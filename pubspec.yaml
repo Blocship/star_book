@@ -1,5 +1,5 @@
 name: scrolling_years_calendar
-description: A new flutter package project.
+description: A calendar widget to easily scroll through the years.
 version: 1.0.0
 author: Menno Renkens <renkenrenkensmenno@gmail.com>
 homepage: https://github.com/mennorenkens/flutter_scrolling_calendar
