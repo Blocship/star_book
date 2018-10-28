@@ -1,0 +1,16 @@
+name: scrolling_years_calendar
+description: A new flutter package project.
+version: 1.0.0
+author: Menno Renkens <renkenrenkensmenno@gmail.com>
+homepage: https://github.com/mennorenkens/flutter_scrolling_calendar
+
+environment:
+  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
