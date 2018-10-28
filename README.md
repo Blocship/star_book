@@ -1,6 +1,8 @@
 # Flutter Scrolling Calendar 🗓
 A customizable calendar widget to easily scroll through the years
 
+![Screenshot](doc/screenshot1.png)
+
 # Features 
 * Choose range of years and the initial year to show
 * Callback on month-tap with date information
