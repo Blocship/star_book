@@ -9,10 +9,10 @@ A customizable calendar widget to easily scroll through the years
 # Planned Features
 * Override the default month names 
 * Customizable color indications per date
-* Allow for more customed designs
+* Allow for better customization of elements
 * Zoom-in to month view on tap in year-view
 * Zoom-in to day view on tap in month-view
-* Inifinite scrolling
+* Infinite scrolling
 
 # Contributors
 * [Menno Renkens](https://github.com/mennorenkens)
