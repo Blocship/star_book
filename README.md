@@ -7,9 +7,9 @@ A customizable calendar widget to easily scroll through the years
 * Choose range of years and the initial year to show
 * Callback on month-tap with date information
 * Choose the color of the current day indicator
+* Override the default month names 
 
 # Planned Features
-* Override the default month names 
 * Customizable color indications per date
 * Allow for better customization of elements
 * Zoom-in to month view on tap in year-view
