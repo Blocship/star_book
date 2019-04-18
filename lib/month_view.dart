@@ -50,16 +50,15 @@ class MonthView extends StatelessWidget {
             decoration: dateIsToday
                 ? BoxDecoration(
                     color: currentDayColor,
-                    borderRadius: BorderRadius.all(Radius.circular(8.0)),
+                    borderRadius: BorderRadius.circular(8.0),
                   )
-                : BoxDecoration(),
+                : null,
             child: Text(
               (day - weekDayOfFirstOfMonth + 1).toString(),
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: dateIsToday ? Colors.white : Colors.black87,
-                fontSize:
-                    (screenSize(context) == ScreenSizes.small) ? 8.0 : 10.0,
+                fontSize: screenSize(context) == ScreenSizes.small ? 8.0 : 10.0,
               ),
             ),
           ),
@@ -94,7 +93,7 @@ class MonthView extends StatelessWidget {
   Widget build(BuildContext context) {
     return FlatButton(
       onPressed: () =>
-          onMonthClick != null ? onMonthClick(year, month) : () => {},
+          onMonthClick == null ? () => {} : onMonthClick(year, month),
       padding: EdgeInsets.all(monthViewPadding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
