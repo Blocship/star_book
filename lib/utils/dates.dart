@@ -7,7 +7,7 @@ bool isToday(DateTime date) {
 /// Gets the number of days for the given month,
 /// by taking the next month on day 0 and getting the number of days.
 int getNumberOfDaysInMonth(int year, int month) {
-  return month < 12
+  return month < DateTime.monthsPerYear
       ? DateTime(year, month + 1, 0).day
       : DateTime(year + 1, 1, 0).day;
 }

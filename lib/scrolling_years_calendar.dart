@@ -22,7 +22,8 @@ class ScrollingYearsCalendar extends StatefulWidget {
     this.customMonthNames,
     this.onMonthClick,
   })  : assert(startYear <= initialYear && initialYear <= endYear),
-        assert(customMonthNames == null || customMonthNames.length == 12);
+        assert(customMonthNames == null ||
+            customMonthNames.length == DateTime.monthsPerYear);
 
   @override
   _ScrollingYearsCalendarState createState() => _ScrollingYearsCalendarState();
