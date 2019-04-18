@@ -10,17 +10,30 @@ bool onTheSameDate(DateTime date1, DateTime date2) {
 int getNumberOfDaysInMonth(int year, int month) {
   if (month < 12) {
     return DateTime(year, month + 1, 0).day;
-  } else { // month = 12
+  } else {
+    // month = 12
     return DateTime(year + 1, 1, 0).day;
   }
 }
 
-/// Get the name of a given month, by either taking using 
+/// Get the name of a given month, by either using
 /// the default name or the custom ones when supplied
 String getMonthName(int month, {List<String> customNames}) {
-  final List<String> monthNames = (customNames == null) ? [
-    "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-  ] : customNames;
+  final List<String> monthNames = (customNames == null)
+      ? [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ]
+      : customNames;
   return monthNames[month - 1];
 }

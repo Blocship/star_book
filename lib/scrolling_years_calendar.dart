@@ -1,11 +1,10 @@
 library scrolling_years_calendar;
 
+import 'package:flutter/material.dart';
 import 'package:scrolling_years_calendar/utils/screen_sizes.dart';
 import 'package:scrolling_years_calendar/year_view.dart';
-import 'package:flutter/material.dart';
 
 class ScrollingYearsCalendar extends StatefulWidget {
-
   final List<String> customMonthNames;
   final Color currentDayColor;
   final Function onMonthClick;
@@ -22,16 +21,15 @@ class ScrollingYearsCalendar extends StatefulWidget {
     @required this.endYear,
     this.customMonthNames,
     this.onMonthClick,
-  }) : assert(startYear <= initialYear && initialYear <= endYear),
-    assert(customMonthNames == null || customMonthNames.length == 12); 
+  })  : assert(startYear <= initialYear && initialYear <= endYear),
+        assert(customMonthNames == null || customMonthNames.length == 12);
 
   @override
   _ScrollingYearsCalendarState createState() => _ScrollingYearsCalendarState();
 }
 
 class _ScrollingYearsCalendarState extends State<ScrollingYearsCalendar> {
-
-  /// Get a widget witht the view of given year
+  /// Get a widget with the view of given year
   YearView _getYearView(int year) {
     return YearView(
       customMonthNames: widget.customMonthNames,
@@ -44,12 +42,14 @@ class _ScrollingYearsCalendarState extends State<ScrollingYearsCalendar> {
 
   @override
   Widget build(BuildContext context) {
-
     int _itemCount = widget.endYear - widget.startYear + 1;
 
-    /// Make sure the right initial-offset is calculated so the listview jumps to the initial year
-    double _initialOffset = (widget.initialYear - widget.startYear) * getYearViewHeight(context);
-    ScrollController _scrollController = new ScrollController(initialScrollOffset: _initialOffset);
+    // Make sure the right initial offset is calculated so the listview
+    // jumps to the initial year
+    double _initialOffset =
+        (widget.initialYear - widget.startYear) * getYearViewHeight(context);
+    ScrollController _scrollController =
+        new ScrollController(initialScrollOffset: _initialOffset);
 
     return ListView.builder(
       controller: _scrollController,
@@ -59,6 +59,5 @@ class _ScrollingYearsCalendarState extends State<ScrollingYearsCalendar> {
         return _getYearView(year);
       },
     );
-  
   }
 }

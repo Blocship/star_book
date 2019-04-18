@@ -14,7 +14,7 @@ class YearView extends StatelessWidget {
     @required this.context,
     @required this.onMonthClick,
     @required this.currentDayColor,
-    this.customMonthNames
+    this.customMonthNames,
   });
 
   @override
@@ -22,28 +22,31 @@ class YearView extends StatelessWidget {
     List<Widget> allMonths = [];
     List<Widget> listWith3Months = [];
 
-    // Loop through all monts
+    // Loop through all months
     for (var month = 1; month < 13; month++) {
-
-      // Add month 
-      listWith3Months.add(MonthView(
-        context: context,
-        currentDayColor: currentDayColor,
-        year: year,
-        month: month,
-        onMonthClick: onMonthClick,
-        customMonthNames: customMonthNames,
-      ));
+      // Add month
+      listWith3Months.add(
+        MonthView(
+          context: context,
+          currentDayColor: currentDayColor,
+          year: year,
+          month: month,
+          onMonthClick: onMonthClick,
+          customMonthNames: customMonthNames,
+        ),
+      );
 
       // Foreach 3 months add to list
       if (month % 3 == 0) {
-        allMonths.add(Container(
+        allMonths.add(
+          Container(
             margin: EdgeInsets.all(10.0),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: List.from(listWith3Months),
             ),
-        ));
+          ),
+        );
         listWith3Months.clear();
       }
     }
@@ -57,7 +60,11 @@ class YearView extends StatelessWidget {
             margin: EdgeInsets.only(bottom: 10.0, top: 25.0, left: 20.0),
             child: Text(
               year.toString(),
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: (screenSize(context) == ScreenSizes.small) ? 22.0 : 26.0,),
+              style: TextStyle(
+                fontWeight: FontWeight.w600,
+                fontSize:
+                    screenSize(context) == ScreenSizes.small ? 22.0 : 26.0,
+              ),
             ),
           ),
           Container(

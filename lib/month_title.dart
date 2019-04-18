@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:scrolling_years_calendar/utils/dates.dart';
 
 class MonthTitle extends StatelessWidget {
-
   final int month;
   final List<String> customMonthNames;
 
-  MonthTitle({this.month, this.customMonthNames});
+  MonthTitle({
+    this.month,
+    this.customMonthNames,
+  });
 
   @override
   Widget build(BuildContext context) {
