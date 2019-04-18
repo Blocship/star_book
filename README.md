@@ -26,4 +26,5 @@ A customizable calendar widget to easily scroll through the years
 ## Contributors
 
 - [Menno Renkens](https://github.com/mennorenkens)
+- [Zep Fietje](https://github.com/zepfietje)
 - [Dutch Coding Company](https://github.com/DutchCodingCompany)
