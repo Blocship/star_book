@@ -30,7 +30,7 @@ class ScrollingYearsCalendar extends StatefulWidget {
 }
 
 class _ScrollingYearsCalendarState extends State<ScrollingYearsCalendar> {
-  /// Get a widget with the view of given year
+  /// Gets a widget with the view of the given year.
   YearView _getYearView(int year) {
     return YearView(
       customMonthNames: widget.customMonthNames,
