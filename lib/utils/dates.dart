@@ -8,11 +8,9 @@ bool isSameDate(DateTime date1, DateTime date2) {
 /// Gets the number of days for the given month,
 /// by taking the next month on day 0 and getting the number of days.
 int getNumberOfDaysInMonth(int year, int month) {
-  if (month < 12) {
-    return DateTime(year, month + 1, 0).day;
-  } else {
-    return DateTime(year + 1, 1, 0).day;
-  }
+  return month < 12
+      ? DateTime(year, month + 1, 0).day
+      : DateTime(year + 1, 1, 0).day;
 }
 
 /// Gets the name of the given month by its number,
