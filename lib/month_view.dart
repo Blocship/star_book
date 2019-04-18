@@ -67,7 +67,7 @@ class MonthView extends StatelessWidget {
       }
 
       // Add a new row of days for each week in the month
-      if ((day % 7 == 0) ||
+      if ((day % DateTime.daysPerWeek == 0) ||
           (day == (numberOfDaysInMonth + weekDayOfFirstOfMonth - 1))) {
         items.add(
           Row(
