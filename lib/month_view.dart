@@ -33,8 +33,7 @@ class MonthView extends StatelessWidget {
     for (int day = 1;
         day < (numberOfDaysInMonth + weekDayOfFirstOfMonth);
         day++) {
-      bool isTheCurrentDate =
-          isSameDate(DateTime(year, month, day), DateTime.now());
+      bool dateIsToday = isToday(DateTime(year, month, day));
       if (day < weekDayOfFirstOfMonth) {
         newRow.add(
           Container(
@@ -47,8 +46,8 @@ class MonthView extends StatelessWidget {
           Container(
             width: dayNumberSize,
             height: dayNumberSize,
-            padding: isTheCurrentDate ? EdgeInsets.all(1.0) : null,
-            decoration: isTheCurrentDate
+            padding: dateIsToday ? EdgeInsets.all(1.0) : null,
+            decoration: dateIsToday
                 ? BoxDecoration(
                     color: currentDayColor,
                     borderRadius: BorderRadius.all(Radius.circular(8.0)),
@@ -58,7 +57,7 @@ class MonthView extends StatelessWidget {
               (day - weekDayOfFirstOfMonth + 1).toString(),
               textAlign: TextAlign.center,
               style: TextStyle(
-                color: isTheCurrentDate ? Colors.white : Colors.black87,
+                color: dateIsToday ? Colors.white : Colors.black87,
                 fontSize:
                     (screenSize(context) == ScreenSizes.small) ? 8.0 : 10.0,
               ),

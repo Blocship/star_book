@@ -1,8 +1,7 @@
-/// Checks whether two given dates are the same.
-bool isSameDate(DateTime date1, DateTime date2) {
-  return date1.year == date2.year &&
-      date1.month == date2.month &&
-      date1.day == date2.day;
+/// Checks if the given date is today.
+bool isToday(DateTime date) {
+  final DateTime now = DateTime.now();
+  return date.isAtSameMomentAs(DateTime(now.year, now.month, now.day));
 }
 
 /// Gets the number of days for the given month,
