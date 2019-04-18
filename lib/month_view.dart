@@ -34,7 +34,7 @@ class MonthView extends StatelessWidget {
         day < (numberOfDaysInMonth + weekDayOfFirstOfMonth);
         day++) {
       bool isTheCurrentDate =
-          onTheSameDate(DateTime(year, month, day), DateTime.now());
+          isSameDate(DateTime(year, month, day), DateTime.now());
       if (day < weekDayOfFirstOfMonth) {
         newRow.add(
           Container(
