@@ -1,11 +1,12 @@
 name: scrolling_years_calendar
-description: A calendar widget to easily scroll through the years, allowing for customizations to fit your design.
+description: A calendar widget to easily scroll through the years,
+  allowing for customizations to fit your design.
 version: 1.0.4
 author: Menno Renkens <renkenrenkensmenno@gmail.com>
 homepage: https://github.com/mennorenkens/flutter_scrolling_calendar
 
 environment:
-  sdk: ">=2.0.0-dev.68.0 <3.0.0"
+  sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
   flutter:
