@@ -19,7 +19,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
@@ -28,20 +27,30 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: new Center(
         child: ScrollingYearsCalendar(
-
-          // required attributes
+          // Required attributes
           context: context,
           initialYear: DateTime.now().year,
           startYear: 2016,
           endYear: 2019,
 
-          // optional attributes
+          // Optional attributes
           currentDayColor: Colors.blue,
-          customMonthNames: ["Jan", "Feb", "Mar", "Apr", "May", 
-          "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+          customMonthNames: [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sep",
+            "Oct",
+            "Nov",
+            "Dec",
+          ],
           onMonthClick: (int year, int month) => print("Clicked $month/$year"),
-
-        )
+        ),
       ),
     );
   }
