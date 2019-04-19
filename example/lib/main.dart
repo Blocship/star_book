@@ -30,8 +30,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // Required attributes
           context: context,
           initialYear: DateTime.now().year,
-          startYear: 2016,
-          endYear: 2019,
+          startYear: DateTime.now().year - 5,
+          endYear: DateTime.now().year,
 
           // Optional attributes
           currentDayColor: Colors.blue,
