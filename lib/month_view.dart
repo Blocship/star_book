@@ -2,106 +2,91 @@ import 'package:flutter/material.dart';
 import 'package:scrolling_years_calendar/utils/dates.dart';
 import 'package:scrolling_years_calendar/utils/screen_sizes.dart';
 import 'package:scrolling_years_calendar/month_title.dart';
+import 'package:scrolling_years_calendar/day_number.dart';
 
 class MonthView extends StatelessWidget {
   final BuildContext context;
   final int year;
   final int month;
-  final Function onMonthClick;
-  final Color currentDayColor;
+  final double padding;
+  final Color todayColor;
   final List<String> customMonthNames;
-  static const double monthViewPadding = 5.0;
+  final Function onMonthTap;
 
   MonthView({
     @required this.context,
     @required this.year,
     @required this.month,
-    @required this.currentDayColor,
-    this.onMonthClick,
+    @required this.padding,
+    this.todayColor,
     this.customMonthNames,
+    this.onMonthTap,
   });
 
-  Widget getMonthDays() {
-    List<Widget> items = [];
-    List<Widget> newRow = [];
+  Widget buildMonthDays(BuildContext context) {
+    List<Widget> dayRows = [];
+    List<Widget> dayRowChildren = [];
 
-    int numberOfDaysInMonth = getNumberOfDaysInMonth(year, month);
-    int weekDayOfFirstOfMonth = DateTime(year, month, 1).weekday;
-    double dayNumberSize = getDayNumberSize(context);
+    int daysInMonth = getDaysInMonth(this.year, this.month);
+    int firstWeekdayOfMonth = DateTime(this.year, this.month, 1).weekday;
 
-    // Add the widgets for the month title and all
-    for (int day = 1;
-        day < (numberOfDaysInMonth + weekDayOfFirstOfMonth);
-        day++) {
-      bool dateIsToday = isToday(DateTime(year, month, day));
-      if (day < weekDayOfFirstOfMonth) {
-        newRow.add(
-          Container(
-            width: dayNumberSize,
-            height: dayNumberSize,
-          ),
-        );
-      } else {
-        newRow.add(
-          Container(
-            width: dayNumberSize,
-            height: dayNumberSize,
-            padding: dateIsToday ? EdgeInsets.all(1.0) : null,
-            decoration: dateIsToday
-                ? BoxDecoration(
-                    color: currentDayColor,
-                    borderRadius: BorderRadius.circular(8.0),
-                  )
-                : null,
-            child: Text(
-              (day - weekDayOfFirstOfMonth + 1).toString(),
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                color: dateIsToday ? Colors.white : Colors.black87,
-                fontSize: screenSize(context) == ScreenSizes.small ? 8.0 : 10.0,
-              ),
-            ),
-          ),
-        );
-      }
+    for (int day = 2 - firstWeekdayOfMonth; day <= daysInMonth; day++) {
+      bool isToday = dateIsToday(DateTime(this.year, this.month, day));
+      dayRowChildren.add(
+        DayNumber(
+          day: day,
+          isToday: isToday,
+          todayColor: this.todayColor,
+        ),
+      );
 
-      // Add a new row of days for each week in the month
-      if ((day % DateTime.daysPerWeek == 0) ||
-          (day == (numberOfDaysInMonth + weekDayOfFirstOfMonth - 1))) {
-        items.add(
+      if ((day - 1 + firstWeekdayOfMonth) % DateTime.daysPerWeek == 0 ||
+          day == daysInMonth) {
+        dayRows.add(
           Row(
-            children: List.from(newRow),
+            children: List.from(dayRowChildren),
           ),
         );
-        newRow.clear();
+        dayRowChildren.clear();
       }
     }
 
-    // Wrap every month in a FlatButton widget to be able to click on them
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: dayRows,
+    );
+  }
+
+  Widget buildMonthView(BuildContext context) {
     return Container(
-      width: (MediaQuery.of(context).size.width) * 0.3 - 10.0,
-      margin:
-          EdgeInsets.all((MediaQuery.of(context).size.width * 0.1 - 20.0) / 6),
+      width: 7 * getDayNumberSize(context),
+      margin: EdgeInsets.all(this.padding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: items,
+        children: <Widget>[
+          MonthTitle(
+            month: this.month,
+            customMonthNames: this.customMonthNames,
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 8.0),
+            child: buildMonthDays(context),
+          ),
+        ],
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return FlatButton(
-      onPressed: () =>
-          onMonthClick == null ? () => {} : onMonthClick(year, month),
-      padding: EdgeInsets.all(monthViewPadding),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          MonthTitle(month: month, customMonthNames: customMonthNames),
-          getMonthDays(),
-        ],
-      ),
-    );
+    return this.onMonthTap == null
+        ? Container(
+            child: this.buildMonthView(context),
+          )
+        : FlatButton(
+            onPressed: () => this.onMonthTap(this.year, this.month),
+            padding: EdgeInsets.all(0.0),
+            child: this.buildMonthView(context),
+          );
   }
 }

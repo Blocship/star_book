@@ -1,80 +1,88 @@
 import 'package:flutter/material.dart';
-import 'package:scrolling_years_calendar/utils/screen_sizes.dart';
 import 'package:scrolling_years_calendar/month_view.dart';
+import 'package:scrolling_years_calendar/year_title.dart';
 
 class YearView extends StatelessWidget {
-  final int year;
   final BuildContext context;
-  final Function onMonthClick;
-  final Color currentDayColor;
+  final int year;
+  final Color todayColor;
   final List<String> customMonthNames;
+  final Function onMonthTap;
+  final double horizontalMargin = 16.0;
+  final double monthViewPadding = 8.0;
 
   YearView({
-    @required this.year,
     @required this.context,
-    @required this.onMonthClick,
-    @required this.currentDayColor,
+    @required this.year,
+    this.todayColor,
     this.customMonthNames,
+    this.onMonthTap,
   });
 
-  @override
-  Widget build(BuildContext context) {
-    List<Widget> allMonths = [];
-    List<Widget> listWith3Months = [];
+  Widget buildYearMonths(BuildContext context) {
+    List<Widget> monthRows = [];
+    List<Widget> monthRowChildren = [];
 
-    // Loop through all months
-    for (var month = 1; month < 13; month++) {
-      // Add month
-      listWith3Months.add(
+    for (int month = 1; month <= DateTime.monthsPerYear; month++) {
+      monthRowChildren.add(
         MonthView(
           context: context,
-          currentDayColor: currentDayColor,
-          year: year,
+          year: this.year,
           month: month,
-          onMonthClick: onMonthClick,
-          customMonthNames: customMonthNames,
+          padding: this.monthViewPadding,
+          todayColor: this.todayColor,
+          customMonthNames: this.customMonthNames,
+          onMonthTap: this.onMonthTap,
         ),
       );
 
-      // Foreach 3 months add to list
       if (month % 3 == 0) {
-        allMonths.add(
-          Container(
-            margin: EdgeInsets.all(10.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: List.from(listWith3Months),
-            ),
+        monthRows.add(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: List.from(monthRowChildren),
           ),
         );
-        listWith3Months.clear();
+        monthRowChildren.clear();
       }
     }
 
+    return Column(
+      children: List.from(monthRows),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
-      height: getYearViewHeight(context),
+      padding: EdgeInsets.only(top: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-            margin: EdgeInsets.only(bottom: 10.0, top: 25.0, left: 20.0),
-            child: Text(
-              year.toString(),
-              style: TextStyle(
-                fontWeight: FontWeight.w600,
-                fontSize:
-                    screenSize(context) == ScreenSizes.small ? 22.0 : 26.0,
-              ),
+            margin: EdgeInsets.symmetric(
+              horizontal: this.horizontalMargin,
+              vertical: 0.0,
+            ),
+            child: YearTitle(this.year),
+          ),
+          Container(
+            margin: EdgeInsets.only(
+              left: this.horizontalMargin,
+              right: this.horizontalMargin,
+              top: 8.0,
+            ),
+            child: Divider(
+              color: Colors.black26,
             ),
           ),
           Container(
-            color: Colors.black26,
-            height: 0.5,
-            margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 5.0),
-            width: MediaQuery.of(context).size.width,
-          ),
-          Column(
-            children: allMonths,
+            margin: EdgeInsets.symmetric(
+              horizontal: this.horizontalMargin - this.monthViewPadding,
+              vertical: 0.0,
+            ),
+            child: buildYearMonths(context),
           ),
         ],
       ),

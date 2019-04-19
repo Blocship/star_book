@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
           endYear: DateTime.now().year,
 
           // Optional attributes
-          currentDayColor: Colors.blue,
+          todayColor: Colors.blue,
           customMonthNames: [
             "Jan",
             "Feb",
@@ -49,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
             "Nov",
             "Dec",
           ],
-          onMonthClick: (int year, int month) => print("Clicked $month/$year"),
+          onMonthTap: (int year, int month) => print("Tapped $month/$year"),
         ),
       ),
     );

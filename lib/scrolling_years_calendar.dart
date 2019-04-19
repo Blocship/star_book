@@ -5,22 +5,22 @@ import 'package:scrolling_years_calendar/utils/screen_sizes.dart';
 import 'package:scrolling_years_calendar/year_view.dart';
 
 class ScrollingYearsCalendar extends StatefulWidget {
-  final List<String> customMonthNames;
-  final Color currentDayColor;
-  final Function onMonthClick;
   final BuildContext context;
   final int initialYear;
   final int startYear;
   final int endYear;
+  final Color todayColor;
+  final List<String> customMonthNames;
+  final Function onMonthTap;
 
   ScrollingYearsCalendar({
-    this.currentDayColor = Colors.blue,
+    @required this.context,
     @required this.initialYear,
     @required this.startYear,
-    @required this.context,
     @required this.endYear,
+    this.todayColor,
     this.customMonthNames,
-    this.onMonthClick,
+    this.onMonthTap,
   })  : assert(startYear <= initialYear && initialYear <= endYear),
         assert(customMonthNames == null ||
             customMonthNames.length == DateTime.monthsPerYear);
@@ -33,11 +33,11 @@ class _ScrollingYearsCalendarState extends State<ScrollingYearsCalendar> {
   /// Gets a widget with the view of the given year.
   YearView _getYearView(int year) {
     return YearView(
-      customMonthNames: widget.customMonthNames,
-      currentDayColor: widget.currentDayColor,
-      onMonthClick: widget.onMonthClick,
-      context: context,
+      context: this.context,
       year: year,
+      todayColor: widget.todayColor,
+      customMonthNames: widget.customMonthNames,
+      onMonthTap: widget.onMonthTap,
     );
   }
 
@@ -45,14 +45,17 @@ class _ScrollingYearsCalendarState extends State<ScrollingYearsCalendar> {
   Widget build(BuildContext context) {
     int _itemCount = widget.endYear - widget.startYear + 1;
 
-    // Make sure the right initial offset is calculated so the listview
-    // jumps to the initial year
-    double _initialOffset =
-        (widget.initialYear - widget.startYear) * getYearViewHeight(context);
+    // Makes sure the right initial offset is calculated so the listview
+    // jumps to the initial year.
+    // TODO: a reliable solution needs to be found
+    double _initialOffset = 0.0;
+    // double _initialOffset =
+    //     (widget.initialYear - widget.startYear) * getYearViewHeight(context);
     ScrollController _scrollController =
         new ScrollController(initialScrollOffset: _initialOffset);
 
     return ListView.builder(
+      padding: EdgeInsets.only(top: 8.0, bottom: 16.0),
       controller: _scrollController,
       itemCount: _itemCount,
       itemBuilder: (context, index) {

@@ -19,14 +19,13 @@ ScreenSizes screenSize(BuildContext context) {
   }
 }
 
-/// Gets the vertical space that one year takes up.
+/// Gets the vertical space that one year view takes up.
 double getYearViewHeight(context) {
-  final int verticalDays = 6;
-  final int verticalMonths = 4;
-  return verticalDays * verticalMonths * getDayNumberSize(context) + 330.0;
+  // TODO: a reliable solution needs to be found
+  return 23 * getDayNumberSize(context);
 }
 
-/// Gets the space that the container of one day number takes up.
+/// Gets the size of the day number widget.
 double getDayNumberSize(context) {
-  return (MediaQuery.of(context).size.width - 72) / 21;
+  return screenSize(context) == ScreenSizes.small ? 12.0 : 16.0;
 }
