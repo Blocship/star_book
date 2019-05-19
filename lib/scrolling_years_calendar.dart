@@ -1,6 +1,7 @@
 library scrolling_years_calendar;
 
 import 'package:flutter/material.dart';
+import 'package:scrolling_years_calendar/utils/screen_sizes.dart';
 import 'package:scrolling_years_calendar/year_view.dart';
 
 class ScrollingYearsCalendar extends StatefulWidget {
@@ -46,15 +47,13 @@ class _ScrollingYearsCalendarState extends State<ScrollingYearsCalendar> {
 
     // Makes sure the right initial offset is calculated so the listview
     // jumps to the initial year.
-    // TODO: a reliable solution needs to be found
-    const double _initialOffset = 0.0;
-    // double _initialOffset =
-    //     (widget.initialYear - widget.startYear) * getYearViewHeight(context);
+    final double _initialOffset =
+        (widget.initialYear - widget.startYear) * getYearViewHeight(context);
     final ScrollController _scrollController =
         ScrollController(initialScrollOffset: _initialOffset);
 
     return ListView.builder(
-      padding: const EdgeInsets.only(top: 8.0, bottom: 16.0),
+      padding: const EdgeInsets.only(bottom: 16.0),
       controller: _scrollController,
       itemCount: _itemCount,
       itemBuilder: (BuildContext context, int index) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scrolling_years_calendar/month_view.dart';
+import 'package:scrolling_years_calendar/utils/screen_sizes.dart';
 import 'package:scrolling_years_calendar/year_title.dart';
 
 class YearView extends StatelessWidget {
@@ -56,6 +57,7 @@ class YearView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: getYearViewHeight(context),
       padding: const EdgeInsets.only(top: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
