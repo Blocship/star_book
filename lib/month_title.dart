@@ -5,7 +5,7 @@ class MonthTitle extends StatelessWidget {
   final int month;
   final List<String> customMonthNames;
 
-  MonthTitle({
+  const MonthTitle({
     @required this.month,
     this.customMonthNames,
   });

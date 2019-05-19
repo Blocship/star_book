@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
           // Optional attributes
           todayColor: Colors.blue,
-          customMonthNames: [
+          customMonthNames: const [
             "Jan",
             "Feb",
             "Mar",

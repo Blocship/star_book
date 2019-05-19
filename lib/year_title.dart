@@ -4,7 +4,7 @@ import 'package:scrolling_years_calendar/utils/screen_sizes.dart';
 class YearTitle extends StatelessWidget {
   final int year;
 
-  YearTitle(
+  const YearTitle(
     this.year,
   );
 

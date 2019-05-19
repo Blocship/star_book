@@ -11,7 +11,7 @@ class YearView extends StatelessWidget {
   final double horizontalMargin = 16.0;
   final double monthViewPadding = 8.0;
 
-  YearView({
+  const YearView({
     @required this.context,
     @required this.year,
     this.todayColor,

@@ -13,7 +13,7 @@ class MonthView extends StatelessWidget {
   final List<String> customMonthNames;
   final Function onMonthTap;
 
-  MonthView({
+  const MonthView({
     @required this.context,
     @required this.year,
     @required this.month,

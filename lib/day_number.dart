@@ -6,7 +6,7 @@ class DayNumber extends StatelessWidget {
   final bool isToday;
   final Color todayColor;
 
-  DayNumber({
+  const DayNumber({
     @required this.day,
     this.isToday,
     this.todayColor = Colors.blue,
