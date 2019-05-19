@@ -48,7 +48,7 @@ class _ScrollingYearsCalendarState extends State<ScrollingYearsCalendar> {
     // Makes sure the right initial offset is calculated so the listview
     // jumps to the initial year.
     // TODO: a reliable solution needs to be found
-    final double _initialOffset = 0.0;
+    const double _initialOffset = 0.0;
     // double _initialOffset =
     //     (widget.initialYear - widget.startYear) * getYearViewHeight(context);
     final ScrollController _scrollController =
