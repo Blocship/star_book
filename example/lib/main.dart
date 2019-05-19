@@ -29,9 +29,9 @@ class _MyHomePageState extends State<MyHomePage> {
         child: ScrollingYearsCalendar(
           // Required attributes
           context: context,
-          initialYear: DateTime.now().year,
-          startYear: DateTime.now().year - 5,
-          endYear: DateTime.now().year,
+          initialDate: DateTime.now(),
+          firstDate: DateTime.now().subtract(Duration(days: 5 * 365)),
+          lastDate: DateTime.now(),
 
           // Optional attributes
           todayColor: Colors.blue,
