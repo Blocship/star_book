@@ -1,73 +1,90 @@
 import 'package:flutter/material.dart';
-import 'package:scrolling_years_calendar/utils/screen_sizes.dart';
 import 'package:scrolling_years_calendar/month_view.dart';
+import 'package:scrolling_years_calendar/utils/screen_sizes.dart';
+import 'package:scrolling_years_calendar/year_title.dart';
 
 class YearView extends StatelessWidget {
-  final int year;
-  final BuildContext context;
-  final Function onMonthClick;
-  final Color currentDayColor;
-  final List<String> customMonthNames;
-
-  YearView({
-    @required this.year,
+  const YearView({
     @required this.context,
-    @required this.onMonthClick,
-    @required this.currentDayColor,
-    this.customMonthNames
+    @required this.year,
+    this.todayColor,
+    this.monthNames,
+    this.onMonthTap,
   });
 
-  @override
-  Widget build(BuildContext context) {
-    List<Widget> allMonths = [];
-    List<Widget> listWith3Months = [];
+  final BuildContext context;
+  final int year;
+  final Color todayColor;
+  final List<String> monthNames;
+  final Function onMonthTap;
+  double get horizontalMargin => 16.0;
+  double get monthViewPadding => 8.0;
 
-    // Loop through all monts
-    for (var month = 1; month < 13; month++) {
+  Widget buildYearMonths(BuildContext context) {
+    final List<Row> monthRows = <Row>[];
+    final List<MonthView> monthRowChildren = <MonthView>[];
 
-      // Add month 
-      listWith3Months.add(MonthView(
-        context: context,
-        currentDayColor: currentDayColor,
-        year: year,
-        month: month,
-        onMonthClick: onMonthClick,
-        customMonthNames: customMonthNames,
-      ));
+    for (int month = 1; month <= DateTime.monthsPerYear; month++) {
+      monthRowChildren.add(
+        MonthView(
+          context: context,
+          year: year,
+          month: month,
+          padding: monthViewPadding,
+          todayColor: todayColor,
+          monthNames: monthNames,
+          onMonthTap: onMonthTap,
+        ),
+      );
 
-      // Foreach 3 months add to list
       if (month % 3 == 0) {
-        allMonths.add(Container(
-            margin: EdgeInsets.all(10.0),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: List.from(listWith3Months),
-            ),
-        ));
-        listWith3Months.clear();
+        monthRows.add(
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: List<MonthView>.from(monthRowChildren),
+          ),
+        );
+        monthRowChildren.clear();
       }
     }
 
+    return Column(
+      children: List<Row>.from(monthRows),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Container(
       height: getYearViewHeight(context),
+      padding: const EdgeInsets.only(top: 16.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-            margin: EdgeInsets.only(bottom: 10.0, top: 25.0, left: 20.0),
-            child: Text(
-              year.toString(),
-              style: TextStyle(fontWeight: FontWeight.w600, fontSize: (screenSize(context) == ScreenSizes.small) ? 22.0 : 26.0,),
+            margin: EdgeInsets.symmetric(
+              horizontal: horizontalMargin,
+              vertical: 0.0,
+            ),
+            child: YearTitle(year),
+          ),
+          Container(
+            margin: EdgeInsets.only(
+              left: horizontalMargin,
+              right: horizontalMargin,
+              top: 8.0,
+            ),
+            child: Divider(
+              color: Colors.black26,
             ),
           ),
           Container(
-            color: Colors.black26,
-            height: 0.5,
-            margin: EdgeInsets.only(left: 20.0, right: 20.0, top: 5.0),
-            width: MediaQuery.of(context).size.width,
-          ),
-          Column(
-            children: allMonths,
+            margin: EdgeInsets.symmetric(
+              horizontal: horizontalMargin - monthViewPadding,
+              vertical: 0.0,
+            ),
+            child: buildYearMonths(context),
           ),
         ],
       ),

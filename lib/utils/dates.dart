@@ -1,26 +1,34 @@
-/// Check whether the 2 given dates are the same
-bool onTheSameDate(DateTime date1, DateTime date2) {
-  return (date1.year == date2.year) &&
-      (date1.month == date2.month) &&
-      (date1.day == date2.day);
+/// Checks if the given date is today.
+bool dateIsToday(DateTime date) {
+  final DateTime now = DateTime.now();
+  return date.isAtSameMomentAs(DateTime(now.year, now.month, now.day));
 }
 
-/// Get the amount of days in the given month (by taking the
-/// next month on day 0 and getting the number of days)
-int getNumberOfDaysInMonth(int year, int month) {
-  if (month < 12) {
-    return DateTime(year, month + 1, 0).day;
-  } else { // month = 12
-    return DateTime(year + 1, 1, 0).day;
-  }
+/// Gets the number of days for the given month,
+/// by taking the next month on day 0 and getting the number of days.
+int getDaysInMonth(int year, int month) {
+  return month < DateTime.monthsPerYear
+      ? DateTime(year, month + 1, 0).day
+      : DateTime(year + 1, 1, 0).day;
 }
 
-/// Get the name of a given month, by either taking using 
-/// the default name or the custom ones when supplied
-String getMonthName(int month, {List<String> customNames}) {
-  final List<String> monthNames = (customNames == null) ? [
-    "Jan", "Feb", "Mar", "Apr", "May", "Jun", 
-    "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
-  ] : customNames;
-  return monthNames[month - 1];
+/// Gets the name of the given month by its number,
+/// using either the supplied or default name.
+String getMonthName(int month, {List<String> monthNames}) {
+  final List<String> names = monthNames ??
+      <String>[
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
+      ];
+  return names[month - 1];
 }
