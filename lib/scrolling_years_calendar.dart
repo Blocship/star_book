@@ -43,15 +43,15 @@ class _ScrollingYearsCalendarState extends State<ScrollingYearsCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    int _itemCount = widget.endYear - widget.startYear + 1;
+    final int _itemCount = widget.endYear - widget.startYear + 1;
 
     // Makes sure the right initial offset is calculated so the listview
     // jumps to the initial year.
     // TODO: a reliable solution needs to be found
-    double _initialOffset = 0.0;
+    final double _initialOffset = 0.0;
     // double _initialOffset =
     //     (widget.initialYear - widget.startYear) * getYearViewHeight(context);
-    ScrollController _scrollController =
+    final ScrollController _scrollController =
         ScrollController(initialScrollOffset: _initialOffset);
 
     return ListView.builder(
@@ -59,7 +59,7 @@ class _ScrollingYearsCalendarState extends State<ScrollingYearsCalendar> {
       controller: _scrollController,
       itemCount: _itemCount,
       itemBuilder: (context, index) {
-        int year = index + widget.startYear;
+        final int year = index + widget.startYear;
         return _getYearView(year);
       },
     );

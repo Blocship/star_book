@@ -24,14 +24,14 @@ class MonthView extends StatelessWidget {
   final Function onMonthTap;
 
   Widget buildMonthDays(BuildContext context) {
-    List<Widget> dayRows = [];
-    List<Widget> dayRowChildren = [];
+    final List<Widget> dayRows = [];
+    final List<Widget> dayRowChildren = [];
 
-    int daysInMonth = getDaysInMonth(year, month);
-    int firstWeekdayOfMonth = DateTime(year, month, 1).weekday;
+    final int daysInMonth = getDaysInMonth(year, month);
+    final int firstWeekdayOfMonth = DateTime(year, month, 1).weekday;
 
     for (int day = 2 - firstWeekdayOfMonth; day <= daysInMonth; day++) {
-      bool isToday = dateIsToday(DateTime(year, month, day));
+      final bool isToday = dateIsToday(DateTime(year, month, day));
       dayRowChildren.add(
         DayNumber(
           day: day,

@@ -14,7 +14,7 @@ class DayNumber extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double size = getDayNumberSize(context);
+    final double size = getDayNumberSize(context);
 
     return Container(
       width: size,

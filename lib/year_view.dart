@@ -20,8 +20,8 @@ class YearView extends StatelessWidget {
   final double monthViewPadding = 8.0;
 
   Widget buildYearMonths(BuildContext context) {
-    List<Widget> monthRows = [];
-    List<Widget> monthRowChildren = [];
+    final List<Widget> monthRows = [];
+    final List<Widget> monthRowChildren = [];
 
     for (int month = 1; month <= DateTime.monthsPerYear; month++) {
       monthRowChildren.add(
