@@ -23,7 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Flutter Scrolling Calendar"),
+        title: const Text('Flutter Scrolling Calendar'),
       ),
       body: Center(
         child: ScrollingYearsCalendar(
@@ -36,20 +36,20 @@ class _MyHomePageState extends State<MyHomePage> {
           // Optional attributes
           todayColor: Colors.blue,
           customMonthNames: const [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec',
           ],
-          onMonthTap: (int year, int month) => print("Tapped $month/$year"),
+          onMonthTap: (int year, int month) => print('Tapped $month/$year'),
         ),
       ),
     );

@@ -17,18 +17,18 @@ int getDaysInMonth(int year, int month) {
 String getMonthName(int month, {List<String> customNames}) {
   final List<String> monthNames = customNames ??
       [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
+        'Jan',
+        'Feb',
+        'Mar',
+        'Apr',
+        'May',
+        'Jun',
+        'Jul',
+        'Aug',
+        'Sep',
+        'Oct',
+        'Nov',
+        'Dec',
       ];
   return monthNames[month - 1];
 }
