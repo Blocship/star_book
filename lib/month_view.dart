@@ -11,7 +11,7 @@ class MonthView extends StatelessWidget {
     @required this.month,
     @required this.padding,
     this.todayColor,
-    this.customMonthNames,
+    this.monthNames,
     this.onMonthTap,
   });
 
@@ -20,7 +20,7 @@ class MonthView extends StatelessWidget {
   final int month;
   final double padding;
   final Color todayColor;
-  final List<String> customMonthNames;
+  final List<String> monthNames;
   final Function onMonthTap;
 
   Widget buildMonthDays(BuildContext context) {
@@ -66,7 +66,7 @@ class MonthView extends StatelessWidget {
         children: <Widget>[
           MonthTitle(
             month: month,
-            customMonthNames: customMonthNames,
+            monthNames: monthNames,
           ),
           Container(
             margin: const EdgeInsets.only(top: 8.0),

@@ -4,17 +4,17 @@ import 'package:scrolling_years_calendar/utils/dates.dart';
 class MonthTitle extends StatelessWidget {
   const MonthTitle({
     @required this.month,
-    this.customMonthNames,
+    this.monthNames,
   });
 
   final int month;
-  final List<String> customMonthNames;
+  final List<String> monthNames;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: Text(
-        getMonthName(month, customNames: customMonthNames),
+        getMonthName(month, monthNames: monthNames),
         style: TextStyle(
           fontSize: 18.0,
           fontWeight: FontWeight.w600,
