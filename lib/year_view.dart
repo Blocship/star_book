@@ -16,8 +16,8 @@ class YearView extends StatelessWidget {
   final Color todayColor;
   final List<String> customMonthNames;
   final Function onMonthTap;
-  final double horizontalMargin = 16.0;
-  final double monthViewPadding = 8.0;
+  double get horizontalMargin => 16.0;
+  double get monthViewPadding => 8.0;
 
   Widget buildYearMonths(BuildContext context) {
     final List<Widget> monthRows = [];
