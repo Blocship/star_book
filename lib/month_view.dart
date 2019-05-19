@@ -24,8 +24,8 @@ class MonthView extends StatelessWidget {
   final Function onMonthTap;
 
   Widget buildMonthDays(BuildContext context) {
-    final List<Widget> dayRows = [];
-    final List<Widget> dayRowChildren = [];
+    final List<Row> dayRows = <Row>[];
+    final List<DayNumber> dayRowChildren = <DayNumber>[];
 
     final int daysInMonth = getDaysInMonth(year, month);
     final int firstWeekdayOfMonth = DateTime(year, month, 1).weekday;
@@ -44,7 +44,7 @@ class MonthView extends StatelessWidget {
           day == daysInMonth) {
         dayRows.add(
           Row(
-            children: List.from(dayRowChildren),
+            children: List<DayNumber>.from(dayRowChildren),
           ),
         );
         dayRowChildren.clear();

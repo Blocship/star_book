@@ -20,8 +20,8 @@ class YearView extends StatelessWidget {
   double get monthViewPadding => 8.0;
 
   Widget buildYearMonths(BuildContext context) {
-    final List<Widget> monthRows = [];
-    final List<Widget> monthRowChildren = [];
+    final List<Row> monthRows = <Row>[];
+    final List<MonthView> monthRowChildren = <MonthView>[];
 
     for (int month = 1; month <= DateTime.monthsPerYear; month++) {
       monthRowChildren.add(
@@ -41,7 +41,7 @@ class YearView extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: List.from(monthRowChildren),
+            children: List<MonthView>.from(monthRowChildren),
           ),
         );
         monthRowChildren.clear();
@@ -49,7 +49,7 @@ class YearView extends StatelessWidget {
     }
 
     return Column(
-      children: List.from(monthRows),
+      children: List<Row>.from(monthRows),
     );
   }
 

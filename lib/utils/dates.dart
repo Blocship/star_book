@@ -16,7 +16,7 @@ int getDaysInMonth(int year, int month) {
 /// using either the default name or custom names when supplied.
 String getMonthName(int month, {List<String> customNames}) {
   final List<String> monthNames = customNames ??
-      [
+      <String>[
         'Jan',
         'Feb',
         'Mar',

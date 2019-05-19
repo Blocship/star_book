@@ -57,7 +57,7 @@ class _ScrollingYearsCalendarState extends State<ScrollingYearsCalendar> {
       padding: const EdgeInsets.only(top: 8.0, bottom: 16.0),
       controller: _scrollController,
       itemCount: _itemCount,
-      itemBuilder: (context, index) {
+      itemBuilder: (BuildContext context, int index) {
         final int year = index + widget.startYear;
         return _getYearView(year);
       },
