@@ -52,7 +52,7 @@ class _ScrollingYearsCalendarState extends State<ScrollingYearsCalendar> {
     // double _initialOffset =
     //     (widget.initialYear - widget.startYear) * getYearViewHeight(context);
     ScrollController _scrollController =
-        new ScrollController(initialScrollOffset: _initialOffset);
+        ScrollController(initialScrollOffset: _initialOffset);
 
     return ListView.builder(
       padding: EdgeInsets.only(top: 8.0, bottom: 16.0),

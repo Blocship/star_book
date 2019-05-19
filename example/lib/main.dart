@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:scrolling_years_calendar/scrolling_years_calendar.dart';
 
-void main() => runApp(new MyApp());
+void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return new MaterialApp(
+    return MaterialApp(
       title: 'Scrolling Years Calendar',
-      home: new MyHomePage(),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
   @override
-  _MyHomePageState createState() => new _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text("Flutter Scrolling Calendar"),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Flutter Scrolling Calendar"),
       ),
-      body: new Center(
+      body: Center(
         child: ScrollingYearsCalendar(
           // Required attributes
           context: context,
