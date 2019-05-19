@@ -69,7 +69,7 @@ class MonthView extends StatelessWidget {
             customMonthNames: customMonthNames,
           ),
           Container(
-            margin: EdgeInsets.only(top: 8.0),
+            margin: const EdgeInsets.only(top: 8.0),
             child: buildMonthDays(context),
           ),
         ],
@@ -85,7 +85,7 @@ class MonthView extends StatelessWidget {
           )
         : FlatButton(
             onPressed: () => this.onMonthTap(year, month),
-            padding: EdgeInsets.all(0.0),
+            padding: const EdgeInsets.all(0.0),
             child: buildMonthView(context),
           );
   }

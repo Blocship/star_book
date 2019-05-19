@@ -23,7 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Flutter Scrolling Calendar"),
+        title: const Text("Flutter Scrolling Calendar"),
       ),
       body: Center(
         child: ScrollingYearsCalendar(
