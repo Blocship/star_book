@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:scrolling_years_calendar/utils/screen_sizes.dart';
 
 class DayNumber extends StatelessWidget {
-  final int day;
-  final bool isToday;
-  final Color todayColor;
-
   const DayNumber({
     @required this.day,
     this.isToday,
     this.todayColor = Colors.blue,
   });
+
+  final int day;
+  final bool isToday;
+  final Color todayColor;
 
   @override
   Widget build(BuildContext context) {

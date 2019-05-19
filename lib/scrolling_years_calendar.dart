@@ -5,14 +5,6 @@ import 'package:scrolling_years_calendar/utils/screen_sizes.dart';
 import 'package:scrolling_years_calendar/year_view.dart';
 
 class ScrollingYearsCalendar extends StatefulWidget {
-  final BuildContext context;
-  final int initialYear;
-  final int startYear;
-  final int endYear;
-  final Color todayColor;
-  final List<String> customMonthNames;
-  final Function onMonthTap;
-
   ScrollingYearsCalendar({
     @required this.context,
     @required this.initialYear,
@@ -24,6 +16,14 @@ class ScrollingYearsCalendar extends StatefulWidget {
   })  : assert(startYear <= initialYear && initialYear <= endYear),
         assert(customMonthNames == null ||
             customMonthNames.length == DateTime.monthsPerYear);
+
+  final BuildContext context;
+  final int initialYear;
+  final int startYear;
+  final int endYear;
+  final Color todayColor;
+  final List<String> customMonthNames;
+  final Function onMonthTap;
 
   @override
   _ScrollingYearsCalendarState createState() => _ScrollingYearsCalendarState();

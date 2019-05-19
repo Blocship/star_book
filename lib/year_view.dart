@@ -3,14 +3,6 @@ import 'package:scrolling_years_calendar/month_view.dart';
 import 'package:scrolling_years_calendar/year_title.dart';
 
 class YearView extends StatelessWidget {
-  final BuildContext context;
-  final int year;
-  final Color todayColor;
-  final List<String> customMonthNames;
-  final Function onMonthTap;
-  final double horizontalMargin = 16.0;
-  final double monthViewPadding = 8.0;
-
   const YearView({
     @required this.context,
     @required this.year,
@@ -18,6 +10,14 @@ class YearView extends StatelessWidget {
     this.customMonthNames,
     this.onMonthTap,
   });
+
+  final BuildContext context;
+  final int year;
+  final Color todayColor;
+  final List<String> customMonthNames;
+  final Function onMonthTap;
+  final double horizontalMargin = 16.0;
+  final double monthViewPadding = 8.0;
 
   Widget buildYearMonths(BuildContext context) {
     List<Widget> monthRows = [];

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:scrolling_years_calendar/utils/screen_sizes.dart';
 
 class YearTitle extends StatelessWidget {
-  final int year;
-
   const YearTitle(
     this.year,
   );
+
+  final int year;
 
   @override
   Widget build(BuildContext context) {
