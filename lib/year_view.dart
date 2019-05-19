@@ -27,12 +27,12 @@ class YearView extends StatelessWidget {
       monthRowChildren.add(
         MonthView(
           context: context,
-          year: this.year,
+          year: year,
           month: month,
-          padding: this.monthViewPadding,
-          todayColor: this.todayColor,
-          customMonthNames: this.customMonthNames,
-          onMonthTap: this.onMonthTap,
+          padding: monthViewPadding,
+          todayColor: todayColor,
+          customMonthNames: customMonthNames,
+          onMonthTap: onMonthTap,
         ),
       );
 
@@ -62,15 +62,15 @@ class YearView extends StatelessWidget {
         children: <Widget>[
           Container(
             margin: EdgeInsets.symmetric(
-              horizontal: this.horizontalMargin,
+              horizontal: horizontalMargin,
               vertical: 0.0,
             ),
-            child: YearTitle(this.year),
+            child: YearTitle(year),
           ),
           Container(
             margin: EdgeInsets.only(
-              left: this.horizontalMargin,
-              right: this.horizontalMargin,
+              left: horizontalMargin,
+              right: horizontalMargin,
               top: 8.0,
             ),
             child: Divider(
@@ -79,7 +79,7 @@ class YearView extends StatelessWidget {
           ),
           Container(
             margin: EdgeInsets.symmetric(
-              horizontal: this.horizontalMargin - this.monthViewPadding,
+              horizontal: horizontalMargin - monthViewPadding,
               vertical: 0.0,
             ),
             child: buildYearMonths(context),

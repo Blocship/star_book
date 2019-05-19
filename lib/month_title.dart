@@ -14,7 +14,7 @@ class MonthTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Text(
-        getMonthName(this.month, customNames: this.customMonthNames),
+        getMonthName(month, customNames: customMonthNames),
         style: TextStyle(
           fontSize: 18.0,
           fontWeight: FontWeight.w600,

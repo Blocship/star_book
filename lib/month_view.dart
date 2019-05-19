@@ -27,16 +27,16 @@ class MonthView extends StatelessWidget {
     List<Widget> dayRows = [];
     List<Widget> dayRowChildren = [];
 
-    int daysInMonth = getDaysInMonth(this.year, this.month);
-    int firstWeekdayOfMonth = DateTime(this.year, this.month, 1).weekday;
+    int daysInMonth = getDaysInMonth(year, month);
+    int firstWeekdayOfMonth = DateTime(year, month, 1).weekday;
 
     for (int day = 2 - firstWeekdayOfMonth; day <= daysInMonth; day++) {
-      bool isToday = dateIsToday(DateTime(this.year, this.month, day));
+      bool isToday = dateIsToday(DateTime(year, month, day));
       dayRowChildren.add(
         DayNumber(
           day: day,
           isToday: isToday,
-          todayColor: this.todayColor,
+          todayColor: todayColor,
         ),
       );
 
@@ -60,13 +60,13 @@ class MonthView extends StatelessWidget {
   Widget buildMonthView(BuildContext context) {
     return Container(
       width: 7 * getDayNumberSize(context),
-      margin: EdgeInsets.all(this.padding),
+      margin: EdgeInsets.all(padding),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           MonthTitle(
-            month: this.month,
-            customMonthNames: this.customMonthNames,
+            month: month,
+            customMonthNames: customMonthNames,
           ),
           Container(
             margin: EdgeInsets.only(top: 8.0),
@@ -79,14 +79,14 @@ class MonthView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return this.onMonthTap == null
+    return onMonthTap == null
         ? Container(
-            child: this.buildMonthView(context),
+            child: buildMonthView(context),
           )
         : FlatButton(
-            onPressed: () => this.onMonthTap(this.year, this.month),
+            onPressed: () => this.onMonthTap(year, month),
             padding: EdgeInsets.all(0.0),
-            child: this.buildMonthView(context),
+            child: buildMonthView(context),
           );
   }
 }

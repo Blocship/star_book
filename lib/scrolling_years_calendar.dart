@@ -33,7 +33,7 @@ class _ScrollingYearsCalendarState extends State<ScrollingYearsCalendar> {
   /// Gets a widget with the view of the given year.
   YearView _getYearView(int year) {
     return YearView(
-      context: this.context,
+      context: context,
       year: year,
       todayColor: widget.todayColor,
       customMonthNames: widget.customMonthNames,

@@ -11,7 +11,7 @@ class YearTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Text(
-      this.year.toString(),
+      year.toString(),
       style: TextStyle(
         fontSize: screenSize(context) == ScreenSizes.small ? 22.0 : 26.0,
         fontWeight: FontWeight.w600,

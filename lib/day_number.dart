@@ -20,17 +20,17 @@ class DayNumber extends StatelessWidget {
       width: size,
       height: size,
       alignment: Alignment.center,
-      decoration: this.isToday
+      decoration: isToday
           ? BoxDecoration(
-              color: this.todayColor,
+              color: todayColor,
               borderRadius: BorderRadius.circular(size / 2),
             )
           : null,
       child: Text(
-        this.day < 1 ? '' : this.day.toString(),
+        day < 1 ? '' : day.toString(),
         textAlign: TextAlign.center,
         style: TextStyle(
-          color: this.isToday ? Colors.white : Colors.black87,
+          color: isToday ? Colors.white : Colors.black87,
           fontSize: screenSize(context) == ScreenSizes.small ? 8.0 : 10.0,
           fontWeight: FontWeight.normal,
         ),
