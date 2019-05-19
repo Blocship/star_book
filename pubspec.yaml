@@ -6,7 +6,7 @@ author: Menno Renkens <renkenrenkensmenno@gmail.com>
 homepage: https://github.com/mennorenkens/flutter_scrolling_calendar
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: '>=2.2.2 <3.0.0'
 
 dependencies:
   flutter:
