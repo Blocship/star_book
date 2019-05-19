@@ -27,13 +27,13 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: ScrollingYearsCalendar(
-          // Required attributes
+          // Required properties
           context: context,
           initialDate: DateTime.now(),
           firstDate: DateTime.now().subtract(Duration(days: 5 * 365)),
           lastDate: DateTime.now(),
 
-          // Optional attributes
+          // Optional properties
           todayColor: Colors.blue,
           monthNames: const <String>[
             'Jan',
