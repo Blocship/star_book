@@ -7,14 +7,14 @@ class YearView extends StatelessWidget {
   const YearView({
     @required this.context,
     @required this.year,
-    this.todayColor,
+    this.currentDateColor,
     this.monthNames,
     this.onMonthTap,
   });
 
   final BuildContext context;
   final int year;
-  final Color todayColor;
+  final Color currentDateColor;
   final List<String> monthNames;
   final Function onMonthTap;
   double get horizontalMargin => 16.0;
@@ -31,7 +31,7 @@ class YearView extends StatelessWidget {
           year: year,
           month: month,
           padding: monthViewPadding,
-          todayColor: todayColor,
+          currentDateColor: currentDateColor,
           monthNames: monthNames,
           onMonthTap: onMonthTap,
         ),

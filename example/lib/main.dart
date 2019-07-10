@@ -34,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
           lastDate: DateTime.now(),
 
           // Optional properties
-          todayColor: Colors.blue,
+          currentDateColor: Colors.blue,
           monthNames: const <String>[
             'Jan',
             'Feb',

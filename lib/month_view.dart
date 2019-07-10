@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scrolling_years_calendar/utils/dates.dart';
+import 'package:scrolling_years_calendar/utils/dates.dart' as dates;
 import 'package:scrolling_years_calendar/utils/screen_sizes.dart';
 import 'package:scrolling_years_calendar/month_title.dart';
 import 'package:scrolling_years_calendar/day_number.dart';
@@ -10,7 +10,7 @@ class MonthView extends StatelessWidget {
     @required this.year,
     @required this.month,
     @required this.padding,
-    this.todayColor,
+    this.currentDateColor,
     this.monthNames,
     this.onMonthTap,
   });
@@ -19,7 +19,7 @@ class MonthView extends StatelessWidget {
   final int year;
   final int month;
   final double padding;
-  final Color todayColor;
+  final Color currentDateColor;
   final List<String> monthNames;
   final Function onMonthTap;
 
@@ -27,16 +27,17 @@ class MonthView extends StatelessWidget {
     final List<Row> dayRows = <Row>[];
     final List<DayNumber> dayRowChildren = <DayNumber>[];
 
-    final int daysInMonth = getDaysInMonth(year, month);
+    final int daysInMonth = dates.getDaysInMonth(year, month);
     final int firstWeekdayOfMonth = DateTime(year, month, 1).weekday;
 
     for (int day = 2 - firstWeekdayOfMonth; day <= daysInMonth; day++) {
-      final bool isToday = dateIsToday(DateTime(year, month, day));
+      final bool isCurrentDate =
+          dates.isCurrentDate(DateTime(year, month, day));
       dayRowChildren.add(
         DayNumber(
           day: day,
-          isToday: isToday,
-          todayColor: todayColor,
+          isCurrentDate: isCurrentDate,
+          currentDateColor: currentDateColor,
         ),
       );
 

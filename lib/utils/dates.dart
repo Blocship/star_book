@@ -1,5 +1,5 @@
-/// Checks if the given date is today.
-bool dateIsToday(DateTime date) {
+/// Checks if the given date is equal to the current date.
+bool isCurrentDate(DateTime date) {
   final DateTime now = DateTime.now();
   return date.isAtSameMomentAs(DateTime(now.year, now.month, now.day));
 }
