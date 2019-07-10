@@ -10,12 +10,10 @@ enum ScreenSizes {
 /// Gets the screen size category of the screen.
 ScreenSizes screenSize(BuildContext context) {
   final double width = MediaQuery.of(context).size.width;
-  if (width < 340) {
+  if (width < 400.0) {
     return ScreenSizes.small;
-  } else if (width < 540) {
-    return ScreenSizes.medium;
   } else {
-    return ScreenSizes.large;
+    return ScreenSizes.medium;
   }
 }
 
