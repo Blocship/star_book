@@ -10,7 +10,9 @@ class ScrollingYearsCalendar extends StatefulWidget {
     @required this.initialDate,
     @required this.firstDate,
     @required this.lastDate,
-    this.todayColor,
+    @required this.currentDateColor,
+    this.highlightedDates,
+    this.highlightedDateColor,
     this.monthNames,
     this.onMonthTap,
   })  : assert(context != null),
@@ -23,14 +25,20 @@ class ScrollingYearsCalendar extends StatefulWidget {
             'initialDate must be on or before lastDate'),
         assert(!firstDate.isAfter(lastDate),
             'lastDate must be on or after firstDate'),
+        assert(currentDateColor != null),
+        assert(highlightedDates == null || highlightedDateColor != null,
+            'highlightedDateColor is required if highlightedDates is not null'),
         assert(
-            monthNames == null || monthNames.length == DateTime.monthsPerYear);
+            monthNames == null || monthNames.length == DateTime.monthsPerYear,
+            'monthNames must contain all months of the year');
 
   final BuildContext context;
   final DateTime initialDate;
   final DateTime firstDate;
   final DateTime lastDate;
-  final Color todayColor;
+  final Color currentDateColor;
+  final List<DateTime> highlightedDates;
+  final Color highlightedDateColor;
   final List<String> monthNames;
   final Function onMonthTap;
 
@@ -44,7 +52,9 @@ class _ScrollingYearsCalendarState extends State<ScrollingYearsCalendar> {
     return YearView(
       context: context,
       year: year,
-      todayColor: widget.todayColor,
+      currentDateColor: widget.currentDateColor,
+      highlightedDates: widget.highlightedDates,
+      highlightedDateColor: widget.highlightedDateColor,
       monthNames: widget.monthNames,
       onMonthTap: widget.onMonthTap,
     );

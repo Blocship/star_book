@@ -10,7 +10,9 @@ class MonthView extends StatelessWidget {
     @required this.year,
     @required this.month,
     @required this.padding,
-    this.todayColor,
+    @required this.currentDateColor,
+    this.highlightedDates,
+    this.highlightedDateColor,
     this.monthNames,
     this.onMonthTap,
   });
@@ -19,9 +21,22 @@ class MonthView extends StatelessWidget {
   final int year;
   final int month;
   final double padding;
-  final Color todayColor;
+  final Color currentDateColor;
+  final List<DateTime> highlightedDates;
+  final Color highlightedDateColor;
   final List<String> monthNames;
   final Function onMonthTap;
+
+  Color getDayNumberColor(DateTime date) {
+    Color color;
+    if (isCurrentDate(date)) {
+      color = currentDateColor;
+    } else if (highlightedDates != null &&
+        isHighlightedDate(date, highlightedDates)) {
+      color = highlightedDateColor;
+    }
+    return color;
+  }
 
   Widget buildMonthDays(BuildContext context) {
     final List<Row> dayRows = <Row>[];
@@ -31,12 +46,15 @@ class MonthView extends StatelessWidget {
     final int firstWeekdayOfMonth = DateTime(year, month, 1).weekday;
 
     for (int day = 2 - firstWeekdayOfMonth; day <= daysInMonth; day++) {
-      final bool isToday = dateIsToday(DateTime(year, month, day));
+      Color color;
+      if (day > 0) {
+        color = getDayNumberColor(DateTime(year, month, day));
+      }
+
       dayRowChildren.add(
         DayNumber(
           day: day,
-          isToday: isToday,
-          todayColor: todayColor,
+          color: color,
         ),
       );
 
