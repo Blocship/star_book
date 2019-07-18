@@ -29,7 +29,8 @@ class ScrollingYearsCalendar extends StatefulWidget {
         assert(highlightedDates == null || highlightedDateColor != null,
             'highlightedDateColor is required if highlightedDates is not null'),
         assert(
-            monthNames == null || monthNames.length == DateTime.monthsPerYear);
+            monthNames == null || monthNames.length == DateTime.monthsPerYear,
+            'monthNames must contain all months of the year');
 
   final BuildContext context;
   final DateTime initialDate;
