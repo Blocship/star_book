@@ -1,3 +1,9 @@
+## 1.2.0
+
+- Highlighted dates feature.
+- **Breaking change.** Renamed color property, which is now required.
+- Breakpoint bug fix.
+
 ## 1.1.0
 
 - Major refactor.

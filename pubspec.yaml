@@ -1,7 +1,7 @@
 name: scrolling_years_calendar
 description: A calendar widget to easily scroll through the years,
   allowing for customizations to fit your design.
-version: 1.1.0
+version: 1.2.0
 authors:
   - Menno Renkens <renkenrenkensmenno@gmail.com>
   - Zep Fietje
