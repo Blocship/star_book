@@ -19,6 +19,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  List<DateTime> getHighlightedDates() {
+    return List<DateTime>.generate(
+      10,
+      (int index) => DateTime.now().add(Duration(days: 10 * (index + 1))),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,11 +37,13 @@ class _MyHomePageState extends State<MyHomePage> {
           // Required properties
           context: context,
           initialDate: DateTime.now(),
-          firstDate: DateTime.now().subtract(Duration(days: 5 * 365)),
+          firstDate: DateTime.now().subtract(const Duration(days: 5 * 365)),
           lastDate: DateTime.now(),
+          currentDateColor: Colors.blue,
 
           // Optional properties
-          currentDateColor: Colors.blue,
+          highlightedDates: getHighlightedDates(),
+          highlightedDateColor: Colors.deepOrange,
           monthNames: const <String>[
             'Jan',
             'Feb',
