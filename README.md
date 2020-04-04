@@ -30,3 +30,9 @@ A customizable calendar widget to easily scroll through the years
 - [Menno Renkens](https://github.com/mennorenkens)
 - [Zep Fietje](https://github.com/zepfietje)
 - [Dutch Coding Company](https://github.com/DutchCodingCompany)
+
+## Starware
+
+Flutter Scrolling Calendar is Starware.  
+This means you're free to use the project, as long as you star its GitHub repository.  
+Your appreciation makes us grow and glow up. ⭐
