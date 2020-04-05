@@ -1,3 +1,7 @@
+## 1.2.1
+
+- Bottom overflow bug fix.
+
 ## 1.2.0
 
 - Highlighted dates feature.
