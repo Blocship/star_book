@@ -33,9 +33,9 @@ double getMonthViewHeight(BuildContext context) {
 /// Gets the vertical space that one year view takes up.
 /// Some years will have extra vertical space equal to the size of a day number.
 double getYearViewHeight(BuildContext context) {
-  const double topPadding = 16.0;
+  const double topPadding = 40.0;
   final double titleHeight =
-      screenSize(context) == ScreenSizes.small ? 26.0 : 30.0;
+      screenSize(context) == ScreenSizes.small ? 26.0 : 31.0;
   const double dividerHeight = 16.0;
 
   return topPadding +

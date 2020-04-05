@@ -17,14 +17,6 @@ A customizable calendar widget to easily scroll through the years
 - Choose the color of the current day indicator
 - Override the default month names
 
-## Planned Features
-
-- Customizable color indications per date
-- Allow for better customization of elements
-- Zoom-in to month view on tap in year-view
-- Zoom-in to day view on tap in month-view
-- Infinite scrolling
-
 ## Contributors
 
 - [Menno Renkens](https://github.com/mennorenkens)
