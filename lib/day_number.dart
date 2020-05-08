@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scrolling_years_calendar/utils/screen_sizes.dart';
+import 'package:star_book/utils/screen_sizes.dart';
 
 class DayNumber extends StatelessWidget {
   const DayNumber({

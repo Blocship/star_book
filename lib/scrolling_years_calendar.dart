@@ -1,8 +1,8 @@
 library scrolling_years_calendar;
 
 import 'package:flutter/material.dart';
-import 'package:scrolling_years_calendar/utils/screen_sizes.dart';
-import 'package:scrolling_years_calendar/year_view.dart';
+import 'package:star_book/utils/screen_sizes.dart';
+import 'package:star_book/year_view.dart';
 
 class ScrollingYearsCalendar extends StatefulWidget {
   ScrollingYearsCalendar({

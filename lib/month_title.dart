@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:scrolling_years_calendar/utils/dates.dart';
+import 'package:star_book/utils/dates.dart';
 
 class MonthTitle extends StatelessWidget {
   const MonthTitle({

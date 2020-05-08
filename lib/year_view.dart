@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:scrolling_years_calendar/month_view.dart';
-import 'package:scrolling_years_calendar/utils/screen_sizes.dart';
-import 'package:scrolling_years_calendar/year_title.dart';
+import 'package:star_book/month_view.dart';
+import 'package:star_book/utils/screen_sizes.dart';
+import 'package:star_book/year_title.dart';
 
 class YearView extends StatelessWidget {
   const YearView({

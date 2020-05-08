@@ -1,8 +1,0 @@
-name: scrolling_years_calendar_example
-description: Demonstrates how to use the scrolling_years_calendar plugin.
-
-dependencies:
-  flutter:
-    sdk: flutter
-  scrolling_years_calendar:
-    path: ../
