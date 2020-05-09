@@ -16,7 +16,7 @@ class MonthTitle extends StatelessWidget {
       child: Text(
         getMonthName(month, monthNames: monthNames),
         style: TextStyle(
-          fontSize: 18.0,
+          fontSize: 34.0,
           fontWeight: FontWeight.w600,
         ),
         maxLines: 1,

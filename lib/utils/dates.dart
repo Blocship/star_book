@@ -1,3 +1,5 @@
+import 'package:star_book/models/day.dart';
+
 /// Checks if the given date is equal to the current date.
 bool isCurrentDate(DateTime date) {
   final DateTime now = DateTime.now();
@@ -5,10 +7,10 @@ bool isCurrentDate(DateTime date) {
 }
 
 /// Checks if the given date is a highlighted date.
-bool isHighlightedDate(DateTime date, List<DateTime> highlightedDates) {
-  return highlightedDates.any((DateTime highlightedDate) =>
-      date.isAtSameMomentAs(DateTime(
-          highlightedDate.year, highlightedDate.month, highlightedDate.day)));
+bool isHighlightedDate(DateTime date, List<Day> highlightedDates) {
+  return highlightedDates.any((Day highlightedDate) => date.isAtSameMomentAs(
+      DateTime(highlightedDate.date.year, highlightedDate.date.month,
+          highlightedDate.date.day)));
 }
 
 /// Gets the number of days for the given month,

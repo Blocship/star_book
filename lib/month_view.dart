@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/models/day.dart';
 import 'package:star_book/utils/dates.dart';
 import 'package:star_book/utils/screen_sizes.dart';
 import 'package:star_book/month_title.dart';
@@ -22,7 +23,7 @@ class MonthView extends StatelessWidget {
   final int month;
   final double padding;
   final Color currentDateColor;
-  final List<DateTime> highlightedDates;
+  final List<Day> highlightedDates;
   final Color highlightedDateColor;
   final List<String> monthNames;
   final Function onMonthTap;
@@ -31,9 +32,17 @@ class MonthView extends StatelessWidget {
     Color color;
     if (isCurrentDate(date)) {
       color = currentDateColor;
-    } else if (highlightedDates != null &&
-        isHighlightedDate(date, highlightedDates)) {
-      color = highlightedDateColor;
+    } else if (highlightedDates != null) {
+      highlightedDates.any((Day highlightedDate) {
+        if (date.isAtSameMomentAs(DateTime(highlightedDate.date.year,
+            highlightedDate.date.month, highlightedDate.date.day))) {
+          color = highlightedDate.color;
+          return true;
+        } else {
+          color = null;
+          return false;
+        }
+      });
     }
     return color;
   }
