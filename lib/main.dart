@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:star_book/models/day.dart';
 import 'package:star_book/widgets/day.dart';
 import 'package:star_book/widgets/month.dart';
-// import 'package:star_book/widgets/month.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,15 +22,15 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   List<Day> highlightedDays = [
-    new Day(day: 1, color: Colors.blue),
-    new Day(day: 3, color: Colors.green),
-    new Day(day: 5, color: Colors.red),
+    new Day(day: 1, tag: "blue"),
+    new Day(day: 3, tag: "green"),
+    new Day(day: 5, tag: "red"),
   ];
 
   onDayPressed(Day day) {
     highlightedDays.removeWhere((d) => d.day == day.day);
     setState(() {
-      highlightedDays.add(Day(day: day.day, color: Colors.brown));
+      highlightedDays.add(Day(day: day.day, tag: "red"));
     });
   }
 

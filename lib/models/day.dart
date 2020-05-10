@@ -5,10 +5,13 @@ class Day {
   Color color;
   String tag;
 
-  Day({this.day, this.color});
+  Day({@required this.day, @required this.tag, this.color});
 
   @override
   bool operator ==(other) {
     return this.day == other.day;
   }
+
+  @override
+  int get hashCode => day.hashCode;
 }

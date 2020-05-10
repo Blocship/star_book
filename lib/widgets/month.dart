@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/models/day.dart';
 import 'package:star_book/utils/dates.dart';
-import 'package:star_book/utils/screen_sizes.dart';
+import 'package:star_book/utils/dayWidget_size.dart';
+import 'package:star_book/utils/tag_to_color.dart';
 import 'package:star_book/widgets/day.dart';
 import 'package:star_book/widgets/month_title.dart';
 
@@ -26,9 +27,9 @@ class MonthWidget extends StatelessWidget {
     if (isCurrentDate(date)) {
       color = currentDateColor;
     } else if (highlightedDates != null) {
-      highlightedDates.any((Day highlightedDate) {
-        if (date.isAtSameMomentAs(DateTime(year, month, highlightedDate.day))) {
-          color = highlightedDate.color;
+      highlightedDates.any((Day day) {
+        if (date.isAtSameMomentAs(DateTime(year, month, day.day))) {
+          color = getColor(day.tag);
           return true;
         } else {
           color = null;
@@ -42,7 +43,6 @@ class MonthWidget extends StatelessWidget {
   Widget buildMonthDays(BuildContext context) {
     final List<Row> dayRows = <Row>[];
     final List<DayWidget> dayRowChildren = <DayWidget>[];
-
     final int daysInMonth = getDaysInMonth(year, month);
     final int firstWeekdayOfMonth = DateTime(year, month, 1).weekday;
 
@@ -51,13 +51,9 @@ class MonthWidget extends StatelessWidget {
       if (day > 0) {
         color = getDayWidgetColor(DateTime(year, month, day));
       }
-
-      dayRowChildren.add(
-        DayWidget(
-          day: Day(day: day, color: color),
-          onDayPressed: onDayPressed,
-        ),
-      );
+      dayRowChildren.add(DayWidget(
+          day: Day(day: day, tag: "blue", color: color),
+          onDayPressed: onDayPressed));
 
       if ((day - 1 + firstWeekdayOfMonth) % DateTime.daysPerWeek == 0 ||
           day == daysInMonth) {
@@ -78,7 +74,7 @@ class MonthWidget extends StatelessWidget {
 
   Widget buildMonthWidget(BuildContext context) {
     return Container(
-      width: 7 * getDayWidgetSize(context),
+      width: 7 * getDayWidgetSize(),
       margin: EdgeInsets.zero,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

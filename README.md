@@ -30,13 +30,40 @@
 
 ## TODO 🚀
 
-[ ] Readme.md improvement
+- [ ] Readme.md improvement
+- [ ] Adding tags
+- [ ] Routing
 
-## Shout Out To Contributors 🔥
+## Shout-out To Contributors 🔥
 
-- [Menno Renkens](https://github.com/mennorenkens)
-- [Zep Fietje](https://github.com/zepfietje)
-- [Dutch Coding Company](https://github.com/DutchCodingCompany)
+<table>
+  <tr>
+    <td align="center">
+      <a href="https://www.facebook.com/hashir.shoaeb">
+        <img src="https://avatars2.githubusercontent.com/u/35165481?v=4" width="100px" alt="" />
+        <br />
+        <sub><b>Hashir Shoaib</b></sub>
+      </a>
+      <br />
+    </td>
+    <td align="center">
+      <a href="https://github.com/mennorenkens">
+        <img src="https://avatars2.githubusercontent.com/u/18008421?v=4" width="100px" alt="" />
+        <br />
+        <sub><b>Menno Renkens</b></sub>
+      </a>
+      <br />
+    </td>
+    <td align="center">
+      <a href="https://github.com/zepfietje">
+        <img src="https://avatars3.githubusercontent.com/u/44533235?s=460&v=4" width="100px" alt="" />
+        <br />
+        <sub><b>Zep Fietje</b></sub>
+      </a>
+      <br />
+    </td>
+  </tr>
+</table>
 
 ## Starware
 
