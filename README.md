@@ -1,23 +1,38 @@
-[![Starware](https://img.shields.io/badge/Starware-%E2%AD%90-black?labelColor=%23f9b00d)](https://github.com/zepfietje/starware)
+<!-- PROJECT LOGO -->
+<br />
+<p align="center">
+  <h1 align="center">StarBook ✨</h1>
 
-# Flutter Scrolling Calendar 🗓
-
-A customizable calendar widget to easily scroll through the years
-
-<p align="left">
-  <a href="https://pub.dartlang.org/packages/scrolling_years_calendar"><img alt="pub version" src="https://img.shields.io/pub/v/scrolling_years_calendar.svg?style=flat-square"></a>
+  <p align="center">
+    A digital diary that can help you in keeping track of your mood and productivity throughout the month. Mood tracker is a good way to see how you are mostly feeling. And it helped me a lot to realise how my general mood is and to improve it. Cause I was feeling down two years ago so now when I look at my mood board it looks much nicer haha. 
+    <br />
+    <br />
+    <a href="https://hashirshoaeb.com">About Me</a>
+    ·
+    <a href="https://github.com/hashirshoaeb/star_book/issues">Report Bug</a>
+    ·
+    <a href="https://github.com/hashirshoaeb/star_book/issues">Request Feature</a>
+  </p>
 </p>
 
-![Screenshot](doc/screenshot1.png)
+![GitHub contributors](https://img.shields.io/github/contributors/hashirshoaeb/star_book?color=ffcc66&style=for-the-badge)
+![GitHub stars](https://img.shields.io/github/stars/hashirshoaeb/star_book?color=ffcc66&logo=StarBook&style=for-the-badge)
+[![GitHub forks](https://img.shields.io/github/forks/hashirshoaeb/star_book?style=for-the-badge)](https://github.com/hashirshoaeb/star_book/network)
+[![GitHub issues](https://img.shields.io/github/issues/hashirshoaeb/star_book?color=ffcc66&style=for-the-badge)](https://github.com/hashirshoaeb/star_book/issues)
+[![GitHub license](https://img.shields.io/github/license/hashirshoaeb/star_book?style=for-the-badge)](https://github.com/hashirshoaeb/star_book/blob/master/LICENSE)
 
-## Features
+<!-- TABLE OF CONTENTS -->
 
-- Choose range of years and the initial year to show
-- Callback on month-tap with date information
-- Choose the color of the current day indicator
-- Override the default month names
+## Table Of Content
 
-## Contributors
+- [Features]()
+- [Contributors]()
+
+## TODO 🚀
+
+[ ] Readme.md improvement
+
+## Shout Out To Contributors 🔥
 
 - [Menno Renkens](https://github.com/mennorenkens)
 - [Zep Fietje](https://github.com/zepfietje)
@@ -25,6 +40,5 @@ A customizable calendar widget to easily scroll through the years
 
 ## Starware
 
-Flutter Scrolling Calendar is Starware.  
-This means you're free to use the project, as long as you star its GitHub repository.  
+You're free to use the project, as long as you star this repository.  
 Your appreciation makes us grow and glow up. ⭐
