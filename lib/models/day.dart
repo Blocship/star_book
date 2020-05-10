@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 class Day {
-  DateTime date;
+  int day;
   Color color;
   String tag;
 
-  Day({this.date, this.color});
+  Day({this.day, this.color});
+
+  @override
+  bool operator ==(other) {
+    return this.day == other.day;
+  }
 }

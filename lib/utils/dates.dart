@@ -7,11 +7,11 @@ bool isCurrentDate(DateTime date) {
 }
 
 /// Checks if the given date is a highlighted date.
-bool isHighlightedDate(DateTime date, List<Day> highlightedDates) {
-  return highlightedDates.any((Day highlightedDate) => date.isAtSameMomentAs(
-      DateTime(highlightedDate.date.year, highlightedDate.date.month,
-          highlightedDate.date.day)));
-}
+// bool isHighlightedDate(DateTime date, List<Day> highlightedDates) {
+//   return highlightedDates.any((Day highlightedDate) => date.isAtSameMomentAs(
+//       DateTime(highlightedDate.date.year, highlightedDate.date.month,
+//           highlightedDate.date.day)));
+// }
 
 /// Gets the number of days for the given month,
 /// by taking the next month on day 0 and getting the number of days.

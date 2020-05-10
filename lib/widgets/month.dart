@@ -2,40 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:star_book/models/day.dart';
 import 'package:star_book/utils/dates.dart';
 import 'package:star_book/utils/screen_sizes.dart';
-import 'package:star_book/month_title.dart';
-import 'package:star_book/day_number.dart';
+import 'package:star_book/widgets/day.dart';
+import 'package:star_book/widgets/month_title.dart';
 
-class MonthView extends StatelessWidget {
-  const MonthView({
-    @required this.context,
-    @required this.year,
-    @required this.month,
-    @required this.padding,
-    @required this.currentDateColor,
-    this.highlightedDates,
-    this.highlightedDateColor,
-    this.monthNames,
-    this.onMonthTap,
-  });
+class MonthWidget extends StatelessWidget {
+  MonthWidget(
+      {@required this.context,
+      @required this.year,
+      @required this.month,
+      @required this.currentDateColor,
+      this.highlightedDates,
+      this.onDayPressed});
 
   final BuildContext context;
   final int year;
   final int month;
-  final double padding;
   final Color currentDateColor;
   final List<Day> highlightedDates;
-  final Color highlightedDateColor;
-  final List<String> monthNames;
-  final Function onMonthTap;
+  final Function onDayPressed;
 
-  Color getDayNumberColor(DateTime date) {
+  Color getDayWidgetColor(DateTime date) {
     Color color;
     if (isCurrentDate(date)) {
       color = currentDateColor;
     } else if (highlightedDates != null) {
       highlightedDates.any((Day highlightedDate) {
-        if (date.isAtSameMomentAs(DateTime(highlightedDate.date.year,
-            highlightedDate.date.month, highlightedDate.date.day))) {
+        if (date.isAtSameMomentAs(DateTime(year, month, highlightedDate.day))) {
           color = highlightedDate.color;
           return true;
         } else {
@@ -49,7 +41,7 @@ class MonthView extends StatelessWidget {
 
   Widget buildMonthDays(BuildContext context) {
     final List<Row> dayRows = <Row>[];
-    final List<DayNumber> dayRowChildren = <DayNumber>[];
+    final List<DayWidget> dayRowChildren = <DayWidget>[];
 
     final int daysInMonth = getDaysInMonth(year, month);
     final int firstWeekdayOfMonth = DateTime(year, month, 1).weekday;
@@ -57,13 +49,13 @@ class MonthView extends StatelessWidget {
     for (int day = 2 - firstWeekdayOfMonth; day <= daysInMonth; day++) {
       Color color;
       if (day > 0) {
-        color = getDayNumberColor(DateTime(year, month, day));
+        color = getDayWidgetColor(DateTime(year, month, day));
       }
 
       dayRowChildren.add(
-        DayNumber(
-          day: day,
-          color: color,
+        DayWidget(
+          day: Day(day: day, color: color),
+          onDayPressed: onDayPressed,
         ),
       );
 
@@ -71,7 +63,7 @@ class MonthView extends StatelessWidget {
           day == daysInMonth) {
         dayRows.add(
           Row(
-            children: List<DayNumber>.from(dayRowChildren),
+            children: List<DayWidget>.from(dayRowChildren),
           ),
         );
         dayRowChildren.clear();
@@ -84,16 +76,16 @@ class MonthView extends StatelessWidget {
     );
   }
 
-  Widget buildMonthView(BuildContext context) {
+  Widget buildMonthWidget(BuildContext context) {
     return Container(
-      width: 7 * getDayNumberSize(context),
-      margin: EdgeInsets.all(padding),
+      width: 7 * getDayWidgetSize(context),
+      margin: EdgeInsets.zero,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           MonthTitle(
             month: month,
-            monthNames: monthNames,
+            monthNames: null,
           ),
           Container(
             margin: const EdgeInsets.only(top: 8.0),
@@ -106,14 +98,8 @@ class MonthView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return onMonthTap == null
-        ? Container(
-            child: buildMonthView(context),
-          )
-        : FlatButton(
-            onPressed: () => this.onMonthTap(year, month),
-            padding: const EdgeInsets.all(0.0),
-            child: buildMonthView(context),
-          );
+    return Container(
+      child: buildMonthWidget(context),
+    );
   }
 }

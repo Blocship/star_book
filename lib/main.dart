@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/models/day.dart';
-import 'package:star_book/month_view.dart';
+import 'package:star_book/widgets/day.dart';
+import 'package:star_book/widgets/month.dart';
+// import 'package:star_book/widgets/month.dart';
 
 void main() => runApp(MyApp());
 
@@ -20,19 +22,18 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  List<DateTime> getHighlightedDates() {
-    return [DateTime(2020, 5, 1), DateTime(2020, 5, 3)];
-    // List<DateTime>.generate(
-    //   10,
-    //   (int index) => DateTime.now().add(Duration(days: 1 * (index + 1))),
-    // );
-  }
-
-  List<Day> highlighted_days = [
-    new Day(date: DateTime(2020, 5, 1), color: Colors.blue),
-    new Day(date: DateTime(2020, 5, 3), color: Colors.green),
-    new Day(date: DateTime(2020, 5, 5), color: Colors.red),
+  List<Day> highlightedDays = [
+    new Day(day: 1, color: Colors.blue),
+    new Day(day: 3, color: Colors.green),
+    new Day(day: 5, color: Colors.red),
   ];
+
+  onDayPressed(Day day) {
+    highlightedDays.removeWhere((d) => d.day == day.day);
+    setState(() {
+      highlightedDays.add(Day(day: day.day, color: Colors.brown));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,15 +42,23 @@ class _MyHomePageState extends State<MyHomePage> {
         title: const Text('StarBook'),
       ),
       body: Center(
-          child: MonthView(
-        context: context,
-        year: 2020,
-        month: 5,
-        padding: 0,
-        currentDateColor: Colors.brown,
-        highlightedDates: highlighted_days,
-        highlightedDateColor: Colors.blue,
-      )),
+        child: MonthWidget(
+          context: context,
+          year: 2020,
+          month: 5,
+          currentDateColor: Colors.blueGrey,
+          highlightedDates: highlightedDays,
+          onDayPressed: onDayPressed,
+        ),
+      ),
     );
   }
 }
+
+// Column(
+//               children: highlightedDays.map((Day d) {
+//         return DayWidget(
+//           day: d,
+//           onDayPressed: onDayPressed,
+//         );
+//       }).toList())
