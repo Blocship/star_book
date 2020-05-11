@@ -31,6 +31,10 @@ class DayWidget extends StatelessWidget {
         child: FlatButton(
           padding: EdgeInsets.all(0),
           onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SecondRoute()),
+            );
             onDayPressed(day);
           },
           child: Text(
@@ -42,6 +46,26 @@ class DayWidget extends StatelessWidget {
               fontWeight: FontWeight.normal,
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class SecondRoute extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Second Route"),
+      ),
+      body: Center(
+        child: RaisedButton(
+          onPressed: () {
+            // Navigate back to first route when tapped
+            Navigator.pop(context);
+          },
+          child: Text('Go back!'),
         ),
       ),
     );
