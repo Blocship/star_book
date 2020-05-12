@@ -33,7 +33,7 @@ class DayWidget extends StatelessWidget {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SecondRoute()),
+              MaterialPageRoute(builder: (context) => SecondRoute(data: day)),
             );
             onDayPressed(day);
           },
@@ -53,6 +53,8 @@ class DayWidget extends StatelessWidget {
 }
 
 class SecondRoute extends StatelessWidget {
+  final Day data;
+  SecondRoute({Key key, this.data}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +67,7 @@ class SecondRoute extends StatelessWidget {
             // Navigate back to first route when tapped
             Navigator.pop(context);
           },
-          child: Text('Go back!'),
+          child: Text('Go back! ${data.tag}'),
         ),
       ),
     );
