@@ -53,9 +53,11 @@ class MonthWidget extends StatelessWidget {
       Color color;
       if (day > 0) {
         color = getDayWidgetColor(DateTime(year, month, day));
+        // getDayWidgetTag
+        // getDayWidgetDetail
       }
       dayRowChildren.add(DayWidget(
-          day: Day(day: day, tag: "blue", color: color),
+          day: Day(day: day, tag: "", color: color),
           onDayPressed: onDayPressed));
 
       if ((day - 1 + firstWeekdayOfMonth) % DateTime.daysPerWeek == 0 ||

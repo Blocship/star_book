@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
   onDayPressed(Day day) {
     highlightedDays.removeWhere((d) => d.day == day.day);
     setState(() {
-      highlightedDays.add(Day(day: day.day, tag: "red"));
+      highlightedDays.add(Day(day: day.day, tag: day.tag));
     });
   }
 

@@ -37,7 +37,7 @@ class DayWidget extends StatelessWidget {
               context,
               MaterialPageRoute(builder: (context) => DayDetailPage(data: day)),
             );
-            print(result);
+            day.tag = result;
             onDayPressed(day);
           },
           child: Text(
