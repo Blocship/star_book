@@ -21,12 +21,17 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  // the list of highlighted day,
+  // this will be coming from and stored in
+  // database later.
   List<Day> highlightedDays = [
     new Day(day: 1, tag: "blue"),
     new Day(day: 3, tag: "green"),
     new Day(day: 5, tag: "red"),
   ];
 
+  // onpressed event, calls on pressing on day.
+  // updates the highlighted days list
   onDayPressed(Day day) {
     highlightedDays.removeWhere((d) => d.day == day.day);
     setState(() {

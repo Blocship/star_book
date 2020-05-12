@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/models/day.dart';
 import 'package:star_book/utils/dayWidget_size.dart';
+import 'package:star_book/widgets/day_detail.dart';
 
 class DayWidget extends StatelessWidget {
   DayWidget({@required this.day, this.onDayPressed});
@@ -9,6 +10,7 @@ class DayWidget extends StatelessWidget {
   final Function onDayPressed;
   // String diary_text or tag for now,
 
+  // builds a day box.
   @override
   Widget build(BuildContext context) {
     final double size = getDayWidgetSize();
@@ -30,11 +32,12 @@ class DayWidget extends StatelessWidget {
         height: double.infinity,
         child: FlatButton(
           padding: EdgeInsets.all(0),
-          onPressed: () {
-            Navigator.push(
+          onPressed: () async {
+            final result = await Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => SecondRoute(data: day)),
+              MaterialPageRoute(builder: (context) => DayDetailPage(data: day)),
             );
+            print(result);
             onDayPressed(day);
           },
           child: Text(
@@ -46,28 +49,6 @@ class DayWidget extends StatelessWidget {
               fontWeight: FontWeight.normal,
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class SecondRoute extends StatelessWidget {
-  final Day data;
-  SecondRoute({Key key, this.data}) : super(key: key);
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Second Route"),
-      ),
-      body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            // Navigate back to first route when tapped
-            Navigator.pop(context);
-          },
-          child: Text('Go back! ${data.tag}'),
         ),
       ),
     );

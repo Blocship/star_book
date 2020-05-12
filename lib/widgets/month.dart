@@ -22,6 +22,8 @@ class MonthWidget extends StatelessWidget {
   final List<Day> highlightedDates;
   final Function onDayPressed;
 
+  // returns the colour by checking the input date,
+  // from the highlighted dates list
   Color getDayWidgetColor(DateTime date) {
     Color color;
     if (isCurrentDate(date)) {
@@ -40,6 +42,7 @@ class MonthWidget extends StatelessWidget {
     return color;
   }
 
+  // stack the days, and make a grid form of calander.
   Widget buildMonthDays(BuildContext context) {
     final List<Row> dayRows = <Row>[];
     final List<DayWidget> dayRowChildren = <DayWidget>[];
@@ -72,6 +75,7 @@ class MonthWidget extends StatelessWidget {
     );
   }
 
+  // stack the month name and the grid of days in column
   Widget buildMonthWidget(BuildContext context) {
     return Container(
       width: 7 * getDayWidgetSize(),
