@@ -25,14 +25,30 @@
 
 ## Table Of Content
 
-- [Features]()
-- [Contributors]()
+- [Demo]()
+- [TODO]()
+- [Contributions]()
+- [Shout-out To Contributors]()
+- [Starware]()
+
+## Demo 🚀
+
+![Demo gif](READMEdocs/demo.gif)
+
+App is under development. For now it is like this. With your help we will add more features and functionalities.
 
 ## TODO 🚀
 
-- [ ] Readme.md improvement
-- [ ] Adding tags
-- [ ] Routing
+- [x] Readme.md improvement
+- [x] Adding tags
+- [x] Routing
+- [ ] Removing extra buttons
+- [ ] Adding input text box instead of color buttons.
+- [ ] Adding description in the day model
+
+# Contributions 🤝
+
+The App is under development. Are you interested in building and contributing to this awesome app? Your pull requests are most welcome. Any idea on how we can make this more awesome? Open a new issue! We need all the help we can get to make this project awesome!
 
 ## Shout-out To Contributors 🔥
 
