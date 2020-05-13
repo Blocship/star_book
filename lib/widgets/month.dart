@@ -12,34 +12,50 @@ class MonthWidget extends StatelessWidget {
       @required this.year,
       @required this.month,
       @required this.currentDateColor,
-      this.highlightedDates,
+      this.highlightedDays,
       this.onDayPressed});
 
   final BuildContext context;
   final int year;
   final int month;
   final Color currentDateColor;
-  final List<Day> highlightedDates;
+  final List<Day> highlightedDays;
   final Function onDayPressed;
 
   // returns the colour by checking the input date,
   // from the highlighted dates list
-  Color getDayWidgetColor(DateTime date) {
-    Color color;
-    if (isCurrentDate(date)) {
-      color = currentDateColor;
-    } else if (highlightedDates != null) {
-      highlightedDates.any((Day day) {
+  // Color getDayWidgetColor(DateTime date) {
+  //   Color color;
+  //   if (isCurrentDate(date)) {
+  //     color = currentDateColor;
+  //   } else if (highlightedDays != null) {
+  //     highlightedDays.any((Day day) {
+  //       if (date.isAtSameMomentAs(DateTime(year, month, day.day))) {
+  //         color = getColor(day.tag);
+  //         return true;
+  //       } else {
+  //         color = null;
+  //         return false;
+  //       }
+  //     });
+  //   }
+  //   return color;
+  // }
+
+  Day getHighlightedDay(DateTime date) {
+    Day hDay;
+    if (highlightedDays != null) {
+      highlightedDays.any((Day day) {
         if (date.isAtSameMomentAs(DateTime(year, month, day.day))) {
-          color = getColor(day.tag);
+          hDay = day;
           return true;
         } else {
-          color = null;
+          hDay = null;
           return false;
         }
       });
     }
-    return color;
+    return hDay;
   }
 
   // stack the days, and make a grid form of calander.
@@ -50,14 +66,15 @@ class MonthWidget extends StatelessWidget {
     final int firstWeekdayOfMonth = DateTime(year, month, 1).weekday;
 
     for (int day = 2 - firstWeekdayOfMonth; day <= daysInMonth; day++) {
-      Color color;
+      Day hDay;
       if (day > 0) {
-        color = getDayWidgetColor(DateTime(year, month, day));
+        hDay = getHighlightedDay(DateTime(year, month, day));
         // getDayWidgetTag
         // getDayWidgetDetail
       }
       dayRowChildren.add(DayWidget(
-          day: Day(day: day, tag: "", color: color),
+          day: hDay != null ? hDay : Day(day: day),
+          color: hDay != null ? getColor(hDay.tag) : null,
           onDayPressed: onDayPressed));
 
       if ((day - 1 + firstWeekdayOfMonth) % DateTime.daysPerWeek == 0 ||

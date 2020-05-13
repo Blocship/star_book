@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/models/day.dart';
-import 'package:star_book/widgets/day.dart';
 import 'package:star_book/widgets/month.dart';
 
 void main() => runApp(MyApp());
@@ -25,9 +24,9 @@ class _MyHomePageState extends State<MyHomePage> {
   // this will be coming from and stored in
   // database later.
   List<Day> highlightedDays = [
-    new Day(day: 1, tag: "blue"),
-    new Day(day: 3, tag: "green"),
-    new Day(day: 5, tag: "red"),
+    new Day(day: 1, tag: "green", detail: "I had a very happy day"),
+    new Day(day: 3, tag: "blue", detail: "My day was normal"),
+    new Day(day: 5, tag: "red", detail: "I was very angry today"),
   ];
 
   // onpressed event, calls on pressing on day.
@@ -35,7 +34,7 @@ class _MyHomePageState extends State<MyHomePage> {
   onDayPressed(Day day) {
     highlightedDays.removeWhere((d) => d.day == day.day);
     setState(() {
-      highlightedDays.add(Day(day: day.day, tag: day.tag));
+      highlightedDays.add(Day(day: day.day, tag: day.tag, detail: day.detail));
     });
   }
 
@@ -51,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
           year: 2020,
           month: 5,
           currentDateColor: Colors.blueGrey,
-          highlightedDates: highlightedDays,
+          highlightedDays: highlightedDays,
           onDayPressed: onDayPressed,
         ),
       ),

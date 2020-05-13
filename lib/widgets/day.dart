@@ -4,9 +4,10 @@ import 'package:star_book/utils/dayWidget_size.dart';
 import 'package:star_book/widgets/day_detail.dart';
 
 class DayWidget extends StatelessWidget {
-  DayWidget({@required this.day, this.onDayPressed});
+  DayWidget({@required this.day, this.color, this.onDayPressed});
 
   final Day day;
+  final Color color;
   final Function onDayPressed;
   // String diary_text or tag for now,
 
@@ -15,7 +16,7 @@ class DayWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final double size = getDayWidgetSize();
     final int _day = this.day.day;
-    final Color _color = this.day.color;
+    final Color _color = color;
 
     return Container(
       width: size,
@@ -44,7 +45,7 @@ class DayWidget extends StatelessWidget {
             _day < 1 ? '' : _day.toString(),
             textAlign: TextAlign.center,
             style: TextStyle(
-              color: day.color != null ? Colors.white : Colors.black87,
+              color: color != null ? Colors.white : Colors.black87,
               fontSize: 16.0,
               fontWeight: FontWeight.normal,
             ),

@@ -32,31 +32,31 @@
 - [Shout-out To Contributors]()
 - [Starware]()
 
-## About App
+## 📝 About App
 
 The idea is pretty simple. Make a calendar. User will be able to set a colour for his moods that he want to track. i.e. green for productive day, blue for happy, red for sad/angry and orange for normal/average day. And render these colours on calander.
 
-## TODO 🚀
+## ☕️ TODO
 
 - [x] Readme.md improvement
 - [x] Adding tags
 - [x] Routing
+- [x] Adding detail in the day model
 - [ ] Removing extra buttons
 - [ ] Adding input text box instead of color buttons.
-- [ ] Adding description in the day model
 - [ ] Add carousel on months
 
-## Contributions 🤝
+## 🤝 Contributions
 
 The App is under development. Are you interested in building and contributing to this awesome app? Your pull requests are most welcome. Any idea on how we can make this more awesome? Open a new issue! We need all the help we can get to make this project awesome!
 
-## Demo 🚀
+## 🚀 Demo
 
 App is under development. For now it is like this. With your help we will add more features and functionalities.
 
 ![Demo gif](READMEdocs/demo.gif)
 
-## Shout-out To Contributors 🔥
+## 🔥 Shout-out To Contributors
 
 <table>
   <tr>
@@ -87,7 +87,7 @@ App is under development. For now it is like this. With your help we will add mo
   </tr>
 </table>
 
-## Starware
+## ⭐ Starware
 
 You're free to use the project, as long as you star this repository.  
 Your appreciation makes us grow and glow up. ⭐

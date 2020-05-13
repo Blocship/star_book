@@ -14,6 +14,7 @@ class DayDetailPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text("${data.detail}"),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: RaisedButton(
