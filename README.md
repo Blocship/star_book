@@ -20,22 +20,21 @@
 [![GitHub forks](https://img.shields.io/github/forks/hashirshoaeb/star_book?style=for-the-badge)](https://github.com/hashirshoaeb/star_book/network)
 [![GitHub issues](https://img.shields.io/github/issues/hashirshoaeb/star_book?color=ffcc66&style=for-the-badge)](https://github.com/hashirshoaeb/star_book/issues)
 [![GitHub license](https://img.shields.io/github/license/hashirshoaeb/star_book?style=for-the-badge)](https://github.com/hashirshoaeb/star_book/blob/master/LICENSE)
+[![Twitter Follow](https://img.shields.io/twitter/follow/hashirshoaeb?color=ffcc66&logo=twitter&logoColor=ffffff&style=for-the-badge)](https://twitter.com/hashirshoaeb)
 
 <!-- TABLE OF CONTENTS -->
 
 ## Table Of Content
 
-- [Demo]()
 - [TODO]()
 - [Contributions]()
+- [Demo]()
 - [Shout-out To Contributors]()
 - [Starware]()
 
-## Demo 🚀
+## About App
 
-![Demo gif](READMEdocs/demo.gif)
-
-App is under development. For now it is like this. With your help we will add more features and functionalities.
+The idea is pretty simple. Make a calendar. User will be able to set a colour for his moods that he want to track. i.e. green for productive day, blue for happy, red for sad/angry and orange for normal/average day. And render these colours on calander.
 
 ## TODO 🚀
 
@@ -45,10 +44,17 @@ App is under development. For now it is like this. With your help we will add mo
 - [ ] Removing extra buttons
 - [ ] Adding input text box instead of color buttons.
 - [ ] Adding description in the day model
+- [ ] Add carousel on months
 
-# Contributions 🤝
+## Contributions 🤝
 
 The App is under development. Are you interested in building and contributing to this awesome app? Your pull requests are most welcome. Any idea on how we can make this more awesome? Open a new issue! We need all the help we can get to make this project awesome!
+
+## Demo 🚀
+
+App is under development. For now it is like this. With your help we will add more features and functionalities.
+
+![Demo gif](READMEdocs/demo.gif)
 
 ## Shout-out To Contributors 🔥
 
