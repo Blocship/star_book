@@ -12,6 +12,33 @@ class DayWidget extends StatelessWidget {
   // String diary_text or tag for now,
 
   // builds a day box.
+  Widget _addText(BuildContext context, int _day) {
+    return Text(
+      _day < 1 ? '' : _day.toString(),
+      textAlign: TextAlign.center,
+      style: TextStyle(
+        color: color != null ? Colors.white : Colors.black87,
+        fontSize: 16.0,
+        fontWeight: FontWeight.normal,
+      ),
+    );
+  }
+
+  Widget _addTextWithButton(BuildContext context, int _day) {
+    return FlatButton(
+      padding: EdgeInsets.all(0),
+      onPressed: () async {
+        final result = await Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => DayDetailPage(data: day)),
+        );
+        day.tag = result;
+        onDayPressed(day);
+      },
+      child: _addText(context, _day),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final double size = getDayWidgetSize();
@@ -31,26 +58,7 @@ class DayWidget extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         height: double.infinity,
-        child: FlatButton(
-          padding: EdgeInsets.all(0),
-          onPressed: () async {
-            final result = await Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => DayDetailPage(data: day)),
-            );
-            day.tag = result;
-            onDayPressed(day);
-          },
-          child: Text(
-            _day < 1 ? '' : _day.toString(),
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: color != null ? Colors.white : Colors.black87,
-              fontSize: 16.0,
-              fontWeight: FontWeight.normal,
-            ),
-          ),
-        ),
+        child: _day < 1 ? null : _addTextWithButton(context, _day),
       ),
     );
   }
