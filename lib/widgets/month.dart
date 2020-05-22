@@ -6,47 +6,47 @@ import 'package:star_book/utils/tag_to_color.dart';
 import 'package:star_book/widgets/day.dart';
 import 'package:star_book/widgets/month_title.dart';
 
-class MonthWidget extends StatelessWidget {
-  MonthWidget(
-      {@required this.context,
-      @required this.year,
-      @required this.month,
-      @required this.currentDateColor,
-      this.highlightedDays,
-      this.onDayPressed});
+class MonthWidget extends StatefulWidget {
+  MonthWidget({
+    @required this.context,
+    @required this.year,
+    @required this.month,
+  });
 
   final BuildContext context;
   final int year;
   final int month;
-  final Color currentDateColor;
-  final List<Day> highlightedDays;
-  final Function onDayPressed;
+  final Color currentDateColor = Colors.blueGrey;
 
-  // returns the colour by checking the input date,
-  // from the highlighted dates list
-  // Color getDayWidgetColor(DateTime date) {
-  //   Color color;
-  //   if (isCurrentDate(date)) {
-  //     color = currentDateColor;
-  //   } else if (highlightedDays != null) {
-  //     highlightedDays.any((Day day) {
-  //       if (date.isAtSameMomentAs(DateTime(year, month, day.day))) {
-  //         color = getColor(day.tag);
-  //         return true;
-  //       } else {
-  //         color = null;
-  //         return false;
-  //       }
-  //     });
-  //   }
-  //   return color;
-  // }
+  @override
+  _MonthWidgetState createState() => _MonthWidgetState();
+}
+
+class _MonthWidgetState extends State<MonthWidget> {
+// the list of highlighted day,
+  // this will be coming from and stored in
+  // database later.
+  List<Day> highlightedDays = [
+    new Day(day: 1, tag: "green", detail: "I had a very happy day"),
+    new Day(day: 3, tag: "blue", detail: "My day was normal"),
+    new Day(day: 5, tag: "red", detail: "I was very angry today"),
+  ];
+
+  // onpressed event, calls on pressing on day.
+  // updates the highlighted days list
+  onDayPressed(Day day) {
+    highlightedDays.removeWhere((d) => d.day == day.day);
+    setState(() {
+      highlightedDays.add(Day(day: day.day, tag: day.tag, detail: day.detail));
+    });
+  }
 
   Day getHighlightedDay(DateTime date) {
     Day hDay;
     if (highlightedDays != null) {
       highlightedDays.any((Day day) {
-        if (date.isAtSameMomentAs(DateTime(year, month, day.day))) {
+        if (date
+            .isAtSameMomentAs(DateTime(widget.year, widget.month, day.day))) {
           hDay = day;
           return true;
         } else {
@@ -58,17 +58,17 @@ class MonthWidget extends StatelessWidget {
     return hDay;
   }
 
-  // stack the days, and make a grid form of calander.
   Widget buildMonthDays(BuildContext context) {
     final List<Row> dayRows = <Row>[];
     final List<DayWidget> dayRowChildren = <DayWidget>[];
-    final int daysInMonth = getDaysInMonth(year, month);
-    final int firstWeekdayOfMonth = DateTime(year, month, 1).weekday;
+    final int daysInMonth = getDaysInMonth(widget.year, widget.month);
+    final int firstWeekdayOfMonth =
+        DateTime(widget.year, widget.month, 1).weekday;
 
     for (int day = 2 - firstWeekdayOfMonth; day <= daysInMonth; day++) {
       Day hDay;
       if (day > 0) {
-        hDay = getHighlightedDay(DateTime(year, month, day));
+        hDay = getHighlightedDay(DateTime(widget.year, widget.month, day));
         // getDayWidgetTag
         // getDayWidgetDetail
       }
@@ -94,7 +94,6 @@ class MonthWidget extends StatelessWidget {
     );
   }
 
-  // stack the month name and the grid of days in column
   Widget buildMonthWidget(BuildContext context) {
     return Container(
       width: 7 * getDayWidgetSize(),
@@ -103,7 +102,7 @@ class MonthWidget extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           MonthTitle(
-            month: month,
+            month: widget.month,
             monthNames: null,
           ),
           Container(
