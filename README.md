@@ -43,8 +43,9 @@ The idea is pretty simple. Make a calendar. User will be able to set a colour fo
 - [x] Routing
 - [x] Adding detail in the day model
 - [x] Separating editable and display screen
-- [ ] Removing extra buttons
-- [ ] Adding input text box instead of color buttons.
+- [x] Removing extra buttons
+- [ ] Remove button from dates greater than current date
+- [ ] Adding input text box instead of color buttons
 - [ ] Add carousel on months
 - [ ] UI Improvments
 - [ ] Adding Background image
