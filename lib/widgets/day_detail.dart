@@ -62,6 +62,10 @@ class _DayDetailPageState extends State<DayDetailPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("day ${widget.data.day} Tag: ${widget.data.tag}"),
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: onEditPressed,
+        ),
       ),
       body: Center(
         child: Column(
