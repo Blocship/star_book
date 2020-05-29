@@ -59,24 +59,29 @@ class _DayDetailPageState extends State<DayDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("day ${widget.data.day} Tag: ${widget.data.tag}"),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: onEditPressed,
+    return WillPopScope(
+      onWillPop: () {
+        onEditPressed();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("day ${widget.data.day} Tag: ${widget.data.tag}"),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: onEditPressed,
+          ),
         ),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            RaisedButton(
-              onPressed: onEditPressed,
-              child: Text(!edit ? "Edit" : "Done"),
-            ),
-            !edit ? displayDetail(context) : editDetail(context),
-          ],
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              RaisedButton(
+                onPressed: onEditPressed,
+                child: Text(!edit ? "Edit" : "Done"),
+              ),
+              !edit ? displayDetail(context) : editDetail(context),
+            ],
+          ),
         ),
       ),
     );
