@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/homePage.dart';
-import 'package:star_book/widgets/month.dart';
 
 void main() => runApp(MyApp());
 
