@@ -33,7 +33,7 @@ class _DayDetailPageState extends State<DayDetailPage> {
       children: <Widget>[
         Text("${widget.data.day}"),
         Text("${widget.data.mood}"),
-        Text("${widget.data.detail}"),
+        Text("${widget.data.story}"),
       ],
     );
   }

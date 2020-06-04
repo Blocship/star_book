@@ -5,9 +5,9 @@ class Activity {
   int month;
   int year;
   String mood;
-  String detail;
+  String story;
 
-  Activity({@required this.day, this.mood, this.detail});
+  Activity({@required this.day, this.mood, this.story});
 
   @override
   bool operator ==(other) {

@@ -27,9 +27,9 @@ class _MonthWidgetState extends State<MonthWidget> {
   // this will be coming from and stored in
   // database later.
   List<Activity> highlightedDays = [
-    new Activity(day: 1, mood: "green", detail: "I had a very happy day"),
-    new Activity(day: 3, mood: "blue", detail: "My day was normal"),
-    new Activity(day: 5, mood: "red", detail: "I was very angry today"),
+    new Activity(day: 1, mood: "green", story: "I had a very happy day"),
+    new Activity(day: 3, mood: "blue", story: "My day was normal"),
+    new Activity(day: 5, mood: "red", story: "I was very angry today"),
   ];
 
   // onpressed event, calls on pressing on day.
@@ -38,7 +38,7 @@ class _MonthWidgetState extends State<MonthWidget> {
     highlightedDays.removeWhere((d) => d.day == day.day);
     setState(() {
       highlightedDays
-          .add(Activity(day: day.day, mood: day.mood, detail: day.detail));
+          .add(Activity(day: day.day, mood: day.mood, story: day.story));
     });
   }
 
