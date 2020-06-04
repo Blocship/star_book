@@ -26,25 +26,26 @@ class _MonthWidgetState extends State<MonthWidget> {
 // the list of highlighted day,
   // this will be coming from and stored in
   // database later.
-  List<Day> highlightedDays = [
-    new Day(day: 1, tag: "green", detail: "I had a very happy day"),
-    new Day(day: 3, tag: "blue", detail: "My day was normal"),
-    new Day(day: 5, tag: "red", detail: "I was very angry today"),
+  List<Activity> highlightedDays = [
+    new Activity(day: 1, tag: "green", detail: "I had a very happy day"),
+    new Activity(day: 3, tag: "blue", detail: "My day was normal"),
+    new Activity(day: 5, tag: "red", detail: "I was very angry today"),
   ];
 
   // onpressed event, calls on pressing on day.
   // updates the highlighted days list
-  onDayPressed(Day day) {
+  onDayPressed(Activity day) {
     highlightedDays.removeWhere((d) => d.day == day.day);
     setState(() {
-      highlightedDays.add(Day(day: day.day, tag: day.tag, detail: day.detail));
+      highlightedDays
+          .add(Activity(day: day.day, tag: day.tag, detail: day.detail));
     });
   }
 
-  Day getHighlightedDay(DateTime date) {
-    Day hDay;
+  Activity getHighlightedDay(DateTime date) {
+    Activity hDay;
     if (highlightedDays != null) {
-      highlightedDays.any((Day day) {
+      highlightedDays.any((Activity day) {
         if (date
             .isAtSameMomentAs(DateTime(widget.year, widget.month, day.day))) {
           hDay = day;
@@ -66,14 +67,14 @@ class _MonthWidgetState extends State<MonthWidget> {
         DateTime(widget.year, widget.month, 1).weekday;
 
     for (int day = 2 - firstWeekdayOfMonth; day <= daysInMonth; day++) {
-      Day hDay;
+      Activity hDay;
       if (day > 0) {
         hDay = getHighlightedDay(DateTime(widget.year, widget.month, day));
         // getDayWidgetTag
         // getDayWidgetDetail
       }
       dayRowChildren.add(DayWidget(
-          day: hDay != null ? hDay : Day(day: day),
+          day: hDay != null ? hDay : Activity(day: day),
           color: hDay != null ? getColor(hDay.tag) : null,
           onDayPressed: onDayPressed));
 

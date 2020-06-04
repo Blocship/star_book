@@ -6,7 +6,7 @@ import 'package:star_book/widgets/day_detail.dart';
 class DayWidget extends StatelessWidget {
   DayWidget({@required this.day, this.color, this.onDayPressed});
 
-  final Day day;
+  final Activity day;
   final Color color;
   final Function onDayPressed;
   // String diary_text or tag for now,

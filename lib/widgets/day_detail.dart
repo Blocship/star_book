@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:star_book/models/activity.dart';
 
 class DayDetailPage extends StatefulWidget {
-  final Day data;
+  final Activity data;
   DayDetailPage({Key key, this.data}) : super(key: key);
 
   @override

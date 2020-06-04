@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class Day {
+class Activity {
   int day;
   String tag;
   String detail;
 
-  Day({@required this.day, this.tag, this.detail});
+  Activity({@required this.day, this.tag, this.detail});
 
   @override
   bool operator ==(other) {
