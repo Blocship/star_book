@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:star_book/models/day.dart';
+import 'package:star_book/models/activity.dart';
 
 class DayDetailPage extends StatefulWidget {
   final Day data;

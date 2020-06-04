@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:star_book/models/day.dart';
+import 'package:star_book/models/activity.dart';
 import 'package:star_book/utils/dayWidget_size.dart';
 import 'package:star_book/widgets/day_detail.dart';
 
