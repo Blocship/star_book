@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class Activity {
   int day;
-  String tag;
+  int month;
+  int year;
+  String mood;
   String detail;
 
-  Activity({@required this.day, this.tag, this.detail});
+  Activity({@required this.day, this.mood, this.detail});
 
   @override
   bool operator ==(other) {

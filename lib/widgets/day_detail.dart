@@ -32,7 +32,7 @@ class _DayDetailPageState extends State<DayDetailPage> {
     return Column(
       children: <Widget>[
         Text("${widget.data.day}"),
-        Text("${widget.data.tag}"),
+        Text("${widget.data.mood}"),
         Text("${widget.data.detail}"),
       ],
     );
@@ -61,7 +61,7 @@ class _DayDetailPageState extends State<DayDetailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("day ${widget.data.day} Tag: ${widget.data.tag}"),
+        title: Text("day ${widget.data.day} Tag: ${widget.data.mood}"),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: onEditPressed,

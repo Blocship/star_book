@@ -9,7 +9,7 @@ class DayWidget extends StatelessWidget {
   final Activity day;
   final Color color;
   final Function onDayPressed;
-  // String diary_text or tag for now,
+  // String diary_text or mood for now,
 
   // builds a day box.
   Widget _addText(BuildContext context, int _day) {
@@ -32,7 +32,7 @@ class DayWidget extends StatelessWidget {
           context,
           MaterialPageRoute(builder: (context) => DayDetailPage(data: day)),
         );
-        day.tag = result;
+        day.mood = result;
         onDayPressed(day);
       },
       child: _addText(context, _day),
