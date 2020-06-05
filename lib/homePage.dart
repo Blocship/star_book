@@ -11,7 +11,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Container(
       child: Center(
-        child: MonthWidget(context: context, year: 2020, month: 5),
+        child: MonthWidget(context: context, year: 2020, month: 6),
       ),
     );
   }

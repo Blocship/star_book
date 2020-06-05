@@ -29,7 +29,7 @@ class _MonthWidgetState extends State<MonthWidget> {
   List<Activity> highlightedDays = [
     new Activity(day: 1, mood: "green", story: "I had a very happy day"),
     new Activity(day: 3, mood: "blue", story: "My day was normal"),
-    new Activity(day: 5, mood: "red", story: "I was very angry today"),
+    new Activity(day: 4, mood: "red", story: "I was very angry today"),
   ];
 
   // onpressed event, calls on pressing on day.
@@ -67,16 +67,24 @@ class _MonthWidgetState extends State<MonthWidget> {
         DateTime(widget.year, widget.month, 1).weekday;
 
     for (int day = 2 - firstWeekdayOfMonth; day <= daysInMonth; day++) {
-      Activity hDay;
-      if (day > 0) {
-        hDay = getHighlightedDay(DateTime(widget.year, widget.month, day));
-        // getDayWidgetTag
-        // getDayWidgetDetail
+      DateTime date = DateTime(widget.year, widget.month, day);
+      Activity hDay = getHighlightedDay(date);
+      Color color;
+      if (hDay != null) {
+        color = getColor(hDay.mood);
+      } else {
+        if (isCurrentDate(date)) {
+          color = widget.currentDateColor;
+        }
       }
-      dayRowChildren.add(DayWidget(
+
+      dayRowChildren.add(
+        DayWidget(
           day: hDay != null ? hDay : Activity(day: day),
-          color: hDay != null ? getColor(hDay.mood) : null,
-          onDayPressed: onDayPressed));
+          color: color,
+          onDayPressed: date.isBefore(DateTime.now()) ? onDayPressed : null,
+        ),
+      );
 
       if ((day - 1 + firstWeekdayOfMonth) % DateTime.daysPerWeek == 0 ||
           day == daysInMonth) {

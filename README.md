@@ -45,7 +45,7 @@ The idea is pretty simple. Make a calendar. User will be able to set a colour fo
 - [x] Separating editable and display screen
 - [x] Removing extra buttons
 - [x] Bottom navigationbar
-- [ ] Remove button from dates greater than current date
+- [x] Remove button from dates greater than current date
 - [ ] Adding input text box instead of color buttons
 - [ ] Add carousel on months
 - [ ] UI Improvments

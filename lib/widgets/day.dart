@@ -58,7 +58,11 @@ class DayWidget extends StatelessWidget {
       child: SizedBox(
         width: double.infinity,
         height: double.infinity,
-        child: _day < 1 ? null : _addTextWithButton(context, _day),
+        child: _day < 1
+            ? null
+            : onDayPressed == null
+                ? _addText(context, _day)
+                : _addTextWithButton(context, _day),
       ),
     );
   }

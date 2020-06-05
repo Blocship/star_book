@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-Color getColor(String tag) {
-  switch (tag) {
+Color getColor(String mood) {
+  switch (mood) {
     case "blue":
       return Colors.blue;
       break;
