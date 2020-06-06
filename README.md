@@ -59,7 +59,7 @@ The App is under development. Are you interested in building and contributing to
 
 App is under development. For now it is like this. With your help we will add more features and functionalities.
 
-![Demo gif](READMEdocs/demo3.gif)
+![Demo gif](READMEdocs/demo4.gif)
 
 ## 🔥 Shout-out To Contributors
 
