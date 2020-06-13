@@ -22,7 +22,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedPage = 0;
   final List<Widget> _pages = [
-    Text("2"),
+    HomePage(),
     DashboardPage(),
     Text("3"),
     Text("4"),
