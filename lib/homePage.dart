@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:star_book/widgets/month.dart';
+import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:star_book/models/activity.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -7,36 +8,60 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  DateTime date = DateTime.now();
+  List<Activity> highlightedDays = [
+    new Activity(day: 1, mood: "green", story: "I had a very happy day"),
+    new Activity(day: 3, mood: "blue", story: "My day was normal"),
+    new Activity(day: 4, mood: "red", story: "I was very angry today"),
+  ];
 
-  void _onPrevPressed() {
-    setState(() {
-      date = new DateTime(date.year, date.month - 1);
-    });
-  }
-
-  void _onNextPressed() {
-    setState(() {
-      date = new DateTime(date.year, date.month + 1);
-    });
+  Widget itemBuilder(BuildContext context, int index) {
+    return Column(
+      children: <Widget>[
+        Text(
+          "Hello",
+          style: TextStyle(fontSize: 40),
+        ),
+        Text(
+          "Hello",
+          style: TextStyle(fontSize: 40),
+        ),
+        Text(
+          "Hello",
+          style: TextStyle(fontSize: 40),
+        ),
+        Text(
+          "Hello",
+          style: TextStyle(fontSize: 40),
+        ),
+        Text(
+          "Hello",
+          style: TextStyle(fontSize: 40),
+        ),
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
-        child: Column(
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                FlatButton(onPressed: _onPrevPressed, child: Text("Prev")),
-                Text("${date.year}, ${date.month}"),
-                FlatButton(onPressed: _onNextPressed, child: Text("Next")),
-              ],
+      child: Column(
+        children: <Widget>[
+          Text(
+            "Hi how's your day today?",
+            style: TextStyle(
+              fontSize: 22,
             ),
-            MonthWidget(context: context, year: date.year, month: date.month),
-          ],
-        ),
+          ),
+          Swiper(
+            itemCount: highlightedDays.length,
+            itemWidth: MediaQuery.of(context).size.width,
+            itemHeight: MediaQuery.of(context).size.height - 400,
+            layout: SwiperLayout.STACK,
+            itemBuilder: itemBuilder,
+            pagination: SwiperPagination(),
+            loop: false,
+          ),
+        ],
       ),
     );
   }
