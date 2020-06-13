@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/homePage.dart';
+import 'package:star_book/dashboardPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -21,8 +22,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int _selectedPage = 0;
   final List<Widget> _pages = [
-    HomePage(),
     Text("2"),
+    DashboardPage(),
     Text("3"),
     Text("4"),
   ];
