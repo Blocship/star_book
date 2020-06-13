@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/homePage.dart';
-import './widgets/modePickerScreen.dart';
+import 'package:star_book/modePickerScreen.dart';
 import 'package:star_book/dashboardPage.dart';
-
 
 void main() => runApp(MyApp());
 
