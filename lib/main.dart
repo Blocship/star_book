@@ -25,7 +25,7 @@ class _MyHomePageState extends State<MyHomePage> {
     HomePage(),
     Text("2"),
     Text("3"),
-    MyApp()
+    ModePicker()
   ];
   final List<BottomNavigationBarItem> _navbarOptionList = [
     BottomNavigationBarItem(

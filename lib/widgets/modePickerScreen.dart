@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class _MyAppState extends State<MyApp> {
+class _ModePickerState extends State<ModePicker> {
 
   String label='';
   double _value=1.0;
@@ -74,9 +74,9 @@ class _MyAppState extends State<MyApp> {
   }
 }
 
-class MyApp extends StatefulWidget {
-  MyApp({Key key}) : super(key: key);
+class ModePicker extends StatefulWidget {
+  ModePicker({Key key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _MyAppState();
+  State<StatefulWidget> createState() => _ModePickerState();
 }
