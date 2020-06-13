@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/homePage.dart';
+import './widgets/modePickerScreen.dart';
 import 'package:star_book/dashboardPage.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -25,7 +27,7 @@ class _MyHomePageState extends State<MyHomePage> {
     HomePage(),
     DashboardPage(),
     Text("3"),
-    Text("4"),
+    ModePicker()
   ];
   final List<BottomNavigationBarItem> _navbarOptionList = [
     BottomNavigationBarItem(
