@@ -17,26 +17,34 @@ class _HomePageState extends State<HomePage> {
   Widget itemBuilder(BuildContext context, int index) {
     return Column(
       children: <Widget>[
-        Text(
-          "Hello",
-          style: TextStyle(fontSize: 40),
-        ),
-        Text(
-          "Hello",
-          style: TextStyle(fontSize: 40),
-        ),
-        Text(
-          "Hello",
-          style: TextStyle(fontSize: 40),
-        ),
-        Text(
-          "Hello",
-          style: TextStyle(fontSize: 40),
-        ),
-        Text(
-          "Hello",
-          style: TextStyle(fontSize: 40),
-        ),
+        SizedBox(height: 100),
+        Card(
+          elevation: 8,
+          color: Colors.blue,
+          child: Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: Column(
+              children: <Widget>[
+                Text(
+                  highlightedDays[index].day.toString(),
+                  style: TextStyle(fontSize: 44),
+                  textAlign: TextAlign.left,
+                ),
+                Text(
+                  highlightedDays[index].mood,
+                  style: TextStyle(fontSize: 32),
+                  textAlign: TextAlign.left,
+                ),
+                Text(
+                  highlightedDays[index].story,
+                  style: TextStyle(fontSize: 22),
+                  textAlign: TextAlign.left,
+                ),
+                SizedBox(height: 100),
+              ],
+            ),
+          ),
+        )
       ],
     );
   }
@@ -45,6 +53,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Container(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
             "Hi how's your day today?",
@@ -52,14 +61,22 @@ class _HomePageState extends State<HomePage> {
               fontSize: 22,
             ),
           ),
-          Swiper(
-            itemCount: highlightedDays.length,
-            itemWidth: MediaQuery.of(context).size.width,
-            itemHeight: MediaQuery.of(context).size.height - 400,
-            layout: SwiperLayout.STACK,
-            itemBuilder: itemBuilder,
-            pagination: SwiperPagination(),
-            loop: false,
+          Text(
+            "Our Stories",
+            style: TextStyle(
+              fontSize: 42,
+            ),
+          ),
+          Container(
+            height: 500,
+            child: Swiper(
+              itemCount: highlightedDays.length,
+              itemWidth: MediaQuery.of(context).size.width - 2 * 64,
+              layout: SwiperLayout.STACK,
+              itemBuilder: itemBuilder,
+              pagination: SwiperPagination(),
+              loop: true,
+            ),
           ),
         ],
       ),
