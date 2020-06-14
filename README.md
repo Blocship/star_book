@@ -51,6 +51,7 @@ Psychologists define mood as a number of persistent feelings that accompany our 
 - [x] Bottom navigationbar
 - [x] Remove button from dates greater than current date
 - [ ] Adding input text box instead of color buttons
+- [ ] Adding stories
 - [x] Add carousel on months
 - [ ] UI Improvments
 - [ ] Adding Background image
