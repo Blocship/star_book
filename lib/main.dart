@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/dashboardPage.dart';
 import 'package:star_book/homePage.dart';
 import 'package:star_book/modePickerScreen.dart';
-import 'package:star_book/dashboardPage.dart';
 
 void main() => runApp(MyApp());
 
@@ -28,6 +28,7 @@ class _MyHomePageState extends State<MyHomePage> {
     Text("3"),
     ModePicker()
   ];
+
   final List<BottomNavigationBarItem> _navbarOptionList = [
     BottomNavigationBarItem(
       icon: Icon(Icons.home, size: 20),
@@ -55,16 +56,19 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('StarBook'),
-      ),
-      body: _pages[_selectedPage],
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: _selectedPage,
-        onTap: (int value) => onNavBarTap(value),
-        items: _navbarOptionList,
+    return SafeArea(
+      child: Scaffold(
+        body: _pages[_selectedPage],
+        bottomNavigationBar: Theme(
+          data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
+          child: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            currentIndex: _selectedPage,
+            onTap: (int value) => onNavBarTap(value),
+            items: _navbarOptionList,
+            elevation: 0,
+          ),
+        ),
       ),
     );
   }
