@@ -6,11 +6,6 @@ import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:star_book/models/activity.dart';
 
 class HomePage extends StatefulWidget {
-  final Function onTap;
-  final selectedIndex;
-
-  HomePage({this.onTap, this.selectedIndex});
-
   @override
   _HomePageState createState() => _HomePageState();
 }
