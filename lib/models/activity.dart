@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class Activity {
   int day;
@@ -6,8 +6,11 @@ class Activity {
   int year;
   String mood;
   String story;
+  var color;
+  double size;
+  IconData icon;
 
-  Activity({@required this.day, this.mood, this.story});
+  Activity({this.size, this.day, this.mood, this.story, this.color, this.icon});
 
   @override
   bool operator ==(other) {

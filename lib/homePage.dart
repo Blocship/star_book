@@ -3,143 +3,193 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:star_book/models/activity.dart';
+import 'package:star_book/story_screen.dart';
 
 class HomePage extends StatefulWidget {
+  final openDrawer;
+
+  HomePage(this.openDrawer);
+
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState(openDrawer);
 }
 
 class _HomePageState extends State<HomePage> {
+  final Function openDrawer;
+
+  _HomePageState(this.openDrawer);
+
+  List<Activity> get reversedList {
+    return highlightedDays.reversed.toList();
+  }
+
   List<Activity> highlightedDays = [
-    new Activity(day: 1, mood: "green", story: "I had a very happy day"),
-    new Activity(day: 3, mood: "blue", story: "My day was normal"),
-    new Activity(day: 4, mood: "red", story: "I was very angry today"),
+    new Activity(
+      icon: FontAwesomeIcons.smile,
+      mood: "green",
+      story: "I had a very happy day",
+      color: Colors.green,
+      size: 120,
+    ),
+    new Activity(
+      icon: FontAwesomeIcons.laughSquint,
+      mood: "green",
+      story: "I had a very happy day",
+      color: Colors.yellow,
+      size: 120,
+    ),
+    new Activity(
+      icon: FontAwesomeIcons.pencilAlt,
+      mood: "white",
+      story: "Write Your Story!",
+      color: Colors.black54.withOpacity(0.75),
+      size: 100,
+    ),
   ];
 
   Widget itemBuilder(BuildContext context, int index) {
     return Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       elevation: 8,
-      color: Colors.blue,
-      child: Padding(
-        padding: const EdgeInsets.all(32.0),
-        child: Column(
-          children: <Widget>[
-            Text(
-              highlightedDays[index].day.toString(),
-              style: TextStyle(fontSize: 44),
-              textAlign: TextAlign.left,
+      color: highlightedDays[index].color,
+      child: Stack(
+        fit: StackFit.loose,
+        children: <Widget>[
+          Container(
+            height: double.infinity,
+            width: double.infinity,
+            padding: EdgeInsets.only(top: 80),
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: Icon(
+                highlightedDays[index].icon,
+                size: highlightedDays[index].size,
+                color: Colors.white,
+              ),
             ),
-            Text(
-              highlightedDays[index].mood,
-              style: TextStyle(fontSize: 32),
-              textAlign: TextAlign.left,
+          ),
+          Container(
+            height: double.infinity,
+            width: double.infinity,
+            padding: EdgeInsets.only(top: 100),
+            child: Align(
+              alignment: Alignment.center,
+              child: Text(
+                highlightedDays[index].story,
+                style: TextStyle(fontSize: 22, color: Colors.white),
+                textAlign: TextAlign.left,
+              ),
             ),
-            Text(
-              highlightedDays[index].story,
-              style: TextStyle(fontSize: 22),
-              textAlign: TextAlign.left,
-            ),
-            SizedBox(height: 100),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
   @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        height: double.infinity,
-        width: double.infinity,
-        child: Stack(
-          fit: StackFit.loose,
-          children: <Widget>[
-            Align(
-              alignment: Alignment.centerLeft,
-              child: Container(
-                height: double.infinity,
-                width: 100,
-                decoration: BoxDecoration(
-                  color: Color(0xFFedf6fd),
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 20,
+    return Container(
+      height: double.infinity,
+      width: double.infinity,
+      child: Stack(
+        fit: StackFit.loose,
+        children: <Widget>[
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Container(
+              height: double.infinity,
+              width: 100,
+              decoration: BoxDecoration(
+                color: Color(0xFFedf6fd),
+              ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    height: 20,
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.settings),
+                    onPressed: openDrawer,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.add,
+                      color: Colors.blue,
+                      size: 25,
                     ),
-                    IconButton(
-                      icon: Icon(Icons.settings),
-                      onPressed: () {},
-                    ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        Icons.add,
-                        color: Colors.blue,
+                    onPressed: () {},
+                  )
+                ],
+              ),
+            ),
+          ),
+          Align(
+            alignment: Alignment.topRight,
+            child: Container(
+              padding: const EdgeInsets.only(top: 30, right: 30),
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage('images/user.png'),
+              ),
+            ),
+          ),
+          Positioned(
+            child: Text(
+              "Good Morning Dear ",
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+            top: MediaQuery.of(context).size.height / 5,
+            right: 50,
+          ),
+          Positioned(
+            child: Text(
+              "Hi how's your day today?",
+              style: TextStyle(
+                fontSize: 18,
+              ),
+            ),
+            top: MediaQuery.of(context).size.height / 4,
+            right: 50,
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: Container(
+              height: MediaQuery.of(context).size.height / 1.7,
+              child: Swiper(
+                onTap: (index) {
+                  if (index == 0) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => StoryScreen(),
                       ),
-                      onPressed: () {},
-                    )
-                  ],
-                ),
+                    );
+                  }
+                },
+                itemCount: highlightedDays.length,
+                itemWidth: MediaQuery.of(context).size.width - 88,
+                itemHeight: MediaQuery.of(context).size.height / 1.8,
+                layout: SwiperLayout.STACK,
+                itemBuilder: itemBuilder,
+                loop: false,
               ),
             ),
-            Align(
-              alignment: Alignment.topRight,
-              child: Padding(
-                padding: const EdgeInsets.only(top: 40, right: 50),
-                child: CircleAvatar(
-                  radius: 40,
-                  backgroundImage: AssetImage('images/user.png'),
-                ),
-              ),
-            ),
-            Positioned(
-              child: Text(
-                "Good Morning Dear ",
-                style: TextStyle(
-                  fontSize: 18,
-                ),
-              ),
-              top: MediaQuery.of(context).size.height / 5,
-              right: 50,
-            ),
-            Positioned(
-              child: Text(
-                "Hi how's your day today?",
-                style: TextStyle(
-                  fontSize: 18,
-                ),
-              ),
-              top: MediaQuery.of(context).size.height / 4,
-              right: 50,
-            ),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 500,
-                child: Swiper(
-                  onTap: (index) {
-                    print(index);
-                  },
-                  scrollDirection: Axis.horizontal,
-                  itemCount: highlightedDays.length,
-                  itemWidth: MediaQuery.of(context).size.width - 88,
-                  itemHeight: MediaQuery.of(context).size.height / 2,
-                  layout: SwiperLayout.STACK,
-                  itemBuilder: itemBuilder,
-                  pagination: SwiperPagination(),
-                  loop: true,
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:star_book/dashboardPage.dart';
 import 'package:star_book/homePage.dart';
@@ -9,6 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'StarBook',
       home: MyHomePage(),
     );
@@ -21,9 +24,13 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _selectedPage = 0;
+  int selectedPage = 0;
+  static GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
+
   final List<Widget> _pages = [
-    HomePage(),
+    HomePage(
+      openDrawer(),
+    ),
     DashboardPage(),
     Text("3"),
     ModePicker()
@@ -50,26 +57,58 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void onNavBarTap(int index) {
     setState(() {
-      _selectedPage = index;
+      selectedPage = index;
     });
+  }
+
+  static VoidCallback openDrawer() {
+    return () {
+      scaffoldKey.currentState.openDrawer();
+    };
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        body: _pages[_selectedPage],
+    if (Platform.isIOS) {
+      return Scaffold(
+        key: scaffoldKey,
+        drawer: new Drawer(),
+        body: _pages[selectedPage],
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
           child: BottomNavigationBar(
             type: BottomNavigationBarType.fixed,
-            currentIndex: _selectedPage,
+            currentIndex: selectedPage,
             onTap: (int value) => onNavBarTap(value),
             items: _navbarOptionList,
             elevation: 0,
           ),
         ),
-      ),
-    );
+      );
+    } else {
+      return SafeArea(
+        child: Scaffold(
+          key: scaffoldKey,
+          drawer: new Drawer(),
+          body: _pages[selectedPage],
+          bottomNavigationBar: Theme(
+            data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
+            child: BottomNavigationBar(
+              type: BottomNavigationBarType.fixed,
+              currentIndex: selectedPage,
+              onTap: (int value) => onNavBarTap(value),
+              items: _navbarOptionList,
+              elevation: 0,
+            ),
+          ),
+        ),
+      );
+    }
   }
 }
