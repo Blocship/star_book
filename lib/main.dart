@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:star_book/dashboardPage.dart';
 import 'package:star_book/homePage.dart';
 import 'package:star_book/modePickerScreen.dart';
@@ -11,6 +12,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: [
+        const Locale('en', 'US'), // English
+        const Locale('th', 'TH'), // Thai
+      ],
       debugShowCheckedModeBanner: false,
       title: 'StarBook',
       home: MyHomePage(),
