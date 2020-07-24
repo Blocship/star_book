@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rounded_date_picker/rounded_picker.dart';
+import 'package:star_book/Screens/detail_screen.dart';
 
 class StoryScreen extends StatefulWidget {
   @override
@@ -10,6 +10,7 @@ class StoryScreen extends StatefulWidget {
 class _StoryScreenState extends State<StoryScreen> {
   String label;
   String currentDate = "Current date";
+  bool setDate = false;
   double _value = 2.0;
   List<String> modes = ['Routine', 'Happy', 'sad', 'angry', 'normal'];
 
@@ -109,6 +110,9 @@ class _StoryScreenState extends State<StoryScreen> {
                     "Story?",
                     style: TextStyle(fontSize: 25),
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -119,13 +123,19 @@ class _StoryScreenState extends State<StoryScreen> {
                       ),
                       GestureDetector(
                         onTap: () async {
-                          DateTime newDateTime = await showRoundedDatePicker(
+                          await showDatePicker(
                             context: context,
                             initialDate: DateTime.now(),
-                            firstDate: DateTime(DateTime.now().year - 1),
-                            lastDate: DateTime(DateTime.now().year + 1),
-                            borderRadius: 16,
-                          );
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(2100),
+                          ).then((value) {
+                            setState(() {
+                              currentDate = "${value.day}," +
+                                  " ${value.month}" +
+                                  " ${value.year}";
+                              setDate = !setDate;
+                            });
+                          });
                         },
                         child: Icon(
                           Icons.keyboard_arrow_down,
@@ -149,7 +159,16 @@ class _StoryScreenState extends State<StoryScreen> {
                       color: Colors.blueAccent,
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(100)),
-                      onPressed: () {},
+                      onPressed: () {
+                        if (setDate) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DetailScreen(),
+                            ),
+                          );
+                        }
+                      },
                       child: Text(
                         "LET'S DO IT",
                         style: TextStyle(
