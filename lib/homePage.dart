@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
@@ -114,7 +115,7 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 20,
+                    height: Platform.isAndroid ? 20 : 40,
                   ),
                   IconButton(
                     icon: Icon(Icons.settings),
@@ -138,32 +139,32 @@ class _HomePageState extends State<HomePage> {
           Align(
             alignment: Alignment.topRight,
             child: Container(
-              padding: const EdgeInsets.only(top: 30, right: 30),
-              child: CircleAvatar(
-                radius: 50,
-                backgroundImage: AssetImage('images/user.png'),
+              width: MediaQuery.of(context).size.width / 1.7,
+              height: MediaQuery.of(context).size.height / 3.5,
+              margin: EdgeInsets.symmetric(horizontal: 50, vertical: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  CircleAvatar(
+                    radius: 50,
+                    backgroundImage: AssetImage('images/user.png'),
+                  ),
+                  Text(
+                    "Good Morning Dear ",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                  Text(
+                    "Hi how's your day today?",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
               ),
             ),
-          ),
-          Positioned(
-            child: Text(
-              "Good Morning Dear ",
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-            top: MediaQuery.of(context).size.height / 5,
-            right: 50,
-          ),
-          Positioned(
-            child: Text(
-              "Hi how's your day today?",
-              style: TextStyle(
-                fontSize: 18,
-              ),
-            ),
-            top: MediaQuery.of(context).size.height / 4,
-            right: 50,
           ),
           Align(
             alignment: Alignment.bottomCenter,
