@@ -189,7 +189,7 @@ class _HomePageState extends State<HomePage> {
                 itemHeight: MediaQuery.of(context).size.height / 1.8,
                 layout: SwiperLayout.STACK,
                 itemBuilder: itemBuilder,
-                loop: false,
+                loop: true,
               ),
             ),
           ),
