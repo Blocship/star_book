@@ -15,39 +15,8 @@ class _StoryScreenState extends State<StoryScreen> {
   double _value = 2.0;
   List<String> modes = ['Routine', 'Happy', 'sad', 'angry', 'normal'];
 
-  Widget _getIcon(BuildContext context) {
-    if (_value == 1)
-      return Icon(Icons.child_care, size: 130, color: Colors.red[200]);
-    else if (_value == 2)
-      return Icon(Icons.child_care, size: 130, color: Colors.green[200]);
-    else if (_value == 3)
-      return Icon(Icons.child_care, size: 130, color: Colors.green[500]);
-    else if (_value == 4)
-      return Icon(Icons.child_care, size: 130, color: Colors.orange[300]);
-    else
-      return Icon(Icons.child_care, size: 130, color: Colors.white);
-  }
-
-  String _getLabel(double index) {
-    if (_value == 0.0)
-      return label = "very sad";
-    else if (_value == 1.0)
-      return label = "sad";
-    else if (_value == 2.0)
-      return label = "neutral";
-    else if (_value == 3.0)
-      return label = "happy";
-    else if (_value == 4.0)
-      return label = "productive";
-    else
-      return label = "No Mood";
-  }
-
   @override
-  void initState() {
-    // TODO: implement initState
-    _getLabel(_value);
-  }
+  void initState() {}
 
   @override
   Widget build(BuildContext context) {
