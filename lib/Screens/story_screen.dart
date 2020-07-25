@@ -12,11 +12,6 @@ class _StoryScreenState extends State<StoryScreen> {
   String label;
   String currentDate = "Current date";
   bool setDate = false;
-  double _value = 2.0;
-  List<String> modes = ['Routine', 'Happy', 'sad', 'angry', 'normal'];
-
-  @override
-  void initState() {}
 
   @override
   Widget build(BuildContext context) {
