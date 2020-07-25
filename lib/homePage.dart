@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:star_book/Screens/story_screen.dart';
+import 'package:star_book/Screens/date_screen.dart';
 import 'package:star_book/models/activity.dart';
 
 class HomePage extends StatefulWidget {
@@ -179,7 +179,7 @@ class _HomePageState extends State<HomePage> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => StoryScreen(),
+                        builder: (context) => DateScreen(),
                       ),
                     );
                   }

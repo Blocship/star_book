@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:star_book/Screens/story_screen.dart';
 import 'package:star_book/models/category.dart';
 
 class ActivityScreen extends StatefulWidget {
@@ -131,7 +132,14 @@ class _ActivityScreenState extends State<ActivityScreen> {
                     ),
                     IconButton(
                       icon: Icon(Icons.arrow_forward_ios),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StoryScreen(),
+                          ),
+                        );
+                      },
                       color: Colors.blueAccent,
                     )
                   ],
