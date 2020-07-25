@@ -5,8 +5,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:star_book/Screens/story_screen.dart';
 import 'package:star_book/models/activity.dart';
-import 'package:star_book/story_screen.dart';
 
 class HomePage extends StatefulWidget {
   final openDrawer;
@@ -28,6 +28,13 @@ class _HomePageState extends State<HomePage> {
 
   List<Activity> highlightedDays = [
     new Activity(
+      icon: FontAwesomeIcons.pencilAlt,
+      mood: "white",
+      story: "Write Your Story!",
+      color: Colors.black54.withOpacity(0.75),
+      size: 100,
+    ),
+    new Activity(
       icon: FontAwesomeIcons.smile,
       mood: "green",
       story: "I had a very happy day",
@@ -40,13 +47,6 @@ class _HomePageState extends State<HomePage> {
       story: "I had a very happy day",
       color: Colors.yellow,
       size: 120,
-    ),
-    new Activity(
-      icon: FontAwesomeIcons.pencilAlt,
-      mood: "white",
-      story: "Write Your Story!",
-      color: Colors.black54.withOpacity(0.75),
-      size: 100,
     ),
   ];
 
@@ -146,9 +146,12 @@ class _HomePageState extends State<HomePage> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  CircleAvatar(
-                    radius: 50,
-                    backgroundImage: AssetImage('images/user.png'),
+                  Hero(
+                    tag: 'UserIcon',
+                    child: CircleAvatar(
+                      radius: 40,
+                      backgroundImage: AssetImage('images/user.png'),
+                    ),
                   ),
                   Text(
                     "Good Morning Dear ",
@@ -186,7 +189,7 @@ class _HomePageState extends State<HomePage> {
                 itemHeight: MediaQuery.of(context).size.height / 1.8,
                 layout: SwiperLayout.STACK,
                 itemBuilder: itemBuilder,
-                loop: false,
+                loop: true,
               ),
             ),
           ),
