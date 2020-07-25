@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class DetailScreen extends StatefulWidget {
+class MoodScreen extends StatefulWidget {
   @override
-  _DetailScreenState createState() => _DetailScreenState();
+  _MoodScreenState createState() => _MoodScreenState();
 }
 
-class _DetailScreenState extends State<DetailScreen> {
+class _MoodScreenState extends State<MoodScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

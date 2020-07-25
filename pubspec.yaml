@@ -24,6 +24,7 @@ dependencies:
   flutter_swiper: ^1.1.6
   font_awesome_flutter: ^8.8.1
   cupertino_icons: ^0.1.2
+  intl: ^0.16.1
 
 dev_dependencies:
   flutter_test:

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:star_book/Screens/detail_screen.dart';
+import 'package:intl/intl.dart';
+import 'package:star_book/Screens/mood_screen.dart';
 
 class StoryScreen extends StatefulWidget {
   @override
@@ -130,16 +131,14 @@ class _StoryScreenState extends State<StoryScreen> {
                             lastDate: DateTime(2100),
                           ).then((value) {
                             setState(() {
-                              currentDate = "${value.day}," +
-                                  " ${value.month}" +
-                                  " ${value.year}";
-                              setDate = !setDate;
+                              currentDate = DateFormat.yMMMEd().format(value);
+                              setDate = true;
                             });
                           });
                         },
                         child: Icon(
                           Icons.keyboard_arrow_down,
-                          size: 30,
+                          size: 35,
                         ),
                       ),
                     ],
@@ -164,7 +163,7 @@ class _StoryScreenState extends State<StoryScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => DetailScreen(),
+                              builder: (context) => MoodScreen(),
                             ),
                           );
                         }
