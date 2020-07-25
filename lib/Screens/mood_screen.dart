@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'activity_screen.dart';
+
 class MoodScreen extends StatefulWidget {
   @override
   _MoodScreenState createState() => _MoodScreenState();
@@ -115,7 +117,14 @@ class _MoodScreenState extends State<MoodScreen> {
                     ),
                     IconButton(
                       icon: Icon(Icons.arrow_forward_ios),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ActivityScreen(label),
+                          ),
+                        );
+                      },
                       color: Colors.blueAccent,
                     )
                   ],
