@@ -24,7 +24,7 @@ class _StoryScreenState extends State<StoryScreen> {
   }
 
   NotusDocument _loadDocument() {
-    final Delta delta = Delta()..insert("Your Story!\n");
+    final Delta delta = Delta()..insert("Start With Your Day!\n");
     return NotusDocument.fromDelta(delta);
   }
 
@@ -75,7 +75,7 @@ class _StoryScreenState extends State<StoryScreen> {
                     controller: _controller,
                     focusNode: _focusNode,
                     autofocus: false,
-                    padding: EdgeInsets.all(8),
+                    padding: EdgeInsets.symmetric(horizontal: 20, vertical: 8),
                   ),
                 ),
               ),

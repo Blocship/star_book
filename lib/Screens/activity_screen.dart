@@ -41,7 +41,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Expanded(
-                flex: 3,
+                flex: 2,
                 child: Stack(
                   children: [
                     Container(
@@ -61,14 +61,20 @@ class _ActivityScreenState extends State<ActivityScreen> {
               child: Container(
                 width: double.infinity,
                 padding: EdgeInsets.only(left: 10),
-                child: Text(
-                  "What made you feel $mood?",
-                  style: TextStyle(fontSize: 23),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "What made you feel $mood?",
+                      style: TextStyle(fontSize: 23),
+                    ),
+                  ],
                 ),
               ),
             ),
             Expanded(
-              flex: 9,
+              flex: 7,
               child: Container(
                 height: MediaQuery.of(context).size.height / 1.94,
                 child: GridView.builder(
@@ -117,7 +123,6 @@ class _ActivityScreenState extends State<ActivityScreen> {
               flex: 1,
               child: Container(
                 padding: EdgeInsets.symmetric(
-                  vertical: 10,
                   horizontal: 10,
                 ),
                 child: Row(
