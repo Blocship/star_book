@@ -78,6 +78,38 @@ class _StoryScreenState extends State<StoryScreen> {
                 ),
               ),
             ),
+            Container(
+              padding: EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 10,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.arrow_back_ios),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    color: Colors.blueAccent,
+                  ),
+                  Container(
+                    child: Text(
+                      "Just Post It!",
+                      style: TextStyle(
+                        fontSize: 20,
+                        color: Colors.blueAccent,
+                      ),
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.arrow_forward_ios),
+                    onPressed: () {},
+                    color: Colors.blueAccent,
+                  )
+                ],
+              ),
+            ),
           ],
         ),
       ),
