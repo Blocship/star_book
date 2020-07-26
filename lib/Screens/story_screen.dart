@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:quill_delta/quill_delta.dart';
+import 'package:zefyr/zefyr.dart';
 
 import '../constants.dart';
 
@@ -8,10 +10,21 @@ class StoryScreen extends StatefulWidget {
 }
 
 class _StoryScreenState extends State<StoryScreen> {
+  ZefyrController _controller;
+  FocusNode _focusNode;
+
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    final document = _loadDocument();
+    _controller = ZefyrController(document);
+    _focusNode = FocusNode();
+  }
+
+  NotusDocument _loadDocument() {
+    final Delta delta = Delta()..insert("Write Your Story!\n");
+    return NotusDocument.fromDelta(delta);
   }
 
   @override
@@ -43,6 +56,26 @@ class _StoryScreenState extends State<StoryScreen> {
               child: Text(
                 "Your Story",
                 style: TextStyle(fontSize: 18),
+              ),
+            ),
+            Expanded(
+              child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 12),
+                decoration: BoxDecoration(
+                  shape: BoxShape.rectangle,
+                  border: Border.all(
+                    color: Colors.blueAccent,
+                    width: 1,
+                  ),
+                  borderRadius: BorderRadius.circular(18),
+                ),
+                child: ZefyrScaffold(
+                  child: ZefyrEditor(
+                    controller: _controller,
+                    focusNode: _focusNode,
+                    padding: EdgeInsets.all(8),
+                  ),
+                ),
               ),
             ),
           ],

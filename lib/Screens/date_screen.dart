@@ -111,7 +111,7 @@ class _DateScreenState extends State<DateScreen> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 64, horizontal: 8),
+                const EdgeInsets.symmetric(vertical: 64, horizontal: 8),
                 child: Align(
                   alignment: Alignment.bottomCenter,
                   child: Container(
