@@ -12,6 +12,7 @@ class StoryScreen extends StatefulWidget {
 class _StoryScreenState extends State<StoryScreen> {
   ZefyrController _controller;
   FocusNode _focusNode;
+  UnfocusDisposition disposition = UnfocusDisposition.scope;
 
   @override
   void initState() {
@@ -23,7 +24,7 @@ class _StoryScreenState extends State<StoryScreen> {
   }
 
   NotusDocument _loadDocument() {
-    final Delta delta = Delta()..insert("Write Your Story!\n");
+    final Delta delta = Delta()..insert("Your Story!\n");
     return NotusDocument.fromDelta(delta);
   }
 
@@ -73,6 +74,7 @@ class _StoryScreenState extends State<StoryScreen> {
                   child: ZefyrEditor(
                     controller: _controller,
                     focusNode: _focusNode,
+                    autofocus: false,
                     padding: EdgeInsets.all(8),
                   ),
                 ),
