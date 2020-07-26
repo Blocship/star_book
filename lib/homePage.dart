@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:star_book/models/activity.dart';
+import 'package:star_book/widgets/story_card.dart';
 
 import 'Screens/date_screen.dart';
+import 'models/activity.dart';
 
 class HomePage extends StatefulWidget {
   final openDrawer;
@@ -23,77 +25,53 @@ class _HomePageState extends State<HomePage> {
 
   _HomePageState(this.openDrawer);
 
-  List<Activity> get reversedList {
-    return highlightedDays.reversed.toList();
-  }
-
-  List<Activity> highlightedDays = [
-    new Activity(
-      icon: FontAwesomeIcons.pencilAlt,
-      mood: "white",
-      story: "Write Your Story!",
-      color: Colors.black54.withOpacity(0.75),
-      size: 100,
-    ),
-    new Activity(
-      icon: FontAwesomeIcons.smile,
-      mood: "green",
-      story: "I had a very happy day",
-      color: Colors.green,
-      size: 120,
-    ),
-    new Activity(
-      icon: FontAwesomeIcons.laughSquint,
-      mood: "green",
-      story: "I had a very happy day",
-      color: Colors.yellow,
-      size: 120,
-    ),
-  ];
+//  List<Activity> highlightedDays = [
+//    new Activity(
+//      icon: FontAwesomeIcons.pencilAlt,
+//      mood: "white",
+//      story: "Write Your Story!",
+//      color: Colors.black54.withOpacity(0.75),
+//      size: 100,
+//    ),
+//    new Activity(
+//      icon: FontAwesomeIcons.smile,
+//      mood: "green",
+//      story: "I had a very happy day",
+//      color: Colors.green,
+//      size: 120,
+//    ),
+//    new Activity(
+//      icon: FontAwesomeIcons.laughSquint,
+//      mood: "green",
+//      story: "I had a very happy day",
+//      color: Colors.yellow,
+//      size: 120,
+//    ),
+//  ];
 
   Widget itemBuilder(BuildContext context, int index) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      elevation: 8,
-      color: highlightedDays[index].color,
-      child: Stack(
-        fit: StackFit.loose,
-        children: <Widget>[
-          Container(
-            height: double.infinity,
-            width: double.infinity,
-            padding: EdgeInsets.only(top: 80),
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: Icon(
-                highlightedDays[index].icon,
-                size: highlightedDays[index].size,
-                color: Colors.white,
-              ),
-            ),
-          ),
-          Container(
-            height: double.infinity,
-            width: double.infinity,
-            padding: EdgeInsets.only(top: 100),
-            child: Align(
-              alignment: Alignment.center,
-              child: Text(
-                highlightedDays[index].story,
-                style: TextStyle(fontSize: 22, color: Colors.white),
-                textAlign: TextAlign.left,
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
+    if (index == 0) {
+      return FirstStoryCard(
+        activity: highlightedDays[index],
+      );
+    } else {
+      return OtherStoryCard(activity: highlightedDays[index]);
+    }
   }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
+    highlightedDays.add(
+      new Activity(
+        icon: FontAwesomeIcons.pencilAlt,
+        mood: "white",
+        story: "Write Your Story!",
+        color: Colors.black54.withOpacity(0.75),
+        size: 100,
+      ),
+    );
   }
 
   @override

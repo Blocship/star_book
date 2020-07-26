@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
+List<Activity> highlightedDays = List<Activity>();
+
 class Activity {
   int day;
   int month;
