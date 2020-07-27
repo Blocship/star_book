@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:star_book/Screens/story_screen.dart';
+import 'package:star_book/models/activity.dart';
 import 'package:star_book/models/category.dart';
 
 class ActivityScreen extends StatefulWidget {
@@ -40,7 +42,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Expanded(
-                flex: 3,
+                flex: 2,
                 child: Stack(
                   children: [
                     Container(
@@ -60,14 +62,20 @@ class _ActivityScreenState extends State<ActivityScreen> {
               child: Container(
                 width: double.infinity,
                 padding: EdgeInsets.only(left: 10),
-                child: Text(
-                  "What made you feel $mood?",
-                  style: TextStyle(fontSize: 23),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      "What made you feel $mood?",
+                      style: TextStyle(fontSize: 23),
+                    ),
+                  ],
                 ),
               ),
             ),
             Expanded(
-              flex: 9,
+              flex: 7,
               child: Container(
                 height: MediaQuery.of(context).size.height / 1.94,
                 child: GridView.builder(
@@ -82,6 +90,7 @@ class _ActivityScreenState extends State<ActivityScreen> {
                         onTap: () {
                           setState(() {
                             selectedItem = categories[int].label;
+                            storyDetails.add(selectedItem);
                           });
                         },
                         child: Card(
@@ -116,7 +125,6 @@ class _ActivityScreenState extends State<ActivityScreen> {
               flex: 1,
               child: Container(
                 padding: EdgeInsets.symmetric(
-                  vertical: 10,
                   horizontal: 10,
                 ),
                 child: Row(
@@ -131,13 +139,22 @@ class _ActivityScreenState extends State<ActivityScreen> {
                     ),
                     IconButton(
                       icon: Icon(Icons.arrow_forward_ios),
-                      onPressed: () {},
+                      onPressed: () {
+                        if (selectedItem != null) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => StoryScreen(),
+                            ),
+                          );
+                        }
+                      },
                       color: Colors.blueAccent,
                     )
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
