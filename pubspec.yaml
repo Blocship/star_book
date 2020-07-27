@@ -31,6 +31,7 @@ dependencies:
       path: packages/zefyr
       commit: 2e37998
   quill_delta: ^1.0.2
+  hive: ^1.4.2
 
 dev_dependencies:
   flutter_test:

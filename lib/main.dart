@@ -26,12 +26,8 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   int selectedPage = 0;
 
-  static GlobalKey<ScaffoldState> scaffoldKey = new GlobalKey<ScaffoldState>();
-
   final List<Widget> _pages = [
-    HomePage(
-      openDrawer(),
-    ),
+    HomePage(),
     DashboardPage(),
     Text("3"),
     ModePicker()
@@ -62,12 +58,6 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  static VoidCallback openDrawer() {
-    return () {
-      scaffoldKey.currentState.openDrawer();
-    };
-  }
-
   @override
   void initState() {
     // TODO: implement initState
@@ -78,8 +68,6 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     if (Platform.isIOS) {
       return Scaffold(
-        key: scaffoldKey,
-        drawer: new Drawer(),
         body: _pages[selectedPage],
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
@@ -95,8 +83,6 @@ class _MyHomePageState extends State<MyHomePage> {
     } else {
       return SafeArea(
         child: Scaffold(
-          key: scaffoldKey,
-          drawer: new Drawer(),
           body: _pages[selectedPage],
           bottomNavigationBar: Theme(
             data: Theme.of(context).copyWith(canvasColor: Colors.transparent),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/models/activity.dart';
 
 import 'activity_screen.dart';
 
@@ -118,6 +119,7 @@ class _MoodScreenState extends State<MoodScreen> {
                     IconButton(
                       icon: Icon(Icons.arrow_forward_ios),
                       onPressed: () {
+                        storyDetails.add(label);
                         Navigator.push(
                           context,
                           MaterialPageRoute(

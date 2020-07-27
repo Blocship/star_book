@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quill_delta/quill_delta.dart';
+import 'package:star_book/main.dart';
+import 'package:star_book/models/activity.dart';
 import 'package:zefyr/zefyr.dart';
 
 import '../constants.dart';
@@ -13,6 +15,8 @@ class _StoryScreenState extends State<StoryScreen> {
   ZefyrController _controller;
   FocusNode _focusNode;
   UnfocusDisposition disposition = UnfocusDisposition.scope;
+  String storyTitle;
+  String storyDesc;
 
   @override
   void initState() {
@@ -47,7 +51,9 @@ class _StoryScreenState extends State<StoryScreen> {
               child: TextField(
                 keyboardType: TextInputType.emailAddress,
                 textAlign: TextAlign.start,
-                onChanged: (value) {},
+                onChanged: (value) {
+                  storyTitle = value;
+                },
                 decoration: kTextFieldDecoration.copyWith(
                     hintText: "Start With Your Feelings!"),
               ),
@@ -106,7 +112,20 @@ class _StoryScreenState extends State<StoryScreen> {
                   ),
                   IconButton(
                     icon: Icon(Icons.arrow_forward_ios),
-                    onPressed: () {},
+                    onPressed: () {
+                      storyDesc = _controller.plainTextEditingValue.text;
+                      if (storyTitle != null && storyDesc != null) {
+                        storyDetails.add(storyTitle);
+                        storyDetails.add(storyDesc);
+                        print(storyDetails);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => MyApp(),
+                          ),
+                        );
+                      }
+                    },
                     color: Colors.blueAccent,
                   )
                 ],

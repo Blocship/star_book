@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:star_book/Screens/mood_screen.dart';
+import 'package:star_book/models/activity.dart';
 
 class DateScreen extends StatefulWidget {
   @override
@@ -126,6 +127,7 @@ class _DateScreenState extends State<DateScreen> {
                           borderRadius: BorderRadius.circular(100)),
                       onPressed: () {
                         if (setDate) {
+                          storyDetails.add(currentDate);
                           Navigator.push(
                             context,
                             MaterialPageRoute(

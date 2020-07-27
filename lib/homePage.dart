@@ -12,22 +12,14 @@ import 'Screens/date_screen.dart';
 import 'models/activity.dart';
 
 class HomePage extends StatefulWidget {
-  final openDrawer;
-
-  HomePage(this.openDrawer);
-
   @override
-  _HomePageState createState() => _HomePageState(openDrawer);
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final Function openDrawer;
-
   var user = 'Dear';
 
   int _index = 0;
-
-  _HomePageState(this.openDrawer);
 
   Widget itemBuilder(BuildContext context, int index) {
     if (index == 0) {
@@ -78,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   IconButton(
                     icon: Icon(Icons.settings),
-                    onPressed: openDrawer,
+                    onPressed: () {},
                   ),
                   SizedBox(
                     height: 10,
