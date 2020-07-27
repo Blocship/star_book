@@ -25,11 +25,7 @@ dependencies:
   font_awesome_flutter: ^8.8.1
   cupertino_icons: ^0.1.2
   intl: ^0.16.1
-  zefyr:
-    git:
-      url: git@github.com:memspace/zefyr.git
-      path: packages/zefyr
-      commit: 2e37998
+  zefyr: ^0.11.0
   quill_delta: ^1.0.2
   hive: ^1.4.2
 
@@ -41,7 +37,6 @@ flutter:
   uses-material-design: true
   assets:
     - images/
-
   # fonts:
   #   - family: Schyler
   #     fonts:
