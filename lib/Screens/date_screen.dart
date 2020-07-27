@@ -13,6 +13,8 @@ class _DateScreenState extends State<DateScreen> {
   String currentDate = "Current date";
   bool setDate = false;
 
+  var username = 'Username';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,7 +59,7 @@ class _DateScreenState extends State<DateScreen> {
                       children: [
                         TextSpan(text: 'Good Morning, '),
                         TextSpan(
-                          text: 'Username',
+                          text: username,
                           style: TextStyle(
                               color: Colors.black, fontWeight: FontWeight.bold),
                         ),

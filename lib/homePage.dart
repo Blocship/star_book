@@ -23,31 +23,11 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final Function openDrawer;
 
-  _HomePageState(this.openDrawer);
+  var user = 'Dear';
 
-//  List<Activity> highlightedDays = [
-//    new Activity(
-//      icon: FontAwesomeIcons.pencilAlt,
-//      mood: "white",
-//      story: "Write Your Story!",
-//      color: Colors.black54.withOpacity(0.75),
-//      size: 100,
-//    ),
-//    new Activity(
-//      icon: FontAwesomeIcons.smile,
-//      mood: "green",
-//      story: "I had a very happy day",
-//      color: Colors.green,
-//      size: 120,
-//    ),
-//    new Activity(
-//      icon: FontAwesomeIcons.laughSquint,
-//      mood: "green",
-//      story: "I had a very happy day",
-//      color: Colors.yellow,
-//      size: 120,
-//    ),
-//  ];
+  int _index = 0;
+
+  _HomePageState(this.openDrawer);
 
   Widget itemBuilder(BuildContext context, int index) {
     if (index == 0) {
@@ -109,7 +89,16 @@ class _HomePageState extends State<HomePage> {
                       color: Colors.blue,
                       size: 25,
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      if (_index == 0) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DateScreen(),
+                          ),
+                        );
+                      }
+                    },
                   )
                 ],
               ),
@@ -128,12 +117,12 @@ class _HomePageState extends State<HomePage> {
                   Hero(
                     tag: 'UserIcon',
                     child: CircleAvatar(
-                      radius: 40,
+                      radius: 50,
                       backgroundImage: AssetImage('images/user.png'),
                     ),
                   ),
                   Text(
-                    "Good Morning Dear ",
+                    "Good Morning $user",
                     style: TextStyle(
                       fontSize: 18,
                     ),
@@ -154,6 +143,7 @@ class _HomePageState extends State<HomePage> {
               height: MediaQuery.of(context).size.height / 1.7,
               child: Swiper(
                 onTap: (index) {
+                  _index = index;
                   if (index == 0) {
                     Navigator.push(
                       context,
