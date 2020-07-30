@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:star_book/models/activity.dart';
 
 import 'activity_screen.dart';
@@ -13,19 +14,36 @@ class _MoodScreenState extends State<MoodScreen> {
 
   String label = "neutral";
 
+  IconData _iconData = FontAwesomeIcons.meh;
+
   String _getLabel(double index) {
     if (_value == 0.0)
       return label = "awful";
-    else if (_value == 1.0)
+    else if (_value <= 1.0)
       return label = "sad";
-    else if (_value == 2.0)
+    else if (_value <= 2.0)
       return label = "neutral";
-    else if (_value == 3.0)
+    else if (_value <= 3.0)
       return label = "happy";
-    else if (_value == 4.0)
+    else if (_value <= 4.0)
       return label = "productive";
     else
       return label = "No Mood";
+  }
+
+  IconData _getIcon(double index) {
+    if (_value == 0.0)
+      return _iconData = FontAwesomeIcons.tired;
+    else if (_value <= 1.0)
+      return _iconData = FontAwesomeIcons.frown;
+    else if (_value <= 2.0)
+      return _iconData = FontAwesomeIcons.meh;
+    else if (_value <= 3.0)
+      return _iconData = FontAwesomeIcons.smile;
+    else if (_value <= 4.0)
+      return _iconData = FontAwesomeIcons.grinSquint;
+    else
+      return _iconData = FontAwesomeIcons.mehBlank;
   }
 
   @override
@@ -59,23 +77,27 @@ class _MoodScreenState extends State<MoodScreen> {
               left: 20,
             ),
             Container(
-              margin: EdgeInsets.all(16),
+              margin:
+                  EdgeInsets.only(top: 200, bottom: 16, left: 16, right: 16),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   SizedBox(
-                    height: 200,
+                    height: MediaQuery.of(context).size.height / 16,
+                  ),
+                  Icon(_iconData, size: MediaQuery.of(context).size.height / 4),
+                  SizedBox(
+                    height: MediaQuery.of(context).size.height / 16,
                   ),
                   SliderTheme(
                     data: SliderTheme.of(context).copyWith(
-                        activeTrackColor: Colors.blue[500],
-                        thumbShape:
-                            RoundSliderThumbShape(enabledThumbRadius: 12),
-                        thumbColor: Colors.blue[800],
-                        inactiveTrackColor: Colors.blue[200],
-                        overlayShape:
-                            RoundSliderOverlayShape(overlayRadius: 18),
-                        overlayColor: Colors.blue[900].withOpacity(0.5)),
+                      activeTrackColor: Colors.blue[500],
+                      thumbShape: RoundSliderThumbShape(enabledThumbRadius: 12),
+                      thumbColor: Colors.blue[800],
+                      inactiveTrackColor: Colors.blue[200],
+                      overlayShape: RoundSliderOverlayShape(overlayRadius: 18),
+                      overlayColor: Colors.blue[900].withOpacity(0.5),
+                    ),
                     child: Slider(
                       value: _value,
                       min: 0.0,
@@ -84,13 +106,13 @@ class _MoodScreenState extends State<MoodScreen> {
                         setState(() {
                           _value = value;
                           _getLabel(value);
+                          _getIcon(value);
                         });
                       },
-                      divisions: 4,
                     ),
                   ),
                   SizedBox(
-                    height: 50,
+                    height: MediaQuery.of(context).size.height / 16,
                   ),
                   Text(
                     label,

@@ -69,6 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
     if (Platform.isIOS) {
       return Scaffold(
         body: _pages[selectedPage],
+        drawer: Drawer(),
         bottomNavigationBar: Theme(
           data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
           child: BottomNavigationBar(
@@ -84,6 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
       return SafeArea(
         child: Scaffold(
           body: _pages[selectedPage],
+          drawer: Drawer(),
           bottomNavigationBar: Theme(
             data: Theme.of(context).copyWith(canvasColor: Colors.transparent),
             child: BottomNavigationBar(

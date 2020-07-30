@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
-List<Activity> highlightedDays = List<Activity>();
+List<Activity> highlightedDays = [];
 List storyDetails = List();
 
 class Activity {
@@ -9,6 +10,8 @@ class Activity {
   int year;
   String mood;
   String story;
+  String title;
+  String category;
   var color;
   double size;
   IconData icon;
@@ -16,6 +19,8 @@ class Activity {
 
   Activity(
       {this.size,
+      this.title,
+      this.category,
       this.day,
       this.mood,
       this.story,

@@ -4,7 +4,6 @@ import 'dart:ui';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:star_book/models/activity.dart';
 import 'package:star_book/widgets/story_card.dart';
 
@@ -23,9 +22,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget itemBuilder(BuildContext context, int index) {
     if (index == 0) {
-      return FirstStoryCard(
-        activity: highlightedDays[index],
-      );
+      return FirstStoryCard();
     } else {
       return OtherStoryCard(activity: highlightedDays[index]);
     }
@@ -35,15 +32,6 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    highlightedDays.add(
-      new Activity(
-        icon: FontAwesomeIcons.pencilAlt,
-        mood: "white",
-        story: "Write Your Story!",
-        color: Colors.black54.withOpacity(0.75),
-        size: 100,
-      ),
-    );
   }
 
   @override
