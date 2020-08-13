@@ -117,12 +117,16 @@ class _StoryScreenState extends State<StoryScreen> {
                       if (storyTitle != null && storyDesc != null) {
                         storyDetails.add(storyTitle);
                         storyDetails.add(storyDesc);
-                        highlightedDays.add(Activity(
+                        highlightedDays.add(
+                          Activity(
                             date: storyDetails[0],
                             mood: storyDetails[1],
-                            story: storyDetails[4],
-                            category: storyDetails[2],
-                            title: storyDetails[3]));
+                            icon: storyDetails[2],
+                            category: storyDetails[3],
+                            title: storyDetails[4],
+                            story: storyDetails[5],
+                          ),
+                        );
                         storyDetails.clear();
                         Navigator.push(
                           context,

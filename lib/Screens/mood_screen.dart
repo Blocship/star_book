@@ -142,6 +142,7 @@ class _MoodScreenState extends State<MoodScreen> {
                       icon: Icon(Icons.arrow_forward_ios),
                       onPressed: () {
                         storyDetails.add(label);
+                        storyDetails.add(_iconData);
                         Navigator.push(
                           context,
                           MaterialPageRoute(
