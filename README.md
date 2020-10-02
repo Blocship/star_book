@@ -26,13 +26,16 @@
 
 ## Table Of Content
 
-- [TODO]()
-- [Contributions]()
+- [About the App](#about-the-app)
+- [MILESTONES](#milestones)
+- [Getting Started](#getting-started)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgements](#acknowledgements)
 - [Demo]()
-- [Shout-out To Contributors]()
-- [Starware]()
 
-## 📝 About App
+## 📝 About the App
 
 “StarBook” is a digital diary, and a mood tracking app. The user will be able to rate his mood for each day and write a short story for him, like how his day was. Color is given to each mood, let’s say, green for a happy mood, red for angry and yellow for a sad mood. The statistics of users will be visualized in a methodical structure. For this the app will form a graph, calendar, each date box is colored with the color of users' aura lets say green for positive spirits. StarBook will cooperate with users to boost their positive energy and train healthy thinking, correspondingly moving towards calmer and patient personality. StarBook will use positive psychology and cognitive behavioral therapy for you to better understand yourself, overcoming stress, anxiety, and depressions. The app is all in all focused to give personalized experience to every individual user, increasing their productivity, objectivity, and emotional health.
 
@@ -55,25 +58,44 @@
 5. Light and Dark mood
 6. Add notifications
 
-## ☕️ TODO
+<!-- GETTING STARTED -->
 
-- [x] Readme.md improvement
-- [x] Adding tags
-- [x] Routing
-- [x] Adding detail in the day model
-- [x] Separating editable and display screen
-- [x] Removing extra buttons
-- [x] Bottom navigationbar
-- [x] Remove button from dates greater than current date
-- [ ] Adding input text box instead of color buttons
-- [ ] Adding stories
-- [x] Add carousel on months
-- [ ] UI Improvments
-- [ ] Adding Background image
+## Getting Started
+
+To get a local copy up and running follow these simple example steps.
+
+Prerequisite: https://flutter.dev/docs/get-started/install
+
+1. To get started, fork this repository to your GitHub account.
+
+2. Clone the repo.
+    ```sh
+     git clone https://github.com/<your-username>/star_book.git
+    ```
+3. Install packages.
+    ```sh
+     flutter pub get
+    ```
+4. Run project.
+    ```sh
+     flutter run
+    ```
+
+<!-- ROADMAP -->
+
+## Roadmap
+
+See the [project board](https://github.com/hashirshoaeb/star_book/projects/1) for a list of proposed features (and known issues).
 
 ## 🤝 Contributions
 
-The App is under development. Are you interested in building and contributing to this awesome app? Your pull requests are most welcome. Any idea on how we can make this more awesome? Open a new issue! We need all the help we can get to make this project awesome!
+The App is under development. Are you interested in building and contributing to this awesome app? Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are greatly appreciated.
+
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ## 🚀 Demo
 
@@ -81,46 +103,8 @@ App is under development. For now it is like this. With your help we will add mo
 
 ![Demo gif](READMEdocs/demo5.gif)
 
-## 🔥 Shout-out To Contributors
+<!-- LICENSE -->
 
-<table>
-  <tr>
-    <td align="center">
-      <a href="https://www.facebook.com/hashir.shoaeb">
-        <img src="https://avatars2.githubusercontent.com/u/35165481?v=4" width="100px" alt="" />
-        <br />
-        <sub><b>Hashir Shoaib</b></sub>
-      </a>
-      <br />
-    </td>
-    <td align="center">
-      <a href="https://github.com/mennorenkens">
-        <img src="https://avatars2.githubusercontent.com/u/18008421?v=4" width="100px" alt="" />
-        <br />
-        <sub><b>Menno Renkens</b></sub>
-      </a>
-      <br />
-    </td>
-    <td align="center">
-      <a href="https://github.com/zepfietje">
-        <img src="https://avatars3.githubusercontent.com/u/44533235?s=460&v=4" width="100px" alt="" />
-        <br />
-        <sub><b>Zep Fietje</b></sub>
-      </a>
-      <br />
-    </td>
-    <td align="center">
-      <a href="https://github.com/alimehdi0009">
-        <img src="https://avatars3.githubusercontent.com/u/45300532?s=460&v=4" width="100px" alt="" />
-        <br />
-        <sub><b>Ali Mehdi</b></sub>
-      </a>
-      <br />
-    </td>
-  </tr>
-</table>
+## License
 
-## ⭐ Starware
-
-You're free to use the project, as long as you star this repository.  
-Your appreciation makes us grow and glow up. ⭐
+Distributed under the MIT License. See `LICENSE` for more information.
