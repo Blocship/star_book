@@ -31,7 +31,7 @@
 - [Getting Started](#getting-started)
 - [Roadmap](#roadmap)
 - [Contributing](#-contributing)
-- [Demo](-demo)
+- [Demo](#-demo)
 - [License](#license)
 
 
