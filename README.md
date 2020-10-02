@@ -26,14 +26,14 @@
 
 ## Table Of Content
 
-- [About the App](#about-the-app)
+- [About the App](#-about-the-app)
 - [MILESTONES](#milestones)
 - [Getting Started](#getting-started)
 - [Roadmap](#roadmap)
-- [Contributing](#contributing)
+- [Contributing](#-contributing)
+- [Demo](-demo)
 - [License](#license)
-- [Acknowledgements](#acknowledgements)
-- [Demo]()
+
 
 ## 📝 About the App
 
@@ -87,7 +87,7 @@ Prerequisite: https://flutter.dev/docs/get-started/install
 
 See the [project board](https://github.com/hashirshoaeb/star_book/projects/1) for a list of proposed features (and known issues).
 
-## 🤝 Contributions
+## 🤝 Contributing
 
 The App is under development. Are you interested in building and contributing to this awesome app? Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are greatly appreciated.
 
