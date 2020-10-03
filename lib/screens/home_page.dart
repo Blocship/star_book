@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 // Files
-import 'package:star_book/screens/preferance_sheet.dart';
-import 'package:star_book/utils/bottom_sheet.dart';
-import 'package:star_book/widgets/month.dart';
+import '../screens/preferance_sheet.dart';
+import '../utils/bottom_sheet.dart';
+import '../widgets/month.dart';
 
 class HomePage extends StatelessWidget {
   @override
