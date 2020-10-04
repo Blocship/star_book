@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import '../screens/preferance_sheet.dart';
 import '../utils/bottom_sheet.dart';
 import '../widgets/month.dart';
+import '../styles/style.dart';
 
 class HomePage extends StatelessWidget {
   @override
@@ -31,9 +32,7 @@ class PreferanceButton extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTap(context),
       child: Icon(
-        IconData(0xf3b0,
-            fontFamily: c.CupertinoIcons.iconFont,
-            fontPackage: c.CupertinoIcons.iconFontPackage),
+        CupertinoIcons.preferanceIcon,
         color: Color.fromARGB(255, 0, 0, 0),
       ),
     );
