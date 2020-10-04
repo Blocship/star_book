@@ -1,34 +1,83 @@
 import 'package:flutter/cupertino.dart' as c;
+import 'package:flutter/material.dart' show Theme;
 import 'package:flutter/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 // Files
 import '../utils/bottom_sheet.dart';
+import '../widgets/action_container.dart';
 
 class PreferanceSheet extends StatelessWidget {
   c.CupertinoNavigationBar _buildNavBar() {
     return c.CupertinoNavigationBar(
-      middle: Text("dataa"),
+      middle: Text("StarBook"),
       leading: Container(
           padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: Text("data")),
+          child: Text("back")),
       trailing: null,
       border: null,
     );
   }
 
-  c.SafeArea _buildBody() {
+  List<Widget> _aboutDeveloper(BuildContext context) {
+    double _width = MediaQuery.of(context).size.width * 0.6 - 29;
+    return [
+      Container(
+        padding: EdgeInsets.fromLTRB(29, 17, 0, 8),
+        child: Text(
+          "ABOUT THE DEVELOPER",
+          style: Theme.of(context).textTheme.caption,
+        ),
+      ),
+      textContainer(
+          context: context,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              c.Container(
+                width: _width,
+                child: Text(
+                  "I'm Hashir, the developer of this app. Feel free to contact me anytime. I love hearing from you",
+                ),
+              ),
+              c.Container(
+                child: Text(
+                  "<Image/>",
+                ),
+              ),
+            ],
+          ))
+    ];
+  }
+
+  c.SafeArea _buildBody(BuildContext context) {
     return SafeArea(
-      minimum: EdgeInsets.symmetric(horizontal: 16),
+      // minimum: EdgeInsets.symmetric(horizontal: 16),
       child: c.Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(padding: EdgeInsets.symmetric(vertical: 14)),
-          textContainer('Edit Mood'),
-          Padding(padding: EdgeInsets.symmetric(vertical: 14)),
-          textContainer('About Developer'),
-          Padding(padding: EdgeInsets.symmetric(vertical: 14)),
-          textContainer('Privacy and Terms'),
-          Padding(padding: EdgeInsets.symmetric(vertical: 14)),
-          textContainer('LICENCE'),
+          Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+          ActionContainer(
+            text: 'Edit Mood',
+            icon: c.CupertinoIcons.right_chevron,
+          ),
+          Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+          ..._aboutDeveloper(context),
+          Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+          ActionContainer(
+            text: 'Privacy and Terms',
+            icon: c.CupertinoIcons.right_chevron,
+          ),
+          Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+          ActionContainer(
+            text: 'LICENCE',
+            icon: c.CupertinoIcons.right_chevron,
+            onTap: () async {
+              String url =
+                  "https://github.com/hashirshoaeb/star_book/blob/master/LICENSE";
+              if (await canLaunch(url)) await launch(url);
+              // else TODO: handle exception
+            },
+          ),
         ],
       ),
     );
@@ -37,9 +86,9 @@ class PreferanceSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
-      backgroundColor: c.CupertinoColors.systemGrey6,
+      backgroundColor: c.CupertinoColors.systemGroupedBackground,
       navigationBar: _buildNavBar(),
-      child: _buildBody(),
+      child: _buildBody(context),
     );
   }
 }
