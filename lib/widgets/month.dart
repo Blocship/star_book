@@ -5,29 +5,46 @@ import '../models/activity.dart';
 import '../utils/date.dart';
 import '../widgets/day.dart';
 
-class Month extends StatelessWidget {
+class Month extends c.StatefulWidget {
   Month({
-    // @required this.activityList,
     @required this.month,
     @required this.year,
   });
 
-  // final List<Activity> activityList;
   final int month;
   final int year;
+
+  @override
+  _MonthState createState() => _MonthState();
+}
+
+class _MonthState extends c.State<Month> {
+  // TODO: fetch data from database based on the month and year.
+  // using mock data for now
+  final List<Activity> activityList = new List<Activity>.from(mActivityList);
+
+  // As the month and year would be same in activity list and calander, so
+  // just comparing day.
+  Activity _getActivity(int day) {
+    final Activity res = activityList.firstWhere(
+      (element) => element.day == day,
+      orElse: () => new Activity(day: day),
+    );
+    return res;
+  }
 
   Widget _daysGrid(BuildContext context) {
     final List<Row> dayRowsList = new List<Row>();
     final List<Day> daysList = new List<Day>();
 
-    final int daysInMonth = getDaysInMonth(year, month);
-    final int fistWeekDay = DateTime(year, month, 1).weekday;
+    final int daysInMonth = getDaysInMonth(widget.year, widget.month);
+    final int fistWeekDay = DateTime(widget.year, widget.month, 1).weekday;
 
     for (int day = 2 - fistWeekDay; day <= daysInMonth; day++) {
       if (day <= 0) {
         daysList.add(new Day());
       } else {
-        daysList.add(new Day(activity: new Activity(day: day)));
+        daysList.add(new Day(activity: _getActivity(day)));
       }
 
       bool weekDone = (day - 1 + fistWeekDay) % DateTime.daysPerWeek == 0;
@@ -40,7 +57,7 @@ class Month extends StatelessWidget {
       }
     }
     return Column(
-      children: [MonthTitle(month, year), ...dayRowsList],
+      children: [MonthTitle(widget.month, widget.year), ...dayRowsList],
     );
   }
 

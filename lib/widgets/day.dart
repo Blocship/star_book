@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 // Files
 import '../models/activity.dart';
+import '../utils/color.dart' as u;
 
 class Day extends StatelessWidget {
   final Activity activity;
@@ -8,7 +10,7 @@ class Day extends StatelessWidget {
   Day({this.activity});
 
   double _squareSize(context) {
-    // TODO: based on the size of the screen, we will adjust the size of square.
+    // TODO: based on the size of the screen, adjust the size of square.
     return 43;
   }
 
@@ -21,29 +23,35 @@ class Day extends StatelessWidget {
       return activity.day.toString();
   }
 
-  int _getColor() {
+  Color _getBackgroundColor(BuildContext context) {
     // if activity.day == null then show white/transparent color
     if (activity == null)
-      return 0x00ffffff;
+      return Color(0x00ffffff);
     else
-      // else
-      // TODO: get color by sending mood, if not, then it will send default color
-      return 0xffe7e7e7;
+    // get color by sending mood, if not, then it will send default color
+    if (activity.mood != null) {
+      int colorCode = activity.mood.colorCode;
+      return c.CupertinoDynamicColor.resolve(
+          u.getColor(u.Color.values[colorCode]), context);
+    } else {
+      return c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.systemGrey6, context);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      // color: Color.fromARGB(255, 255, 0, 0),
       height: _squareSize(context),
       width: _squareSize(context),
       alignment: Alignment.center,
       margin: EdgeInsets.all(_squareSize(context) * 0.10),
       decoration: BoxDecoration(
-          color: Color(_getColor()),
+          color: _getBackgroundColor(context),
           borderRadius: BorderRadius.circular(_squareSize(context) / 5)),
       child: Text(
         _getText(),
+        // TODO: set color white for colored boxes.
         style: TextStyle(fontSize: _squareSize(context) * 0.55),
       ),
     );
