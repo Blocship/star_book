@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart' as c;
 
-enum Color {
+enum EColor {
   systemBlue,
   systemIndigo,
   systemGreen,
@@ -13,19 +13,19 @@ enum Color {
   // systemTeal,
 }
 
-c.CupertinoDynamicColor getColor(Color color) {
+c.CupertinoDynamicColor getColor(EColor color) {
   switch (color) {
-    case Color.systemBlue:
+    case EColor.systemBlue:
       return c.CupertinoColors.activeBlue;
-    case Color.systemIndigo:
+    case EColor.systemIndigo:
       return c.CupertinoColors.systemIndigo;
-    case Color.systemGreen:
+    case EColor.systemGreen:
       return c.CupertinoColors.systemGreen;
-    case Color.systemYellow:
+    case EColor.systemYellow:
       return c.CupertinoColors.systemYellow;
-    case Color.systemOrange:
+    case EColor.systemOrange:
       return c.CupertinoColors.systemOrange;
-    case Color.systemRed:
+    case EColor.systemRed:
       return c.CupertinoColors.systemRed;
     default:
       return c.CupertinoColors.systemGrey5;

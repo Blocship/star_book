@@ -27,7 +27,7 @@ class MoodSheet extends StatelessWidget {
           ...mMoodList.map((e) {
             return ColorContainer(
               text: e.label,
-              color: getColor(Color.values[e.colorCode]),
+              color: getColor(EColor.values[e.colorCode]),
               // TODO: add keys
               // On Tap functionality
             );

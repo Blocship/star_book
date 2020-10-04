@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 // Files
 import '../models/activity.dart';
-import '../utils/color.dart' as u;
+import '../utils/color.dart';
 
 class Day extends StatelessWidget {
   final Activity activity;
@@ -32,7 +32,7 @@ class Day extends StatelessWidget {
     if (activity.mood != null) {
       int colorCode = activity.mood.colorCode;
       return c.CupertinoDynamicColor.resolve(
-          u.getColor(u.Color.values[colorCode]), context);
+          getColor(EColor.values[colorCode]), context);
     } else {
       return c.CupertinoDynamicColor.resolve(
           c.CupertinoColors.systemGrey6, context);
