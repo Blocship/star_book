@@ -17,18 +17,27 @@ class ActionContainer extends StatelessWidget {
         margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
         padding: EdgeInsets.fromLTRB(13, 15, 13, 12),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6),
-            color: c.CupertinoColors.secondarySystemGroupedBackground),
+          borderRadius: BorderRadius.circular(6),
+          color: c.CupertinoDynamicColor.resolve(
+            c.CupertinoColors.secondarySystemGroupedBackground,
+            context,
+          ),
+        ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
               text,
-              style: TextStyle(color: c.CupertinoColors.label),
+              style: TextStyle(
+                  color: c.CupertinoDynamicColor.resolve(
+                c.CupertinoColors.label,
+                context,
+              )),
             ),
             Icon(
               icon,
-              color: c.CupertinoColors.tertiaryLabel,
+              color: c.CupertinoDynamicColor.resolve(
+                  c.CupertinoColors.tertiaryLabel, context),
             ),
           ],
         ),
