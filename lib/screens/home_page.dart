@@ -33,7 +33,10 @@ class PreferanceButton extends StatelessWidget {
       onTap: () => onTap(context),
       child: Icon(
         CupertinoIcons.preferanceIcon,
-        color: Color.fromARGB(255, 0, 0, 0),
+        color: c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.label,
+          context,
+        ),
       ),
     );
   }
