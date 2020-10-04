@@ -13,3 +13,24 @@ int getDaysInMonth(int year, int month) {
       ? DateTime(year, month + 1, 0).day
       : DateTime(year + 1, 1, 0).day;
 }
+
+/// List of months name
+const List<String> monthList = <String>[
+  'January',
+  'Feburary',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+/// Gets the name of the given month by its number,
+String getMonthTitle(int month) {
+  return monthList[month - 1];
+}

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 // Files
 import '../models/activity.dart';
@@ -39,7 +40,7 @@ class Month extends StatelessWidget {
       }
     }
     return Column(
-      children: dayRowsList,
+      children: [MonthTitle(month, year), ...dayRowsList],
     );
   }
 
@@ -47,6 +48,26 @@ class Month extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: _daysGrid(context),
+    );
+  }
+}
+
+class MonthTitle extends StatelessWidget {
+  MonthTitle(this.month, this.year);
+
+  final int month;
+  final int year;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.fromLTRB(14, 10, 0, 10),
+      child: Text(
+        "${getMonthTitle(month)} $year",
+        // style: Theme.of(context).textTheme.headline3),
+        style: c.CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
+      ),
+      alignment: Alignment.centerLeft,
     );
   }
 }
