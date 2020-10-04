@@ -1,5 +1,5 @@
 // Files
-import 'package:star_book/models/mood.dart';
+import '../models/mood.dart';
 
 class Activity {
   Activity({
