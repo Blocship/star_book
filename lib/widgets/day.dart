@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 // Files
 import '../models/activity.dart';
 import '../utils/color.dart';
+import '../screens/activity_edit_sheet.dart';
+import '../utils/bottom_sheet.dart';
 
 class Day extends StatelessWidget {
   final Activity activity;
@@ -39,44 +41,33 @@ class Day extends StatelessWidget {
     }
   }
 
+  void _onTap(context) {
+    if (activity == null)
+      return;
+    else if (activity.title == null)
+      bottomSheet(context: context, child: ActivityEditSheetRouteInitializer());
+    else
+      Navigator.of(context).pushNamed('/activity');
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: _squareSize(context),
-      width: _squareSize(context),
-      alignment: Alignment.center,
-      margin: EdgeInsets.all(_squareSize(context) * 0.10),
-      decoration: BoxDecoration(
-          color: _getBackgroundColor(context),
-          borderRadius: BorderRadius.circular(_squareSize(context) / 5)),
-      child: Text(
-        _getText(),
-        // TODO: set color white for colored boxes.
-        style: TextStyle(fontSize: _squareSize(context) * 0.55),
+    return GestureDetector(
+      onTap: () => _onTap(context),
+      child: Container(
+        height: _squareSize(context),
+        width: _squareSize(context),
+        alignment: Alignment.center,
+        margin: EdgeInsets.all(_squareSize(context) * 0.10),
+        decoration: BoxDecoration(
+            color: _getBackgroundColor(context),
+            borderRadius: BorderRadius.circular(_squareSize(context) / 5)),
+        child: Text(
+          _getText(),
+          // TODO: set color white for colored boxes.
+          style: TextStyle(fontSize: _squareSize(context) * 0.55),
+        ),
       ),
     );
   }
 }
-
-// class MyButton extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return GestureDetector(
-//       onTap: () {
-//         print('MyButton was tapped!');
-//       },
-//       child: Container(
-//         height: 36.0,
-//         padding: const EdgeInsets.all(8.0),
-//         margin: const EdgeInsets.symmetric(horizontal: 8.0),
-//         decoration: BoxDecoration(
-//           borderRadius: BorderRadius.circular(5.0),
-//           color: Colors.lightGreen[500],
-//         ),
-//         child: Center(
-//           child: Text('Engage'),
-//         ),
-//       ),
-//     );
-//   }
-// }
