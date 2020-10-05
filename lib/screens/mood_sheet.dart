@@ -9,10 +9,6 @@ class MoodSheet extends StatelessWidget {
   c.CupertinoNavigationBar _buildNavBar() {
     return c.CupertinoNavigationBar(
       middle: Text("Mood"),
-      leading: Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          child: Text("back")),
-      trailing: null,
       border: null,
     );
   }
