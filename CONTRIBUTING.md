@@ -26,7 +26,7 @@ The following are guidelines for contributing to this project.
 > can make all of your pull request branches based on this `master` branch.
 > Whenever you want to update your version of `master`, do a regular `git pull`.
 
-3. Open Issue, discuss what you are planing to do.
+3. Open Issue, discuss what you are planning to do.
 
 4. Make changes and create Pull Request.
 
