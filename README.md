@@ -89,7 +89,7 @@ See the [project board](https://github.com/hashirshoaeb/star_book/projects/1) fo
 
 ## 🤝 Contributing
 
-The App is under development. Are you interested in building and contributing to this awesome app? Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are greatly appreciated.
+The App is under development. Are you interested in building and contributing to this awesome app? Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are greatly appreciated. To pick somthing for contribution refer [StarBook board](https://github.com/hashirshoaeb/star_book/projects/1). For more, refer [CONTRIBUTING.md](CONTRIBUTING.md)
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
