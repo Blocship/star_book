@@ -40,14 +40,8 @@ class PreferanceSheet extends StatelessWidget {
               c.Container(
                 padding: c.EdgeInsets.all(0),
                 margin: c.EdgeInsets.all(0),
-                width: c.MediaQuery
-                    .of(context)
-                    .size
-                    .width / 4,
-                height: c.MediaQuery
-                    .of(context)
-                    .size
-                    .height / 8,
+                width: c.MediaQuery.of(context).size.width / 4,
+                height: c.MediaQuery.of(context).size.height / 8,
                 decoration: c.BoxDecoration(
                   color: c.CupertinoColors.black,
                   shape: c.BoxShape.circle,
