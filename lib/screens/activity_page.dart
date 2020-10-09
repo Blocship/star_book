@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart' as c;
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 // TODO: display activity in cupertino style,
