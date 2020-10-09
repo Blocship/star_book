@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart' as c;
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 // TODO: display activity in cupertino style,
@@ -10,6 +11,13 @@ class ActivityPage extends StatelessWidget {
     return c.CupertinoPageScaffold(
       navigationBar: c.CupertinoNavigationBar(
         middle: Text('Activity'),
+        trailing: c.GestureDetector(
+          onTap: () {},
+          child: Text(
+            "Edit",
+            style: c.CupertinoTheme.of(context).textTheme.navActionTextStyle,
+          ),
+        ),
       ),
       child: c.SingleChildScrollView(
         child: SafeArea(
@@ -24,7 +32,7 @@ class ActivityPage extends StatelessWidget {
                     c.Text(
                       "07 - 10 - 20",
                       style: c.TextStyle(
-                          fontWeight: c.FontWeight.bold, fontSize: 24),
+                          fontWeight: c.FontWeight.bold, fontSize: 20),
                     ),
                   ],
                 ),
@@ -34,12 +42,18 @@ class ActivityPage extends StatelessWidget {
                 child: c.Text("Happy"),
               ),
               c.Container(
-                padding: c.EdgeInsets.all(16),
-                child: c.Text("Title"),
+                padding: c.EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                child: c.Text(
+                  "I am doing good!",
+                  style: c.CupertinoTheme.of(context)
+                      .textTheme
+                      .navLargeTitleTextStyle
+                      .copyWith(),
+                ),
               ),
               c.Container(
                 padding: c.EdgeInsets.all(16),
-                child: c.Text("Note: \n\nLorem Ipsum is simply dummy text of the printing and typesetting industry." +
+                child: c.Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
                     " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," +
                     " when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
                     " It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
