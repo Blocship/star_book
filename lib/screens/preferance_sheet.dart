@@ -45,6 +45,7 @@ class PreferanceSheet extends StatelessWidget {
                   color: c.CupertinoColors.black,
                   shape: c.BoxShape.circle,
                   image: c.DecorationImage(
+                    fit: c.BoxFit.fill,
                     image: c.NetworkImage(
                         "https://avatars0.githubusercontent.com/u/35165481?s=88"),
                   ),
