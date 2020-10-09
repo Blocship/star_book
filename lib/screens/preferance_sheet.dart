@@ -37,8 +37,17 @@ class PreferanceSheet extends StatelessWidget {
                 ),
               ),
               c.Container(
-                child: Text(
-                  "<Image/>",
+                padding: c.EdgeInsets.all(0),
+                margin: c.EdgeInsets.all(0),
+                width: c.MediaQuery.of(context).size.width / 4,
+                height: c.MediaQuery.of(context).size.height / 8,
+                decoration: c.BoxDecoration(
+                  color: c.CupertinoColors.black,
+                  shape: c.BoxShape.circle,
+                  image: c.DecorationImage(
+                    image: c.NetworkImage(
+                        "https://avatars0.githubusercontent.com/u/35165481?s=88&u=5e93486587eb4d044df976642823b630e3663070&v=4"),
+                  ),
                 ),
               ),
             ],
