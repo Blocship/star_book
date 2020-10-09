@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/material.dart' show Theme;
 import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 // Files
 import '../utils/bottom_sheet.dart';
 import '../widgets/action_container.dart';
@@ -16,35 +17,45 @@ class PreferanceSheet extends StatelessWidget {
   }
 
   List<Widget> _aboutDeveloper(BuildContext context) {
-    double _width = MediaQuery
-        .of(context)
-        .size
-        .width * 0.6 - 29;
+    double _width = MediaQuery.of(context).size.width * 0.6 - 29;
     return [
       Container(
         padding: EdgeInsets.fromLTRB(29, 17, 0, 8),
         child: Text(
           "ABOUT THE DEVELOPER",
-          style: Theme
-              .of(context)
-              .textTheme
-              .caption,
+          style: Theme.of(context).textTheme.caption,
         ),
       ),
       textContainer(
           context: context,
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: c.MainAxisAlignment.spaceAround,
             children: [
               c.Container(
                 width: _width,
                 child: Text(
                   "I'm Hashir, the developer of this app. Feel free to contact me anytime. I love hearing from you",
+                  style: c.TextStyle(fontSize: 17),
                 ),
               ),
               c.Container(
-                child: Text(
-                  "<Image/>",
+                padding: c.EdgeInsets.all(0),
+                margin: c.EdgeInsets.all(0),
+                width: c.MediaQuery
+                    .of(context)
+                    .size
+                    .width / 4,
+                height: c.MediaQuery
+                    .of(context)
+                    .size
+                    .height / 8,
+                decoration: c.BoxDecoration(
+                  color: c.CupertinoColors.black,
+                  shape: c.BoxShape.circle,
+                  image: c.DecorationImage(
+                    image: c.NetworkImage(
+                        "https://avatars0.githubusercontent.com/u/35165481?s=88&u=5e93486587eb4d044df976642823b630e3663070&v=4"),
+                  ),
                 ),
               ),
             ],
