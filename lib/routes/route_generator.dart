@@ -14,7 +14,7 @@ class RouteGenerator {
       case "/":
         return c.CupertinoPageRoute(builder: (context) => HomePage());
       case "/activity":
-        return c.CupertinoPageRoute(builder: (context) => ActivityPage());
+        return c.CupertinoPageRoute(builder: (context) => ActivityPage(args));
       default:
         return c.CupertinoPageRoute(builder: (context) => ErrorPage());
     }

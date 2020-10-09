@@ -44,10 +44,10 @@ class Day extends StatelessWidget {
   void _onTap(context) {
     if (activity == null)
       return;
-    else if (activity.title == null)
+    else if (activity.mood == null)
       bottomSheet(context: context, child: ActivityEditSheetRouteInitializer());
     else
-      Navigator.of(context).pushNamed('/activity');
+      Navigator.of(context).pushNamed('/activity', arguments: activity);
   }
 
   @override
