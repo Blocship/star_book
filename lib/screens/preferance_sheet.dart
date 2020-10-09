@@ -29,13 +29,12 @@ class PreferanceSheet extends StatelessWidget {
       textContainer(
           context: context,
           child: Row(
-            mainAxisAlignment: c.MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               c.Container(
                 width: _width,
                 child: Text(
                   "I'm Hashir, the developer of this app. Feel free to contact me anytime. I love hearing from you",
-                  style: c.TextStyle(fontSize: 17),
                 ),
               ),
               c.Container(
