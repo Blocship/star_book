@@ -1,68 +1,72 @@
-import 'package:flutter/material.dart';
-import 'package:star_book/models/activity.dart';
-import 'package:star_book/utils/dayWidget_size.dart';
-import 'package:star_book/widgets/day_detail.dart';
+import 'package:flutter/cupertino.dart' as c;
+import 'package:flutter/widgets.dart';
+// Files
+import '../models/activity.dart';
+import '../utils/color.dart';
+import '../screens/activity_edit_sheet.dart';
+import '../utils/bottom_sheet.dart';
 
-class DayWidget extends StatelessWidget {
-  DayWidget({@required this.day, this.color, this.onDayPressed});
+class Day extends StatelessWidget {
+  final Activity activity;
 
-  final Activity day;
-  final Color color;
-  final Function onDayPressed;
-  // String diary_text or mood for now,
+  Day({this.activity});
 
-  // builds a day box.
-  Widget _addText(BuildContext context, int _day) {
-    return Text(
-      _day < 1 ? '' : _day.toString(),
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        color: color != null ? Colors.white : Colors.black87,
-        fontSize: 16.0,
-        fontWeight: FontWeight.normal,
-      ),
-    );
+  double _squareSize(context) {
+    // TODO: based on the size of the screen, adjust the size of square.
+    return 43;
   }
 
-  Widget _addTextWithButton(BuildContext context, int _day) {
-    return FlatButton(
-      padding: EdgeInsets.all(0),
-      onPressed: () async {
-        final result = await Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => DayDetailPage(data: day)),
-        );
-        day.mood = result;
-        onDayPressed(day);
-      },
-      child: _addText(context, _day),
-    );
+  String _getText() {
+    if (activity == null)
+      return '';
+    else if (activity.day == null)
+      return '';
+    else
+      return activity.day.toString();
+  }
+
+  Color _getBackgroundColor(BuildContext context) {
+    // if activity.day == null then show white/transparent color
+    if (activity == null)
+      return Color(0x00ffffff);
+    else
+    // get color by sending mood, if not, then it will send default color
+    if (activity.mood != null) {
+      int colorCode = activity.mood.colorCode;
+      return c.CupertinoDynamicColor.resolve(
+          getColor(EColor.values[colorCode]), context);
+    } else {
+      return c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.systemGrey6, context);
+    }
+  }
+
+  void _onTap(context) {
+    if (activity == null)
+      return;
+    else if (activity.title == null)
+      bottomSheet(context: context, child: ActivityEditSheetRouteInitializer());
+    else
+      Navigator.of(context).pushNamed('/activity');
   }
 
   @override
   Widget build(BuildContext context) {
-    final double size = getDayWidgetSize();
-    final int _day = this.day.day;
-    final Color _color = color;
-
-    return Container(
-      width: size,
-      height: size,
-      alignment: Alignment.center,
-      decoration: _color != null
-          ? BoxDecoration(
-              color: _color,
-              borderRadius: BorderRadius.circular(size / 2),
-            )
-          : null,
-      child: SizedBox(
-        width: double.infinity,
-        height: double.infinity,
-        child: _day < 1
-            ? null
-            : onDayPressed == null
-                ? _addText(context, _day)
-                : _addTextWithButton(context, _day),
+    return GestureDetector(
+      onTap: () => _onTap(context),
+      child: Container(
+        height: _squareSize(context),
+        width: _squareSize(context),
+        alignment: Alignment.center,
+        margin: EdgeInsets.all(_squareSize(context) * 0.10),
+        decoration: BoxDecoration(
+            color: _getBackgroundColor(context),
+            borderRadius: BorderRadius.circular(_squareSize(context) / 5)),
+        child: Text(
+          _getText(),
+          // TODO: set color white for colored boxes.
+          style: TextStyle(fontSize: _squareSize(context) * 0.55),
+        ),
       ),
     );
   }

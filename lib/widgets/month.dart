@@ -1,132 +1,90 @@
-import 'package:flutter/material.dart';
-import 'package:star_book/models/activity.dart';
-import 'package:star_book/utils/dates.dart';
-import 'package:star_book/utils/dayWidget_size.dart';
-import 'package:star_book/utils/tag_to_color.dart';
-import 'package:star_book/widgets/day.dart';
-import 'package:star_book/widgets/month_title.dart';
+import 'package:flutter/cupertino.dart' as c;
+import 'package:flutter/widgets.dart';
+// Files
+import '../models/activity.dart';
+import '../utils/date.dart';
+import '../widgets/day.dart';
 
-class MonthWidget extends StatefulWidget {
-  MonthWidget({
-    @required this.context,
-    @required this.year,
+class Month extends c.StatefulWidget {
+  Month({
     @required this.month,
+    @required this.year,
   });
 
-  final BuildContext context;
-  final int year;
   final int month;
-  final Color currentDateColor = Colors.blueGrey;
+  final int year;
 
   @override
-  _MonthWidgetState createState() => _MonthWidgetState();
+  _MonthState createState() => _MonthState();
 }
 
-class _MonthWidgetState extends State<MonthWidget> {
-// the list of highlighted day,
-  // this will be coming from and stored in
-  // database later.
-  List<Activity> highlightedDays = [
-    new Activity(day: 1, mood: "green", story: "I had a very happy day"),
-    new Activity(day: 3, mood: "blue", story: "My day was normal"),
-    new Activity(day: 4, mood: "red", story: "I was very angry today"),
-  ];
+class _MonthState extends c.State<Month> {
+  // TODO: fetch data from database based on the month and year.
+  // using mock data for now
+  final List<Activity> activityList = new List<Activity>.from(mActivityList);
 
-  // onpressed event, calls on pressing on day.
-  // updates the highlighted days list
-  onDayPressed(Activity day) {
-    highlightedDays.removeWhere((d) => d.day == day.day);
-    setState(() {
-      highlightedDays
-          .add(Activity(day: day.day, mood: day.mood, story: day.story));
-    });
-  }
-
-  Activity getHighlightedDay(DateTime date) {
-    Activity hDay;
-    if (highlightedDays != null) {
-      highlightedDays.any((Activity day) {
-        if (date
-            .isAtSameMomentAs(DateTime(widget.year, widget.month, day.day))) {
-          hDay = day;
-          return true;
-        } else {
-          hDay = null;
-          return false;
-        }
-      });
-    }
-    return hDay;
-  }
-
-  Widget buildMonthDays(BuildContext context) {
-    final List<Row> dayRows = <Row>[];
-    final List<DayWidget> dayRowChildren = <DayWidget>[];
-    final int daysInMonth = getDaysInMonth(widget.year, widget.month);
-    final int firstWeekdayOfMonth =
-        DateTime(widget.year, widget.month, 1).weekday;
-
-    for (int day = 2 - firstWeekdayOfMonth; day <= daysInMonth; day++) {
-      DateTime date = DateTime(widget.year, widget.month, day);
-      Activity hDay = getHighlightedDay(date);
-      Color color;
-      if (hDay != null) {
-        color = getColor(hDay.mood);
-      } else {
-        if (isCurrentDate(date)) {
-          color = widget.currentDateColor;
-        }
-      }
-
-      dayRowChildren.add(
-        DayWidget(
-          day: hDay != null ? hDay : Activity(day: day),
-          color: color,
-          onDayPressed: date.isBefore(DateTime.now()) ? onDayPressed : null,
-        ),
-      );
-
-      if ((day - 1 + firstWeekdayOfMonth) % DateTime.daysPerWeek == 0 ||
-          day == daysInMonth) {
-        dayRows.add(
-          Row(
-            children: List<DayWidget>.from(dayRowChildren),
-          ),
-        );
-        dayRowChildren.clear();
-      }
-    }
-
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: dayRows,
+  // As the month and year would be same in activity list and calander, so
+  // just comparing day.
+  Activity _getActivity(int day) {
+    final Activity res = activityList.firstWhere(
+      (element) => element.day == day,
+      orElse: () => new Activity(day: day),
     );
+    return res;
   }
 
-  Widget buildMonthWidget(BuildContext context) {
-    return Container(
-      width: 7 * getDayWidgetSize(),
-      margin: EdgeInsets.zero,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          MonthTitle(
-            month: widget.month,
-            monthNames: null,
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 8.0),
-            child: buildMonthDays(context),
-          ),
-        ],
-      ),
+  Widget _daysGrid(BuildContext context) {
+    final List<Row> dayRowsList = new List<Row>();
+    final List<Day> daysList = new List<Day>();
+
+    final int daysInMonth = getDaysInMonth(widget.year, widget.month);
+    final int fistWeekDay = DateTime(widget.year, widget.month, 1).weekday;
+
+    for (int day = 2 - fistWeekDay; day <= daysInMonth; day++) {
+      if (day <= 0) {
+        daysList.add(new Day());
+      } else {
+        daysList.add(new Day(activity: _getActivity(day)));
+      }
+
+      bool weekDone = (day - 1 + fistWeekDay) % DateTime.daysPerWeek == 0;
+      bool monthDone = day == daysInMonth;
+      if (weekDone || monthDone) {
+        dayRowsList.add(
+          Row(children: List<Day>.from(daysList)),
+        );
+        daysList.clear();
+      }
+    }
+    return Column(
+      children: [MonthTitle(widget.month, widget.year), ...dayRowsList],
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: buildMonthWidget(context),
+      child: _daysGrid(context),
+    );
+  }
+}
+
+class MonthTitle extends StatelessWidget {
+  MonthTitle(this.month, this.year);
+
+  final int month;
+  final int year;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.fromLTRB(14, 10, 0, 10),
+      child: Text(
+        "${getMonthTitle(month)} $year",
+        // style: Theme.of(context).textTheme.headline3),
+        style: c.CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
+      ),
+      alignment: Alignment.centerLeft,
     );
   }
 }
