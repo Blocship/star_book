@@ -16,7 +16,8 @@ class PreferanceSheet extends StatelessWidget {
   }
 
   List<Widget> _aboutDeveloper(BuildContext context) {
-    double _width = MediaQuery.of(context).size.width * 0.6 - 29;
+    double _textWidth = MediaQuery.of(context).size.width * 0.6 - 29;
+    double _imageWidth = MediaQuery.of(context).size.width * 0.4 - 29;
     return [
       Container(
         padding: EdgeInsets.fromLTRB(29, 17, 0, 8),
@@ -31,14 +32,21 @@ class PreferanceSheet extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               c.Container(
-                width: _width,
+                width: _textWidth,
                 child: Text(
                   "I'm Hashir, the developer of this app. Feel free to contact me anytime. I love hearing from you",
                 ),
               ),
               c.Container(
-                child: Text(
-                  "<Image/>",
+                width: _imageWidth,
+                height: _imageWidth,
+                decoration: c.BoxDecoration(
+                  color: c.CupertinoColors.black,
+                  borderRadius: BorderRadius.circular(_imageWidth / 2),
+                  image: c.DecorationImage(
+                    image: c.NetworkImage(
+                        "https://avatars0.githubusercontent.com/u/35165481?s=$_imageWidth + 29"),
+                  ),
                 ),
               ),
             ],
