@@ -11,7 +11,6 @@ class Activity {
     this.title,
     this.note,
   });
-
   int id;
   int day;
   int month;
