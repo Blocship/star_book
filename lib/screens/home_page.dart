@@ -16,7 +16,12 @@ class HomePage extends StatelessWidget {
         trailing: PreferanceButton(),
         border: null,
       ),
-      child: SafeArea(child: Month(month: 10, year: 2020)),
+      child: SafeArea(
+        child: c.Container(
+          padding: c.EdgeInsets.symmetric(horizontal: 12),
+          child: Month(month: 10, year: 2020),
+        ),
+      ),
     );
   }
 }
