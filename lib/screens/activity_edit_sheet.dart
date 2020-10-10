@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 // Files
 import '../routes/route_generator.dart';
 import '../utils/bottom_sheet.dart';
+import '../widgets/action_container.dart';
 
 class ActivityEditSheetRouteInitializer extends StatelessWidget {
   Future<bool> _handlePopScope(BuildContext context) async {
@@ -62,6 +63,12 @@ class ActivityEditSheet extends StatelessWidget {
             context: context,
             child: Text("Date"),
             onTap: null,
+          ),
+          Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+          ActionContainer(
+            text: "Mood",
+            icon: c.CupertinoIcons.right_chevron,
+            onTap: () => Navigator.of(context).pushNamed("/mood"),
           ),
         ],
       ),
