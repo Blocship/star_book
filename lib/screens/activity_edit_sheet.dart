@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 // Files
 import '../routes/route_generator.dart';
+import '../utils/bottom_sheet.dart';
 
 class ActivityEditSheetRouteInitializer extends StatelessWidget {
   Future<bool> _handlePopScope(BuildContext context) async {
@@ -46,7 +47,7 @@ class ActivityEditSheet extends StatelessWidget {
   c.CupertinoNavigationBar _buildNavBar() {
     return c.CupertinoNavigationBar(
       leading: Container(),
-      middle: Text("data"),
+      middle: Text("Edit"),
     );
   }
 
@@ -57,11 +58,11 @@ class ActivityEditSheet extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(padding: EdgeInsets.symmetric(vertical: 18)),
-          GestureDetector(
-              onTap: () {
-                Navigator.of(context).pushNamed("/mood");
-              },
-              child: Text("data"))
+          textContainer(
+            context: context,
+            child: Text("Date"),
+            onTap: null,
+          ),
         ],
       ),
     );
