@@ -12,7 +12,6 @@ class Day extends StatelessWidget {
   Day({this.activity});
 
   double _squareSize(context) {
-    // TODO: based on the size of the screen, adjust the size of square.
     return c.MediaQuery.of(context).size.width / 9;
   }
 
