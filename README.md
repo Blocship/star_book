@@ -101,7 +101,9 @@ The App is under development. Are you interested in building and contributing to
 
 App is under development. For now it is like this. With your help we will add more features and functionalities.
 
-![Demo gif](READMEdocs/demo5.gif)
+| Light Mode                                               | Dark Mode                                              |   
+|:--------------------------------------------------------:|:------------------------------------------------------:|
+| <img src="READMEdocs/demo-light.gif" width="380" ></img> | <img src="READMEdocs/demo-dark.gif" width="380"></img> |
 
 <!-- LICENSE -->
 
