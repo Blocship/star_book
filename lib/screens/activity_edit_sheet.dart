@@ -70,6 +70,26 @@ class ActivityEditSheet extends StatelessWidget {
             icon: c.CupertinoIcons.right_chevron,
             onTap: () => Navigator.of(context).pushNamed("/mood"),
           ),
+          Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+          textContainer(
+            context: context,
+            child: c.CupertinoTextField(
+              placeholder: "Title",
+              decoration: null,
+              cursorColor: Color.fromARGB(255, 0, 0, 0),
+              onTap: null,
+            ),
+          ),
+          Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+          textContainer(
+            context: context,
+            child: c.CupertinoTextField(
+              placeholder: "Note",
+              decoration: null,
+              cursorColor: Color.fromARGB(255, 0, 0, 0),
+              onTap: null,
+            ),
+          ),
         ],
       ),
     );
