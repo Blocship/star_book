@@ -44,7 +44,29 @@ class ActivityEditSheetRouteInitializer extends StatelessWidget {
   }
 }
 
-class ActivityEditSheet extends StatelessWidget {
+class ActivityEditSheet extends c.StatefulWidget {
+  @override
+  _ActivityEditSheetState createState() => _ActivityEditSheetState();
+}
+
+class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
+  @override
+  void initState() {
+    super.initState();
+    titleController.addListener(test);
+    noteController.addListener(test);
+  }
+
+  final titleController = TextEditingController();
+  final noteController = TextEditingController();
+
+  // TODO: function is just to test the controller listener.
+  // this will have no use in future.
+  void test() {
+    print(titleController.text);
+    print(noteController.text);
+  }
+
   Widget _buildNavBar() {
     return c.CupertinoNavigationBar(
       leading: Container(),
@@ -75,10 +97,10 @@ class ActivityEditSheet extends StatelessWidget {
             textContainer(
               context: context,
               child: c.CupertinoTextField(
+                controller: titleController,
                 placeholder: "Title",
                 decoration: null,
                 maxLines: 1,
-                cursorColor: Color.fromARGB(255, 0, 0, 0),
                 onTap: null,
               ),
             ),
@@ -86,12 +108,12 @@ class ActivityEditSheet extends StatelessWidget {
             textContainer(
               context: context,
               child: c.CupertinoTextField(
+                controller: noteController,
                 placeholder: "Note",
                 decoration: null,
                 maxLines: null,
                 minLines: 4,
                 keyboardType: TextInputType.multiline,
-                cursorColor: Color.fromARGB(255, 0, 0, 0),
                 onTap: null,
               ),
             ),
@@ -108,5 +130,12 @@ class ActivityEditSheet extends StatelessWidget {
       navigationBar: _buildNavBar(),
       child: _buildBody(context),
     );
+  }
+
+  @override
+  void dispose() {
+    titleController.dispose();
+    noteController.dispose();
+    super.dispose();
   }
 }
