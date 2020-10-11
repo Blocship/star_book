@@ -45,52 +45,58 @@ class ActivityEditSheetRouteInitializer extends StatelessWidget {
 }
 
 class ActivityEditSheet extends StatelessWidget {
-  c.CupertinoNavigationBar _buildNavBar() {
+  Widget _buildNavBar() {
     return c.CupertinoNavigationBar(
       leading: Container(),
       middle: Text("Edit"),
     );
   }
 
-  c.SafeArea _buildBody(BuildContext context) {
-    return SafeArea(
-      // minimum: EdgeInsets.symmetric(horizontal: 16),
-      child: c.Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(padding: EdgeInsets.symmetric(vertical: 18)),
-          textContainer(
-            context: context,
-            child: Text("Date"),
-            onTap: null,
-          ),
-          Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-          ActionContainer(
-            text: "Mood",
-            icon: c.CupertinoIcons.right_chevron,
-            onTap: () => Navigator.of(context).pushNamed("/mood"),
-          ),
-          Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-          textContainer(
-            context: context,
-            child: c.CupertinoTextField(
-              placeholder: "Title",
-              decoration: null,
-              cursorColor: Color.fromARGB(255, 0, 0, 0),
+  Widget _buildBody(BuildContext context) {
+    return c.SingleChildScrollView(
+      child: SafeArea(
+        // minimum: EdgeInsets.symmetric(horizontal: 16),
+        child: c.Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+            textContainer(
+              context: context,
+              child: Text("Date"),
               onTap: null,
             ),
-          ),
-          Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-          textContainer(
-            context: context,
-            child: c.CupertinoTextField(
-              placeholder: "Note",
-              decoration: null,
-              cursorColor: Color.fromARGB(255, 0, 0, 0),
-              onTap: null,
+            Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+            ActionContainer(
+              text: "Mood",
+              icon: c.CupertinoIcons.right_chevron,
+              onTap: () => Navigator.of(context).pushNamed("/mood"),
             ),
-          ),
-        ],
+            Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+            textContainer(
+              context: context,
+              child: c.CupertinoTextField(
+                placeholder: "Title",
+                decoration: null,
+                maxLines: 1,
+                cursorColor: Color.fromARGB(255, 0, 0, 0),
+                onTap: null,
+              ),
+            ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+            textContainer(
+              context: context,
+              child: c.CupertinoTextField(
+                placeholder: "Note",
+                decoration: null,
+                maxLines: null,
+                minLines: 4,
+                keyboardType: TextInputType.multiline,
+                cursorColor: Color.fromARGB(255, 0, 0, 0),
+                onTap: null,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
