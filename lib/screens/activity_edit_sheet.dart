@@ -71,6 +71,7 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
     return c.CupertinoNavigationBar(
       leading: Container(),
       middle: Text("Edit"),
+      trailing: Text("Done"),
     );
   }
 
