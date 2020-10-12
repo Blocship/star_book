@@ -67,3 +67,6 @@ Websites that helped me in making this project through out.
 - https://medium.com/flutter/learning-flutters-new-navigation-and-routing-system-7c9068155ade
 - https://www.youtube.com/watch?v=nyvwx7o277U
 - https://developer.apple.com/design/human-interface-guidelines/ios/visual-design/color/
+- https://api.flutter.dev/flutter/widgets/TextEditingController-class.html
+- https://flutter.dev/docs/cookbook/forms/text-field-changes
+- https://api.flutter.dev/flutter/cupertino/CupertinoTextField-class.html
