@@ -41,7 +41,6 @@ class PreferanceSheet extends StatelessWidget {
                 width: _imageWidth,
                 height: _imageWidth,
                 decoration: c.BoxDecoration(
-                  color: c.CupertinoColors.black,
                   borderRadius: BorderRadius.circular(_imageWidth / 2),
                   image: c.DecorationImage(
                     image: c.NetworkImage(
