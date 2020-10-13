@@ -6,7 +6,23 @@ import '../utils/bottom_sheet.dart';
 import '../widgets/month.dart';
 import '../styles/style.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int month;
+  int year;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    month = 10;
+    year = 2020;
+  }
+
   @override
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
@@ -17,9 +33,33 @@ class HomePage extends StatelessWidget {
         border: null,
       ),
       child: SafeArea(
-        child: c.Container(
-          padding: c.EdgeInsets.symmetric(horizontal: 12),
-          child: Month(month: 10, year: 2020),
+        child: c.GestureDetector(
+          onHorizontalDragEnd: (value) {
+            // Drags Left
+            if (value.primaryVelocity.isNegative) {
+              if (month == 12) {
+                month = 1;
+                year++;
+              } else {
+                month++;
+              }
+              setState(() {});
+            }
+            // Drags Right
+            else if (!value.primaryVelocity.isNegative) {
+              if (month == 1) {
+                month = 12;
+                year--;
+              } else {
+                month--;
+              }
+              setState(() {});
+            }
+          },
+          child: c.Container(
+            padding: c.EdgeInsets.symmetric(horizontal: 12),
+            child: Month(month: month, year: year),
+          ),
         ),
       ),
     );
