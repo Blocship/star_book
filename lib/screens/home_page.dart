@@ -23,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     year = 2020;
   }
 
-  void onDrag(var value) {
+  void onHorizontalDragEnd(c.DragEndDetails value) {
     // Drags Left
     if (value.primaryVelocity.isNegative) {
       if (month == 12) {
@@ -57,9 +57,7 @@ class _HomePageState extends State<HomePage> {
       ),
       child: SafeArea(
         child: c.GestureDetector(
-          onHorizontalDragEnd: (value) {
-            onDrag(value);
-          },
+          onHorizontalDragEnd: onHorizontalDragEnd,
           child: c.Container(
             padding: c.EdgeInsets.symmetric(horizontal: 12),
             child: Month(month: month, year: year),
