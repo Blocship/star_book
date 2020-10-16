@@ -3,8 +3,6 @@ import 'package:flutter/widgets.dart';
 // Files
 import '../models/activity.dart';
 import '../utils/color.dart';
-import '../screens/activity_edit_sheet.dart';
-import '../utils/bottom_sheet.dart';
 
 class Day extends StatelessWidget {
   final Activity activity;
@@ -44,7 +42,7 @@ class Day extends StatelessWidget {
     if (activity == null)
       return;
     else if (activity.mood == null)
-      bottomSheet(context: context, child: ActivityEditSheetRouteInitializer());
+      Navigator.of(context).pushNamed("/edit", arguments: activity);
     else
       Navigator.of(context).pushNamed('/activity', arguments: activity);
   }
