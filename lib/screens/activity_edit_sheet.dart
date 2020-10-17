@@ -13,27 +13,28 @@ class ActivityEditSheetRouteInitializer extends StatelessWidget {
 
   Future<bool> _handlePopScope(BuildContext context) async {
     bool shouldClose = true;
-    await c.showCupertinoDialog(
-        context: context,
-        builder: (context) => c.CupertinoAlertDialog(
-              title: Text('Should Close Activity Edit Sheet?}'),
-              actions: <Widget>[
-                c.CupertinoButton(
-                  child: Text('Yes'),
-                  onPressed: () {
-                    shouldClose = true;
-                    Navigator.of(context).pop();
-                  },
-                ),
-                c.CupertinoButton(
-                  child: Text('No'),
-                  onPressed: () {
-                    shouldClose = false;
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ));
+    await c.showCupertinoModalPopup(
+      context: context,
+      builder: (context) => c.CupertinoActionSheet(
+        actions: [
+          c.CupertinoActionSheetAction(
+            onPressed: () {
+              shouldClose = true;
+              Navigator.of(context).pop();
+            },
+            child: Text("Discard Changes"),
+            isDestructiveAction: true,
+          ),
+        ],
+        cancelButton: c.CupertinoActionSheetAction(
+          onPressed: () {
+            shouldClose = false;
+            Navigator.of(context).pop();
+          },
+          child: Text("Cancel"),
+        ),
+      ),
+    );
     return shouldClose;
   }
 
