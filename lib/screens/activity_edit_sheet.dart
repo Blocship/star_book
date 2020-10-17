@@ -80,8 +80,14 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
   Widget _buildNavBar() {
     return c.CupertinoNavigationBar(
       leading: Container(),
-      middle: Text("Edit"),
-      trailing: Text("Done"),
+      middle: Text("Add/Edit"),
+      trailing: GestureDetector(
+        onTap: () {
+          // TODO: fix error
+          Navigator.of(context).pop();
+        },
+        child: Text("Done"),
+      ),
     );
   }
 
