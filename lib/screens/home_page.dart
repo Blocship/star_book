@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart' as c;
+import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/widgets.dart';
 // Files
 import '../widgets/month.dart';
-import '../styles/style.dart';
+// import '../styles/style.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -77,7 +78,7 @@ class PreferanceButton extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTap(context),
       child: Icon(
-        CupertinoIcons.preferanceIcon,
+        c.CupertinoIcons.bars,
         color: c.CupertinoDynamicColor.resolve(
           c.CupertinoColors.label,
           context,
