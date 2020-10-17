@@ -4,31 +4,37 @@ import 'package:flutter/widgets.dart';
 import '../routes/route_generator.dart';
 import '../utils/bottom_sheet.dart';
 import '../widgets/action_container.dart';
+import '../models/activity.dart';
 
 class ActivityEditSheetRouteInitializer extends StatelessWidget {
+  ActivityEditSheetRouteInitializer(this.activity);
+
+  final Activity activity;
+
   Future<bool> _handlePopScope(BuildContext context) async {
-    bool shouldClose = true;
-    await c.showCupertinoDialog(
-        context: context,
-        builder: (context) => c.CupertinoAlertDialog(
-              title: Text('Should Close Activity Edit Sheet?'),
-              actions: <Widget>[
-                c.CupertinoButton(
-                  child: Text('Yes'),
-                  onPressed: () {
-                    shouldClose = true;
-                    Navigator.of(context).pop();
-                  },
-                ),
-                c.CupertinoButton(
-                  child: Text('No'),
-                  onPressed: () {
-                    shouldClose = false;
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            ));
+    bool shouldClose = false;
+    await c.showCupertinoModalPopup(
+      context: context,
+      builder: (context) => c.CupertinoActionSheet(
+        actions: [
+          c.CupertinoActionSheetAction(
+            onPressed: () {
+              shouldClose = true;
+              Navigator.of(context).pop();
+            },
+            child: Text("Discard Changes"),
+            isDestructiveAction: true,
+          ),
+        ],
+        cancelButton: c.CupertinoActionSheetAction(
+          onPressed: () {
+            shouldClose = false;
+            Navigator.of(context).pop();
+          },
+          child: Text("Cancel"),
+        ),
+      ),
+    );
     return shouldClose;
   }
 
@@ -38,13 +44,18 @@ class ActivityEditSheetRouteInitializer extends StatelessWidget {
       onWillPop: () => _handlePopScope(context),
       child: Navigator(
         initialRoute: '/edit',
-        onGenerateRoute: (settings) => RouteGenerator.activityRoute(settings),
+        onGenerateRoute: (settings) =>
+            RouteGenerator.activityRoute(settings, activity),
       ),
     );
   }
 }
 
 class ActivityEditSheet extends c.StatefulWidget {
+  ActivityEditSheet(this.activity);
+
+  final Activity activity;
+
   @override
   _ActivityEditSheetState createState() => _ActivityEditSheetState();
 }
@@ -70,8 +81,14 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
   Widget _buildNavBar() {
     return c.CupertinoNavigationBar(
       leading: Container(),
-      middle: Text("Edit"),
-      trailing: Text("Done"),
+      middle: Text("Add/Edit"),
+      trailing: GestureDetector(
+        onTap: () {
+          // TODO: fix error
+          Navigator.of(context).pop();
+        },
+        child: Text("Done"),
+      ),
     );
   }
 

@@ -1,10 +1,9 @@
 import 'package:flutter/cupertino.dart' as c;
+import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/widgets.dart';
 // Files
-import '../screens/preferance_sheet.dart';
-import '../utils/bottom_sheet.dart';
 import '../widgets/month.dart';
-import '../styles/style.dart';
+// import '../styles/style.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -70,7 +69,7 @@ class _HomePageState extends State<HomePage> {
 
 class PreferanceButton extends StatelessWidget {
   final Function onTap = (context) {
-    bottomSheet(context: context, child: PreferanceSheet());
+    Navigator.of(context).pushNamed("/preferance");
     return null;
   };
 
@@ -79,7 +78,7 @@ class PreferanceButton extends StatelessWidget {
     return GestureDetector(
       onTap: () => onTap(context),
       child: Icon(
-        CupertinoIcons.preferanceIcon,
+        c.CupertinoIcons.bars,
         color: c.CupertinoDynamicColor.resolve(
           c.CupertinoColors.label,
           context,
