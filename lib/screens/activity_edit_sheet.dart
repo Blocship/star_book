@@ -12,7 +12,7 @@ class ActivityEditSheetRouteInitializer extends StatelessWidget {
   final Activity activity;
 
   Future<bool> _handlePopScope(BuildContext context) async {
-    bool shouldClose = true;
+    bool shouldClose = false;
     await c.showCupertinoModalPopup(
       context: context,
       builder: (context) => c.CupertinoActionSheet(
