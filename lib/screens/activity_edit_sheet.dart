@@ -43,7 +43,7 @@ class ActivityEditSheetRouteInitializer extends StatelessWidget {
     return WillPopScope(
       onWillPop: () => _handlePopScope(context),
       child: Navigator(
-        initialRoute: '/edit',
+        initialRoute: 'edit/title',
         onGenerateRoute: (settings) =>
             RouteGenerator.activityRoute(settings, activity),
       ),
@@ -108,7 +108,7 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
             ActionContainer(
               text: "Mood",
               icon: c.CupertinoIcons.right_chevron,
-              onTap: () => Navigator.of(context).pushNamed("/mood"),
+              onTap: () => Navigator.of(context).pushNamed("edit/mood"),
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 8)),
             textContainer(

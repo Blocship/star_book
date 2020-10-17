@@ -45,11 +45,11 @@ class RouteGenerator {
   ) {
     final args = settings.arguments;
     switch (settings.name) {
-      case "/edit":
+      case "edit/title":
         return MaterialWithModalsPageRoute(
           builder: (context) => ActivityEditSheet(activity),
         );
-      case "/mood":
+      case "edit/mood":
         return MaterialWithModalsPageRoute(
           builder: (context) => MoodSheet(),
         );
