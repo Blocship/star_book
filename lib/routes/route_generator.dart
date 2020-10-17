@@ -30,7 +30,7 @@ class RouteGenerator {
       case "/edit":
         return ModalBottomSheetRouteWrapper(
           builder: (context, controller) =>
-              ActivityEditSheetRouteInitializer(args),
+              ActivitiyEditSheetRouteInitializer(args),
         );
       default:
         return MaterialWithModalsPageRoute(
@@ -47,7 +47,7 @@ class RouteGenerator {
     switch (settings.name) {
       case "/edit":
         return MaterialWithModalsPageRoute(
-          builder: (context) => ActivityEditSheet(activity),
+          builder: (context) => ActivitiyEditSheetRouteInitializer(activity),
         );
       case "/mood":
         return MaterialWithModalsPageRoute(

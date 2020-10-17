@@ -1,15 +1,40 @@
 import 'package:flutter/cupertino.dart' as c;
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:star_book/screens/home_page.dart';
 // Files
 import '../routes/route_generator.dart';
 import '../utils/bottom_sheet.dart';
 import '../widgets/action_container.dart';
 import '../models/activity.dart';
 
-class ActivityEditSheetRouteInitializer extends StatelessWidget {
-  ActivityEditSheetRouteInitializer(this.activity);
-
+class ActivitiyEditSheetRouteInitializer extends StatefulWidget {
+  @override
   final Activity activity;
+
+  const ActivitiyEditSheetRouteInitializer(this.activity);
+
+  _ActivitiyEditSheetRouteInitializer createState() =>
+      _ActivitiyEditSheetRouteInitializer();
+}
+
+class _ActivitiyEditSheetRouteInitializer
+    extends State<ActivitiyEditSheetRouteInitializer> {
+  final titleController = TextEditingController();
+  final noteController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    titleController.addListener(test);
+    noteController.addListener(test);
+  }
+
+  void test() {
+    print(titleController.text);
+    print(noteController.text);
+  }
 
   Future<bool> _handlePopScope(BuildContext context) async {
     bool shouldClose = true;
@@ -35,46 +60,6 @@ class ActivityEditSheetRouteInitializer extends StatelessWidget {
               ],
             ));
     return shouldClose;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => _handlePopScope(context),
-      child: Navigator(
-        initialRoute: '/edit',
-        onGenerateRoute: (settings) =>
-            RouteGenerator.activityRoute(settings, activity),
-      ),
-    );
-  }
-}
-
-class ActivityEditSheet extends c.StatefulWidget {
-  ActivityEditSheet(this.activity);
-
-  final Activity activity;
-
-  @override
-  _ActivityEditSheetState createState() => _ActivityEditSheetState();
-}
-
-class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
-  @override
-  void initState() {
-    super.initState();
-    titleController.addListener(test);
-    noteController.addListener(test);
-  }
-
-  final titleController = TextEditingController();
-  final noteController = TextEditingController();
-
-  // TODO: function is just to test the controller listener.
-  // this will have no use in future.
-  void test() {
-    print(titleController.text);
-    print(noteController.text);
   }
 
   Widget _buildNavBar() {
@@ -142,10 +127,13 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
 
   @override
   Widget build(BuildContext context) {
-    return c.CupertinoPageScaffold(
-      backgroundColor: c.CupertinoColors.systemGroupedBackground,
-      navigationBar: _buildNavBar(),
-      child: _buildBody(context),
+    return WillPopScope(
+      onWillPop: () => _handlePopScope(context),
+      child: c.CupertinoPageScaffold(
+        backgroundColor: c.CupertinoColors.systemGroupedBackground,
+        navigationBar: _buildNavBar(),
+        child: _buildBody(context),
+      ),
     );
   }
 
