@@ -84,8 +84,7 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
       middle: Text("Add/Edit"),
       trailing: GestureDetector(
         onTap: () {
-          // TODO: fix error
-          Navigator.of(context).pop();
+          Navigator.of(context, rootNavigator: true).pop();
         },
         child: Text("Done"),
       ),
