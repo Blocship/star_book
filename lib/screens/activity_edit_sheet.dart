@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 // Files
 import '../routes/route_generator.dart';
-import '../utils/bottom_sheet.dart';
 import '../widgets/action_container.dart';
 import '../models/activity.dart';
+import '../widgets/my_container.dart';
 
 class ActivityEditSheetRouteInitializer extends StatelessWidget {
   ActivityEditSheetRouteInitializer(this.activity);
@@ -99,8 +99,7 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(padding: EdgeInsets.symmetric(vertical: 18)),
-            textContainer(
-              context: context,
+            MyContainer(
               child: Text("Date"),
               onTap: null,
             ),
@@ -111,8 +110,7 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
               onTap: () => Navigator.of(context).pushNamed("edit/mood"),
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-            textContainer(
-              context: context,
+            MyContainer(
               child: c.CupertinoTextField(
                 controller: titleController,
                 placeholder: "Title",
@@ -122,8 +120,7 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
               ),
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-            textContainer(
-              context: context,
+            MyContainer(
               child: c.CupertinoTextField(
                 controller: noteController,
                 placeholder: "Note",

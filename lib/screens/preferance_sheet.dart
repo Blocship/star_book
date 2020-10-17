@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/material.dart' show Theme;
 import 'package:flutter/widgets.dart';
+import 'package:star_book/widgets/my_container.dart';
 import 'package:url_launcher/url_launcher.dart';
 // Files
 import '../utils/bottom_sheet.dart';
@@ -26,30 +27,29 @@ class PreferanceSheet extends StatelessWidget {
           style: Theme.of(context).textTheme.caption,
         ),
       ),
-      textContainer(
-          context: context,
+      MyContainer(
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              c.Container(
-                width: _textWidth,
-                child: Text(
-                  "I'm Hashir, the developer of this app. Feel free to contact me anytime. I love hearing from you",
-                ),
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          c.Container(
+            width: _textWidth,
+            child: Text(
+              "I'm Hashir, the developer of this app. Feel free to contact me anytime. I love hearing from you",
+            ),
+          ),
+          c.Container(
+            width: _imageWidth,
+            height: _imageWidth,
+            decoration: c.BoxDecoration(
+              borderRadius: BorderRadius.circular(_imageWidth / 2),
+              image: c.DecorationImage(
+                image: c.NetworkImage(
+                    "https://avatars0.githubusercontent.com/u/35165481?s=$_imageWidth + 29"),
               ),
-              c.Container(
-                width: _imageWidth,
-                height: _imageWidth,
-                decoration: c.BoxDecoration(
-                  borderRadius: BorderRadius.circular(_imageWidth / 2),
-                  image: c.DecorationImage(
-                    image: c.NetworkImage(
-                        "https://avatars0.githubusercontent.com/u/35165481?s=$_imageWidth + 29"),
-                  ),
-                ),
-              ),
-            ],
-          ))
+            ),
+          ),
+        ],
+      ))
     ];
   }
 
