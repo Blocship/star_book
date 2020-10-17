@@ -4,28 +4,6 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Colors;
 
-// Cupertino style text container
-Widget textContainer({
-  Widget child,
-  Function onTap,
-  @required BuildContext context,
-}) {
-  return GestureDetector(
-    onTap: onTap != null ? onTap : null,
-    child: Container(
-        margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-        padding: EdgeInsets.fromLTRB(13, 15, 13, 12),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6),
-          color: c.CupertinoDynamicColor.resolve(
-            c.CupertinoColors.secondarySystemGroupedBackground,
-            context,
-          ),
-        ),
-        child: child),
-  );
-}
-
 CupertinoModalBottomSheetRoute<dynamic> ModalBottomSheetRouteWrapper(
     {Widget Function(BuildContext, ScrollController) builder}) {
   return CupertinoModalBottomSheetRoute<dynamic>(
