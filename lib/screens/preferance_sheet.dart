@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart' as c;
-import 'package:flutter/material.dart' show Theme;
 import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 // Files
 import '../widgets/action_container.dart';
 import '../widgets/my_container.dart';
+import '../styles/style.dart';
 
 class PreferanceSheet extends StatelessWidget {
   c.CupertinoNavigationBar _buildNavBar() {
@@ -23,7 +23,7 @@ class PreferanceSheet extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(29, 17, 0, 8),
         child: Text(
           "ABOUT THE DEVELOPER",
-          style: Theme.of(context).textTheme.caption,
+          style: Style.footerNoteStyle(context),
         ),
       ),
       MyContainer(

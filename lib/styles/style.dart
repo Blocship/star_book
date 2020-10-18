@@ -1,22 +1,27 @@
 import 'package:flutter/cupertino.dart' as c;
+import 'package:flutter/widgets.dart';
 
 abstract class Style {
-  // static fileds for common styling
-  // static const TextStyle productRowItemName = TextStyle(
-  //   color: Color.fromRGBO(0, 0, 0, 0.8),
-  //   fontSize: 18,
-  //   fontStyle: FontStyle.normal,
-  //   fontWeight: FontWeight.normal,
-  // );
+  /// Cupertino, Footer Note Text Style
+  static TextStyle footerNoteStyle(BuildContext context) {
+    return TextStyle(
+      color: c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.secondaryLabel, context),
+      fontWeight: FontWeight.w400,
+      fontFamily: "SFProText",
+      fontStyle: FontStyle.normal,
+      fontSize: 13.0,
+    );
+  }
 }
 
 // Cupertino Icons which are not in cupertino_icons package
-abstract class CupertinoIcons {
-  // Icons._();
+// abstract class CupertinoIcons {
+//   // Icons._();
 
-  static const c.IconData preferanceIcon = c.IconData(
-    0xf38b,
-    fontFamily: c.CupertinoIcons.iconFont,
-    fontPackage: c.CupertinoIcons.iconFontPackage,
-  );
-}
+//   static const c.IconData preferanceIcon = c.IconData(
+//     0xf38b,
+//     fontFamily: c.CupertinoIcons.iconFont,
+//     fontPackage: c.CupertinoIcons.iconFontPackage,
+//   );
+// }
