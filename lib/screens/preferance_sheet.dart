@@ -1,11 +1,10 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/material.dart' show Theme;
 import 'package:flutter/widgets.dart';
-import 'package:star_book/widgets/my_container.dart';
 import 'package:url_launcher/url_launcher.dart';
 // Files
-import '../utils/bottom_sheet.dart';
 import '../widgets/action_container.dart';
+import '../widgets/my_container.dart';
 
 class PreferanceSheet extends StatelessWidget {
   c.CupertinoNavigationBar _buildNavBar() {
@@ -31,23 +30,22 @@ class PreferanceSheet extends StatelessWidget {
           child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          c.Container(
+          Container(
             width: _textWidth,
             child: Text(
               "I'm Hashir, the developer of this app. Feel free to contact me anytime. I love hearing from you",
             ),
           ),
-          // c.Container(
-          //   width: _imageWidth,
-          //   height: _imageWidth,
-          //   decoration: c.BoxDecoration(
-          //     borderRadius: BorderRadius.circular(_imageWidth / 2),
-          //     image: c.DecorationImage(
-          //       image: c.NetworkImage(
-          //           "https://avatars0.githubusercontent.com/u/35165481?s=$_imageWidth + 29"),
-          //     ),
-          //   ),
-          // ),
+          Container(
+            width: _imageWidth,
+            height: _imageWidth,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(_imageWidth / 2),
+              image: DecorationImage(
+                image: AssetImage("dev-profile.jpeg"),
+              ),
+            ),
+          ),
         ],
       ))
     ];
@@ -56,7 +54,7 @@ class PreferanceSheet extends StatelessWidget {
   c.SafeArea _buildBody(BuildContext context) {
     return SafeArea(
       // minimum: EdgeInsets.symmetric(horizontal: 16),
-      child: c.Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(padding: EdgeInsets.symmetric(vertical: 18)),
