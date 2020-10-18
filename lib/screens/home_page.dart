@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart' as c;
-import 'package:cupertino_icons/cupertino_icons.dart';
 import 'package:flutter/widgets.dart';
+import 'package:star_book/models/activity.dart';
+import 'package:star_book/models/mood.dart';
 // Files
 import '../widgets/month.dart';
 // import '../styles/style.dart';
@@ -13,6 +14,13 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int month;
   int year;
+
+  // TODO: fetch data from database based on the month and year.
+  // using mock data for now
+  final List<Activity> activityList = new List<Activity>.from(mActivityList);
+  // TODO: fetch data from database based.
+  // using mock data for now
+  final List<Mood> moodList = new List<Mood>.from(mMoodList);
 
   @override
   void initState() {
@@ -59,7 +67,11 @@ class _HomePageState extends State<HomePage> {
           onHorizontalDragEnd: onHorizontalDragEnd,
           child: c.Container(
             padding: c.EdgeInsets.symmetric(horizontal: 12),
-            child: Month(month: month, year: year),
+            child: Month(
+              month: month,
+              year: year,
+              activityList: activityList,
+            ),
           ),
         ),
       ),
