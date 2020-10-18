@@ -24,7 +24,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     month = 10;
     year = 2020;
