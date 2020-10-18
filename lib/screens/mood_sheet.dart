@@ -25,7 +25,7 @@ class MoodSheet extends StatelessWidget {
               text: e.label,
               color: getColor(EColor.values[e.colorCode]),
               onTap: () {
-                Navigator.of(context).pop();
+                Navigator.of(context).pop(e.id);
               },
               //TODO: pass the color id which is picked
             );
