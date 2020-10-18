@@ -9,24 +9,22 @@ class Month extends c.StatefulWidget {
   Month({
     @required this.month,
     @required this.year,
+    @required this.activityList,
   });
 
   final int month;
   final int year;
+  final List<Activity> activityList;
 
   @override
   _MonthState createState() => _MonthState();
 }
 
 class _MonthState extends c.State<Month> {
-  // TODO: fetch data from database based on the month and year.
-  // using mock data for now
-  final List<Activity> activityList = new List<Activity>.from(mActivityList);
-
   // As the month and year would be same in activity list and calander, so
   // just comparing day.
   Activity _getActivity(int day) {
-    final Activity res = activityList.firstWhere(
+    final Activity res = widget.activityList.firstWhere(
       (element) => element.day == day,
       orElse: () =>
           new Activity(day: day, month: widget.month, year: widget.year),

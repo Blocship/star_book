@@ -28,8 +28,8 @@ class Day extends StatelessWidget {
       return Color(0x00ffffff);
     else
     // get color by sending mood, if not, then it will send default color
-    if (activity.mood != null) {
-      int colorCode = activity.mood.colorCode;
+    if (activity.moodId != null) {
+      int colorCode = activity.moodId;
       return c.CupertinoDynamicColor.resolve(
           getColor(EColor.values[colorCode]), context);
     } else {
@@ -41,7 +41,7 @@ class Day extends StatelessWidget {
   void _onTap(context) {
     if (activity == null)
       return;
-    else if (activity.mood == null)
+    else if (activity.moodId == null)
       Navigator.of(context).pushNamed("/edit", arguments: activity);
     else
       Navigator.of(context).pushNamed('/activity', arguments: activity);
