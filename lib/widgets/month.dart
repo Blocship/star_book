@@ -28,7 +28,8 @@ class _MonthState extends c.State<Month> {
   Activity _getActivity(int day) {
     final Activity res = activityList.firstWhere(
       (element) => element.day == day,
-      orElse: () => new Activity(day: day),
+      orElse: () =>
+          new Activity(day: day, month: widget.month, year: widget.year),
     );
     return res;
   }

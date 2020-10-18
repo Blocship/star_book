@@ -61,21 +61,25 @@ class ActivityEditSheet extends c.StatefulWidget {
 }
 
 class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
+  Activity activity;
   @override
   void initState() {
     super.initState();
-    titleController.addListener(test);
-    noteController.addListener(test);
+    // TODO: Shallow clone to deep clone
+    activity = widget.activity;
+    titleController.addListener(onTitleChange);
+    noteController.addListener(onNoteChange);
   }
 
   final titleController = TextEditingController();
   final noteController = TextEditingController();
 
-  // TODO: function is just to test the controller listener.
-  // this will have no use in future.
-  void test() {
-    print(titleController.text);
-    print(noteController.text);
+  void onTitleChange() {
+    this.activity.title = titleController.text;
+  }
+
+  void onNoteChange() {
+    this.activity.note = noteController.text;
   }
 
   Widget _buildNavBar() {
@@ -100,7 +104,14 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
           children: [
             Padding(padding: EdgeInsets.symmetric(vertical: 18)),
             MyContainer(
-              child: Text("Date"),
+              child: c.Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Date"),
+                  Text(
+                      "${activity.day.toString()} / ${activity.month.toString()} / ${activity.year.toString()}"),
+                ],
+              ),
               onTap: null,
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 8)),
