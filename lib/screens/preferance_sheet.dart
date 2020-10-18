@@ -37,17 +37,17 @@ class PreferanceSheet extends StatelessWidget {
               "I'm Hashir, the developer of this app. Feel free to contact me anytime. I love hearing from you",
             ),
           ),
-          c.Container(
-            width: _imageWidth,
-            height: _imageWidth,
-            decoration: c.BoxDecoration(
-              borderRadius: BorderRadius.circular(_imageWidth / 2),
-              image: c.DecorationImage(
-                image: c.NetworkImage(
-                    "https://avatars0.githubusercontent.com/u/35165481?s=$_imageWidth + 29"),
-              ),
-            ),
-          ),
+          // c.Container(
+          //   width: _imageWidth,
+          //   height: _imageWidth,
+          //   decoration: c.BoxDecoration(
+          //     borderRadius: BorderRadius.circular(_imageWidth / 2),
+          //     image: c.DecorationImage(
+          //       image: c.NetworkImage(
+          //           "https://avatars0.githubusercontent.com/u/35165481?s=$_imageWidth + 29"),
+          //     ),
+          //   ),
+          // ),
         ],
       ))
     ];
@@ -78,8 +78,11 @@ class PreferanceSheet extends StatelessWidget {
             onTap: () async {
               String url =
                   "https://github.com/hashirshoaeb/star_book/blob/master/LICENSE";
-              if (await canLaunch(url)) await launch(url);
-              // else TODO: handle exception
+              try {
+                if (await canLaunch(url)) await launch(url);
+              } catch (e) {
+                // print("Url Exception , ${e.toString()}");
+              }
             },
           ),
         ],
