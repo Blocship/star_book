@@ -118,7 +118,11 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
             ActionContainer(
               text: "Mood",
               icon: c.CupertinoIcons.right_chevron,
-              onTap: () => Navigator.of(context).pushNamed("edit/mood"),
+              onTap: () async {
+                dynamic moodId =
+                    await Navigator.of(context).pushNamed("edit/mood");
+                activity.moodId = moodId;
+              },
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 8)),
             MyContainer(
