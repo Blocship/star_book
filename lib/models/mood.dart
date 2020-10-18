@@ -1,6 +1,7 @@
 // Files
 import '../utils/color.dart';
 
+/// Data Type Mood
 class Mood {
   Mood({
     this.id,
@@ -12,6 +13,7 @@ class Mood {
   int colorCode;
 }
 
+/// Mock list of Moods
 List<Mood> mMoodList = new List<Mood>()
   ..add(Mood(id: 0, label: "Happy", colorCode: EColor.systemBlue.index))
   ..add(Mood(id: 1, label: "Sad", colorCode: EColor.systemIndigo.index))

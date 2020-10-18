@@ -1,13 +1,11 @@
-// Files
-import '../models/mood.dart';
-
+/// Data Type Activity
 class Activity {
   Activity({
     this.id,
     this.day,
     this.month,
     this.year,
-    this.mood,
+    this.moodId,
     this.title,
     this.note,
   });
@@ -15,11 +13,12 @@ class Activity {
   int day;
   int month;
   int year;
-  Mood mood;
+  int moodId;
   String title;
   String note;
 }
 
+/// Mock list of Activities
 List<Activity> mActivityList = new List<Activity>()
   ..add(
     Activity(
@@ -27,7 +26,7 @@ List<Activity> mActivityList = new List<Activity>()
         day: 1,
         month: 10,
         year: 2020,
-        mood: mMoodList[0],
+        moodId: 0,
         title: "First Day of Oct",
         note:
             "Aenean diam mi, euismod sed euismod at, condimentum in enim. Quisque in suscipit nunc. Mauris faucibus neque lorem, sit amet placerat risus viverra pulvinar. In in libero mi. Donec ornare turpis sed ex efficitur suscipit ac placerat lorem. Nullam magna massa, auctor in dictum ac, elementum nec diam. Maecenas in suscipit tellus."),
@@ -38,7 +37,7 @@ List<Activity> mActivityList = new List<Activity>()
         day: 2,
         month: 10,
         year: 2020,
-        mood: mMoodList[0],
+        moodId: 0,
         title: "Second Day of Oct",
         note:
             "Aenean diam mi, condimentum in enim. Quisque in suscipit nunc. Mauris faucibus neque lorem, sit amet placerat risus viverra pulvinar. In in libero mi. Donec ornare turpis sed ex efficitur suscipit ac placerat lorem. Nullam magna massa, auctor in dictum ac, elementum nec diam. Maecenas in suscipit tellus."),
@@ -49,7 +48,7 @@ List<Activity> mActivityList = new List<Activity>()
         day: 3,
         month: 10,
         year: 2020,
-        mood: mMoodList[1],
+        moodId: 1,
         title: "Third Day of Oct",
         note:
             "Aenean diam mi, euismod sed euismod at, condimentum in enim. Quisque in suscipit nunc. Mauris faucibus neque lorem in libero mi. Donec ornare turpis sed ex efficitur suscipit ac placerat lorem. Nullam magna massa, auctor in dictum ac, elementum nec diam. Maecenas in suscipit tellus."),
@@ -60,7 +59,7 @@ List<Activity> mActivityList = new List<Activity>()
         day: 4,
         month: 10,
         year: 2020,
-        mood: mMoodList[1],
+        moodId: 1,
         title: "Forth Day of Oct",
         note:
             "Aenean diam mi, euismod sed euismod at, condimentum in enim. Quisque in suscipit nunc. Mauris faucibus neque lorem, sit amet placerat risus viverra pulvinar. In in libero mi. Donec ornare turpis sed ex efficitur suscipit ac placerat lorem. Nullam magna massa, auctor in dictum ac, elementum nec diam. Maecenas in suscipit tellus."),
@@ -71,7 +70,7 @@ List<Activity> mActivityList = new List<Activity>()
         day: 7,
         month: 10,
         year: 2020,
-        mood: mMoodList[2],
+        moodId: 2,
         title: "Seventh Day of Oct",
         note:
             "Aenean diam mi, euismod sed euismod at, condimentum in enim. Quisque in suscipit nunc. Mauris faucibus neque lorem, sit amet placerat risus viverra pulvinar. In in libero mi. Donec ornare turpis sed. Nullam magna massa, auctor in dictum ac, elementum nec diam. Maecenas in suscipit tellus."),
@@ -82,7 +81,7 @@ List<Activity> mActivityList = new List<Activity>()
         day: 8,
         month: 10,
         year: 2020,
-        mood: mMoodList[3],
+        moodId: 3,
         title: "Eighth Day of Oct",
         note:
             "Aenean diam mi, euismod sed euismod at, condimentum in enim. Quisque in suscipit nunc. Mauris faucibus neque lorem, sit amet placerat risus viverra pulvinar. In in libero mi. Donec ornare turpis sed ex efficitur suscipit ac placerat lorem."),
@@ -93,7 +92,7 @@ List<Activity> mActivityList = new List<Activity>()
         day: 9,
         month: 10,
         year: 2020,
-        mood: mMoodList[4],
+        moodId: 4,
         title: "Ninth Day of Oct",
         note:
             "Aenean diam mi, euismod sed euismod at, in enim. Quisque in suscipit nunc. Mauris neque lorem, sit amet placerat risus viverra pulvinar. In in libero mi. Donec ex efficitur suscipit ac placerat lorem. Nullam magna massa, auctor in dictum ac, elementum nec diam. Maecenas in suscipit tellus."),
