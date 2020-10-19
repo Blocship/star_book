@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 // Files
 import '../models/activity.dart';
 import '../utils/date.dart';
@@ -65,9 +66,13 @@ class _MonthState extends c.State<Month> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: _daysGrid(context),
-    );
+    return ValueListenableBuilder(
+        valueListenable: Hive.box<Activity>(activityBoxName).listenable(),
+        builder: (context, box, widget) {
+          return Container(
+            child: _daysGrid(context),
+          );
+        });
   }
 }
 
@@ -83,7 +88,6 @@ class MonthTitle extends StatelessWidget {
       margin: EdgeInsets.fromLTRB(14, 10, 0, 10),
       child: Text(
         "${getMonthTitle(month)} $year",
-        // style: Theme.of(context).textTheme.headline3),
         style: c.CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
       ),
       alignment: Alignment.centerLeft,
