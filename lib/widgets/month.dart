@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
+import 'package:hive/hive.dart';
 // Files
 import '../models/activity.dart';
 import '../utils/date.dart';
@@ -9,23 +10,25 @@ class Month extends c.StatefulWidget {
   Month({
     @required this.month,
     @required this.year,
-    @required this.activityList,
   });
 
   final int month;
   final int year;
-  final List<Activity> activityList;
 
   @override
   _MonthState createState() => _MonthState();
 }
 
 class _MonthState extends c.State<Month> {
-  // As the month and year would be same in activity list and calander, so
-  // just comparing day.
+  final List<Activity> activityList =
+      Hive.box<Activity>(activityBoxName).values.toList();
+
   Activity _getActivity(int day) {
-    final Activity res = widget.activityList.firstWhere(
-      (element) => element.day == day,
+    final Activity res = activityList.firstWhere(
+      (element) =>
+          element.day == day &&
+          element.month == widget.month &&
+          element.year == widget.year,
       orElse: () =>
           new Activity(day: day, month: widget.month, year: widget.year),
     );
