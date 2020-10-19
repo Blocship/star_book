@@ -1,15 +1,24 @@
+import 'package:hive/hive.dart';
 // Files
 import '../utils/color.dart';
 
+part 'mood.g.dart';
+
+const String moodBoxName = 'mood';
+
 /// Data Type Mood
+@HiveType(typeId: 1)
 class Mood {
   Mood({
     this.id,
     this.label,
     this.colorCode,
   });
+  @HiveField(0)
   int id;
+  @HiveField(1)
   String label;
+  @HiveField(2)
   int colorCode;
 }
 

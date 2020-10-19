@@ -1,4 +1,11 @@
+import 'package:hive/hive.dart';
+
+part 'activity.g.dart';
+
+const String activityBoxName = 'activity';
+
 /// Data Type Activity
+@HiveType(typeId: 0)
 class Activity {
   Activity({
     this.id,
@@ -9,12 +16,19 @@ class Activity {
     this.title,
     this.note,
   });
+  @HiveField(0)
   int id;
+  @HiveField(1)
   int day;
+  @HiveField(2)
   int month;
+  @HiveField(3)
   int year;
+  @HiveField(4)
   int moodId;
+  @HiveField(5)
   String title;
+  @HiveField(6)
   String note;
 }
 
