@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
+import 'package:hive/hive.dart';
 // Files
 import '../routes/route_generator.dart';
 import '../widgets/action_container.dart';
@@ -88,7 +89,12 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
       middle: Text("Add/Edit"),
       trailing: GestureDetector(
         onTap: () {
-          Navigator.of(context, rootNavigator: true).pop();
+          if (activity.title != null &&
+              activity.note != null &&
+              activity.moodId != null) {
+            Hive.box<Activity>(activityBoxName).add(activity);
+            Navigator.of(context, rootNavigator: true).pop();
+          }
         },
         child: Text("Done"),
       ),
@@ -154,6 +160,7 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
 
   @override
   Widget build(BuildContext context) {
+    print(activity.day);
     return c.CupertinoPageScaffold(
       backgroundColor: c.CupertinoColors.systemGroupedBackground,
       navigationBar: _buildNavBar(),
