@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
-import 'package:star_book/models/activity.dart';
-import 'package:star_book/models/mood.dart';
+import 'package:hive/hive.dart';
 // Files
 import '../widgets/month.dart';
-// import '../styles/style.dart';
+import '../models/activity.dart';
+import '../models/mood.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -14,19 +14,29 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int month;
   int year;
+  List<Activity> activityList;
 
-  // TODO: fetch data from database based on the month and year.
-  // using mock data for now
-  final List<Activity> activityList = new List<Activity>.from(mActivityList);
   // TODO: fetch data from database based.
   // using mock data for now
   final List<Mood> moodList = new List<Mood>.from(mMoodList);
 
   @override
   void initState() {
+    print(Hive.box<Activity>(activityBoxName).length);
+    month = DateTime.now().month;
+    year = DateTime.now().year;
+    activityList = _setActivityList(month: month, year: year);
     super.initState();
-    month = 10;
-    year = 2020;
+  }
+
+  List<Activity> _setActivityList({int month, int year}) {
+    return Hive.box<Activity>(activityBoxName)
+        .values
+        .toList()
+        .where(
+          (element) => (element.month == month && element.year == year),
+        )
+        .toList();
   }
 
   void onHorizontalDragEnd(c.DragEndDetails value) {
@@ -38,7 +48,10 @@ class _HomePageState extends State<HomePage> {
       } else {
         month++;
       }
-      setState(() {});
+
+      setState(() {
+        activityList = _setActivityList(month: month, year: year);
+      });
     }
     // Drags Right
     else if (!value.primaryVelocity.isNegative) {
@@ -48,12 +61,16 @@ class _HomePageState extends State<HomePage> {
       } else {
         month--;
       }
-      setState(() {});
+
+      setState(() {
+        activityList = _setActivityList(month: month, year: year);
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    print(activityList.length);
     return c.CupertinoPageScaffold(
       backgroundColor: c.CupertinoColors.systemBackground,
       navigationBar: c.CupertinoNavigationBar(
