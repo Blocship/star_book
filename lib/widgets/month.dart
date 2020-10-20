@@ -21,10 +21,10 @@ class Month extends c.StatefulWidget {
 }
 
 class _MonthState extends c.State<Month> {
-  final List<Activity> activityList =
-      Hive.box<Activity>(activityBoxName).values.toList();
-
   Activity _getActivity(int day) {
+    final List<Activity> activityList =
+        Hive.box<Activity>(activityBoxName).values.toList();
+    // new List<Activity>.from(Hive.box<Activity>(activityBoxName).values);
     final Activity res = activityList.firstWhere(
       (element) =>
           element.day == day &&
@@ -68,7 +68,7 @@ class _MonthState extends c.State<Month> {
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
         valueListenable: Hive.box<Activity>(activityBoxName).listenable(),
-        builder: (context, box, widget) {
+        builder: (context, Box<Activity> box, widget) {
           return Container(
             child: _daysGrid(context),
           );

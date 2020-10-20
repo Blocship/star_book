@@ -160,7 +160,6 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
 
   @override
   Widget build(BuildContext context) {
-    print(activity.day);
     return c.CupertinoPageScaffold(
       backgroundColor: c.CupertinoColors.systemGroupedBackground,
       navigationBar: _buildNavBar(),
