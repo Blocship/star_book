@@ -63,13 +63,15 @@ class ActivityEditSheet extends c.StatefulWidget {
 
 class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
   Activity activity;
-  final titleController = TextEditingController();
-  final noteController = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController noteController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     activity = widget.activity;
+    titleController.text = activity.title;
+    noteController.text = activity.note;
     titleController.addListener(onTitleChange);
     noteController.addListener(onNoteChange);
   }
@@ -82,19 +84,20 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
     this.activity.note = noteController.text;
   }
 
-  void onDone() {
+  void onDone(BuildContext context) async {
     if (activity.isFilled()) {
-      Hive.box<Activity>(activityBoxName).add(activity);
+      // bug: mutating previous and adding new entry in the database
+      await Hive.box<Activity>(activityBoxName).add(activity);
       Navigator.of(context, rootNavigator: true).pop();
     }
   }
 
-  Widget _buildNavBar() {
+  Widget _buildNavBar(BuildContext context) {
     return c.CupertinoNavigationBar(
       leading: Container(),
       middle: Text("Add/Edit"),
       trailing: GestureDetector(
-        onTap: onDone,
+        onTap: () => onDone(context),
         child: Text("Done"),
       ),
     );
@@ -163,7 +166,7 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
         c.CupertinoColors.systemGroupedBackground,
         context,
       ),
-      navigationBar: _buildNavBar(),
+      navigationBar: _buildNavBar(context),
       child: _buildBody(context),
     );
   }

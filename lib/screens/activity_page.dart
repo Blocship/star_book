@@ -15,13 +15,17 @@ class ActivityPage extends StatelessWidget {
   final Mood mood;
   final Activity activity;
 
+  void onEdit(BuildContext context) {
+    Navigator.of(context).popAndPushNamed("/edit", arguments: activity);
+  }
+
   @override
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
       navigationBar: c.CupertinoNavigationBar(
         middle: Text('Activity'),
         trailing: c.GestureDetector(
-          onTap: () {},
+          onTap: () => onEdit(context),
           child: Text(
             "Edit",
             style: c.CupertinoTheme.of(context).textTheme.navActionTextStyle,
