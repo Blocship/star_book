@@ -15,7 +15,6 @@ class MoodSheet extends StatelessWidget {
 
   c.SafeArea _buildBody(BuildContext context) {
     return SafeArea(
-      // minimum: EdgeInsets.symmetric(horizontal: 16),
       child: c.Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -37,7 +36,10 @@ class MoodSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
-      backgroundColor: c.CupertinoColors.systemGroupedBackground,
+      backgroundColor: c.CupertinoDynamicColor.resolve(
+        c.CupertinoColors.systemBackground,
+        context,
+      ),
       navigationBar: _buildNavBar(),
       child: _buildBody(context),
     );

@@ -30,6 +30,15 @@ class Activity {
   String title;
   @HiveField(6)
   String note;
+
+  bool isFilled() {
+    return (this.day != null &&
+        this.month != null &&
+        this.year != null &&
+        this.moodId != null &&
+        this.title != null &&
+        this.note != null);
+  }
 }
 
 /// Mock list of Activities

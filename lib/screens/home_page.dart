@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 // Files
 import '../widgets/month.dart';
 import '../models/mood.dart';
+import '../utils/date.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -25,36 +26,33 @@ class _HomePageState extends State<HomePage> {
   }
 
   void onHorizontalDragEnd(c.DragEndDetails value) {
-    // Drags Left
-    if (value.primaryVelocity.isNegative) {
-      if (month == 12) {
-        month = 1;
-        year++;
-      } else {
-        month++;
-      }
-
-      setState(() {});
-    }
-    // Drags Right
-    else if (!value.primaryVelocity.isNegative) {
-      if (month == 1) {
-        month = 12;
-        year--;
-      } else {
-        month--;
-      }
-
-      setState(() {});
-    }
+    (value.primaryVelocity.isNegative)
+        ?
+        // Drags Left
+        setState(() {
+            year = getNextYear(year, month);
+            month = getNextMonth(year, month);
+          })
+        :
+        // Drags Right
+        setState(() {
+            year = getPreviousYear(year, month);
+            month = getPreviousMonth(year, month);
+          });
   }
 
   @override
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
-      backgroundColor: c.CupertinoColors.systemBackground,
+      backgroundColor: c.CupertinoDynamicColor.resolve(
+        c.CupertinoColors.systemBackground,
+        context,
+      ),
       navigationBar: c.CupertinoNavigationBar(
-        backgroundColor: c.CupertinoColors.systemBackground,
+        backgroundColor: c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.systemBackground,
+          context,
+        ),
         trailing: PreferanceButton(),
         border: null,
       ),

@@ -63,17 +63,16 @@ class ActivityEditSheet extends c.StatefulWidget {
 
 class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
   Activity activity;
+  final titleController = TextEditingController();
+  final noteController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
-    // TODO: Shallow clone to deep clone
     activity = widget.activity;
     titleController.addListener(onTitleChange);
     noteController.addListener(onNoteChange);
   }
-
-  final titleController = TextEditingController();
-  final noteController = TextEditingController();
 
   void onTitleChange() {
     this.activity.title = titleController.text;
@@ -83,19 +82,19 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
     this.activity.note = noteController.text;
   }
 
+  void onDone() {
+    if (activity.isFilled()) {
+      Hive.box<Activity>(activityBoxName).add(activity);
+      Navigator.of(context, rootNavigator: true).pop();
+    }
+  }
+
   Widget _buildNavBar() {
     return c.CupertinoNavigationBar(
       leading: Container(),
       middle: Text("Add/Edit"),
       trailing: GestureDetector(
-        onTap: () {
-          if (activity.title != null &&
-              activity.note != null &&
-              activity.moodId != null) {
-            Hive.box<Activity>(activityBoxName).add(activity);
-            Navigator.of(context, rootNavigator: true).pop();
-          }
-        },
+        onTap: onDone,
         child: Text("Done"),
       ),
     );
@@ -104,7 +103,6 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
   Widget _buildBody(BuildContext context) {
     return c.SingleChildScrollView(
       child: SafeArea(
-        // minimum: EdgeInsets.symmetric(horizontal: 16),
         child: c.Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -161,7 +159,10 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
   @override
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
-      backgroundColor: c.CupertinoColors.systemGroupedBackground,
+      backgroundColor: c.CupertinoDynamicColor.resolve(
+        c.CupertinoColors.systemGroupedBackground,
+        context,
+      ),
       navigationBar: _buildNavBar(),
       child: _buildBody(context),
     );

@@ -14,6 +14,22 @@ int getDaysInMonth(int year, int month) {
       : DateTime(year + 1, 1, 0).day;
 }
 
+int getNextMonth(int year, int month) {
+  return (month == 12) ? month = 1 : month + 1;
+}
+
+int getNextYear(int year, int month) {
+  return (month == 12) ? year + 1 : year;
+}
+
+int getPreviousMonth(int year, int month) {
+  return (month == 1) ? month = 12 : month - 1;
+}
+
+int getPreviousYear(int year, int month) {
+  return (month == 1) ? year - 1 : year;
+}
+
 /// List of months name
 const List<String> monthList = <String>[
   'January',
