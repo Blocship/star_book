@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
-import 'package:hive/hive.dart';
 // Files
 import '../routes/route_generator.dart';
 import '../widgets/action_container.dart';
 import '../models/activity.dart';
 import '../widgets/my_container.dart';
+import '../controllers/activity.dart';
 
 class ActivityEditSheetRouteInitializer extends StatelessWidget {
   ActivityEditSheetRouteInitializer(this.activity);
@@ -69,7 +69,7 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
   @override
   void initState() {
     super.initState();
-    activity = widget.activity;
+    activity = Activity.from(widget.activity);
     titleController.text = activity.title;
     noteController.text = activity.note;
     titleController.addListener(onTitleChange);
@@ -86,8 +86,7 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
 
   void onDone(BuildContext context) async {
     if (activity.isFilled()) {
-      // bug: mutating previous and adding new entry in the database
-      await Hive.box<Activity>(activityBoxName).add(activity);
+      ActivityController.update(activity);
       Navigator.of(context, rootNavigator: true).pop();
     }
   }

@@ -6,6 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import '../models/activity.dart';
 import '../utils/date.dart';
 import '../widgets/day.dart';
+import '../controllers/activity.dart';
 
 class Month extends c.StatefulWidget {
   Month({
@@ -22,18 +23,7 @@ class Month extends c.StatefulWidget {
 
 class _MonthState extends c.State<Month> {
   Activity _getActivity(int day) {
-    final List<Activity> activityList =
-        Hive.box<Activity>(activityBoxName).values.toList();
-    // new List<Activity>.from(Hive.box<Activity>(activityBoxName).values);
-    final Activity res = activityList.firstWhere(
-      (element) =>
-          element.day == day &&
-          element.month == widget.month &&
-          element.year == widget.year,
-      orElse: () =>
-          new Activity(day: day, month: widget.month, year: widget.year),
-    );
-    return res;
+    return ActivityController.readAt(day, widget.month, widget.year);
   }
 
   Widget _daysGrid(BuildContext context) {

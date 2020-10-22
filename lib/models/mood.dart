@@ -1,14 +1,13 @@
 import 'package:hive/hive.dart';
 // Files
 import '../utils/color.dart';
-
 part 'mood.g.dart';
 
 const String moodBoxName = 'mood';
 
 /// Data Type Mood
 @HiveType(typeId: 1)
-class Mood {
+class Mood extends HiveObject {
   Mood({
     this.id,
     this.label,

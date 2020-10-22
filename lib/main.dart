@@ -12,8 +12,6 @@ void main() async {
   Hive.registerAdapter<Activity>(ActivityAdapter());
   Hive.registerAdapter<Mood>(MoodAdapter());
   await Hive.openBox<Activity>(activityBoxName);
-  await Hive.box<Activity>(activityBoxName).clear();
-  await Hive.box<Activity>(activityBoxName).addAll(mActivityList);
   runApp(MyApp());
 }
 
