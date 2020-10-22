@@ -152,6 +152,16 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
                 onTap: null,
               ),
             ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+            activity.isFilled()
+                ? c.CupertinoButton(
+                    child: Text("DELETE"),
+                    onPressed: () {
+                      ActivityController.delete(activity);
+                      Navigator.of(context, rootNavigator: true).pop();
+                    },
+                  )
+                : Container(),
           ],
         ),
       ),
