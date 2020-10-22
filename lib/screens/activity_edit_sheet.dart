@@ -5,6 +5,7 @@ import '../routes/route_generator.dart';
 import '../widgets/action_container.dart';
 import '../models/activity.dart';
 import '../widgets/my_container.dart';
+import '../controllers/activity.dart';
 
 class ActivityEditSheetRouteInitializer extends StatelessWidget {
   ActivityEditSheetRouteInitializer(this.activity);
@@ -53,7 +54,6 @@ class ActivityEditSheetRouteInitializer extends StatelessWidget {
 
 class ActivityEditSheet extends c.StatefulWidget {
   ActivityEditSheet(this.activity);
-
   final Activity activity;
 
   @override
@@ -62,17 +62,18 @@ class ActivityEditSheet extends c.StatefulWidget {
 
 class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
   Activity activity;
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController noteController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
-    // TODO: Shallow clone to deep clone
-    activity = widget.activity;
+    activity = Activity.from(widget.activity);
+    titleController.text = activity.title;
+    noteController.text = activity.note;
     titleController.addListener(onTitleChange);
     noteController.addListener(onNoteChange);
   }
-
-  final titleController = TextEditingController();
-  final noteController = TextEditingController();
 
   void onTitleChange() {
     this.activity.title = titleController.text;
@@ -82,14 +83,25 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
     this.activity.note = noteController.text;
   }
 
-  Widget _buildNavBar() {
+  void onDone(BuildContext context) async {
+    if (activity.isFilled()) {
+      ActivityController.update(activity);
+      Navigator.of(context, rootNavigator: true).pop();
+    }
+  }
+
+  void onDelete(BuildContext context) async {
+    await ActivityController.delete(activity);
+    Navigator.of(context, rootNavigator: true).pop();
+  }
+
+  Widget _buildNavBar(BuildContext context) {
     return c.CupertinoNavigationBar(
       leading: Container(),
-      middle: Text("Add/Edit"),
+      middle:
+          activity.isFilled() ? Text("Edit Activity") : Text("Add Acitvity"),
       trailing: GestureDetector(
-        onTap: () {
-          Navigator.of(context, rootNavigator: true).pop();
-        },
+        onTap: () => onDone(context),
         child: Text("Done"),
       ),
     );
@@ -98,7 +110,6 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
   Widget _buildBody(BuildContext context) {
     return c.SingleChildScrollView(
       child: SafeArea(
-        // minimum: EdgeInsets.symmetric(horizontal: 16),
         child: c.Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
@@ -146,6 +157,13 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
                 onTap: null,
               ),
             ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+            activity.isFilled()
+                ? c.CupertinoButton(
+                    child: Text("DELETE"),
+                    onPressed: () => onDelete(context),
+                  )
+                : Container(),
           ],
         ),
       ),
@@ -155,8 +173,11 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
   @override
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
-      backgroundColor: c.CupertinoColors.systemGroupedBackground,
-      navigationBar: _buildNavBar(),
+      backgroundColor: c.CupertinoDynamicColor.resolve(
+        c.CupertinoColors.systemGroupedBackground,
+        context,
+      ),
+      navigationBar: _buildNavBar(context),
       child: _buildBody(context),
     );
   }

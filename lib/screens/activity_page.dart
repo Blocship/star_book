@@ -15,13 +15,17 @@ class ActivityPage extends StatelessWidget {
   final Mood mood;
   final Activity activity;
 
+  void onEdit(BuildContext context) {
+    Navigator.of(context).popAndPushNamed("/edit", arguments: activity);
+  }
+
   @override
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
       navigationBar: c.CupertinoNavigationBar(
         middle: Text('Activity'),
         trailing: c.GestureDetector(
-          onTap: () {},
+          onTap: () => onEdit(context),
           child: Text(
             "Edit",
             style: c.CupertinoTheme.of(context).textTheme.navActionTextStyle,
@@ -56,24 +60,12 @@ class ActivityPage extends StatelessWidget {
                   activity.title,
                   style: c.CupertinoTheme.of(context)
                       .textTheme
-                      .navLargeTitleTextStyle
-                      .copyWith(),
+                      .navLargeTitleTextStyle,
                 ),
               ),
               c.Container(
                 padding: c.EdgeInsets.all(16),
-                child: c.Text("${activity.note}\n    " +
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
-                    " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," +
-                    " when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
-                    " It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
-                    "\n It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages," +
-                    "\n and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." +
-                    "Lorem Ipsum is simply dummy text of the printing and typesetting industry." +
-                    " Lorem Ipsum has been the industry's standard dummy text ever since the 1500s," +
-                    "\n when an unknown printer took a galley of type and scrambled it to make a type specimen book." +
-                    " It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. " +
-                    " and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."),
+                child: c.Text(activity.note),
               ),
             ],
           ),
