@@ -54,7 +54,6 @@ class ActivityEditSheetRouteInitializer extends StatelessWidget {
 
 class ActivityEditSheet extends c.StatefulWidget {
   ActivityEditSheet(this.activity);
-
   final Activity activity;
 
   @override
@@ -91,10 +90,16 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
     }
   }
 
+  void onDelete(BuildContext context) async {
+    await ActivityController.delete(activity);
+    Navigator.of(context, rootNavigator: true).pop();
+  }
+
   Widget _buildNavBar(BuildContext context) {
     return c.CupertinoNavigationBar(
       leading: Container(),
-      middle: Text("Add/Edit"),
+      middle:
+          activity.isFilled() ? Text("Edit Activity") : Text("Add Acitvity"),
       trailing: GestureDetector(
         onTap: () => onDone(context),
         child: Text("Done"),
@@ -156,10 +161,7 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
             activity.isFilled()
                 ? c.CupertinoButton(
                     child: Text("DELETE"),
-                    onPressed: () {
-                      ActivityController.delete(activity);
-                      Navigator.of(context, rootNavigator: true).pop();
-                    },
+                    onPressed: () => onDelete(context),
                   )
                 : Container(),
           ],
