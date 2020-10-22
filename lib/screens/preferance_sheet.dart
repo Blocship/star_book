@@ -23,7 +23,7 @@ class PreferanceSheet extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(29, 17, 0, 8),
         child: Text(
           "ABOUT THE DEVELOPER",
-          style: Style.footerNoteStyle(context),
+          style: Style.footerNoteSecondary(context),
         ),
       ),
       MyContainer(
@@ -34,6 +34,7 @@ class PreferanceSheet extends StatelessWidget {
             width: _textWidth,
             child: Text(
               "I'm Hashir, the developer of this app. Feel free to contact me anytime. I love hearing from you",
+              style: Style.body(context),
             ),
           ),
           Container(

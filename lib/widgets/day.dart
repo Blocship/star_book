@@ -62,7 +62,11 @@ class Day extends StatelessWidget {
         child: Text(
           _getText(),
           // TODO: set color white for colored boxes.
-          style: TextStyle(fontSize: _squareSize(context) * 0.55),
+          style: TextStyle(
+            fontSize: _squareSize(context) * 0.55,
+            color: c.CupertinoDynamicColor.resolve(
+                c.CupertinoColors.label, context),
+          ),
         ),
       ),
     );

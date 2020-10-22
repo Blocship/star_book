@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 // Files
 import '../models/activity.dart';
 import '../models/mood.dart';
+import '../styles/style.dart';
 
 // TODO: display activity in cupertino style,
 // added just to implement route,
@@ -44,8 +45,7 @@ class ActivityPage extends StatelessWidget {
                   children: [
                     c.Text(
                       "${activity.day} - ${activity.month} - ${activity.year}",
-                      style: c.TextStyle(
-                          fontWeight: c.FontWeight.bold, fontSize: 20),
+                      style: Style.bodySecondary(context),
                     ),
                   ],
                 ),
@@ -65,7 +65,10 @@ class ActivityPage extends StatelessWidget {
               ),
               c.Container(
                 padding: c.EdgeInsets.all(16),
-                child: c.Text(activity.note),
+                child: c.Text(
+                  activity.note,
+                  style: Style.body(context),
+                ),
               ),
             ],
           ),

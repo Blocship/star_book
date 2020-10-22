@@ -6,6 +6,7 @@ import '../widgets/action_container.dart';
 import '../models/activity.dart';
 import '../widgets/my_container.dart';
 import '../controllers/activity.dart';
+import '../styles/style.dart';
 
 class ActivityEditSheetRouteInitializer extends StatelessWidget {
   ActivityEditSheetRouteInitializer(this.activity);
@@ -118,9 +119,14 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
               child: c.Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Date"),
                   Text(
-                      "${activity.day.toString()} / ${activity.month.toString()} / ${activity.year.toString()}"),
+                    "Date",
+                    style: Style.body(context),
+                  ),
+                  Text(
+                    "${activity.day.toString()} / ${activity.month.toString()} / ${activity.year.toString()}",
+                    style: Style.bodySecondary(context),
+                  ),
                 ],
               ),
               onTap: null,

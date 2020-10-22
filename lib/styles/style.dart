@@ -2,8 +2,31 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 
 abstract class Style {
-  /// Cupertino, Footer Note Text Style
-  static TextStyle footerNoteStyle(BuildContext context) {
+  /// Cupertino, Body Size, Label Color Text Style
+  static TextStyle body(BuildContext context) {
+    return TextStyle(
+      color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.label, context),
+      fontWeight: FontWeight.w400,
+      fontFamily: "SFProText",
+      fontStyle: FontStyle.normal,
+      fontSize: 17.0,
+    );
+  }
+
+  /// Cupertino, Body Size, Secondary Label Color Text Style
+  static TextStyle bodySecondary(BuildContext context) {
+    return TextStyle(
+      color: c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.secondaryLabel, context),
+      fontWeight: FontWeight.w400,
+      fontFamily: "SFProText",
+      fontStyle: FontStyle.normal,
+      fontSize: 17.0,
+    );
+  }
+
+  /// Cupertino, Footer Note Size, Secondary Label Color Text Style
+  static TextStyle footerNoteSecondary(BuildContext context) {
     return TextStyle(
       color: c.CupertinoDynamicColor.resolve(
           c.CupertinoColors.secondaryLabel, context),
