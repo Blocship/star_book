@@ -21,7 +21,7 @@ class MyContainer extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(6),
             color: c.CupertinoDynamicColor.resolve(
-              c.CupertinoColors.secondarySystemGroupedBackground,
+              c.CupertinoColors.tertiarySystemBackground,
               context,
             ),
           ),

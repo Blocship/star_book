@@ -7,8 +7,10 @@ import '../widgets/my_container.dart';
 import '../styles/style.dart';
 
 class PreferanceSheet extends StatelessWidget {
-  c.CupertinoNavigationBar _buildNavBar() {
+  c.CupertinoNavigationBar _buildNavBar(BuildContext context) {
     return c.CupertinoNavigationBar(
+      backgroundColor: c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.systemGrey6, context),
       middle: Text("StarBook"),
       trailing: null,
       border: null,
@@ -52,7 +54,7 @@ class PreferanceSheet extends StatelessWidget {
     ];
   }
 
-  c.SafeArea _buildBody(BuildContext context) {
+  SafeArea _buildBody(BuildContext context) {
     return SafeArea(
       // minimum: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -92,8 +94,9 @@ class PreferanceSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
-      backgroundColor: c.CupertinoColors.systemGroupedBackground,
-      navigationBar: _buildNavBar(),
+      backgroundColor: c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.systemGrey6, context),
+      navigationBar: _buildNavBar(context),
       child: _buildBody(context),
     );
   }

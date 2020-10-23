@@ -2,6 +2,17 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 
 abstract class Style {
+  /// Cupertino, Large Title Size, Label Color Text, Bold Style
+  static TextStyle largeTitle(BuildContext context) {
+    return TextStyle(
+      color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.label, context),
+      fontWeight: FontWeight.w700,
+      fontFamily: "SFProDisplay",
+      fontStyle: FontStyle.normal,
+      fontSize: 34.0,
+    );
+  }
+
   /// Cupertino, Body Size, Label Color Text Style
   static TextStyle body(BuildContext context) {
     return TextStyle(

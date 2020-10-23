@@ -34,7 +34,7 @@ class Day extends StatelessWidget {
           getColor(EColor.values[colorCode]), context);
     } else {
       return c.CupertinoDynamicColor.resolve(
-          c.CupertinoColors.systemGrey6, context);
+          c.CupertinoColors.tertiarySystemGroupedBackground, context);
     }
   }
 

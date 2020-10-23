@@ -6,26 +6,33 @@ import '../widgets/color_container.dart';
 import '../models/mood.dart';
 
 class MoodSheet extends StatelessWidget {
-  c.CupertinoNavigationBar _buildNavBar() {
+  c.CupertinoNavigationBar _buildNavBar(BuildContext context) {
     return c.CupertinoNavigationBar(
+      backgroundColor: c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.systemGrey6, context),
       middle: Text("Mood"),
       border: null,
     );
   }
 
-  c.SafeArea _buildBody(BuildContext context) {
+  SafeArea _buildBody(BuildContext context) {
     return SafeArea(
-      child: c.Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(padding: EdgeInsets.symmetric(vertical: 18)),
           ...mMoodList.map((e) {
-            return ColorContainer(
-              text: e.label,
-              color: getColor(EColor.values[e.colorCode]),
-              onTap: () {
-                Navigator.of(context).pop(e.id);
-              },
+            return Column(
+              children: [
+                ColorContainer(
+                  text: e.label,
+                  color: getColor(EColor.values[e.colorCode]),
+                  onTap: () {
+                    Navigator.of(context).pop(e.id);
+                  },
+                ),
+                Padding(padding: EdgeInsets.symmetric(vertical: 6)),
+              ],
             );
           }),
         ],
@@ -37,10 +44,10 @@ class MoodSheet extends StatelessWidget {
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
       backgroundColor: c.CupertinoDynamicColor.resolve(
-        c.CupertinoColors.systemBackground,
+        c.CupertinoColors.systemGrey6,
         context,
       ),
-      navigationBar: _buildNavBar(),
+      navigationBar: _buildNavBar(context),
       child: _buildBody(context),
     );
   }
