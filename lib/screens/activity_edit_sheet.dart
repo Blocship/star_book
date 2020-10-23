@@ -6,6 +6,7 @@ import '../widgets/action_container.dart';
 import '../models/activity.dart';
 import '../widgets/my_container.dart';
 import '../controllers/activity.dart';
+import '../styles/style.dart';
 
 class ActivityEditSheetRouteInitializer extends StatelessWidget {
   ActivityEditSheetRouteInitializer(this.activity);
@@ -52,7 +53,7 @@ class ActivityEditSheetRouteInitializer extends StatelessWidget {
   }
 }
 
-class ActivityEditSheet extends c.StatefulWidget {
+class ActivityEditSheet extends StatefulWidget {
   ActivityEditSheet(this.activity);
   final Activity activity;
 
@@ -60,7 +61,7 @@ class ActivityEditSheet extends c.StatefulWidget {
   _ActivityEditSheetState createState() => _ActivityEditSheetState();
 }
 
-class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
+class _ActivityEditSheetState extends State<ActivityEditSheet> {
   Activity activity;
   final TextEditingController titleController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
@@ -97,6 +98,8 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
 
   Widget _buildNavBar(BuildContext context) {
     return c.CupertinoNavigationBar(
+      backgroundColor: c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.systemGrey6, context),
       leading: Container(),
       middle:
           activity.isFilled() ? Text("Edit Activity") : Text("Add Acitvity"),
@@ -104,23 +107,29 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
         onTap: () => onDone(context),
         child: Text("Done"),
       ),
+      border: null,
     );
   }
 
   Widget _buildBody(BuildContext context) {
-    return c.SingleChildScrollView(
+    return SingleChildScrollView(
       child: SafeArea(
-        child: c.Column(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Padding(padding: EdgeInsets.symmetric(vertical: 18)),
             MyContainer(
-              child: c.Row(
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Date"),
                   Text(
-                      "${activity.day.toString()} / ${activity.month.toString()} / ${activity.year.toString()}"),
+                    "Date",
+                    style: Style.body(context),
+                  ),
+                  Text(
+                    "${activity.day}-${activity.month}-${activity.year}",
+                    style: Style.bodySecondary(context),
+                  ),
                 ],
               ),
               onTap: null,
@@ -174,7 +183,7 @@ class _ActivityEditSheetState extends c.State<ActivityEditSheet> {
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
       backgroundColor: c.CupertinoDynamicColor.resolve(
-        c.CupertinoColors.systemGroupedBackground,
+        c.CupertinoColors.systemGrey6,
         context,
       ),
       navigationBar: _buildNavBar(context),

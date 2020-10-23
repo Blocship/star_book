@@ -34,7 +34,7 @@ class Day extends StatelessWidget {
           getColor(EColor.values[colorCode]), context);
     } else {
       return c.CupertinoDynamicColor.resolve(
-          c.CupertinoColors.systemGrey6, context);
+          c.CupertinoColors.tertiarySystemGroupedBackground, context);
     }
   }
 
@@ -62,7 +62,11 @@ class Day extends StatelessWidget {
         child: Text(
           _getText(),
           // TODO: set color white for colored boxes.
-          style: TextStyle(fontSize: _squareSize(context) * 0.55),
+          style: TextStyle(
+            fontSize: _squareSize(context) * 0.55,
+            color: c.CupertinoDynamicColor.resolve(
+                c.CupertinoColors.label, context),
+          ),
         ),
       ),
     );

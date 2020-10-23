@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 // Files
 import '../models/activity.dart';
 import '../models/mood.dart';
+import '../styles/style.dart';
 
 // TODO: display activity in cupertino style,
 // added just to implement route,
@@ -22,50 +23,58 @@ class ActivityPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
+      backgroundColor: c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.tertiarySystemBackground, context),
       navigationBar: c.CupertinoNavigationBar(
+        backgroundColor: c.CupertinoDynamicColor.resolve(
+            c.CupertinoColors.tertiarySystemBackground, context),
         middle: Text('Activity'),
-        trailing: c.GestureDetector(
+        trailing: GestureDetector(
           onTap: () => onEdit(context),
           child: Text(
             "Edit",
             style: c.CupertinoTheme.of(context).textTheme.navActionTextStyle,
           ),
         ),
+        border: null,
       ),
-      child: c.SingleChildScrollView(
+      child: SingleChildScrollView(
         child: SafeArea(
-          child: c.Column(
+          child: Column(
             crossAxisAlignment: c.CrossAxisAlignment.start,
             children: [
-              c.Container(
-                padding: c.EdgeInsets.all(16),
-                child: c.Row(
-                  mainAxisAlignment: c.MainAxisAlignment.center,
+              Container(
+                padding: EdgeInsets.all(16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    c.Text(
+                    Text(
                       "${activity.day} - ${activity.month} - ${activity.year}",
-                      style: c.TextStyle(
-                          fontWeight: c.FontWeight.bold, fontSize: 20),
+                      style: Style.bodySecondary(context),
                     ),
                   ],
                 ),
               ),
-              c.Container(
-                padding: c.EdgeInsets.all(16),
-                child: c.Text(mood.label),
-              ),
-              c.Container(
-                padding: c.EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                child: c.Text(
-                  activity.title,
-                  style: c.CupertinoTheme.of(context)
-                      .textTheme
-                      .navLargeTitleTextStyle,
+              Container(
+                padding: EdgeInsets.all(16),
+                child: Text(
+                  mood.label,
+                  style: Style.body(context),
                 ),
               ),
-              c.Container(
-                padding: c.EdgeInsets.all(16),
-                child: c.Text(activity.note),
+              Container(
+                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                child: Text(
+                  activity.title,
+                  style: Style.largeTitle(context),
+                ),
+              ),
+              Container(
+                padding: EdgeInsets.all(16),
+                child: Text(
+                  activity.note,
+                  style: Style.body(context),
+                ),
               ),
             ],
           ),

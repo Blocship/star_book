@@ -7,6 +7,7 @@ import '../models/activity.dart';
 import '../utils/date.dart';
 import '../widgets/day.dart';
 import '../controllers/activity.dart';
+import '../styles/style.dart';
 
 class Month extends c.StatefulWidget {
   Month({
@@ -78,7 +79,7 @@ class MonthTitle extends StatelessWidget {
       margin: EdgeInsets.fromLTRB(14, 10, 0, 10),
       child: Text(
         "${getMonthTitle(month)} $year",
-        style: c.CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
+        style: Style.largeTitle(context),
       ),
       alignment: Alignment.centerLeft,
     );
