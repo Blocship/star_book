@@ -18,27 +18,29 @@ class MoodSheet extends StatelessWidget {
     );
   }
 
-  SafeArea _buildBody(BuildContext context) {
-    return SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(padding: EdgeInsets.symmetric(vertical: 18)),
-          ...mMoodList.map((e) {
-            return Column(
-              children: [
-                ColorContainer(
-                  text: e.label,
-                  color: getColor(EColor.values[e.colorCode]),
-                  onTap: () {
-                    Navigator.of(context).pop(e.id);
-                  },
-                ),
-                Padding(padding: EdgeInsets.symmetric(vertical: 6)),
-              ],
-            );
-          }),
-        ],
+  Widget _buildBody(BuildContext context) {
+    return c.SingleChildScrollView(
+      child: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+            ...mMoodList.map((e) {
+              return Column(
+                children: [
+                  ColorContainer(
+                    text: e.label,
+                    color: getColor(EColor.values[e.colorCode]),
+                    onTap: () {
+                      Navigator.of(context).pop(e.id);
+                    },
+                  ),
+                  Padding(padding: EdgeInsets.symmetric(vertical: 6)),
+                ],
+              );
+            }),
+          ],
+        ),
       ),
     );
   }
