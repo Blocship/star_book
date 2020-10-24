@@ -69,7 +69,7 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
     );
   }
 
-  Widget _buildBody(BuildContext context) {
+  c.Widget _buildBody(BuildContext context) {
     return SingleChildScrollView(
       child: SafeArea(
         child: Column(

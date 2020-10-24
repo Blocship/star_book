@@ -56,7 +56,7 @@ class PreferanceSheet extends StatelessWidget {
     ];
   }
 
-  SafeArea _buildBody(BuildContext context) {
+  c.Widget _buildBody(BuildContext context) {
     return SafeArea(
       // minimum: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
