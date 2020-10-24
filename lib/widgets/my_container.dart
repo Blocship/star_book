@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 
-/// Cupertino style text container
+/// Cupertino style container widget
 class MyContainer extends StatelessWidget {
   MyContainer({
-    this.child,
+    @required this.child,
     this.onTap,
   });
 
@@ -16,16 +16,17 @@ class MyContainer extends StatelessWidget {
     return GestureDetector(
       onTap: onTap != null ? onTap : null,
       child: Container(
-          margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-          padding: EdgeInsets.fromLTRB(13, 15, 13, 12),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(6),
-            color: c.CupertinoDynamicColor.resolve(
-              c.CupertinoColors.tertiarySystemBackground,
-              context,
-            ),
+        margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
+        padding: EdgeInsets.fromLTRB(13, 15, 13, 12),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(6),
+          color: c.CupertinoDynamicColor.resolve(
+            c.CupertinoColors.tertiarySystemBackground,
+            context,
           ),
-          child: child),
+        ),
+        child: child,
+      ),
     );
   }
 }

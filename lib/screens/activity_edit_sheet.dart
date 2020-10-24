@@ -8,51 +8,9 @@ import '../widgets/my_container.dart';
 import '../controllers/activity.dart';
 import '../styles/style.dart';
 
-class ActivityEditSheetRouteInitializer extends StatelessWidget {
-  ActivityEditSheetRouteInitializer(this.activity);
-
-  final Activity activity;
-
-  Future<bool> _handlePopScope(BuildContext context) async {
-    bool shouldClose = false;
-    await c.showCupertinoModalPopup(
-      context: context,
-      builder: (context) => c.CupertinoActionSheet(
-        actions: [
-          c.CupertinoActionSheetAction(
-            onPressed: () {
-              shouldClose = true;
-              Navigator.of(context).pop();
-            },
-            child: Text("Discard Changes"),
-            isDestructiveAction: true,
-          ),
-        ],
-        cancelButton: c.CupertinoActionSheetAction(
-          onPressed: () {
-            shouldClose = false;
-            Navigator.of(context).pop();
-          },
-          child: Text("Cancel"),
-        ),
-      ),
-    );
-    return shouldClose;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () => _handlePopScope(context),
-      child: Navigator(
-        initialRoute: 'edit/title',
-        onGenerateRoute: (settings) =>
-            RouteGenerator.activityRoute(settings, activity),
-      ),
-    );
-  }
-}
-
+/// Activity Add and Edit Sheet Screen widget.
+///
+/// Input form to create update and delete [Activity]
 class ActivityEditSheet extends StatefulWidget {
   ActivityEditSheet(this.activity);
   final Activity activity;
@@ -196,5 +154,54 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
     titleController.dispose();
     noteController.dispose();
     super.dispose();
+  }
+}
+
+/// Activity Route Initializer initialises the activity route.
+///
+/// [ActivityEditSheet] initial route.
+/// Takes confirmation before poping the scope with [CupertinoActionSheet]
+class ActivityRouteInitializer extends StatelessWidget {
+  ActivityRouteInitializer(this.activity);
+
+  final Activity activity;
+
+  Future<bool> _handlePopScope(BuildContext context) async {
+    bool shouldClose = false;
+    await c.showCupertinoModalPopup(
+      context: context,
+      builder: (context) => c.CupertinoActionSheet(
+        actions: [
+          c.CupertinoActionSheetAction(
+            onPressed: () {
+              shouldClose = true;
+              Navigator.of(context).pop();
+            },
+            child: Text("Discard Changes"),
+            isDestructiveAction: true,
+          ),
+        ],
+        cancelButton: c.CupertinoActionSheetAction(
+          onPressed: () {
+            shouldClose = false;
+            Navigator.of(context).pop();
+          },
+          child: Text("Cancel"),
+        ),
+      ),
+    );
+    return shouldClose;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: () => _handlePopScope(context),
+      child: Navigator(
+        initialRoute: 'edit/title',
+        onGenerateRoute: (settings) =>
+            RouteGenerator.activityRoute(settings, activity),
+      ),
+    );
   }
 }

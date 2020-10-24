@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart' as c;
 // Files
 import '../widgets/my_container.dart';
 
-// Cupertino style action container
+/// Cupertino style action container widget
 class ActionContainer extends StatelessWidget {
   ActionContainer({
     this.text,

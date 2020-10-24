@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:flutter/cupertino.dart' as c;
 // Files
 import '../screens/activity_edit_sheet.dart';
 import '../screens/activity_page.dart';
@@ -9,6 +9,8 @@ import '../screens/mood_sheet.dart';
 import '../screens/preferance_sheet.dart';
 import '../utils/bottom_sheet.dart';
 
+/// Centralised routing class.
+/// Static methods inside, define named routes
 class RouteGenerator {
   static Route<dynamic> mainRoute(
     RouteSettings settings,
@@ -16,24 +18,23 @@ class RouteGenerator {
     final args = settings.arguments;
     switch (settings.name) {
       case "/":
-        return MaterialWithModalsPageRoute(
+        return c.CupertinoPageRoute(
           builder: (context) => HomePage(),
         );
       case "/activity":
-        return MaterialWithModalsPageRoute(
+        return c.CupertinoPageRoute(
           builder: (context) => ActivityPage(args),
         );
       case "/preferance":
-        return ModalBottomSheetRouteWrapper(
+        return CupertinoModalBottomSheetRouteWrapper(
           builder: (context, controller) => PreferanceSheet(),
         );
       case "/edit":
-        return ModalBottomSheetRouteWrapper(
-          builder: (context, controller) =>
-              ActivityEditSheetRouteInitializer(args),
+        return CupertinoModalBottomSheetRouteWrapper(
+          builder: (context, controller) => ActivityRouteInitializer(args),
         );
       default:
-        return MaterialWithModalsPageRoute(
+        return c.CupertinoPageRoute(
           builder: (context) => ErrorPage(),
         );
     }
@@ -46,15 +47,15 @@ class RouteGenerator {
     final args = settings.arguments;
     switch (settings.name) {
       case "edit/title":
-        return MaterialWithModalsPageRoute(
+        return c.CupertinoPageRoute(
           builder: (context) => ActivityEditSheet(activity),
         );
       case "edit/mood":
-        return MaterialWithModalsPageRoute(
+        return c.CupertinoPageRoute(
           builder: (context) => MoodSheet(),
         );
       default:
-        return MaterialWithModalsPageRoute(
+        return c.CupertinoPageRoute(
           builder: (context) => ErrorPage(),
         );
     }

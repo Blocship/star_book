@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 
+/// Centralised style class.
+/// Static methods inside, return generic styling
 abstract class Style {
   /// Cupertino, Large Title Size, Label Color Text, Bold Style
   static TextStyle largeTitle(BuildContext context) {

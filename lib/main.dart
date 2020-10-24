@@ -7,6 +7,7 @@ import './routes/route_generator.dart';
 import './models/activity.dart';
 import './models/mood.dart';
 
+/// Starting point of the application.
 void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter<Activity>(ActivityAdapter());
@@ -15,6 +16,9 @@ void main() async {
   runApp(MyApp());
 }
 
+/// MyApp is the most Parent widget and initialises the main route.
+///
+/// [HomePage] initial route
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {

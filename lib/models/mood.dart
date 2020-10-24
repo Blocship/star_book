@@ -3,9 +3,18 @@ import 'package:hive/hive.dart';
 import '../utils/color.dart';
 part 'mood.g.dart';
 
+/// If you think as relational database then it is the name of [Mood] table.
+///
+/// constant value `mood`
 const String moodBoxName = 'mood';
 
 /// Data Type Mood
+///
+/// If you think as relational database
+/// table name is [moodBoxName] and fields
+/// [id], [label] and [colorCode]
+/// are table column names
+/// and adding [Activtiy] object is like adding new row in database.
 @HiveType(typeId: 1)
 class Mood extends HiveObject {
   Mood({

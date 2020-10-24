@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart' as c;
 // Files
 import '../widgets/my_container.dart';
 
-// Color action container
+/// Cupertino style color action container widget
 class ColorContainer extends StatelessWidget {
   ColorContainer({
     this.text,

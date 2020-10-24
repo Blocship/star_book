@@ -9,6 +9,9 @@ import '../widgets/day.dart';
 import '../controllers/activity.dart';
 import '../styles/style.dart';
 
+/// Month widget arranges the [Day]s in rows and columns to make calendar
+/// for given month and year.
+/// And also give [MonthTitle]
 class Month extends c.StatefulWidget {
   Month({
     @required this.month,
@@ -67,6 +70,10 @@ class _MonthState extends c.State<Month> {
   }
 }
 
+/// Month Title widget
+///
+/// for example:
+/// ## December 2020
 class MonthTitle extends StatelessWidget {
   MonthTitle(this.month, this.year);
 

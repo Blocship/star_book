@@ -6,6 +6,8 @@ import '../widgets/action_container.dart';
 import '../widgets/my_container.dart';
 import '../styles/style.dart';
 
+/// Preferance Sheet Screen widget displays the
+/// settings option, Privacy Policy, LICENCE, Terms and Conditions etc.
 class PreferanceSheet extends StatelessWidget {
   c.CupertinoNavigationBar _buildNavBar(BuildContext context) {
     return c.CupertinoNavigationBar(

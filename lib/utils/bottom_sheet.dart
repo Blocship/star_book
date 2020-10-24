@@ -4,8 +4,10 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show Colors;
 
-CupertinoModalBottomSheetRoute<dynamic> ModalBottomSheetRouteWrapper(
-    {Widget Function(BuildContext, ScrollController) builder}) {
+/// Wrapper for [CupertinoModalBottomSheetRoute]
+/// that opens the route in bottom sheet
+CupertinoModalBottomSheetRoute<dynamic> CupertinoModalBottomSheetRouteWrapper(
+    {Widget Function(BuildContext context, ScrollController) builder}) {
   return CupertinoModalBottomSheetRoute<dynamic>(
     expanded: true,
     builder: builder,

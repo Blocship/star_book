@@ -5,6 +5,8 @@ import '../widgets/month.dart';
 import '../models/mood.dart';
 import '../utils/date.dart';
 
+/// Home Page Screen widget is the main page
+/// of the app that renders [Month] and [PreferanceButton] widgets
 class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
@@ -30,14 +32,14 @@ class _HomePageState extends State<HomePage> {
         ?
         // Drags Left
         setState(() {
-            year = getNextYear(year, month);
-            month = getNextMonth(year, month);
+            year = getNextYear(month, year);
+            month = getNextMonth(month, year);
           })
         :
         // Drags Right
         setState(() {
-            year = getPreviousYear(year, month);
-            month = getPreviousMonth(year, month);
+            year = getPreviousYear(month, year);
+            month = getPreviousMonth(month, year);
           });
   }
 

@@ -5,6 +5,9 @@ import '../utils/color.dart';
 import '../widgets/color_container.dart';
 import '../models/mood.dart';
 
+/// Mood Sheet Screen widget displays the list
+/// of moods, on picking a [Mood] it pop it's scope
+/// and pass the id back to the navigator
 class MoodSheet extends StatelessWidget {
   c.CupertinoNavigationBar _buildNavBar(BuildContext context) {
     return c.CupertinoNavigationBar(

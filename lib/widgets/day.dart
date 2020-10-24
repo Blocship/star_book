@@ -4,6 +4,9 @@ import 'package:flutter/widgets.dart';
 import '../models/activity.dart';
 import '../utils/color.dart';
 
+/// Day widget renders color on the basis of [Activity] and [Mood]
+///
+/// Renders default color if [MoodId] in [Activity] is not filled
 class Day extends StatelessWidget {
   final Activity activity;
 

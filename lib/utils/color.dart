@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart' as c;
 
+/// Enum for mood colors
 enum EColor {
   systemBlue,
   systemIndigo,
@@ -13,6 +14,7 @@ enum EColor {
   // systemTeal,
 }
 
+/// Takes the enum [EColor] and returns the [CupertinoDynamicColor]
 c.CupertinoDynamicColor getColor(EColor color) {
   switch (color) {
     case EColor.systemBlue:

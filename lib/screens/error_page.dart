@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 
+/// Error Page/Sheet Screen widget is displayed for wrong or unkonwn route
 class ErrorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
