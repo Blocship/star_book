@@ -71,3 +71,4 @@ Websites that helped me in making this project through out.
 - https://flutter.dev/docs/cookbook/forms/text-field-changes
 - https://api.flutter.dev/flutter/cupertino/CupertinoTextField-class.html
 - https://www.freecodecamp.org/news/how-to-delete-a-git-branch-both-locally-and-remotely/
+- https://dart.dev/guides/language/effective-dart/documentation
