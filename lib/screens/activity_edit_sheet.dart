@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
+import 'package:star_book/models/mood.dart';
+import 'package:star_book/utils/color.dart';
+import 'package:star_book/widgets/color_container.dart';
 // Files
 import '../routes/route_generator.dart';
 import '../widgets/action_container.dart';
@@ -23,6 +26,7 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
   Activity activity;
   final TextEditingController titleController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
+  var containerColor;
 
   @override
   void initState() {
@@ -70,6 +74,14 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
   }
 
   Widget _buildBody(BuildContext context) {
+    // Before we return the body of the main context/activity sheet, it checks the conditions everytime
+    activity.moodId == null
+        ? containerColor = c.CupertinoColors.systemGrey
+        : containerColor = getColor(
+            EColor.values[activity.moodId],
+          );
+    // Condition Ends Here
+
     return SingleChildScrollView(
       child: SafeArea(
         child: Column(
@@ -93,13 +105,15 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
               onTap: null,
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-            ActionContainer(
+            ColorContainer(
               text: "Mood",
-              icon: c.CupertinoIcons.right_chevron,
+              color: containerColor,
               onTap: () async {
                 dynamic moodId =
                     await Navigator.of(context).pushNamed("edit/mood");
-                activity.moodId = moodId;
+                setState(() {
+                  activity.moodId = moodId;
+                });
               },
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 8)),
