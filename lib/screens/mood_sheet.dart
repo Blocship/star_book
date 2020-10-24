@@ -18,7 +18,7 @@ class MoodSheet extends StatelessWidget {
     );
   }
 
-  c.Widget _buildBody(BuildContext context) {
+  Widget _buildBody(BuildContext context) {
     return c.SingleChildScrollView(
       child: SafeArea(
         child: Column(
