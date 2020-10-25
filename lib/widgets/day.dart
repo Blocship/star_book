@@ -25,6 +25,17 @@ class Day extends StatelessWidget {
       return activity.day.toString();
   }
 
+  c.CupertinoDynamicColor _getTextColor(c.BuildContext context) {
+    if (activity == null) {
+      return c.CupertinoDynamicColor.resolve(c.CupertinoColors.label, context);
+    } else if (activity.moodId != null) {
+      return c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.tertiarySystemBackground, context);
+    } else {
+      return c.CupertinoDynamicColor.resolve(c.CupertinoColors.label, context);
+    }
+  }
+
   Color _getBackgroundColor(BuildContext context) {
     // if activity.day == null then show white/transparent color
     if (activity == null)
@@ -67,8 +78,7 @@ class Day extends StatelessWidget {
           // TODO: set color white for colored boxes.
           style: TextStyle(
             fontSize: _squareSize(context) * 0.55,
-            color: c.CupertinoDynamicColor.resolve(
-                c.CupertinoColors.label, context),
+            color: _getTextColor(context),
           ),
         ),
       ),
