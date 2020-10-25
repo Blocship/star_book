@@ -55,7 +55,7 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
     Navigator.of(context, rootNavigator: true).pop();
   }
 
-  c.CupertinoDynamicColor getMoodColor() {
+  c.CupertinoDynamicColor _getMoodColor() {
     return activity.moodId == null
         ? c.CupertinoColors.systemGrey
         : getColor(
@@ -104,7 +104,7 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
             Padding(padding: EdgeInsets.symmetric(vertical: 8)),
             ColorContainer(
               text: "Mood",
-              color: getMoodColor(),
+              color: _getMoodColor(),
               onTap: () async {
                 dynamic moodId =
                     await Navigator.of(context).pushNamed("edit/mood");
