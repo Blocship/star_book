@@ -72,9 +72,10 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
       leading: Container(),
       middle:
           activity.isFilled() ? Text("Edit Activity") : Text("Add Acitvity"),
-      trailing: GestureDetector(
-        onTap: () => onDone(context),
+      trailing: c.CupertinoButton(
+        onPressed: () => onDone(context),
         child: Text("Done"),
+        padding: c.EdgeInsets.zero,
       ),
       border: null,
     );

@@ -26,12 +26,10 @@ class ActivityPage extends StatelessWidget {
       backgroundColor: c.CupertinoDynamicColor.resolve(
           c.CupertinoColors.tertiarySystemBackground, context),
       middle: Text('Activity'),
-      trailing: GestureDetector(
-        onTap: () => onEdit(context),
-        child: Text(
-          "Edit",
-          style: c.CupertinoTheme.of(context).textTheme.navActionTextStyle,
-        ),
+      trailing: c.CupertinoButton(
+        onPressed: () => onEdit(context),
+        child: Text("Edit"),
+        padding: c.EdgeInsets.zero,
       ),
       border: null,
     );
