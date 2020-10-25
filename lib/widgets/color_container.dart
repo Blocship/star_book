@@ -32,7 +32,7 @@ class ColorContainer extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
+            padding: EdgeInsets.symmetric(vertical: 9, horizontal: 9),
             decoration: BoxDecoration(
               color: c.CupertinoDynamicColor.resolve(color, context),
               shape: c.BoxShape.circle,

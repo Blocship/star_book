@@ -1,15 +1,13 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
-import 'package:star_book/models/mood.dart';
-import 'package:star_book/utils/color.dart';
-import 'package:star_book/widgets/color_container.dart';
 // Files
 import '../routes/route_generator.dart';
-import '../widgets/action_container.dart';
 import '../models/activity.dart';
 import '../widgets/my_container.dart';
 import '../controllers/activity.dart';
 import '../styles/style.dart';
+import 'package:star_book/utils/color.dart';
+import 'package:star_book/widgets/color_container.dart';
 
 /// Activity Add and Edit Sheet Screen widget.
 ///
@@ -26,7 +24,6 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
   Activity activity;
   final TextEditingController titleController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
-  var containerColor;
 
   @override
   void initState() {
@@ -58,6 +55,14 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
     Navigator.of(context, rootNavigator: true).pop();
   }
 
+  c.CupertinoDynamicColor getMoodColor() {
+    return activity.moodId == null
+        ? c.CupertinoColors.systemGrey
+        : getColor(
+            EColor.values[activity.moodId],
+          );
+  }
+
   Widget _buildNavBar(BuildContext context) {
     return c.CupertinoNavigationBar(
       backgroundColor: c.CupertinoDynamicColor.resolve(
@@ -74,14 +79,6 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
   }
 
   Widget _buildBody(BuildContext context) {
-    // Before we return the body of the main context/activity sheet, it checks the conditions everytime
-    activity.moodId == null
-        ? containerColor = c.CupertinoColors.systemGrey
-        : containerColor = getColor(
-            EColor.values[activity.moodId],
-          );
-    // Condition Ends Here
-
     return SingleChildScrollView(
       child: SafeArea(
         child: Column(
@@ -107,7 +104,7 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
             Padding(padding: EdgeInsets.symmetric(vertical: 8)),
             ColorContainer(
               text: "Mood",
-              color: containerColor,
+              color: getMoodColor(),
               onTap: () async {
                 dynamic moodId =
                     await Navigator.of(context).pushNamed("edit/mood");
