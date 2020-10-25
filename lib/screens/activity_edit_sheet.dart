@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 // Files
 import '../routes/route_generator.dart';
-import '../widgets/action_container.dart';
 import '../models/activity.dart';
 import '../widgets/my_container.dart';
 import '../controllers/activity.dart';
 import '../styles/style.dart';
+import '../utils/color.dart';
+import '../widgets/color_container.dart';
 
 /// Activity Add and Edit Sheet Screen widget.
 ///
@@ -54,6 +55,16 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
     Navigator.of(context, rootNavigator: true).pop();
   }
 
+  c.CupertinoDynamicColor _getMoodColor(c.BuildContext context) {
+    return c.CupertinoDynamicColor.resolve(
+        activity.moodId == null
+            ? c.CupertinoColors.tertiarySystemGroupedBackground
+            : getColor(
+                EColor.values[activity.moodId],
+              ),
+        context);
+  }
+
   Widget _buildNavBar(BuildContext context) {
     return c.CupertinoNavigationBar(
       backgroundColor: c.CupertinoDynamicColor.resolve(
@@ -93,13 +104,15 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
               onTap: null,
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-            ActionContainer(
+            ColorContainer(
               text: "Mood",
-              icon: c.CupertinoIcons.right_chevron,
+              color: _getMoodColor(context),
               onTap: () async {
                 dynamic moodId =
                     await Navigator.of(context).pushNamed("edit/mood");
-                activity.moodId = moodId;
+                setState(() {
+                  activity.moodId = moodId;
+                });
               },
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 8)),

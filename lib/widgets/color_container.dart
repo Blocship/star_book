@@ -29,14 +29,13 @@ class ColorContainer extends StatelessWidget {
                 c.CupertinoColors.label,
                 context,
               ),
-              fontSize: 20,
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+            padding: EdgeInsets.symmetric(vertical: 9, horizontal: 9),
             decoration: BoxDecoration(
               color: c.CupertinoDynamicColor.resolve(color, context),
-              borderRadius: BorderRadius.circular(12),
+              shape: c.BoxShape.circle,
             ),
           ),
         ],
