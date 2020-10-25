@@ -14,6 +14,21 @@ class PreferanceSheet extends StatelessWidget {
       backgroundColor: c.CupertinoDynamicColor.resolve(
           c.CupertinoColors.systemGrey6, context),
       middle: Text("StarBook"),
+      leading: GestureDetector(
+        onTap: () => {
+          Navigator.maybePop(context),
+        },
+        child: c.Padding(
+          padding: const EdgeInsets.only(
+            top: 12.0,
+            bottom: 12.0,
+          ),
+          child: Text(
+            "Back",
+            style: c.CupertinoTheme.of(context).textTheme.navActionTextStyle,
+          ),
+        ),
+      ),
       trailing: null,
       border: null,
     );
