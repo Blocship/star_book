@@ -6,8 +6,8 @@ import '../models/activity.dart';
 import '../widgets/my_container.dart';
 import '../controllers/activity.dart';
 import '../styles/style.dart';
-import 'package:star_book/utils/color.dart';
-import 'package:star_book/widgets/color_container.dart';
+import '../utils/color.dart';
+import '../widgets/color_container.dart';
 
 /// Activity Add and Edit Sheet Screen widget.
 ///
@@ -55,12 +55,14 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
     Navigator.of(context, rootNavigator: true).pop();
   }
 
-  c.CupertinoDynamicColor _getMoodColor() {
-    return activity.moodId == null
-        ? c.CupertinoColors.systemGrey
-        : getColor(
-            EColor.values[activity.moodId],
-          );
+  c.CupertinoDynamicColor _getMoodColor(c.BuildContext context) {
+    return c.CupertinoDynamicColor.resolve(
+        activity.moodId == null
+            ? c.CupertinoColors.tertiarySystemGroupedBackground
+            : getColor(
+                EColor.values[activity.moodId],
+              ),
+        context);
   }
 
   Widget _buildNavBar(BuildContext context) {
@@ -104,7 +106,7 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
             Padding(padding: EdgeInsets.symmetric(vertical: 8)),
             ColorContainer(
               text: "Mood",
-              color: _getMoodColor(),
+              color: _getMoodColor(context),
               onTap: () async {
                 dynamic moodId =
                     await Navigator.of(context).pushNamed("edit/mood");
