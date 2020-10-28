@@ -13,8 +13,8 @@ class MyContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap != null ? onTap : null,
+    return c.CupertinoButton(
+      onPressed: onTap != null ? onTap : null,
       child: Container(
         margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
         padding: EdgeInsets.fromLTRB(13, 15, 13, 12),

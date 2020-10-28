@@ -50,6 +50,16 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
     }
   }
 
+  c.CupertinoDynamicColor _getButtonColor(c.BuildContext context) {
+    if (activity.isFilled()) {
+      return c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.systemBlue, context);
+    } else {
+      return c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.systemGrey, context);
+    }
+  }
+
   void onDelete(BuildContext context) async {
     await ActivityController.delete(activity);
     Navigator.of(context, rootNavigator: true).pop();
@@ -73,8 +83,13 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
       middle:
           activity.isFilled() ? Text("Edit Activity") : Text("Add Acitvity"),
       trailing: c.CupertinoButton(
-        onPressed: () => onDone(context),
-        child: Text("Done"),
+        onPressed: null,
+        child: Text(
+          "Done",
+          style: TextStyle(
+            color: _getButtonColor(context),
+          ),
+        ),
         padding: c.EdgeInsets.zero,
       ),
       border: null,
