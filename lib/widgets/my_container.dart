@@ -14,6 +14,7 @@ class MyContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return c.CupertinoButton(
+      padding: EdgeInsets.zero,
       onPressed: onTap != null ? onTap : null,
       child: Container(
         margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
