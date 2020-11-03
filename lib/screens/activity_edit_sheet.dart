@@ -60,6 +60,12 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
     Navigator.of(context, rootNavigator: true).pop();
   }
 
+  void onMoodTap() async {
+    dynamic moodId = await Navigator.of(context).pushNamed("edit/mood");
+    activity.moodId = moodId;
+    setState(() {});
+  }
+
   c.CupertinoDynamicColor _getMoodColor(c.BuildContext context) {
     return c.CupertinoDynamicColor.resolve(
         activity.moodId == null
@@ -112,13 +118,7 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
             ColorContainer(
               text: "Mood",
               color: _getMoodColor(context),
-              onTap: () async {
-                dynamic moodId =
-                    await Navigator.of(context).pushNamed("edit/mood");
-                setState(() {
-                  activity.moodId = moodId;
-                });
-              },
+              onTap: onMoodTap,
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 8)),
             MyContainer(
