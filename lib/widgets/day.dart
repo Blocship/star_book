@@ -75,7 +75,6 @@ class Day extends StatelessWidget {
             borderRadius: BorderRadius.circular(_squareSize(context) / 5)),
         child: Text(
           _getText(),
-          // TODO: set color white for colored boxes.
           style: TextStyle(
             fontSize: _squareSize(context) * 0.55,
             color: _getTextColor(context),
