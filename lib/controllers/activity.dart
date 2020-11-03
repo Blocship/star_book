@@ -1,5 +1,4 @@
 import 'package:hive/hive.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 // Files
 import '../models/activity.dart';
 import './id.dart';
