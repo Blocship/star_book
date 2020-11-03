@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter/cupertino.dart' as c;
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 // Files
 import '../screens/activity_edit_sheet.dart';
 import '../screens/activity_page.dart';
@@ -18,11 +18,11 @@ class RouteGenerator {
     final args = settings.arguments;
     switch (settings.name) {
       case "/":
-        return c.CupertinoPageRoute(
+        return MaterialWithModalsPageRoute(
           builder: (context) => HomePage(),
         );
       case "/activity":
-        return c.CupertinoPageRoute(
+        return MaterialWithModalsPageRoute(
           builder: (context) => ActivityPage(args),
         );
       case "/preferance":
@@ -34,7 +34,7 @@ class RouteGenerator {
           builder: (context, controller) => ActivityRouteInitializer(args),
         );
       default:
-        return c.CupertinoPageRoute(
+        return MaterialWithModalsPageRoute(
           builder: (context) => ErrorPage(),
         );
     }
@@ -44,18 +44,18 @@ class RouteGenerator {
     RouteSettings settings,
     dynamic activity,
   ) {
-    final args = settings.arguments;
+    // final args = settings.arguments;
     switch (settings.name) {
       case "edit/title":
-        return c.CupertinoPageRoute(
+        return MaterialWithModalsPageRoute(
           builder: (context) => ActivityEditSheet(activity),
         );
       case "edit/mood":
-        return c.CupertinoPageRoute(
+        return MaterialWithModalsPageRoute(
           builder: (context) => MoodSheet(),
         );
       default:
-        return c.CupertinoPageRoute(
+        return MaterialWithModalsPageRoute(
           builder: (context) => ErrorPage(),
         );
     }
