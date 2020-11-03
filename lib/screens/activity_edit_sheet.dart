@@ -8,6 +8,7 @@ import '../controllers/activity.dart';
 import '../styles/style.dart';
 import '../utils/color.dart';
 import '../widgets/color_container.dart';
+import '../utils/activity.dart';
 
 /// Activity Add and Edit Sheet Screen widget.
 ///
@@ -22,6 +23,7 @@ class ActivityEditSheet extends StatefulWidget {
 
 class _ActivityEditSheetState extends State<ActivityEditSheet> {
   Activity activity;
+  ActivityType type;
   final TextEditingController titleController = TextEditingController();
   final TextEditingController noteController = TextEditingController();
 
@@ -31,16 +33,19 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
     activity = Activity.from(widget.activity);
     titleController.text = activity.title;
     noteController.text = activity.note;
+    type = (activity.moodId == null) ? ActivityType.add : ActivityType.edit;
     titleController.addListener(onTitleChange);
     noteController.addListener(onNoteChange);
   }
 
   void onTitleChange() {
     this.activity.title = titleController.text;
+    setState(() {});
   }
 
   void onNoteChange() {
     this.activity.note = noteController.text;
+    setState(() {});
   }
 
   void onDone(BuildContext context) async {
@@ -70,11 +75,11 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
       backgroundColor: c.CupertinoDynamicColor.resolve(
           c.CupertinoColors.systemGrey6, context),
       leading: Container(),
-      middle:
-          activity.isFilled() ? Text("Edit Activity") : Text("Add Acitvity"),
-      trailing: GestureDetector(
-        onTap: () => onDone(context),
+      middle: Text("${(type == ActivityType.add) ? "Add" : "Edit"} Acitvity"),
+      trailing: c.CupertinoButton(
+        onPressed: activity.isFilled() ? () => onDone(context) : null,
         child: Text("Done"),
+        padding: EdgeInsets.zero,
       ),
       border: null,
     );
@@ -138,12 +143,12 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
               ),
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-            activity.isFilled()
-                ? c.CupertinoButton(
+            (type == ActivityType.add)
+                ? Container()
+                : c.CupertinoButton(
                     child: Text("DELETE"),
                     onPressed: () => onDelete(context),
-                  )
-                : Container(),
+                  ),
           ],
         ),
       ),

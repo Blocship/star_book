@@ -1,4 +1,7 @@
 import 'package:hive/hive.dart';
+// Files
+import '../utils/string.dart';
+
 part 'activity.g.dart';
 
 /// If you think as relational database then it is the name of [Activity] table.
@@ -58,7 +61,7 @@ class Activity extends HiveObject {
         this.month != null &&
         this.year != null &&
         this.moodId != null &&
-        this.title != null &&
-        this.note != null);
+        !isNullOrEmpty(this.title) &&
+        !isNullOrEmpty(this.note));
   }
 }
