@@ -1,7 +1,22 @@
 /// Checks if the given date is equal to the current date.
-bool isCurrentDate(DateTime date) {
+bool isCurrentDate(int year, int month, int day) {
+  DateTime date = new DateTime(year, month, day);
   final DateTime now = DateTime.now();
   return date.isAtSameMomentAs(DateTime(now.year, now.month, now.day));
+}
+
+/// Checks if the given date is before the current date.
+bool isBeforeCurrentDate(int year, int month, int day) {
+  DateTime date = new DateTime(year, month, day);
+  final DateTime now = DateTime.now();
+  return date.isBefore(DateTime(now.year, now.month, now.day));
+}
+
+/// Checks if the given date is after the current date.
+bool isAfterCurrentDate(int year, int month, int day) {
+  DateTime date = new DateTime(year, month, day);
+  final DateTime now = DateTime.now();
+  return date.isAfter(DateTime(now.year, now.month, now.day));
 }
 
 /// Gets the number of days for the given month.

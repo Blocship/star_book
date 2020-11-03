@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 // Files
 import '../models/activity.dart';
 import '../utils/color.dart';
+import '../utils/date.dart';
 
 /// Day widget renders color on the basis of [Activity] and [Mood]
 ///
@@ -53,7 +54,8 @@ class Day extends StatelessWidget {
   }
 
   void _onTap(context) {
-    if (activity == null)
+    if (activity == null ||
+        isAfterCurrentDate(activity.year, activity.month, activity.day))
       return;
     else if (activity.moodId == null)
       Navigator.of(context).pushNamed("/edit", arguments: activity);
