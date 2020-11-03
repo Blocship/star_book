@@ -13,13 +13,14 @@ class MyContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap != null ? onTap : null,
+    return c.CupertinoButton(
+      padding: EdgeInsets.zero,
+      onPressed: onTap,
       child: Container(
         margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
         padding: EdgeInsets.fromLTRB(13, 15, 13, 12),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(6),
+          borderRadius: BorderRadius.circular(8),
           color: c.CupertinoDynamicColor.resolve(
             c.CupertinoColors.tertiarySystemBackground,
             context,
