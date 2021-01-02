@@ -41,15 +41,9 @@ The following are guidelines for contributing to this project.
 
 Following are the mock-up screens and the flow of the App.
 
-![Mock-up Image](READMEdocs/mock-up.jpg)
+![Mock-up Image](READMEdocs/mock-up.png)
 
-![Mock-ups](READMEdocs/StarBook.pdf)
-
-<object data="READMEdocs/StarBook.pdf" type="application/pdf" width="700px" height="700px">
-    <embed src="READMEdocs/StarBook.pdf">
-        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="READMEdocs/StarBook.pdf">Download PDF</a>.</p>
-    </embed>
-</object>
+Please download the PDF to view it: [Download PDF](READMEdocs/StarBook.pdf)
 
 ## 🐛 How to Report Bugs
 
