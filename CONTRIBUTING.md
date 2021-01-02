@@ -43,6 +43,14 @@ Following are the mock-up screens and the flow of the App.
 
 ![Mock-up Image](READMEdocs/mock-up.jpg)
 
+![Mock-ups](READMEdocs/StarBook.pdf)
+
+<object data="READMEdocs/StarBook.pdf" type="application/pdf" width="700px" height="700px">
+    <embed src="READMEdocs/StarBook.pdf">
+        <p>This browser does not support PDFs. Please download the PDF to view it: <a href="READMEdocs/StarBook.pdf">Download PDF</a>.</p>
+    </embed>
+</object>
+
 ## 🐛 How to Report Bugs
 
 Please open a [new issue](https://github.com/hashirshoaeb/star_book/issues/new) including steps to reproduce the problem
