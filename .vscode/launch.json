@@ -1,0 +1,12 @@
+{
+  // Configurations to set the launch of `star_book` dart files in debug mode
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "star_book",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug"
+    }
+  ]
+}
