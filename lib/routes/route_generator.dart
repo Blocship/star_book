@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+
 // Files
 import '../screens/activity_edit_sheet.dart';
 import '../screens/activity_page.dart';
