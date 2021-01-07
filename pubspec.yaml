@@ -42,7 +42,7 @@ dev_dependencies:
   # Local database
   hive_generator: ^0.8.1
   build_runner: ^1.10.3
-#  Flutter Icons
+  # App's launcher icons generator 
   flutter_launcher_icons: ^0.7.0
 
 # For information on the generic Dart part of this file, see the
