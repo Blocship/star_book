@@ -50,7 +50,7 @@ abstract class Style {
     );
   }
   ///For button text in UserNameAdd sheet
-  static TextStyle ButtonText(BuildContext context) {
+  static TextStyle buttonText(BuildContext context) {
     return TextStyle(
       color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.white, context),
       fontFamily: "SFProDisplay",
