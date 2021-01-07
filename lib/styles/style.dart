@@ -49,6 +49,38 @@ abstract class Style {
       fontSize: 13.0,
     );
   }
+
+  /// Extra Large Title Size, Label Color Text, Bold Style
+  static TextStyle extraLargeTitle(BuildContext context) {
+    return TextStyle(
+      color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.label, context),
+      fontWeight: FontWeight.w700,
+      fontFamily: "SFProDisplay",
+      fontStyle: FontStyle.normal,
+      fontSize: 45.0,
+    );
+  }
+
+  /// For Subtitle in Username Add Sheet
+  static TextStyle subTitle(BuildContext context) {
+    return TextStyle(
+      color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.label, context),
+      fontWeight: FontWeight.w400,
+      fontFamily: "SFProDisplay",
+      fontStyle: FontStyle.normal,
+      fontSize: 32.0,
+    );
+  }
+
+  /// For button text in Username Add Sheet
+  static TextStyle buttonText(BuildContext context) {
+    return TextStyle(
+      color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.white, context),
+      fontFamily: "SFProDisplay",
+      fontStyle: FontStyle.normal,
+      fontSize: 18.0,
+    );
+  }
 }
 
 // Cupertino Icons which are not in cupertino_icons package
