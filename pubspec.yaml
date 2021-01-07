@@ -42,9 +42,18 @@ dev_dependencies:
   # Local database
   hive_generator: ^0.8.1
   build_runner: ^1.10.3
+#  Flutter Icons
+  flutter_launcher_icons: ^0.7.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+
+# Adding Flutter icons
+flutter_icons:
+  ios: true
+  android: true
+  image_path_ios: "assets/icon.png"
+  image_path_android: "assets/icon.png"
 
 # The following section is specific to Flutter.
 flutter:
@@ -57,7 +66,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - dev-profile.jpeg
-  #   - images/a_dot_ham.jpeg
+    - icon.png
+#     - images/a_dot_ham.jpeg
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
