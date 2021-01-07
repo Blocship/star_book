@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart' as c;
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:star_book/widgets/custom_switch.dart';
 import 'package:url_launcher/url_launcher.dart';
 // Files
 import '../widgets/action_container.dart';
@@ -73,6 +75,7 @@ class PreferanceSheet extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
+    bool _light = false;
     return SafeArea(
       // minimum: EdgeInsets.symmetric(horizontal: 16),
       child: Column(
@@ -83,6 +86,31 @@ class PreferanceSheet extends StatelessWidget {
           //   text: 'Edit Mood',
           //   icon: c.CupertinoIcons.right_chevron,
           // ),
+          Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+          MyContainer(
+              child: Row(
+                mainAxisAlignment: c.MainAxisAlignment.spaceBetween,
+                children: [
+                  c.Container(
+                    width: MediaQuery.of(context).size.width * 0.6 - 29,
+                    child: Text('Dark Mode',
+                        style: Style.body(context)
+                    ),
+                  ),
+                  Card(
+                    child: CustomSwitch(
+                        activeColor: Colors.blue,
+                        value: _light,
+                        onChanged: (value) {
+                          _light = value;
+                        }),
+                    shape: c.RoundedRectangleBorder(
+                      borderRadius: c.BorderRadius.circular(18),
+                    ),
+                  ),
+                ],
+              ),
+          ),
           Padding(padding: EdgeInsets.symmetric(vertical: 18)),
           ..._aboutDeveloper(context),
           Padding(padding: EdgeInsets.symmetric(vertical: 18)),
