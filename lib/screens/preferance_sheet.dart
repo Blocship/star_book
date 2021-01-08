@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart' as c;
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
 // Files
@@ -7,17 +6,50 @@ import '../widgets/action_container.dart';
 import '../widgets/my_container.dart';
 import '../styles/style.dart';
 
+enum BrightnessOption {
+  light,
+  dark,
+  auto,
+}
+
+Map<BrightnessOption, Widget> optoins = {
+  BrightnessOption.auto: SlidingSegment(c.CupertinoIcons.circle_lefthalf_fill),
+  BrightnessOption.light: SlidingSegment(c.CupertinoIcons.sun_max_fill),
+  BrightnessOption.dark: SlidingSegment(c.CupertinoIcons.moon_fill),
+};
+
+class SlidingSegment extends StatelessWidget {
+  SlidingSegment(this.iconData);
+  final IconData iconData;
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      iconData,
+      size: 17,
+      color: c.CupertinoDynamicColor.resolve(
+        c.CupertinoColors.label,
+        context,
+      ),
+    );
+  }
+}
+
 /// Preferance Sheet Screen widget displays the
 /// settings option, Privacy Policy, LICENCE, Terms and Conditions etc.
 class PreferanceSheet extends StatefulWidget {
-  // theme mode
-  String _selectedMode = 'Dark';
-
   @override
   PreferenceSheetState createState() => PreferenceSheetState();
 }
 
 class PreferenceSheetState extends State<PreferanceSheet> {
+  BrightnessOption _selectedOption;
+
+  @override
+  void initState() {
+    _selectedOption = BrightnessOption.auto;
+    super.initState();
+  }
+
   c.CupertinoNavigationBar _buildNavBar(BuildContext context) {
     return c.CupertinoNavigationBar(
       backgroundColor: c.CupertinoDynamicColor.resolve(
@@ -56,28 +88,29 @@ class PreferenceSheetState extends State<PreferanceSheet> {
         ),
       ),
       MyContainer(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: _textWidth,
-                child: Text(
-                  "I'm Hashir, the developer of this app. Feel free to contact me anytime. I love hearing from you",
-                  style: Style.body(context),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              width: _textWidth,
+              child: Text(
+                "I'm Hashir, the developer of this app. Feel free to contact me anytime. I love hearing from you",
+                style: Style.body(context),
+              ),
+            ),
+            Container(
+              width: _imageWidth,
+              height: _imageWidth,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(_imageWidth / 2),
+                image: DecorationImage(
+                  image: AssetImage("dev-profile.jpeg"),
                 ),
               ),
-              Container(
-                width: _imageWidth,
-                height: _imageWidth,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(_imageWidth / 2),
-                  image: DecorationImage(
-                    image: AssetImage("dev-profile.jpeg"),
-                  ),
-                ),
-              ),
-            ],
-          ))
+            ),
+          ],
+        ),
+      ),
     ];
   }
 
@@ -95,87 +128,18 @@ class PreferenceSheetState extends State<PreferanceSheet> {
           Padding(padding: EdgeInsets.symmetric(vertical: 18)),
           MyContainer(
             child: Row(
-              mainAxisAlignment: c.MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                c.Expanded(
-                  flex: 1,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.white10,
-                    child: Icon(Icons.bedtime, color: Colors.white70, size: 20),
+                Text('Dark Mode', style: Style.body(context)),
+                c.CupertinoSlidingSegmentedControl<BrightnessOption>(
+                  children: optoins,
+                  groupValue: _selectedOption,
+                  onValueChanged: onSlidingSegmentChanged,
+                  backgroundColor: c.CupertinoDynamicColor.resolve(
+                    c.CupertinoColors.systemGrey6,
+                    context,
                   ),
                 ),
-                c.SizedBox(width: 10),
-                c.Expanded(
-                  flex: 3,
-                  child: c.Container(
-                    width: MediaQuery.of(context).size.width * 0.6 - 29,
-                    child: Text('Dark Mode'.toUpperCase(),
-                        style: Style.body(context)
-                    ),
-                  ),
-                ),
-                c.Expanded(
-                  flex: 4,
-                  child: c.CupertinoSlidingSegmentedControl(
-                    children: {
-                      'Auto': Container(
-                        width: 40,
-                        height: 40,
-                        child: Card(
-                          elevation: 0,
-                          color: widget._selectedMode == 'Auto' ? Colors.grey : Colors.transparent,
-                          shape: c.RoundedRectangleBorder(
-                            borderRadius: c.BorderRadius.circular(8),
-                          ),
-                          // margin: EdgeInsets.all(10),
-                          child: Container(
-                            width: 25,
-                            height: 25,
-                            decoration: c.BoxDecoration(
-                              color: Colors.white70,
-                              borderRadius: c.BorderRadius.circular(20),
-                            ),
-                            margin: EdgeInsets.all(5),
-                            alignment: c.Alignment.center,
-                            child: Text('A', style: c.TextStyle(color: Colors.black45, fontSize: 15, fontWeight: c.FontWeight.w600)),
-                          ),
-                        ),
-                      ),
-                      'Light': Container(
-                        width: 40,
-                        height: 40,
-                        child: Card(
-                          elevation: 0,
-                          color: widget._selectedMode == 'Light' ? Colors.grey : Colors.transparent,
-                          shape: c.RoundedRectangleBorder(
-                            borderRadius: c.BorderRadius.circular(8),
-                          ),
-                          // margin: EdgeInsets.all(10),
-                          child: Icon(Icons.wb_sunny, color: Colors.white70, size: 20),
-                        ),
-                      ),
-                      'Dark': Container(
-                        width: 40,
-                        height: 40,
-                        child: Card(
-                          elevation: 0,
-                          color: widget._selectedMode == 'Dark' ? Colors.grey : Colors.transparent,
-                          shape: c.RoundedRectangleBorder(
-                            borderRadius: c.BorderRadius.circular(8),
-                          ),
-                          // margin: EdgeInsets.all(10),
-                          child: Icon(Icons.bedtime, color: Colors.white70, size: 20),
-                        ),
-                      ),
-                    },
-                    onValueChanged: (value) {
-                      setState(() {
-                        widget._selectedMode = value;
-                        print(widget._selectedMode);
-                      });
-                    },
-                  ),
-                )
               ],
             ),
           ),
@@ -213,5 +177,11 @@ class PreferenceSheetState extends State<PreferanceSheet> {
       navigationBar: _buildNavBar(context),
       child: _buildBody(context),
     );
+  }
+
+  void onSlidingSegmentChanged(BrightnessOption option) {
+    setState(() {
+      _selectedOption = option;
+    });
   }
 }
