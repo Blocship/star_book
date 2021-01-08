@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
+import 'package:star_book/screens/year_view.dart';
 // Files
 import '../widgets/month.dart';
 import '../models/mood.dart';
@@ -57,6 +58,22 @@ class _HomePageState extends State<HomePage> {
         ),
         trailing: PreferanceButton(),
         border: null,
+        leading: c.CupertinoDialogAction(
+          onPressed: () {
+            Navigator.push(context , c.CupertinoPageRoute(builder: (context) => YearView(
+              context: context,
+              initialDate: DateTime.now(),
+              firstDate: DateTime.now().subtract(const Duration(days: 5 * 365)),
+              lastDate: DateTime.now(),)));
+          },
+          child: Text(
+              'Year',
+            style: c.TextStyle(
+              fontSize: 20,
+              color: Color(0xff3890fc),
+            ),
+          ),
+        ),
       ),
       child: SafeArea(
         child: c.GestureDetector(

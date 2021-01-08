@@ -75,3 +75,7 @@ const List<String> _monthList = const <String>[
 String getMonthTitle(int month) {
   return _monthList[month - 1];
 }
+
+List<String> getMonthList() {
+  return _monthList;
+}
