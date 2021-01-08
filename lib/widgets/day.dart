@@ -56,7 +56,21 @@ class Day extends StatelessWidget {
   void _onTap(context) {
     if (activity == null ||
         isAfterCurrentDate(activity.year, activity.month, activity.day))
-      return;
+      c.showCupertinoDialog(
+          context: context,
+          builder: (context) => new c.CupertinoAlertDialog(
+                title: new Text("Cannot Add Mood"),
+                content: new Text(
+                    "You cannot add a mood for ${activity.day}-${activity.month}-${activity.year}."),
+                actions: <Widget>[
+                  c.CupertinoDialogAction(
+                    child: Text("Okay"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ],
+              ));
     else if (activity.moodId == null)
       Navigator.of(context).pushNamed("/edit", arguments: activity);
     else
