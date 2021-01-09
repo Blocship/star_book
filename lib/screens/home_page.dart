@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
+import 'package:swipedetector/swipedetector.dart';
 // Files
 import '../widgets/month.dart';
 import '../models/mood.dart';
@@ -27,21 +28,21 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  void onHorizontalDragEnd(c.DragEndDetails value) {
-    (value.primaryVelocity.isNegative)
-        ?
-        // Drags Left
-        setState(() {
-            year = getNextYear(month, year);
-            month = getNextMonth(month, year);
-          })
-        :
-        // Drags Right
-        setState(() {
-            year = getPreviousYear(month, year);
-            month = getPreviousMonth(month, year);
-          });
-  }
+  // void onHorizontalDragEnd(c.DragUpdateDetails value) {
+  //   (value.primaryDelta.isNegative)
+  //       ?
+  //       // Drags Left
+  //       setState(() {
+  //           year = getNextYear(month, year);
+  //           month = getNextMonth(month, year);
+  //         })
+  //       :
+  //       // Drags Right
+  //       setState(() {
+  //           year = getPreviousYear(month, year);
+  //           month = getPreviousMonth(month, year);
+  //         });
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -58,11 +59,26 @@ class _HomePageState extends State<HomePage> {
         trailing: PreferanceButton(),
         border: null,
       ),
-      child: SafeArea(
-        child: c.GestureDetector(
-          onHorizontalDragEnd: onHorizontalDragEnd,
-          child: c.Container(
-            padding: c.EdgeInsets.symmetric(horizontal: 12),
+      child: c.SafeArea(
+              child: c.Container(
+          //height: 400,
+          //width: double.infinity,
+          //padding: c.EdgeInsets.symmetric(horizontal: 12),
+          child: SwipeDetector(
+            onSwipeLeft: () {
+              print("Next year");
+              setState(() {
+                year = getNextYear(month, year);
+                month = getNextMonth(month, year);
+              });
+            },
+            onSwipeRight: () {
+              print("Prev year");
+              setState(() {
+                year = getPreviousYear(month, year);
+                month = getPreviousMonth(month, year);
+              });
+            },
             child: Month(
               month: month,
               year: year,
