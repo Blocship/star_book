@@ -1,4 +1,3 @@
-import 'package:dataclass/dataclass.dart';
 import 'package:hive/hive.dart';
 // Files
 import '../utils/string.dart';
@@ -67,23 +66,28 @@ class Activity extends HiveObject {
   }
 
   @override
-  bool operator ==(other) {
-    if (identical(this, other)) return true;
-    if (other is! Activity) return false;
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
 
-    return true &&
-        this.id == other.id &&
-        this.day == other.day &&
-        this.month == other.month &&
-        this.year == other.year &&
-        this.moodId == other.moodId &&
-        this.title == other.title &&
-        this.note == other.note;
+    return o is Activity &&
+        this.id == o.id &&
+        this.day == o.day &&
+        this.month == o.month &&
+        this.year == o.year &&
+        this.moodId == o.moodId &&
+        this.title == o.title &&
+        this.note == o.note;
   }
 
   @override
   int get hashCode {
-    return mapPropsToHashCode([id, day, month, year, moodId, title, note]);
+    return id.hashCode ^
+        day.hashCode ^
+        month.hashCode ^
+        year.hashCode ^
+        moodId.hashCode ^
+        title.hashCode ^
+        note.hashCode;
   }
 
   @override
