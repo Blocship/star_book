@@ -1,4 +1,3 @@
-import 'package:dataclass/dataclass.dart';
 import 'package:hive/hive.dart';
 
 class User extends HiveObject {
@@ -8,21 +7,20 @@ class User extends HiveObject {
   User(this.name);
 
   @override
-  bool operator ==(other) {
-    if (identical(this, other)) return true;
-    if (other is! User) return false;
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
 
-    return true && this.name == other.name;
+    return o is User && this.name == o.name;
   }
 
   @override
   int get hashCode {
-    return mapPropsToHashCode([name]);
+    return name.hashCode;
   }
 
   @override
   String toString() {
-    return '{\n name: $name}';
+    return '{\n name: $name}, \n';
   }
 
   User copyWith({String name}) {
