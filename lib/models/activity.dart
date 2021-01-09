@@ -1,3 +1,4 @@
+import 'package:dataclass/dataclass.dart';
 import 'package:hive/hive.dart';
 // Files
 import '../utils/string.dart';
@@ -63,5 +64,48 @@ class Activity extends HiveObject {
         this.moodId != null &&
         !isNullOrEmpty(this.title) &&
         !isNullOrEmpty(this.note));
+  }
+
+  @override
+  bool operator ==(other) {
+    if (identical(this, other)) return true;
+    if (other is! Activity) return false;
+
+    return true &&
+        this.id == other.id &&
+        this.day == other.day &&
+        this.month == other.month &&
+        this.year == other.year &&
+        this.moodId == other.moodId &&
+        this.title == other.title &&
+        this.note == other.note;
+  }
+
+  @override
+  int get hashCode {
+    return mapPropsToHashCode([id, day, month, year, moodId, title, note]);
+  }
+
+  @override
+  String toString() {
+    return '{\n id: ${this.id},\n day: ${this.day},\n month: ${this.month},\n year: ${this.year},\n moodId: ${this.moodId},\n title: ${this.title},\n note: ${this.note}, \n}';
+  }
+
+  Activity copyWith(
+      {int id,
+      int day,
+      int month,
+      int year,
+      int moodId,
+      String title,
+      String note}) {
+    return Activity(
+        id: id ?? this.id,
+        day: day ?? this.day,
+        month: month ?? this.month,
+        year: year ?? this.year,
+        moodId: moodId ?? this.moodId,
+        title: title ?? this.title,
+        note: note ?? this.note);
   }
 }
