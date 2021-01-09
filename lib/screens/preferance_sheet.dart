@@ -149,6 +149,15 @@ class PreferenceSheetState extends State<PreferanceSheet> {
           ActionContainer(
             text: 'Privacy and Terms',
             icon: c.CupertinoIcons.right_chevron,
+            onTap: () async {
+              String url =
+                  "https://www.privacypolicygenerator.info/live.php?token=9D71jAEsRLTRK7tnOVin87QfmEQxYW9O";
+              try {
+                if (await canLaunch(url)) await launch(url);
+              } catch (e) {
+                // print("Url Exception , ${e.toString()}");
+              }
+            },
           ),
           Padding(padding: EdgeInsets.symmetric(vertical: 18)),
           ActionContainer(
