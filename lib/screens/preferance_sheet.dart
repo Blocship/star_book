@@ -1,5 +1,9 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:star_book/bloc/theme_bloc/theme_bloc.dart';
+import 'package:star_book/bloc/theme_bloc/theme_event.dart';
+import 'package:star_book/bloc/theme_bloc/theme_state.dart';
 import 'package:url_launcher/url_launcher.dart';
 // Files
 import '../widgets/action_container.dart';
@@ -46,7 +50,7 @@ class PreferenceSheetState extends State<PreferanceSheet> {
 
   @override
   void initState() {
-    _selectedOption = BrightnessOption.auto;
+    // _selectedOption = BrightnessOption.auto;
     super.initState();
   }
 
@@ -131,13 +135,16 @@ class PreferenceSheetState extends State<PreferanceSheet> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Dark Mode', style: Style.body(context)),
-                c.CupertinoSlidingSegmentedControl<BrightnessOption>(
-                  children: optoins,
-                  groupValue: _selectedOption,
-                  onValueChanged: onSlidingSegmentChanged,
-                  backgroundColor: c.CupertinoDynamicColor.resolve(
-                    c.CupertinoColors.systemGrey6,
-                    context,
+                BlocBuilder<ThemeBloc, ThemeState>(
+                  builder: (context, state) =>
+                      c.CupertinoSlidingSegmentedControl<BrightnessOption>(
+                    children: optoins,
+                    groupValue: state.option,
+                    onValueChanged: onSlidingSegmentChanged,
+                    backgroundColor: c.CupertinoDynamicColor.resolve(
+                      c.CupertinoColors.systemGrey6,
+                      context,
+                    ),
                   ),
                 ),
               ],
@@ -180,8 +187,6 @@ class PreferenceSheetState extends State<PreferanceSheet> {
   }
 
   void onSlidingSegmentChanged(BrightnessOption option) {
-    setState(() {
-      _selectedOption = option;
-    });
+    BlocProvider.of<ThemeBloc>(context).add(ThemeChangeEvent(option: option));
   }
 }

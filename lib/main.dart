@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:star_book/bloc/theme_bloc/theme_bloc.dart';
+import 'package:star_book/bloc/theme_bloc/theme_state.dart';
 // Files
 import './routes/route_generator.dart';
 import './models/activity.dart';
@@ -22,11 +25,16 @@ void main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return c.CupertinoApp(
-      initialRoute: '/',
-      title: "StarBook",
-      theme: c.CupertinoThemeData(),
-      onGenerateRoute: (settings) => RouteGenerator.mainRoute(settings),
+    return BlocProvider(
+      create: (context) => ThemeBloc(),
+      child: BlocBuilder<ThemeBloc, ThemeState>(
+        builder: (context, state) => c.CupertinoApp(
+          initialRoute: '/',
+          title: "StarBook",
+          theme: state.theme,
+          onGenerateRoute: (settings) => RouteGenerator.mainRoute(settings),
+        ),
+      ),
     );
   }
 }
