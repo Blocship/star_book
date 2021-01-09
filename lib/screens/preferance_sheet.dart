@@ -151,7 +151,7 @@ class PreferenceSheetState extends State<PreferanceSheet> {
             icon: c.CupertinoIcons.right_chevron,
             onTap: () async {
               String url =
-                  "https://www.privacypolicygenerator.info/live.php?token=9D71jAEsRLTRK7tnOVin87QfmEQxYW9O";
+                  "https://github.com/hashirshoaeb/star_book/blob/master/POLICY.md";
               try {
                 if (await canLaunch(url)) await launch(url);
               } catch (e) {
