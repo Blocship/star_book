@@ -1,3 +1,4 @@
+import 'package:dataclass/dataclass.dart';
 import 'package:hive/hive.dart';
 // Files
 import '../utils/color.dart';
@@ -28,6 +29,34 @@ class Mood extends HiveObject {
   String label;
   @HiveField(2)
   int colorCode;
+
+  @override
+  bool operator ==(other) {
+    if (identical(this, other)) return true;
+    if (other is! Mood) return false;
+
+    return true &&
+        this.id == other.id &&
+        this.label == other.label &&
+        this.colorCode == other.colorCode;
+  }
+
+  @override
+  int get hashCode {
+    return mapPropsToHashCode([id, label, colorCode]);
+  }
+
+  @override
+  String toString() {
+    return '\n id: $id, \n label: $label, \n colorCode: $colorCode, \n';
+  }
+
+  Mood copyWith({int id, String label, int colorCode}) {
+    return Mood(
+        id: id ?? this.id,
+        label: label ?? this.label,
+        colorCode: colorCode ?? this.colorCode);
+  }
 }
 
 /// Mock list of Moods
