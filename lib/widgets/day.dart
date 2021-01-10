@@ -101,7 +101,9 @@ class Day extends StatelessWidget {
         final _size = (size == null) ? constraints.minWidth : size;
         return c.CupertinoButton(
           padding: EdgeInsets.zero,
-          onPressed: (onPressed) ? () => _onDayPressed(context) : null,
+          onPressed: (onPressed && activity != null)
+              ? () => _onDayPressed(context)
+              : null,
           child: Container(
             height: _size,
             width: _size,
