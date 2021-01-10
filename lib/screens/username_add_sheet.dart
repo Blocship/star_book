@@ -81,6 +81,9 @@ class _UsernameAddSheetState extends State<UsernameAddSheet> {
   }
 
   void onContinuePressed() {
-    //TODO: Navigate to profile page
+    {
+      Navigator.of(context).pushNamed("/home");
+      return null;
+    }
   }
 }
