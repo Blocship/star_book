@@ -64,4 +64,52 @@ class Activity extends HiveObject {
         !isNullOrEmpty(this.title) &&
         !isNullOrEmpty(this.note));
   }
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Activity &&
+        this.id == o.id &&
+        this.day == o.day &&
+        this.month == o.month &&
+        this.year == o.year &&
+        this.moodId == o.moodId &&
+        this.title == o.title &&
+        this.note == o.note;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        day.hashCode ^
+        month.hashCode ^
+        year.hashCode ^
+        moodId.hashCode ^
+        title.hashCode ^
+        note.hashCode;
+  }
+
+  @override
+  String toString() {
+    return '{\n id: ${this.id},\n day: ${this.day},\n month: ${this.month},\n year: ${this.year},\n moodId: ${this.moodId},\n title: ${this.title},\n note: ${this.note}, \n}';
+  }
+
+  Activity copyWith(
+      {int id,
+      int day,
+      int month,
+      int year,
+      int moodId,
+      String title,
+      String note}) {
+    return Activity(
+        id: id ?? this.id,
+        day: day ?? this.day,
+        month: month ?? this.month,
+        year: year ?? this.year,
+        moodId: moodId ?? this.moodId,
+        title: title ?? this.title,
+        note: note ?? this.note);
+  }
 }

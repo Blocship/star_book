@@ -28,6 +28,33 @@ class Mood extends HiveObject {
   String label;
   @HiveField(2)
   int colorCode;
+
+  @override
+  bool operator ==(Object o) {
+    if (identical(this, o)) return true;
+
+    return o is Mood &&
+        this.id == o.id &&
+        this.label == o.label &&
+        this.colorCode == o.colorCode;
+  }
+
+  @override
+  int get hashCode {
+    return id.hashCode ^ label.hashCode ^ colorCode.hashCode;
+  }
+
+  @override
+  String toString() {
+    return '{\n id: $id, \n label: $label, \n colorCode: $colorCode, \n}';
+  }
+
+  Mood copyWith({int id, String label, int colorCode}) {
+    return Mood(
+        id: id ?? this.id,
+        label: label ?? this.label,
+        colorCode: colorCode ?? this.colorCode);
+  }
 }
 
 /// Mock list of Moods
