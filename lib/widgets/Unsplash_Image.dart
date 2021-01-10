@@ -37,6 +37,9 @@ class UnsplashImage {
             "by ${photoList[index]['user']['username']} from Unsplash",
             style: Style.footerNoteSecondary(context),
           )
-        : c.Text("by Mark Boss from Unsplash");
+        : c.Text(
+            "by Mark Boss from Unsplash",
+            style: Style.footerNoteSecondary(context),
+          );
   }
 }
