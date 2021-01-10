@@ -16,14 +16,14 @@ import '../widgets/day.dart';
 class Month extends StatefulWidget {
   final int month;
   final int year;
-  final double size;
-  final Function ontap;
+  final bool onPressed;
+  final bool showMonthTitle;
 
   Month({
     @required this.month,
     @required this.year,
-    this.size,
-    this.ontap,
+    this.showMonthTitle = true,
+    this.onPressed = false,
   });
 
   @override
@@ -35,45 +35,21 @@ class _MonthState extends c.State<Month> {
     return ActivityController.readAt(day, widget.month, widget.year);
   }
 
-  // Widget _daysGrid(BuildContext context) {
-  //   final List<Row> dayRowsList = new List<Row>();
-  //   final List<Day> daysList = new List<Day>();
-
-  //   final int daysInMonth = getDaysInMonth(widget.year, widget.month);
-  //   final int fistWeekDay = DateTime(widget.year, widget.month, 1).weekday;
-
-  //   for (int day = 2 - fistWeekDay; day <= daysInMonth; day++) {
-  //     if (day <= 0) {
-  //       daysList.add(new Day());
-  //     } else {
-  //       daysList.add(new Day(activity: _getActivity(day)));
-  //     }
-
-  //     bool weekDone = (day - 1 + fistWeekDay) % DateTime.daysPerWeek == 0;
-  //     bool monthDone = day == daysInMonth;
-  //     if (weekDone || monthDone) {
-  //       dayRowsList.add(
-  //         Row(children: List<Day>.from(daysList)),
-  //       );
-  //       daysList.clear();
-  //     }
-  //   }
-  //   return Column(
-  //     children: [MonthTitle(widget.month, widget.year), ...dayRowsList],
-  //   );
-  // }
-
   Widget _daysGrid(BuildContext context) {
     final int daysInMonth = getDaysInMonth(widget.year, widget.month);
     final int fistWeekDay = DateTime(widget.year, widget.month, 1).weekday;
-    final daysList = new List<Day>();
+    final daysList = List<Day>();
     for (int day = 2 - fistWeekDay; day <= daysInMonth; day++) {
       if (day <= 0) {
-        daysList.add(new Day());
+        daysList.add(Day());
       } else {
-        daysList.add(new Day(activity: _getActivity(day)));
+        daysList.add(Day(
+          activity: _getActivity(day),
+          onPressed: (widget.onPressed == false),
+        ));
       }
     }
+
     return GridView.count(
       primary: false,
       shrinkWrap: true,
@@ -87,13 +63,30 @@ class _MonthState extends c.State<Month> {
     return ValueListenableBuilder(
       valueListenable: Hive.box<Activity>(activityBoxName).listenable(),
       builder: (context, Box<Activity> box, _) {
-        return Container(
-          child: c.Column(
-            children: [
-              MonthTitle(month: widget.month, year: widget.year),
-              _daysGrid(context),
-            ],
-          ),
+        return LayoutBuilder(
+          builder: (BuildContext context, BoxConstraints constraints) {
+            final double _size = constraints.minWidth;
+            // print('month size: $_size');
+            return c.CupertinoButton(
+              padding: EdgeInsets.zero,
+              onPressed: (widget.onPressed)
+                  ? () {
+                      print('navigate to home');
+                    }
+                  : null,
+              child: Column(
+                children: [
+                  if (widget.showMonthTitle)
+                    MonthTitle(
+                      month: widget.month,
+                      year: widget.year,
+                      size: _size,
+                    ),
+                  _daysGrid(context),
+                ],
+              ),
+            );
+          },
         );
       },
     );
@@ -108,20 +101,25 @@ class MonthTitle extends StatelessWidget {
   final int month;
   final int year;
   final double size;
+  final String _getYear;
 
+  static const int _thresh = 200;
   MonthTitle({
-    this.month,
+    @required this.month,
     this.year,
     this.size,
-  });
+  })  : assert(size <= _thresh || (size > _thresh && year != null)),
+        _getYear = (size < _thresh) ? '' : year.toString();
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.fromLTRB(14, 10, 0, 10),
       child: Text(
-        "${getMonthTitle(month)} $year",
-        style: Style.largeTitle(context),
+        '${getMonthTitle(month)} $_getYear',
+        style: (size < _thresh)
+            ? Style.footerNoteSecondary(context)
+            : Style.largeTitle(context),
       ),
       alignment: Alignment.centerLeft,
     );
