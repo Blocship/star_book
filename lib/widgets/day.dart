@@ -23,9 +23,10 @@ class Day extends StatelessWidget {
     this.ontap,
   });
 
-  double _squareSize(BuildContext context) {
-    return c.MediaQuery.of(context).size.width / 9;
-  }
+  // double _squareSize(BuildContext context) {
+  //   print(MediaQuery.of(context).size.width);
+  //   return MediaQuery.of(context).size.width / 9;
+  // }
 
   String _getText() {
     if (activity == null)
@@ -97,26 +98,30 @@ class Day extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return c.CupertinoButton(
-      padding: EdgeInsets.zero,
-      onPressed: () => _onDayPressed(context),
-      child: Container(
-        height: _squareSize(context),
-        width: _squareSize(context),
-        alignment: Alignment.center,
-        margin: EdgeInsets.all(_squareSize(context) * 0.10),
-        decoration: BoxDecoration(
-          color: _getBackgroundColor(context),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Text(
-          _getText(),
-          style: TextStyle(
-            fontSize: _squareSize(context) * 0.55,
-            color: _getTextColor(context),
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        return c.CupertinoButton(
+          padding: EdgeInsets.zero,
+          onPressed: () => _onDayPressed(context),
+          child: Container(
+            height: constraints.minWidth,
+            width: constraints.minWidth,
+            alignment: Alignment.center,
+            margin: EdgeInsets.all(constraints.minWidth * 0.10),
+            decoration: BoxDecoration(
+              color: _getBackgroundColor(context),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text(
+              _getText(),
+              style: TextStyle(
+                fontSize: constraints.minWidth * 0.5,
+                color: _getTextColor(context),
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
