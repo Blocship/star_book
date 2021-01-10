@@ -12,15 +12,13 @@ import '../utils/date.dart';
 /// Renders default color if [MoodId] in [Activity] is not filled
 class Day extends StatelessWidget {
   final Activity activity;
-  // not in use
   final double size;
-  // not in use
-  final Function ontap;
+  final bool onPressed;
 
   Day({
     this.activity,
     this.size,
-    this.ontap,
+    this.onPressed = true,
   });
 
   // double _squareSize(BuildContext context) {
@@ -100,14 +98,15 @@ class Day extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
+        final _size = (size == null) ? constraints.minWidth : size;
         return c.CupertinoButton(
           padding: EdgeInsets.zero,
-          onPressed: () => _onDayPressed(context),
+          onPressed: (onPressed) ? () => _onDayPressed(context) : null,
           child: Container(
-            height: constraints.minWidth,
-            width: constraints.minWidth,
+            height: _size,
+            width: _size,
             alignment: Alignment.center,
-            margin: EdgeInsets.all(constraints.minWidth * 0.10),
+            margin: EdgeInsets.all(_size * 0.10),
             decoration: BoxDecoration(
               color: _getBackgroundColor(context),
               borderRadius: BorderRadius.circular(10),
@@ -115,7 +114,7 @@ class Day extends StatelessWidget {
             child: Text(
               _getText(),
               style: TextStyle(
-                fontSize: constraints.minWidth * 0.5,
+                fontSize: _size * 0.5,
                 color: _getTextColor(context),
               ),
             ),
