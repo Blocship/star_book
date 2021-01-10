@@ -98,7 +98,8 @@ class Day extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        final _size = (size == null) ? constraints.minWidth : size;
+        final double _size = (size == null) ? constraints.minWidth : size;
+        // print('day size: $_size');
         return c.CupertinoButton(
           padding: EdgeInsets.zero,
           onPressed: (onPressed && activity != null)
