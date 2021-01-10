@@ -1,20 +1,24 @@
 import 'package:flutter/cupertino.dart' as c;
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:star_book/screens/date_picker_sheet.dart';
+
 // Files
 import '../routes/route_generator.dart';
 import '../models/activity.dart';
+import '../utils/activity.dart';
 import '../widgets/my_container.dart';
 import '../controllers/activity.dart';
 import '../styles/style.dart';
 import '../utils/color.dart';
 import '../widgets/color_container.dart';
-import '../utils/activity.dart';
 
 /// Activity Add and Edit Sheet Screen widget.
 ///
 /// Input form to create update and delete [Activity]
 class ActivityEditSheet extends StatefulWidget {
   ActivityEditSheet(this.activity);
+
   final Activity activity;
 
   @override
@@ -66,6 +70,22 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
     setState(() {});
   }
 
+  void onDateTap() async {
+
+    dynamic date = await Navigator.of(context).push(MaterialPageRoute(
+        builder: (ctx) =>
+            DatePickerSheet(activity.day, activity.month, activity.year)));
+
+    // After getting date update the state.
+    setState(() {
+      activity =
+          ActivityController.readAt(date["day"], date["month"], date["year"]);
+      titleController.text = activity.title == null ? '' : activity.title;
+      noteController.text = activity.note == null ? '' : activity.note;
+      type = (activity.moodId == null) ? ActivityType.add : ActivityType.edit;
+    });
+  }
+
   c.CupertinoDynamicColor _getMoodColor(c.BuildContext context) {
     return c.CupertinoDynamicColor.resolve(
         activity.moodId == null
@@ -112,7 +132,7 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
                   ),
                 ],
               ),
-              onTap: null,
+              onTap: onDateTap,
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 8)),
             ColorContainer(
