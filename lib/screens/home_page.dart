@@ -59,33 +59,63 @@ class _HomePageState extends State<HomePage> {
         trailing: PreferanceButton(),
         border: null,
       ),
-      child: c.SafeArea(
-              child: c.Container(
-          //height: 400,
-          //width: double.infinity,
-          //padding: c.EdgeInsets.symmetric(horizontal: 12),
-          child: SwipeDetector(
-            onSwipeLeft: () {
-              print("Next year");
-              setState(() {
-                year = getNextYear(month, year);
-                month = getNextMonth(month, year);
-              });
-            },
-            onSwipeRight: () {
-              print("Prev year");
-              setState(() {
-                year = getPreviousYear(month, year);
-                month = getPreviousMonth(month, year);
-              });
-            },
-            child: Month(
-              month: month,
-              year: year,
-            ),
-          ),
+      child: c.Container(
+        child: c.SafeArea(
+                child: ListView.builder(
+              itemCount: 1,
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (c.BuildContext context, int index) {
+                return c.Dismissible(
+                  key: c.UniqueKey(),
+                  child: Month(
+                    month: month,
+                    year: year,
+                  ),
+                  onDismissed: (direction) {
+                    if (direction == c.DismissDirection.endToStart) {
+                     setState(() {
+                        year = getNextYear(month, year);
+                        month = getNextMonth(month, year);
+                      });
+                    }
+                     else if (direction == c.DismissDirection.startToEnd) {
+                      setState(() {
+                        year = getPreviousYear(month, year);
+                        month = getPreviousMonth(month, year);
+                      });
+                    }
+                  },
+                );
+              }),
         ),
       ),
+      // child: c.SafeArea(
+      //         child: c.Container(
+      //     ////height: 400,
+      //     ////width: double.infinity,
+      //     ////padding: c.EdgeInsets.symmetric(horizontal: 12),
+      //     child: SwipeDetector(
+      //       onSwipeLeft: () {
+      //         print("Next year");
+      //         setState(() {
+      //           year = getNextYear(month, year);
+      //           month = getNextMonth(month, year);
+      //         });
+      //       },
+      //       onSwipeRight: () {
+      //         print("Prev year");
+      //         setState(() {
+      //           year = getPreviousYear(month, year);
+      //           month = getPreviousMonth(month, year);
+      //         });
+      //       },
+      //       child: Month(
+      //         month: month,
+      //         year: year,
+      //       ),
+      //     ),
+      //   ),
+      // ),
     );
   }
 }
