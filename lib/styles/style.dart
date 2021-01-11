@@ -65,10 +65,10 @@ abstract class Style {
   static TextStyle subTitle(BuildContext context) {
     return TextStyle(
       color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.label, context),
-      fontWeight: FontWeight.w400,
+      fontWeight: FontWeight.w700,
       fontFamily: "SFProDisplay",
       fontStyle: FontStyle.normal,
-      fontSize: 32.0,
+      fontSize: 23.0,
     );
   }
 
@@ -77,6 +77,7 @@ abstract class Style {
     return TextStyle(
       color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.white, context),
       fontFamily: "SFProDisplay",
+      fontWeight: FontWeight.w700,
       fontStyle: FontStyle.normal,
       fontSize: 18.0,
     );
