@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:star_book/screens/year_page.dart';
 
 // Files
 import '../screens/activity_edit_sheet.dart';
@@ -25,6 +26,10 @@ class RouteGenerator {
       case "/activity":
         return MaterialWithModalsPageRoute(
           builder: (context) => ActivityPage(args),
+        );
+      case "/year":
+        return MaterialWithModalsPageRoute(
+          builder: (context) => YearPage(),
         );
       case "/preferance":
         return CupertinoModalBottomSheetRouteWrapper(
