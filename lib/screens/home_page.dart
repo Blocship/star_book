@@ -1,4 +1,6 @@
 import 'package:flutter/cupertino.dart' as c;
+import 'package:cupertino_icons/cupertino_icons.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 // Files
 import '../widgets/month.dart';
@@ -56,6 +58,15 @@ class _HomePageState extends State<HomePage> {
           context,
         ),
         trailing: PreferanceButton(),
+        leading: c.CupertinoDialogAction(
+          onPressed: () {
+            Navigator.pushNamed(context, '/year');
+          },
+          child: Text('Year'),
+          textStyle: c.TextStyle(
+            fontSize: 20,
+          ),
+        ),
         border: null,
       ),
       child: SafeArea(

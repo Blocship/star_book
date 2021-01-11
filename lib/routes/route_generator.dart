@@ -34,7 +34,10 @@ class RouteGenerator {
         );
       case "/year":
         return MaterialWithModalsPageRoute(
-          builder: (context) => YearPage(),
+          builder: (context) => YearPage(
+            startYear: DateTime.now().subtract(new Duration(days: 5*365)),
+            endYear: DateTime.now(),
+          ),
         );
       case "/preferance":
         return CupertinoModalBottomSheetRouteWrapper(
