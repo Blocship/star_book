@@ -65,7 +65,7 @@ class _MonthState extends c.State<Month> {
       builder: (context, Box<Activity> box, _) {
         return LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-            final double _size = constraints.minWidth;
+            final double _size = constraints.maxWidth;
             // print('month size: $_size');
             return c.CupertinoButton(
               padding: EdgeInsets.zero,
