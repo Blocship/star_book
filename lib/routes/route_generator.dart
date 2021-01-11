@@ -10,6 +10,7 @@ import '../screens/home_page.dart';
 import '../screens/mood_sheet.dart';
 import '../screens/preferance_sheet.dart';
 import '../utils/bottom_sheet.dart';
+import '../screens/username_add_sheet.dart';
 
 /// Centralised routing class.
 /// Static methods inside, define named routes
@@ -20,6 +21,10 @@ class RouteGenerator {
     final args = settings.arguments;
     switch (settings.name) {
       case "/":
+        return MaterialWithModalsPageRoute(
+          builder: (context) => UsernameAddSheet(),
+        );
+      case "/home":
         return MaterialWithModalsPageRoute(
           builder: (context) => HomePage(),
         );
