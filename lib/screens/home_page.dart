@@ -1,12 +1,10 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
-import 'package:star_book/widgets/Unsplash_Image.dart';
 
 // Files
-import '../widgets/month.dart';
-import '../models/mood.dart';
 import '../utils/date.dart';
-import '../styles/style.dart';
+import '../widgets/Unsplash_Image.dart';
+import '../widgets/month.dart';
 
 /// Home Page Screen widget is the main page
 /// of the app that renders [Month] and [PreferanceButton] widgets
@@ -23,7 +21,7 @@ class _HomePageState extends State<HomePage> {
 
   // TODO: fetch data from database based.
   // using mock data for now
-  final List<Mood> moodList = new List<Mood>.from(mMoodList);
+  // final List<Mood> moodList = new List<Mood>.from(mMoodList);
 
   // List photoList;
   @override
@@ -53,35 +51,29 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    double h = c.MediaQuery.of(context).size.height;
-    return c.CupertinoPageScaffold(
-      backgroundColor: c.CupertinoDynamicColor.resolve(
-        c.CupertinoColors.systemBackground,
-        context,
-      ),
-      navigationBar: c.CupertinoNavigationBar(
-        backgroundColor: c.CupertinoDynamicColor.resolve(
-          c.CupertinoColors.systemBackground,
-          context,
+    return Container(
+      decoration: BoxDecoration(
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          image: m.getBackgroundImage(index),
         ),
-        trailing: PreferanceButton(),
-        leading: m.getAttribution(index, context),
-        border: null,
       ),
-      child: SafeArea(
-        child: c.GestureDetector(
-          onHorizontalDragEnd: onHorizontalDragEnd,
-          child: Container(
-            //to expand size of container to full screen
-            height: c.MediaQuery.of(context).size.height,
-            //for background image
-            decoration: BoxDecoration(
-                image:
-                    DecorationImage(fit: BoxFit.cover, image: m.getBg(index))),
-            padding: c.EdgeInsets.symmetric(horizontal: 12),
-            child: Month(
-              month: month,
-              year: year,
+      child: c.CupertinoPageScaffold(
+        backgroundColor: Color(0x00000000),
+        navigationBar: c.CupertinoNavigationBar(
+          backgroundColor: Color(0x00000000),
+          trailing: PreferanceButton(),
+          leading: m.getAttribution(index, context),
+        ),
+        child: SafeArea(
+          child: c.GestureDetector(
+            onHorizontalDragEnd: onHorizontalDragEnd,
+            child: Container(
+              padding: c.EdgeInsets.symmetric(horizontal: 12),
+              child: Month(
+                month: month,
+                year: year,
+              ),
             ),
           ),
         ),
