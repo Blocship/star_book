@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return c.CupertinoApp(
-      initialRoute: '/',
+      initialRoute: '/username_add',
       title: "StarBook",
       theme: c.CupertinoThemeData(),
       onGenerateRoute: (settings) => RouteGenerator.mainRoute(settings),

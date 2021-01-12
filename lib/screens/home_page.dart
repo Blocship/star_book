@@ -59,7 +59,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  Widget build(BuildContext context) {
+    Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
         color: c.CupertinoDynamicColor.resolve(
@@ -75,8 +75,9 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Color(0x00000000),
         navigationBar: c.CupertinoNavigationBar(
           backgroundColor: Color(0x00000000),
-          trailing: PreferanceButton(),
-          leading: null,
+          leading: PreferanceButton(),
+          trailing: YearButton(),
+          border: null,
         ),
         child: SafeArea(
           child: c.GestureDetector(
@@ -111,6 +112,27 @@ class PreferanceButton extends StatelessWidget {
           c.CupertinoColors.label,
           context,
         ),
+      ),
+    );
+  }
+}
+
+class YearButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return c.CupertinoButton(
+      padding: EdgeInsets.zero,
+      onPressed: () {
+        Navigator.of(context).pushNamed('/year');
+      },
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          const Padding(padding: EdgeInsetsDirectional.only(start: 8.0)),
+          Text('Year'),
+          const Padding(padding: EdgeInsetsDirectional.only(start: 6.0)),
+        ],
       ),
     );
   }

@@ -20,7 +20,7 @@ class RouteGenerator {
   ) {
     final args = settings.arguments;
     switch (settings.name) {
-      case "/":
+      case "/username_add":
         return MaterialWithModalsPageRoute(
           builder: (context) => UsernameAddSheet(),
         );
