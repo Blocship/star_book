@@ -20,7 +20,7 @@ class RouteGenerator {
   ) {
     final args = settings.arguments;
     switch (settings.name) {
-      case "/":
+      case "/username_add":
         return MaterialWithModalsPageRoute(
           builder: (context) => UsernameAddSheet(),
         );
@@ -34,10 +34,7 @@ class RouteGenerator {
         );
       case "/year":
         return MaterialWithModalsPageRoute(
-          builder: (context) => YearPage(
-            startYear: DateTime.now().subtract(new Duration(days: 5*365)),
-            endYear: DateTime.now(),
-          ),
+          builder: (context) => YearPage(),
         );
       case "/preferance":
         return CupertinoModalBottomSheetRouteWrapper(

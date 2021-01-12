@@ -5,20 +5,18 @@ import 'package:flutter/widgets.dart';
 import '../widgets/year.dart';
 
 class YearPage extends StatefulWidget {
-  YearPage({
-  @required this.startYear,
-  @required this.endYear
-  });
-  final DateTime startYear;
-  final DateTime endYear;
+  YearPage();
+
   @override
   _YearPageState createState() => _YearPageState();
 }
 
 class _YearPageState extends State<YearPage> {
+  int currentYear = DateTime.now().year;
   @override
   Widget build(BuildContext context) {
-    final int _itemCount = widget.endYear.year - widget.startYear.year + 1;
+    // TODO: for now, can only  go 5 years back
+    final int _itemCount = 5;
     return c.CupertinoPageScaffold(
       backgroundColor: c.CupertinoDynamicColor.resolve(
         c.CupertinoColors.systemBackground,
@@ -33,13 +31,13 @@ class _YearPageState extends State<YearPage> {
       ),
       child: SafeArea(
         minimum: EdgeInsets.symmetric(horizontal: 16),
-        child: c.ListView.builder(
-          padding: EdgeInsets.symmetric(horizontal: 2.5 , vertical: 2.5),
+        child: ListView.builder(
+          padding: EdgeInsets.zero,
           scrollDirection: Axis.vertical,
           reverse: true,
           itemCount: _itemCount,
           itemBuilder: (context, index) {
-            return Year(year: widget.endYear.year - index);
+            return Year(year: currentYear - index);
           },
         ),
       ),

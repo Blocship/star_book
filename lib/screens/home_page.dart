@@ -1,6 +1,4 @@
 import 'package:flutter/cupertino.dart' as c;
-import 'package:cupertino_icons/cupertino_icons.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 // Files
 import '../widgets/month.dart';
@@ -57,16 +55,8 @@ class _HomePageState extends State<HomePage> {
           c.CupertinoColors.systemBackground,
           context,
         ),
-        trailing: PreferanceButton(),
-        leading: c.CupertinoDialogAction(
-          onPressed: () {
-            Navigator.pushNamed(context, '/year');
-          },
-          child: Text('Year'),
-          textStyle: c.TextStyle(
-            fontSize: 20,
-          ),
-        ),
+        leading: PreferanceButton(),
+        trailing: YearButton(),
         border: null,
       ),
       child: SafeArea(
@@ -101,6 +91,27 @@ class PreferanceButton extends StatelessWidget {
           c.CupertinoColors.label,
           context,
         ),
+      ),
+    );
+  }
+}
+
+class YearButton extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return c.CupertinoButton(
+      padding: EdgeInsets.zero,
+      onPressed: () {
+        Navigator.of(context).pushNamed('/year');
+      },
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          const Padding(padding: EdgeInsetsDirectional.only(start: 8.0)),
+          Text('Year'),
+          const Padding(padding: EdgeInsetsDirectional.only(start: 6.0)),
+        ],
       ),
     );
   }
