@@ -39,6 +39,8 @@ dependencies:
   # https://bloclibrary.dev
   flutter_bloc: ^6.1.1
   equatable: ^1.2.5
+  http: ^0.12.2
+  flutter_dotenv: ^2.1.0
 
 
 dev_dependencies:

@@ -3,8 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:star_book/bloc/theme_bloc/theme_bloc.dart';
-import 'package:star_book/bloc/theme_bloc/theme_state.dart';
+import 'package:star_book/bloc/theme_bloc/theme.dart';
 // Files
 import './routes/route_generator.dart';
 import './models/activity.dart';
@@ -29,7 +28,7 @@ class MyApp extends StatelessWidget {
       create: (context) => ThemeBloc(),
       child: BlocBuilder<ThemeBloc, ThemeState>(
         builder: (context, state) => c.CupertinoApp(
-          initialRoute: '/',
+          initialRoute: '/username_add',
           title: "StarBook",
           theme: state.theme,
           onGenerateRoute: (settings) => RouteGenerator.mainRoute(settings),

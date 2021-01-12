@@ -1,10 +1,8 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:star_book/bloc/theme_bloc/theme_bloc.dart';
-import 'package:star_book/bloc/theme_bloc/theme_event.dart';
-import 'package:star_book/bloc/theme_bloc/theme_state.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:star_book/bloc/theme_bloc/theme.dart';
 // Files
 import '../widgets/action_container.dart';
 import '../widgets/my_container.dart';
