@@ -81,6 +81,22 @@ Prerequisite: https://flutter.dev/docs/get-started/install
     ```sh
      flutter run
     ```
+5. Uncomment .env from pubspec.yaml
+    ```sh
+           assets:
+             - .env
+    ```
+   
+6. Add a .env file to the root of your project.
+
+7. Go to https://unsplash.com/developers and register as a developer.
+
+8. Create an App and copy its Access Key.
+
+9. Paste the Access key in the .env file as follows:
+    ```sh
+     CLIENT_ID=<your-access_key>
+   ```
 
 <!-- ROADMAP -->
 
