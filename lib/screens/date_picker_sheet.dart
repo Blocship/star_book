@@ -1,17 +1,13 @@
 import 'package:flutter/cupertino.dart' as c;
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
 import '../widgets/my_container.dart';
 
 /// Date Picker Screen widget displays option to switch between dates.
 
 class DatePickerSheet extends StatefulWidget {
-  int day;
-  int month;
-  int year;
+  RouteSettings settings;
 
-  DatePickerSheet(this.day, this.month, this.year);
+  DatePickerSheet(this.settings);
 
   @override
   _DatePickerSheetState createState() => _DatePickerSheetState();
@@ -23,11 +19,11 @@ class _DatePickerSheetState extends State<DatePickerSheet> {
 
   @override
   void initState() {
-    super.initState();
-    dateController.text = '${widget.day}-${widget.month}-${widget.year}';
-    day = widget.day;
-    month = widget.month;
-    year = widget.year;
+    var data = widget.settings.arguments as Map<String, int>;
+    day = data["day"];
+    month = data["month"];
+    year = data["year"];
+    dateController.text = '${day}-${month}-${year}';
   }
 
   @override
@@ -81,21 +77,19 @@ class _DatePickerSheetState extends State<DatePickerSheet> {
               padding: EdgeInsets.all(10),
               height: MediaQuery.of(context).size.height * 2 / 5,
               child: c.CupertinoDatePicker(
-                initialDateTime:
-                    DateTime(widget.year, widget.month, widget.day),
+                initialDateTime: DateTime(year, month, day),
                 onDateTimeChanged: (DateTime newdate) {
                   setState(() {
                     day = newdate.day;
                     month = newdate.month;
                     year = newdate.year;
-                    print("State Updated");
                   });
                   dateController.text = '$day-$month-$year';
                 },
                 use24hFormat: true,
                 maximumDate: DateTime.now(),
-                minimumYear: widget.year,
-                maximumYear: widget.year,
+                minimumYear: year,
+                maximumYear: year,
                 mode: c.CupertinoDatePickerMode.date,
               ),
             )

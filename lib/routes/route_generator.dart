@@ -8,6 +8,7 @@ import '../screens/error_page.dart';
 import '../screens/home_page.dart';
 import '../screens/mood_sheet.dart';
 import '../screens/preferance_sheet.dart';
+import '../screens/date_picker_sheet.dart';
 import '../utils/bottom_sheet.dart';
 
 /// Centralised routing class.
@@ -54,6 +55,10 @@ class RouteGenerator {
       case "edit/mood":
         return MaterialWithModalsPageRoute(
           builder: (context) => MoodSheet(),
+        );
+      case "edit/date":
+        return MaterialWithModalsPageRoute(
+          builder: (context) => DatePickerSheet(settings),
         );
       default:
         return MaterialWithModalsPageRoute(

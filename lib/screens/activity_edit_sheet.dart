@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart' as c;
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:star_book/screens/date_picker_sheet.dart';
 
 // Files
 import '../routes/route_generator.dart';
@@ -78,9 +76,12 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
   }
 
   void onDateTap() async {
-    dynamic date = await Navigator.of(context).push(MaterialPageRoute(
-        builder: (ctx) =>
-            DatePickerSheet(activity.day, activity.month, activity.year)));
+    dynamic date = await Navigator.of(context).pushNamed("edit/date",
+        arguments: {
+          "day": activity.day,
+          "month": activity.month,
+          "year": activity.year
+        });
 
     // After getting date update the state.
     setState(() {
