@@ -35,7 +35,9 @@ dependencies:
   # https://docs.hivedb.dev/#/
   hive: ^1.4.4+1
   hive_flutter: ^0.3.1
+  # High level functions for HTTP requests.
   http: ^0.12.2
+  # Load data from .env file
   flutter_dotenv: ^2.1.0
 
 dev_dependencies:
@@ -71,7 +73,6 @@ flutter:
     - backup-bg-image.JPG
     - icon.png
     # - .env
-#     - images/a_dot_ham.jpeg
 
 
 
