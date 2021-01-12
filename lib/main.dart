@@ -5,6 +5,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 // Files
 import './api/unsplash_api_service.dart';
+import './controllers/activity.dart';
 import './models/activity.dart';
 import './models/mood.dart';
 import './routes/route_generator.dart';
@@ -15,6 +16,7 @@ void main() async {
   Hive.registerAdapter<Activity>(ActivityAdapter());
   Hive.registerAdapter<Mood>(MoodAdapter());
   await Hive.openBox<Activity>(activityBoxName);
+  await ActivityController.initialize();
   UnsplashAPIService.loadenv();
   runApp(MyApp());
 }
