@@ -42,6 +42,13 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
     noteController.addListener(onNoteChange);
   }
 
+  @override
+  void dispose() {
+    titleController.dispose();
+    noteController.dispose();
+    super.dispose();
+  }
+
   void onTitleChange() {
     this.activity.title = titleController.text;
     setState(() {});
@@ -71,7 +78,6 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
   }
 
   void onDateTap() async {
-
     dynamic date = await Navigator.of(context).push(MaterialPageRoute(
         builder: (ctx) =>
             DatePickerSheet(activity.day, activity.month, activity.year)));
@@ -185,13 +191,6 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
       navigationBar: _buildNavBar(context),
       child: _buildBody(context),
     );
-  }
-
-  @override
-  void dispose() {
-    titleController.dispose();
-    noteController.dispose();
-    super.dispose();
   }
 }
 

@@ -30,6 +30,12 @@ class _DatePickerSheetState extends State<DatePickerSheet> {
     year = widget.year;
   }
 
+  @override
+  void dispose() {
+    dateController.dispose();
+    super.dispose();
+  }
+
   c.CupertinoNavigationBar _buildNavBar(BuildContext context) {
     return c.CupertinoNavigationBar(
       backgroundColor: c.CupertinoDynamicColor.resolve(
