@@ -70,7 +70,7 @@ flutter:
     - dev-profile.jpeg
     - backup-bg-image.JPG
     - icon.png
-    - .env
+    # - .env
 #     - images/a_dot_ham.jpeg
 
 
