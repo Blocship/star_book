@@ -2,12 +2,12 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:star_book/APIService/APIService.dart';
+
 // Files
-import './routes/route_generator.dart';
+import './api/unsplash_api_service.dart';
 import './models/activity.dart';
 import './models/mood.dart';
+import './routes/route_generator.dart';
 
 /// Starting point of the application.
 void main() async {

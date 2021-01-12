@@ -2,8 +2,9 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 
 // Files
+import '../api/unsplash_api_service.dart';
+import '../models/unsplash_photo.dart';
 import '../utils/date.dart';
-import '../widgets/Unsplash_Image.dart';
 import '../widgets/month.dart';
 
 /// Home Page Screen widget is the main page
@@ -17,7 +18,8 @@ class _HomePageState extends State<HomePage> {
   int month;
   int year;
   int index = 0;
-  UnsplashImage m = UnsplashImage();
+  List<UnsplashPhoto> images = List<UnsplashPhoto>();
+  bool _loading = false;
 
   // TODO: fetch data from database based.
   // using mock data for now
@@ -28,7 +30,14 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     month = DateTime.now().month;
     year = DateTime.now().year;
+    initImages();
+
     super.initState();
+  }
+
+  void initImages() async {
+    images = await UnsplashAPIService.getPhotos(12);
+    print(images);
   }
 
   void onHorizontalDragEnd(c.DragEndDetails value) {
@@ -53,9 +62,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
+        color: c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.systemBackground,
+          context,
+        ),
         image: DecorationImage(
           fit: BoxFit.cover,
-          image: m.getBackgroundImage(index),
+          image: AssetImage('backup-bg-image.JPG'),
         ),
       ),
       child: c.CupertinoPageScaffold(
@@ -63,7 +76,7 @@ class _HomePageState extends State<HomePage> {
         navigationBar: c.CupertinoNavigationBar(
           backgroundColor: Color(0x00000000),
           trailing: PreferanceButton(),
-          leading: m.getAttribution(index, context),
+          leading: null,
         ),
         child: SafeArea(
           child: c.GestureDetector(
