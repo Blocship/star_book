@@ -1,5 +1,12 @@
 import 'package:hive/hive.dart';
 
+/// If you think as relational database then it is the name of [User] table.
+
+/// User Details Table
+///
+/// If you think as relational database,
+/// [name]
+/// are table column names
 class User extends HiveObject {
   String name;
 

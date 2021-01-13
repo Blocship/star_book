@@ -1,5 +1,11 @@
 import 'dart:convert';
+/// If you think as relational database then it is the name of [UnsplashPhoto] table.
 
+/// UnSplashPhoto Table
+///
+/// If you think as relational database,
+/// [url], [photographer], [link] and [blurhash]
+/// are table column names
 class UnsplashPhoto {
   String url;
   String photographer;
