@@ -81,6 +81,25 @@ Prerequisite: https://flutter.dev/docs/get-started/install
     ```sh
      flutter run
     ```
+   
+Steps to use Unsplash Photos to home_page.dart (Optional)
+
+1. Uncomment .env from pubspec.yaml
+    ```sh
+           assets:
+             - .env
+    ```
+   
+2. Add a .env file to the root of your project.
+
+3. Go to https://unsplash.com/developers and register as a developer.
+
+4. Create an App and copy its Access Key.
+
+5. Paste the Access key in the .env file as follows:
+    ```sh
+     CLIENT_ID=<your-access_key>
+   ```
 
 <!-- ROADMAP -->
 

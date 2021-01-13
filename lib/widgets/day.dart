@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
+
 // Files
+import './dialog.dart';
 import '../models/activity.dart';
 import '../utils/color.dart';
 import '../utils/date.dart';
@@ -10,12 +12,19 @@ import '../utils/date.dart';
 /// Renders default color if [MoodId] in [Activity] is not filled
 class Day extends StatelessWidget {
   final Activity activity;
+  final double size;
+  final bool onPressed;
 
-  Day({this.activity});
+  Day({
+    this.activity,
+    this.size,
+    this.onPressed = true,
+  });
 
-  double _squareSize(context) {
-    return c.MediaQuery.of(context).size.width / 9;
-  }
+  // double _squareSize(BuildContext context) {
+  //   print(MediaQuery.of(context).size.width);
+  //   return MediaQuery.of(context).size.width / 9;
+  // }
 
   String _getText() {
     if (activity == null)
@@ -26,80 +35,95 @@ class Day extends StatelessWidget {
       return activity.day.toString();
   }
 
-  c.CupertinoDynamicColor _getTextColor(c.BuildContext context) {
+  c.CupertinoDynamicColor _getTextColor(BuildContext context) {
     if (activity == null) {
-      return c.CupertinoDynamicColor.resolve(c.CupertinoColors.label, context);
+      return c.CupertinoDynamicColor.resolve(
+        c.CupertinoColors.label,
+        context,
+      );
     } else if (activity.moodId != null) {
       return c.CupertinoDynamicColor.resolve(
-          c.CupertinoColors.tertiarySystemBackground, context);
+        c.CupertinoColors.tertiarySystemBackground,
+        context,
+      );
     } else {
-      return c.CupertinoDynamicColor.resolve(c.CupertinoColors.label, context);
+      return c.CupertinoDynamicColor.resolve(
+        c.CupertinoColors.label,
+        context,
+      );
     }
   }
 
   Color _getBackgroundColor(BuildContext context) {
-    // if activity.day == null then show white/transparent color
-    if (activity == null)
+    if (activity == null) {
+      // show white/transparent colors
       return Color(0x00ffffff);
-    else
-    // get color by sending mood, if not, then it will send default color
-    if (activity.moodId != null) {
+    } else if (activity.moodId != null) {
+      // get color by sending mood,
       int colorCode = activity.moodId;
       return c.CupertinoDynamicColor.resolve(
-          getColor(EColor.values[colorCode]), context);
+        getColor(EColor.values[colorCode]),
+        context,
+      );
     } else {
+      // send default color
       return c.CupertinoDynamicColor.resolve(
-          c.CupertinoColors.tertiarySystemGroupedBackground, context);
+        c.CupertinoColors.tertiarySystemGroupedBackground,
+        context,
+      );
     }
   }
 
-  void _onTap(context) async {
+  void _onDayPressed(BuildContext context) async {
     if (activity == null ||
-        isAfterCurrentDate(activity.year, activity.month, activity.day))
+        isAfterCurrentDate(activity.year, activity.month, activity.day)) {
       await c.showCupertinoDialog(
         context: context,
-        builder: (context) {
-          return c.CupertinoAlertDialog(
-            title: Text('Cannot Add Mood'),
-            content: Text(
-                'You cannot add a mood for ${activity.day}-${activity.month}-${activity.year}.'),
-            actions: <Widget>[
-              c.CupertinoDialogAction(
-                child: Text('Okay'),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              )
-            ],
+        builder: (_) {
+          return AlertDialog(
+            title: 'Cannot Add Activity',
+            content:
+                'You cannot add a activity for ${activity.day}-${activity.month}-${activity.year}.',
           );
         },
       );
-    else if (activity.moodId == null)
+    } else if (activity.moodId == null) {
       Navigator.of(context).pushNamed("/edit", arguments: activity);
-    else
+    } else {
       Navigator.of(context).pushNamed('/activity', arguments: activity);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _onTap(context),
-      child: Container(
-        height: _squareSize(context),
-        width: _squareSize(context),
-        alignment: Alignment.center,
-        margin: EdgeInsets.all(_squareSize(context) * 0.10),
-        decoration: BoxDecoration(
-            color: _getBackgroundColor(context),
-            borderRadius: BorderRadius.circular(_squareSize(context) / 5)),
-        child: Text(
-          _getText(),
-          style: TextStyle(
-            fontSize: _squareSize(context) * 0.55,
-            color: _getTextColor(context),
+    return LayoutBuilder(
+      builder: (BuildContext context, BoxConstraints constraints) {
+        final double _size = (size == null) ? constraints.maxWidth : size;
+        // print('day size: $_size');
+        return c.CupertinoButton(
+          padding: EdgeInsets.zero,
+          onPressed: (onPressed && activity != null)
+              ? () => _onDayPressed(context)
+              : null,
+          child: Container(
+            height: _size,
+            width: _size,
+            alignment: Alignment.center,
+            margin: EdgeInsets.all(_size * 0.10),
+            decoration: BoxDecoration(
+              color: _getBackgroundColor(context),
+              borderRadius: BorderRadius.circular(10),
+            ),
+            child: Text(
+              _getText(),
+              style: TextStyle(
+                fontSize: _size * 0.5,
+                color: _getTextColor(context),
+              ),
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
