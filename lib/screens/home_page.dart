@@ -8,13 +8,19 @@ import '../utils/date.dart';
 /// Home Page Screen widget is the main page
 /// of the app that renders [Month] and [PreferanceButton] widgets
 class HomePage extends StatefulWidget {
-  @override
+  
   _HomePageState createState() => _HomePageState();
+  
 }
+
+
+
 
 class _HomePageState extends State<HomePage> {
   int month;
   int year;
+
+  
 
   // TODO: fetch data from database based.
   // using mock data for now
@@ -72,6 +78,8 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+  
+
 }
 
 class PreferanceButton extends StatelessWidget {
@@ -94,3 +102,5 @@ class PreferanceButton extends StatelessWidget {
     );
   }
 }
+
+

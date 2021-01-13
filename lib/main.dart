@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart' as c;
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:star_book/screens/home_page.dart';
 // Files
 import './routes/route_generator.dart';
 import './models/activity.dart';
@@ -27,6 +29,39 @@ class MyApp extends StatelessWidget {
       title: "StarBook",
       theme: c.CupertinoThemeData(),
       onGenerateRoute: (settings) => RouteGenerator.mainRoute(settings),
+       // home:HomePage(),
+    );
+
+}
+  }
+
+class HomePage extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+    return c.CupertinoTabScaffold(tabBar: c.CupertinoTabBar(items: [
+      BottomNavigationBarItem(
+        icon: Icon (c.CupertinoIcons.home),
+        
+        
+      ),
+      BottomNavigationBarItem(
+        icon: Icon (c.CupertinoIcons.profile_circled),
+
+      ),
+    ],
+    ),
+    tabBuilder: (context,i){
+      
+    }
     );
   }
 }
+
+
+class Profile extends StatelessWidget{
+  @override
+  Widget build(BuildContext context){
+  }
+}
+  
+
