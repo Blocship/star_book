@@ -16,6 +16,9 @@ class UsernameAddSheet extends StatefulWidget {
 class _UsernameAddSheetState extends State<UsernameAddSheet> {
   TextEditingController _username;
   String error;
+  int length = 0;
+  String text = "";
+  int maxLength = 20;
 
   @override
   void initState() {
@@ -58,6 +61,17 @@ class _UsernameAddSheetState extends State<UsernameAddSheet> {
               ),
               SizedBox(height: h * 0.12),
               c.CupertinoTextField(
+                maxLength: 20,
+                onChanged: (String newVal) {
+                  if (newVal.length <= maxLength) {
+                    text = newVal;
+                    setState(() {
+                      length = newVal.length;
+                    });
+                  } else {
+                    _username.text = text;
+                  }
+                },
                 padding: EdgeInsets.all(16),
                 controller: _username,
                 placeholder: 'Your Name',
@@ -70,11 +84,25 @@ class _UsernameAddSheetState extends State<UsernameAddSheet> {
                   ),
                 ),
               ),
+              c.Container(
+                padding: EdgeInsets.only(top: 5),
+                alignment: c.Alignment.centerRight,
+                child: Text(
+                  '$length/$maxLength',
+                  style: c.TextStyle(
+                    color: Color(0xffffffff),
+                  ),
+                ),
+              ),
               SizedBox(height: h * 0.25),
               c.CupertinoButton(
-                onPressed: () {
-                  onContinuePressed(context);
-                },
+                onPressed: _username.text == null ||
+                        _username.text.length == 0 ||
+                        _username.text.length > 20
+                    ? null
+                    : () {
+                        onContinuePressed(context);
+                      },
                 color: c.CupertinoDynamicColor.resolve(
                     c.CupertinoColors.systemOrange, context),
                 child: Text(
@@ -124,10 +152,11 @@ class _UsernameAddSheetState extends State<UsernameAddSheet> {
   }
 
   void onContinuePressed(c.BuildContext context) async {
-    dynamic isValid = validate(context);
-    bool nameValidOrNot = await isValid;
-    if (nameValidOrNot) {
-      pushToHome();
-    }
+    // dynamic isValid = validate(context);
+    // bool nameValidOrNot = await isValid;
+    // if (nameValidOrNot) {
+    //   pushToHome();
+    // }
+    pushToHome();
   }
 }
