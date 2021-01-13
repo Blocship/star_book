@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
+import 'package:star_book/services/notification_service/notification_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 // Files
 import '../widgets/action_container.dart';
@@ -43,10 +46,14 @@ class PreferanceSheet extends StatefulWidget {
 
 class PreferenceSheetState extends State<PreferanceSheet> {
   BrightnessOption _selectedOption;
+  bool getNotified;
+  NotificationServce _notificationServce;
 
   @override
   void initState() {
     _selectedOption = BrightnessOption.auto;
+    _notificationServce = NotificationServce();
+    getNotified = false;
     super.initState();
   }
 
@@ -117,63 +124,95 @@ class PreferenceSheetState extends State<PreferanceSheet> {
   Widget _buildBody(BuildContext context) {
     return SafeArea(
       // minimum: EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // Padding(padding: EdgeInsets.symmetric(vertical: 18)),
-          // ActionContainer(
-          //   text: 'Edit Mood',
-          //   icon: c.CupertinoIcons.right_chevron,
-          // ),
-          Padding(padding: EdgeInsets.symmetric(vertical: 18)),
-          MyContainer(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Dark Mode', style: Style.body(context)),
-                c.CupertinoSlidingSegmentedControl<BrightnessOption>(
-                  children: optoins,
-                  groupValue: _selectedOption,
-                  onValueChanged: onSlidingSegmentChanged,
-                  backgroundColor: c.CupertinoDynamicColor.resolve(
-                    c.CupertinoColors.systemGrey6,
-                    context,
+      child: c.SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+            // ActionContainer(
+            //   text: 'Edit Mood',
+            //   icon: c.CupertinoIcons.right_chevron,
+            // ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+            MyContainer(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Dark Mode', style: Style.body(context)),
+                  c.CupertinoSlidingSegmentedControl<BrightnessOption>(
+                    children: optoins,
+                    groupValue: _selectedOption,
+                    onValueChanged: onSlidingSegmentChanged,
+                    backgroundColor: c.CupertinoDynamicColor.resolve(
+                      c.CupertinoColors.systemGrey6,
+                      context,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Padding(padding: EdgeInsets.symmetric(vertical: 18)),
-          ..._aboutDeveloper(context),
-          Padding(padding: EdgeInsets.symmetric(vertical: 18)),
-          ActionContainer(
-            text: 'Privacy and Terms',
-            icon: c.CupertinoIcons.right_chevron,
-            onTap: () async {
-              String url =
-                  "https://github.com/hashirshoaeb/star_book/blob/master/POLICY.md";
-              try {
-                if (await canLaunch(url)) await launch(url);
-              } catch (e) {
-                // print("Url Exception , ${e.toString()}");
-              }
-            },
-          ),
-          Padding(padding: EdgeInsets.symmetric(vertical: 18)),
-          ActionContainer(
-            text: 'LICENCE',
-            icon: c.CupertinoIcons.right_chevron,
-            onTap: () async {
-              String url =
-                  "https://github.com/hashirshoaeb/star_book/blob/master/LICENSE";
-              try {
-                if (await canLaunch(url)) await launch(url);
-              } catch (e) {
-                // print("Url Exception , ${e.toString()}");
-              }
-            },
-          ),
-        ],
+            Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+            MyContainer(
+              child: Row(
+                children: [
+                  Text("Get Notified"),
+                  c.CupertinoSwitch(
+                    value: getNotified,
+                    onChanged: (value) async {
+                      if (Platform.isIOS) {
+                        if (await _notificationServce
+                            .iosNotificationPermission()) {
+                          if (value) {
+                            await _notificationServce
+                                .scheduleDailyNotification();
+                          }
+                        }
+                      } else {
+                        if (value) {
+                          await _notificationServce.scheduleDailyNotification();
+                        }
+                      }
+
+                      setState(() {
+                        getNotified = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+            ..._aboutDeveloper(context),
+            Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+            ActionContainer(
+              text: 'Privacy and Terms',
+              icon: c.CupertinoIcons.right_chevron,
+              onTap: () async {
+                String url =
+                    "https://github.com/hashirshoaeb/star_book/blob/master/POLICY.md";
+                try {
+                  if (await canLaunch(url)) await launch(url);
+                } catch (e) {
+                  // print("Url Exception , ${e.toString()}");
+                }
+              },
+            ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+            ActionContainer(
+              text: 'LICENCE',
+              icon: c.CupertinoIcons.right_chevron,
+              onTap: () async {
+                String url =
+                    "https://github.com/hashirshoaeb/star_book/blob/master/LICENSE";
+                try {
+                  if (await canLaunch(url)) await launch(url);
+                } catch (e) {
+                  // print("Url Exception , ${e.toString()}");
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

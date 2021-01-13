@@ -37,6 +37,8 @@ dependencies:
   hive_flutter: ^0.3.1
   http: ^0.12.2
   flutter_dotenv: ^2.1.0
+  flutter_local_notifications: ^3.0.3
+  flutter_native_timezone: ^1.0.4
 
 dev_dependencies:
   flutter_test:
