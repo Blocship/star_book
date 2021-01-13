@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart' as c;
 
 /// Enum for mood colors
-enum EColor {
+enum MoodColor {
   systemBlue,
   systemIndigo,
   systemGreen,
@@ -14,20 +14,20 @@ enum EColor {
   // systemTeal,
 }
 
-/// Takes the enum [EColor] and returns the [CupertinoDynamicColor]
-c.CupertinoDynamicColor getColor(EColor color) {
+/// Takes the enum [MoodColor] and returns the [CupertinoDynamicColor]
+c.CupertinoDynamicColor getColor(MoodColor color) {
   switch (color) {
-    case EColor.systemBlue:
+    case MoodColor.systemBlue:
       return c.CupertinoColors.activeBlue;
-    case EColor.systemIndigo:
+    case MoodColor.systemIndigo:
       return c.CupertinoColors.systemIndigo;
-    case EColor.systemGreen:
+    case MoodColor.systemGreen:
       return c.CupertinoColors.systemGreen;
-    case EColor.systemYellow:
+    case MoodColor.systemYellow:
       return c.CupertinoColors.systemYellow;
-    case EColor.systemOrange:
+    case MoodColor.systemOrange:
       return c.CupertinoColors.systemOrange;
-    case EColor.systemRed:
+    case MoodColor.systemRed:
       return c.CupertinoColors.systemRed;
     default:
       return c.CupertinoColors.systemGrey5;
