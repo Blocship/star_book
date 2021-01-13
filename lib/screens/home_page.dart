@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import '../widgets/month.dart';
 import '../models/mood.dart';
 import '../utils/date.dart';
+import './profile_page.dart';
 
 /// Home Page Screen widget is the main page
 /// of the app that renders [Month] and [PreferanceButton] widgets
@@ -63,10 +64,20 @@ class _HomePageState extends State<HomePage> {
           onHorizontalDragEnd: onHorizontalDragEnd,
           child: c.Container(
             padding: c.EdgeInsets.symmetric(horizontal: 12),
-            child: Month(
-              month: month,
-              year: year,
-            ),
+            child: Column(
+              children: [
+                Month(
+                  month: month,
+                  year: year,
+                ),
+                c.CupertinoButton(
+                  child: Text('Profile Page'),
+                  onPressed: (){
+                    Navigator.push(context , c.CupertinoPageRoute(builder: (context)=>ProfilePage()));
+                  },
+                )
+              ],
+            )
           ),
         ),
       ),
