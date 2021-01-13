@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 // Files
 import '../widgets/year.dart';
 
+/// Year Page Widget displays calender for current year and past 4 years and dates are colored with [Mood] color.
 class YearPage extends StatefulWidget {
   YearPage();
 

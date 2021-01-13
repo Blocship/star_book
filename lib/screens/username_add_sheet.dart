@@ -4,6 +4,9 @@ import 'package:flutter/widgets.dart';
 //Files
 import '../styles/style.dart';
 
+/// UserName Add Sheet Screen Widget
+///
+/// Input form to store Username of user in [User] table.
 class UsernameAddSheet extends StatefulWidget {
   @override
   _UsernameAddSheetState createState() => _UsernameAddSheetState();

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 
+/// Alert Dialog Widget displays Cupertino style AlertDialog.
 class AlertDialog extends StatelessWidget {
   final String title;
   final String content;
