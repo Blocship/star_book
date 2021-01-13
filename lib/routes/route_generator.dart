@@ -27,7 +27,7 @@ class RouteGenerator {
         );
       case "/home":
         return MaterialWithModalsPageRoute(
-          builder: (context) => HomePage(),
+          builder: (context) => Home(),
         );
       case "/activity":
         return MaterialWithModalsPageRoute(
