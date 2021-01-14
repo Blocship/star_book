@@ -98,7 +98,7 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
         activity.moodId == null
             ? c.CupertinoColors.tertiarySystemGroupedBackground
             : getColor(
-                EColor.values[activity.moodId],
+                MoodColor.values[activity.moodId],
               ),
         context);
   }
