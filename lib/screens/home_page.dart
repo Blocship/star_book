@@ -6,6 +6,7 @@ import '../api/unsplash_api_service.dart';
 import '../models/unsplash_photo.dart';
 import '../utils/date.dart';
 import '../widgets/month.dart';
+import './profile_page.dart';
 
 /// Home Page Screen widget is the main page
 /// of the app that renders [Month] and [PreferanceButton] widgets
@@ -84,9 +85,19 @@ class _HomePageState extends State<HomePage> {
             onHorizontalDragEnd: onHorizontalDragEnd,
             child: Container(
               padding: c.EdgeInsets.symmetric(horizontal: 12),
-              child: Month(
-                month: month,
-                year: year,
+              child: c.Column(
+                children: [
+                  Month(
+                    month: month,
+                    year: year,
+                  ),
+                  c.CupertinoButton(
+                    child: Text('Profile Page'),
+                    onPressed: () {
+                      Navigator.push(context , c.CupertinoPageRoute(builder: (context) => ProfilePage()));
+                    },
+                  )
+                ],
               ),
             ),
           ),
