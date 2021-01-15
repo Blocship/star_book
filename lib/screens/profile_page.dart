@@ -116,22 +116,3 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 }
-
-// Table(
-// defaultColumnWidth: FixedColumnWidth(120),
-// children: [
-// TableRow(
-// decoration: BoxDecoration(
-// color: Color(0xff0373fc),
-// ),
-// children: [
-// Padding(
-// padding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-// ),
-// Padding(
-// padding: EdgeInsets.symmetric(vertical: 8, horizontal: 10),
-// )
-// ],
-// )
-// ],
-// ),
