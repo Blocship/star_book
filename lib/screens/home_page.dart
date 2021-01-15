@@ -85,19 +85,9 @@ class _HomePageState extends State<HomePage> {
             onHorizontalDragEnd: onHorizontalDragEnd,
             child: Container(
               padding: c.EdgeInsets.symmetric(horizontal: 12),
-              child: c.Column(
-                children: [
-                  Month(
-                    month: month,
-                    year: year,
-                  ),
-                  c.CupertinoButton(
-                    child: Text('Profile Page'),
-                    onPressed: () {
-                      Navigator.push(context , c.CupertinoPageRoute(builder: (context) => ProfilePage()));
-                    },
-                  )
-                ],
+              child: Month(
+                month: month,
+                year: year,
               ),
             ),
           ),

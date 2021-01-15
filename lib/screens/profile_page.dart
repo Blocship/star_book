@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 
 //Files
 import '../styles/style.dart';
-import '../widgets/my_container.dart';
+import '../models/user.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -11,6 +11,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  User appUser = User('Tejas');
   @override
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
@@ -26,7 +27,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   style: Style.extraLargeTitle(context)
               ),
               Text(
-                  'Tejas',
+                  appUser.name,
                   style: Style.subTitle(context).copyWith(
                     color: c.CupertinoDynamicColor.resolve(
                       c.CupertinoColors.systemBlue.darkColor,
