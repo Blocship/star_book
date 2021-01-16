@@ -8,22 +8,30 @@ import 'package:hive_flutter/hive_flutter.dart';
 import './api/unsplash_api_service.dart';
 import './controllers/activity.dart';
 import './models/activity.dart';
+import './models/global_setting.dart';
 import './models/mood.dart';
 import './routes/route_generator.dart';
 
 /// Starting point of the application.
 void main() async {
-  await Hive.initFlutter();
-  Hive.registerAdapter<Activity>(ActivityAdapter());
-  Hive.registerAdapter<Mood>(MoodAdapter());
-  await Hive.openBox<Activity>(activityBoxName);
-  await ActivityController.initialize();
-  UnsplashAPIService.loadenv();
   WidgetsFlutterBinding.ensureInitialized();
   await SystemChrome.setPreferredOrientations([               // Locks the device orientation in PortraitUp only.
     DeviceOrientation.portraitUp                        // This method is not applicable on iPad when multitasking is enabled.
   ]);
+  await hiveInitialize();
+  await ActivityController.initialize();
+  UnsplashAPIService.loadenv();
   runApp(MyApp());
+}
+
+Future<void> hiveInitialize() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter<Activity>(ActivityAdapter());
+  Hive.registerAdapter<Mood>(MoodAdapter());
+  Hive.registerAdapter<BrightnessOption>(BrightnessOptionAdapter());
+  Hive.registerAdapter<User>(UserAdapter());
+  await Hive.openBox<Activity>(activityBoxName);
+  await Hive.openBox(globalSettingBoxName);
 }
 
 /// MyApp is the most Parent widget and initialises the main route.
