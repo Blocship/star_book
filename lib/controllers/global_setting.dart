@@ -7,7 +7,7 @@ class GlobalSettingController {
   static User getuser() {
     return Hive.box(globalSettingBoxName).get(
       userBoxName,
-      defaultValue: '',
+      defaultValue: User(name: ''),
     ) as User;
   }
 
@@ -37,7 +37,7 @@ class GlobalSettingController {
     return Hive.box(globalSettingBoxName).get(
       reminderBoxName,
       defaultValue: defaultTime,
-    );
+    ) as DateTime;
   }
 
   static void setReminderTime(DateTime reminderTime) async {
