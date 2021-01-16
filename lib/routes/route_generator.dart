@@ -9,6 +9,7 @@ import '../screens/error_page.dart';
 import '../screens/home_page.dart';
 import '../screens/mood_sheet.dart';
 import '../screens/preferance_sheet.dart';
+import '../screens/date_picker_sheet.dart';
 import '../utils/bottom_sheet.dart';
 import '../screens/username_add_sheet.dart';
 
@@ -20,13 +21,13 @@ class RouteGenerator {
   ) {
     final args = settings.arguments;
     switch (settings.name) {
-      case "/":
+      case "/username_add":
         return MaterialWithModalsPageRoute(
           builder: (context) => UsernameAddSheet(),
         );
       case "/home":
         return MaterialWithModalsPageRoute(
-          builder: (context) => HomePage(),
+          builder: (context) => Home(),
         );
       case "/activity":
         return MaterialWithModalsPageRoute(
@@ -64,6 +65,10 @@ class RouteGenerator {
       case "edit/mood":
         return MaterialWithModalsPageRoute(
           builder: (context) => MoodSheet(),
+        );
+      case "edit/date":
+        return MaterialWithModalsPageRoute(
+          builder: (context) => DatePickerSheet(settings),
         );
       default:
         return MaterialWithModalsPageRoute(

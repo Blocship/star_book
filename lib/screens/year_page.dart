@@ -4,14 +4,20 @@ import 'package:flutter/widgets.dart';
 // Files
 import '../widgets/year.dart';
 
+/// Year Page Widget displays calender for current year and past 4 years and dates are colored with [Mood] color.
 class YearPage extends StatefulWidget {
+  YearPage();
+
   @override
   _YearPageState createState() => _YearPageState();
 }
 
 class _YearPageState extends State<YearPage> {
+  int currentYear = DateTime.now().year;
   @override
   Widget build(BuildContext context) {
+    // TODO: for now, can only  go 5 years back
+    final int _itemCount = 5;
     return c.CupertinoPageScaffold(
       backgroundColor: c.CupertinoDynamicColor.resolve(
         c.CupertinoColors.systemBackground,
@@ -26,11 +32,13 @@ class _YearPageState extends State<YearPage> {
       ),
       child: SafeArea(
         minimum: EdgeInsets.symmetric(horizontal: 16),
-        child: PageView.builder(
+        child: ListView.builder(
+          padding: EdgeInsets.zero,
           scrollDirection: Axis.vertical,
-          itemCount: 4,
+          reverse: true,
+          itemCount: _itemCount,
           itemBuilder: (context, index) {
-            return Year(year: 2021 + index);
+            return Year(year: currentYear - index);
           },
         ),
       ),

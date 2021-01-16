@@ -6,10 +6,18 @@ class MyContainer extends StatelessWidget {
   MyContainer({
     @required this.child,
     this.onTap,
+    this.margin,
+    this.padding,
+    this.width,
+    this.height,
   });
 
   final Widget child;
   final Function onTap;
+  final EdgeInsets margin;
+  final EdgeInsetsGeometry padding;
+  final double width;
+  final double height;
 
   @override
   Widget build(BuildContext context) {
@@ -17,8 +25,10 @@ class MyContainer extends StatelessWidget {
       padding: EdgeInsets.zero,
       onPressed: onTap,
       child: Container(
-        margin: EdgeInsets.fromLTRB(16, 0, 16, 0),
-        padding: EdgeInsets.fromLTRB(13, 15, 13, 12),
+        width: width,
+        height: height,
+        margin: margin ?? EdgeInsets.fromLTRB(16, 0, 16, 0),
+        padding: padding ?? EdgeInsets.fromLTRB(13, 15, 13, 12),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           color: c.CupertinoDynamicColor.resolve(
