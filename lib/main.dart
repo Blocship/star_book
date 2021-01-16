@@ -23,6 +23,8 @@ Future<void> hiveInitialize() async {
   await Hive.initFlutter();
   Hive.registerAdapter<Activity>(ActivityAdapter());
   Hive.registerAdapter<Mood>(MoodAdapter());
+  Hive.registerAdapter<BrightnessOption>(BrightnessOptionAdapter());
+  Hive.registerAdapter<User>(UserAdapter());
   await Hive.openBox<Activity>(activityBoxName);
   await Hive.openBox(globalSettingBoxName);
 }
