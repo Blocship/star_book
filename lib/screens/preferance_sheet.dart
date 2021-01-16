@@ -46,14 +46,16 @@ class PreferanceSheet extends StatefulWidget {
 
 class PreferenceSheetState extends State<PreferanceSheet> {
   BrightnessOption _selectedOption;
-  bool getNotified;
-  NotificationServce _notificationServce;
+  bool notifyDaily;
+  bool notifyIfIMiss;
+  NotificationService _notificationService;
 
   @override
   void initState() {
     _selectedOption = BrightnessOption.auto;
-    _notificationServce = NotificationServce();
-    getNotified = false;
+    _notificationService = NotificationService();
+    notifyDaily = false;
+    notifyIfIMiss = false;
     super.initState();
   }
 
@@ -154,27 +156,59 @@ class PreferenceSheetState extends State<PreferanceSheet> {
             Padding(padding: EdgeInsets.symmetric(vertical: 18)),
             MyContainer(
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text("Get Notified"),
+                  Text("Remind me to write everyday"),
                   c.CupertinoSwitch(
-                    value: getNotified,
+                    value: notifyDaily,
                     onChanged: (value) async {
                       if (Platform.isIOS) {
-                        if (await _notificationServce
+                        if (await _notificationService
                             .iosNotificationPermission()) {
                           if (value) {
-                            await _notificationServce
+                            await _notificationService
                                 .scheduleDailyNotification();
                           }
                         }
                       } else {
                         if (value) {
-                          await _notificationServce.scheduleDailyNotification();
+                          await _notificationService
+                              .scheduleDailyNotification();
                         }
                       }
 
                       setState(() {
-                        getNotified = value;
+                        notifyDaily = value;
+                      });
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+            MyContainer(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Remind me if I forget to write"),
+                  c.CupertinoSwitch(
+                    value: notifyIfIMiss,
+                    onChanged: (value) async {
+                      if (Platform.isIOS) {
+                        if (await _notificationService
+                            .iosNotificationPermission()) {
+                          if (value) {
+                            await _notificationService.checkDiary();
+                          }
+                        }
+                      } else {
+                        if (value) {
+                          await _notificationService.checkDiary();
+                        }
+                      }
+
+                      setState(() {
+                        notifyIfIMiss = value;
                       });
                     },
                   ),

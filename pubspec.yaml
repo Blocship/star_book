@@ -37,8 +37,12 @@ dependencies:
   hive_flutter: ^0.3.1
   http: ^0.12.2
   flutter_dotenv: ^2.1.0
+  #50
   flutter_local_notifications: ^3.0.3
   flutter_native_timezone: ^1.0.4
+  # WorkManager to periodically run Dart code in the
+  # background and show notification based on it
+  workmanager: ^0.2.3
 
 dev_dependencies:
   flutter_test:
