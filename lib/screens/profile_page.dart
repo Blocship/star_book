@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 
 //Files
+import '../models/global_setting.dart';
 import '../styles/style.dart';
-import '../models/user.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -11,7 +11,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  User user = User('Tejas');
+  User user = User(name: 'Tejas');
 
   @override
   Widget build(BuildContext context) {
