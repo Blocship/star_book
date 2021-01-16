@@ -50,7 +50,8 @@ class NotificationService {
     var value = box.get(id);
     print(value);
     if (value == null) {
-      await currentTimeZone();
+      tz.initializeTimeZones();
+      tz.setLocalLocation(tz.getLocation(await currentTimeZone()));
       await _showNotification();
     }
   }
