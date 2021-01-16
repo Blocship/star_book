@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
+import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 // Files
@@ -13,6 +14,10 @@ import './routes/route_generator.dart';
 
 /// Starting point of the application.
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([               // Locks the device orientation in PortraitUp only.
+    DeviceOrientation.portraitUp                        // This method is not applicable on iPad when multitasking is enabled.
+  ]);
   await hiveInitialize();
   await ActivityController.initialize();
   UnsplashAPIService.loadenv();

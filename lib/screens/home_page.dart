@@ -3,10 +3,10 @@ import 'package:flutter/widgets.dart';
 
 // Files
 import '../api/unsplash_api_service.dart';
-import '../screens/error_page.dart';
 import '../models/unsplash_photo.dart';
 import '../utils/date.dart';
 import '../widgets/month.dart';
+import './profile_page.dart';
 
 enum BottomTabOption {
   home,
@@ -37,8 +37,7 @@ class _HomeState extends State<Home> {
     if (BottomTabOption.values[index] == BottomTabOption.home) {
       return HomePage();
     } else {
-      // TODO: Add ProfilePage
-      return ErrorPage();
+      return ProfilePage();
     }
   }
 
