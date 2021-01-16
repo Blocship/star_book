@@ -35,6 +35,10 @@ dependencies:
   # https://docs.hivedb.dev/#/
   hive: ^1.4.4+1
   hive_flutter: ^0.3.1
+  # High level functions for HTTP requests.
+  http: ^0.12.2
+  # Load data from .env file
+  flutter_dotenv: ^2.1.0
 
 dev_dependencies:
   flutter_test:
@@ -42,9 +46,18 @@ dev_dependencies:
   # Local database
   hive_generator: ^0.8.1
   build_runner: ^1.10.3
+  # App's launcher icons generator 
+  flutter_launcher_icons: ^0.7.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+
+# Adding Flutter icons
+flutter_icons:
+  ios: true
+  android: true
+  image_path_ios: "assets/icon.png"
+  image_path_android: "assets/icon.png"
 
 # The following section is specific to Flutter.
 flutter:
@@ -57,7 +70,11 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - dev-profile.jpeg
-  #   - images/a_dot_ham.jpeg
+    - backup-bg-image.JPG
+    - icon.png
+    # - .env
+
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

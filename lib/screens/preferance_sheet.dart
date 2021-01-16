@@ -6,9 +6,50 @@ import '../widgets/action_container.dart';
 import '../widgets/my_container.dart';
 import '../styles/style.dart';
 
+enum BrightnessOption {
+  light,
+  dark,
+  auto,
+}
+
+Map<BrightnessOption, Widget> optoins = {
+  BrightnessOption.auto: SlidingSegment(c.CupertinoIcons.circle_lefthalf_fill),
+  BrightnessOption.light: SlidingSegment(c.CupertinoIcons.sun_max_fill),
+  BrightnessOption.dark: SlidingSegment(c.CupertinoIcons.moon_fill),
+};
+
+class SlidingSegment extends StatelessWidget {
+  SlidingSegment(this.iconData);
+  final IconData iconData;
+  @override
+  Widget build(BuildContext context) {
+    return Icon(
+      iconData,
+      size: 17,
+      color: c.CupertinoDynamicColor.resolve(
+        c.CupertinoColors.label,
+        context,
+      ),
+    );
+  }
+}
+
 /// Preferance Sheet Screen widget displays the
 /// settings option, Privacy Policy, LICENCE, Terms and Conditions etc.
-class PreferanceSheet extends StatelessWidget {
+class PreferanceSheet extends StatefulWidget {
+  @override
+  PreferenceSheetState createState() => PreferenceSheetState();
+}
+
+class PreferenceSheetState extends State<PreferanceSheet> {
+  BrightnessOption _selectedOption;
+
+  @override
+  void initState() {
+    _selectedOption = BrightnessOption.auto;
+    super.initState();
+  }
+
   c.CupertinoNavigationBar _buildNavBar(BuildContext context) {
     return c.CupertinoNavigationBar(
       backgroundColor: c.CupertinoDynamicColor.resolve(
@@ -47,28 +88,29 @@ class PreferanceSheet extends StatelessWidget {
         ),
       ),
       MyContainer(
-          child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            width: _textWidth,
-            child: Text(
-              "I'm Hashir, the developer of this app. Feel free to contact me anytime. I love hearing from you",
-              style: Style.body(context),
-            ),
-          ),
-          Container(
-            width: _imageWidth,
-            height: _imageWidth,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(_imageWidth / 2),
-              image: DecorationImage(
-                image: AssetImage("dev-profile.jpeg"),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Container(
+              width: _textWidth,
+              child: Text(
+                "I'm Hashir, the developer of this app. Feel free to contact me anytime. I love hearing from you",
+                style: Style.body(context),
               ),
             ),
-          ),
-        ],
-      ))
+            Container(
+              width: _imageWidth,
+              height: _imageWidth,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(_imageWidth / 2),
+                image: DecorationImage(
+                  image: AssetImage("dev-profile.jpeg"),
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     ];
   }
 
@@ -84,11 +126,38 @@ class PreferanceSheet extends StatelessWidget {
           //   icon: c.CupertinoIcons.right_chevron,
           // ),
           Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+          MyContainer(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Dark Mode', style: Style.body(context)),
+                c.CupertinoSlidingSegmentedControl<BrightnessOption>(
+                  children: optoins,
+                  groupValue: _selectedOption,
+                  onValueChanged: onSlidingSegmentChanged,
+                  backgroundColor: c.CupertinoDynamicColor.resolve(
+                    c.CupertinoColors.systemGrey6,
+                    context,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Padding(padding: EdgeInsets.symmetric(vertical: 18)),
           ..._aboutDeveloper(context),
           Padding(padding: EdgeInsets.symmetric(vertical: 18)),
           ActionContainer(
             text: 'Privacy and Terms',
             icon: c.CupertinoIcons.right_chevron,
+            onTap: () async {
+              String url =
+                  "https://github.com/hashirshoaeb/star_book/blob/master/POLICY.md";
+              try {
+                if (await canLaunch(url)) await launch(url);
+              } catch (e) {
+                // print("Url Exception , ${e.toString()}");
+              }
+            },
           ),
           Padding(padding: EdgeInsets.symmetric(vertical: 18)),
           ActionContainer(
@@ -117,5 +186,11 @@ class PreferanceSheet extends StatelessWidget {
       navigationBar: _buildNavBar(context),
       child: _buildBody(context),
     );
+  }
+
+  void onSlidingSegmentChanged(BrightnessOption option) {
+    setState(() {
+      _selectedOption = option;
+    });
   }
 }

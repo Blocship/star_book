@@ -1,5 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:star_book/screens/year_page.dart';
+
 // Files
 import '../screens/activity_edit_sheet.dart';
 import '../screens/activity_page.dart';
@@ -7,7 +9,9 @@ import '../screens/error_page.dart';
 import '../screens/home_page.dart';
 import '../screens/mood_sheet.dart';
 import '../screens/preferance_sheet.dart';
+import '../screens/date_picker_sheet.dart';
 import '../utils/bottom_sheet.dart';
+import '../screens/username_add_sheet.dart';
 
 /// Centralised routing class.
 /// Static methods inside, define named routes
@@ -17,13 +21,21 @@ class RouteGenerator {
   ) {
     final args = settings.arguments;
     switch (settings.name) {
-      case "/":
+      case "/username_add":
         return MaterialWithModalsPageRoute(
-          builder: (context) => HomePage(),
+          builder: (context) => UsernameAddSheet(),
+        );
+      case "/home":
+        return MaterialWithModalsPageRoute(
+          builder: (context) => Home(),
         );
       case "/activity":
         return MaterialWithModalsPageRoute(
           builder: (context) => ActivityPage(args),
+        );
+      case "/year":
+        return MaterialWithModalsPageRoute(
+          builder: (context) => YearPage(),
         );
       case "/preferance":
         return CupertinoModalBottomSheetRouteWrapper(
@@ -53,6 +65,10 @@ class RouteGenerator {
       case "edit/mood":
         return MaterialWithModalsPageRoute(
           builder: (context) => MoodSheet(),
+        );
+      case "edit/date":
+        return MaterialWithModalsPageRoute(
+          builder: (context) => DatePickerSheet(settings),
         );
       default:
         return MaterialWithModalsPageRoute(

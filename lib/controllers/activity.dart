@@ -20,7 +20,7 @@ class ActivityController {
   /// If you think it as relational database,
   /// it return all the rows from the [activityBoxName] Table
   static Map<String, Activity> readAll() {
-    return Hive.box<Activity>(activityBoxName).toMap();
+    return Hive.box<Activity>(activityBoxName).toMap().map((id, activity) => MapEntry(id as String, activity));
   }
 
   /// Returns the [Activity] w.r.t to the date from the, `Hive box`
@@ -50,5 +50,19 @@ class ActivityController {
   static Future<void> delete(Activity activity) async {
     String id = Id(activity.day, activity.month, activity.year).toString();
     await Hive.box<Activity>(activityBoxName).delete(id);
+  }
+
+  /// Adds mock data for [Activity]s in the, `Hive box` (For testing purpose only)
+  ///
+  /// If you think it as relational database,
+  /// It populates the [activityBoxName] Table by creating new rows
+  /// for each [Activity] of mock data if [activityBoxName] Table is empty
+  static Future<void> initialize() async {
+    Map<String, Activity> existingActivities = readAll();
+    if (existingActivities.isEmpty) {
+      mActivityList.forEach((Activity activity) async {
+        await create(activity);
+      });
+    }
   }
 }
