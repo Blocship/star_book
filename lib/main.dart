@@ -20,11 +20,10 @@ void main() async {
   await ActivityController.initialize();
   UnsplashAPIService.loadenv();
   WidgetsFlutterBinding.ensureInitialized();
-  SystemChrome.setPreferredOrientations([               // Locks the device orientation in PortraitUp only.
+  await SystemChrome.setPreferredOrientations([               // Locks the device orientation in PortraitUp only.
     DeviceOrientation.portraitUp                        // This method is not applicable on iPad when multitasking is enabled.
-  ]).then((_) {
-    runApp(MyApp());
-  });
+  ]);
+  runApp(MyApp());
 }
 
 /// MyApp is the most Parent widget and initialises the main route.
