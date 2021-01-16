@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 /// If you think as relational database then it is the name of [UnsplashPhoto] table.
 
 /// UnSplashPhoto Table
@@ -6,6 +7,7 @@ import 'dart:convert';
 /// If you think as relational database,
 /// [url], [photographer], [link] and [blurhash]
 /// are table column names
+// 5
 class UnsplashPhoto {
   String url;
   String photographer;
@@ -59,7 +61,7 @@ class UnsplashPhoto {
 
   @override
   String toString() {
-    return '{\n url: $url,\n photographer: $photographer,\n link: $link,\n blurhash: $blurhash\n}';
+    return '{\n url: $url,\n photographer: $photographer,\n link: $link,\n blurhash: $blurhash, \n}';
   }
 
   @override

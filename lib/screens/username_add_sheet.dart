@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 
 //Files
+import '../controllers/global_setting.dart';
+import '../models/global_setting.dart';
 import '../styles/style.dart';
 import '../utils/string.dart';
 
@@ -14,7 +16,8 @@ class UsernameAddSheet extends StatefulWidget {
 }
 
 class _UsernameAddSheetState extends State<UsernameAddSheet> {
-  TextEditingController _username;
+  TextEditingController textController;
+  User user;
   final int maxLength = 20;
   int remainingChar;
 
@@ -22,19 +25,22 @@ class _UsernameAddSheetState extends State<UsernameAddSheet> {
   void initState() {
     super.initState();
     remainingChar = maxLength;
-    _username = TextEditingController();
-    _username.addListener(onTextChanged);
+    textController = TextEditingController();
+    textController.addListener(onTextChanged);
+    user = GlobalSettingController.getuser();
+    textController.text = user.name;
   }
 
   @override
   void dispose() {
-    _username.dispose();
+    textController.dispose();
     super.dispose();
   }
 
   void onTextChanged() {
     setState(() {
-      remainingChar = maxLength - _username.text.length;
+      remainingChar = maxLength - textController.text.length;
+      user.name = textController.text;
     });
   }
 
@@ -67,7 +73,7 @@ class _UsernameAddSheetState extends State<UsernameAddSheet> {
             SizedBox(height: h * 0.12),
             c.CupertinoTextField(
               maxLength: maxLength,
-              controller: _username,
+              controller: textController,
               placeholder: 'Your Name',
               keyboardType: TextInputType.text,
               padding: EdgeInsets.all(16),
@@ -83,7 +89,7 @@ class _UsernameAddSheetState extends State<UsernameAddSheet> {
               padding: EdgeInsets.only(top: 5),
               alignment: Alignment.centerRight,
               child: Text(
-                '${_username.text.length} / $maxLength',
+                '${textController.text.length} / $maxLength',
                 style: c.TextStyle(
                   color: c.CupertinoDynamicColor.resolve(
                     c.CupertinoColors.secondaryLabel,
@@ -94,7 +100,7 @@ class _UsernameAddSheetState extends State<UsernameAddSheet> {
             ),
             SizedBox(height: h * 0.25),
             c.CupertinoButton(
-              onPressed: isNullOrEmpty(_username.text)
+              onPressed: isNullOrEmpty(textController.text)
                   ? null
                   : () => onContinuePressed(context),
               color: c.CupertinoDynamicColor.resolve(
@@ -111,6 +117,7 @@ class _UsernameAddSheetState extends State<UsernameAddSheet> {
   }
 
   void onContinuePressed(c.BuildContext context) async {
+    GlobalSettingController.setUser(user);
     await Navigator.of(context).pushNamed("/home");
   }
 }
