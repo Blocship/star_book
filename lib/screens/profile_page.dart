@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 //Files
 import '../models/global_setting.dart';
 import '../styles/style.dart';
+import '../controllers/global_setting.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -11,7 +12,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  User user = User(name: 'Tejas');
+  User user = User(name: GlobalSettingController.getuser().name);
 
   @override
   Widget build(BuildContext context) {
