@@ -16,6 +16,13 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
+      navigationBar: c.CupertinoNavigationBar(
+        automaticallyImplyLeading:
+            false, //to remove the back button that comes with the navigation bar
+        backgroundColor: Color(0x00000000),
+        trailing: PreferanceButton(),
+        border: null,
+      ),
       child: SafeArea(
         minimum: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
@@ -120,6 +127,26 @@ class Stats extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class PreferanceButton extends StatelessWidget {
+  void onTap(context) {
+    Navigator.of(context).pushNamed("/preferance");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => onTap(context),
+      child: Icon(
+        c.CupertinoIcons.bars,
+        color: c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.label,
+          context,
+        ),
+      ),
     );
   }
 }
