@@ -12,7 +12,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  User user = User(name: GlobalSettingController.getuser().name);
+  User user = GlobalSettingController.getuser();
 
   @override
   Widget build(BuildContext context) {

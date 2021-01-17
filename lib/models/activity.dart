@@ -180,15 +180,15 @@ List<Activity> mActivityList = new List<Activity>()
   ))
   // Happy Day
   ..add(Activity(
-      day: 01,
-      month: 01,
-      year: 2021,
-      moodId: 0,
-      title: "Happy New Year",
-      note: """
+    day: 01,
+    month: 01,
+    year: 2021,
+    moodId: 0,
+    title: "Happy New Year",
+    note: """
         Voila Diary,
         Today, I had a great time as this was the 1st day of the year. Once again, I took resolutions for the year which I am going to follow(:P) or at least try to follow(:O). Today, I started my day with some exercise and healthy breakfast. Then, spent the rest of my day with my family and which I really enjoyed. At the end of the day, we had a special dinner made by my mother. Today was the perfect beginning of the year. Hurray!! Goodbye Diary...
-        """
+        """,
   ))
   // Productive Day
   ..add(Activity(
