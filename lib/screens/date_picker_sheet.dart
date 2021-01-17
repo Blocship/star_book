@@ -5,8 +5,7 @@ import '../widgets/my_container.dart';
 /// Date Picker Screen displays option to switch between dates from 1st of this month to current date of present month.
 
 class DatePickerSheet extends StatefulWidget {
-  RouteSettings settings;
-
+  final RouteSettings settings;
   DatePickerSheet(this.settings);
 
   @override
@@ -19,11 +18,12 @@ class _DatePickerSheetState extends State<DatePickerSheet> {
 
   @override
   void initState() {
+    super.initState();
     var data = widget.settings.arguments as Map<String, int>;
     day = data["day"];
     month = data["month"];
     year = data["year"];
-    dateController.text = '${day}-${month}-${year}';
+    dateController.text = '$day-$month-$year';
   }
 
   @override
