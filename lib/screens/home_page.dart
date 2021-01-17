@@ -35,9 +35,17 @@ class _HomeState extends State<Home> {
 
   Widget tabBuilder(BuildContext context, int index) {
     if (BottomTabOption.values[index] == BottomTabOption.home) {
-      return HomePage();
+      return c.CupertinoTabView(
+        builder: (context){
+          return HomePage();
+        },
+      );
     } else {
-      return ProfilePage();
+      return c.CupertinoTabView(
+        builder: (context){
+          return ProfilePage();
+        },
+      );
     }
   }
 
