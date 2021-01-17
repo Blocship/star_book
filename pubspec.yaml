@@ -39,6 +39,7 @@ dependencies:
   http: ^0.12.2
   # Load data from .env file
   flutter_dotenv: ^2.1.0
+  blurhash_dart: ^0.2.3
 
 dev_dependencies:
   flutter_test:
@@ -46,7 +47,7 @@ dev_dependencies:
   # Local database
   hive_generator: ^0.8.1
   build_runner: ^1.10.3
-  # App's launcher icons generator 
+  # App's launcher icons generator
   flutter_launcher_icons: ^0.7.0
 
 # For information on the generic Dart part of this file, see the
@@ -78,10 +79,10 @@ flutter:
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
-
+  
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
+  
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

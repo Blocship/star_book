@@ -1,6 +1,8 @@
-import 'package:flutter/cupertino.dart' as c;
+import 'dart:typed_data';
 import 'package:flutter/widgets.dart';
-
+import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart' as c;
+import 'package:blurhash_dart/blurhash_dart.dart';
 // Files
 import '../api/unsplash_api_service.dart';
 import '../screens/error_page.dart';
@@ -92,14 +94,22 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     month = DateTime.now().month;
     year = DateTime.now().year;
-    initImages();
-
     super.initState();
   }
 
-  void initImages() async {
-    images = await UnsplashAPIService.getPhotos(12);
-    print(images);
+  Future<List<UnsplashPhoto>> initImages() async {
+    return await UnsplashAPIService.getPhotos(12);
+    // print(images);
+  }
+
+  Uint8List loadBlurHash(String blurHash) {
+    Uint8List pixels;
+    try {
+      pixels = decodeBlurHash(blurHash, 300, 300);
+    } catch (e) {
+      print("Blur Exception: + ${e.toString()}");
+    }
+    return pixels;
   }
 
   void onHorizontalDragEnd(c.DragEndDetails value) {
@@ -122,38 +132,61 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: c.CupertinoDynamicColor.resolve(
-          c.CupertinoColors.systemBackground,
-          context,
+    return Stack(
+      children: [
+        Container(
+          color: c.CupertinoDynamicColor.resolve(
+            c.CupertinoColors.systemBackground,
+            context,
+          ),
         ),
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: AssetImage('backup-bg-image.JPG'),
-        ),
-      ),
-      child: c.CupertinoPageScaffold(
-        backgroundColor: Color(0x00000000),
-        navigationBar: c.CupertinoNavigationBar(
+        c.FutureBuilder(
+            future: initImages(),
+            builder: (c.BuildContext context, c.AsyncSnapshot snapshot) {
+              if ((snapshot.connectionState == c.ConnectionState.done) &&
+                  (snapshot.hasData) &&
+                  (snapshot.data.isNotEmpty)) {
+                images = snapshot.data;
+                return FadeInImage.memoryNetwork(
+                  width: double.infinity,
+                  height: double.infinity,
+                  fit: BoxFit.cover,
+                  placeholder: loadBlurHash(images[month - 1].blurhash),
+                  image: images[month - 1].url,
+                );
+              } else {
+                return Image.asset(
+                  "backup-bg-image.JPG",
+                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  height: double.infinity,
+                );
+              }
+            }),
+        c.CupertinoPageScaffold(
           backgroundColor: Color(0x00000000),
-          leading: PreferanceButton(),
-          trailing: YearButton(),
-          border: null,
-        ),
-        child: SafeArea(
-          child: c.GestureDetector(
-            onHorizontalDragEnd: onHorizontalDragEnd,
+          navigationBar: c.CupertinoNavigationBar(
+            backgroundColor: Color(0x00000000),
+            leading: PreferanceButton(),
+            trailing: YearButton(),
+            border: null,
+          ),
+          child: SafeArea(
             child: Container(
-              padding: c.EdgeInsets.symmetric(horizontal: 12),
-              child: Month(
-                month: month,
-                year: year,
+              child: c.GestureDetector(
+                onHorizontalDragEnd: onHorizontalDragEnd,
+                child: Container(
+                  padding: c.EdgeInsets.symmetric(horizontal: 12),
+                  child: Month(
+                    month: month,
+                    year: year,
+                  ),
+                ),
               ),
             ),
           ),
         ),
-      ),
+      ],
     );
   }
 }
