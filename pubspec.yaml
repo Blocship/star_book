@@ -39,6 +39,12 @@ dependencies:
   http: ^0.12.2
   # Load data from .env file
   flutter_dotenv: ^2.1.0
+  # Schedule/show local notificaions
+  flutter_local_notifications: ^3.0.3
+  # Deive timezone
+  flutter_native_timezone: ^1.0.4
+  # Running Dart code in backgroud
+  workmanager: ^0.2.3
 
 dev_dependencies:
   flutter_test:

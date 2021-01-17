@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:workmanager/workmanager.dart';
 
 // Files
 import './api/unsplash_api_service.dart';
@@ -11,12 +12,27 @@ import './models/activity.dart';
 import './models/global_setting.dart';
 import './models/mood.dart';
 import './routes/route_generator.dart';
+import 'services/notification_service/notification_service.dart';
+
+void callbackDispatcher() {
+  Workmanager.executeTask((task, inputData) async {
+    await NotificationService().checkDiary();
+    return Future.value(true);
+  });
+}
 
 /// Starting point of the application.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([               // Locks the device orientation in PortraitUp only.
-    DeviceOrientation.portraitUp                        // This method is not applicable on iPad when multitasking is enabled.
+  Workmanager.initialize(callbackDispatcher, isInDebugMode: true);
+  Workmanager.registerPeriodicTask(
+    "200",
+    "CheckDiaryTask",
+  );
+  await SystemChrome.setPreferredOrientations([
+    // Locks the device orientation in PortraitUp only.
+    DeviceOrientation
+        .portraitUp // This method is not applicable on iPad when multitasking is enabled.
   ]);
   await hiveInitialize();
   await ActivityController.initialize();

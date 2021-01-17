@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
+import 'package:star_book/services/notification_service/notification_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // Files
@@ -39,10 +42,16 @@ class PreferanceSheet extends StatefulWidget {
 
 class PreferenceSheetState extends State<PreferanceSheet> {
   BrightnessOption _selectedOption;
+  bool notifyDaily;
+  bool notifyIfIMiss;
+  NotificationService _notificationService;
 
   @override
   void initState() {
     _selectedOption = BrightnessOption.auto;
+    _notificationService = NotificationService();
+    notifyDaily = false;
+    notifyIfIMiss = false;
     super.initState();
   }
 
@@ -113,63 +122,133 @@ class PreferenceSheetState extends State<PreferanceSheet> {
   Widget _buildBody(BuildContext context) {
     return SafeArea(
       // minimum: EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          // Padding(padding: EdgeInsets.symmetric(vertical: 18)),
-          // ActionContainer(
-          //   text: 'Edit Mood',
-          //   icon: c.CupertinoIcons.right_chevron,
-          // ),
-          Padding(padding: EdgeInsets.symmetric(vertical: 18)),
-          MyContainer(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text('Dark Mode', style: Style.body(context)),
-                c.CupertinoSlidingSegmentedControl<BrightnessOption>(
-                  children: optoins,
-                  groupValue: _selectedOption,
-                  onValueChanged: onSlidingSegmentChanged,
-                  backgroundColor: c.CupertinoDynamicColor.resolve(
-                    c.CupertinoColors.systemGrey6,
-                    context,
+      child: c.SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            // Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+            // ActionContainer(
+            //   text: 'Edit Mood',
+            //   icon: c.CupertinoIcons.right_chevron,
+            // ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+            MyContainer(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Dark Mode', style: Style.body(context)),
+                  c.CupertinoSlidingSegmentedControl<BrightnessOption>(
+                    children: optoins,
+                    groupValue: _selectedOption,
+                    onValueChanged: onSlidingSegmentChanged,
+                    backgroundColor: c.CupertinoDynamicColor.resolve(
+                      c.CupertinoColors.systemGrey6,
+                      context,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          Padding(padding: EdgeInsets.symmetric(vertical: 18)),
-          ..._aboutDeveloper(context),
-          Padding(padding: EdgeInsets.symmetric(vertical: 18)),
-          ActionContainer(
-            text: 'Privacy and Terms',
-            icon: c.CupertinoIcons.right_chevron,
-            onTap: () async {
-              String url =
-                  "https://github.com/hashirshoaeb/star_book/blob/master/POLICY.md";
-              try {
-                if (await canLaunch(url)) await launch(url);
-              } catch (e) {
-                // print("Url Exception , ${e.toString()}");
-              }
-            },
-          ),
-          Padding(padding: EdgeInsets.symmetric(vertical: 18)),
-          ActionContainer(
-            text: 'LICENCE',
-            icon: c.CupertinoIcons.right_chevron,
-            onTap: () async {
-              String url =
-                  "https://github.com/hashirshoaeb/star_book/blob/master/LICENSE";
-              try {
-                if (await canLaunch(url)) await launch(url);
-              } catch (e) {
-                // print("Url Exception , ${e.toString()}");
-              }
-            },
-          ),
-        ],
+            Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+            MyContainer(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Remind me to write everyday',
+                      style: Style.body(context)),
+                  c.CupertinoSwitch(
+                    value: notifyDaily,
+                    onChanged: (value) async {
+                      if (Platform.isIOS) {
+                        if (await _notificationService
+                            .iosNotificationPermission()) {
+                          if (value) {
+                            await _notificationService
+                                .scheduleDailyNotification();
+                            setState(() {
+                              notifyDaily = true;
+                            });
+                          }
+                        }
+                      } else {
+                        if (value) {
+                          setState(() {
+                            notifyDaily = true;
+                          });
+                          await _notificationService
+                              .scheduleDailyNotification();
+                        }
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+            MyContainer(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text('Remind me if I forget to write',
+                      style: Style.body(context)),
+                  c.CupertinoSwitch(
+                    value: notifyIfIMiss,
+                    onChanged: (value) async {
+                      if (Platform.isIOS) {
+                        if (await _notificationService
+                            .iosNotificationPermission()) {
+                          if (value) {
+                            setState(() {
+                              notifyIfIMiss = true;
+                            });
+                            await _notificationService.checkDiary();
+                          }
+                        }
+                      } else {
+                        if (value) {
+                          setState(() {
+                            notifyIfIMiss = true;
+                          });
+                          await _notificationService.checkDiary();
+                        }
+                      }
+                    },
+                  ),
+                ],
+              ),
+            ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+            ..._aboutDeveloper(context),
+            Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+            ActionContainer(
+              text: 'Privacy and Terms',
+              icon: c.CupertinoIcons.right_chevron,
+              onTap: () async {
+                String url =
+                    "https://github.com/hashirshoaeb/star_book/blob/master/POLICY.md";
+                try {
+                  if (await canLaunch(url)) await launch(url);
+                } catch (e) {
+                  // print("Url Exception , ${e.toString()}");
+                }
+              },
+            ),
+            Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+            ActionContainer(
+              text: 'LICENCE',
+              icon: c.CupertinoIcons.right_chevron,
+              onTap: () async {
+                String url =
+                    "https://github.com/hashirshoaeb/star_book/blob/master/LICENSE";
+                try {
+                  if (await canLaunch(url)) await launch(url);
+                } catch (e) {
+                  // print("Url Exception , ${e.toString()}");
+                }
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
