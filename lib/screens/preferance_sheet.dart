@@ -1,16 +1,12 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 import 'package:url_launcher/url_launcher.dart';
+
 // Files
+import '../models/global_setting.dart';
+import '../styles/style.dart';
 import '../widgets/action_container.dart';
 import '../widgets/my_container.dart';
-import '../styles/style.dart';
-
-enum BrightnessOption {
-  light,
-  dark,
-  auto,
-}
 
 Map<BrightnessOption, Widget> optoins = {
   BrightnessOption.auto: SlidingSegment(c.CupertinoIcons.circle_lefthalf_fill),

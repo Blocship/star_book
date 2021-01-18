@@ -62,7 +62,7 @@ class Day extends StatelessWidget {
       // get color by sending mood,
       int colorCode = activity.moodId;
       return c.CupertinoDynamicColor.resolve(
-        getColor(EColor.values[colorCode]),
+        getColor(MoodColor.values[colorCode]),
         context,
       );
     } else {
