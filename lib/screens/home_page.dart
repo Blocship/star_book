@@ -1,11 +1,41 @@
+// child: c.Container(
+//   height: double.maxFinite,
+//   child: c.ListView.builder(
+//     itemCount: 1,
+//     itemBuilder: (c.BuildContext context, int index) {
+//       return c.Container(
+//         child: c.Dismissible(
+//           key: c.UniqueKey(),
+//           child: Month(
+//             month: month,
+//             year: year,
+//           ),
+//           onDismissed: (direction) {
+//             if (direction == c.DismissDirection.endToStart) {
+//               setState(() {
+//                 year = getNextYear(month, year);
+//                 month = getNextMonth(month, year);
+//               });
+//             } else if (direction == c.DismissDirection.startToEnd) {
+//               setState(() {
+//                 year = getPreviousYear(month, year);
+//                 month = getPreviousMonth(month, year);
+//               });
+//             }
+//           },
+//         ),
+//       );
+//     },
+//   ),
+// ),
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
+
 // Files
-import '../widgets/month.dart';
-<<<<<<< HEAD
-import '../models/mood.dart';
+import '../api/unsplash_api_service.dart';
+import '../models/unsplash_photo.dart';
 import '../utils/date.dart';
-=======
+import '../widgets/month.dart';
 import './profile_page.dart';
 
 enum BottomTabOption {
@@ -67,7 +97,6 @@ class _HomeState extends State<Home> {
     );
   }
 }
->>>>>>> upstream/master
 
 /// Home Page Screen widget is the main page
 /// of the app that renders [Month] and [PreferanceButton] widgets
@@ -79,67 +108,109 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int month;
   int year;
+  int index = 0;
+  List<UnsplashPhoto> images = List<UnsplashPhoto>();
+  bool _loading = false;
 
   // TODO: fetch data from database based.
   // using mock data for now
-  final List<Mood> moodList = new List<Mood>.from(mMoodList);
+  // final List<Mood> moodList = new List<Mood>.from(mMoodList);
 
+  // List photoList;
   @override
   void initState() {
     month = DateTime.now().month;
     year = DateTime.now().year;
+    initImages();
+
     super.initState();
   }
 
+  void initImages() async {
+    images = await UnsplashAPIService.getPhotos(12);
+    print(images);
+  }
+
+  // void onHorizontalDragEnd(c.DragEndDetails value) {
+  //   (value.primaryVelocity.isNegative)
+  //       ?
+  //       // Drags Left
+  //       setState(() {
+  //           year = getNextYear(month, year);
+  //           month = getNextMonth(month, year);
+  //           index < 28 ? index += 1 : index = 0;
+  //         })
+  //       :
+  //       // Drags Right
+  //       setState(() {
+  //           year = getPreviousYear(month, year);
+  //           month = getPreviousMonth(month, year);
+  //           index > 0 ? index -= 1 : index = 28;
+  //         });
+  // }
+
   @override
   Widget build(BuildContext context) {
-<<<<<<< HEAD
-    return c.CupertinoPageScaffold(
-      backgroundColor: c.CupertinoDynamicColor.resolve(
-        c.CupertinoColors.systemBackground,
-        context,
-      ),
-      navigationBar: c.CupertinoNavigationBar(
-        backgroundColor: c.CupertinoDynamicColor.resolve(
-=======
     return Container(
       decoration: BoxDecoration(
         color: c.CupertinoDynamicColor.resolve(
->>>>>>> upstream/master
           c.CupertinoColors.systemBackground,
           context,
         ),
-        trailing: PreferanceButton(),
-        border: null,
+        image: DecorationImage(
+          fit: BoxFit.cover,
+          image: AssetImage('backup-bg-image.JPG'),
+        ),
       ),
-      child: c.Container(
-        height: double.maxFinite,
-        child: c.ListView.builder(
-          itemCount: 1,
-          itemBuilder: (c.BuildContext context, int index) {
-            return c.Container(
-              child: c.Dismissible(
-                key: c.UniqueKey(),
-                child: Month(
-                  month: month,
-                  year: year,
+      child: c.CupertinoPageScaffold(
+        backgroundColor: Color(0x00000000),
+        navigationBar: c.CupertinoNavigationBar(
+          backgroundColor: Color(0x00000000),
+          leading: PreferanceButton(),
+          trailing: YearButton(),
+          border: null,
+        ),
+        // child: SafeArea(
+        //   child: c.GestureDetector(
+        //     onHorizontalDragEnd: onHorizontalDragEnd,
+        //     child: Container(
+        //       padding: c.EdgeInsets.symmetric(horizontal: 12),
+        //       child: Month(
+        //         month: month,
+        //         year: year,
+        //       ),
+        //     ),
+        //   ),
+        // ),
+        child: c.Container(
+          height: double.maxFinite,
+          child: c.ListView.builder(
+            itemCount: 1,
+            itemBuilder: (c.BuildContext context, int index) {
+              return c.Container(
+                child: c.Dismissible(
+                  key: c.UniqueKey(),
+                  child: Month(
+                    month: month,
+                    year: year,
+                  ),
+                  onDismissed: (direction) {
+                    if (direction == c.DismissDirection.endToStart) {
+                      setState(() {
+                        year = getNextYear(month, year);
+                        month = getNextMonth(month, year);
+                      });
+                    } else if (direction == c.DismissDirection.startToEnd) {
+                      setState(() {
+                        year = getPreviousYear(month, year);
+                        month = getPreviousMonth(month, year);
+                      });
+                    }
+                  },
                 ),
-                onDismissed: (direction) {
-                  if (direction == c.DismissDirection.endToStart) {
-                    setState(() {
-                      year = getNextYear(month, year);
-                      month = getNextMonth(month, year);
-                    });
-                  } else if (direction == c.DismissDirection.startToEnd) {
-                    setState(() {
-                      year = getPreviousYear(month, year);
-                      month = getPreviousMonth(month, year);
-                    });
-                  }
-                },
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
       ),
     );
@@ -165,8 +236,6 @@ class PreferanceButton extends StatelessWidget {
     );
   }
 }
-<<<<<<< HEAD
-=======
 
 class YearButton extends StatelessWidget {
   @override
@@ -188,4 +257,3 @@ class YearButton extends StatelessWidget {
     );
   }
 }
->>>>>>> upstream/master
