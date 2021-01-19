@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import '../models/global_setting.dart';
 import '../styles/style.dart';
 import '../controllers/global_setting.dart';
+import '../widgets/analytics.dart';
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -39,6 +40,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             SizedBox(height: 40),
             Stats(),
+            Center(child: Analytics())
           ],
         ),
       ),
