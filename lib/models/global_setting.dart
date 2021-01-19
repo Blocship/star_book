@@ -11,6 +11,7 @@ const String reminderBoxName = 'brightness';
 const String brightnessBoxName = 'brightness';
 const String globalSettingBoxName = 'globalSetting';
 
+/// Enumeration - To keep check on Brightness Level of Application
 @HiveType(typeId: brightnessTypeId)
 enum BrightnessOption {
   @HiveField(0)
