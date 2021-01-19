@@ -102,24 +102,23 @@ class _HomePageState extends State<HomePage> {
   }
 
   void onHorizontalDragEnd(c.DragEndDetails value) {
-    if(value.primaryVelocity != 0)//to check if the velocity is non zero 
-{
-(value.primaryVelocity.isNegative)
-        ?
-        // Drags Left
-        setState(() {
-            year = getNextYear(month, year);
-            month = getNextMonth(month, year);
-            index < 28 ? index += 1 : index = 0;
-          })
-        :
-        // Drags Right
-        setState(() {
-            year = getPreviousYear(month, year);
-            month = getPreviousMonth(month, year);
-            index > 0 ? index -= 1 : index = 28;
-          });
-  }}
+    if (value.primaryVelocity.isNegative) {
+      // Drags Left
+      setState(() {
+        year = getNextYear(month, year);
+        month = getNextMonth(month, year);
+        index < 28 ? index += 1 : index = 0;
+      });
+    } else if (value.primaryVelocity > 0) {
+      // Drags Right
+      setState(() {
+        year = getPreviousYear(month, year);
+        month = getPreviousMonth(month, year);
+        index > 0 ? index -= 1 : index = 28;
+      });
+    }
+    // else velocity is zero, no need to do anything
+  }
 
   @override
   Widget build(BuildContext context) {
