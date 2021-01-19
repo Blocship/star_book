@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart' as c;
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 // Files
 import '../models/activity.dart';
@@ -64,16 +65,22 @@ class ActivityPage extends StatelessWidget {
             ),
             Container(
               padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-              child: Text(
+              child: SelectableText(
                 activity.title,
+                showCursor: true,
+                toolbarOptions: c.ToolbarOptions(copy: true, selectAll: true),
                 style: Style.largeTitle(context),
+                enableInteractiveSelection: true
               ),
             ),
             Container(
               padding: EdgeInsets.all(16),
-              child: Text(
+              child: SelectableText(
                 activity.note,
+                showCursor: true,
+                toolbarOptions: c.ToolbarOptions(copy: true, selectAll: true),
                 style: Style.body(context),
+                enableInteractiveSelection: true,
               ),
             ),
           ],

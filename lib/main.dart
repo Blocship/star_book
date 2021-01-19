@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart' as c;
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter/services.dart';
@@ -44,6 +45,11 @@ class MyApp extends StatelessWidget {
       initialRoute: '/username_add',
       title: "StarBook",
       theme: c.CupertinoThemeData(),
+      localizationsDelegates: [
+        DefaultMaterialLocalizations.delegate,
+        c.DefaultCupertinoLocalizations.delegate,
+        DefaultWidgetsLocalizations.delegate,
+      ],
       onGenerateRoute: (settings) => RouteGenerator.mainRoute(settings),
     );
   }
