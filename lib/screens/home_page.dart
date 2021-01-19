@@ -137,7 +137,6 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Color(0x00000000),
         navigationBar: c.CupertinoNavigationBar(
           backgroundColor: Color(0x00000000),
-          leading: PreferanceButton(),
           trailing: YearButton(),
           border: null,
         ),
@@ -152,26 +151,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class PreferanceButton extends StatelessWidget {
-  void onTap(context) {
-    Navigator.of(context).pushNamed("/preferance");
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => onTap(context),
-      child: Icon(
-        c.CupertinoIcons.bars,
-        color: c.CupertinoDynamicColor.resolve(
-          c.CupertinoColors.label,
-          context,
         ),
       ),
     );
