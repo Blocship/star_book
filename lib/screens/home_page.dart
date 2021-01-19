@@ -102,7 +102,9 @@ class _HomePageState extends State<HomePage> {
   }
 
   void onHorizontalDragEnd(c.DragEndDetails value) {
-    (value.primaryVelocity.isNegative)
+    if(value.primaryVelocity != 0)//to check if the velocity is non zero 
+{
+(value.primaryVelocity.isNegative)
         ?
         // Drags Left
         setState(() {
@@ -117,7 +119,7 @@ class _HomePageState extends State<HomePage> {
             month = getPreviousMonth(month, year);
             index > 0 ? index -= 1 : index = 28;
           });
-  }
+  }}
 
   @override
   Widget build(BuildContext context) {
