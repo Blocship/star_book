@@ -7,12 +7,21 @@ import '../styles/style.dart';
 import '../controllers/global_setting.dart';
 import '../widgets/analytics.dart';
 
+/// Profile Page displays user details
+/// Such as
+/// - Username
+/// - Points
+/// - Streak
+/// - Monthly and Weekly Widgets.
+
+
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  /// Initiate user from Global Settings Controller
   User user = GlobalSettingController.getuser();
 
   @override
