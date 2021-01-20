@@ -5,6 +5,15 @@ import 'package:flutter/widgets.dart';
 import '../models/global_setting.dart';
 import '../styles/style.dart';
 import '../controllers/global_setting.dart';
+import '../widgets/analytics.dart';
+
+/// Profile Page displays user details
+/// Such as
+/// - Username
+/// - Points
+/// - Streak
+/// - Monthly and Weekly Widgets.
+
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -12,11 +21,19 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  /// Initiate user from Global Settings Controller
   User user = GlobalSettingController.getuser();
 
   @override
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
+      navigationBar: c.CupertinoNavigationBar(
+        automaticallyImplyLeading:
+            false, //to remove the back button that comes with the navigation bar
+        backgroundColor: Color(0x00000000),
+        trailing: PreferanceButton(),
+        border: null,
+      ),
       child: SafeArea(
         minimum: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
@@ -39,6 +56,7 @@ class _ProfilePageState extends State<ProfilePage> {
             ),
             SizedBox(height: 40),
             Stats(),
+            Center(child: Analytics())
           ],
         ),
       ),
@@ -121,6 +139,26 @@ class Stats extends StatelessWidget {
           ),
         ),
       ],
+    );
+  }
+}
+
+class PreferanceButton extends StatelessWidget {
+  void onTap(context) {
+    Navigator.of(context).pushNamed("/preferance");
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => onTap(context),
+      child: Icon(
+        c.CupertinoIcons.bars,
+        color: c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.label,
+          context,
+        ),
+      ),
     );
   }
 }
