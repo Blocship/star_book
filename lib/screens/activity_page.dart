@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import '../models/activity.dart';
 import '../models/mood.dart';
 import '../styles/style.dart';
+import '../utils/date.dart';
 
 // TODO: display activity in cupertino style,
 // added just to implement route,
@@ -49,7 +50,7 @@ class ActivityPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "${activity.day} - ${activity.month} - ${activity.year}",
+                    "${getMonthTitle(activity.month)} ${activity.day}, ${activity.year}",
                     style: Style.bodySecondary(context),
                   ),
                 ],
