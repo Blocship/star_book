@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:star_book/styles/style.dart';
 import '../widgets/my_container.dart';
 
 /// Time Picker Screen displays option to switch select time for reminder.
@@ -50,10 +51,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
             MyContainer(
               child: c.CupertinoTextField(
                 textAlign: TextAlign.center,
-                style: c.TextStyle(
-                    fontSize: 20,
-                    color: Color(0xffffffff),
-                    fontWeight: FontWeight.w400),
+                style: Style.body(context),
                 readOnly: true,
                 placeholder: 'time',
                 decoration: null,
@@ -67,9 +65,9 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
             ),
             c.Center(
                 child: Text(
-                  "Choose Time",
-                  style: TextStyle(color: c.Color(0xffffffff)),
-                )),
+              "Choose Time",
+              style: Style.body(context),
+            )),
             c.Container(
               padding: EdgeInsets.all(10),
               height: MediaQuery.of(context).size.height * 2 / 5,
