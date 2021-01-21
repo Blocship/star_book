@@ -12,6 +12,7 @@ import '../screens/preferance_sheet.dart';
 import '../screens/date_picker_sheet.dart';
 import '../utils/bottom_sheet.dart';
 import '../screens/username_add_sheet.dart';
+import '../screens/time_picker_sheet.dart';
 
 /// Centralised routing class.
 /// Static methods inside, define named routes
@@ -69,6 +70,10 @@ class RouteGenerator {
       case "edit/date":
         return MaterialWithModalsPageRoute(
           builder: (context) => DatePickerSheet(settings),
+        );
+      case "edit/time":
+        return MaterialWithModalsPageRoute(
+          builder: (context) => TimePickerSheet(settings),
         );
       default:
         return MaterialWithModalsPageRoute(
