@@ -4,6 +4,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 // Files
 import '../models/global_setting.dart';
+import '../screens/time_picker_sheet.dart';
 import '../styles/style.dart';
 import '../widgets/action_container.dart';
 import '../widgets/my_container.dart';
@@ -139,6 +140,39 @@ class PreferenceSheetState extends State<PreferanceSheet> {
               ],
             ),
           ),
+          Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+          MyContainer(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text('Reminder', style: Style.body(context)),
+                c.Row(
+                  children: [
+                    Text('19:00', style: Style.bodySecondary(context)),
+                    Icon(
+                      c.CupertinoIcons.right_chevron,
+                      color: c.CupertinoDynamicColor.resolve(
+                          c.CupertinoColors.tertiaryLabel, context),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            onTap: () {
+              RouteSettings settings;
+              // Navigator.push(
+              //   context,
+              //   MaterialPageRoute(
+              //     builder: (context) => TimePickerSheet(settings),
+              //   ),
+              // );
+              c.showCupertinoModalPopup(
+                  context: context,
+                  builder: (context) {
+                    return TimePickerSheet(settings);
+                  });
+            },
+          ),
           Padding(padding: EdgeInsets.symmetric(vertical: 18)),
           ..._aboutDeveloper(context),
           Padding(padding: EdgeInsets.symmetric(vertical: 18)),
@@ -155,7 +189,7 @@ class PreferenceSheetState extends State<PreferanceSheet> {
               }
             },
           ),
-          Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+          Padding(padding: EdgeInsets.symmetric(vertical: 8)),
           ActionContainer(
             text: 'LICENCE',
             icon: c.CupertinoIcons.right_chevron,
