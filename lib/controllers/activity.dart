@@ -1,7 +1,8 @@
 import 'package:hive/hive.dart';
+
 // Files
-import '../models/activity.dart';
 import './id.dart';
+import '../models/activity.dart';
 
 /// Class with static methods, to provide `CRUD` operations for [Activity] model
 class ActivityController {
@@ -20,7 +21,9 @@ class ActivityController {
   /// If you think it as relational database,
   /// it return all the rows from the [activityBoxName] Table
   static Map<String, Activity> readAll() {
-    return Hive.box<Activity>(activityBoxName).toMap().map((id, activity) => MapEntry(id as String, activity));
+    return Hive.box<Activity>(activityBoxName)
+        .toMap()
+        .map((id, activity) => MapEntry(id as String, activity));
   }
 
   /// Returns the [Activity] w.r.t to the date from the, `Hive box`

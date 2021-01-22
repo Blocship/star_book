@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart' as c;
-import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:star_book/styles/style.dart';
+
+// Files
+import '../styles/style.dart';
 import '../widgets/my_container.dart';
 
 /// Time Picker Screen displays option to switch select time for reminder.
@@ -30,64 +31,6 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
     super.dispose();
   }
 
-  c.CupertinoNavigationBar _buildNavBar(BuildContext context) {
-    return c.CupertinoNavigationBar(
-      backgroundColor: c.CupertinoDynamicColor.resolve(
-          c.CupertinoColors.systemGrey6, context),
-      middle: Text("Time"),
-      border: null,
-    );
-  }
-
-  Widget _buildBody(BuildContext context) {
-    return c.SingleChildScrollView(
-      child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            c.SizedBox(
-              height: 20,
-            ),
-            MyContainer(
-              child: c.CupertinoTextField(
-                textAlign: TextAlign.center,
-                style: Style.body(context),
-                readOnly: true,
-                placeholder: 'time',
-                decoration: null,
-                controller: timeController,
-                maxLines: 1,
-                onTap: null,
-              ),
-            ),
-            c.SizedBox(
-              height: 30,
-            ),
-            c.Center(
-                child: Text(
-              "Choose Time",
-              style: Style.body(context),
-            )),
-            c.Container(
-              padding: EdgeInsets.all(10),
-              height: MediaQuery.of(context).size.height * 2 / 5,
-              child: c.CupertinoDatePicker(
-                onDateTimeChanged: (DateTime time) {
-                  setState(() {
-                    _time = time;
-                    timeController.text = '${_time.hour}:${_time.minute}';
-                  });
-                },
-                use24hFormat: true,
-                mode: c.CupertinoDatePickerMode.time,
-              ),
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return c.WillPopScope(
@@ -99,8 +42,59 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
           c.CupertinoColors.systemGrey6,
           context,
         ),
-        navigationBar: _buildNavBar(context),
-        child: _buildBody(context),
+        navigationBar: c.CupertinoNavigationBar(
+          backgroundColor: c.CupertinoDynamicColor.resolve(
+              c.CupertinoColors.systemGrey6, context),
+          middle: Text("Time"),
+          border: null,
+        ),
+        child: SingleChildScrollView(
+          child: SafeArea(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                SizedBox(
+                  height: 20,
+                ),
+                MyContainer(
+                  child: c.CupertinoTextField(
+                    textAlign: TextAlign.center,
+                    style: Style.body(context),
+                    readOnly: true,
+                    placeholder: 'time',
+                    decoration: null,
+                    controller: timeController,
+                    maxLines: 1,
+                    onTap: null,
+                  ),
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Center(
+                  child: Text(
+                    "Choose Time",
+                    style: Style.body(context),
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  height: MediaQuery.of(context).size.height * 2 / 5,
+                  child: c.CupertinoDatePicker(
+                    onDateTimeChanged: (DateTime time) {
+                      setState(() {
+                        _time = time;
+                        timeController.text = '${_time.hour}:${_time.minute}';
+                      });
+                    },
+                    use24hFormat: true,
+                    mode: c.CupertinoDatePickerMode.time,
+                  ),
+                )
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }

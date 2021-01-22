@@ -20,6 +20,21 @@ const String activityBoxName = 'activity';
 /// and adding [Activtiy] object is like adding new row in database.
 @HiveType(typeId: activityTypeId)
 class Activity extends HiveObject {
+  @HiveField(0)
+  int id;
+  @HiveField(1)
+  int day;
+  @HiveField(2)
+  int month;
+  @HiveField(3)
+  int year;
+  @HiveField(4)
+  int moodId;
+  @HiveField(5)
+  String title;
+  @HiveField(6)
+  String note;
+
   Activity({
     this.id,
     this.day,
@@ -41,30 +56,15 @@ class Activity extends HiveObject {
     this.note = activity.note;
   }
 
-  @HiveField(0)
-  int id;
-  @HiveField(1)
-  int day;
-  @HiveField(2)
-  int month;
-  @HiveField(3)
-  int year;
-  @HiveField(4)
-  int moodId;
-  @HiveField(5)
-  String title;
-  @HiveField(6)
-  String note;
-
-  /// Checks if any of the fields is null or not.
-  /// Except [key] and [id]
-  bool isFilled() {
-    return (this.day != null &&
-        this.month != null &&
-        this.year != null &&
-        this.moodId != null &&
-        !isNullOrEmpty(this.title) &&
-        !isNullOrEmpty(this.note));
+  @override
+  int get hashCode {
+    return id.hashCode ^
+        day.hashCode ^
+        month.hashCode ^
+        year.hashCode ^
+        moodId.hashCode ^
+        title.hashCode ^
+        note.hashCode;
   }
 
   @override
@@ -79,22 +79,6 @@ class Activity extends HiveObject {
         this.moodId == o.moodId &&
         this.title == o.title &&
         this.note == o.note;
-  }
-
-  @override
-  int get hashCode {
-    return id.hashCode ^
-        day.hashCode ^
-        month.hashCode ^
-        year.hashCode ^
-        moodId.hashCode ^
-        title.hashCode ^
-        note.hashCode;
-  }
-
-  @override
-  String toString() {
-    return '{\n id: ${this.id},\n day: ${this.day},\n month: ${this.month},\n year: ${this.year},\n moodId: ${this.moodId},\n title: ${this.title},\n note: ${this.note}, \n}';
   }
 
   Activity copyWith(
@@ -114,6 +98,22 @@ class Activity extends HiveObject {
         title: title ?? this.title,
         note: note ?? this.note);
   }
+
+  /// Checks if any of the fields is null or not.
+  /// Except [key] and [id]
+  bool isFilled() {
+    return (this.day != null &&
+        this.month != null &&
+        this.year != null &&
+        this.moodId != null &&
+        !isNullOrEmpty(this.title) &&
+        !isNullOrEmpty(this.note));
+  }
+
+  @override
+  String toString() {
+    return '{\n id: ${this.id},\n day: ${this.day},\n month: ${this.month},\n year: ${this.year},\n moodId: ${this.moodId},\n title: ${this.title},\n note: ${this.note}, \n}';
+  }
 }
 
 /// Mock list of Activities
@@ -122,7 +122,7 @@ List<Activity> mActivityList = new List<Activity>()
   ..add(Activity(
     day: 07,
     month: 07,
-    year: 2019,
+    year: 2020,
     moodId: 3,
     title: "Fever sucks",
     note: """
@@ -134,7 +134,7 @@ List<Activity> mActivityList = new List<Activity>()
   ..add(Activity(
     day: 21,
     month: 07,
-    year: 2019,
+    year: 2020,
     moodId: 1,
     title: "Day not well spent",
     note: """
