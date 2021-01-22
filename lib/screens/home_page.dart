@@ -1,8 +1,7 @@
-import 'dart:typed_data';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart' as c;
-import 'package:blurhash_dart/blurhash_dart.dart';
+
 // Files
 import './profile_page.dart';
 import '../api/unsplash_api_service.dart';
@@ -10,6 +9,8 @@ import '../models/unsplash_photo.dart';
 import '../utils/date.dart';
 import '../widgets/background_images.dart';
 import '../widgets/month.dart';
+import '../screens/error_page.dart';
+import '../widgets/background_images.dart';
 
 enum BottomTabOption {
   home,
@@ -82,9 +83,7 @@ class _HomePageState extends State<HomePage> {
   int month;
   int year;
   int index = 0;
-  List<UnsplashPhoto> images = List<UnsplashPhoto>();
   bool _loading = false;
-
   // TODO: fetch data from database based.
   // using mock data for now
   // final List<Mood> moodList = new List<Mood>.from(mMoodList);
@@ -92,24 +91,9 @@ class _HomePageState extends State<HomePage> {
   // List photoList;
   @override
   void initState() {
+    super.initState();
     month = DateTime.now().month;
     year = DateTime.now().year;
-    super.initState();
-  }
-
-  Future<List<UnsplashPhoto>> initImages() async {
-    return await UnsplashAPIService.getPhotos(12);
-    // print(images);
-  }
-
-  Uint8List loadBlurHash(String blurHash) {
-    Uint8List pixels;
-    try {
-      pixels = decodeBlurHash(blurHash, 300, 300);
-    } catch (e) {
-      print("Blur Exception: + ${e.toString()}");
-    }
-    return pixels;
   }
 
   void onHorizontalDragEnd(c.DragEndDetails value) {
