@@ -4,13 +4,9 @@ import 'package:flutter/cupertino.dart' as c;
 
 // Files
 import './profile_page.dart';
-import '../api/unsplash_api_service.dart';
-import '../models/unsplash_photo.dart';
 import '../utils/date.dart';
 import '../widgets/background_images.dart';
 import '../widgets/month.dart';
-import '../screens/error_page.dart';
-import '../widgets/background_images.dart';
 
 enum BottomTabOption {
   home,
