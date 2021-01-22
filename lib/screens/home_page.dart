@@ -1,14 +1,12 @@
-import 'dart:typed_data';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart' as c;
-import 'package:blurhash_dart/blurhash_dart.dart';
+
 // Files
-import '../api/unsplash_api_service.dart';
-import '../screens/error_page.dart';
-import '../models/unsplash_photo.dart';
 import '../utils/date.dart';
 import '../widgets/month.dart';
+import '../screens/error_page.dart';
+import '../widgets/background_images.dart';
 
 enum BottomTabOption {
   home,
@@ -82,9 +80,7 @@ class _HomePageState extends State<HomePage> {
   int month;
   int year;
   int index = 0;
-  List<UnsplashPhoto> images = List<UnsplashPhoto>();
   bool _loading = false;
-
   // TODO: fetch data from database based.
   // using mock data for now
   // final List<Mood> moodList = new List<Mood>.from(mMoodList);
@@ -92,24 +88,9 @@ class _HomePageState extends State<HomePage> {
   // List photoList;
   @override
   void initState() {
+    super.initState();
     month = DateTime.now().month;
     year = DateTime.now().year;
-    super.initState();
-  }
-
-  Future<List<UnsplashPhoto>> initImages() async {
-    return await UnsplashAPIService.getPhotos(12);
-    // print(images);
-  }
-
-  Uint8List loadBlurHash(String blurHash) {
-    Uint8List pixels;
-    try {
-      pixels = decodeBlurHash(blurHash, 300, 300);
-    } catch (e) {
-      print("Blur Exception: + ${e.toString()}");
-    }
-    return pixels;
   }
 
   void onHorizontalDragEnd(c.DragEndDetails value) {
@@ -140,29 +121,7 @@ class _HomePageState extends State<HomePage> {
             context,
           ),
         ),
-        c.FutureBuilder(
-            future: initImages(),
-            builder: (c.BuildContext context, c.AsyncSnapshot snapshot) {
-              if ((snapshot.connectionState == c.ConnectionState.done) &&
-                  (snapshot.hasData) &&
-                  (snapshot.data.isNotEmpty)) {
-                images = snapshot.data;
-                return FadeInImage.memoryNetwork(
-                  width: double.infinity,
-                  height: double.infinity,
-                  fit: BoxFit.cover,
-                  placeholder: loadBlurHash(images[month - 1].blurhash),
-                  image: images[month - 1].url,
-                );
-              } else {
-                return Image.asset(
-                  "backup-bg-image.JPG",
-                  fit: BoxFit.cover,
-                  width: double.infinity,
-                  height: double.infinity,
-                );
-              }
-            }),
+        BackgroundImage(month: month),
         c.CupertinoPageScaffold(
           backgroundColor: Color(0x00000000),
           navigationBar: c.CupertinoNavigationBar(
