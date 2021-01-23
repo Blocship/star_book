@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 
 // Files
+import './profile_page.dart';
 import '../api/unsplash_api_service.dart';
 import '../models/unsplash_photo.dart';
 import '../utils/date.dart';
 import '../widgets/month.dart';
-import './profile_page.dart';
 
 enum BottomTabOption {
   home,
@@ -136,6 +136,7 @@ class _HomePageState extends State<HomePage> {
       child: c.CupertinoPageScaffold(
         backgroundColor: Color(0x00000000),
         navigationBar: c.CupertinoNavigationBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Color(0x00000000),
           trailing: YearButton(),
           border: null,
