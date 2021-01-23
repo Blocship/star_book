@@ -63,4 +63,6 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
+    androidTestImplementation 'androidx.test:runner:1.1.1'                   // or higher
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'   // or higher
 }

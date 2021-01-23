@@ -77,14 +77,6 @@ class NotificationService {
       android: androidNotificationDetails,
       iOS: iosNotificationDetails,
     );
-    // if (tz.TZDateTime.now(tz.local).hour == 10) {
-    //   await localNotifications.show(
-    //     4,
-    //     'plain title',
-    //     'plain body of notification',
-    //     notificationDetails,
-    //   );
-    // }
     await localNotifications.zonedSchedule(
       2,
       'notification title',

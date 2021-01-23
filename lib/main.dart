@@ -1,9 +1,9 @@
+import 'package:background_fetch/background_fetch.dart';
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:workmanager/workmanager.dart';
 
 // Files
 import './api/unsplash_api_service.dart';
@@ -14,21 +14,15 @@ import './models/mood.dart';
 import './routes/route_generator.dart';
 import 'services/notification_service/notification_service.dart';
 
-void callbackDispatcher() {
-  Workmanager.executeTask((task, inputData) async {
-    await NotificationService().checkDiary();
-    return Future.value(true);
-  });
+void backgroundFetchHeadlessTask(String taskId) async {
+  await NotificationService().checkDiary();
+  BackgroundFetch.finish(taskId);
 }
 
 /// Starting point of the application.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Workmanager.initialize(callbackDispatcher, isInDebugMode: true);
-  Workmanager.registerPeriodicTask(
-    "200",
-    "CheckDiaryTask",
-  );
+  BackgroundFetch.registerHeadlessTask(backgroundFetchHeadlessTask);
   await SystemChrome.setPreferredOrientations([
     // Locks the device orientation in PortraitUp only.
     DeviceOrientation
@@ -53,7 +47,30 @@ Future<void> hiveInitialize() async {
 /// MyApp is the most Parent widget and initialises the main route.
 ///
 /// [HomePage] initial route
-class MyApp extends StatelessWidget {
+class MyApp extends c.StatefulWidget {
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends c.State<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    initFetchState();
+  }
+
+  Future<void> initFetchState() async {
+    BackgroundFetch.configure(
+        BackgroundFetchConfig(
+          minimumFetchInterval: 15,
+          enableHeadless: true,
+          stopOnTerminate: false,
+        ), (String taskId) async {
+      await NotificationService().checkDiary();
+      BackgroundFetch.finish(taskId);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return c.CupertinoApp(
