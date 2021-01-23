@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 
 // Files
+import './profile_page.dart';
 import '../api/unsplash_api_service.dart';
 import '../models/unsplash_photo.dart';
 import '../utils/date.dart';
 import '../widgets/month.dart';
-import './profile_page.dart';
 
 enum BottomTabOption {
   home,
@@ -102,21 +102,22 @@ class _HomePageState extends State<HomePage> {
   }
 
   void onHorizontalDragEnd(c.DragEndDetails value) {
-    (value.primaryVelocity.isNegative)
-        ?
-        // Drags Left
-        setState(() {
-            year = getNextYear(month, year);
-            month = getNextMonth(month, year);
-            index < 28 ? index += 1 : index = 0;
-          })
-        :
-        // Drags Right
-        setState(() {
-            year = getPreviousYear(month, year);
-            month = getPreviousMonth(month, year);
-            index > 0 ? index -= 1 : index = 28;
-          });
+    if (value.primaryVelocity.isNegative) {
+      // Drags Left
+      setState(() {
+        year = getNextYear(month, year);
+        month = getNextMonth(month, year);
+        index < 28 ? index += 1 : index = 0;
+      });
+    } else if (value.primaryVelocity > 0) {
+      // Drags Right
+      setState(() {
+        year = getPreviousYear(month, year);
+        month = getPreviousMonth(month, year);
+        index > 0 ? index -= 1 : index = 28;
+      });
+    }
+    // else velocity is zero, no need to do anything
   }
 
   @override
@@ -135,8 +136,8 @@ class _HomePageState extends State<HomePage> {
       child: c.CupertinoPageScaffold(
         backgroundColor: Color(0x00000000),
         navigationBar: c.CupertinoNavigationBar(
+          automaticallyImplyLeading: false,
           backgroundColor: Color(0x00000000),
-          leading: PreferanceButton(),
           trailing: YearButton(),
           border: null,
         ),
@@ -151,26 +152,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class PreferanceButton extends StatelessWidget {
-  void onTap(context) {
-    Navigator.of(context).pushNamed("/preferance");
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => onTap(context),
-      child: Icon(
-        c.CupertinoIcons.bars,
-        color: c.CupertinoDynamicColor.resolve(
-          c.CupertinoColors.label,
-          context,
         ),
       ),
     );

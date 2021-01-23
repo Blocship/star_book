@@ -2,43 +2,39 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 
 // Files
+import '../styles/style.dart';
 import '../widgets/my_container.dart';
 
-/// Date Picker Screen displays option to switch between dates
-/// from 1st of this month to current date of present month.
-class DatePickerSheet extends StatefulWidget {
+/// Time Picker Screen displays option to switch select time for reminder.
+class TimePickerSheet extends StatefulWidget {
   final RouteSettings settings;
-  DatePickerSheet(this.settings);
+
+  TimePickerSheet(this.settings);
 
   @override
-  _DatePickerSheetState createState() => _DatePickerSheetState();
+  _TimePickerSheetState createState() => _TimePickerSheetState();
 }
 
-class _DatePickerSheetState extends State<DatePickerSheet> {
-  TextEditingController dateController = TextEditingController();
-  int day, month, year;
+class _TimePickerSheetState extends State<TimePickerSheet> {
+  c.TextEditingController timeController = new c.TextEditingController();
+  DateTime _time;
 
   @override
   void initState() {
     super.initState();
-    var data = widget.settings.arguments as Map<String, int>;
-    day = data['day'];
-    month = data['month'];
-    year = data['year'];
-    dateController.text = '$day-$month-$year';
+    timeController.text;
   }
 
   @override
   void dispose() {
-    dateController.dispose();
+    timeController.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
+    return c.WillPopScope(
       onWillPop: () async {
-        Navigator.of(context).pop({'day': day, 'month': month, 'year': year});
         return true;
       },
       child: c.CupertinoPageScaffold(
@@ -48,10 +44,8 @@ class _DatePickerSheetState extends State<DatePickerSheet> {
         ),
         navigationBar: c.CupertinoNavigationBar(
           backgroundColor: c.CupertinoDynamicColor.resolve(
-            c.CupertinoColors.systemGrey6,
-            context,
-          ),
-          middle: Text('Date'),
+              c.CupertinoColors.systemGrey6, context),
+          middle: Text("Time"),
           border: null,
         ),
         child: SingleChildScrollView(
@@ -65,14 +59,11 @@ class _DatePickerSheetState extends State<DatePickerSheet> {
                 MyContainer(
                   child: c.CupertinoTextField(
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Color(0xffffffff),
-                        fontWeight: FontWeight.w400),
+                    style: Style.body(context),
                     readOnly: true,
-                    placeholder: '$day-$month-$year',
+                    placeholder: 'time',
                     decoration: null,
-                    controller: dateController,
+                    controller: timeController,
                     maxLines: 1,
                     onTap: null,
                   ),
@@ -81,28 +72,23 @@ class _DatePickerSheetState extends State<DatePickerSheet> {
                   height: 30,
                 ),
                 Center(
-                    child: Text(
-                  'Choose Another Date',
-                  style: TextStyle(color: Color(0xffffffff)),
-                )),
+                  child: Text(
+                    "Choose Time",
+                    style: Style.body(context),
+                  ),
+                ),
                 Container(
                   padding: EdgeInsets.all(10),
                   height: MediaQuery.of(context).size.height * 2 / 5,
                   child: c.CupertinoDatePicker(
-                    initialDateTime: DateTime(year, month, day),
-                    onDateTimeChanged: (DateTime newdate) {
+                    onDateTimeChanged: (DateTime time) {
                       setState(() {
-                        day = newdate.day;
-                        month = newdate.month;
-                        year = newdate.year;
+                        _time = time;
+                        timeController.text = '${_time.hour}:${_time.minute}';
                       });
-                      dateController.text = '$day-$month-$year';
                     },
                     use24hFormat: true,
-                    maximumDate: DateTime.now(),
-                    minimumYear: year,
-                    maximumYear: year,
-                    mode: c.CupertinoDatePickerMode.date,
+                    mode: c.CupertinoDatePickerMode.time,
                   ),
                 )
               ],
