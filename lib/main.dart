@@ -75,6 +75,12 @@ class _MyAppState extends c.State<MyApp> {
       await NotificationService().checkDiary();
       BackgroundFetch.finish(taskId);
     });
+    BackgroundFetch.scheduleTask(
+      TaskConfig(
+        taskId: 'com.example.headlesstask',
+        delay: 30 * 60000,
+      ),
+    );
   }
 
   @override
