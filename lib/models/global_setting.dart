@@ -6,14 +6,9 @@ import '../utils/constant.dart';
 part '../models_hive_generated/brightness.g.dart';
 part '../models_hive_generated/user.g.dart';
 
-<<<<<<< HEAD
-const String userBoxName = 'user';
-const String reminderBoxName = 'reminder';
-=======
->>>>>>> 221520acdef556ce12f619b1a1defe40b48ec332
 const String brightnessBoxName = 'brightness';
 const String globalSettingBoxName = 'globalSetting';
-const String reminderBoxName = 'brightness';
+const String reminderBoxName = 'reminder';
 const String userBoxName = 'user';
 
 /// Enumeration - To keep check on Brightness Level of Application
