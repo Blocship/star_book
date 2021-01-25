@@ -11,7 +11,6 @@ const String _api = 'https://api.unsplash.com/';
 /// UnsplashAPIService class provides static methods to use UnSplash Api Services.
 class UnsplashAPIService {
   // TODO: shift it to proper place.
-
   /// Load Environment
   static void loadenv() async {
     try {
@@ -20,6 +19,7 @@ class UnsplashAPIService {
       print('.env loading: $e');
     }
   }
+
   /// Retrieve List of [UnsplashPhoto] using Unsplash Api
   static Future<List<UnsplashPhoto>> getPhotos(int count) async {
     assert(count > 0 && count <= 30);

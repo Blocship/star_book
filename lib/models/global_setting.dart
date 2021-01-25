@@ -6,10 +6,15 @@ import '../utils/constant.dart';
 part '../models_hive_generated/brightness.g.dart';
 part '../models_hive_generated/user.g.dart';
 
+<<<<<<< HEAD
 const String userBoxName = 'user';
 const String reminderBoxName = 'reminder';
+=======
+>>>>>>> 221520acdef556ce12f619b1a1defe40b48ec332
 const String brightnessBoxName = 'brightness';
 const String globalSettingBoxName = 'globalSetting';
+const String reminderBoxName = 'brightness';
+const String userBoxName = 'user';
 
 /// Enumeration - To keep check on Brightness Level of Application
 @HiveType(typeId: brightnessTypeId)
@@ -29,10 +34,15 @@ enum BrightnessOption {
 /// are table column names
 @HiveType(typeId: userTypeId)
 class User extends HiveObject {
-  User({this.name});
-
   @HiveField(0)
   String name;
+
+  User({this.name});
+
+  @override
+  int get hashCode {
+    return name.hashCode;
+  }
 
   @override
   bool operator ==(Object o) {
@@ -41,17 +51,12 @@ class User extends HiveObject {
     return o is User && this.name == o.name;
   }
 
-  @override
-  int get hashCode {
-    return name.hashCode;
+  User copyWith({String name}) {
+    return User(name: name ?? this.name);
   }
 
   @override
   String toString() {
     return '{\n name: $name, \n}';
-  }
-
-  User copyWith({String name}) {
-    return User(name: name ?? this.name);
   }
 }

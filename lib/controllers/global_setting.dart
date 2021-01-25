@@ -3,7 +3,8 @@ import 'package:hive/hive.dart';
 // Files
 import '../models/global_setting.dart';
 
-/// Global Settings Controller Controls various functionalities for [User] and [Brightness-Level] and [Remainder-Time] .
+/// Global Settings Controller Controls various functionalities for
+/// [User] and [Brightness-Level] and [Remainder-Time] .
 class GlobalSettingController {
   /// Static method to getUser Details
   static User getuser() {
