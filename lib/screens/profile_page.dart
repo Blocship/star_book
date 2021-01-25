@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
+import 'package:hive/hive.dart';
 
 //Files
 import '../models/global_setting.dart';
@@ -14,7 +15,6 @@ import '../widgets/analytics.dart';
 /// - Streak
 /// - Monthly and Weekly Widgets.
 
-
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
@@ -22,7 +22,23 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   /// Initiate user from Global Settings Controller
-  User user = GlobalSettingController.getuser();
+  User user;
+  @override
+  void initState() {
+    Future.delayed(Duration(seconds: 0), () async {
+      await openHiveBox();
+    });
+    user = GlobalSettingController.getuser();
+    super.initState();
+  }
+
+  /// Opening the [globalSettingBoxName] box if it isn't
+  /// already opened.
+  Future<void> openHiveBox() async {
+    if (!Hive.isBoxOpen(globalSettingBoxName)) {
+      await Hive.openBox(globalSettingBoxName);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {

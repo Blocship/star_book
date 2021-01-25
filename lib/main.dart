@@ -14,6 +14,8 @@ import './models/mood.dart';
 import './routes/route_generator.dart';
 import 'services/notification_service/notification_service.dart';
 
+/// HeadlessTask executed moments after the app has been terminated
+/// (Android only)
 void backgroundFetchHeadlessTask(String taskId) async {
   await NotificationService().checkDiary();
   BackgroundFetch.finish(taskId);
@@ -59,6 +61,9 @@ class _MyAppState extends c.State<MyApp> {
     initFetchState();
   }
 
+  /// Configures and schedules a task with [taskId] to be executed
+  /// after every 15 minutes of interval (when the app is terminated
+  /// from the background as well).
   Future<void> initFetchState() async {
     BackgroundFetch.configure(
         BackgroundFetchConfig(

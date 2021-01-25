@@ -12,6 +12,7 @@ class GlobalSettingController {
       defaultValue: User(name: ''),
     ) as User;
   }
+
   /// Static method to set User
   static void setUser(User user) async {
     await Hive.box(globalSettingBoxName).put(
@@ -19,6 +20,7 @@ class GlobalSettingController {
       user,
     );
   }
+
   /// Static method to Retrieve Brightness Option
   static BrightnessOption getBrightnessOption() {
     return Hive.box(globalSettingBoxName).get(
@@ -26,6 +28,7 @@ class GlobalSettingController {
       defaultValue: BrightnessOption.auto,
     );
   }
+
   /// Static method to Set Brightness Option
   static void setbrightnessOption(BrightnessOption brightnessOption) async {
     await Hive.box(globalSettingBoxName).put(
@@ -33,6 +36,7 @@ class GlobalSettingController {
       brightnessOption,
     );
   }
+
   /// Static method to Retrieve Reminder Time
   static DateTime getReminderTime() {
     DateTime defaultTime = DateTime.parse('2021-01-16 19:00:00');
@@ -41,10 +45,11 @@ class GlobalSettingController {
       defaultValue: defaultTime,
     ) as DateTime;
   }
+
   /// Static method to Set Brightness Time
   static void setReminderTime(DateTime reminderTime) async {
     await Hive.box(globalSettingBoxName).put(
-      reminderTime,
+      reminderBoxName,
       reminderTime,
     );
   }

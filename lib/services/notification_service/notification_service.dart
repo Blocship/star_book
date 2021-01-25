@@ -39,6 +39,9 @@ class NotificationService {
     return await FlutterNativeTimezone.getLocalTimezone();
   }
 
+  /// A function to check whether the user has written
+  /// his diary for yesterday. If not, calling [_schedule10AMNotification]
+  /// to schedule a notification
   Future<void> checkDiary() async {
     await Hive.initFlutter();
     if (!Hive.isAdapterRegistered(0)) {
@@ -61,6 +64,9 @@ class NotificationService {
     }
   }
 
+  /// SCheduling a notification to show at 10 AM
+  /// TODO: Providing descriptive and meaningful title
+  /// and description for the notification
   Future<void> _schedule10AMNotification() async {
     const AndroidNotificationDetails androidNotificationDetails =
         AndroidNotificationDetails(
@@ -81,7 +87,7 @@ class NotificationService {
       2,
       'notification title',
       'notification body',
-      _nextInstanceOfSelectedTime(10),
+      _nextInstanceOfSelectedTime(10, 0),
       notificationDetails,
       androidAllowWhileIdle: true,
       uiLocalNotificationDateInterpretation:
@@ -90,6 +96,8 @@ class NotificationService {
     );
   }
 
+  /// Requesting permission to show notifications
+  /// on [iOS]
   Future<bool> iosNotificationPermission() async {
     return await localNotifications
         .resolvePlatformSpecificImplementation<
@@ -101,12 +109,15 @@ class NotificationService {
         );
   }
 
-  Future<void> scheduleDailyNotification() async {
+  /// SCheduling a notification to show everyday at a specifice time
+  /// TODO: Providing descriptive and meaningful name
+  /// and description for the notification
+  Future<void> scheduleDailyNotification({int hour, int minutes}) async {
     await localNotifications.zonedSchedule(
       1,
       'daily scheduled notification title',
       'daily scheduled notification body',
-      _nextInstanceOfSelectedTime(19),
+      _nextInstanceOfSelectedTime(hour, minutes),
       const NotificationDetails(
         android: AndroidNotificationDetails(
           'daily notification channel id',
@@ -127,10 +138,12 @@ class NotificationService {
     );
   }
 
-  tz.TZDateTime _nextInstanceOfSelectedTime(int hour) {
+  /// Checking whether the time selected by the user falls
+  /// before or after the current date.
+  tz.TZDateTime _nextInstanceOfSelectedTime(int hour, int minutes) {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
     tz.TZDateTime scheduledDate =
-        tz.TZDateTime.local(now.year, now.month, now.day, hour);
+        tz.TZDateTime.local(now.year, now.month, now.day, hour, minutes);
     if (scheduledDate.isBefore(now)) {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }

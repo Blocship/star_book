@@ -1,5 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
+import 'package:star_book/controllers/global_setting.dart';
+import 'package:star_book/services/notification_service/notification_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // Files
@@ -40,10 +44,12 @@ class PreferanceSheet extends StatefulWidget {
 
 class PreferenceSheetState extends State<PreferanceSheet> {
   BrightnessOption _selectedOption;
+  DateTime _reminderTime;
 
   @override
   void initState() {
     _selectedOption = BrightnessOption.auto;
+    _reminderTime = GlobalSettingController.getReminderTime();
     super.initState();
   }
 
@@ -111,7 +117,8 @@ class PreferenceSheetState extends State<PreferanceSheet> {
                   Text('Reminder', style: Style.body(context)),
                   c.Row(
                     children: [
-                      Text('19:00', style: Style.bodySecondary(context)),
+                      Text('${_reminderTime?.hour} : ${_reminderTime?.minute}',
+                          style: Style.bodySecondary(context)),
                       Icon(
                         c.CupertinoIcons.right_chevron,
                         color: c.CupertinoDynamicColor.resolve(
@@ -121,7 +128,7 @@ class PreferenceSheetState extends State<PreferanceSheet> {
                   ),
                 ],
               ),
-              onTap: () {
+              onTap: () async {
                 RouteSettings settings;
                 // Navigator.push(
                 //   context,
@@ -129,11 +136,19 @@ class PreferenceSheetState extends State<PreferanceSheet> {
                 //     builder: (context) => TimePickerSheet(settings),
                 //   ),
                 // );
-                c.showCupertinoModalPopup(
+                if (Platform.isIOS) {
+                  NotificationService().iosNotificationPermission();
+                }
+                DateTime _selectedTime = await c.showCupertinoModalPopup(
                     context: context,
                     builder: (context) {
                       return TimePickerSheet(settings);
                     });
+                if (_selectedTime != null) {
+                  setState(() {
+                    _reminderTime = _selectedTime;
+                  });
+                }
               },
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 18)),
@@ -170,6 +185,11 @@ class PreferenceSheetState extends State<PreferanceSheet> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
   }
 
   void onSlidingSegmentChanged(BrightnessOption option) {

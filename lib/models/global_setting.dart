@@ -7,7 +7,7 @@ part '../models_hive_generated/brightness.g.dart';
 part '../models_hive_generated/user.g.dart';
 
 const String userBoxName = 'user';
-const String reminderBoxName = 'brightness';
+const String reminderBoxName = 'reminder';
 const String brightnessBoxName = 'brightness';
 const String globalSettingBoxName = 'globalSetting';
 
