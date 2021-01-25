@@ -24,10 +24,10 @@ void backgroundFetchHeadlessTask(String taskId) async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   BackgroundFetch.registerHeadlessTask(backgroundFetchHeadlessTask);
+  // This method is not applicable on iPad when multitasking is enabled.
   await SystemChrome.setPreferredOrientations([
     // Locks the device orientation in PortraitUp only.
-    DeviceOrientation
-        .portraitUp // This method is not applicable on iPad when multitasking is enabled.
+    DeviceOrientation.portraitUp
   ]);
   await hiveInitialize();
   await ActivityController.initialize();
