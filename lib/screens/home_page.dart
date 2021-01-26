@@ -125,6 +125,8 @@ class _HomePageState extends State<HomePage> {
         c.CupertinoPageScaffold(
           backgroundColor: Color(0x00000000),
           navigationBar: c.CupertinoNavigationBar(
+            heroTag: 'HomePage',
+            transitionBetweenRoutes: false,
             backgroundColor: Color(0x00000000),
             leading: PreferanceButton(),
             trailing: YearButton(),

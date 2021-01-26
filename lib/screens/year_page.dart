@@ -24,6 +24,8 @@ class _YearPageState extends State<YearPage> {
         context,
       ),
       navigationBar: c.CupertinoNavigationBar(
+        heroTag: 'YearPage',
+        transitionBetweenRoutes: false,
         backgroundColor: c.CupertinoDynamicColor.resolve(
           c.CupertinoColors.systemBackground,
           context,
