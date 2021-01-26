@@ -6,8 +6,8 @@ import '../models/activity.dart';
 
 /// Class with static methods, to provide `CRUD` operations for [Activity] model
 class ActivityController {
-
-  static final ActivityController _activityControllerSingleton = ActivityController._internal();
+  static final ActivityController _activityControllerSingleton =
+      ActivityController._internal();
   ActivityController._internal();
   factory ActivityController() => _activityControllerSingleton;
 

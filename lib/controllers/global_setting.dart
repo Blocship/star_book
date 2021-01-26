@@ -6,8 +6,8 @@ import '../models/global_setting.dart';
 /// Global Settings Controller Controls various functionalities for
 /// [User] and [Brightness-Level] and [Remainder-Time] .
 class GlobalSettingController {
-
-  static final GlobalSettingController globalSettingControllerSingleton = GlobalSettingController._internal();
+  static final GlobalSettingController globalSettingControllerSingleton =
+      GlobalSettingController._internal();
   GlobalSettingController._internal();
   factory GlobalSettingController() => globalSettingControllerSingleton;
 

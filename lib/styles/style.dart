@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 /// Centralised style class.
 /// Static methods inside, return generic styling
 class Style {
-
   static final Style styleSingleton = Style._internal();
   Style._internal();
   factory Style() => styleSingleton;

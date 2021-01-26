@@ -11,10 +11,10 @@ const String _api = 'https://api.unsplash.com/';
 
 /// UnsplashAPIService class provides static methods to use UnSplash Api Services.
 class UnsplashAPIService {
-
-  static final UnsplashAPIService unsplashAPIServiceSingleton = UnsplashAPIService._internal();
+  static final UnsplashAPIService unsplashAPIServiceSingleton =
+      UnsplashAPIService._internal();
   UnsplashAPIService._internal();
-  factory UnsplashAPIService()=> unsplashAPIServiceSingleton;
+  factory UnsplashAPIService() => unsplashAPIServiceSingleton;
 
   // TODO: shift it to proper place.
   /// Load Environment
