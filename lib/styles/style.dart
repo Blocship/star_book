@@ -3,7 +3,12 @@ import 'package:flutter/widgets.dart';
 
 /// Centralised style class.
 /// Static methods inside, return generic styling
-abstract class Style {
+class Style {
+
+  static final Style styleSingleton = Style._internal();
+  Style._internal();
+  factory Style() => styleSingleton;
+
   /// Cupertino, Large Title Size, Label Color Text, Bold Style
   static TextStyle largeTitle(BuildContext context) {
     return TextStyle(
