@@ -25,6 +25,7 @@ void backgroundFetchHeadlessTask(String taskId) async {
 /// Starting point of the application.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await NotificationService().notificationInitialization();
   BackgroundFetch.registerHeadlessTask(backgroundFetchHeadlessTask);
   // This method is not applicable on iPad when multitasking is enabled.
   await SystemChrome.setPreferredOrientations([
