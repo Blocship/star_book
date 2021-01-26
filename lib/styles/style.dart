@@ -85,6 +85,16 @@ class Style {
       fontSize: 18.0,
     );
   }
+  /// For Subtitle in ProfilePage
+  static TextStyle subTitleBold(BuildContext context) {
+    return TextStyle(
+      color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.label, context),
+      fontWeight: FontWeight.w700,
+      fontFamily: "SFProDisplay",
+      fontStyle: FontStyle.normal,
+      fontSize: 22.0,
+    );
+  }
 }
 
 // Cupertino Icons which are not in cupertino_icons package
