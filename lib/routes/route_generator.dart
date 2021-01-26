@@ -17,6 +17,11 @@ import '../utils/bottom_sheet.dart';
 /// Centralised routing class.
 /// Static methods inside, define named routes
 class RouteGenerator {
+
+  static final RouteGenerator routeGeneratorSingleton = RouteGenerator._internal();
+  RouteGenerator._internal();
+  factory RouteGenerator() => routeGeneratorSingleton;
+
   static Route<dynamic> mainRoute(
     RouteSettings settings,
   ) {
