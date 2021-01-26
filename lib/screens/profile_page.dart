@@ -26,6 +26,8 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
+      backgroundColor: c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.systemGrey6, context),
       navigationBar: c.CupertinoNavigationBar(
         //to remove the back button that comes with the navigation bar
         automaticallyImplyLeading: false,
@@ -38,24 +40,21 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 30),
             Text(
               'Greetings',
-              style: Style.extraLargeTitle(context),
+              style: Style.largeTitle(context),
             ),
-            SizedBox(height: 10),
-            Text(
-              user.name,
-              style: Style.largeTitle(context).copyWith(
-                color: c.CupertinoDynamicColor.resolve(
-                  c.CupertinoColors.systemBlue.darkColor,
-                  context,
-                ),
-              ),
-            ),
-            SizedBox(height: 40),
+            SizedBox(height: 17),
+            Text(user.name, style: Style.subTitleBold(context)),
+            SizedBox(height: 17),
             Stats(),
-            Center(child: Analytics())
+            SizedBox(height: 17),
+            Text(
+              'Analytics',
+              style: Style.subTitleBold(context),
+            ),
+            SizedBox(height: 17),
+            Analytics()
           ],
         ),
       ),
@@ -67,78 +66,45 @@ class Stats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(10),
-              bottomLeft: Radius.circular(10),
-            ),
-            color: c.CupertinoDynamicColor.resolve(
-              c.CupertinoColors.systemBlue.darkColor,
-              context,
-            ),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                'Points',
-                style: TextStyle(
-                    color: c.CupertinoColors.white,
-                    fontSize: 20,
-                    fontFamily: "SFProText",
-                    fontWeight: c.FontWeight.w500),
-              ),
-              Text(
-                '30',
-                style: TextStyle(
-                    color: c.CupertinoColors.white,
-                    fontSize: 17,
-                    fontFamily: "SFProText",
-                    fontWeight: c.FontWeight.w500),
-              )
-            ],
-          ),
-        ),
-        SizedBox(width: 1.5),
-        Container(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-                topRight: Radius.circular(10),
-                bottomRight: Radius.circular(10)),
-            color: c.CupertinoDynamicColor.resolve(
-              c.CupertinoColors.systemBlue.darkColor,
-              context,
+        mainAxisAlignment: c.MainAxisAlignment.spaceBetween,
+        children: [
+          MyContainer(
+            width: c.MediaQuery.of(context).size.width / 2.5,
+            margin: c.EdgeInsets.zero,
+            child: Column(
+              crossAxisAlignment: c.CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '30',
+                  style: Style.subTitleBold(context),
+                ),
+                Text(
+                  'Points',
+                  style: Style.bodySecondary(context),
+                )
+              ],
             ),
           ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              Text(
-                'Streak',
-                style: TextStyle(
-                    color: c.CupertinoColors.white,
-                    fontSize: 20,
-                    fontFamily: "SFProText",
-                    fontWeight: c.FontWeight.w500),
-              ),
-              Text(
-                '6',
-                style: TextStyle(
-                    color: c.CupertinoColors.white,
-                    fontSize: 17,
-                    fontFamily: "SFProText",
-                    fontWeight: c.FontWeight.w500),
-              )
-            ],
+
+          MyContainer(
+            margin: c.EdgeInsets.zero,
+            width: c.MediaQuery.of(context).size.width / 2.5,
+            child: Column(
+              crossAxisAlignment: c.CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '6',
+                  style: Style.subTitleBold(context),
+                ),
+                Text(
+                  'Streak',
+                  style: Style.bodySecondary(context),
+                )
+              ],
+            ),
           ),
-        ),
-      ],
-    );
+        ],
+      );
   }
 }
 
@@ -203,6 +169,7 @@ class _AnalyticsState extends State<Analytics> {
   @override
   Widget build(BuildContext context) {
     return MyContainer(
+      margin: c.EdgeInsets.zero,
       height: 300,
       child: Column(
         children: [
