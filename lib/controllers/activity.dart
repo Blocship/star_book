@@ -73,4 +73,15 @@ class ActivityController {
       });
     }
   }
+
+  /// Points is the total number of entries([Activity]s) in diary.
+  static int points() {
+    return readAll().length;
+  }
+
+  /// Latest consecutive activty count
+  static int streak() {
+    // TODO: write streak algo
+    return 6;
+  }
 }
