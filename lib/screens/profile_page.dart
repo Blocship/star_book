@@ -12,7 +12,7 @@ import '../widgets/my_container.dart';
 /// - Username
 /// - Points
 /// - Streak
-/// - Monthly and Weekly Widgets.
+/// - Monthly and Weekly Graph Widgets.
 
 class ProfilePage extends StatefulWidget {
   @override
@@ -40,21 +40,25 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(height: 16),
             Text(
               'Greetings',
               style: Style.largeTitle(context),
             ),
-            SizedBox(height: 17),
-            Text(user.name, style: Style.subTitleBold(context)),
-            SizedBox(height: 17),
+            SizedBox(height: 16),
+            Text(
+              user.name,
+              style: Style.title(context),
+            ),
+            SizedBox(height: 32),
             Stats(),
-            SizedBox(height: 17),
+            SizedBox(height: 32),
             Text(
               'Analytics',
-              style: Style.subTitleBold(context),
+              style: Style.title2(context),
             ),
-            SizedBox(height: 17),
-            Analytics()
+            SizedBox(height: 16),
+            Center(child: Analytics())
           ],
         ),
       ),
@@ -66,51 +70,52 @@ class Stats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-        mainAxisAlignment: c.MainAxisAlignment.spaceBetween,
-        children: [
-          MyContainer(
-            width: c.MediaQuery.of(context).size.width / 2.5,
-            margin: c.EdgeInsets.zero,
-            child: Column(
-              crossAxisAlignment: c.CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '30',
-                  style: Style.subTitleBold(context),
-                ),
-                Text(
-                  'Points',
-                  style: Style.bodySecondary(context),
-                )
-              ],
-            ),
+      mainAxisAlignment: c.MainAxisAlignment.spaceAround,
+      children: [
+        MyContainer(
+          width: MediaQuery.of(context).size.width / 2 - 32,
+          margin: EdgeInsets.zero,
+          child: Column(
+            crossAxisAlignment: c.CrossAxisAlignment.start,
+            children: [
+              Text(
+                '30',
+                style: Style.title(context),
+              ),
+              SizedBox(height: 6),
+              Text(
+                'Points',
+                style: Style.bodySecondary(context),
+              )
+            ],
           ),
-
-          MyContainer(
-            margin: c.EdgeInsets.zero,
-            width: c.MediaQuery.of(context).size.width / 2.5,
-            child: Column(
-              crossAxisAlignment: c.CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '6',
-                  style: Style.subTitleBold(context),
-                ),
-                Text(
-                  'Streak',
-                  style: Style.bodySecondary(context),
-                )
-              ],
-            ),
+        ),
+        MyContainer(
+          margin: EdgeInsets.zero,
+          width: MediaQuery.of(context).size.width / 2 - 32,
+          child: Column(
+            crossAxisAlignment: c.CrossAxisAlignment.start,
+            children: [
+              Text(
+                '6',
+                style: Style.title(context),
+              ),
+              SizedBox(height: 6),
+              Text(
+                'Streak',
+                style: Style.bodySecondary(context),
+              )
+            ],
           ),
-        ],
-      );
+        ),
+      ],
+    );
   }
 }
 
 class PreferanceButton extends StatelessWidget {
   void onTap(context) {
-    Navigator.of(context).pushNamed("/preferance");
+    Navigator.of(context).pushNamed('/preferance');
   }
 
   @override

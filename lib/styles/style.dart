@@ -11,7 +11,10 @@ class Style {
   /// Cupertino, Large Title Size, Label Color Text, Bold Style
   static TextStyle largeTitle(BuildContext context) {
     return TextStyle(
-      color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.label, context),
+      color: c.CupertinoDynamicColor.resolve(
+        c.CupertinoColors.label,
+        context,
+      ),
       fontWeight: FontWeight.w700,
       fontFamily: "SFProDisplay",
       fontStyle: FontStyle.normal,
@@ -19,10 +22,55 @@ class Style {
     );
   }
 
+  /// Cupertino, title Size, Label Color Text, Style
+  static TextStyle title(BuildContext context) {
+    return TextStyle(
+      color: c.CupertinoDynamicColor.resolve(
+        c.CupertinoColors.label,
+        context,
+      ),
+      fontWeight: FontWeight.w400,
+      fontFamily: "SFProDisplay",
+      fontStyle: FontStyle.normal,
+      fontSize: 28.0,
+    );
+  }
+
+  /// Cupertino, title Size, Label Color Text, Style
+  static TextStyle titleBold(BuildContext context) {
+    return TextStyle(
+      color: c.CupertinoDynamicColor.resolve(
+        c.CupertinoColors.label,
+        context,
+      ),
+      fontWeight: FontWeight.w600,
+      fontFamily: "SFProDisplay",
+      fontStyle: FontStyle.normal,
+      fontSize: 28.0,
+    );
+  }
+
+  /// Cupertino, title2 Size, Label Color Text, Style
+  static TextStyle title2(BuildContext context) {
+    return TextStyle(
+      color: c.CupertinoDynamicColor.resolve(
+        c.CupertinoColors.label,
+        context,
+      ),
+      fontWeight: FontWeight.w400,
+      fontFamily: "SFProDisplay",
+      fontStyle: FontStyle.normal,
+      fontSize: 22.0,
+    );
+  }
+
   /// Cupertino, Body Size, Label Color Text Style
   static TextStyle body(BuildContext context) {
     return TextStyle(
-      color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.label, context),
+      color: c.CupertinoDynamicColor.resolve(
+        c.CupertinoColors.label,
+        context,
+      ),
       fontWeight: FontWeight.w400,
       fontFamily: "SFProText",
       fontStyle: FontStyle.normal,
@@ -34,7 +82,9 @@ class Style {
   static TextStyle bodySecondary(BuildContext context) {
     return TextStyle(
       color: c.CupertinoDynamicColor.resolve(
-          c.CupertinoColors.secondaryLabel, context),
+        c.CupertinoColors.secondaryLabel,
+        context,
+      ),
       fontWeight: FontWeight.w400,
       fontFamily: "SFProText",
       fontStyle: FontStyle.normal,
@@ -46,7 +96,9 @@ class Style {
   static TextStyle footerNoteSecondary(BuildContext context) {
     return TextStyle(
       color: c.CupertinoDynamicColor.resolve(
-          c.CupertinoColors.secondaryLabel, context),
+        c.CupertinoColors.secondaryLabel,
+        context,
+      ),
       fontWeight: FontWeight.w400,
       fontFamily: "SFProText",
       fontStyle: FontStyle.normal,
@@ -57,7 +109,10 @@ class Style {
   /// Extra Large Title Size, Label Color Text, Bold Style
   static TextStyle extraLargeTitle(BuildContext context) {
     return TextStyle(
-      color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.label, context),
+      color: c.CupertinoDynamicColor.resolve(
+        c.CupertinoColors.label,
+        context,
+      ),
       fontWeight: FontWeight.w700,
       fontFamily: "SFProDisplay",
       fontStyle: FontStyle.normal,
@@ -68,7 +123,10 @@ class Style {
   /// For Subtitle in Username Add Sheet
   static TextStyle subTitle(BuildContext context) {
     return TextStyle(
-      color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.label, context),
+      color: c.CupertinoDynamicColor.resolve(
+        c.CupertinoColors.label,
+        context,
+      ),
       fontWeight: FontWeight.w400,
       fontFamily: "SFProDisplay",
       fontStyle: FontStyle.normal,
@@ -79,20 +137,13 @@ class Style {
   /// For button text in Username Add Sheet
   static TextStyle buttonText(BuildContext context) {
     return TextStyle(
-      color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.white, context),
+      color: c.CupertinoDynamicColor.resolve(
+        c.CupertinoColors.white,
+        context,
+      ),
       fontFamily: "SFProDisplay",
       fontStyle: FontStyle.normal,
       fontSize: 18.0,
-    );
-  }
-  /// For Subtitle in ProfilePage
-  static TextStyle subTitleBold(BuildContext context) {
-    return TextStyle(
-      color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.label, context),
-      fontWeight: FontWeight.w700,
-      fontFamily: "SFProDisplay",
-      fontStyle: FontStyle.normal,
-      fontSize: 22.0,
     );
   }
 }
