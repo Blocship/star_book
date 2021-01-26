@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -21,7 +22,7 @@ void main() async {
   ]);
   await hiveInitialize();
   await ActivityController.initialize();
-  UnsplashAPIService.loadenv();
+  await DotEnv().load('.env');
   runApp(MyApp());
 }
 
