@@ -16,16 +16,6 @@ class UnsplashAPIService {
   UnsplashAPIService._internal();
   factory UnsplashAPIService() => unsplashAPIServiceSingleton;
 
-  // TODO: shift it to proper place.
-  /// Load Environment
-  static void loadenv() async {
-    try {
-      await DotEnv().load('.env');
-    } catch (e) {
-      print('.env loading: $e');
-    }
-  }
-
   /// Retrieve List of [UnsplashPhoto] using Unsplash Api
   static Future<List<UnsplashPhoto>> getPhotos(
       int count, FToast _errorToast) async {
