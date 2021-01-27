@@ -8,8 +8,9 @@ import '../screens/time_picker_sheet.dart';
 import '../styles/style.dart';
 import '../widgets/action_container.dart';
 import '../widgets/my_container.dart';
+import '../controllers/global_setting.dart';
 
-Map<BrightnessOption, Widget> optoins = {
+Map<BrightnessOption, Widget> options = {
   BrightnessOption.auto: SlidingSegment(c.CupertinoIcons.circle_lefthalf_fill),
   BrightnessOption.light: SlidingSegment(c.CupertinoIcons.sun_max_fill),
   BrightnessOption.dark: SlidingSegment(c.CupertinoIcons.moon_fill),
@@ -39,13 +40,13 @@ class PreferanceSheet extends StatefulWidget {
 }
 
 class PreferenceSheetState extends State<PreferanceSheet> {
-  BrightnessOption _selectedOption;
+  BrightnessOption _selectedOption = GlobalSettingController.getBrightnessOption();
 
-  @override
-  void initState() {
-    _selectedOption = BrightnessOption.auto;
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   _selectedOption = BrightnessOption.auto;
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -92,7 +93,7 @@ class PreferenceSheetState extends State<PreferanceSheet> {
                 children: [
                   Text('Dark Mode', style: Style.body(context)),
                   c.CupertinoSlidingSegmentedControl<BrightnessOption>(
-                    children: optoins,
+                    children: options,
                     groupValue: _selectedOption,
                     onValueChanged: onSlidingSegmentChanged,
                     backgroundColor: c.CupertinoDynamicColor.resolve(
@@ -175,6 +176,8 @@ class PreferenceSheetState extends State<PreferanceSheet> {
   void onSlidingSegmentChanged(BrightnessOption option) {
     setState(() {
       _selectedOption = option;
+      GlobalSettingController.setbrightnessOption(_selectedOption);
+      print(GlobalSettingController.getBrightnessOption().toString());
     });
   }
 
