@@ -55,7 +55,7 @@ class GlobalSettingController {
   /// Static method to Set Brightness Time
   static void setReminderTime(DateTime reminderTime) async {
     await Hive.box(globalSettingBoxName).put(
-      reminderTime,
+      reminderBoxName,
       reminderTime,
     );
   }

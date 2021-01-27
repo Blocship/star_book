@@ -17,8 +17,10 @@ import './routes/route_generator.dart';
 /// Starting point of the application.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([               // Locks the device orientation in PortraitUp only.
-    DeviceOrientation.portraitUp                        // This method is not applicable on iPad when multitasking is enabled.
+  // This method is not applicable on iPad when multitasking is enabled.
+  await SystemChrome.setPreferredOrientations([
+    // Locks the device orientation in PortraitUp only.
+    DeviceOrientation.portraitUp
   ]);
   await hiveInitialize();
   await ActivityController.initialize();
