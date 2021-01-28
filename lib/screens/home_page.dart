@@ -30,7 +30,7 @@
 // ),
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
-
+import 'package:swipedetector/swipedetector.dart';
 // Files
 import '../api/unsplash_api_service.dart';
 import '../models/unsplash_photo.dart';
@@ -181,34 +181,59 @@ class _HomePageState extends State<HomePage> {
         //     ),
         //   ),
         // ),
-        child: c.Container(
-          height: double.maxFinite,
-          child: c.ListView.builder(
-            itemCount: 1,
-            itemBuilder: (c.BuildContext context, int index) {
-              return c.Container(
-                child: c.Dismissible(
-                  key: c.UniqueKey(),
-                  child: Month(
-                    month: month,
-                    year: year,
-                  ),
-                  onDismissed: (direction) {
-                    if (direction == c.DismissDirection.endToStart) {
-                      setState(() {
-                        year = getNextYear(month, year);
-                        month = getNextMonth(month, year);
-                      });
-                    } else if (direction == c.DismissDirection.startToEnd) {
-                      setState(() {
-                        year = getPreviousYear(month, year);
-                        month = getPreviousMonth(month, year);
-                      });
-                    }
-                  },
-                ),
-              );
+        // child: c.Container(
+        //   height: double.maxFinite,
+        //   child: c.ListView.builder(
+        //     itemCount: 1,
+        //     itemBuilder: (c.BuildContext context, int index) {
+        //       return c.Container(
+        //         child: c.Dismissible(
+        //           key: c.UniqueKey(),
+        //           child: Month(
+        //             month: month,
+        //             year: year,
+        //           ),
+        //           onDismissed: (direction) {
+        //             if (direction == c.DismissDirection.endToStart) {
+        //               setState(() {
+        //                 year = getNextYear(month, year);
+        //                 month = getNextMonth(month, year);
+        //               });
+        //             } else if (direction == c.DismissDirection.startToEnd) {
+        //               setState(() {
+        //                 year = getPreviousYear(month, year);
+        //                 month = getPreviousMonth(month, year);
+        //               });
+        //             }
+        //           },
+        //         ),
+        //       );
+        //     },
+        //   ),
+        // ),
+
+        child: c.SafeArea(
+          child: SwipeDetector(
+            onSwipeLeft: () {
+              print("left");
             },
+            onSwipeRight: () {
+              print("right");
+            },
+            child: c.PageView.builder(
+              onPageChanged: (index) {
+                setState(() {
+                  year = getNextYear(month, year);
+                  month = getNextMonth(month, year);
+                });
+              },
+              itemBuilder: (BuildContext context, int index) {
+                return Month(
+                  month: month,
+                  year: year,
+                );
+              },
+            ),
           ),
         ),
       ),
