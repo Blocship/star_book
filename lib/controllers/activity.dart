@@ -6,6 +6,11 @@ import '../models/activity.dart';
 
 /// Class with static methods, to provide `CRUD` operations for [Activity] model
 class ActivityController {
+  static final ActivityController _activityControllerSingleton =
+      ActivityController._internal();
+  ActivityController._internal();
+  factory ActivityController() => _activityControllerSingleton;
+
   /// Adds new [Activity] in the, `Hive box`
   ///
   /// If you think it as relational database,
@@ -67,5 +72,16 @@ class ActivityController {
         await create(activity);
       });
     }
+  }
+
+  /// Points is the total number of entries([Activity]s) in diary.
+  static int points() {
+    return readAll().length;
+  }
+
+  /// Latest consecutive activty count
+  static int streak() {
+    // TODO: write streak algo
+    return 6;
   }
 }
