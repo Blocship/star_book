@@ -11,6 +11,20 @@ const String globalSettingBoxName = 'globalSetting';
 const String reminderBoxName = 'reminder';
 const String userBoxName = 'user';
 
+/// Properties(keys) to be used to store some useful information in [globalSettingsBoxName]
+
+/// Property for displaying installed date of app
+const String installedDate = "installedDate";
+
+/// Property for displaying last [Activity] date of app
+const String lastActivityDate = "lastActivityDate";
+
+/// Property for displaying current streak date of app
+const String currentStreak = "currentStreak";
+
+/// Property for displaying longest streak date of app
+const String longestStreak = "longestStreak";
+
 /// Enumeration - To keep check on Brightness Level of Application
 @HiveType(typeId: brightnessTypeId)
 enum BrightnessOption {

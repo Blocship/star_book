@@ -75,3 +75,7 @@ const List<String> _monthList = const <String>[
 String getMonthTitle(int month) {
   return _monthList[month - 1];
 }
+/// Returns date with default time
+DateTime getDate(DateTime _date) {
+  return new DateTime(_date.year, _date.month, _date.day);
+}

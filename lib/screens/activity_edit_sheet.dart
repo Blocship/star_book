@@ -60,6 +60,8 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
   void onDone(BuildContext context) async {
     if (activity.isFilled()) {
       ActivityController.update(activity);
+      // Add this activity to the [Activity] Streak
+      ActivityController.streak(activity);
       Navigator.of(context, rootNavigator: true).pop();
     }
   }
