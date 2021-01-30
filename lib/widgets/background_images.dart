@@ -58,12 +58,13 @@ class _BackgroundImageState extends State<BackgroundImage> {
               handleErrors(_err, errToast);
             }
           } else {
-            Brightness _brightness = brightness;
             child = Image.asset(
-                _brightness == Brightness.light ? "backup-bg-image.JPG" : "bg_dark.jpg",
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: double.infinity,
+              brightness == Brightness.light
+                  ? "backup-bg-image.JPG"
+                  : "bg_dark.jpg",
+              fit: BoxFit.cover,
+              width: double.infinity,
+              height: double.infinity,
             );
           }
           return c.AnimatedSwitcher(

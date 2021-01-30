@@ -128,9 +128,9 @@ class _HomePageState extends State<HomePage> {
             heroTag: 'HomePage',
             transitionBetweenRoutes: false,
             backgroundColor: Color(0x00000000),
-            leading: PreferanceButton(),
             trailing: YearButton(),
             border: null,
+            automaticallyImplyLeading: false,
           ),
           child: SafeArea(
             child: Container(

@@ -44,7 +44,7 @@ Future<void> hiveInitialize() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return c.ValueListenableBuilder(
+    return ValueListenableBuilder(
       valueListenable: Hive.box(globalSettingBoxName).listenable(),
       builder: (context, box, widget) {
         return c.CupertinoApp(
@@ -58,7 +58,7 @@ class MyApp extends StatelessWidget {
           ],
           onGenerateRoute: (settings) => RouteGenerator.mainRoute(settings),
         );
-      }
+      },
     );
   }
 }
