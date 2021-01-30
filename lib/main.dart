@@ -5,6 +5,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'controllers/global_setting.dart';
 
 // Files
 import './controllers/activity.dart';
@@ -44,21 +45,41 @@ Future<void> hiveInitialize() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: Hive.box(globalSettingBoxName).listenable(),
-      builder: (context, box, widget) {
-        return c.CupertinoApp(
-          initialRoute: '/username_add',
-          title: "StarBook",
-          theme: c.CupertinoThemeData(brightness: brightness),
-          localizationsDelegates: [
-            DefaultMaterialLocalizations.delegate,
-            c.DefaultCupertinoLocalizations.delegate,
-            DefaultWidgetsLocalizations.delegate,
-          ],
-          onGenerateRoute: (settings) => RouteGenerator.mainRoute(settings),
-        );
-      },
-    );
+    User user = GlobalSettingController.getuser();
+    if (user != null && user.name.isNotEmpty) {
+      return ValueListenableBuilder(
+        valueListenable: Hive.box(globalSettingBoxName).listenable(),
+        builder: (context, box, widget) {
+          return c.CupertinoApp(
+            initialRoute: '/home',
+            title: "StarBook",
+            theme: c.CupertinoThemeData(brightness: brightness),
+            localizationsDelegates: [
+              DefaultMaterialLocalizations.delegate,
+              c.DefaultCupertinoLocalizations.delegate,
+              DefaultWidgetsLocalizations.delegate,
+            ],
+            onGenerateRoute: (settings) => RouteGenerator.mainRoute(settings),
+          );
+        },
+      );
+    } else {
+      return ValueListenableBuilder(
+        valueListenable: Hive.box(globalSettingBoxName).listenable(),
+        builder: (context, box, widget) {
+          return c.CupertinoApp(
+            initialRoute: '/username_add',
+            title: "StarBook",
+            theme: c.CupertinoThemeData(brightness: brightness),
+            localizationsDelegates: [
+              DefaultMaterialLocalizations.delegate,
+              c.DefaultCupertinoLocalizations.delegate,
+              DefaultWidgetsLocalizations.delegate,
+            ],
+            onGenerateRoute: (settings) => RouteGenerator.mainRoute(settings),
+          );
+        },
+      );
+    }
   }
 }
