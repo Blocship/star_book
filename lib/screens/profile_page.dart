@@ -6,6 +6,7 @@ import '../controllers/global_setting.dart';
 import '../models/global_setting.dart';
 import '../styles/style.dart';
 import '../widgets/my_container.dart';
+import '../controllers/activity.dart';
 
 /// Profile Page displays user details
 /// Such as
@@ -79,7 +80,7 @@ class Stats extends StatelessWidget {
             crossAxisAlignment: c.CrossAxisAlignment.start,
             children: [
               Text(
-                '30',
+                ActivityController.points().toString(),
                 style: Style.title(context),
               ),
               SizedBox(height: 6),
@@ -97,7 +98,7 @@ class Stats extends StatelessWidget {
             crossAxisAlignment: c.CrossAxisAlignment.start,
             children: [
               Text(
-                '6',
+                ActivityController.streak().toString(),
                 style: Style.title(context),
               ),
               SizedBox(height: 6),
