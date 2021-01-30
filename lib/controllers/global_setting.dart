@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
 
 // Files
+import '../utils/date.dart';
 import '../models/global_setting.dart';
 
 /// Global Settings Controller Controls various functionalities for
@@ -57,6 +58,78 @@ class GlobalSettingController {
     await Hive.box(globalSettingBoxName).put(
       reminderBoxName,
       reminderTime,
+    );
+  }
+
+  /// Static method to initialize Streak settings
+  static void initStreakSettings() {
+    DateTime _installedDate = getInstalledDate();
+    if (_installedDate == null) {
+      setInstalledDate(DateTime.now());
+    }
+  }
+
+  ///Static method to get the Installed Date
+  static DateTime getInstalledDate() {
+    return Hive.box(globalSettingBoxName).get(
+      installedDate,
+    ) as DateTime;
+  }
+
+  ///Static method to Set the Installed Date
+  static void setInstalledDate(DateTime _installedDate) async {
+    _installedDate = getDate(_installedDate);
+    await Hive.box(globalSettingBoxName).put(
+      installedDate,
+      _installedDate,
+    );
+  }
+
+  ///Static method to get the Last [Activity] Date
+  static DateTime getLastActivityDate() {
+    return Hive.box(globalSettingBoxName).get(
+      lastActivityDate,
+    ) as DateTime;
+  }
+
+  ///Static method to set the Last [Activity] Date
+  static void setLastActivityDate(DateTime _lastActivityDate) async {
+    _lastActivityDate = getDate(_lastActivityDate);
+    await Hive.box(globalSettingBoxName).put(
+      lastActivityDate,
+      _lastActivityDate,
+    );
+  }
+
+  ///Static method to get the Current Streak
+  static int getCurrentStreak() {
+    return Hive.box(globalSettingBoxName).get(
+      currentStreak,
+      defaultValue: 0,
+    );
+  }
+
+  ///Static method to set the Current Streak
+  static void setCurrentStreak(int _currentStreak) async {
+    await Hive.box(globalSettingBoxName).put(
+      currentStreak,
+      _currentStreak,
+    );
+  }
+
+  ///Static method to get the Longest Streak
+  static int getLongestStreak() {
+    return Hive.box(globalSettingBoxName).get(
+      longestStreak,
+      defaultValue: 0,
+    );
+  }
+
+  ///Static method to Set the Longest Streak
+  static void setLongestStreak(int _longestStreak) async {
+    return Hive.box(globalSettingBoxName).put(
+      longestStreak,
+      _longestStreak,
     );
   }
 }
