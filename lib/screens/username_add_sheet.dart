@@ -98,7 +98,7 @@ class _UsernameAddSheetState extends State<UsernameAddSheet> {
                 ),
               ),
             ),
-            SizedBox(height: h * 0.25),
+            SizedBox(height: h * 0.15),
             c.CupertinoButton(
               onPressed: isNullOrEmpty(textController.text)
                   ? null
