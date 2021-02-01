@@ -1,7 +1,7 @@
 import 'package:hive/hive.dart';
-
 // Files
 import '../utils/date.dart';
+import '../models/streak.dart';
 import '../models/global_setting.dart';
 
 /// Global Settings Controller Controls various functionalities for
@@ -85,51 +85,75 @@ class GlobalSettingController {
     );
   }
 
-  ///Static method to get the Last [Activity] Date
-  static DateTime getLastActivityDate() {
+  ///Static method to get all Streaks of [Activity]s
+  static List<StreakDataType> getAllStreaks() {
     return Hive.box(globalSettingBoxName).get(
-      lastActivityDate,
-    ) as DateTime;
+      allStreaks,
+      defaultValue: [],
+    ) as List<StreakDataType>;
+  }
+
+  /// Static method to get the Longest Streak
+  static StreakDataType getLongestStreak() {
+    DateTime today = getDate(new DateTime.now());
+    List<StreakDataType> streaks = getAllStreaks();
+    StreakDataType currStreak = getCurrentStreak();
+    Streak _appStreak = new Streak(streaks, currStreak);
+    StreakDataType longestStreak = _appStreak.longestStreaks.isNotEmpty
+        ? _appStreak.longestStreaks.first
+        : StreakDataType(0, today, today);
+    return longestStreak;
+  }
+
+  /// Static method to get the Longest Streak Count
+  static int getLongestStreakCount() {
+    DateTime today = getDate(new DateTime.now());
+    List<StreakDataType> streaks = getAllStreaks();
+    StreakDataType currStreak = getCurrentStreak();
+    Streak _appStreak = new Streak(streaks, currStreak);
+    StreakDataType longestStreak = _appStreak.longestStreaks.isNotEmpty
+        ? _appStreak.longestStreaks.first
+        : StreakDataType(0, today, today);
+    return longestStreak.streakCount;
   }
 
   ///Static method to set the Last [Activity] Date
-  static void setLastActivityDate(DateTime _lastActivityDate) async {
-    _lastActivityDate = getDate(_lastActivityDate);
+  static void setAllStreaks(List<StreakDataType> _allStreaks) async {
     await Hive.box(globalSettingBoxName).put(
-      lastActivityDate,
-      _lastActivityDate,
+      allStreaks,
+      _allStreaks,
     );
   }
 
   ///Static method to get the Current Streak
-  static int getCurrentStreak() {
+  static StreakDataType getCurrentStreak() {
+    DateTime today = getDate(new DateTime.now());
     return Hive.box(globalSettingBoxName).get(
       currentStreak,
-      defaultValue: 0,
+      defaultValue: StreakDataType(0, today, today),
     );
+  }
+
+  ///Static method to get the Current Streak Count
+  static int getCurrentStreakCount() {
+    DateTime today = getDate(new DateTime.now());
+    // Read the GlobalSetting Properties
+    StreakDataType currStk = GlobalSettingController.getCurrentStreak();
+    DateTime _lastActivityDate = currStk.streakEndDate;
+    int daysTillLastActivity = today.difference(_lastActivityDate).inDays;
+    // Check whether the last [Activity] was yesterday
+    if (daysTillLastActivity == 1) {
+      return currStk.streakCount;
+    } else {
+      return 0;
+    }
   }
 
   ///Static method to set the Current Streak
-  static void setCurrentStreak(int _currentStreak) async {
+  static void setCurrentStreak(StreakDataType _currentStreak) async {
     await Hive.box(globalSettingBoxName).put(
       currentStreak,
       _currentStreak,
-    );
-  }
-
-  ///Static method to get the Longest Streak
-  static int getLongestStreak() {
-    return Hive.box(globalSettingBoxName).get(
-      longestStreak,
-      defaultValue: 0,
-    );
-  }
-
-  ///Static method to Set the Longest Streak
-  static void setLongestStreak(int _longestStreak) async {
-    return Hive.box(globalSettingBoxName).put(
-      longestStreak,
-      _longestStreak,
     );
   }
 }

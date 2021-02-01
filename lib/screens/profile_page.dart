@@ -98,7 +98,7 @@ class Stats extends StatelessWidget {
             crossAxisAlignment: c.CrossAxisAlignment.start,
             children: [
               Text(
-                GlobalSettingController.getCurrentStreak().toString(),
+                GlobalSettingController.getCurrentStreakCount().toString(),
                 style: Style.title(context),
               ),
               SizedBox(height: 6),
