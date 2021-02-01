@@ -16,14 +16,11 @@ const String userBoxName = 'user';
 /// Property for displaying installed date of app
 const String installedDate = "installedDate";
 
-/// Property for displaying last [Activity] date of app
-const String lastActivityDate = "lastActivityDate";
+/// Property for displaying all [Activity] Streaks of app
+const String allStreaks = "allStreaks";
 
 /// Property for displaying current streak date of app
 const String currentStreak = "currentStreak";
-
-/// Property for displaying longest streak date of app
-const String longestStreak = "longestStreak";
 
 /// Enumeration - To keep check on Brightness Level of Application
 @HiveType(typeId: brightnessTypeId)

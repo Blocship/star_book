@@ -2,6 +2,7 @@ import 'package:hive/hive.dart';
 
 // Files
 import './id.dart';
+import '../models/streak.dart';
 import '../models/activity.dart';
 import '../controllers/global_setting.dart';
 
@@ -81,38 +82,20 @@ class ActivityController {
   }
 
   /// Function to show the Latest consecutive activity streak
-  static void streak(Activity activity) {
-    // Get activity date
-    DateTime _activityDate =
-        DateTime(activity.year, activity.month, activity.day);
+  static void addActivityToStreak(Activity activity) {
     // Read the GlobalSetting Properties
-    int lngStk = GlobalSettingController.getLongestStreak(),
-        currStk = GlobalSettingController.getCurrentStreak();
-    DateTime _installedDate = GlobalSettingController.getInstalledDate();
-    DateTime _lastActivityDate = GlobalSettingController.getLastActivityDate();
+    List<StreakDataType> streaks = GlobalSettingController.getAllStreaks();
+    StreakDataType currStreak = GlobalSettingController.getCurrentStreak();
+    Streak appStreak = new Streak(streaks, currStreak);
+    appStreak.addActivityToStreak(activity);
+  }
 
-    // Assertion for validity of proper installation
-    assert(_installedDate is DateTime);
-
-    //Check whether current [Activity] is the first [Activity] of the app or not
-    if (_lastActivityDate == null) {
-      currStk = 1;
-      lngStk = 1;
-    } else {
-      int daysTillLastActivity =
-          _activityDate.difference(_lastActivityDate).inDays;
-      // Check whether the last [Activity] was yesterday
-      if (daysTillLastActivity == 1) {
-        currStk++;
-      } else if (daysTillLastActivity > 1) {
-        currStk = 1;
-      }
-      // Update `longestStreak` if `currentStreak` is greater than `longestStreak`
-      if (lngStk < currStk) lngStk = currStk;
-    }
-    // Update `currentStreak`, `longestStreak` and current [Activity] date
-    GlobalSettingController.setCurrentStreak(currStk);
-    GlobalSettingController.setLongestStreak(lngStk);
-    GlobalSettingController.setLastActivityDate(_activityDate);
+  /// Function to update the Streak after deletion of an [Activity]
+  static void deleteActivityFromStreak(Activity activity) {
+    // Read the GlobalSetting Properties
+    List<StreakDataType> streaks = GlobalSettingController.getAllStreaks();
+    StreakDataType currStreak = GlobalSettingController.getCurrentStreak();
+    Streak appStreak = new Streak(streaks, currStreak);
+    appStreak.deleteActivityFromStreak(activity);
   }
 }

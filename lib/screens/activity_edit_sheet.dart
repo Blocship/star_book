@@ -61,13 +61,15 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
     if (activity.isFilled()) {
       ActivityController.update(activity);
       // Add this activity to the [Activity] Streak
-      ActivityController.streak(activity);
+      ActivityController.addActivityToStreak(activity);
       Navigator.of(context, rootNavigator: true).pop();
     }
   }
 
   void onDelete(BuildContext context) async {
     await ActivityController.delete(activity);
+    // Delete this activity from the [Activity] Streaks
+    ActivityController.deleteActivityFromStreak(activity);
     Navigator.of(context, rootNavigator: true).pop();
   }
 

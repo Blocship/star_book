@@ -13,6 +13,7 @@ import './models/global_setting.dart';
 import './models/mood.dart';
 import './routes/route_generator.dart';
 import './utils/brightness.dart';
+import 'models/streak.dart';
 
 /// Starting point of the application.
 void main() async {
@@ -34,6 +35,7 @@ Future<void> hiveInitialize() async {
   Hive.registerAdapter<Mood>(MoodAdapter());
   Hive.registerAdapter<BrightnessOption>(BrightnessOptionAdapter());
   Hive.registerAdapter<User>(UserAdapter());
+  Hive.registerAdapter<StreakDataType>(StreakDataTypeAdapter());
   await Hive.openBox<Activity>(activityBoxName);
   await Hive.openBox(globalSettingBoxName);
 }
@@ -44,21 +46,20 @@ Future<void> hiveInitialize() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ValueListenableBuilder(
-      valueListenable: Hive.box(globalSettingBoxName).listenable(),
-      builder: (context, box, widget) {
-        return c.CupertinoApp(
-          initialRoute: '/username_add',
-          title: "StarBook",
-          theme: c.CupertinoThemeData(brightness: brightness),
-          localizationsDelegates: [
-            DefaultMaterialLocalizations.delegate,
-            c.DefaultCupertinoLocalizations.delegate,
-            DefaultWidgetsLocalizations.delegate,
-          ],
-          onGenerateRoute: (settings) => RouteGenerator.mainRoute(settings),
-        );
-      },
-    );
+    return c.ValueListenableBuilder(
+        valueListenable: Hive.box(globalSettingBoxName).listenable(),
+        builder: (context, box, widget) {
+          return c.CupertinoApp(
+            initialRoute: '/username_add',
+            title: "StarBook",
+            theme: c.CupertinoThemeData(brightness: brightness),
+            localizationsDelegates: [
+              DefaultMaterialLocalizations.delegate,
+              c.DefaultCupertinoLocalizations.delegate,
+              DefaultWidgetsLocalizations.delegate,
+            ],
+            onGenerateRoute: (settings) => RouteGenerator.mainRoute(settings),
+          );
+        });
   }
 }
