@@ -87,10 +87,12 @@ class GlobalSettingController {
 
   ///Static method to get all Streaks of [Activity]s
   static List<StreakDataType> getAllStreaks() {
-    return Hive.box(globalSettingBoxName).get(
+    List<dynamic> _strks = Hive.box(globalSettingBoxName).get(
       allStreaks,
       defaultValue: [],
-    ) as List<StreakDataType>;
+    );
+    List<StreakDataType> _streaks = List<StreakDataType>.from(_strks);
+    return _streaks;
   }
 
   /// Static method to get the Longest Streak
@@ -127,10 +129,9 @@ class GlobalSettingController {
 
   ///Static method to get the Current Streak
   static StreakDataType getCurrentStreak() {
-    DateTime today = getDate(new DateTime.now());
     return Hive.box(globalSettingBoxName).get(
       currentStreak,
-      defaultValue: StreakDataType(0, today, today),
+      defaultValue: null,
     );
   }
 
@@ -139,6 +140,9 @@ class GlobalSettingController {
     DateTime today = getDate(new DateTime.now());
     // Read the GlobalSetting Properties
     StreakDataType currStk = GlobalSettingController.getCurrentStreak();
+    // No streak Exists
+    if (currStk == null) return 0;
+
     DateTime _lastActivityDate = currStk.streakEndDate;
     int daysTillLastActivity = today.difference(_lastActivityDate).inDays;
     // Check whether the last [Activity] was yesterday
