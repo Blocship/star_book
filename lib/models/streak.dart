@@ -42,7 +42,11 @@ class StreakDataType {
     else if (a.streakCount < b.streakCount)
       return 1;
     else // if both have same `streakCount`, [StreakDataType] with latest `streakEndDate` has higher priority
-      return (a.streakEndDate.isAfter(b.streakEndDate)) ? -1 : 1;
+      return (a.streakEndDate.isAtSameMomentAs(b.streakEndDate))
+          ? 0
+          : (a.streakEndDate.isAfter(b.streakEndDate))
+              ? -1
+              : 1;
   }
 
   /// Method to check whether `_date` lies in between `this.streakStartDate` and `this.streakEndDate`
@@ -94,17 +98,22 @@ class Streak {
     /// Assertion for validity of proper installation
     assert(_installedDate is DateTime);
 
+    /// ! Comment this for Testing Purpose
+    /// New [Activity] for a dat before today will not be counted in streak
     /// Streak will not be affected if an [Activity] is added for a date before today
     if (!_activityDate.isAtSameMomentAs(getDate(new DateTime.now()))) return;
 
     /// Update Longest Streaks Heap
     StreakDataType _streakToBeModified;
     longestStreaks.toUnorderedList().forEach((_streak) {
-      if (_streak.liesInStreak(_activityDate)) {
+      if (_streak.liesInStreak(_activityDate.subtract(new Duration(days: 1)))) {
         _streakToBeModified = _streak;
       }
     });
-    if (_streakToBeModified != null) longestStreaks.remove(_streakToBeModified);
+    
+    if (_streakToBeModified is StreakDataType) {
+      longestStreaks.remove(_streakToBeModified);
+    }
 
     ///Check whether current [Activity] is the first [Activity] of the app or not
     if (currentStreak == null) {
@@ -148,8 +157,12 @@ class Streak {
         _streakCount = _endDate.difference(_startDate).inDays + 1;
 
         currentStreak = new StreakDataType(_streakCount, _startDate, _endDate);
-        // Update the hive database with Current Streak
-        GlobalSettingController.setCurrentStreak(currentStreak);
+
+        // Update the hive database with Current Streak if current streak is valid
+        if (!currentStreak.streakStartDate.isAfter(currentStreak.streakEndDate))
+          GlobalSettingController.setCurrentStreak(currentStreak);
+        else
+          currentStreak = null;
       }
     }
 
