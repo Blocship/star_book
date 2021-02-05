@@ -37,7 +37,6 @@ class _ProfilePageState extends State<ProfilePage> {
         border: null,
       ),
       child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
         child: SafeArea(
           minimum: EdgeInsets.symmetric(horizontal: 16),
           child: Column(
