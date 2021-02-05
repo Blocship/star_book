@@ -40,7 +40,8 @@ class PreferanceSheet extends StatefulWidget {
 }
 
 class PreferenceSheetState extends State<PreferanceSheet> {
-  BrightnessOption _selectedOption = GlobalSettingController.getBrightnessOption();
+  BrightnessOption _selectedOption =
+      GlobalSettingController.getBrightnessOption();
 
   // @override
   // void initState() {
@@ -138,7 +139,7 @@ class PreferenceSheetState extends State<PreferanceSheet> {
               },
             ),
             Padding(padding: EdgeInsets.symmetric(vertical: 18)),
-            _aboutDeveloper(),
+            AboutDeveloper(),
             Padding(padding: EdgeInsets.symmetric(vertical: 18)),
             ActionContainer(
               text: 'Privacy and Terms',
@@ -182,9 +183,9 @@ class PreferenceSheetState extends State<PreferanceSheet> {
   }
 }
 
-class _aboutDeveloper extends StatelessWidget {
+class AboutDeveloper extends StatelessWidget {
   @override
-  c.Widget build(BuildContext context) {
+  Widget build(BuildContext context) {
     double _textWidth = MediaQuery.of(context).size.width * 0.6 - 29;
     double _imageWidth = MediaQuery.of(context).size.width * 0.4 - 29;
     return Column(
