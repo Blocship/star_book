@@ -36,31 +36,33 @@ class _ProfilePageState extends State<ProfilePage> {
         trailing: PreferanceButton(),
         border: null,
       ),
-      child: SafeArea(
-        minimum: EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 16),
-            Text(
-              'Greetings',
-              style: Style.largeTitle(context),
-            ),
-            SizedBox(height: 16),
-            Text(
-              user.name,
-              style: Style.title(context),
-            ),
-            SizedBox(height: 32),
-            Stats(),
-            SizedBox(height: 32),
-            Text(
-              'Analytics',
-              style: Style.title2(context),
-            ),
-            SizedBox(height: 16),
-            Center(child: Analytics())
-          ],
+      child: SingleChildScrollView(
+        child: SafeArea(
+          minimum: EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 16),
+              Text(
+                'Greetings',
+                style: Style.largeTitle(context),
+              ),
+              SizedBox(height: 16),
+              Text(
+                user.name,
+                style: Style.title(context),
+              ),
+              SizedBox(height: 32),
+              Stats(),
+              SizedBox(height: 32),
+              Text(
+                'Analytics',
+                style: Style.title2(context),
+              ),
+              SizedBox(height: 16),
+              Center(child: Analytics())
+            ],
+          ),
         ),
       ),
     );
