@@ -98,18 +98,25 @@ class _UsernameAddSheetState extends State<UsernameAddSheet> {
                 ),
               ),
             ),
-            SizedBox(height: h * 0.25),
-            c.CupertinoButton(
-              onPressed: isNullOrEmpty(textController.text)
-                  ? null
-                  : () => onContinuePressed(context),
-              color: c.CupertinoDynamicColor.resolve(
-                  c.CupertinoColors.systemOrange, context),
-              child: Text(
-                'Continue',
-                style: Style.buttonText(context),
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: c.Padding(
+                  padding: c.EdgeInsets.symmetric(vertical: 15),
+                  child: c.CupertinoButton(
+                    onPressed: isNullOrEmpty(textController.text)
+                        ? null
+                        : () => onContinuePressed(context),
+                    color: c.CupertinoDynamicColor.resolve(
+                        c.CupertinoColors.systemOrange, context),
+                    child: Text(
+                      'Continue',
+                      style: Style.buttonText(context),
+                    ),
+                  ),
+                ),
               ),
-            ),
+            )
           ],
         ),
       ),
