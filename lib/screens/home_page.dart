@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart' as c;
+import 'package:star_book/utils/brightness.dart';
 // import 'package:star_book/utils/brightness.dart';
 
 // Files
@@ -120,9 +121,10 @@ class _HomePageState extends State<HomePage> {
         context,
       ),
       navigationBar: c.CupertinoNavigationBar(
+        brightness: brightness,
         heroTag: 'HomePage',
         transitionBetweenRoutes: false,
-        backgroundColor: Color(0x00000000),
+        backgroundColor: Colors.transparent,
         trailing: PreferanceButton(),
         border: null,
         automaticallyImplyLeading: false,

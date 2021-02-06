@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+// import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive/hive.dart';
 import 'package:flutter/services.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 // Files
-import './controllers/activity.dart';
+// import './controllers/activity.dart';
 import './models/activity.dart';
 import './models/global_setting.dart';
 import './models/mood.dart';
@@ -48,6 +48,7 @@ class MyApp extends StatelessWidget {
       valueListenable: Hive.box(globalSettingBoxName).listenable(),
       builder: (context, box, widget) {
         return c.CupertinoApp(
+          debugShowCheckedModeBanner: false,
           initialRoute: '/home',
           title: "StarBook",
           theme: c.CupertinoThemeData(brightness: brightness),
