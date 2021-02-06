@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
+import 'package:star_book/widgets/pie_chart.dart';
 
 //Files
 import '../controllers/global_setting.dart';
@@ -190,11 +191,7 @@ class _AnalyticsState extends State<Analytics> {
           ),
           MyContainer(
             //TODO: Replace with graph
-            child: Text(
-                _selectedOption == AnalyticsOption.monthly
-                    ? 'monthly'
-                    : 'weekly',
-                style: Style.body(context)),
+            child: PieChartWidget()
           ),
         ],
       ),
