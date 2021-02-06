@@ -56,9 +56,11 @@ class _ProfilePageState extends State<ProfilePage> {
               SizedBox(height: 32),
               Stats(),
               SizedBox(height: 32),
-              Text(
-                'Analytics',
-                style: Style.title2(context),
+              c.Center(
+                child: Text(
+                  'Analytics',
+                  style: Style.title2(context),
+                ),
               ),
               SizedBox(height: 16),
               Center(child: Analytics())
@@ -179,7 +181,6 @@ class _AnalyticsState extends State<Analytics> {
   Widget build(BuildContext context) {
     return MyContainer(
       margin: c.EdgeInsets.zero,
-      height: 300,
       child: Column(
         children: [
           c.CupertinoSlidingSegmentedControl<AnalyticsOption>(
@@ -190,9 +191,10 @@ class _AnalyticsState extends State<Analytics> {
                 c.CupertinoColors.systemGrey6, context),
           ),
           MyContainer(
-            //TODO: Replace with graph
-            child: PieChartWidget()
-          ),
+              //TODO: Replace with graph
+              child: _selectedOption == AnalyticsOption.monthly
+                  ? PieChartWidget("monthly")
+                  : PieChartWidget("weekly")),
         ],
       ),
     );

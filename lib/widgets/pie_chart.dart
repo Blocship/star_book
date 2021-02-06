@@ -5,6 +5,10 @@ import 'package:star_book/utils/color.dart';
 import '../models/mood.dart';
 
 class PieChartWidget extends StatefulWidget {
+  final String type;
+
+  PieChartWidget(this.type);
+
   @override
   _PieChartWidgetState createState() => _PieChartWidgetState();
 }
@@ -15,7 +19,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
+      height: 300,
       child: PieChart(
         PieChartData(
             pieTouchData: PieTouchData(touchCallback: (pieTouchResponse) {
@@ -161,11 +165,11 @@ class _Badge extends StatelessWidget {
   final Color borderColor;
 
   const _Badge(
-      this.moodName, {
-        Key key,
-        @required this.size,
-        @required this.borderColor,
-      }) : super(key: key);
+    this.moodName, {
+    Key key,
+    @required this.size,
+    @required this.borderColor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -191,8 +195,8 @@ class _Badge extends StatelessWidget {
         padding: EdgeInsets.all(size * .15),
         child: FittedBox(
             child: Text(
-              moodName,
-              style: TextStyle(color: CupertinoColors.black),
-            )));
+          moodName,
+          style: TextStyle(color: CupertinoColors.black),
+        )));
   }
 }
