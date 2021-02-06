@@ -1,42 +1,12 @@
-// child: c.Container(
-//   height: double.maxFinite,
-//   child: c.ListView.builder(
-//     itemCount: 1,
-//     itemBuilder: (c.BuildContext context, int index) {
-//       return c.Container(
-//         child: c.Dismissible(
-//           key: c.UniqueKey(),
-//           child: Month(
-//             month: month,
-//             year: year,
-//           ),
-//           onDismissed: (direction) {
-//             if (direction == c.DismissDirection.endToStart) {
-//               setState(() {
-//                 year = getNextYear(month, year);
-//                 month = getNextMonth(month, year);
-//               });
-//             } else if (direction == c.DismissDirection.startToEnd) {
-//               setState(() {
-//                 year = getPreviousYear(month, year);
-//                 month = getPreviousMonth(month, year);
-//               });
-//             }
-//           },
-//         ),
-//       );
-//     },
-//   ),
-// ),
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:swipedetector/swipedetector.dart';
 // Files
-import '../api/unsplash_api_service.dart';
-import '../models/unsplash_photo.dart';
-import '../utils/date.dart';
-import '../widgets/month.dart';
 import './profile_page.dart';
+import '../utils/date.dart';
+import '../widgets/background_images.dart';
+import '../widgets/month.dart';
 
 enum BottomTabOption {
   home,
@@ -109,9 +79,9 @@ class _HomePageState extends State<HomePage> {
   int month;
   int year;
   int index = 0;
-  List<UnsplashPhoto> images = List<UnsplashPhoto>();
   bool _loading = false;
-
+  var monthList = [];
+  var yearList = [];
   // TODO: fetch data from database based.
   // using mock data for now
   // final List<Mood> moodList = new List<Mood>.from(mMoodList);
@@ -119,124 +89,55 @@ class _HomePageState extends State<HomePage> {
   // List photoList;
   @override
   void initState() {
+    super.initState();
     month = DateTime.now().month;
     year = DateTime.now().year;
-    initImages();
-
-    super.initState();
   }
-
-  void initImages() async {
-    images = await UnsplashAPIService.getPhotos(12);
-    print(images);
-  }
-
-  // void onHorizontalDragEnd(c.DragEndDetails value) {
-  //   (value.primaryVelocity.isNegative)
-  //       ?
-  //       // Drags Left
-  //       setState(() {
-  //           year = getNextYear(month, year);
-  //           month = getNextMonth(month, year);
-  //           index < 28 ? index += 1 : index = 0;
-  //         })
-  //       :
-  //       // Drags Right
-  //       setState(() {
-  //           year = getPreviousYear(month, year);
-  //           month = getPreviousMonth(month, year);
-  //           index > 0 ? index -= 1 : index = 28;
-  //         });
-  // }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: c.CupertinoDynamicColor.resolve(
-          c.CupertinoColors.systemBackground,
-          context,
-        ),
-        image: DecorationImage(
-          fit: BoxFit.cover,
-          image: AssetImage('backup-bg-image.JPG'),
-        ),
-      ),
-      child: c.CupertinoPageScaffold(
-        backgroundColor: Color(0x00000000),
-        navigationBar: c.CupertinoNavigationBar(
-          backgroundColor: Color(0x00000000),
-          trailing: YearButton(),
-          border: null,
-        ),
-        // child: SafeArea(
-        //   child: c.GestureDetector(
-        //     onHorizontalDragEnd: onHorizontalDragEnd,
-        //     child: Container(
-        //       padding: c.EdgeInsets.symmetric(horizontal: 12),
-        //       child: Month(
-        //         month: month,
-        //         year: year,
-        //       ),
-        //     ),
-        //   ),
-        // ),
-        // child: c.Container(
-        //   height: double.maxFinite,
-        //   child: c.ListView.builder(
-        //     itemCount: 1,
-        //     itemBuilder: (c.BuildContext context, int index) {
-        //       return c.Container(
-        //         child: c.Dismissible(
-        //           key: c.UniqueKey(),
-        //           child: Month(
-        //             month: month,
-        //             year: year,
-        //           ),
-        //           onDismissed: (direction) {
-        //             if (direction == c.DismissDirection.endToStart) {
-        //               setState(() {
-        //                 year = getNextYear(month, year);
-        //                 month = getNextMonth(month, year);
-        //               });
-        //             } else if (direction == c.DismissDirection.startToEnd) {
-        //               setState(() {
-        //                 year = getPreviousYear(month, year);
-        //                 month = getPreviousMonth(month, year);
-        //               });
-        //             }
-        //           },
-        //         ),
-        //       );
-        //     },
-        //   ),
-        // ),
-
-        child: c.SafeArea(
-          child: SwipeDetector(
-            onSwipeLeft: () {
-              print("left");
-            },
-            onSwipeRight: () {
-              print("right");
-            },
-            child: c.PageView.builder(
-              onPageChanged: (index) {
-                setState(() {
-                  year = getNextYear(month, year);
-                  month = getNextMonth(month, year);
-                });
-              },
-              itemBuilder: (BuildContext context, int index) {
-                return Month(
-                  month: month,
-                  year: year,
-                );
-              },
-            ),
+    return Stack(
+      children: [
+        Container(
+          color: c.CupertinoDynamicColor.resolve(
+            c.CupertinoColors.systemBackground,
+            context,
           ),
         ),
-      ),
+        BackgroundImage(month: month),
+        c.CupertinoPageScaffold(
+            backgroundColor: Color(0x00000000),
+            navigationBar: c.CupertinoNavigationBar(
+              heroTag: 'HomePage',
+              transitionBetweenRoutes: false,
+              backgroundColor: Color(0x00000000),
+              leading: PreferanceButton(),
+              trailing: YearButton(),
+              border: null,
+            ),
+            child: SwipeDetector(
+              onSwipeRight: () {
+                print("hi");
+              },
+              child: c.SafeArea(
+                child: c.PageView.builder(
+                  onPageChanged: (index) {
+                    setState(() {
+                      year = getNextYear(month, year);
+                      month = getNextMonth(month, year);
+                    });
+                  },
+                  itemBuilder: (BuildContext context, int index) {
+                    print(index);
+                    return Month(
+                      month: monthList[1],
+                      year: yearList[1],
+                    );
+                  },
+                ),
+              ),
+            ))
+      ],
     );
   }
 }

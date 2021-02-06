@@ -20,19 +20,8 @@ class UnsplashPhoto {
     this.blurhash,
   });
 
-  UnsplashPhoto copyWith({
-    String url,
-    String photographer,
-    String link,
-    String blurhash,
-  }) {
-    return UnsplashPhoto(
-      url: url ?? this.url,
-      photographer: photographer ?? this.photographer,
-      link: link ?? this.link,
-      blurhash: blurhash ?? this.blurhash,
-    );
-  }
+  factory UnsplashPhoto.fromJson(String source) =>
+      UnsplashPhoto.fromMap(json.decode(source));
 
   // Map<String, dynamic> toMap() {
   //   return {
@@ -56,12 +45,12 @@ class UnsplashPhoto {
 
   // String toJson() => json.encode(toMap());
 
-  factory UnsplashPhoto.fromJson(String source) =>
-      UnsplashPhoto.fromMap(json.decode(source));
-
   @override
-  String toString() {
-    return '{\n url: $url,\n photographer: $photographer,\n link: $link,\n blurhash: $blurhash, \n}';
+  int get hashCode {
+    return url.hashCode ^
+        photographer.hashCode ^
+        link.hashCode ^
+        blurhash.hashCode;
   }
 
   @override
@@ -75,11 +64,22 @@ class UnsplashPhoto {
         o.blurhash == blurhash;
   }
 
+  UnsplashPhoto copyWith({
+    String url,
+    String photographer,
+    String link,
+    String blurhash,
+  }) {
+    return UnsplashPhoto(
+      url: url ?? this.url,
+      photographer: photographer ?? this.photographer,
+      link: link ?? this.link,
+      blurhash: blurhash ?? this.blurhash,
+    );
+  }
+
   @override
-  int get hashCode {
-    return url.hashCode ^
-        photographer.hashCode ^
-        link.hashCode ^
-        blurhash.hashCode;
+  String toString() {
+    return '{\n url: $url,\n photographer: $photographer,\n link: $link,\n blurhash: $blurhash, \n}';
   }
 }

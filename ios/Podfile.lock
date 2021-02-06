@@ -1,18 +1,29 @@
 PODS:
   - Flutter (1.0.0)
+  - fluttertoast (0.0.2):
+    - Flutter
+    - Toast
   - path_provider (0.0.1):
     - Flutter
+  - Toast (4.0.0)
   - url_launcher (0.0.1):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
+  - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - url_launcher (from `.symlinks/plugins/url_launcher/ios`)
+
+SPEC REPOS:
+  trunk:
+    - Toast
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
+  fluttertoast:
+    :path: ".symlinks/plugins/fluttertoast/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
   url_launcher:
@@ -20,7 +31,9 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  fluttertoast: 6122fa75143e992b1d3470f61000f591a798cc58
   path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+  Toast: 91b396c56ee72a5790816f40d3a94dd357abc196
   url_launcher: 6fef411d543ceb26efce54b05a0a40bfd74cbbef
 
 PODFILE CHECKSUM: aafe91acc616949ddb318b77800a7f51bffa2a4c

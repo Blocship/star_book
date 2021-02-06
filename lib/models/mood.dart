@@ -20,17 +20,23 @@ const String moodBoxName = 'mood';
 /// and adding [Activtiy] object is like adding new row in database.
 @HiveType(typeId: moodTypeId)
 class Mood extends HiveObject {
-  Mood({
-    this.id,
-    this.label,
-    this.colorCode,
-  });
   @HiveField(0)
   int id;
   @HiveField(1)
   String label;
   @HiveField(2)
   int colorCode;
+
+  Mood({
+    this.id,
+    this.label,
+    this.colorCode,
+  });
+
+  @override
+  int get hashCode {
+    return id.hashCode ^ label.hashCode ^ colorCode.hashCode;
+  }
 
   @override
   bool operator ==(Object o) {
@@ -42,21 +48,16 @@ class Mood extends HiveObject {
         this.colorCode == o.colorCode;
   }
 
-  @override
-  int get hashCode {
-    return id.hashCode ^ label.hashCode ^ colorCode.hashCode;
-  }
-
-  @override
-  String toString() {
-    return '{\n id: $id, \n label: $label, \n colorCode: $colorCode, \n}';
-  }
-
   Mood copyWith({int id, String label, int colorCode}) {
     return Mood(
         id: id ?? this.id,
         label: label ?? this.label,
         colorCode: colorCode ?? this.colorCode);
+  }
+
+  @override
+  String toString() {
+    return '{\n id: $id, \n label: $label, \n colorCode: $colorCode, \n}';
   }
 }
 
