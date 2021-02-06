@@ -15,7 +15,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.0.0
 
 environment:
   sdk: ">=2.7.0 <3.0.0"
@@ -40,9 +40,9 @@ dependencies:
   # Load data from .env file
   flutter_dotenv: ^2.1.0
   # Functions to show toast
-  fluttertoast: ^7.1.6
+  # fluttertoast: ^7.1.6
   # Blur Hash Functions for Network Images
-  flutter_blurhash: ^0.5.0
+  # flutter_blurhash: ^0.5.0
 
 dev_dependencies:
   flutter_test:
@@ -73,10 +73,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - dev-profile.jpeg
-    - new_bg.jpeg
-    - backup-bg-image.JPG
+    # - new_bg.jpeg
+    # - backup-bg-image.JPG
     - icon.png
-    - bg_dark.jpg
+    # - bg_dark.jpg
     # - .env
     # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

@@ -23,8 +23,8 @@ void main() async {
     DeviceOrientation.portraitUp
   ]);
   await hiveInitialize();
-  await ActivityController.initialize();
-  await DotEnv().load('.env');
+  // await ActivityController.initialize();
+  // await DotEnv().load('.env');
   runApp(MyApp());
 }
 
@@ -48,7 +48,7 @@ class MyApp extends StatelessWidget {
       valueListenable: Hive.box(globalSettingBoxName).listenable(),
       builder: (context, box, widget) {
         return c.CupertinoApp(
-          initialRoute: '/username_add',
+          initialRoute: '/home',
           title: "StarBook",
           theme: c.CupertinoThemeData(brightness: brightness),
           localizationsDelegates: [

@@ -9,9 +9,9 @@ import '../screens/error_page.dart';
 import '../screens/home_page.dart';
 import '../screens/mood_sheet.dart';
 import '../screens/preferance_sheet.dart';
-import '../screens/time_picker_sheet.dart';
-import '../screens/username_add_sheet.dart';
-import '../screens/year_page.dart';
+// import '../screens/time_picker_sheet.dart';
+// import '../screens/username_add_sheet.dart';
+// import '../screens/year_page.dart';
 import '../utils/bottom_sheet.dart';
 
 /// Centralised routing class.
@@ -27,22 +27,22 @@ class RouteGenerator {
   ) {
     final args = settings.arguments;
     switch (settings.name) {
-      case "/username_add":
-        return MaterialWithModalsPageRoute(
-          builder: (context) => UsernameAddSheet(),
-        );
+      // case "/username_add":
+      //   return MaterialWithModalsPageRoute(
+      //     builder: (context) => UsernameAddSheet(),
+      //   );
       case "/home":
         return MaterialWithModalsPageRoute(
-          builder: (context) => Home(),
+          builder: (context) => HomePage(),
         );
       case "/activity":
         return MaterialWithModalsPageRoute(
           builder: (context) => ActivityPage(args),
         );
-      case "/year":
-        return MaterialWithModalsPageRoute(
-          builder: (context) => YearPage(),
-        );
+      // case "/year":
+      //   return MaterialWithModalsPageRoute(
+      //     builder: (context) => YearPage(),
+      //   );
       case "/preferance":
         return CupertinoModalBottomSheetRouteWrapper(
           builder: (context, controller) => PreferanceSheet(),
@@ -76,10 +76,10 @@ class RouteGenerator {
         return MaterialWithModalsPageRoute(
           builder: (context) => DatePickerSheet(settings),
         );
-      case "edit/time":
-        return MaterialWithModalsPageRoute(
-          builder: (context) => TimePickerSheet(settings),
-        );
+      // case "edit/time":
+      //   return MaterialWithModalsPageRoute(
+      //     builder: (context) => TimePickerSheet(settings),
+      //   );
       default:
         return MaterialWithModalsPageRoute(
           builder: (context) => ErrorPage(),
