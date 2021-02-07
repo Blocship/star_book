@@ -7,8 +7,7 @@ import 'package:star_book/api/errors_toast.dart';
 // Files
 import '../models/unsplash_photo.dart';
 import '../api/unsplash_api_service.dart';
-import 'package:star_book/models/unsplash_photo.dart';
-import 'package:star_book/api/unsplash_api_service.dart';
+import '../utils/brightness.dart';
 
 class BackgroundImage extends StatefulWidget {
   const BackgroundImage({
@@ -60,7 +59,9 @@ class _BackgroundImageState extends State<BackgroundImage> {
             }
           } else {
             child = Image.asset(
-              "new_bg.jpeg",
+              brightness == Brightness.light
+                  ? "backup-bg-image.JPG"
+                  : "bg_dark.jpg",
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,

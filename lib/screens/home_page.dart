@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:swipedetector/swipedetector.dart';
+import 'package:flutter/cupertino.dart' as c;
 // Files
 import './profile_page.dart';
 import '../utils/date.dart';
@@ -78,10 +77,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int month;
   int year;
-  int index = 0;
   bool _loading = false;
-  var monthList = [];
-  var yearList = [];
+  int prevIndex = 999, currentIndex = 1000;
   // TODO: fetch data from database based.
   // using mock data for now
   // final List<Mood> moodList = new List<Mood>.from(mMoodList);
@@ -93,6 +90,25 @@ class _HomePageState extends State<HomePage> {
     month = DateTime.now().month;
     year = DateTime.now().year;
   }
+
+  // void onHorizontalDragEnd(c.DragEndDetails value) {
+  //   if (value.primaryVelocity.isNegative) {
+  //     // Drags Left
+  //     setState(() {
+  //       year = getNextYear(month, year);
+  //       month = getNextMonth(month, year);
+  //       //index < 28 ? index += 1 : index = 0;
+  //     });
+  //   } else if (value.primaryVelocity > 0) {
+  //     // Drags Right
+  //     setState(() {
+  //       year = getPreviousYear(month, year);
+  //       month = getPreviousMonth(month, year);
+  //       //index > 0 ? index -= 1 : index = 28;
+  //     });
+  //   }
+  //   // else velocity is zero, no need to do anything
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -106,37 +122,43 @@ class _HomePageState extends State<HomePage> {
         ),
         BackgroundImage(month: month),
         c.CupertinoPageScaffold(
+          backgroundColor: Color(0x00000000),
+          navigationBar: c.CupertinoNavigationBar(
+            heroTag: 'HomePage',
+            transitionBetweenRoutes: false,
             backgroundColor: Color(0x00000000),
-            navigationBar: c.CupertinoNavigationBar(
-              heroTag: 'HomePage',
-              transitionBetweenRoutes: false,
-              backgroundColor: Color(0x00000000),
-              leading: PreferanceButton(),
-              trailing: YearButton(),
-              border: null,
-            ),
-            child: SwipeDetector(
-              onSwipeRight: () {
-                print("hi");
-              },
-              child: c.SafeArea(
-                child: c.PageView.builder(
+            trailing: YearButton(),
+            border: null,
+            automaticallyImplyLeading: false,
+          ),
+          child: SafeArea(
+            child: Container(
+              child: c.PageView.builder(
+                  controller: c.PageController(initialPage: 1000),
                   onPageChanged: (index) {
                     setState(() {
-                      year = getNextYear(month, year);
-                      month = getNextMonth(month, year);
+                      prevIndex = currentIndex;
+                      currentIndex = index;
+                      print(prevIndex);
+                      print(currentIndex);
+                      if (currentIndex > prevIndex) {
+                        year = getNextYear(month, year);
+                        month = getNextMonth(month, year);
+                        
+                      } 
+                      else  {
+                        year = getPreviousYear(month, year);
+                        month = getPreviousMonth(month, year);
+                        
+                      }
                     });
                   },
                   itemBuilder: (BuildContext context, int index) {
-                    print(index);
-                    return Month(
-                      month: monthList[1],
-                      year: yearList[1],
-                    );
-                  },
-                ),
-              ),
-            ))
+                    return Month(month: month, year: year);
+                  }),
+            ),
+          ),
+        ),
       ],
     );
   }
