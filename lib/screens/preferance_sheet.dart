@@ -146,7 +146,7 @@ class PreferenceSheetState extends State<PreferanceSheet> {
               icon: c.CupertinoIcons.right_chevron,
               onTap: () async {
                 String url =
-                    "https://github.com/hashirshoaeb/star_book/blob/master/POLICY.md";
+                    "https://github.com/hashirshoaeb/star_book/blob/master/PRIVACY%26POLICY.md";
                 try {
                   if (await canLaunch(url)) await launch(url);
                 } catch (e) {
