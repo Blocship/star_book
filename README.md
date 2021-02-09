@@ -131,7 +131,7 @@ App is under development. For now it is like this. With your help we will add mo
 
 | Light Mode                                               | Dark Mode                                              |   
 |:--------------------------------------------------------:|:------------------------------------------------------:|
-| <img src="https://github.com/kanishkaa24/star_book/blob/master/assets/light%20mode.gif?raw=true" width="320" ></img> | <img src="https://github.com/kanishkaa24/star_book/blob/master/assets/dark%20mode.gif?raw=true" width="320"></img> |
+| <img src="READMEdocs/light mode.gif" width="320" ></img> | <img src="READMEdocs/dark mode.gif" width="320"></img> |
 
 <!-- LICENSE -->
 
