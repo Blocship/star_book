@@ -118,6 +118,6 @@ class _UsernameAddSheetState extends State<UsernameAddSheet> {
 
   void onContinuePressed(c.BuildContext context) async {
     GlobalSettingController.setUser(user);
-    await Navigator.of(context).pushNamed("/home");
+    await Navigator.of(context).pushReplacementNamed("home");
   }
 }
