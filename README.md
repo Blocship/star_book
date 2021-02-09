@@ -121,9 +121,17 @@ The App is under development. Are you interested in building and contributing to
 
 App is under development. For now it is like this. With your help we will add more features and functionalities.
 
+### IOS
+
 | Light Mode                                               | Dark Mode                                              |   
 |:--------------------------------------------------------:|:------------------------------------------------------:|
 | <img src="READMEdocs/demo-light.gif" width="320" ></img> | <img src="READMEdocs/demo-dark.gif" width="320"></img> |
+
+### Android
+
+| Light Mode                                               | Dark Mode                                              |   
+|:--------------------------------------------------------:|:------------------------------------------------------:|
+| <img src="https://github.com/kanishkaa24/star_book/blob/master/assets/light%20mode.gif?raw=true" width="320" ></img> | <img src="https://github.com/kanishkaa24/star_book/blob/master/assets/dark%20mode.gif?raw=true" width="320"></img> |
 
 <!-- LICENSE -->
 

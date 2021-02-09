@@ -6,6 +6,7 @@ import '../controllers/global_setting.dart';
 import '../models/global_setting.dart';
 import '../styles/style.dart';
 import '../widgets/my_container.dart';
+import '../controllers/activity.dart';
 
 /// Profile Page displays user details
 /// Such as
@@ -35,31 +36,33 @@ class _ProfilePageState extends State<ProfilePage> {
         trailing: PreferanceButton(),
         border: null,
       ),
-      child: SafeArea(
-        minimum: EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: 16),
-            Text(
-              'Greetings',
-              style: Style.largeTitle(context),
-            ),
-            SizedBox(height: 16),
-            Text(
-              user.name,
-              style: Style.title(context),
-            ),
-            SizedBox(height: 32),
-            Stats(),
-            SizedBox(height: 32),
-            Text(
-              'Analytics',
-              style: Style.title2(context),
-            ),
-            SizedBox(height: 16),
-            Center(child: Analytics())
-          ],
+      child: SingleChildScrollView(
+        child: SafeArea(
+          minimum: EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 16),
+              Text(
+                'Greetings',
+                style: Style.largeTitle(context),
+              ),
+              SizedBox(height: 16),
+              Text(
+                user.name,
+                style: Style.title(context),
+              ),
+              SizedBox(height: 32),
+              Stats(),
+              SizedBox(height: 32),
+              Text(
+                'Analytics',
+                style: Style.title2(context),
+              ),
+              SizedBox(height: 16),
+              Center(child: Analytics())
+            ],
+          ),
         ),
       ),
     );
@@ -79,7 +82,7 @@ class Stats extends StatelessWidget {
             crossAxisAlignment: c.CrossAxisAlignment.start,
             children: [
               Text(
-                '30',
+                ActivityController.points().toString(),
                 style: Style.title(context),
               ),
               SizedBox(height: 6),
@@ -97,7 +100,7 @@ class Stats extends StatelessWidget {
             crossAxisAlignment: c.CrossAxisAlignment.start,
             children: [
               Text(
-                '6',
+                ActivityController.streak().toString(),
                 style: Style.title(context),
               ),
               SizedBox(height: 6),
