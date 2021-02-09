@@ -92,7 +92,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
 class PreferanceButton extends StatelessWidget {
   void onTap(context) {
-    Navigator.of(context).pushNamed('/preferance');
+    Navigator.of(context).pushNamed('preferance');
   }
 
   @override

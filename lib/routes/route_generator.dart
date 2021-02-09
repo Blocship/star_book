@@ -27,27 +27,27 @@ class RouteGenerator {
   ) {
     final args = settings.arguments;
     switch (settings.name) {
-      case "/username_add":
+      case 'username_add':
         return MaterialWithModalsPageRoute(
           builder: (context) => UsernameAddSheet(),
         );
-      case "/home":
+      case 'home':
         return MaterialWithModalsPageRoute(
           builder: (context) => Home(),
         );
-      case "/activity":
+      case 'activity':
         return MaterialWithModalsPageRoute(
           builder: (context) => ActivityPage(args),
         );
-      case "/year":
+      case 'year':
         return MaterialWithModalsPageRoute(
           builder: (context) => YearPage(),
         );
-      case "/preferance":
+      case 'preferance':
         return CupertinoModalBottomSheetRouteWrapper(
           builder: (context, controller) => PreferanceSheet(),
         );
-      case "/edit":
+      case 'edit':
         return CupertinoModalBottomSheetRouteWrapper(
           builder: (context, controller) => ActivityRouteInitializer(args),
         );
@@ -64,19 +64,19 @@ class RouteGenerator {
   ) {
     // final args = settings.arguments;
     switch (settings.name) {
-      case "edit/title":
+      case 'edit/title':
         return MaterialWithModalsPageRoute(
           builder: (context) => ActivityEditSheet(activity),
         );
-      case "edit/mood":
+      case 'edit/mood':
         return MaterialWithModalsPageRoute(
           builder: (context) => MoodSheet(),
         );
-      case "edit/date":
+      case 'edit/date':
         return MaterialWithModalsPageRoute(
           builder: (context) => DatePickerSheet(settings),
         );
-      case "edit/time":
+      case 'edit/time':
         return MaterialWithModalsPageRoute(
           builder: (context) => TimePickerSheet(settings),
         );

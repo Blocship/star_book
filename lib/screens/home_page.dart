@@ -158,7 +158,7 @@ class YearButton extends StatelessWidget {
     return c.CupertinoButton(
       padding: EdgeInsets.zero,
       onPressed: () {
-        Navigator.of(context, rootNavigator: true).pushNamed('/year');
+        Navigator.of(context, rootNavigator: true).pushNamed('year');
       },
       child: Row(
         mainAxisSize: MainAxisSize.min,
