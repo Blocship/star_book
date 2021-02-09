@@ -3,6 +3,7 @@ import 'package:hive/hive.dart';
 // Files
 import './id.dart';
 import '../models/activity.dart';
+import '../utils/date.dart';
 
 /// Class with static methods, to provide `CRUD` operations for [Activity] model
 class ActivityController {
@@ -45,6 +46,18 @@ class ActivityController {
     );
   }
 
+  static Map<String, Activity> readRange(DateTime start, DateTime end) {
+    return Map<String, Activity>.fromEntries(
+      readAll().entries.where(
+            (element) =>
+                Id.from(element.key).toDateTime().isAtSameMomentAs(start) ||
+                Id.from(element.key).toDateTime().isAtSameMomentAs(end) ||
+                (Id.from(element.key).toDateTime().isAfter(start) &&
+                    Id.from(element.key).toDateTime().isBefore(end)),
+          ),
+    );
+  }
+
   /// Updates the [Activity] w.r.t to the date from the, `Hive box`
   ///
   /// If you think it as relational database,
@@ -73,6 +86,21 @@ class ActivityController {
       });
     }
   }
+
+  static Map<String, double> getMonthGraph(int year, int month) {
+    int totalDays = getDaysInMonth(year, month);
+    return {
+      'Happy': 6,
+      'Sad': 6,
+      'Productive': 6,
+      'Sick': 6,
+      'Normal': 3,
+      'Angry': 1,
+      'empty': 0,
+    };
+  }
+
+  static void getWeekGraph() {}
 
   /// Points is the total number of entries([Activity]s) in diary.
   static int points() {

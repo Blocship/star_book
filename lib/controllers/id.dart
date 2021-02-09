@@ -14,6 +14,10 @@ class Id {
         this.month = int.parse(s.split('-')[1]),
         this.year = int.parse(s.split('-')[2]);
 
+  DateTime toDateTime() {
+    return DateTime(year, month, day);
+  }
+
   @override
   bool operator ==(o) =>
       o is Id && o.day == day && o.month == month && o.year == year;
