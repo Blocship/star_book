@@ -13,18 +13,16 @@ import '../widgets/dialog.dart';
 
 /// Profile Page displays user details
 /// Such as
-/// - Username
-/// - Points
-/// - Streak
-/// - Monthly and Weekly Graph Widgets.
-
+/// - [Greeting]
+/// - [Username]
+/// - [Stats]
+/// - [Analytics]
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  /// Initiate user from Global Settings Controller
   User user = GlobalSettingController.getuser();
   bool showUsername;
 
@@ -60,10 +58,7 @@ class _ProfilePageState extends State<ProfilePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 16),
-              Text(
-                'Greetings',
-                style: Style.largeTitle(context),
-              ),
+              Greeting(),
               SizedBox(height: 16),
               AnimatedSwitcher(
                 duration: Duration(milliseconds: 1),
@@ -77,14 +72,12 @@ class _ProfilePageState extends State<ProfilePage> {
               SizedBox(height: 32),
               Stats(),
               SizedBox(height: 32),
-              c.Center(
-                child: Text(
-                  'Analytics',
-                  style: Style.title2(context),
-                ),
+              Text(
+                'Analytics',
+                style: Style.title2(context),
               ),
               SizedBox(height: 16),
-              Center(child: Analytics())
+              Center(child: Analytics()),
             ],
           ),
         ),
@@ -109,6 +102,16 @@ class PreferanceButton extends StatelessWidget {
           context,
         ),
       ),
+    );
+  }
+}
+
+class Greeting extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'Greetings',
+      style: Style.largeTitle(context),
     );
   }
 }
