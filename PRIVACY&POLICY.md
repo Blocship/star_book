@@ -1,6 +1,6 @@
 ## Terms of Service
 
-StarBook app is an open-source app free to use.
+StarBook is an open-source and free to use app.
 
 ## Privacy Policy
 
