@@ -138,3 +138,10 @@ App is under development. For now it is like this. With your help we will add mo
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
+
+## Get the App
+<div style="text-align: center">
+<a href="https://apps.apple.com/us/app/starbook-journal-ai-diary/id1552418289?ign-itsct=apps_box&ign-itscg=30200">
+<img src="https://www.starbook.dev/static/media/App_Store_Badge.969642b4.svg" style="width:400px">
+</a>
+</div>
