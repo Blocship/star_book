@@ -58,7 +58,7 @@ int getPreviousYear(int month, int year) {
 /// List of months name
 const List<String> _monthList = const <String>[
   'January',
-  'Feburary',
+  'February',
   'March',
   'April',
   'May',
