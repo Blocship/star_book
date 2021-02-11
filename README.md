@@ -23,6 +23,10 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/hashirshoaeb?color=ffcc66&logo=twitter&logoColor=ffffff&style=for-the-badge)](https://twitter.com/hashirshoaeb)
 [![Flutter Version](https://img.shields.io/static/v1?label=Flutter&message=1.22.2&color=ffcc66&style=for-the-badge)](https://flutter.dev/docs/development/tools/sdk/releases)
 
+## Get the App
+
+<a href="https://apps.apple.com/us/app/starbook-journal-ai-diary/id1552418289?itsct=apps_box&amp;itscg=30200" style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-US?size=250x83&amp;releaseDate=1612569600&h=9e9ca7fb9eb136d741621d25e5fadce8" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;"></a>
+
 <!-- TABLE OF CONTENTS -->
 
 ## Table Of Content
@@ -138,10 +142,3 @@ App is under development. For now it is like this. With your help we will add mo
 ## License
 
 Distributed under the MIT License. See `LICENSE` for more information.
-
-## Get the App
-<div style="text-align: center">
-<a href="https://apps.apple.com/us/app/starbook-journal-ai-diary/id1552418289?ign-itsct=apps_box&ign-itscg=30200">
-<img src="https://www.starbook.dev/static/media/App_Store_Badge.969642b4.svg" style="width:400px">
-</a>
-</div>
