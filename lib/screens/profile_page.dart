@@ -3,13 +3,14 @@ import 'package:flutter/widgets.dart';
 import 'package:star_book/widgets/pie_chart.dart';
 
 //Files
+import './preferance_sheet.dart';
+import '../controllers/activity.dart';
 import '../controllers/global_setting.dart';
 import '../models/global_setting.dart';
 import '../styles/style.dart';
-import '../widgets/my_container.dart';
-import '../controllers/activity.dart';
 import '../utils/string.dart';
 import '../widgets/dialog.dart';
+import '../widgets/my_container.dart';
 
 /// Profile Page displays user details
 /// Such as
@@ -86,6 +87,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 }
 
+/// Hamburger icon, that navigates to [PreferanceSheet]
 class PreferanceButton extends StatelessWidget {
   void onTap(context) {
     Navigator.of(context).pushNamed('preferance');
@@ -106,6 +108,7 @@ class PreferanceButton extends StatelessWidget {
   }
 }
 
+/// Greeting widget displays greeting based on time.
 class Greeting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -116,6 +119,8 @@ class Greeting extends StatelessWidget {
   }
 }
 
+/// Username widget displays the name of user
+/// ontap it goes into editable mode. See [UsernameEdit]
 class Username extends StatelessWidget {
   final Function onTap;
   final User user = GlobalSettingController.getuser();
@@ -134,6 +139,8 @@ class Username extends StatelessWidget {
   }
 }
 
+/// UsernameEdit widget displays TextField to update the username.
+/// See [Username]
 class UsernameEdit extends StatefulWidget {
   final Function onTap;
 
@@ -217,6 +224,9 @@ class _UsernameEditState extends State<UsernameEdit> {
   }
 }
 
+/// Stats widget display User's activity stats like:
+/// - Points (Total number of activites)
+/// - Streak (Latest consecutive activity count)
 class Stats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -288,6 +298,7 @@ class SlidingSegment extends StatelessWidget {
   }
 }
 
+/// Analytics widget displays graph of user's last month/week activtiy
 class Analytics extends StatefulWidget {
   @override
   _AnalyticsState createState() => _AnalyticsState();
