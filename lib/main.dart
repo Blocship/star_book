@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
       builder: (context, box, widget) {
         return c.CupertinoApp(
           debugShowCheckedModeBanner: false,
-          initialRoute: '/home',
+          initialRoute: 'home',
           title: "StarBook",
           theme: c.CupertinoThemeData(brightness: brightness),
           localizationsDelegates: [

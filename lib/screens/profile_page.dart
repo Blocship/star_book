@@ -118,7 +118,7 @@ import 'package:flutter/widgets.dart';
 
 class PreferanceButton extends StatelessWidget {
   void onTap(context) {
-    Navigator.of(context).pushNamed('/preferance');
+    Navigator.of(context).pushNamed('preferance');
   }
 
   @override

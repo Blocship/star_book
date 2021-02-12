@@ -88,9 +88,9 @@ class Day extends StatelessWidget {
         },
       );
     } else if (activity.moodId == null) {
-      Navigator.of(context).pushNamed("/edit", arguments: activity);
+      Navigator.of(context).pushNamed("edit", arguments: activity);
     } else {
-      Navigator.of(context).pushNamed('/activity', arguments: activity);
+      Navigator.of(context).pushNamed('activity', arguments: activity);
     }
   }
 

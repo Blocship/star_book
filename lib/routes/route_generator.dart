@@ -31,11 +31,11 @@ class RouteGenerator {
       //   return MaterialWithModalsPageRoute(
       //     builder: (context) => UsernameAddSheet(),
       //   );
-      case "/home":
+      case "home":
         return MaterialWithModalsPageRoute(
           builder: (context) => HomePage(),
         );
-      case "/activity":
+      case "activity":
         return MaterialWithModalsPageRoute(
           builder: (context) => ActivityPage(args),
         );
@@ -43,11 +43,11 @@ class RouteGenerator {
       //   return MaterialWithModalsPageRoute(
       //     builder: (context) => YearPage(),
       //   );
-      case "/preferance":
+      case "preferance":
         return CupertinoModalBottomSheetRouteWrapper(
           builder: (context, controller) => PreferanceSheet(),
         );
-      case "/edit":
+      case "edit":
         return CupertinoModalBottomSheetRouteWrapper(
           builder: (context, controller) => ActivityRouteInitializer(args),
         );
