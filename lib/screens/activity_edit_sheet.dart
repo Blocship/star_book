@@ -116,7 +116,7 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
           context,
         ),
         leading: Container(),
-        middle: Text('${(type == ActivityType.add) ? 'Add' : 'Edit'} Acitvity'),
+        middle: Text('${(type == ActivityType.add) ? 'Add' : 'Edit'} Activity'),
         trailing: c.CupertinoButton(
           onPressed: activity.isFilled() ? () => onDone(context) : null,
           child: Text('Done'),
