@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_statusbarcolor/flutter_statusbarcolor.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -49,6 +50,8 @@ class MyApp extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: Hive.box(globalSettingBoxName).listenable(),
       builder: (context, box, widget) {
+        FlutterStatusbarcolor.setStatusBarColor(c.CupertinoDynamicColor.resolve(
+            brightness == Brightness.light ? c.CupertinoColors.lightBackgroundGray: c.CupertinoColors.tertiaryLabel, context));
         return c.CupertinoApp(
           initialRoute: (isNullOrEmpty(GlobalSettingController.getuser().name))
               ? 'username_add'
