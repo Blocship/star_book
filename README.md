@@ -23,6 +23,10 @@
 [![Twitter Follow](https://img.shields.io/twitter/follow/hashirshoaeb?color=ffcc66&logo=twitter&logoColor=ffffff&style=for-the-badge)](https://twitter.com/hashirshoaeb)
 [![Flutter Version](https://img.shields.io/static/v1?label=Flutter&message=1.22.2&color=ffcc66&style=for-the-badge)](https://flutter.dev/docs/development/tools/sdk/releases)
 
+## Get the App
+
+<a href="https://apps.apple.com/us/app/starbook-journal-ai-diary/id1552418289?itsct=apps_box&amp;itscg=30200" style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-US?size=250x83&amp;releaseDate=1612569600&h=9e9ca7fb9eb136d741621d25e5fadce8" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;"></a>
+
 <!-- TABLE OF CONTENTS -->
 
 ## Table Of Content
@@ -131,7 +135,7 @@ App is under development. For now it is like this. With your help we will add mo
 
 | Light Mode                                               | Dark Mode                                              |   
 |:--------------------------------------------------------:|:------------------------------------------------------:|
-| <img src="https://github.com/kanishkaa24/star_book/blob/master/assets/light%20mode.gif?raw=true" width="320" ></img> | <img src="https://github.com/kanishkaa24/star_book/blob/master/assets/dark%20mode.gif?raw=true" width="320"></img> |
+| <img src="READMEdocs/light mode.gif" width="320" ></img> | <img src="READMEdocs/dark mode.gif" width="320"></img> |
 
 <!-- LICENSE -->
 

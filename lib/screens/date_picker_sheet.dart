@@ -65,26 +65,30 @@ class _DatePickerSheetState extends State<DatePickerSheet> {
                 MyContainer(
                   child: c.CupertinoTextField(
                     textAlign: TextAlign.center,
-                    style: TextStyle(
-                        fontSize: 20,
-                        color: Color(0xffffffff),
-                        fontWeight: FontWeight.w400),
                     readOnly: true,
                     placeholder: '$day-$month-$year',
                     decoration: null,
                     controller: dateController,
                     maxLines: 1,
                     onTap: null,
+                    style: TextStyle(
+                      color: c.CupertinoDynamicColor.resolve(
+                          c.CupertinoColors.label, context),
+                    ),
                   ),
                 ),
                 SizedBox(
                   height: 30,
                 ),
                 Center(
-                    child: Text(
-                  'Choose Another Date',
-                  style: TextStyle(color: Color(0xffffffff)),
-                )),
+                  child: Text(
+                    'Choose Another Date',
+                    style: TextStyle(
+                      color: c.CupertinoDynamicColor.resolve(
+                          c.CupertinoColors.label, context),
+                    ),
+                  ),
+                ),
                 Container(
                   padding: EdgeInsets.all(10),
                   height: MediaQuery.of(context).size.height * 2 / 5,

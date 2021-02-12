@@ -1,32 +1,49 @@
 import 'package:flutter/cupertino.dart' as c;
+import 'package:flutter/material.dart' as m;
 import 'package:flutter/widgets.dart';
+import 'package:star_book/widgets/pie_chart.dart';
 
 //Files
+import './preferance_sheet.dart';
+import '../controllers/activity.dart';
 import '../controllers/global_setting.dart';
 import '../models/global_setting.dart';
 import '../styles/style.dart';
+import '../utils/string.dart';
+import '../widgets/dialog.dart';
 import '../widgets/my_container.dart';
-import '../controllers/activity.dart';
 
 /// Profile Page displays user details
 /// Such as
-/// - Username
-/// - Points
-/// - Streak
-/// - Monthly and Weekly Graph Widgets.
-
+/// - [Greeting]
+/// - [Username]
+/// - [Stats]
+/// - [Analytics]
 class ProfilePage extends StatefulWidget {
   @override
   _ProfilePageState createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  /// Initiate user from Global Settings Controller
   User user = GlobalSettingController.getuser();
+  bool showUsername;
+
+  @override
+  void initState() {
+    super.initState();
+    showUsername = true;
+  }
+
+  void onUsernameTap(bool show) {
+    setState(() {
+      showUsername = show;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
+      resizeToAvoidBottomInset: true,
       backgroundColor: c.CupertinoDynamicColor.resolve(
           c.CupertinoColors.systemGrey6, context),
       navigationBar: c.CupertinoNavigationBar(
@@ -43,14 +60,16 @@ class _ProfilePageState extends State<ProfilePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 16),
-              Text(
-                'Greetings',
-                style: Style.largeTitle(context),
-              ),
+              Greeting(),
               SizedBox(height: 16),
-              Text(
-                user.name,
-                style: Style.title(context),
+              AnimatedSwitcher(
+                duration: Duration(milliseconds: 1),
+                transitionBuilder:
+                    (Widget child, Animation<double> animation) =>
+                        ScaleTransition(scale: animation, child: child),
+                child: showUsername
+                    ? Username(onTap: onUsernameTap)
+                    : UsernameEdit(onTap: onUsernameTap),
               ),
               SizedBox(height: 32),
               Stats(),
@@ -60,7 +79,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 style: Style.title2(context),
               ),
               SizedBox(height: 16),
-              Center(child: Analytics())
+              Center(child: Analytics()),
             ],
           ),
         ),
@@ -69,6 +88,159 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 }
 
+/// Hamburger icon, that navigates to [PreferanceSheet]
+class PreferanceButton extends StatelessWidget {
+  void onTap(context) {
+    Navigator.of(context).pushNamed('preferance');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => onTap(context),
+      child: Icon(
+        c.CupertinoIcons.bars,
+        color: c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.label,
+          context,
+        ),
+      ),
+    );
+  }
+}
+
+/// Greeting widget displays greeting based on time.
+class Greeting extends StatelessWidget {
+  String greeting() {
+    m.TimeOfDay timeOfDay = m.TimeOfDay.now();
+    // greetings List contains various greeting messages.
+    List greetings = ["Good Morning", "Good Night", "Hello"];
+    if (timeOfDay.hour >= 6 && timeOfDay.hour <= 10) {
+      return greetings[0];
+    } else if (timeOfDay.hour >= 20 && timeOfDay.hour <= 24) {
+      return greetings[1];
+    } else {
+      return greetings[2];
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      greeting(),
+      style: Style.largeTitle(context),
+    );
+  }
+}
+
+/// Username widget displays the name of user
+/// ontap it goes into editable mode. See [UsernameEdit]
+class Username extends StatelessWidget {
+  final Function onTap;
+  final User user = GlobalSettingController.getuser();
+
+  Username({this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () => this.onTap(false),
+      child: Align(
+        alignment: Alignment.topLeft,
+        child: Text(user.name, style: Style.title(context)),
+      ),
+    );
+  }
+}
+
+/// UsernameEdit widget displays TextField to update the username.
+/// See [Username]
+class UsernameEdit extends StatefulWidget {
+  final Function onTap;
+
+  UsernameEdit({this.onTap});
+
+  @override
+  _UsernameEditState createState() => _UsernameEditState();
+}
+
+class _UsernameEditState extends State<UsernameEdit> {
+  final int maxLength = 20;
+  int remainingCharacters;
+  TextEditingController textController;
+  User user;
+
+  @override
+  void initState() {
+    super.initState();
+    textController = new TextEditingController();
+    user = GlobalSettingController.getuser();
+    textController.text = user.name;
+    textController.addListener(onTextChanged);
+    remainingCharacters = maxLength - textController.text.length;
+  }
+
+  void onTextChanged() {
+    setState(() {
+      remainingCharacters = maxLength - textController.text.length;
+      user.name = textController.text;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Expanded(
+          flex: 11,
+          child: c.CupertinoTextField(
+            maxLength: maxLength,
+            controller: textController,
+            keyboardType: TextInputType.text,
+            padding: EdgeInsets.all(16),
+            style: Style.bodySecondary(context),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10.0),
+              color: c.CupertinoDynamicColor.resolve(
+                  c.CupertinoColors.quaternarySystemFill, context),
+            ),
+          ),
+        ),
+        Spacer(),
+        Container(
+          width: 44,
+          height: 44,
+          child: c.CupertinoButton(
+            padding: EdgeInsets.all(10),
+            color: c.CupertinoDynamicColor.resolve(
+                c.CupertinoColors.systemOrange, context),
+            child: Icon(c.CupertinoIcons.checkmark_alt,
+                color: c.CupertinoColors.white),
+            onPressed: () {
+              if (isNullOrEmpty(textController.text)) {
+                AlertDialog dialog = AlertDialog(
+                    title: "Username can't be empty",
+                    content: "Please enter your username");
+                c.showCupertinoDialog(
+                    context: context,
+                    builder: (BuildContext context) => dialog);
+              } else {
+                GlobalSettingController.setUser(user);
+                this.widget.onTap(true);
+              }
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+/// Stats widget display User's activity stats like:
+/// - Points (Total number of activites)
+/// - Streak (Latest consecutive activity count)
 class Stats extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -116,26 +288,6 @@ class Stats extends StatelessWidget {
   }
 }
 
-class PreferanceButton extends StatelessWidget {
-  void onTap(context) {
-    Navigator.of(context).pushNamed('/preferance');
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => onTap(context),
-      child: Icon(
-        c.CupertinoIcons.bars,
-        color: c.CupertinoDynamicColor.resolve(
-          c.CupertinoColors.label,
-          context,
-        ),
-      ),
-    );
-  }
-}
-
 enum AnalyticsOption {
   monthly,
   weekly,
@@ -160,6 +312,7 @@ class SlidingSegment extends StatelessWidget {
   }
 }
 
+/// Analytics widget displays graph of user's last month/week activtiy
 class Analytics extends StatefulWidget {
   @override
   _AnalyticsState createState() => _AnalyticsState();
@@ -178,7 +331,6 @@ class _AnalyticsState extends State<Analytics> {
   Widget build(BuildContext context) {
     return MyContainer(
       margin: c.EdgeInsets.zero,
-      height: 300,
       child: Column(
         children: [
           c.CupertinoSlidingSegmentedControl<AnalyticsOption>(
@@ -189,13 +341,10 @@ class _AnalyticsState extends State<Analytics> {
                 c.CupertinoColors.systemGrey6, context),
           ),
           MyContainer(
-            //TODO: Replace with graph
-            child: Text(
-                _selectedOption == AnalyticsOption.monthly
-                    ? 'monthly'
-                    : 'weekly',
-                style: Style.body(context)),
-          ),
+              //TODO: Replace with graph
+              child: _selectedOption == AnalyticsOption.monthly
+                  ? PieChartWidget("monthly")
+                  : PieChartWidget("weekly")),
         ],
       ),
     );

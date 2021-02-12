@@ -18,7 +18,7 @@ class ActivityPage extends StatelessWidget {
   final Activity activity;
 
   void onEdit(BuildContext context) async {
-    await Navigator.of(context).popAndPushNamed("/edit", arguments: activity);
+    await Navigator.of(context).popAndPushNamed("edit", arguments: activity);
   }
 
   @override

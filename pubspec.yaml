@@ -43,6 +43,9 @@ dependencies:
   fluttertoast: ^7.1.6
   # Blur Hash Functions for Network Images
   flutter_blurhash: ^0.5.0
+  # Chart
+  fl_chart: ^0.12.2
+
 
 dev_dependencies:
   flutter_test:
