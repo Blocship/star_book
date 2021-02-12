@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart' as c;
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:star_book/controllers/global_setting.dart';
+import 'package:star_book/services/notification_service.dart';
 
 // Files
 import '../styles/style.dart';
@@ -16,6 +19,7 @@ class TimePickerSheet extends StatefulWidget {
 }
 
 class _TimePickerSheetState extends State<TimePickerSheet> {
+  NotificationService _notificationService;
   c.TextEditingController timeController = new c.TextEditingController();
   DateTime _time;
 
@@ -23,6 +27,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
   void initState() {
     super.initState();
     timeController.text;
+    _notificationService = NotificationService();
   }
 
   @override
@@ -43,6 +48,13 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
           context,
         ),
         navigationBar: c.CupertinoNavigationBar(
+          leading: c.GestureDetector(
+            child: Icon(Icons.arrow_back_ios),
+
+            /// Passing the selected [_time] back to the
+            /// preference sheet via [Navigator.pop]
+            onTap: () => Navigator.pop(context, _time),
+          ),
           backgroundColor: c.CupertinoDynamicColor.resolve(
               c.CupertinoColors.systemGrey6, context),
           middle: Text("Time"),
@@ -86,6 +98,11 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
                         _time = time;
                         timeController.text = '${_time.hour}:${_time.minute}';
                       });
+                      GlobalSettingController.setReminderTime(time);
+                      _notificationService.scheduleDailyNotification(
+                        hour: time.hour,
+                        minutes: time.minute,
+                      );
                     },
                     use24hFormat: true,
                     mode: c.CupertinoDatePickerMode.time,
