@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/material.dart' as m;
 import 'package:flutter/widgets.dart';
-import 'package:star_book/widgets/pie_chart.dart';
 
 //Files
 import './preferance_sheet.dart';
@@ -9,9 +8,11 @@ import '../controllers/activity.dart';
 import '../controllers/global_setting.dart';
 import '../models/global_setting.dart';
 import '../styles/style.dart';
+import '../utils/brightness.dart';
 import '../utils/string.dart';
 import '../widgets/dialog.dart';
 import '../widgets/my_container.dart';
+import '../widgets/pie_chart.dart';
 
 /// Profile Page displays user details
 /// Such as
@@ -49,6 +50,7 @@ class _ProfilePageState extends State<ProfilePage> {
       navigationBar: c.CupertinoNavigationBar(
         //to remove the back button that comes with the navigation bar
         automaticallyImplyLeading: false,
+        brightness: brightness,
         backgroundColor: Color(0x00000000),
         trailing: PreferanceButton(),
         border: null,

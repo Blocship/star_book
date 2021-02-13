@@ -1,9 +1,10 @@
-import 'package:flutter/widgets.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart' as c;
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 // Files
 import './profile_page.dart';
+import '../utils/brightness.dart';
 import '../utils/date.dart';
 import '../widgets/background_images.dart';
 import '../widgets/month.dart';
@@ -126,6 +127,7 @@ class _HomePageState extends State<HomePage> {
           backgroundColor: Color(0x00000000),
           navigationBar: c.CupertinoNavigationBar(
             heroTag: 'HomePage',
+            brightness: brightness,
             transitionBetweenRoutes: false,
             backgroundColor: Color(0x00000000),
             trailing: YearButton(),
