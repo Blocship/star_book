@@ -88,13 +88,13 @@ class ActivityController {
   }
 
   /// moodID , occurance
-  static Map<int, int> getMonthGraph(int year, int month) {
+  static Map<int, double> getMonthGraph(int year, int month) {
     int totalDays = getDaysInMonth(year, month);
     Map<String, Activity> activityMap = readRange(
       DateTime(year, month, 1),
       DateTime(year, month, totalDays),
     );
-    Map<int, int> moodFrequency = Map<int, int>();
+    Map<int, double> moodFrequency = Map<int, double>();
     activityMap.forEach((key, value) {
       moodFrequency[value.moodId] = moodFrequency.containsKey(value.moodId)
           ? moodFrequency[value.moodId] + 1
