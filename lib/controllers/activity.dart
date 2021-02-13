@@ -109,7 +109,16 @@ class ActivityController {
 
   /// Latest consecutive activty count
   static int streak() {
-    // TODO: write streak algo
-    return 6;
+    // TODO: Improve the time complexity. we can use database for that.
+    DateTime date = DateTime.now();
+    int streakCount = 0;
+    Activity activity = readAt(date.day, date.month, date.year);
+    if (activity.moodId == null) return streakCount;
+    while (activity.moodId != null) {
+      streakCount++;
+      date = date.subtract(Duration(days: 1));
+      activity = readAt(date.day, date.month, date.year);
+    }
+    return streakCount;
   }
 }
