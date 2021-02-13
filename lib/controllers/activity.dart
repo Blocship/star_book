@@ -87,17 +87,20 @@ class ActivityController {
     }
   }
 
-  static Map<String, double> getMonthGraph(int year, int month) {
+  /// moodID , occurance
+  static Map<int, int> getMonthGraph(int year, int month) {
     int totalDays = getDaysInMonth(year, month);
-    return {
-      'Happy': 6,
-      'Sad': 6,
-      'Productive': 6,
-      'Sick': 6,
-      'Normal': 3,
-      'Angry': 1,
-      'empty': 0,
-    };
+    Map<String, Activity> activityMap = readRange(
+      DateTime(year, month, 1),
+      DateTime(year, month, totalDays),
+    );
+    Map<int, int> moodFrequency = Map<int, int>();
+    activityMap.forEach((key, value) {
+      moodFrequency[value.moodId] = moodFrequency.containsKey(value.moodId)
+          ? moodFrequency[value.moodId] + 1
+          : 1;
+    });
+    return moodFrequency;
   }
 
   static void getWeekGraph() {}
