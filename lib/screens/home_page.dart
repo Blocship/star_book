@@ -2,12 +2,15 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
+
 // Files
 import './profile_page.dart';
 import '../utils/brightness.dart';
 import '../utils/date.dart';
 import '../widgets/background_images.dart';
 import '../widgets/month.dart';
+import '../controllers/activity.dart';
+import '../models/activity.dart';
 
 enum BottomTabOption {
   home,
@@ -149,6 +152,11 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
         ),
+        Positioned(
+          top:c.MediaQuery.of(context).size.height*0.75,
+          right: c.MediaQuery.of(context).size.width*0.1,
+          child: FloatingButton()
+        )
       ],
     );
   }
@@ -173,4 +181,29 @@ class YearButton extends StatelessWidget {
       ),
     );
   }
+}
+//custom floating action button for Home Page since CupertinoPageScaffold doesnot have a floatingActionButton property
+class FloatingButton extends StatelessWidget{
+  Activity _getActivity() {
+    DateTime now=DateTime.now();
+    return ActivityController.readAt(now.day, now.month, now.year);
+  }
+  void _onButtonPress(BuildContext context){
+    Activity activity=_getActivity();
+    if (activity.moodId == null) {
+      Navigator.of(context).pushNamed("edit", arguments: activity);
+    } else {
+      Navigator.of(context).pushNamed('activity', arguments: activity);
+    }
+  }
+  @override
+  Widget build(BuildContext context) {
+
+    return c.CupertinoButton(
+        padding: EdgeInsets.all(15.0),
+        color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.systemOrange, context),
+        child:Icon(c.CupertinoIcons.pencil_circle,color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.white, context),size: 28.0,),
+        onPressed:()=> _onButtonPress(context));
+  }
+
 }
