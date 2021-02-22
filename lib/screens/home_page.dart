@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-
 // Files
 import './profile_page.dart';
 import '../utils/brightness.dart';
@@ -84,6 +83,7 @@ class _HomePageState extends State<HomePage> {
   int year;
   int index = 0;
   bool _loading = false;
+
   // TODO: fetch data from database based.
   // using mock data for now
   // final List<Mood> moodList = new List<Mood>.from(mMoodList);
@@ -138,27 +138,46 @@ class _HomePageState extends State<HomePage> {
             automaticallyImplyLeading: false,
           ),
           child: SafeArea(
-            child: Container(
-              child: c.GestureDetector(
-                onHorizontalDragEnd: onHorizontalDragEnd,
-                child: Container(
-                  padding: c.EdgeInsets.symmetric(horizontal: 12),
-                  child: Month(
-                    month: month,
-                    year: year,
+            child: Scaffold(
+                backgroundColor: Color(0x00000000),
+                body: Container(
+                  child: c.GestureDetector(
+                    onHorizontalDragEnd: onHorizontalDragEnd,
+                    child: Container(
+                      padding: c.EdgeInsets.symmetric(horizontal: 12),
+                      child: Month(
+                        month: month,
+                        year: year,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+                floatingActionButton: FloatingActionButton(
+                    shape: c.RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
+                    backgroundColor: c.CupertinoDynamicColor.resolve(c.CupertinoColors.systemOrange, context),
+                    child: Icon(
+                      c.CupertinoIcons.pencil_circle,
+                      color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.white, context),
+                      size: 28.0,
+                    ),
+                    onPressed: () => onPress(context)
+                )
             ),
           ),
         ),
-        Positioned(
-          top:c.MediaQuery.of(context).size.height*0.75,
-          right: c.MediaQuery.of(context).size.width*0.1,
-          child: FloatingButton()
-        )
       ],
     );
+  }
+
+  void onPress(BuildContext context) {
+    DateTime now = DateTime.now();
+    Activity activity = ActivityController.readAt(now.day, now.month, now.year);
+    ;
+    if (activity.moodId == null) {
+      Navigator.of(context).pushNamed("edit", arguments: activity);
+    } else {
+      Navigator.of(context).pushNamed('activity', arguments: activity);
+    }
   }
 }
 
@@ -182,28 +201,4 @@ class YearButton extends StatelessWidget {
     );
   }
 }
-//custom floating action button for Home Page since CupertinoPageScaffold doesnot have a floatingActionButton property
-class FloatingButton extends StatelessWidget{
-  Activity _getActivity() {
-    DateTime now=DateTime.now();
-    return ActivityController.readAt(now.day, now.month, now.year);
-  }
-  void _onButtonPress(BuildContext context){
-    Activity activity=_getActivity();
-    if (activity.moodId == null) {
-      Navigator.of(context).pushNamed("edit", arguments: activity);
-    } else {
-      Navigator.of(context).pushNamed('activity', arguments: activity);
-    }
-  }
-  @override
-  Widget build(BuildContext context) {
 
-    return c.CupertinoButton(
-        padding: EdgeInsets.all(15.0),
-        color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.systemOrange, context),
-        child:Icon(c.CupertinoIcons.pencil_circle,color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.white, context),size: 28.0,),
-        onPressed:()=> _onButtonPress(context));
-  }
-
-}
