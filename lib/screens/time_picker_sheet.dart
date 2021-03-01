@@ -19,7 +19,6 @@ class TimePickerSheet extends StatefulWidget {
 }
 
 class _TimePickerSheetState extends State<TimePickerSheet> {
-  NotificationService _notificationService;
   c.TextEditingController timeController = new c.TextEditingController();
   DateTime _time;
 
@@ -27,7 +26,6 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
   void initState() {
     super.initState();
     timeController.text;
-    _notificationService = NotificationService();
   }
 
   @override
@@ -99,7 +97,7 @@ class _TimePickerSheetState extends State<TimePickerSheet> {
                         timeController.text = '${_time.hour}:${_time.minute}';
                       });
                       GlobalSettingController.setReminderTime(time);
-                      _notificationService.scheduleDailyNotification(
+                      NotificationService().scheduleDailyNotification(
                         hour: time.hour,
                         minutes: time.minute,
                       );

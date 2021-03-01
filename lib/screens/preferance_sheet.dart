@@ -137,7 +137,7 @@ class PreferenceSheetState extends State<PreferanceSheet> {
                 //   ),
                 // );
                 if (Platform.isIOS) {
-                  NotificationService().iosNotificationPermission();
+                  await NotificationService().iosNotificationPermission();
                 }
                 DateTime _selectedTime = await c.showCupertinoModalPopup(
                     context: context,
