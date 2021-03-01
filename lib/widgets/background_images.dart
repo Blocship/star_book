@@ -6,7 +6,7 @@ import 'package:star_book/api/errors_toast.dart';
 
 // Files
 import '../models/unsplash_photo.dart';
-import '../api/unsplash_api_service.dart';
+import '../services/unsplash_api_service.dart';
 import '../utils/brightness.dart';
 
 class BackgroundImage extends StatefulWidget {

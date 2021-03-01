@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 /// Function to show a toast describing the internal error
+@deprecated
 void displayErrorDescription(String errorMsg, FToast errToast) {
   if (errorMsg == null) return;
   Widget toast = Container(
