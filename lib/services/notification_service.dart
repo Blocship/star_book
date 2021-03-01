@@ -4,34 +4,33 @@ import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest_all.dart' as tz;
 
 class NotificationService {
-  FlutterLocalNotificationsPlugin localNotifications =
-      FlutterLocalNotificationsPlugin();
+  static final NotificationService _instance = NotificationService._internal();
 
-  Future<void> notificationInitialization() async {
-    tz.initializeTimeZones();
-    tz.setLocalLocation(tz.getLocation(await currentTimeZone()));
-    FlutterLocalNotificationsPlugin localNotifications =
-        FlutterLocalNotificationsPlugin();
-    const AndroidInitializationSettings initializationSettingsAndroid =
-        AndroidInitializationSettings(
-      'app_icon',
-    );
-    final IOSInitializationSettings initializationSettingsIOS =
-        IOSInitializationSettings(
-      requestAlertPermission: true,
-      requestBadgePermission: true,
-      requestSoundPermission: true,
-    );
-    final InitializationSettings initializationSettings =
-        InitializationSettings(
-      android: initializationSettingsAndroid,
-      iOS: initializationSettingsIOS,
-    );
-    //TODO: Passing a function to onSelectNotification which fires up when a notification
-    //is tapped, navigating the user to other page or doing something else
-    await localNotifications.initialize(initializationSettings);
+  factory NotificationService() => _instance;
+
+  NotificationService._internal() {
+    initialize();
   }
 
+  static final FlutterLocalNotificationsPlugin _notification =
+      FlutterLocalNotificationsPlugin();
+
+  Future<void> initialize() async {
+    tz.initializeTimeZones();
+    tz.setLocalLocation(tz.getLocation(await currentTimeZone()));
+
+    const InitializationSettings initSettings = InitializationSettings(
+      android: const AndroidInitializationSettings('app_icon'),
+      iOS: const IOSInitializationSettings(),
+    );
+
+    //TODO: Passing a function to onSelectNotification
+    // which fires up when a notification
+    // is tapped, navigating the user to other page or doing something else
+    await _notification.initialize(initSettings);
+  }
+
+  /// Returns local timezone
   Future<String> currentTimeZone() async {
     return await FlutterNativeTimezone.getLocalTimezone();
   }
@@ -39,7 +38,7 @@ class NotificationService {
   /// Requesting permission to show notifications
   /// on [iOS]
   Future<bool> iosNotificationPermission() async {
-    return await localNotifications
+    return await _notification
         .resolvePlatformSpecificImplementation<
             IOSFlutterLocalNotificationsPlugin>()
         ?.requestPermissions(
@@ -53,7 +52,7 @@ class NotificationService {
   /// TODO: Providing descriptive and meaningful name
   /// and description for the notification
   Future<void> scheduleDailyNotification({int hour, int minutes}) async {
-    await localNotifications.zonedSchedule(
+    await _notification.zonedSchedule(
       1,
       'daily scheduled notification title',
       'daily scheduled notification body',
@@ -65,11 +64,11 @@ class NotificationService {
           'daily notification description',
         ),
         iOS: IOSNotificationDetails(
-          presentAlert: true,
-          presentBadge: true,
-          presentSound: true,
-          subtitle: 'notification subtitle',
-        ),
+            presentAlert: true,
+            presentBadge: true,
+            presentSound: true,
+            subtitle: 'notification subtitle',
+            threadIdentifier: '1'),
       ),
       androidAllowWhileIdle: true,
       uiLocalNotificationDateInterpretation:
