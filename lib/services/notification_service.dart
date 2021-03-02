@@ -48,9 +48,7 @@ class NotificationService {
         );
   }
 
-  /// SCheduling a notification to show everyday at a specifice time
-  /// TODO: Providing descriptive and meaningful name
-  /// and description for the notification
+  /// Scheduling a notification to show everyday at a specifice time
   Future<void> scheduleDailyNotification({int hour, int minutes}) async {
     await _notification.zonedSchedule(
       1,

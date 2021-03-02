@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
   int month;
   int year;
   int index = 0;
-  bool _loading = false;
+  // bool _loading = false;
   // TODO: fetch data from database based.
   // using mock data for now
   // final List<Mood> moodList = new List<Mood>.from(mMoodList);

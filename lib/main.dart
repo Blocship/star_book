@@ -15,12 +15,10 @@ import './models/mood.dart';
 import './routes/route_generator.dart';
 import './utils/brightness.dart';
 import './utils/string.dart';
-import 'services/notification_service.dart';
 
 /// Starting point of the application.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await NotificationService.initialize();
   // This method is not applicable on iPad when multitasking is enabled.
   await SystemChrome.setPreferredOrientations([
     // Locks the device orientation in PortraitUp only.

@@ -343,7 +343,6 @@ class _AnalyticsState extends State<Analytics> {
                 c.CupertinoColors.systemGrey6, context),
           ),
           MyContainer(
-              //TODO: Replace with graph
               child: _selectedOption == AnalyticsOption.monthly
                   ? PieChartWidget("monthly")
                   : PieChartWidget("weekly")),

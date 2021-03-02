@@ -28,6 +28,7 @@ void displayErrorDescription(String errorMsg, FToast errToast) {
 }
 
 // Function to handle error and exceptions and displaying them to users
+// TODO: replace with logger.
 void handleErrors(_error, FToast errToast) {
   if (_error.runtimeType == OSError || _error.runtimeType == SocketException) {
     print("OSError/Socket Exception: + ${_error.message}}\n"
