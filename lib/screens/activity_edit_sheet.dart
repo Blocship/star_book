@@ -6,8 +6,8 @@ import '../controllers/activity.dart';
 import '../models/activity.dart';
 import '../routes/route_generator.dart';
 import '../styles/style.dart';
-import '../utils/activity.dart';
 import '../utils/color.dart';
+import '../utils/enums.dart';
 import '../widgets/color_container.dart';
 import '../widgets/my_container.dart';
 

@@ -6,12 +6,14 @@ import 'package:star_book/services/notification_service.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // Files
-import '../models/global_setting.dart';
-import '../screens/time_picker_sheet.dart';
-import '../styles/style.dart';
-import '../widgets/action_container.dart';
-import '../widgets/my_container.dart';
-import '../controllers/global_setting.dart';
+import '../../models/global_setting.dart';
+import '../time_picker_sheet.dart';
+import '../../styles/style.dart';
+import '../../widgets/action_container.dart';
+import '../../widgets/my_container.dart';
+import '../../controllers/global_setting.dart';
+
+part 'about_developer.dart';
 
 Map<BrightnessOption, Widget> options = {
   BrightnessOption.auto: SlidingSegment(c.CupertinoIcons.circle_lefthalf_fill),
@@ -35,14 +37,14 @@ class SlidingSegment extends StatelessWidget {
   }
 }
 
-/// Preferance Sheet Screen widget displays the
+/// Preference Sheet Screen widget displays the
 /// settings option, Privacy Policy, LICENCE, Terms and Conditions etc.
-class PreferanceSheet extends StatefulWidget {
+class PreferenceSheet extends StatefulWidget {
   @override
   PreferenceSheetState createState() => PreferenceSheetState();
 }
 
-class PreferenceSheetState extends State<PreferanceSheet> {
+class PreferenceSheetState extends State<PreferenceSheet> {
   BrightnessOption _selectedOption =
       GlobalSettingController.getBrightnessOption();
   DateTime _reminderTime;
@@ -193,49 +195,5 @@ class PreferenceSheetState extends State<PreferanceSheet> {
       GlobalSettingController.setbrightnessOption(_selectedOption);
       print(GlobalSettingController.getBrightnessOption().toString());
     });
-  }
-}
-
-class AboutDeveloper extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    double _textWidth = MediaQuery.of(context).size.width * 0.6 - 29;
-    double _imageWidth = MediaQuery.of(context).size.width * 0.4 - 29;
-    return Column(
-      crossAxisAlignment: c.CrossAxisAlignment.start,
-      children: [
-        Container(
-          padding: EdgeInsets.fromLTRB(29, 17, 0, 8),
-          child: Text(
-            "ABOUT THE DEVELOPER",
-            style: Style.footerNoteSecondary(context),
-          ),
-        ),
-        MyContainer(
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                width: _textWidth,
-                child: Text(
-                  "I'm Hashir, the developer of this app. Feel free to contact me anytime. I love hearing from you",
-                  style: Style.body(context),
-                ),
-              ),
-              Container(
-                width: _imageWidth,
-                height: _imageWidth,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(_imageWidth / 2),
-                  image: DecorationImage(
-                    image: AssetImage("dev-profile.jpeg"),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
   }
 }

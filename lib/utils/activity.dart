@@ -1,4 +1,0 @@
-enum ActivityType {
-  add,
-  edit,
-}

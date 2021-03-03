@@ -8,7 +8,7 @@ import '../screens/date_picker_sheet.dart';
 import '../screens/error_page.dart';
 import '../screens/home_page.dart';
 import '../screens/mood_sheet.dart';
-import '../screens/preferance_sheet.dart';
+import '../screens/preference_sheet.dart/preference_sheet.dart';
 import '../screens/time_picker_sheet.dart';
 import '../screens/username_add_sheet.dart';
 import '../screens/year_page.dart';
@@ -45,7 +45,7 @@ class RouteGenerator {
         );
       case 'preferance':
         return CupertinoModalBottomSheetRouteWrapper(
-          builder: (context, controller) => PreferanceSheet(),
+          builder: (context, controller) => PreferenceSheet(),
         );
       case 'edit':
         return CupertinoModalBottomSheetRouteWrapper(

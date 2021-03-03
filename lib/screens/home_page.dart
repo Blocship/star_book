@@ -3,16 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 // Files
-import './profile_page.dart';
+import './profile_page/profile_page.dart';
 import '../utils/brightness.dart';
 import '../utils/date.dart';
+import '../utils/enums.dart';
 import '../widgets/background_images.dart';
 import '../widgets/month.dart';
-
-enum BottomTabOption {
-  home,
-  profile,
-}
 
 class Home extends StatefulWidget {
   @override
