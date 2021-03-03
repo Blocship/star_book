@@ -103,6 +103,33 @@ class ActivityController {
     return moodFrequency;
   }
 
+  /// moodID , occurance
+  static Map<int, double> getLastMonthGraph() {
+    DateTime currentDate = DateTime.now();
+    int lastYear = getPreviousYear(currentDate.month, currentDate.year);
+    int lastMonth = getPreviousMonth(currentDate.month, currentDate.year);
+
+    return getMonthGraph(lastYear, lastMonth);
+  }
+
+  /// moodID , occurance
+  static Map<int, double> get30DayGraph() {
+    DateTime currentDate = DateTime.now();
+    DateTime back30day = DateTime(
+      getPreviousYear(currentDate.month, currentDate.year),
+      getPreviousMonth(currentDate.month, currentDate.year),
+      currentDate.day,
+    );
+    Map<String, Activity> activityMap = readRange(back30day, currentDate);
+    Map<int, double> moodFrequency = Map<int, double>();
+    activityMap.forEach((key, value) {
+      moodFrequency[value.moodId] = moodFrequency.containsKey(value.moodId)
+          ? moodFrequency[value.moodId] + 1
+          : 1;
+    });
+    return moodFrequency;
+  }
+
   static void getWeekGraph() {}
 
   /// Points is the total number of entries([Activity]s) in diary.

@@ -19,17 +19,26 @@ class _PieChartWidgetState extends State<PieChartWidget> {
           borderData: FlBorderData(show: false),
           sectionsSpace: 0,
           centerSpaceRadius: 0,
-          sections: (widget.type == AnalyticsOption.monthly)
-              ? monthlySections()
-              : weeklySections(),
+          sections: sections,
         ),
       ),
     );
   }
 
-  List<PieChartSectionData> monthlySections() {
+  List<PieChartSectionData> get sections {
+    switch (widget.type) {
+      case AnalyticsOption.lastMonth:
+        return lastMonthSections;
+      case AnalyticsOption.days30:
+        return day30Sections;
+      default:
+        return [];
+    }
+  }
+
+  List<PieChartSectionData> get lastMonthSections {
     List<PieChartSectionData> chart = [];
-    ActivityController.getMonthGraph(2021, 1).forEach(
+    ActivityController.getLastMonthGraph().forEach(
       (key, value) {
         chart.add(
           PieChartSectionData(
@@ -47,6 +56,27 @@ class _PieChartWidgetState extends State<PieChartWidget> {
     return chart;
   }
 
+  List<PieChartSectionData> get day30Sections {
+    List<PieChartSectionData> chart = [];
+    ActivityController.get30DayGraph().forEach(
+      (key, value) {
+        chart.add(
+          PieChartSectionData(
+            color: getColor(MoodColor.values[mMoodList[key].colorCode]),
+            value: value,
+            title: '${mMoodList[key].label}',
+            radius: 150,
+            titleStyle: Style.body(context).copyWith(
+              color: CupertinoColors.white,
+            ),
+          ),
+        );
+      },
+    );
+    return chart;
+  }
+
+  @deprecated
   List<PieChartSectionData> weeklySections() {
     List<PieChartSectionData> chart = [];
     chart.add(

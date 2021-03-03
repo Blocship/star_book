@@ -1,5 +1,11 @@
 enum AnalyticsOption {
-  monthly,
+  thisWeek,
+  lastWeek,
+  days30,
+  allTime,
+  @deprecated
+  lastMonth,
+  @deprecated
   weekly,
 }
 enum BottomTabOption {

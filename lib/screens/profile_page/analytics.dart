@@ -1,8 +1,8 @@
 part of 'profile_page.dart';
 
 Map<AnalyticsOption, Widget> options = {
-  AnalyticsOption.monthly: SlidingSegment('monthly'),
-  AnalyticsOption.weekly: SlidingSegment('weekly'),
+  AnalyticsOption.lastMonth: SlidingSegment('last month'),
+  AnalyticsOption.days30: SlidingSegment('30 days'),
 };
 
 class SlidingSegment extends StatelessWidget {
@@ -30,7 +30,7 @@ class _AnalyticsState extends State<Analytics> {
 
   @override
   void initState() {
-    _selectedOption = AnalyticsOption.monthly;
+    _selectedOption = AnalyticsOption.lastMonth;
     super.initState();
   }
 
