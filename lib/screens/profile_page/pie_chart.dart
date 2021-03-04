@@ -2,8 +2,10 @@ part of 'profile_page.dart';
 
 class PieChartWidget extends StatefulWidget {
   final AnalyticsOption type;
+  final DateTime from;
+  final DateTime to;
 
-  PieChartWidget({this.type});
+  PieChartWidget({this.type, this.from, this.to});
 
   @override
   _PieChartWidgetState createState() => _PieChartWidgetState();
@@ -26,19 +28,8 @@ class _PieChartWidgetState extends State<PieChartWidget> {
   }
 
   List<PieChartSectionData> get sections {
-    switch (widget.type) {
-      case AnalyticsOption.lastMonth:
-        return lastMonthSections;
-      case AnalyticsOption.days30:
-        return day30Sections;
-      default:
-        return [];
-    }
-  }
-
-  List<PieChartSectionData> get lastMonthSections {
     List<PieChartSectionData> chart = [];
-    ActivityController.getLastMonthGraph().forEach(
+    ActivityController.moodFrequency(widget.from, widget.to).forEach(
       (key, value) {
         chart.add(
           PieChartSectionData(
@@ -53,45 +44,27 @@ class _PieChartWidgetState extends State<PieChartWidget> {
         );
       },
     );
-    return chart;
-  }
-
-  List<PieChartSectionData> get day30Sections {
-    List<PieChartSectionData> chart = [];
-    ActivityController.get30DayGraph().forEach(
-      (key, value) {
-        chart.add(
-          PieChartSectionData(
-            color: getColor(MoodColor.values[mMoodList[key].colorCode]),
-            value: value,
-            title: '${mMoodList[key].label}',
-            radius: 150,
-            titleStyle: Style.body(context).copyWith(
-              color: CupertinoColors.white,
+    int totalDays = widget.to.difference(widget.from).inDays + 1;
+    int emptyDays =
+        totalDays - ActivityController.rangeLength(widget.from, widget.to);
+    if (chart.length == 0)
+      chart.add(
+        PieChartSectionData(
+          color: c.CupertinoDynamicColor.resolve(
+            c.CupertinoColors.systemGrey6,
+            context,
+          ),
+          value: emptyDays.toDouble(),
+          title: 'No Data..',
+          radius: 150,
+          titleStyle: Style.body(context).copyWith(
+            color: c.CupertinoDynamicColor.resolve(
+              c.CupertinoColors.secondaryLabel,
+              context,
             ),
           ),
-        );
-      },
-    );
-    return chart;
-  }
-
-  @deprecated
-  List<PieChartSectionData> weeklySections() {
-    List<PieChartSectionData> chart = [];
-    chart.add(
-      PieChartSectionData(
-        color: c.CupertinoDynamicColor.resolve(
-          c.CupertinoColors.secondarySystemBackground,
-          context,
         ),
-        value: 100,
-        title: 'Coming Soon..',
-        radius: 150,
-        titleStyle: Style.body(context),
-      ),
-    );
-
+      );
     return chart;
   }
 }

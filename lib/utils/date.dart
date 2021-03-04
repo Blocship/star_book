@@ -75,3 +75,8 @@ const List<String> _monthList = const <String>[
 String getMonthTitle(int month) {
   return _monthList[month - 1];
 }
+
+String getDateFormat(DateTime date) {
+  String month = getMonthTitle(date.month).substring(0, 3);
+  return '$month ${date.day}, ${date.year}';
+}

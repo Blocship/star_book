@@ -8,6 +8,7 @@ class MyContainer extends StatelessWidget {
     this.onTap,
     this.margin,
     this.padding,
+    this.boxDecoration,
     this.width,
     this.height,
   });
@@ -16,6 +17,7 @@ class MyContainer extends StatelessWidget {
   final Function onTap;
   final EdgeInsets margin;
   final EdgeInsetsGeometry padding;
+  final BoxDecoration boxDecoration;
   final double width;
   final double height;
 
@@ -27,15 +29,16 @@ class MyContainer extends StatelessWidget {
       child: Container(
         width: width,
         height: height,
-        margin: margin ?? EdgeInsets.fromLTRB(16, 0, 16, 0),
-        padding: padding ?? EdgeInsets.fromLTRB(13, 15, 13, 12),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
-          color: c.CupertinoDynamicColor.resolve(
-            c.CupertinoColors.tertiarySystemBackground,
-            context,
-          ),
-        ),
+        margin: margin ?? const EdgeInsets.fromLTRB(16, 0, 16, 0),
+        padding: padding ?? const EdgeInsets.fromLTRB(13, 15, 13, 12),
+        decoration: boxDecoration ??
+            BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: c.CupertinoDynamicColor.resolve(
+                c.CupertinoColors.tertiarySystemBackground,
+                context,
+              ),
+            ),
         child: child,
       ),
     );

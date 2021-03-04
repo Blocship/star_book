@@ -58,6 +58,10 @@ class ActivityController {
     );
   }
 
+  static int rangeLength(DateTime start, DateTime end) {
+    return readRange(start, end).length;
+  }
+
   /// Updates the [Activity] w.r.t to the date from the, `Hive box`
   ///
   /// If you think it as relational database,
@@ -87,7 +91,18 @@ class ActivityController {
     }
   }
 
+  static Map<int, double> moodFrequency(DateTime start, DateTime end) {
+    Map<int, double> moodFrequency = Map<int, double>();
+    readRange(start, end).forEach((key, value) {
+      moodFrequency[value.moodId] = moodFrequency.containsKey(value.moodId)
+          ? moodFrequency[value.moodId] + 1
+          : 1;
+    });
+    return moodFrequency;
+  }
+
   /// moodID , occurance
+  @deprecated
   static Map<int, double> getMonthGraph(int year, int month) {
     int totalDays = getDaysInMonth(year, month);
     Map<String, Activity> activityMap = readRange(
@@ -104,6 +119,7 @@ class ActivityController {
   }
 
   /// moodID , occurance
+  @deprecated
   static Map<int, double> getLastMonthGraph() {
     DateTime currentDate = DateTime.now();
     int lastYear = getPreviousYear(currentDate.month, currentDate.year);
@@ -113,6 +129,7 @@ class ActivityController {
   }
 
   /// moodID , occurance
+  @deprecated
   static Map<int, double> get30DayGraph() {
     DateTime currentDate = DateTime.now();
     DateTime back30day = DateTime(
@@ -130,6 +147,7 @@ class ActivityController {
     return moodFrequency;
   }
 
+  @deprecated
   static void getWeekGraph() {}
 
   /// Points is the total number of entries([Activity]s) in diary.
