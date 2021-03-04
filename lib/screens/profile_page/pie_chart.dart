@@ -1,11 +1,10 @@
 part of 'profile_page.dart';
 
 class PieChartWidget extends StatefulWidget {
-  final AnalyticsOption type;
   final DateTime from;
   final DateTime to;
 
-  PieChartWidget({this.type, this.from, this.to});
+  PieChartWidget({this.from, this.to});
 
   @override
   _PieChartWidgetState createState() => _PieChartWidgetState();

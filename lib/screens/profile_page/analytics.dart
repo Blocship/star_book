@@ -52,7 +52,7 @@ class _AnalyticsState extends State<Analytics> {
             ),
           ),
           MyContainer(
-            child: PieChartWidget(type: selectedOption, from: from, to: to),
+            child: PieChartWidget(from: from, to: to),
           ),
         ],
       ),
