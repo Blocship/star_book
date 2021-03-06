@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_native_timezone/flutter_native_timezone.dart';
+import 'package:star_book/utils/constant.dart';
 import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest_all.dart' as tz;
 
@@ -11,14 +14,10 @@ class NotificationService {
   NotificationService._internal() {
     initialize();
   }
-  List<String> notificationMessages = [
-    'You only fail if you quit! Don\'t forget to input your mood. 😁',
-    'Let\'s recognise emotional patterns in your life. 😊',
-    'Don\'t forget to enter your mood. ⏰',
-    '✨ StarBook is waiting for you! hop in, log your mood.',
-    'Did you forget to eat your lunch? No! then dont\'t forget to enter your mood.',
-    'Hey! you haven\'t entered your mood today. Do it now! 😃'
-  ];
+
+  String get notificationMessage {
+    return notificationMessages[Random().nextInt(notificationMessages.length)];
+  }
 
   static final FlutterLocalNotificationsPlugin _notification =
       FlutterLocalNotificationsPlugin();
@@ -61,7 +60,7 @@ class NotificationService {
     await _notification.zonedSchedule(
       1,
       'Reminder',
-      'daily scheduled notification body',
+      notificationMessage,
       _nextInstanceOfSelectedTime(hour, minutes),
       const NotificationDetails(
         android: AndroidNotificationDetails(
@@ -73,7 +72,7 @@ class NotificationService {
             presentAlert: true,
             presentBadge: true,
             presentSound: true,
-            subtitle: 'notification subtitle',
+            // subtitle: 'notification subtitle',
             threadIdentifier: '1'),
       ),
       androidAllowWhileIdle: true,
