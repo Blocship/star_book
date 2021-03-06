@@ -57,6 +57,7 @@ dev_dependencies:
     sdk: flutter
   build_runner: ^1.10.3
   # App's launcher icons generator
+  # flutter pub run flutter_launcher_icons:main
   flutter_launcher_icons: ^0.7.0
   # Local database
   hive_generator: ^0.8.1
@@ -81,7 +82,6 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - dev-profile.jpeg
-    - new_bg.jpeg
     - backup-bg-image.JPG
     - icon.png
     - bg_dark.jpg
