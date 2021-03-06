@@ -58,21 +58,25 @@ class _ProfilePageState extends State<ProfilePage> {
       resizeToAvoidBottomInset: true,
       backgroundColor: c.CupertinoDynamicColor.resolve(
           c.CupertinoColors.systemGrey6, context),
-      navigationBar: c.CupertinoNavigationBar(
-        //to remove the back button that comes with the navigation bar
-        automaticallyImplyLeading: false,
-        brightness: brightness,
-        backgroundColor: Color(0x00000000),
-        trailing: PreferenceButton(),
-        border: null,
-      ),
-      child: SingleChildScrollView(
-        child: SafeArea(
-          minimum: EdgeInsets.symmetric(horizontal: 16),
+      // navigationBar: c.CupertinoNavigationBar(
+      //   //to remove the back button that comes with the navigation bar
+      //   automaticallyImplyLeading: false,
+      //   brightness: brightness,
+      //   backgroundColor: Color(0x00000000),
+      //   trailing: PreferenceButton(),
+      //   border: null,
+      // ),
+      child: SafeArea(
+        minimum: EdgeInsets.symmetric(horizontal: 16),
+        child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 16),
+              Container(
+                height: 44,
+                alignment: Alignment.centerRight,
+                child: PreferenceButton(),
+              ),
               Greeting(),
               SizedBox(height: 16),
               AnimatedSwitcher(

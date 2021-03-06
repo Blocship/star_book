@@ -121,27 +121,34 @@ class _HomePageState extends State<HomePage> {
         BackgroundImage(month: month),
         c.CupertinoPageScaffold(
           backgroundColor: Color(0x00000000),
-          navigationBar: c.CupertinoNavigationBar(
-            heroTag: 'HomePage',
-            brightness: brightness,
-            transitionBetweenRoutes: false,
-            backgroundColor: Color(0x00000000),
-            trailing: YearButton(),
-            border: null,
-            automaticallyImplyLeading: false,
-          ),
+          // navigationBar: c.CupertinoNavigationBar(
+          //   heroTag: 'HomePage',
+          //   brightness: brightness,
+          //   transitionBetweenRoutes: false,
+          //   backgroundColor: Color(0x00000000),
+          //   trailing: YearButton(),
+          //   border: null,
+          //   automaticallyImplyLeading: false,
+          // ),
           child: SafeArea(
-            child: Container(
-              child: c.GestureDetector(
-                onHorizontalDragEnd: onHorizontalDragEnd,
-                child: Container(
-                  padding: c.EdgeInsets.symmetric(horizontal: 12),
-                  child: Month(
-                    month: month,
-                    year: year,
+            child: Column(
+              children: [
+                Container(
+                  height: 44,
+                ),
+                Container(
+                  child: c.GestureDetector(
+                    onHorizontalDragEnd: onHorizontalDragEnd,
+                    child: Container(
+                      padding: c.EdgeInsets.symmetric(horizontal: 12),
+                      child: Month(
+                        month: month,
+                        year: year,
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
           ),
         ),

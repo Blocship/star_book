@@ -8,13 +8,20 @@ class PreferenceButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => onTap(context),
-      child: Icon(
-        c.CupertinoIcons.bars,
-        color: c.CupertinoDynamicColor.resolve(
-          c.CupertinoColors.label,
-          context,
+    return c.CupertinoButton(
+      padding: EdgeInsets.zero,
+      onPressed: () => onTap(context),
+      child: Container(
+        height: 44,
+        width: 44,
+        alignment: Alignment.centerRight,
+        child: Icon(
+          c.CupertinoIcons.bars,
+          size: 32,
+          color: c.CupertinoDynamicColor.resolve(
+            c.CupertinoColors.label,
+            context,
+          ),
         ),
       ),
     );
