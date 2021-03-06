@@ -11,6 +11,14 @@ class NotificationService {
   NotificationService._internal() {
     initialize();
   }
+  List<String> notificationMessages = [
+    'You only fail if you quit! Don\'t forget to input your mood. 😁',
+    'Let\'s recognise emotional patterns in your life. 😊',
+    'Don\'t forget to enter your mood. ⏰',
+    '✨ StarBook is waiting for you! hop in, log your mood.',
+    'Did you forget to eat your lunch? No! then dont\'t forget to enter your mood.',
+    'Hey! you haven\'t entered your mood today. Do it now! 😃'
+  ];
 
   static final FlutterLocalNotificationsPlugin _notification =
       FlutterLocalNotificationsPlugin();
@@ -52,7 +60,7 @@ class NotificationService {
   Future<void> scheduleDailyNotification({int hour, int minutes}) async {
     await _notification.zonedSchedule(
       1,
-      'daily scheduled notification title',
+      'Reminder',
       'daily scheduled notification body',
       _nextInstanceOfSelectedTime(hour, minutes),
       const NotificationDetails(
