@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 // Files
@@ -110,6 +111,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    // set the brightness on status bar
+    SystemChrome.setSystemUIOverlayStyle((brightness == Brightness.dark)
+        ? SystemUiOverlayStyle.light
+        : SystemUiOverlayStyle.dark);
+
     return Stack(
       children: [
         Container(
