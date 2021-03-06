@@ -25,7 +25,7 @@ void main() async {
     DeviceOrientation.portraitUp
   ]);
   await hiveInitialize();
-  await ActivityController.initialize();
+  // await ActivityController.initialize();
   await DotEnv().load('.env');
   runApp(MyApp());
 }
