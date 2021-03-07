@@ -12,7 +12,7 @@ const String reminderBoxName = 'reminder';
 const String userBoxName = 'user';
 
 /// Enumeration - To keep check on Brightness Level of Application
-@HiveType(typeId: brightnessTypeId)
+@HiveType(typeId: kBrightnessTypeId)
 enum BrightnessOption {
   @HiveField(0)
   light,
@@ -27,7 +27,7 @@ enum BrightnessOption {
 /// If you think as relational database,
 /// [name]
 /// are table column names
-@HiveType(typeId: userTypeId)
+@HiveType(typeId: kUserTypeId)
 class User extends HiveObject {
   @HiveField(0)
   String name;

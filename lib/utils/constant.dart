@@ -1,10 +1,10 @@
 // Hive Type id constants
-const int activityTypeId = 0;
-const int moodTypeId = 1;
-const int userTypeId = 2;
-const int brightnessTypeId = 3;
+const int kActivityTypeId = 0;
+const int kMoodTypeId = 1;
+const int kUserTypeId = 2;
+const int kBrightnessTypeId = 3;
 
-const List<String> notificationMessages = const [
+const List<String> kNotificationMessages = const [
   'You only fail if you quit! Don\'t forget to input your mood. 😁',
   'Let\'s recognise emotional patterns in your life. 😊',
   'Don\'t forget to enter your mood. ⏰',
