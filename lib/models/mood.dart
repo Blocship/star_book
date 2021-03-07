@@ -18,7 +18,7 @@ const String moodBoxName = 'mood';
 /// [id], [label] and [colorCode]
 /// are table column names
 /// and adding [Activtiy] object is like adding new row in database.
-@HiveType(typeId: moodTypeId)
+@HiveType(typeId: kMoodTypeId)
 class Mood extends HiveObject {
   @HiveField(0)
   int id;

@@ -16,7 +16,8 @@ class NotificationService {
   }
 
   String get notificationMessage {
-    return notificationMessages[Random().nextInt(notificationMessages.length)];
+    return kNotificationMessages[
+        Random().nextInt(kNotificationMessages.length)];
   }
 
   static final FlutterLocalNotificationsPlugin _notification =

@@ -18,7 +18,7 @@ const String activityBoxName = 'activity';
 /// [id], [day], [month], [year], [moodId], [title] and [note]
 /// are table column names
 /// and adding [Activtiy] object is like adding new row in database.
-@HiveType(typeId: activityTypeId)
+@HiveType(typeId: kActivityTypeId)
 class Activity extends HiveObject {
   @HiveField(0)
   int id;
