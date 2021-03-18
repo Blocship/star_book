@@ -4,7 +4,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 // Files
-import '../api/errors_toast.dart';
 import '../models/unsplash_photo.dart';
 
 const String _api = 'https://api.unsplash.com/';
@@ -37,18 +36,18 @@ class UnsplashAPIService {
         });
       } else if (response.statusCode == 401) {
         print('[Unsplash API Error] Unauthorized Access!!');
-        displayErrorDescription(
-            "Unauthorized access, Try again Later!!", _errorToast);
+        // displayErrorDescription(
+        //     "Unauthorized access, Try again Later!!", _errorToast);
       } else {
         print(
             '[Unsplash API Error] ${response.statusCode}: ${response.reasonPhrase}');
-        displayErrorDescription(
-            "Multiple error occurred, Try again Later!!", _errorToast);
+        // displayErrorDescription(
+        //     "Multiple error occurred, Try again Later!!", _errorToast);
       }
     } catch (_err) {
       print('Unsplash Error: ${_err.toString()}');
       //Display Error Message
-      handleErrors(_err, _errorToast);
+      // handleErrors(_err, _errorToast);
     }
     return photos;
   }

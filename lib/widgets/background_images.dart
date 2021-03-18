@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:star_book/api/errors_toast.dart';
 
 // Files
 import '../models/unsplash_photo.dart';
@@ -55,7 +54,7 @@ class _BackgroundImageState extends State<BackgroundImage> {
               );
             } catch (_err) {
               //Handle Errors
-              handleErrors(_err, errToast);
+              // handleErrors(_err, errToast);
             }
           } else {
             child = Image.asset(
