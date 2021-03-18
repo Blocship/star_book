@@ -1,0 +1,36 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Push a new beta build to TestFlight"
+  lane :beta do
+    build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
+    upload_to_testflight
+  end  
+  
+  desc "Push a new production build to App store connect"
+  lane :release do
+    increment_build_number(
+    build_number: app_store_build_number + 1,
+    xcodeproj: "Runner.xcodeproj"
+  )
+    get_push_certificate # will ensure your certificate is valid for at least another 2 weeks, and create a new one if it isn't.
+    build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
+    upload_to_app_store                  # upload your app to App Store Connect
+  end
+  
+end
