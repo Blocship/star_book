@@ -7,7 +7,6 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 // Files
-import './controllers/activity.dart';
 import './controllers/global_setting.dart';
 import './models/activity.dart';
 import './models/global_setting.dart';
