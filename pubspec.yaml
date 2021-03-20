@@ -61,6 +61,9 @@ dev_dependencies:
   flutter_launcher_icons: ^0.7.0
   # Local database
   hive_generator: ^0.8.1
+  # A command-line utility to automate package maintenance. 
+  # Manipulates the changelog and pubspec.yaml.
+  cider: ^0.0.5
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

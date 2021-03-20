@@ -99,6 +99,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "7.1.0"
+  change:
+    dependency: transitive
+    description:
+      name: change
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   characters:
     dependency: transitive
     description:
@@ -120,6 +127,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  cider:
+    dependency: "direct dev"
+    description:
+      name: cider
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.5"
   cli_util:
     dependency: transitive
     description:
@@ -387,6 +401,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.11.4"
+  markdown:
+    dependency: transitive
+    description:
+      name: markdown
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.8"
+  marker:
+    dependency: transitive
+    description:
+      name: marker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.0"
   matcher:
     dependency: transitive
     description:
@@ -394,6 +422,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.12.10-nullsafety.1"
+  maybe_just_nothing:
+    dependency: transitive
+    description:
+      name: maybe_just_nothing
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.3.1"
   meta:
     dependency: transitive
     description:
@@ -707,6 +742,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0-nullsafety.3"
+  version_manipulation:
+    dependency: transitive
+    description:
+      name: version_manipulation
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.5"
   watcher:
     dependency: transitive
     description:
@@ -749,6 +791,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.2.1"
+  yaml_edit:
+    dependency: transitive
+    description:
+      name: yaml_edit
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3"
 sdks:
   dart: ">=2.10.0-110 <2.11.0"
   flutter: ">=1.22.4 <2.0.0"
