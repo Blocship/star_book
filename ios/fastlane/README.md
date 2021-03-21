@@ -16,11 +16,26 @@ or alternatively using `brew install fastlane`
 
 # Available Actions
 ## iOS
-### ios beta
+### ios do_sign
 ```
-fastlane ios beta
+fastlane ios do_sign
 ```
-Push a new beta build to TestFlight
+Match —— Easily sync certificates and profiles across team
+### ios do_build
+```
+fastlane ios do_build
+```
+Gym —— builds and packages iOS apps. It makes it super easy to generate a signed ipa or app file.
+### ios do_beta
+```
+fastlane ios do_beta
+```
+Pilot —— Upload new binary to App Store Connect for TestFlight beta testing.
+### ios do_release
+```
+fastlane ios do_release
+```
+Release
 
 ----
 
