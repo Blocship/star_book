@@ -58,7 +58,7 @@ int getPreviousYear(int month, int year) {
 /// List of months name
 const List<String> _monthList = const <String>[
   'January',
-  'Feburary',
+  'February',
   'March',
   'April',
   'May',
@@ -74,4 +74,9 @@ const List<String> _monthList = const <String>[
 /// Gets the name of the given month by its number,
 String getMonthTitle(int month) {
   return _monthList[month - 1];
+}
+
+String getDateFormat(DateTime date) {
+  String month = getMonthTitle(date.month).substring(0, 3);
+  return '$month ${date.day}, ${date.year}';
 }

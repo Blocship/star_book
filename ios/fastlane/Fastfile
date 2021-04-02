@@ -1,0 +1,68 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+
+  desc "Match —— Easily sync certificates and profiles across team"
+  lane :do_sign do
+    sync_code_signing(
+      api_key_path: "./fastlane/appstore_connect_api.json",
+      type:"appstore",     
+    )
+  update_code_signing_settings(
+    use_automatic_signing: false,
+    build_configurations: "Release",
+    code_sign_identity: "iPhone Distribution",
+    profile_name: "match AppStore com.hashirshoaeb.StarBook",
+  )
+  end  
+
+  desc "Gym —— builds and packages iOS apps. It makes it super easy to generate a signed ipa or app file."
+  lane :do_build do
+    do_sign
+    build_ios_app(
+      workspace: "Runner.xcworkspace", 
+      scheme: "Runner",
+      clean: true,
+      silent: true,
+      output_directory: "../build/ios/ipa",
+      configuration: "Release",)
+  end  
+
+  desc "Pilot —— Upload new binary to App Store Connect for TestFlight beta testing."
+  lane :do_beta do
+    do_build
+    upload_to_testflight(
+      api_key_path: "./fastlane/appstore_connect_api.json",
+      ipa:"../build/ios/ipa/Runner.ipa",
+      # changelog: "",
+      skip_submission: true,
+    )
+  end
+
+  desc "Release"
+  lane :do_release do
+  
+  end
+  
+  # desc "Push a new production build to App store connect"
+  # lane :release do
+  #   build_app(workspace: "Runner.xcworkspace", scheme: "Runner")
+  #   upload_to_app_store                  # upload your app to App Store Connect
+  # end
+  
+end

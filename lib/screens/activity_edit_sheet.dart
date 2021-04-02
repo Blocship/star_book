@@ -2,14 +2,14 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 
 // Files
-import '../routes/route_generator.dart';
-import '../models/activity.dart';
-import '../utils/activity.dart';
-import '../widgets/my_container.dart';
 import '../controllers/activity.dart';
+import '../models/activity.dart';
+import '../routes/route_generator.dart';
 import '../styles/style.dart';
 import '../utils/color.dart';
+import '../utils/enums.dart';
 import '../widgets/color_container.dart';
+import '../widgets/my_container.dart';
 
 /// Activity Add and Edit Sheet Screen widget.
 ///
@@ -70,23 +70,23 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
   }
 
   void onMoodTap() async {
-    dynamic moodId = await Navigator.of(context).pushNamed("edit/mood");
+    dynamic moodId = await Navigator.of(context).pushNamed('edit/mood');
     activity.moodId = moodId;
     setState(() {});
   }
 
   void onDateTap() async {
-    dynamic date = await Navigator.of(context).pushNamed("edit/date",
+    dynamic date = await Navigator.of(context).pushNamed('edit/date',
         arguments: {
-          "day": activity.day,
-          "month": activity.month,
-          "year": activity.year
+          'day': activity.day,
+          'month': activity.month,
+          'year': activity.year
         });
 
     // After getting date update the state.
     setState(() {
       activity =
-          ActivityController.readAt(date["day"], date["month"], date["year"]);
+          ActivityController.readAt(date['day'], date['month'], date['year']);
       titleController.text = activity.title == null ? '' : activity.title;
       noteController.text = activity.note == null ? '' : activity.note;
       type = (activity.moodId == null) ? ActivityType.add : ActivityType.edit;
@@ -103,85 +103,6 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
         context);
   }
 
-  Widget _buildNavBar(BuildContext context) {
-    return c.CupertinoNavigationBar(
-      backgroundColor: c.CupertinoDynamicColor.resolve(
-          c.CupertinoColors.systemGrey6, context),
-      leading: Container(),
-      middle: Text("${(type == ActivityType.add) ? "Add" : "Edit"} Acitvity"),
-      trailing: c.CupertinoButton(
-        onPressed: activity.isFilled() ? () => onDone(context) : null,
-        child: Text("Done"),
-        padding: EdgeInsets.zero,
-      ),
-      border: null,
-    );
-  }
-
-  Widget _buildBody(BuildContext context) {
-    return SingleChildScrollView(
-      child: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Padding(padding: EdgeInsets.symmetric(vertical: 18)),
-            MyContainer(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Date",
-                    style: Style.body(context),
-                  ),
-                  Text(
-                    "${activity.day}-${activity.month}-${activity.year}",
-                    style: Style.bodySecondary(context),
-                  ),
-                ],
-              ),
-              onTap: onDateTap,
-            ),
-            Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-            ColorContainer(
-              text: "Mood",
-              color: _getMoodColor(context),
-              onTap: onMoodTap,
-            ),
-            Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-            MyContainer(
-              child: c.CupertinoTextField(
-                controller: titleController,
-                placeholder: "Title",
-                decoration: null,
-                maxLines: 1,
-                onTap: null,
-              ),
-            ),
-            Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-            MyContainer(
-              child: c.CupertinoTextField(
-                controller: noteController,
-                placeholder: "Note",
-                decoration: null,
-                maxLines: null,
-                minLines: 4,
-                keyboardType: TextInputType.multiline,
-                onTap: null,
-              ),
-            ),
-            Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-            (type == ActivityType.add)
-                ? Container()
-                : c.CupertinoButton(
-                    child: Text("DELETE"),
-                    onPressed: () => onDelete(context),
-                  ),
-          ],
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
@@ -189,8 +110,81 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
         c.CupertinoColors.systemGrey6,
         context,
       ),
-      navigationBar: _buildNavBar(context),
-      child: _buildBody(context),
+      navigationBar: c.CupertinoNavigationBar(
+        backgroundColor: c.CupertinoDynamicColor.resolve(
+          c.CupertinoColors.systemGrey6,
+          context,
+        ),
+        leading: Container(),
+        middle: Text('${(type == ActivityType.add) ? 'Add' : 'Edit'} Activity'),
+        trailing: c.CupertinoButton(
+          onPressed: activity.isFilled() ? () => onDone(context) : null,
+          child: Text('Done'),
+          padding: EdgeInsets.zero,
+        ),
+        border: null,
+      ),
+      child: SingleChildScrollView(
+        child: SafeArea(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+              MyContainer(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Date',
+                      style: Style.body(context),
+                    ),
+                    Text(
+                      '${activity.day}-${activity.month}-${activity.year}',
+                      style: Style.bodySecondary(context),
+                    ),
+                  ],
+                ),
+                onTap: onDateTap,
+              ),
+              Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+              ColorContainer(
+                text: 'Mood',
+                color: _getMoodColor(context),
+                onTap: onMoodTap,
+              ),
+              Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+              MyContainer(
+                child: c.CupertinoTextField(
+                  controller: titleController,
+                  placeholder: 'Title',
+                  decoration: null,
+                  maxLines: 1,
+                  onTap: null,
+                ),
+              ),
+              Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+              MyContainer(
+                child: c.CupertinoTextField(
+                  controller: noteController,
+                  placeholder: 'Note',
+                  decoration: null,
+                  maxLines: null,
+                  minLines: 4,
+                  keyboardType: TextInputType.multiline,
+                  onTap: null,
+                ),
+              ),
+              Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+              (type == ActivityType.add)
+                  ? Container()
+                  : c.CupertinoButton(
+                      child: Text('DELETE'),
+                      onPressed: () => onDelete(context),
+                    ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -215,7 +209,7 @@ class ActivityRouteInitializer extends StatelessWidget {
               shouldClose = true;
               Navigator.of(context).pop();
             },
-            child: Text("Discard Changes"),
+            child: Text('Discard Changes'),
             isDestructiveAction: true,
           ),
         ],
@@ -224,7 +218,7 @@ class ActivityRouteInitializer extends StatelessWidget {
             shouldClose = false;
             Navigator.of(context).pop();
           },
-          child: Text("Cancel"),
+          child: Text('Cancel'),
         ),
       ),
     );

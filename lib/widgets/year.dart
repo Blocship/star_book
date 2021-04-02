@@ -19,14 +19,16 @@ class _YearState extends State<Year> {
 
   @override
   void initState() {
-    for (int i = 1; i <= 12; i++) {
-      months.add(Month(
-        month: i,
-        year: widget.year,
-        onPressed: true,
-      ));
-    }
     super.initState();
+    for (int i = 1; i <= 12; i++) {
+      months.add(
+        Month(
+          month: i,
+          year: widget.year,
+          onPressed: true,
+        ),
+      );
+    }
   }
 
   @override

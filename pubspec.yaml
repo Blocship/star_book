@@ -1,9 +1,9 @@
 name: star_book
-description: A new Flutter project.
+description: A digital diary that can help you in keeping track of your mood and productivity throughout the month.A digital diary that can help you in keeping track of your mood and productivity throughout the month.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -15,17 +15,18 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+1
+version: 1.1.1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: '>=2.7.0 <3.0.0'
+  flutter: ^1.22.4
 
 dependencies:
   flutter:
     sdk: flutter
-  # Cupertino style madal bottom sheets
+  # Cupertino style modal bottom sheets
   modal_bottom_sheet: ^0.2.2
-  # To Create hyperlinks,
+  # To create hyperlinks,
   url_launcher: ^5.7.2
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -39,15 +40,30 @@ dependencies:
   http: ^0.12.2
   # Load data from .env file
   flutter_dotenv: ^2.1.0
+  # Functions to show toast
+  fluttertoast: ^7.1.6
+  # Blur Hash Functions for network images
+  flutter_blurhash: ^0.5.0
+  # Chart
+  fl_chart: ^0.12.2
+  # Schedule/show local notificaions
+  flutter_local_notifications: ^4.0.1
+  # Deive timezone
+  flutter_native_timezone: ^1.0.4
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: ^1.10.3
+  # App's launcher icons generator
+  # flutter pub run flutter_launcher_icons:main
+  flutter_launcher_icons: ^0.7.0
   # Local database
   hive_generator: ^0.8.1
-  build_runner: ^1.10.3
-  # App's launcher icons generator 
-  flutter_launcher_icons: ^0.7.0
+  # A command-line utility to automate package maintenance. 
+  # Manipulates the changelog and pubspec.yaml.
+  cider: ^0.0.5
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -61,7 +77,6 @@ flutter_icons:
 
 # The following section is specific to Flutter.
 flutter:
-
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
@@ -72,16 +87,12 @@ flutter:
     - dev-profile.jpeg
     - backup-bg-image.JPG
     - icon.png
+    - bg_dark.jpg
     # - .env
-
-
-
-  # An image asset can refer to one or more resolution-specific "variants", see
+    # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
-
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
-
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a

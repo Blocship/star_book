@@ -1,26 +1,31 @@
 import 'package:flutter/cupertino.dart' as c;
-import 'package:flutter/widgets.dart';
-import 'package:hive/hive.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 // Files
-import './api/unsplash_api_service.dart';
-import './controllers/activity.dart';
+import './controllers/global_setting.dart';
 import './models/activity.dart';
 import './models/global_setting.dart';
 import './models/mood.dart';
 import './routes/route_generator.dart';
+import './utils/brightness.dart';
+import './utils/string.dart';
 
 /// Starting point of the application.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations([               // Locks the device orientation in PortraitUp only.
-    DeviceOrientation.portraitUp                        // This method is not applicable on iPad when multitasking is enabled.
+  // This method is not applicable on iPad when multitasking is enabled.
+  await SystemChrome.setPreferredOrientations([
+    // Locks the device orientation in PortraitUp only.
+    DeviceOrientation.portraitUp
   ]);
   await hiveInitialize();
-  await ActivityController.initialize();
-  UnsplashAPIService.loadenv();
+  // await ActivityController.initialize();
+  await DotEnv().load('.env');
   runApp(MyApp());
 }
 
@@ -40,11 +45,23 @@ Future<void> hiveInitialize() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return c.CupertinoApp(
-      initialRoute: '/username_add',
-      title: "StarBook",
-      theme: c.CupertinoThemeData(),
-      onGenerateRoute: (settings) => RouteGenerator.mainRoute(settings),
+    return ValueListenableBuilder(
+      valueListenable: Hive.box(globalSettingBoxName).listenable(),
+      builder: (context, box, widget) {
+        return c.CupertinoApp(
+          initialRoute: (isNullOrEmpty(GlobalSettingController.getuser().name))
+              ? 'username_add'
+              : 'home',
+          title: "StarBook",
+          theme: c.CupertinoThemeData(brightness: brightness),
+          localizationsDelegates: [
+            DefaultMaterialLocalizations.delegate,
+            c.DefaultCupertinoLocalizations.delegate,
+            DefaultWidgetsLocalizations.delegate,
+          ],
+          onGenerateRoute: (settings) => RouteGenerator.mainRoute(settings),
+        );
+      },
     );
   }
 }

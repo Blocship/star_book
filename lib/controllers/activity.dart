@@ -1,10 +1,17 @@
 import 'package:hive/hive.dart';
+
 // Files
-import '../models/activity.dart';
 import './id.dart';
+import '../models/activity.dart';
+import '../utils/date.dart';
 
 /// Class with static methods, to provide `CRUD` operations for [Activity] model
 class ActivityController {
+  static final ActivityController _activityControllerSingleton =
+      ActivityController._internal();
+  ActivityController._internal();
+  factory ActivityController() => _activityControllerSingleton;
+
   /// Adds new [Activity] in the, `Hive box`
   ///
   /// If you think it as relational database,
@@ -20,7 +27,9 @@ class ActivityController {
   /// If you think it as relational database,
   /// it return all the rows from the [activityBoxName] Table
   static Map<String, Activity> readAll() {
-    return Hive.box<Activity>(activityBoxName).toMap().map((id, activity) => MapEntry(id as String, activity));
+    return Hive.box<Activity>(activityBoxName)
+        .toMap()
+        .map((id, activity) => MapEntry(id as String, activity));
   }
 
   /// Returns the [Activity] w.r.t to the date from the, `Hive box`
@@ -35,6 +44,22 @@ class ActivityController {
       id,
       defaultValue: Activity(day: day, month: month, year: year),
     );
+  }
+
+  static Map<String, Activity> readRange(DateTime start, DateTime end) {
+    return Map<String, Activity>.fromEntries(
+      readAll().entries.where(
+            (element) =>
+                Id.from(element.key).toDateTime().isAtSameMomentAs(start) ||
+                Id.from(element.key).toDateTime().isAtSameMomentAs(end) ||
+                (Id.from(element.key).toDateTime().isAfter(start) &&
+                    Id.from(element.key).toDateTime().isBefore(end)),
+          ),
+    );
+  }
+
+  static int rangeLength(DateTime start, DateTime end) {
+    return readRange(start, end).length;
   }
 
   /// Updates the [Activity] w.r.t to the date from the, `Hive box`
@@ -64,5 +89,84 @@ class ActivityController {
         await create(activity);
       });
     }
+  }
+
+  static Map<int, double> moodFrequency(DateTime start, DateTime end) {
+    Map<int, double> moodFrequency = Map<int, double>();
+    readRange(start, end).forEach((key, value) {
+      moodFrequency[value.moodId] = moodFrequency.containsKey(value.moodId)
+          ? moodFrequency[value.moodId] + 1
+          : 1;
+    });
+    return moodFrequency;
+  }
+
+  /// moodID , occurance
+  @deprecated
+  static Map<int, double> getMonthGraph(int year, int month) {
+    int totalDays = getDaysInMonth(year, month);
+    Map<String, Activity> activityMap = readRange(
+      DateTime(year, month, 1),
+      DateTime(year, month, totalDays),
+    );
+    Map<int, double> moodFrequency = Map<int, double>();
+    activityMap.forEach((key, value) {
+      moodFrequency[value.moodId] = moodFrequency.containsKey(value.moodId)
+          ? moodFrequency[value.moodId] + 1
+          : 1;
+    });
+    return moodFrequency;
+  }
+
+  /// moodID , occurance
+  @deprecated
+  static Map<int, double> getLastMonthGraph() {
+    DateTime currentDate = DateTime.now();
+    int lastYear = getPreviousYear(currentDate.month, currentDate.year);
+    int lastMonth = getPreviousMonth(currentDate.month, currentDate.year);
+
+    return getMonthGraph(lastYear, lastMonth);
+  }
+
+  /// moodID , occurance
+  @deprecated
+  static Map<int, double> get30DayGraph() {
+    DateTime currentDate = DateTime.now();
+    DateTime back30day = DateTime(
+      getPreviousYear(currentDate.month, currentDate.year),
+      getPreviousMonth(currentDate.month, currentDate.year),
+      currentDate.day,
+    );
+    Map<String, Activity> activityMap = readRange(back30day, currentDate);
+    Map<int, double> moodFrequency = Map<int, double>();
+    activityMap.forEach((key, value) {
+      moodFrequency[value.moodId] = moodFrequency.containsKey(value.moodId)
+          ? moodFrequency[value.moodId] + 1
+          : 1;
+    });
+    return moodFrequency;
+  }
+
+  @deprecated
+  static void getWeekGraph() {}
+
+  /// Points is the total number of entries([Activity]s) in diary.
+  static int points() {
+    return readAll().length;
+  }
+
+  /// Latest consecutive activty count
+  static int streak() {
+    // TODO: Improve the time complexity. we can use database for that.
+    DateTime date = DateTime.now();
+    int streakCount = 0;
+    Activity activity = readAt(date.day, date.month, date.year);
+    if (activity.moodId == null) return streakCount;
+    while (activity.moodId != null) {
+      streakCount++;
+      date = date.subtract(Duration(days: 1));
+      activity = readAt(date.day, date.month, date.year);
+    }
+    return streakCount;
   }
 }
