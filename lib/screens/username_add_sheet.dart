@@ -61,13 +61,13 @@ class _UsernameAddSheetState extends State<UsernameAddSheet> {
               alignment: Alignment.topLeft,
               child: Text(
                 'Hello there!',
-                style: Style.extraLargeTitle(context),
+                style: Style.largeTitle(context),
               ),
             ),
             SizedBox(height: 8),
             Text(
               'So nice to meet you! What do your friends call you?',
-              style: Style.subTitle(context),
+              style: Style.title(context),
             ),
             Spacer(flex: 22),
             c.CupertinoTextField(
@@ -99,11 +99,11 @@ class _UsernameAddSheetState extends State<UsernameAddSheet> {
             ),
             Spacer(flex: 46),
             c.CupertinoButton(
-              onPressed: isNullOrEmpty(textController.text)
-                  ? null
-                  : () => onContinuePressed(context),
+              onPressed: isNullOrEmpty(textController.text) ? null : () => onContinuePressed(context),
               color: c.CupertinoDynamicColor.resolve(
-                  c.CupertinoColors.systemOrange, context),
+                c.CupertinoColors.systemOrange,
+                context,
+              ),
               child: Text(
                 'Continue',
                 style: Style.buttonText(context),

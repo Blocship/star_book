@@ -107,6 +107,7 @@ class Style {
   }
 
   /// Extra Large Title Size, Label Color Text, Bold Style
+  @deprecated
   static TextStyle extraLargeTitle(BuildContext context) {
     return TextStyle(
       color: c.CupertinoDynamicColor.resolve(
@@ -121,6 +122,7 @@ class Style {
   }
 
   /// For Subtitle in Username Add Sheet
+  @deprecated
   static TextStyle subTitle(BuildContext context) {
     return TextStyle(
       color: c.CupertinoDynamicColor.resolve(
