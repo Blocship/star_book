@@ -2,7 +2,7 @@
 	// Causes the debug view to automatically appear when a breakpoint is hit. This
 	// setting is global and not configurable per-language.
 	"debug.openDebug": "openOnDebugBreak",
-
+	"dart.lineLength": 130,
 	"[dart]": {
 		// Automatically format code on save and during typing of certain characters
 		// (like `;` and `}`).
@@ -10,7 +10,7 @@
 		"editor.formatOnType": true,
 
 		// Draw a guide line at 80 characters, where Dart's formatting will wrap code.
-		"editor.rulers": [80],
+		"editor.rulers": [130],
 
 		// Disables built-in highlighting of words that match your selection. Without
 		// this, all instances of the selected text will be highlighted, interfering
