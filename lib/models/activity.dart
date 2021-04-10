@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+import 'package:intl/intl.dart';
 
 // Files
 import '../utils/constant.dart';
@@ -58,13 +59,7 @@ class Activity extends HiveObject {
 
   @override
   int get hashCode {
-    return id.hashCode ^
-        day.hashCode ^
-        month.hashCode ^
-        year.hashCode ^
-        moodId.hashCode ^
-        title.hashCode ^
-        note.hashCode;
+    return id.hashCode ^ day.hashCode ^ month.hashCode ^ year.hashCode ^ moodId.hashCode ^ title.hashCode ^ note.hashCode;
   }
 
   @override
@@ -81,14 +76,15 @@ class Activity extends HiveObject {
         this.note == o.note;
   }
 
-  Activity copyWith(
-      {int id,
-      int day,
-      int month,
-      int year,
-      int moodId,
-      String title,
-      String note}) {
+  Activity copyWith({
+    int id,
+    int day,
+    int month,
+    int year,
+    int moodId,
+    String title,
+    String note,
+  }) {
     return Activity(
         id: id ?? this.id,
         day: day ?? this.day,
@@ -108,6 +104,11 @@ class Activity extends HiveObject {
         this.moodId != null &&
         !isNullOrEmpty(this.title) &&
         !isNullOrEmpty(this.note));
+  }
+
+  String dateFormat() {
+    final date = DateTime(year, month, day);
+    return DateFormat.yMMMMd(Intl.defaultLocale).format(date);
   }
 
   @override

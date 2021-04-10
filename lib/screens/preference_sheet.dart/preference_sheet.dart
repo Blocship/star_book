@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 import 'package:star_book/services/notification_service.dart';
+import 'package:star_book/utils/date.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // Files
@@ -45,8 +46,7 @@ class PreferenceSheet extends StatefulWidget {
 }
 
 class PreferenceSheetState extends State<PreferenceSheet> {
-  BrightnessOption _selectedOption =
-      GlobalSettingController.getBrightnessOption();
+  BrightnessOption _selectedOption = GlobalSettingController.getBrightnessOption();
   DateTime _reminderTime;
 
   @override
@@ -59,10 +59,14 @@ class PreferenceSheetState extends State<PreferenceSheet> {
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
       backgroundColor: c.CupertinoDynamicColor.resolve(
-          c.CupertinoColors.systemGrey6, context),
+        c.CupertinoColors.systemGrey6,
+        context,
+      ),
       navigationBar: c.CupertinoNavigationBar(
         backgroundColor: c.CupertinoDynamicColor.resolve(
-            c.CupertinoColors.systemGrey6, context),
+          c.CupertinoColors.systemGrey6,
+          context,
+        ),
         middle: Text("StarBook"),
         leading: Container(),
         // leading: GestureDetector(
@@ -93,12 +97,15 @@ class PreferenceSheetState extends State<PreferenceSheet> {
             //   text: 'Edit Mood',
             //   icon: c.CupertinoIcons.right_chevron,
             // ),
-            Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+            Padding(padding: const EdgeInsets.symmetric(vertical: 18)),
             MyContainer(
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Dark Mode', style: Style.body(context)),
+                  Text(
+                    'Dark Mode',
+                    style: Style.body(context),
+                  ),
                   c.CupertinoSlidingSegmentedControl<BrightnessOption>(
                     children: options,
                     groupValue: _selectedOption,
@@ -116,15 +123,22 @@ class PreferenceSheetState extends State<PreferenceSheet> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text('Reminder', style: Style.body(context)),
+                  Text(
+                    'Reminder',
+                    style: Style.body(context),
+                  ),
                   c.Row(
                     children: [
-                      Text('${_reminderTime.hour} : ${_reminderTime.minute}',
-                          style: Style.bodySecondary(context)),
+                      Text(
+                        '${getTimeFormat(context, _reminderTime)}',
+                        style: Style.bodySecondary(context),
+                      ),
                       Icon(
                         c.CupertinoIcons.right_chevron,
                         color: c.CupertinoDynamicColor.resolve(
-                            c.CupertinoColors.tertiaryLabel, context),
+                          c.CupertinoColors.tertiaryLabel,
+                          context,
+                        ),
                       ),
                     ],
                   ),
@@ -160,8 +174,7 @@ class PreferenceSheetState extends State<PreferenceSheet> {
               text: 'Privacy and Terms',
               icon: c.CupertinoIcons.right_chevron,
               onTap: () async {
-                String url =
-                    "https://github.com/hashirshoaeb/star_book/blob/master/PRIVACY%26POLICY.md";
+                String url = "https://github.com/hashirshoaeb/star_book/blob/master/PRIVACY%26POLICY.md";
                 try {
                   if (await canLaunch(url)) await launch(url);
                 } catch (e) {
@@ -174,8 +187,7 @@ class PreferenceSheetState extends State<PreferenceSheet> {
               text: 'LICENCE',
               icon: c.CupertinoIcons.right_chevron,
               onTap: () async {
-                String url =
-                    "https://github.com/hashirshoaeb/star_book/blob/master/LICENSE";
+                String url = "https://github.com/hashirshoaeb/star_book/blob/master/LICENSE";
                 try {
                   if (await canLaunch(url)) await launch(url);
                 } catch (e) {

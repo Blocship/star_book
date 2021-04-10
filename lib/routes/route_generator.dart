@@ -17,8 +17,7 @@ import '../utils/bottom_sheet.dart';
 /// Centralised routing class.
 /// Static methods inside, define named routes
 class RouteGenerator {
-  static final RouteGenerator routeGeneratorSingleton =
-      RouteGenerator._internal();
+  static final RouteGenerator routeGeneratorSingleton = RouteGenerator._internal();
   RouteGenerator._internal();
   factory RouteGenerator() => routeGeneratorSingleton;
 
@@ -62,7 +61,7 @@ class RouteGenerator {
     RouteSettings settings,
     dynamic activity,
   ) {
-    // final args = settings.arguments;
+    final args = settings.arguments;
     switch (settings.name) {
       case 'edit/title':
         return MaterialWithModalsPageRoute(
