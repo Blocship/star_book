@@ -72,6 +72,10 @@ class _PackageSheetState extends State<PackageSheet> {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      backgroundColor: CupertinoDynamicColor.resolve(
+        CupertinoColors.systemGrey6,
+        context,
+      ),
       navigationBar: CupertinoNavigationBar(),
       child: SafeArea(
         minimum: EdgeInsets.symmetric(horizontal: 16),

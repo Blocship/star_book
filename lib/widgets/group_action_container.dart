@@ -106,7 +106,10 @@ class GroupActionContainer extends StatelessWidget {
                 child: Divider(
                   height: 0,
                   thickness: 1,
-                  color: c.CupertinoColors.separator,
+                  color: c.CupertinoDynamicColor.resolve(
+                    c.CupertinoColors.separator,
+                    context,
+                  ),
                 ),
               );
             },

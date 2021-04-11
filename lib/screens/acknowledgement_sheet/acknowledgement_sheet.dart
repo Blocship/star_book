@@ -33,6 +33,10 @@ class AcknowledgementSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoPageScaffold(
+      backgroundColor: CupertinoDynamicColor.resolve(
+        CupertinoColors.systemGrey6,
+        context,
+      ),
       navigationBar: CupertinoNavigationBar(),
       child: SafeArea(
         child: FutureBuilder<_LicenseData>(
