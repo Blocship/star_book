@@ -6,44 +6,41 @@ class Legal extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Container(
-          padding: EdgeInsets.fromLTRB(29, 17, 0, 8),
-          child: Text(
-            "LEGAL",
-            style: Style.footerNoteSecondary(context),
-          ),
-        ),
-        ActionContainer(
-          text: 'Acknowledgement',
-          icon: c.CupertinoIcons.right_chevron,
-          onTap: () async {
-            Navigator.of(context).pushNamed('preference/acknowledgement');
-          },
-        ),
-        ActionContainer(
-          text: 'Privacy and Terms',
-          icon: c.CupertinoIcons.right_chevron,
-          onTap: () async {
-            String url = "https://github.com/hashirshoaeb/star_book/blob/master/PRIVACY%26POLICY.md";
-            try {
-              if (await canLaunch(url)) await launch(url);
-            } catch (e) {
-              // print("Url Exception , ${e.toString()}");
-            }
-          },
-        ),
-        // Padding(padding: EdgeInsets.symmetric(vertical: 8)),
-        ActionContainer(
-          text: 'LICENCE',
-          icon: c.CupertinoIcons.right_chevron,
-          onTap: () async {
-            String url = "https://github.com/hashirshoaeb/star_book/blob/master/LICENSE";
-            try {
-              if (await canLaunch(url)) await launch(url);
-            } catch (e) {
-              // print("Url Exception , ${e.toString()}");
-            }
-          },
+        GroupActionContainer(
+          header: 'LEGAL',
+          actionList: [
+            GroupAction(
+              label: 'Acknowledgement',
+              icon: c.CupertinoIcons.right_chevron,
+              onTap: () async {
+                Navigator.of(context).pushNamed('preference/acknowledgement');
+              },
+            ),
+            GroupAction(
+              label: 'Privacy and Terms',
+              icon: c.CupertinoIcons.right_chevron,
+              onTap: () async {
+                String url = "https://github.com/hashirshoaeb/star_book/blob/master/PRIVACY%26POLICY.md";
+                try {
+                  if (await canLaunch(url)) await launch(url);
+                } catch (e) {
+                  // print("Url Exception , ${e.toString()}");
+                }
+              },
+            ),
+            GroupAction(
+              label: 'LICENCE',
+              icon: c.CupertinoIcons.right_chevron,
+              onTap: () async {
+                String url = "https://github.com/hashirshoaeb/star_book/blob/master/LICENSE";
+                try {
+                  if (await canLaunch(url)) await launch(url);
+                } catch (e) {
+                  // print("Url Exception , ${e.toString()}");
+                }
+              },
+            )
+          ],
         ),
       ],
     );

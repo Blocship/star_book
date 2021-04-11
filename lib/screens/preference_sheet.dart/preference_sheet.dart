@@ -12,7 +12,7 @@ import '../../routes/route_generator.dart';
 import '../../services/notification_service.dart';
 import '../../styles/style.dart';
 import '../../utils/date.dart';
-import '../../widgets/action_container.dart';
+import '../../widgets/group_action_container.dart';
 import '../../widgets/my_container.dart';
 import '../time_picker_sheet.dart';
 
@@ -129,7 +129,7 @@ class PreferenceSheetState extends State<PreferenceSheet> {
                   ],
                 ),
               ),
-              // Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+              Padding(padding: EdgeInsets.symmetric(vertical: 8)),
               MyContainer(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
