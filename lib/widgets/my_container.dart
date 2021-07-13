@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 
+const kMargin = const EdgeInsets.fromLTRB(16, 0, 16, 0);
+const kPadding = const EdgeInsets.fromLTRB(13, 15, 13, 12);
+final kBorderRadus = BorderRadius.circular(8);
+
 /// Cupertino style container widget
 class MyContainer extends StatelessWidget {
   MyContainer({
@@ -29,8 +33,8 @@ class MyContainer extends StatelessWidget {
       child: Container(
         width: width,
         height: height,
-        margin: margin ?? const EdgeInsets.fromLTRB(16, 0, 16, 0),
-        padding: padding ?? const EdgeInsets.fromLTRB(13, 15, 13, 12),
+        margin: margin ?? kMargin,
+        padding: padding ?? kPadding,
         decoration: boxDecoration ??
             BoxDecoration(
               borderRadius: BorderRadius.circular(8),

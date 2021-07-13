@@ -106,7 +106,22 @@ class Style {
     );
   }
 
+  /// Cupertino, Footer Note Size, Primary Label Color Text Style
+  static TextStyle footerNotePrimary(BuildContext context) {
+    return TextStyle(
+      color: c.CupertinoDynamicColor.resolve(
+        c.CupertinoColors.label,
+        context,
+      ),
+      fontWeight: FontWeight.w400,
+      fontFamily: "SFProText",
+      fontStyle: FontStyle.normal,
+      fontSize: 13.0,
+    );
+  }
+
   /// Extra Large Title Size, Label Color Text, Bold Style
+  @deprecated
   static TextStyle extraLargeTitle(BuildContext context) {
     return TextStyle(
       color: c.CupertinoDynamicColor.resolve(
@@ -121,6 +136,7 @@ class Style {
   }
 
   /// For Subtitle in Username Add Sheet
+  @deprecated
   static TextStyle subTitle(BuildContext context) {
     return TextStyle(
       color: c.CupertinoDynamicColor.resolve(
