@@ -19,7 +19,7 @@ version: 2.0.0
 
 environment:
   sdk: '>=2.12.0 <3.0.0'
-  flutter: ^1.22.4
+  flutter: ^2.5.1
 
 dependencies:
   flutter:
@@ -47,7 +47,7 @@ dependencies:
   # Chart
   fl_chart: ^0.40.0
   # Schedule/show local notificaions
-  flutter_local_notifications: ^8.2.0
+  flutter_local_notifications: ^9.0.0
   # Deive timezone
   flutter_native_timezone: ^2.0.0
 
