@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../models/global_setting.dart';
+part of 'user.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
