@@ -5,15 +5,15 @@ import '../widgets/my_container.dart';
 
 /// Cupertino style color action container widget
 class ColorContainer extends StatelessWidget {
-  ColorContainer({
-    this.text,
-    this.color,
+  const ColorContainer({
+    required this.text,
+    required this.color,
     this.onTap,
   });
 
   final String text;
   final c.CupertinoDynamicColor color;
-  final Function onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class ColorContainer extends StatelessWidget {
             ),
           ),
           Container(
-            padding: EdgeInsets.symmetric(vertical: 9, horizontal: 9),
+            padding: const EdgeInsets.symmetric(vertical: 9, horizontal: 9),
             decoration: BoxDecoration(
               color: c.CupertinoDynamicColor.resolve(color, context),
               shape: c.BoxShape.circle,

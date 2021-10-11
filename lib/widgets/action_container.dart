@@ -5,15 +5,15 @@ import '../widgets/my_container.dart';
 
 /// Cupertino style action container widget
 class ActionContainer extends StatelessWidget {
-  ActionContainer({
-    this.text,
-    this.icon,
+  const ActionContainer({
+    required this.text,
+    required this.icon,
     this.onTap,
   });
 
   final String text;
   final IconData icon;
-  final Function onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +31,7 @@ class ActionContainer extends StatelessWidget {
           ),
           Icon(
             icon,
-            color: c.CupertinoDynamicColor.resolve(
-                c.CupertinoColors.tertiaryLabel, context),
+            color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.tertiaryLabel, context),
           ),
         ],
       ),
