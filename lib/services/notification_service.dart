@@ -16,12 +16,10 @@ class NotificationService {
   }
 
   String get notificationMessage {
-    return kNotificationMessages[
-        Random().nextInt(kNotificationMessages.length)];
+    return kNotificationMessages[Random().nextInt(kNotificationMessages.length)];
   }
 
-  static final FlutterLocalNotificationsPlugin _notification =
-      FlutterLocalNotificationsPlugin();
+  static final FlutterLocalNotificationsPlugin _notification = FlutterLocalNotificationsPlugin();
 
   Future<void> initialize() async {
     tz.initializeTimeZones();
@@ -45,11 +43,8 @@ class NotificationService {
 
   /// Requesting permission to show notifications
   /// on [iOS]
-  Future<bool> iosNotificationPermission() async {
-    return await _notification
-        .resolvePlatformSpecificImplementation<
-            IOSFlutterLocalNotificationsPlugin>()
-        ?.requestPermissions(
+  Future<bool?> iosNotificationPermission() async {
+    return await _notification.resolvePlatformSpecificImplementation<IOSFlutterLocalNotificationsPlugin>()?.requestPermissions(
           alert: true,
           badge: true,
           sound: true,
@@ -57,7 +52,7 @@ class NotificationService {
   }
 
   /// Scheduling a notification to show everyday at a specifice time
-  Future<void> scheduleDailyNotification({int hour, int minutes}) async {
+  Future<void> scheduleDailyNotification({required int hour, required int minutes}) async {
     await _notification.zonedSchedule(
       1,
       'Reminder',
@@ -67,7 +62,6 @@ class NotificationService {
         android: AndroidNotificationDetails(
           'daily notification channel id',
           'daily notification channel name',
-          'daily notification description',
         ),
         iOS: IOSNotificationDetails(
             presentAlert: true,
@@ -77,8 +71,7 @@ class NotificationService {
             threadIdentifier: '1'),
       ),
       androidAllowWhileIdle: true,
-      uiLocalNotificationDateInterpretation:
-          UILocalNotificationDateInterpretation.absoluteTime,
+      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
     );
   }
@@ -87,8 +80,7 @@ class NotificationService {
   /// before or after the current date.
   tz.TZDateTime _nextInstanceOfSelectedTime(int hour, int minutes) {
     final tz.TZDateTime now = tz.TZDateTime.now(tz.local);
-    tz.TZDateTime scheduledDate =
-        tz.TZDateTime.local(now.year, now.month, now.day, hour, minutes);
+    tz.TZDateTime scheduledDate = tz.TZDateTime.local(now.year, now.month, now.day, hour, minutes);
     if (scheduledDate.isBefore(now)) {
       scheduledDate = scheduledDate.add(const Duration(days: 1));
     }
