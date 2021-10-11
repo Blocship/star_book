@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../models/global_setting.dart';
+part of 'brightness.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
@@ -20,7 +20,7 @@ class BrightnessOptionAdapter extends TypeAdapter<BrightnessOption> {
       case 2:
         return BrightnessOption.auto;
       default:
-        return null;
+        return BrightnessOption.light;
     }
   }
 

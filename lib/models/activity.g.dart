@@ -1,38 +1,50 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../models/mood.dart';
+part of 'activity.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class MoodAdapter extends TypeAdapter<Mood> {
+class ActivityAdapter extends TypeAdapter<Activity> {
   @override
-  final int typeId = 1;
+  final int typeId = 0;
 
   @override
-  Mood read(BinaryReader reader) {
+  Activity read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Mood(
-      id: fields[0] as int,
-      label: fields[1] as String,
-      colorCode: fields[2] as int,
+    return Activity(
+      id: fields[0] as int?,
+      day: fields[1] as int,
+      month: fields[2] as int,
+      year: fields[3] as int,
+      moodId: fields[4] as int?,
+      title: fields[5] as String?,
+      note: fields[6] as String?,
     );
   }
 
   @override
-  void write(BinaryWriter writer, Mood obj) {
+  void write(BinaryWriter writer, Activity obj) {
     writer
-      ..writeByte(3)
+      ..writeByte(7)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
-      ..write(obj.label)
+      ..write(obj.day)
       ..writeByte(2)
-      ..write(obj.colorCode);
+      ..write(obj.month)
+      ..writeByte(3)
+      ..write(obj.year)
+      ..writeByte(4)
+      ..write(obj.moodId)
+      ..writeByte(5)
+      ..write(obj.title)
+      ..writeByte(6)
+      ..write(obj.note);
   }
 
   @override
@@ -41,7 +53,7 @@ class MoodAdapter extends TypeAdapter<Mood> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is MoodAdapter &&
+      other is ActivityAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
