@@ -10,8 +10,8 @@ import '../utils/brightness.dart';
 
 class BackgroundImage extends StatefulWidget {
   const BackgroundImage({
-    Key key,
-    @required this.month,
+    Key? key,
+    required this.month,
   }) : super(key: key);
 
   final int month;
@@ -21,9 +21,9 @@ class BackgroundImage extends StatefulWidget {
 }
 
 class _BackgroundImageState extends State<BackgroundImage> {
-  FToast errToast;
-  Future<List<UnsplashPhoto>> _getBGImages;
-  List<UnsplashPhoto> images = List<UnsplashPhoto>();
+  late final FToast errToast;
+  late final Future<List<UnsplashPhoto>> _getBGImages;
+  List<UnsplashPhoto> images = [];
   @override
   void initState() {
     super.initState();
@@ -33,7 +33,7 @@ class _BackgroundImageState extends State<BackgroundImage> {
   }
 
   Future<List<UnsplashPhoto>> initImages() async {
-    return await UnsplashAPIService.getPhotos(12, errToast);
+    return UnsplashAPIService.getPhotos(12, errToast);
   }
 
   @override
@@ -42,9 +42,7 @@ class _BackgroundImageState extends State<BackgroundImage> {
         future: _getBGImages,
         builder: (c.BuildContext context, c.AsyncSnapshot snapshot) {
           Widget child;
-          if ((snapshot.connectionState == c.ConnectionState.done) &&
-              (snapshot.hasData) &&
-              (snapshot.data.isNotEmpty)) {
+          if ((snapshot.connectionState == c.ConnectionState.done) && (snapshot.hasData) && (snapshot.data.isNotEmpty)) {
             images = snapshot.data;
             try {
               child = BlurHash(
@@ -55,12 +53,16 @@ class _BackgroundImageState extends State<BackgroundImage> {
             } catch (_err) {
               //Handle Errors
               // handleErrors(_err, errToast);
+              child = Image.asset(
+                brightness == Brightness.light ? 'backup-bg-image.JPG' : 'bg_dark.jpg',
+                fit: BoxFit.cover,
+                width: double.infinity,
+                height: double.infinity,
+              );
             }
           } else {
             child = Image.asset(
-              brightness == Brightness.light
-                  ? "backup-bg-image.JPG"
-                  : "bg_dark.jpg",
+              brightness == Brightness.light ? 'backup-bg-image.JPG' : 'bg_dark.jpg',
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,

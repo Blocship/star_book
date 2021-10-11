@@ -8,14 +8,14 @@ import '../styles/style.dart';
 class Year extends StatefulWidget {
   final int year;
 
-  Year({@required this.year});
+  const Year({required this.year});
 
   @override
   _YearState createState() => _YearState();
 }
 
 class _YearState extends State<Year> {
-  List<Month> months = List<Month>();
+  final List<Month> months = [];
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class _YearState extends State<Year> {
     return Column(
       children: [
         Container(
-          margin: EdgeInsets.fromLTRB(14, 10, 0, 10),
+          margin: const EdgeInsets.fromLTRB(14, 10, 0, 10),
           child: Text(
             '${widget.year}',
             style: Style.largeTitle(context),

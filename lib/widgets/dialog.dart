@@ -6,7 +6,10 @@ class AlertDialog extends StatelessWidget {
   final String title;
   final String content;
 
-  AlertDialog({this.title, this.content});
+  const AlertDialog({
+    required this.title,
+    required this.content,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +18,7 @@ class AlertDialog extends StatelessWidget {
       content: Text(content),
       actions: <Widget>[
         c.CupertinoDialogAction(
-          child: Text('Okay'),
+          child: const Text('Okay'),
           onPressed: () {
             Navigator.of(context).pop();
           },
