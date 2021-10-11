@@ -3,7 +3,7 @@ part of 'profile_page.dart';
 /// Username widget displays the name of user
 /// ontap it goes into editable mode. See [UsernameEdit]
 class Username extends StatelessWidget {
-  final Function onTap;
+  final Function? onTap;
   final User user = GlobalSettingController.getuser();
 
   Username({this.onTap});
@@ -11,7 +11,7 @@ class Username extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => this.onTap(false),
+      onTap: () => this.onTap?.call(false),
       child: Align(
         alignment: Alignment.topLeft,
         child: Text(user.name, style: Style.title(context)),
@@ -23,7 +23,7 @@ class Username extends StatelessWidget {
 /// UsernameEdit widget displays TextField to update the username.
 /// See [Username]
 class UsernameEdit extends StatefulWidget {
-  final Function onTap;
+  final Function? onTap;
 
   UsernameEdit({this.onTap});
 
@@ -33,9 +33,9 @@ class UsernameEdit extends StatefulWidget {
 
 class _UsernameEditState extends State<UsernameEdit> {
   final int maxLength = 20;
-  int remainingCharacters;
-  TextEditingController textController;
-  User user;
+  late int remainingCharacters;
+  late TextEditingController textController;
+  late User user;
 
   @override
   void initState() {
@@ -50,7 +50,7 @@ class _UsernameEditState extends State<UsernameEdit> {
   void onTextChanged() {
     setState(() {
       remainingCharacters = maxLength - textController.text.length;
-      user.name = textController.text;
+      user = user.copyWith(name: textController.text);
     });
   }
 
@@ -70,8 +70,7 @@ class _UsernameEditState extends State<UsernameEdit> {
             style: Style.bodySecondary(context),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              color: c.CupertinoDynamicColor.resolve(
-                  c.CupertinoColors.quaternarySystemFill, context),
+              color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.quaternarySystemFill, context),
             ),
           ),
         ),
@@ -81,21 +80,15 @@ class _UsernameEditState extends State<UsernameEdit> {
           height: 44,
           child: c.CupertinoButton(
             padding: EdgeInsets.all(10),
-            color: c.CupertinoDynamicColor.resolve(
-                c.CupertinoColors.systemOrange, context),
-            child: Icon(c.CupertinoIcons.checkmark_alt,
-                color: c.CupertinoColors.white),
+            color: c.CupertinoDynamicColor.resolve(c.CupertinoColors.systemOrange, context),
+            child: Icon(c.CupertinoIcons.checkmark_alt, color: c.CupertinoColors.white),
             onPressed: () {
               if (isNullOrEmpty(textController.text)) {
-                AlertDialog dialog = AlertDialog(
-                    title: "Username can't be empty",
-                    content: "Please enter your username");
-                c.showCupertinoDialog(
-                    context: context,
-                    builder: (BuildContext context) => dialog);
+                AlertDialog dialog = AlertDialog(title: "Username can't be empty", content: "Please enter your username");
+                c.showCupertinoDialog(context: context, builder: (BuildContext context) => dialog);
               } else {
                 GlobalSettingController.setUser(user);
-                this.widget.onTap(true);
+                this.widget.onTap?.call(true);
               }
             },
           ),

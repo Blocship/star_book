@@ -3,12 +3,12 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart' as m;
 import 'package:flutter/widgets.dart';
+import 'package:star_book/models/user.dart';
 import '../../utils/date.dart';
 
 // Files
 import '../../controllers/activity.dart';
 import '../../controllers/global_setting.dart';
-import '../../models/global_setting.dart';
 import '../../models/mood.dart';
 import '../../styles/style.dart';
 import '../../utils/color.dart';
@@ -37,7 +37,7 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   User user = GlobalSettingController.getuser();
-  bool showUsername;
+  late bool showUsername;
 
   @override
   void initState() {
@@ -55,8 +55,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
       resizeToAvoidBottomInset: true,
-      backgroundColor: c.CupertinoDynamicColor.resolve(
-          c.CupertinoColors.systemGrey6, context),
+      backgroundColor: c.CupertinoDynamicColor.resolve(c.CupertinoColors.systemGrey6, context),
       // navigationBar: c.CupertinoNavigationBar(
       //   //to remove the back button that comes with the navigation bar
       //   automaticallyImplyLeading: false,
@@ -80,12 +79,8 @@ class _ProfilePageState extends State<ProfilePage> {
               SizedBox(height: 16),
               AnimatedSwitcher(
                 duration: Duration(milliseconds: 1),
-                transitionBuilder:
-                    (Widget child, Animation<double> animation) =>
-                        ScaleTransition(scale: animation, child: child),
-                child: showUsername
-                    ? Username(onTap: onUsernameTap)
-                    : UsernameEdit(onTap: onUsernameTap),
+                transitionBuilder: (Widget child, Animation<double> animation) => ScaleTransition(scale: animation, child: child),
+                child: showUsername ? Username(onTap: onUsernameTap) : UsernameEdit(onTap: onUsernameTap),
               ),
               SizedBox(height: 32),
               Stats(),

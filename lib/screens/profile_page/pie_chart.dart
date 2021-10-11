@@ -4,7 +4,10 @@ class PieChartWidget extends StatefulWidget {
   final DateTime from;
   final DateTime to;
 
-  PieChartWidget({this.from, this.to});
+  PieChartWidget({
+    required this.from,
+    required this.to,
+  });
 
   @override
   _PieChartWidgetState createState() => _PieChartWidgetState();
@@ -44,8 +47,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
       },
     );
     int totalDays = widget.to.difference(widget.from).inDays + 1;
-    int emptyDays =
-        totalDays - ActivityController.rangeLength(widget.from, widget.to);
+    int emptyDays = totalDays - ActivityController.rangeLength(widget.from, widget.to);
     if (chart.length == 0)
       chart.add(
         PieChartSectionData(

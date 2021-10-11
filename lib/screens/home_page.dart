@@ -17,7 +17,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  BottomTabOption selectedTab;
+  late BottomTabOption selectedTab;
 
   @override
   void initState() {
@@ -39,7 +39,7 @@ class _HomeState extends State<Home> {
     }
   }
 
-  final List<BottomNavigationBarItem> bottomTabItems = [
+  final List<BottomNavigationBarItem> bottomTabItems = const [
     BottomNavigationBarItem(
       icon: Icon(c.CupertinoIcons.house_fill),
       label: 'Home',
@@ -53,9 +53,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return c.CupertinoTabScaffold(
-      backgroundColor: Color(0x00000000),
+      backgroundColor: const Color(0x00000000),
       tabBar: c.CupertinoTabBar(
-        backgroundColor: Color(0x00000000),
+        backgroundColor: const Color(0x00000000),
         border: null,
         onTap: changeTab,
         currentIndex: selectedTab.index,
@@ -74,8 +74,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int month;
-  int year;
+  late int month;
+  late int year;
   int index = 0;
   // bool _loading = false;
   // TODO: fetch data from database based.
@@ -91,14 +91,15 @@ class _HomePageState extends State<HomePage> {
   }
 
   void onHorizontalDragEnd(c.DragEndDetails value) {
-    if (value.primaryVelocity.isNegative) {
+    if (value.primaryVelocity == null) return;
+    if (value.primaryVelocity!.isNegative) {
       // Drags Left
       setState(() {
         year = getNextYear(month, year);
         month = getNextMonth(month, year);
         index < 28 ? index += 1 : index = 0;
       });
-    } else if (value.primaryVelocity > 0) {
+    } else if (value.primaryVelocity! > 0) {
       // Drags Right
       setState(() {
         year = getPreviousYear(month, year);
@@ -112,9 +113,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     // set the brightness on status bar
-    SystemChrome.setSystemUIOverlayStyle((brightness == Brightness.dark)
-        ? SystemUiOverlayStyle.light
-        : SystemUiOverlayStyle.dark);
+    SystemChrome.setSystemUIOverlayStyle(
+        (brightness == Brightness.dark) ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark);
 
     return Stack(
       children: [
@@ -174,7 +174,7 @@ class YearButton extends StatelessWidget {
       child: Row(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.start,
-        children: <Widget>[
+        children: const <Widget>[
           const Padding(padding: EdgeInsetsDirectional.only(start: 8.0)),
           Text('Year'),
           const Padding(padding: EdgeInsetsDirectional.only(start: 6.0)),

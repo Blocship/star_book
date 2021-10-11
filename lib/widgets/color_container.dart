@@ -12,7 +12,7 @@ class ColorContainer extends StatelessWidget {
   });
 
   final String text;
-  final c.CupertinoDynamicColor color;
+  final Color color;
   final VoidCallback? onTap;
 
   @override
