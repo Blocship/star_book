@@ -16,7 +16,7 @@ class Style {
         context,
       ),
       fontWeight: FontWeight.w700,
-      fontFamily: "SFProDisplay",
+      fontFamily: 'SFProDisplay',
       fontStyle: FontStyle.normal,
       fontSize: 34.0,
     );
@@ -30,7 +30,7 @@ class Style {
         context,
       ),
       fontWeight: FontWeight.w400,
-      fontFamily: "SFProDisplay",
+      fontFamily: 'SFProDisplay',
       fontStyle: FontStyle.normal,
       fontSize: 28.0,
     );
@@ -44,7 +44,7 @@ class Style {
         context,
       ),
       fontWeight: FontWeight.w600,
-      fontFamily: "SFProDisplay",
+      fontFamily: 'SFProDisplay',
       fontStyle: FontStyle.normal,
       fontSize: 28.0,
     );
@@ -58,7 +58,7 @@ class Style {
         context,
       ),
       fontWeight: FontWeight.w400,
-      fontFamily: "SFProDisplay",
+      fontFamily: 'SFProDisplay',
       fontStyle: FontStyle.normal,
       fontSize: 22.0,
     );
@@ -72,7 +72,7 @@ class Style {
         context,
       ),
       fontWeight: FontWeight.w400,
-      fontFamily: "SFProText",
+      fontFamily: 'SFProText',
       fontStyle: FontStyle.normal,
       fontSize: 17.0,
     );
@@ -86,7 +86,7 @@ class Style {
         context,
       ),
       fontWeight: FontWeight.w400,
-      fontFamily: "SFProText",
+      fontFamily: 'SFProText',
       fontStyle: FontStyle.normal,
       fontSize: 17.0,
     );
@@ -100,7 +100,7 @@ class Style {
         context,
       ),
       fontWeight: FontWeight.w400,
-      fontFamily: "SFProText",
+      fontFamily: 'SFProText',
       fontStyle: FontStyle.normal,
       fontSize: 13.0,
     );
@@ -114,7 +114,7 @@ class Style {
         context,
       ),
       fontWeight: FontWeight.w400,
-      fontFamily: "SFProText",
+      fontFamily: 'SFProText',
       fontStyle: FontStyle.normal,
       fontSize: 13.0,
     );
@@ -129,7 +129,7 @@ class Style {
         context,
       ),
       fontWeight: FontWeight.w700,
-      fontFamily: "SFProDisplay",
+      fontFamily: 'SFProDisplay',
       fontStyle: FontStyle.normal,
       fontSize: 45.0,
     );
@@ -144,7 +144,7 @@ class Style {
         context,
       ),
       fontWeight: FontWeight.w400,
-      fontFamily: "SFProDisplay",
+      fontFamily: 'SFProDisplay',
       fontStyle: FontStyle.normal,
       fontSize: 32.0,
     );
@@ -157,7 +157,7 @@ class Style {
         c.CupertinoColors.white,
         context,
       ),
-      fontFamily: "SFProDisplay",
+      fontFamily: 'SFProDisplay',
       fontStyle: FontStyle.normal,
       fontSize: 18.0,
     );
