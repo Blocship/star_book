@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
+import 'package:star_book/models/brightness.dart';
 
 // Files
 import '../controllers/global_setting.dart';
-import '../models/global_setting.dart';
 
 /// function to return brightness for theme data
 Brightness get brightness {
-  BrightnessOption mode = GlobalSettingController.getBrightnessOption();
+  final BrightnessOption mode = GlobalSettingController.getBrightnessOption();
 
   if (mode == BrightnessOption.light) {
     return Brightness.light;
@@ -14,6 +14,6 @@ Brightness get brightness {
     return Brightness.dark;
   } else {
     // (mode == BrightnessOption.auto)
-    return WidgetsBinding.instance.window.platformBrightness;
+    return WidgetsBinding.instance!.window.platformBrightness;
   }
 }
