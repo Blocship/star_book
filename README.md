@@ -4,9 +4,7 @@
   <h1 align="center">StarBook ✨</h1>
 
   <p align="center">
-Understanding your moods helps you manage them and feel better faster. If you are more aware of your moods, you may be able to better manage your lifestyle choices, make informed health decisions, prevent or avoid triggers of negative moods, and work towards a better quality of life
-  <br/>
-  So
+Understanding your moods helps you manage them and feel better faster. If you are more aware of your moods, you may be able to better manage your lifestyle choices, make informed health decisions, prevent or avoid triggers of negative moods, and work towards a better quality of life. So,
   <br/>
     A digital diary that can help you in keeping track of your mood and productivity throughout the month. Mood tracker is a good way to see how you are mostly feeling. And it helped me a lot to realise how my general mood is and to improve it. Cause I was feeling down two years ago so now when I look at my mood board it looks much nicer. 
     <br />
