@@ -17,7 +17,9 @@ class _PieChartWidgetState extends State<PieChartWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 16),
+      width: MediaQuery.of(context).size.width - 16 - 16,
+      height: MediaQuery.of(context).size.width - 16 - 16,
+      // padding: EdgeInsets.symmetric(vertical: 16),
       child: PieChart(
         PieChartData(
           borderData: FlBorderData(show: false),
