@@ -40,3 +40,4 @@ post_install do |installer|
   end
 end
 # https://stackoverflow.com/questions/37160688/set-deployment-target-for-cocoapodss-pod
+# https://flutter.dev/docs/development/add-to-app/ios/project-setup#apple-silicon-arm64-macs
