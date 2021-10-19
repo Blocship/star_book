@@ -28,7 +28,7 @@ void main() async {
   ]);
   await hiveInitialize();
   // await ActivityController.initialize();
-  await DotEnv().load(fileName: '.env');
+  // await DotEnv().load(fileName: '.env');
   runApp(MyApp());
 }
 
