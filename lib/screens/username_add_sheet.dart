@@ -46,7 +46,6 @@ class _UsernameAddSheetState extends State<UsernameAddSheet> {
 
   @override
   Widget build(BuildContext context) {
-    double h = MediaQuery.of(context).size.height;
     return c.CupertinoPageScaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: c.CupertinoDynamicColor.resolve(
@@ -57,20 +56,20 @@ class _UsernameAddSheetState extends State<UsernameAddSheet> {
         minimum: EdgeInsets.symmetric(horizontal: 16),
         child: Column(
           children: [
-            SizedBox(height: h * 0.13),
+            Spacer(flex: 24),
             Align(
               alignment: Alignment.topLeft,
               child: Text(
                 'Hello there!',
-                style: Style.extraLargeTitle(context),
+                style: Style.largeTitle(context),
               ),
             ),
-            SizedBox(height: 10.0),
+            SizedBox(height: 8),
             Text(
               'So nice to meet you! What do your friends call you?',
-              style: Style.subTitle(context),
+              style: Style.title(context),
             ),
-            SizedBox(height: h * 0.12),
+            Spacer(flex: 22),
             c.CupertinoTextField(
               maxLength: maxLength,
               controller: textController,
@@ -98,18 +97,19 @@ class _UsernameAddSheetState extends State<UsernameAddSheet> {
                 ),
               ),
             ),
-            SizedBox(height: h * 0.25),
+            Spacer(flex: 46),
             c.CupertinoButton(
-              onPressed: isNullOrEmpty(textController.text)
-                  ? null
-                  : () => onContinuePressed(context),
+              onPressed: isNullOrEmpty(textController.text) ? null : () => onContinuePressed(context),
               color: c.CupertinoDynamicColor.resolve(
-                  c.CupertinoColors.systemOrange, context),
+                c.CupertinoColors.systemOrange,
+                context,
+              ),
               child: Text(
                 'Continue',
                 style: Style.buttonText(context),
               ),
             ),
+            Spacer(flex: 8),
           ],
         ),
       ),

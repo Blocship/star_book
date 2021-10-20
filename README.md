@@ -32,7 +32,6 @@
 ## Table Of Content
 
 - [About the App](#-about-the-app)
-- [MILESTONES](#milestones)
 - [Getting Started](#getting-started)
 - [Roadmap](#roadmap)
 - [Contributing](#-contributing)
@@ -44,24 +43,6 @@
 
 **“StarBook”** is a digital diary, and a mood tracking app. The user will be able to rate his mood for each day and write a short story for him, like how his day was. Color is given to each mood, let’s say, green for a happy mood, red for angry and yellow for a sad mood. The statistics of users will be visualized in a methodical structure. For this the app will form a graph, calendar, each date box is colored with the color of users' aura lets say green for positive spirits. StarBook will cooperate with users to boost their positive energy and train healthy thinking, correspondingly moving towards calmer and patient personality. StarBook will use positive psychology and cognitive behavioral therapy for you to better understand yourself, overcoming stress, anxiety, and depressions. The app is all in all focused to give personalized experience to every individual user, increasing their productivity, objectivity, and emotional health.
 
-## MILESTONES
-
-### v1.0.0 (First Release)
-
-1. A main screen with Carousel calendar.
-2. Set color(mood) on clicking on day.
-3. Text input screen to add new or edit diary(story).
-4. Save data to the local database (phone’s storage).
-5. Profile and Settings Screen
-
-### v > 1.0.0 (Future Updates and Features)
-
-1. Option to sync data to the online database.
-2. Option to share Story and Mood statistics to the social media apps
-3. UI/UX Improvements.
-4. Attach pictures with stories
-5. Light and Dark mood
-6. Add notifications
 
 <!-- GETTING STARTED -->
 
@@ -113,7 +94,7 @@ See the [project board](https://github.com/hashirshoaeb/star_book/projects/1) fo
 
 ## 🤝 Contributing
 
-The App is under development. Are you interested in building and contributing to this awesome app? Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are greatly appreciated. To pick something for contribution refer [StarBook board](https://github.com/hashirshoaeb/star_book/projects/1). For more, refer [CONTRIBUTING.md](CONTRIBUTING.md)
+Are you interested in building and contributing to this awesome app? Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are greatly appreciated. To pick something for contribution refer [StarBook board](https://github.com/hashirshoaeb/star_book/projects/1). For more, refer [CONTRIBUTING.md](CONTRIBUTING.md)
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)

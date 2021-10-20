@@ -30,7 +30,9 @@ class ActivityPage extends StatelessWidget {
       ),
       navigationBar: c.CupertinoNavigationBar(
         backgroundColor: c.CupertinoDynamicColor.resolve(
-            c.CupertinoColors.tertiarySystemBackground, context),
+          c.CupertinoColors.tertiarySystemBackground,
+          context,
+        ),
         middle: Text('Activity'),
         trailing: GestureDetector(
           onTap: () => onEdit(context),
@@ -52,7 +54,7 @@ class ActivityPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "${getMonthTitle(activity.month)} ${activity.day}, ${activity.year}",
+                      "${activity.dateFormat()}",
                       style: Style.bodySecondary(context),
                     ),
                   ],
@@ -69,8 +71,7 @@ class ActivityPage extends StatelessWidget {
                 padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: SelectableText(activity.title,
                     showCursor: true,
-                    toolbarOptions:
-                        c.ToolbarOptions(copy: true, selectAll: true),
+                    toolbarOptions: c.ToolbarOptions(copy: true, selectAll: true),
                     style: Style.largeTitle(context),
                     enableInteractiveSelection: true),
               ),

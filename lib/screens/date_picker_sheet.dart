@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
+import 'package:star_book/utils/date.dart';
 
 // Files
 import '../widgets/my_container.dart';
@@ -26,7 +27,7 @@ class _DatePickerSheetState extends State<DatePickerSheet> {
     day = data['day'];
     month = data['month'];
     year = data['year'];
-    dateController.text = '$day-$month-$year';
+    dateController.text = getDateFormat(DateTime(year, month, day));
   }
 
   @override
@@ -74,7 +75,9 @@ class _DatePickerSheetState extends State<DatePickerSheet> {
                     onTap: null,
                     style: TextStyle(
                       color: c.CupertinoDynamicColor.resolve(
-                          c.CupertinoColors.label, context),
+                        c.CupertinoColors.label,
+                        context,
+                      ),
                     ),
                   ),
                 ),
@@ -86,7 +89,9 @@ class _DatePickerSheetState extends State<DatePickerSheet> {
                     'Choose Another Date',
                     style: TextStyle(
                       color: c.CupertinoDynamicColor.resolve(
-                          c.CupertinoColors.label, context),
+                        c.CupertinoColors.label,
+                        context,
+                      ),
                     ),
                   ),
                 ),
@@ -101,11 +106,10 @@ class _DatePickerSheetState extends State<DatePickerSheet> {
                         month = newdate.month;
                         year = newdate.year;
                       });
-                      dateController.text = '$day-$month-$year';
+                      dateController.text = getDateFormat(DateTime(year, month, day));
                     },
                     use24hFormat: true,
                     maximumDate: DateTime.now(),
-                    minimumYear: year,
                     maximumYear: year,
                     mode: c.CupertinoDatePickerMode.date,
                   ),

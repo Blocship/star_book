@@ -1,3 +1,6 @@
+import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
+
 /// Checks if the given date is equal to the current date.
 bool isCurrentDate(int year, int month, int day) {
   DateTime date = new DateTime(year, month, day);
@@ -26,9 +29,7 @@ bool isAfterCurrentDate(int year, int month, int day) {
 /// DateTime(year, month + 1, 0).day => Last day of month => 1 is first dat,
 /// 0 means previous day.
 int getDaysInMonth(int year, int month) {
-  return month < DateTime.monthsPerYear
-      ? DateTime(year, month + 1, 0).day
-      : DateTime(year + 1, 1, 0).day;
+  return month < DateTime.monthsPerYear ? DateTime(year, month + 1, 0).day : DateTime(year + 1, 1, 0).day;
 }
 
 /// Returns the next month,
@@ -77,6 +78,13 @@ String getMonthTitle(int month) {
 }
 
 String getDateFormat(DateTime date) {
-  String month = getMonthTitle(date.month).substring(0, 3);
-  return '$month ${date.day}, ${date.year}';
+  // return '$month ${date.day}, ${date.year}';
+  return DateFormat.yMMMMd(Intl.defaultLocale).format(date);
+}
+
+String getTimeFormat(BuildContext context, DateTime date) {
+  if (MediaQuery.of(context).alwaysUse24HourFormat)
+    return DateFormat.Hm(Intl.defaultLocale).format(date);
+  else
+    return DateFormat.jm(Intl.defaultLocale).format(date);
 }
