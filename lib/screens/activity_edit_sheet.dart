@@ -76,12 +76,17 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
   }
 
   void onDateTap() async {
-    dynamic date = await Navigator.of(context)
-        .pushNamed('edit/date', arguments: {'day': activity?.day, 'month': activity?.month, 'year': activity?.year});
+    dynamic date = await Navigator.of(context).pushNamed('edit/date',
+        arguments: {
+          'day': activity?.day,
+          'month': activity?.month,
+          'year': activity?.year
+        });
 
     // After getting date update the state.
     setState(() {
-      activity = ActivityController.readAt(date['day'], date['month'], date['year']);
+      activity =
+          ActivityController.readAt(date['day'], date['month'], date['year']);
       titleController.text = activity?.title == null ? '' : activity!.title!;
       noteController.text = activity?.note == null ? '' : activity!.note!;
       type = (activity?.moodId == null) ? ActivityType.add : ActivityType.edit;
@@ -226,7 +231,8 @@ class ActivityRouteInitializer extends StatelessWidget {
       onWillPop: () => _handlePopScope(context),
       child: Navigator(
         initialRoute: 'edit/title',
-        onGenerateRoute: (settings) => RouteGenerator.activityRoute(settings, activity),
+        onGenerateRoute: (settings) =>
+            RouteGenerator.activityRoute(settings, activity),
       ),
     );
   }
