@@ -20,8 +20,8 @@ class Month extends StatefulWidget {
   final bool showMonthTitle;
 
   Month({
-    @required this.month,
-    @required this.year,
+    required this.month,
+    required this.year,
     this.showMonthTitle = true,
     this.onPressed = false,
   });
@@ -31,17 +31,17 @@ class Month extends StatefulWidget {
 }
 
 class _MonthState extends c.State<Month> {
-  Activity _getActivity(int day) {
+  Activity? _getActivity(int day) {
     return ActivityController.readAt(day, widget.month, widget.year);
   }
 
   Widget _daysGrid(BuildContext context) {
     final int daysInMonth = getDaysInMonth(widget.year, widget.month);
     final int fistWeekDay = DateTime(widget.year, widget.month, 1).weekday;
-    final daysList = List<Day>();
+    final daysList = <Widget>[];
     for (int day = 2 - fistWeekDay; day <= daysInMonth; day++) {
       if (day <= 0) {
-        daysList.add(Day());
+        daysList.add(const Day());
       } else {
         daysList.add(Day(
           activity: _getActivity(day),
@@ -105,21 +105,19 @@ class MonthTitle extends StatelessWidget {
 
   static const int _thresh = 200;
   MonthTitle({
-    @required this.month,
-    this.year,
-    this.size,
+    required this.month,
+    required this.year,
+    required this.size,
   })  : assert(size <= _thresh || (size > _thresh && year != null)),
         _getYear = (size < _thresh) ? '' : year.toString();
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.fromLTRB(14, 10, 0, 10),
+      margin: const EdgeInsets.fromLTRB(14, 10, 0, 10),
       child: Text(
         '${getMonthTitle(month)} $_getYear',
-        style: (size < _thresh)
-            ? Style.footerNoteSecondary(context)
-            : Style.largeTitle(context),
+        style: (size < _thresh) ? Style.footerNoteSecondary(context) : Style.largeTitle(context),
       ),
       alignment: Alignment.centerLeft,
     );

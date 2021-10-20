@@ -10,28 +10,26 @@ const String _api = 'https://api.unsplash.com/';
 
 /// UnsplashAPIService class provides static methods to use UnSplash Api Services.
 class UnsplashAPIService {
-  static final UnsplashAPIService unsplashAPIServiceSingleton =
-      UnsplashAPIService._internal();
+  static final UnsplashAPIService unsplashAPIServiceSingleton = UnsplashAPIService._internal();
   UnsplashAPIService._internal();
   factory UnsplashAPIService() => unsplashAPIServiceSingleton;
 
   /// Retrieve List of [UnsplashPhoto] using Unsplash Api
-  static Future<List<UnsplashPhoto>> getPhotos(
-      int count, FToast _errorToast) async {
+  static Future<List<UnsplashPhoto>> getPhotos(int count, FToast _errorToast) async {
     assert(count > 0 && count <= 30);
 
-    List<UnsplashPhoto> photos = List<UnsplashPhoto>();
+    final List<UnsplashPhoto> photos = [];
     const String _path = 'photos/random/';
-    final String _clientID = DotEnv().env['CLIENT_ID'];
-    final String query =
-        '?count=$count&client_id=$_clientID&query=nature&color=dark&orientation=portrait';
+    final String? _clientID = DotEnv().env['CLIENT_ID'];
+    final String query = '?count=$count&client_id=$_clientID&query=nature&color=dark&orientation=portrait';
     try {
       print('$_api$_path$query');
-      Response response = await get('$_api$_path$query');
+
+      final Response response = await get(Uri.parse('$_api$_path$query'));
       if (response.statusCode == 200) {
-        List<dynamic> photosdata = json.decode(response.body);
+        final List<dynamic> photosdata = json.decode(response.body);
         photosdata.forEach((photoData) {
-          UnsplashPhoto photo = UnsplashPhoto.fromMap(photoData);
+          final UnsplashPhoto photo = UnsplashPhoto.fromMap(photoData);
           photos.add(photo);
         });
       } else if (response.statusCode == 401) {
@@ -39,8 +37,7 @@ class UnsplashAPIService {
         // displayErrorDescription(
         //     "Unauthorized access, Try again Later!!", _errorToast);
       } else {
-        print(
-            '[Unsplash API Error] ${response.statusCode}: ${response.reasonPhrase}');
+        print('[Unsplash API Error] ${response.statusCode}: ${response.reasonPhrase}');
         // displayErrorDescription(
         //     "Multiple error occurred, Try again Later!!", _errorToast);
       }

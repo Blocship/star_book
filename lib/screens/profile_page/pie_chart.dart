@@ -4,7 +4,10 @@ class PieChartWidget extends StatefulWidget {
   final DateTime from;
   final DateTime to;
 
-  PieChartWidget({this.from, this.to});
+  PieChartWidget({
+    required this.from,
+    required this.to,
+  });
 
   @override
   _PieChartWidgetState createState() => _PieChartWidgetState();
@@ -14,7 +17,9 @@ class _PieChartWidgetState extends State<PieChartWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 16),
+      width: MediaQuery.of(context).size.width - 16 - 16,
+      height: MediaQuery.of(context).size.width - 16 - 16,
+      // padding: EdgeInsets.symmetric(vertical: 16),
       child: PieChart(
         PieChartData(
           borderData: FlBorderData(show: false),
@@ -44,8 +49,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
       },
     );
     int totalDays = widget.to.difference(widget.from).inDays + 1;
-    int emptyDays =
-        totalDays - ActivityController.rangeLength(widget.from, widget.to);
+    int emptyDays = totalDays - ActivityController.rangeLength(widget.from, widget.to);
     if (chart.length == 0)
       chart.add(
         PieChartSectionData(

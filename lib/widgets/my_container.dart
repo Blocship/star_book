@@ -7,8 +7,8 @@ final kBorderRadus = BorderRadius.circular(8);
 
 /// Cupertino style container widget
 class MyContainer extends StatelessWidget {
-  MyContainer({
-    @required this.child,
+  const MyContainer({
+    required this.child,
     this.onTap,
     this.margin,
     this.padding,
@@ -18,12 +18,12 @@ class MyContainer extends StatelessWidget {
   });
 
   final Widget child;
-  final Function onTap;
-  final EdgeInsets margin;
-  final EdgeInsetsGeometry padding;
-  final BoxDecoration boxDecoration;
-  final double width;
-  final double height;
+  final VoidCallback? onTap;
+  final EdgeInsets? margin;
+  final EdgeInsetsGeometry? padding;
+  final BoxDecoration? boxDecoration;
+  final double? width;
+  final double? height;
 
   @override
   Widget build(BuildContext context) {

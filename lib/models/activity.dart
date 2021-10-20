@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 import '../utils/constant.dart';
 import '../utils/string.dart';
 
-part '../models_hive_generated/activity.g.dart';
+part 'activity.g.dart';
 
 /// If you think as relational database then it is the name of [Activity] table.
 ///
@@ -22,40 +22,39 @@ const String activityBoxName = 'activity';
 @HiveType(typeId: kActivityTypeId)
 class Activity extends HiveObject {
   @HiveField(0)
-  int id;
+  final int? id;
   @HiveField(1)
-  int day;
+  final int day;
   @HiveField(2)
-  int month;
+  final int month;
   @HiveField(3)
-  int year;
+  final int year;
   @HiveField(4)
-  int moodId;
+  final int? moodId;
   @HiveField(5)
-  String title;
+  final String? title;
   @HiveField(6)
-  String note;
+  final String? note;
 
   Activity({
     this.id,
-    this.day,
-    this.month,
-    this.year,
+    required this.day,
+    required this.month,
+    required this.year,
     this.moodId,
     this.title,
     this.note,
   });
 
   /// Deep copy constructor
-  Activity.from(Activity activity) {
-    this.id = activity.id;
-    this.day = activity.day;
-    this.month = activity.month;
-    this.year = activity.year;
-    this.moodId = activity.moodId;
-    this.title = activity.title;
-    this.note = activity.note;
-  }
+  Activity.from(Activity activity)
+      : this.id = activity.id,
+        this.day = activity.day,
+        this.month = activity.month,
+        this.year = activity.year,
+        this.moodId = activity.moodId,
+        this.title = activity.title,
+        this.note = activity.note;
 
   @override
   int get hashCode {
@@ -77,13 +76,13 @@ class Activity extends HiveObject {
   }
 
   Activity copyWith({
-    int id,
-    int day,
-    int month,
-    int year,
-    int moodId,
-    String title,
-    String note,
+    int? id,
+    int? day,
+    int? month,
+    int? year,
+    int? moodId,
+    String? title,
+    String? note,
   }) {
     return Activity(
         id: id ?? this.id,
@@ -118,7 +117,7 @@ class Activity extends HiveObject {
 }
 
 /// Mock list of Activities
-List<Activity> mActivityList = new List<Activity>()
+List<Activity> mActivityList = []
   // Happy Day
   ..add(Activity(
     day: 01,

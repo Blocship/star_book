@@ -5,11 +5,14 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:star_book/models/brightness.dart';
+import 'package:star_book/models/user.dart';
 
 // Files
 import './controllers/global_setting.dart';
 import './models/activity.dart';
-import './models/global_setting.dart';
+import 'models/activity.dart';
+import 'models/index.dart';
 import './models/mood.dart';
 import './routes/route_generator.dart';
 import './utils/brightness.dart';
@@ -25,7 +28,7 @@ void main() async {
   ]);
   await hiveInitialize();
   // await ActivityController.initialize();
-  await DotEnv().load('.env');
+  // await DotEnv().load(fileName: '.env');
   runApp(MyApp());
 }
 
@@ -49,12 +52,10 @@ class MyApp extends StatelessWidget {
       valueListenable: Hive.box(globalSettingBoxName).listenable(),
       builder: (context, box, widget) {
         return c.CupertinoApp(
-          initialRoute: (isNullOrEmpty(GlobalSettingController.getuser().name))
-              ? 'username_add'
-              : 'home',
-          title: "StarBook",
+          initialRoute: (isNullOrEmpty(GlobalSettingController.getuser().name)) ? 'username_add' : 'home',
+          title: 'StarBook',
           theme: c.CupertinoThemeData(brightness: brightness),
-          localizationsDelegates: [
+          localizationsDelegates: const [
             DefaultMaterialLocalizations.delegate,
             c.DefaultCupertinoLocalizations.delegate,
             DefaultWidgetsLocalizations.delegate,
