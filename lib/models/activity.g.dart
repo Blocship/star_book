@@ -6,17 +6,17 @@ part of 'activity.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class ActivityAdapter extends TypeAdapter<Activity> {
+class ActivityAdapter extends TypeAdapter<_$_Activity> {
   @override
   final int typeId = 0;
 
   @override
-  Activity read(BinaryReader reader) {
+  _$_Activity read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Activity(
+    return _$_Activity(
       id: fields[0] as int?,
       day: fields[1] as int,
       month: fields[2] as int,
@@ -28,7 +28,7 @@ class ActivityAdapter extends TypeAdapter<Activity> {
   }
 
   @override
-  void write(BinaryWriter writer, Activity obj) {
+  void write(BinaryWriter writer, _$_Activity obj) {
     writer
       ..writeByte(7)
       ..writeByte(0)

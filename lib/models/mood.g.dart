@@ -6,17 +6,17 @@ part of 'mood.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class MoodAdapter extends TypeAdapter<Mood> {
+class MoodAdapter extends TypeAdapter<_$_Mood> {
   @override
   final int typeId = 1;
 
   @override
-  Mood read(BinaryReader reader) {
+  _$_Mood read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return Mood(
+    return _$_Mood(
       id: fields[0] as int,
       label: fields[1] as String,
       colorCode: fields[2] as int,
@@ -24,7 +24,7 @@ class MoodAdapter extends TypeAdapter<Mood> {
   }
 
   @override
-  void write(BinaryWriter writer, Mood obj) {
+  void write(BinaryWriter writer, _$_Mood obj) {
     writer
       ..writeByte(3)
       ..writeByte(0)

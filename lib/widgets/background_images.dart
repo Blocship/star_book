@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart' as c;
+import 'package:flutter/material.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -42,11 +42,13 @@ class _BackgroundImageState extends State<BackgroundImage> {
         future: _getBGImages,
         builder: (c.BuildContext context, c.AsyncSnapshot snapshot) {
           Widget child;
-          if ((snapshot.connectionState == c.ConnectionState.done) && (snapshot.hasData) && (snapshot.data.isNotEmpty)) {
+          if ((snapshot.connectionState == c.ConnectionState.done) &&
+              (snapshot.hasData) &&
+              (snapshot.data.isNotEmpty)) {
             images = snapshot.data;
             try {
               child = BlurHash(
-                hash: images[widget.month - 1].blurhash,
+                hash: images[widget.month - 1].blurHash,
                 image: images[widget.month - 1].url,
                 imageFit: c.BoxFit.cover,
               );
@@ -54,7 +56,9 @@ class _BackgroundImageState extends State<BackgroundImage> {
               //Handle Errors
               // handleErrors(_err, errToast);
               child = Image.asset(
-                brightness == Brightness.light ? 'backup-bg-image.JPG' : 'bg_dark.jpg',
+                brightness == Brightness.light
+                    ? 'backup-bg-image.JPG'
+                    : 'bg_dark.jpg',
                 fit: BoxFit.cover,
                 width: double.infinity,
                 height: double.infinity,
@@ -62,7 +66,9 @@ class _BackgroundImageState extends State<BackgroundImage> {
             }
           } else {
             child = Image.asset(
-              brightness == Brightness.light ? 'backup-bg-image.JPG' : 'bg_dark.jpg',
+              brightness == Brightness.light
+                  ? 'backup-bg-image.JPG'
+                  : 'bg_dark.jpg',
               fit: BoxFit.cover,
               width: double.infinity,
               height: double.infinity,
