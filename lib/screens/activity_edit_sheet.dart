@@ -119,7 +119,7 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
         middle: Text('${(type == ActivityType.add) ? 'Add' : 'Edit'} Activity'),
         trailing: c.CupertinoButton(
           onPressed: activity!.isFilled() ? () => onDone(context) : null,
-          child: Text('Done'),
+          child: const Text('Done'),
           padding: EdgeInsets.zero,
         ),
         border: null,
@@ -129,7 +129,7 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+              const Padding(padding: EdgeInsets.symmetric(vertical: 18)),
               MyContainer(
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -146,7 +146,7 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
                 ),
                 onTap: onDateTap,
               ),
-              Padding(padding: EdgeInsets.symmetric(vertical: 8)),
+              const Padding(padding: EdgeInsets.symmetric(vertical: 8)),
               ColorContainer(
                 text: 'Mood',
                 color: _getMoodColor(context),

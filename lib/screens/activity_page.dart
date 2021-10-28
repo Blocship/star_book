@@ -6,12 +6,12 @@ import 'package:flutter/widgets.dart';
 import '../models/activity.dart';
 import '../models/mood.dart';
 import '../styles/style.dart';
-import '../utils/date.dart';
 
 /// Activity Page Screen widget displays [Activity]
 class ActivityPage extends StatelessWidget {
   // TODO: moodID and color id is same, this may break change later,
   // will get the mood from list on the basis of moodId.
+  static const String id = 'activity';
   ActivityPage(this.activity) : mood = mMoodList[activity.moodId!];
 
   final Mood mood;
@@ -68,7 +68,8 @@ class ActivityPage extends StatelessWidget {
                 ),
               ),
               Container(
-                padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                 child: SelectableText(
                   activity.title!,
                   showCursor: true,

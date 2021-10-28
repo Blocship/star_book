@@ -20,7 +20,8 @@ import '../utils/bottom_sheet.dart';
 /// Centralised routing class.
 /// Static methods inside, define named routes
 class RouteGenerator {
-  static final RouteGenerator routeGeneratorSingleton = RouteGenerator._internal();
+  static final RouteGenerator routeGeneratorSingleton =
+      RouteGenerator._internal();
   RouteGenerator._internal();
   factory RouteGenerator() => routeGeneratorSingleton;
 
@@ -37,7 +38,7 @@ class RouteGenerator {
         return MaterialWithModalsPageRoute(
           builder: (context) => Home(),
         );
-      case 'activity':
+      case ActivityPage.id:
         return MaterialWithModalsPageRoute(
           builder: (context) => ActivityPage(args as Activity),
         );
