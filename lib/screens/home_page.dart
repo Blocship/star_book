@@ -113,8 +113,9 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     // set the brightness on status bar
-    SystemChrome.setSystemUIOverlayStyle(
-        (brightness == Brightness.dark) ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark);
+    SystemChrome.setSystemUIOverlayStyle((brightness == Brightness.dark)
+        ? SystemUiOverlayStyle.light
+        : SystemUiOverlayStyle.dark);
 
     return Stack(
       children: [
@@ -146,7 +147,7 @@ class _HomePageState extends State<HomePage> {
                   child: c.GestureDetector(
                     onHorizontalDragEnd: onHorizontalDragEnd,
                     child: Container(
-                      padding: c.EdgeInsets.symmetric(horizontal: 12),
+                      padding: const c.EdgeInsets.symmetric(horizontal: 12),
                       child: Month(
                         month: month,
                         year: year,

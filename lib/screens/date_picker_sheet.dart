@@ -23,7 +23,7 @@ class _DatePickerSheetState extends State<DatePickerSheet> {
   @override
   void initState() {
     super.initState();
-    final data = widget.settings.arguments as Map<String, int>;
+    final data = widget.settings.arguments as Map<String, int?>;
     day = data['day']!;
     month = data['month']!;
     year = data['year']!;
@@ -106,7 +106,8 @@ class _DatePickerSheetState extends State<DatePickerSheet> {
                         month = newdate.month;
                         year = newdate.year;
                       });
-                      dateController.text = getDateFormat(DateTime(year, month, day));
+                      dateController.text =
+                          getDateFormat(DateTime(year, month, day));
                     },
                     use24hFormat: true,
                     maximumDate: DateTime.now(),

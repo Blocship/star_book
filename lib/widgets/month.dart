@@ -19,7 +19,7 @@ class Month extends StatefulWidget {
   final bool onPressed;
   final bool showMonthTitle;
 
-  Month({
+  const Month({
     required this.month,
     required this.year,
     this.showMonthTitle = true,
@@ -117,7 +117,9 @@ class MonthTitle extends StatelessWidget {
       margin: const EdgeInsets.fromLTRB(14, 10, 0, 10),
       child: Text(
         '${getMonthTitle(month)} $_getYear',
-        style: (size < _thresh) ? Style.footerNoteSecondary(context) : Style.largeTitle(context),
+        style: (size < _thresh)
+            ? Style.footerNoteSecondary(context)
+            : Style.largeTitle(context),
       ),
       alignment: Alignment.centerLeft,
     );
