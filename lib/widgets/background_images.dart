@@ -33,38 +33,33 @@ class _BackgroundImageState extends State<BackgroundImage> {
   }
 
   Future<List<UnsplashPhoto>> initImages() async {
-    return UnsplashAPIService.getPhotos(12, errToast);
+    return await UnsplashAPIService.getPhotos(12, errToast);
   }
 
   @override
   Widget build(BuildContext context) {
     return c.FutureBuilder(
-        future: _getBGImages,
-        builder: (c.BuildContext context, c.AsyncSnapshot snapshot) {
-          Widget child;
-          if ((snapshot.connectionState == c.ConnectionState.done) &&
-              (snapshot.hasData) &&
-              (snapshot.data.isNotEmpty)) {
-            images = snapshot.data;
-            try {
-              child = BlurHash(
-                hash: images[widget.month - 1].blurHash,
-                image: images[widget.month - 1].url,
-                imageFit: c.BoxFit.cover,
-              );
-            } catch (_err) {
-              //Handle Errors
-              // handleErrors(_err, errToast);
-              child = Image.asset(
-                brightness == Brightness.light
-                    ? 'backup-bg-image.JPG'
-                    : 'bg_dark.jpg',
-                fit: BoxFit.cover,
-                width: double.infinity,
-                height: double.infinity,
-              );
-            }
-          } else {
+      future: _getBGImages,
+      builder: (c.BuildContext context, c.AsyncSnapshot snapshot) {
+        Widget child;
+        String credits;
+        print(snapshot);
+        if ((snapshot.connectionState == c.ConnectionState.done) &&
+            (snapshot.hasData) &&
+            (snapshot.data.isNotEmpty)) {
+          images = snapshot.data;
+          credits = images[widget.month - 1].photographer;
+
+          try {
+            child = BlurHash(
+              hash: images[widget.month - 1].blurHash,
+              image: images[widget.month - 1].url,
+              imageFit: c.BoxFit.cover,
+            );
+             } catch (_err) {
+            //Handle Errors
+            // handleErrors(_err, errToast);
+
             child = Image.asset(
               brightness == Brightness.light
                   ? 'backup-bg-image.JPG'
@@ -74,12 +69,36 @@ class _BackgroundImageState extends State<BackgroundImage> {
               height: double.infinity,
             );
           }
-          return c.AnimatedSwitcher(
-            child: child,
-            switchInCurve: Curves.easeIn,
-            switchOutCurve: Curves.easeOut,
-            duration: const Duration(milliseconds: 800),
+        } else {
+          child = Image.asset(
+            brightness == Brightness.light
+                ? 'backup-bg-image.JPG'
+                : 'bg_dark.jpg',
+            fit: BoxFit.cover,
+            width: double.infinity,
+            height: double.infinity,
           );
-        });
+          credits = '';
+        }
+        return c.AnimatedSwitcher(
+          child: Stack(
+            children: [
+              child,
+              Positioned(
+                child: Text(
+                  credits,
+                  style: const TextStyle(color: Colors.black, fontSize: 18),
+                ),
+                bottom: 100,
+                right: 100,
+              ),
+            ],
+          ),
+          switchInCurve: Curves.easeIn,
+          switchOutCurve: Curves.easeOut,
+          duration: const Duration(milliseconds: 800),
+        );
+      },
+    );
   }
 }
