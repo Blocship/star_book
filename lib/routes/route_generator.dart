@@ -34,7 +34,7 @@ class RouteGenerator {
         return MaterialWithModalsPageRoute(
           builder: (context) => UsernameAddSheet(),
         );
-      case 'home':
+      case Home.id:
         return MaterialWithModalsPageRoute(
           builder: (context) => Home(),
         );

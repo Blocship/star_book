@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart' as c;
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as m;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -12,6 +12,7 @@ import '../widgets/background_images.dart';
 import '../widgets/month.dart';
 
 class Home extends StatefulWidget {
+  static const String id = 'home';
   @override
   _HomeState createState() => _HomeState();
 }
@@ -52,16 +53,22 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    return c.CupertinoTabScaffold(
-      backgroundColor: const Color(0x00000000),
-      tabBar: c.CupertinoTabBar(
-        backgroundColor: const Color(0x00000000),
-        border: null,
-        onTap: changeTab,
-        currentIndex: selectedTab.index,
-        items: bottomTabItems,
+    return m.Scaffold(
+      floatingActionButton: m.FloatingActionButton(
+        onPressed: () {},
+        child: const Icon(m.Icons.edit),
       ),
-      tabBuilder: tabBuilder,
+      bottomNavigationBar: c.CupertinoTabScaffold(
+        backgroundColor: const Color(0x00000000),
+        tabBar: c.CupertinoTabBar(
+          backgroundColor: const Color(0x00000000),
+          border: null,
+          onTap: changeTab,
+          currentIndex: selectedTab.index,
+          items: bottomTabItems,
+        ),
+        tabBuilder: tabBuilder,
+      ),
     );
   }
 }
