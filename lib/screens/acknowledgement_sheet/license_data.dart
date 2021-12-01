@@ -10,7 +10,7 @@ class _LicenseData {
 
   // Special treatment for the first package since it should be the package
   // for delivered application.
-  String firstPackage;
+  String? firstPackage;
 
   void addLicense(LicenseEntry entry) {
     // Before the license can be added, we must first record the packages to
@@ -20,12 +20,12 @@ class _LicenseData {
       // Bind this license to the package using the next index value. This
       // creates a contract that this license must be inserted at this same
       // index value.
-      packageLicenseBindings[package].add(licenses.length);
+      packageLicenseBindings[package]!.add(licenses.length);
     }
     licenses.add(entry); // Completion of the contract above.
   }
 
-  /// Add a package and initialise package license binding. This is a no-op if
+  /// Add a package and initialize package license binding. This is a no-op if
   /// the package has been seen before.
   void _addPackage(String package) {
     if (!packageLicenseBindings.containsKey(package)) {
@@ -38,7 +38,7 @@ class _LicenseData {
   /// Sort the packages using some comparison method, or by the default manner,
   /// which is to put the application package first, followed by every other
   /// package in case-insensitive alphabetical order.
-  void sortPackages([int compare(String a, String b)]) {
+  void sortPackages([int Function(String a, String b)? compare]) {
     packages.sort(compare ??
         (String a, String b) {
           // Based on how LicenseRegistry currently behaves, the first package

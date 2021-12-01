@@ -8,13 +8,16 @@ import '../styles/style.dart';
 class PackageSheetArgument {
   final String package;
   final List<LicenseEntry> licenses;
-  PackageSheetArgument({this.package, this.licenses});
+  PackageSheetArgument({
+    required this.package,
+    required this.licenses,
+  });
 }
 
 class PackageSheet extends StatefulWidget {
   final PackageSheetArgument args;
 
-  PackageSheet(this.args);
+  const PackageSheet(this.args);
   @override
   _PackageSheetState createState() => _PackageSheetState();
 }
@@ -76,9 +79,9 @@ class _PackageSheetState extends State<PackageSheet> {
         CupertinoColors.systemGrey6,
         context,
       ),
-      navigationBar: CupertinoNavigationBar(),
+      navigationBar: const CupertinoNavigationBar(),
       child: SafeArea(
-        minimum: EdgeInsets.symmetric(horizontal: 16),
+        minimum: const EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           child: Column(
             children: _licenses,

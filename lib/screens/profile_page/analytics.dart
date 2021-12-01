@@ -21,9 +21,9 @@ class Analytics extends StatefulWidget {
 }
 
 class _AnalyticsState extends State<Analytics> {
-  AnalyticsOption selectedOption;
-  DateTime selectedfrom;
-  DateTime selectedto;
+  late AnalyticsOption selectedOption;
+  late DateTime selectedfrom;
+  late DateTime selectedto;
 
   @override
   void initState() {
@@ -41,8 +41,7 @@ class _AnalyticsState extends State<Analytics> {
             children: options,
             groupValue: selectedOption,
             onValueChanged: onSlidingSegmentChanged,
-            backgroundColor: c.CupertinoDynamicColor.resolve(
-                c.CupertinoColors.systemGrey6, context),
+            backgroundColor: c.CupertinoDynamicColor.resolve(c.CupertinoColors.systemGrey6, context),
           ),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -99,9 +98,9 @@ class _AnalyticsState extends State<Analytics> {
     }
   }
 
-  void onSlidingSegmentChanged(AnalyticsOption option) {
+  void onSlidingSegmentChanged(AnalyticsOption? option) {
     setState(() {
-      selectedOption = option;
+      selectedOption = option!;
       selectedto = to;
       selectedfrom = from;
     });

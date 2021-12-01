@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:star_book/models/activity.dart';
 
 // Files
 import '../screens/acknowledgement_sheet/acknowledgement_sheet.dart';
@@ -19,7 +20,8 @@ import '../utils/bottom_sheet.dart';
 /// Centralised routing class.
 /// Static methods inside, define named routes
 class RouteGenerator {
-  static final RouteGenerator routeGeneratorSingleton = RouteGenerator._internal();
+  static final RouteGenerator routeGeneratorSingleton =
+      RouteGenerator._internal();
   RouteGenerator._internal();
   factory RouteGenerator() => routeGeneratorSingleton;
 
@@ -32,13 +34,13 @@ class RouteGenerator {
         return MaterialWithModalsPageRoute(
           builder: (context) => UsernameAddSheet(),
         );
-      case 'home':
+      case Home.id:
         return MaterialWithModalsPageRoute(
           builder: (context) => Home(),
         );
-      case 'activity':
+      case ActivityPage.id:
         return MaterialWithModalsPageRoute(
-          builder: (context) => ActivityPage(args),
+          builder: (context) => ActivityPage(args as Activity),
         );
       case 'year':
         return MaterialWithModalsPageRoute(
@@ -46,11 +48,11 @@ class RouteGenerator {
         );
       case 'preferance':
         return CupertinoModalBottomSheetRouteWrapper(
-          builder: (context, controller) => PreferenceRouteInitializer(),
+          builder: (context) => PreferenceRouteInitializer(),
         );
       case 'edit':
         return CupertinoModalBottomSheetRouteWrapper(
-          builder: (context, controller) => ActivityRouteInitializer(args),
+          builder: (context) => ActivityRouteInitializer(args as Activity),
         );
       default:
         return MaterialWithModalsPageRoute(
@@ -103,7 +105,7 @@ class RouteGenerator {
         );
       case 'preference/acknowledgement/licenses':
         return MaterialWithModalsPageRoute(
-          builder: (context) => PackageSheet(args),
+          builder: (context) => PackageSheet(args as PackageSheetArgument),
         );
       default:
         return MaterialWithModalsPageRoute(

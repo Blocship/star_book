@@ -7,9 +7,9 @@ class ErrorPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
       backgroundColor: c.CupertinoColors.systemBackground,
-      navigationBar: c.CupertinoNavigationBar(
+      navigationBar: const c.CupertinoNavigationBar(
         backgroundColor: c.CupertinoColors.systemBackground,
-        middle: Text("Error"),
+        middle: Text('Error'),
         border: null,
       ),
       child: Center(
@@ -18,11 +18,10 @@ class ErrorPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Text(
-              "404",
-              style:
-                  c.CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
+              '404',
+              style: c.CupertinoTheme.of(context).textTheme.navLargeTitleTextStyle,
             ),
-            Text("Page you are looking for, does not exist"),
+            const Text('Page you are looking for, does not exist'),
           ],
         ),
       ),

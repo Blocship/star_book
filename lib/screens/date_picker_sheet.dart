@@ -18,15 +18,15 @@ class DatePickerSheet extends StatefulWidget {
 
 class _DatePickerSheetState extends State<DatePickerSheet> {
   TextEditingController dateController = TextEditingController();
-  int day, month, year;
+  late int day, month, year;
 
   @override
   void initState() {
     super.initState();
-    var data = widget.settings.arguments as Map<String, int>;
-    day = data['day'];
-    month = data['month'];
-    year = data['year'];
+    final data = widget.settings.arguments as Map<String, int?>;
+    day = data['day']!;
+    month = data['month']!;
+    year = data['year']!;
     dateController.text = getDateFormat(DateTime(year, month, day));
   }
 
@@ -106,7 +106,8 @@ class _DatePickerSheetState extends State<DatePickerSheet> {
                         month = newdate.month;
                         year = newdate.year;
                       });
-                      dateController.text = getDateFormat(DateTime(year, month, day));
+                      dateController.text =
+                          getDateFormat(DateTime(year, month, day));
                     },
                     use24hFormat: true,
                     maximumDate: DateTime.now(),

@@ -3,11 +3,11 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:star_book/models/brightness.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // Files
 import '../../controllers/global_setting.dart';
-import '../../models/global_setting.dart';
 import '../../routes/route_generator.dart';
 import '../../services/notification_service.dart';
 import '../../styles/style.dart';
@@ -50,7 +50,7 @@ class PreferenceSheet extends StatefulWidget {
 
 class PreferenceSheetState extends State<PreferenceSheet> {
   BrightnessOption _selectedOption = GlobalSettingController.getBrightnessOption();
-  DateTime _reminderTime;
+  late DateTime _reminderTime;
 
   @override
   void initState() {
@@ -156,7 +156,7 @@ class PreferenceSheetState extends State<PreferenceSheet> {
                   ],
                 ),
                 onTap: () async {
-                  RouteSettings settings;
+                  RouteSettings? settings;
                   // Navigator.push(
                   //   context,
                   //   MaterialPageRoute(
@@ -198,9 +198,9 @@ class PreferenceSheetState extends State<PreferenceSheet> {
     );
   }
 
-  void onSlidingSegmentChanged(BrightnessOption option) {
+  void onSlidingSegmentChanged(BrightnessOption? option) {
     setState(() {
-      _selectedOption = option;
+      _selectedOption = option!;
       GlobalSettingController.setbrightnessOption(_selectedOption);
       print(GlobalSettingController.getBrightnessOption().toString());
     });

@@ -27,12 +27,12 @@ class _YearPageState extends State<YearPage> {
           c.CupertinoColors.systemBackground,
           context,
         ),
-        middle: Text('Year'),
+        middle: const Text('Year'),
         previousPageTitle: 'Home',
         border: null,
       ),
       child: SafeArea(
-        minimum: EdgeInsets.symmetric(horizontal: 16),
+        minimum: const EdgeInsets.symmetric(horizontal: 16),
         child: ListView.builder(
           padding: EdgeInsets.zero,
           scrollDirection: Axis.vertical,

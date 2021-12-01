@@ -6,19 +6,19 @@ import 'package:flutter/widgets.dart';
 import '../models/activity.dart';
 import '../models/mood.dart';
 import '../styles/style.dart';
-import '../utils/date.dart';
 
 /// Activity Page Screen widget displays [Activity]
 class ActivityPage extends StatelessWidget {
   // TODO: moodID and color id is same, this may break change later,
   // will get the mood from list on the basis of moodId.
-  ActivityPage(this.activity) : mood = mMoodList[activity.moodId];
+  static const String id = 'activity';
+  ActivityPage(this.activity) : mood = mMoodList[activity.moodId!];
 
   final Mood mood;
   final Activity activity;
 
   void onEdit(BuildContext context) async {
-    await Navigator.of(context).popAndPushNamed("edit", arguments: activity);
+    await Navigator.of(context).popAndPushNamed('edit', arguments: activity);
   }
 
   @override
@@ -33,11 +33,11 @@ class ActivityPage extends StatelessWidget {
           c.CupertinoColors.tertiarySystemBackground,
           context,
         ),
-        middle: Text('Activity'),
+        middle: const Text('Activity'),
         trailing: GestureDetector(
           onTap: () => onEdit(context),
           child: Text(
-            "Edit",
+            'Edit',
             style: c.CupertinoTheme.of(context).textTheme.navActionTextStyle,
           ),
         ),
@@ -49,36 +49,39 @@ class ActivityPage extends StatelessWidget {
             crossAxisAlignment: c.CrossAxisAlignment.start,
             children: [
               Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      "${activity.dateFormat()}",
+                      '${activity.dateFormat()}',
                       style: Style.bodySecondary(context),
                     ),
                   ],
                 ),
               ),
               Container(
-                padding: EdgeInsets.all(16),
+                padding: const EdgeInsets.all(16),
                 child: Text(
                   mood.label,
                   style: Style.body(context),
                 ),
               ),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
-                child: SelectableText(activity.title,
-                    showCursor: true,
-                    toolbarOptions: c.ToolbarOptions(copy: true, selectAll: true),
-                    style: Style.largeTitle(context),
-                    enableInteractiveSelection: true),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                child: SelectableText(
+                  activity.title!,
+                  showCursor: true,
+                  toolbarOptions: c.ToolbarOptions(copy: true, selectAll: true),
+                  style: Style.largeTitle(context),
+                  enableInteractiveSelection: true,
+                ),
               ),
               Container(
                 padding: EdgeInsets.all(16),
                 child: SelectableText(
-                  activity.note,
+                  activity.note!,
                   showCursor: true,
                   toolbarOptions: c.ToolbarOptions(copy: true, selectAll: true),
                   style: Style.body(context),

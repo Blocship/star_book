@@ -11,11 +11,11 @@ import '../utils/date.dart';
 ///
 /// Renders default color if [MoodId] in [Activity] is not filled
 class Day extends StatelessWidget {
-  final Activity activity;
-  final double size;
+  final Activity? activity;
+  final double? size;
   final bool onPressed;
 
-  Day({
+  const Day({
     this.activity,
     this.size,
     this.onPressed = true,
@@ -29,19 +29,19 @@ class Day extends StatelessWidget {
   String _getText() {
     if (activity == null)
       return '';
-    else if (activity.day == null)
+    else if (activity!.day == null)
       return '';
     else
-      return activity.day.toString();
+      return activity!.day.toString();
   }
 
-  c.CupertinoDynamicColor _getTextColor(BuildContext context) {
+  Color _getTextColor(BuildContext context) {
     if (activity == null) {
       return c.CupertinoDynamicColor.resolve(
         c.CupertinoColors.label,
         context,
       );
-    } else if (activity.moodId != null) {
+    } else if (activity!.moodId != null) {
       return c.CupertinoDynamicColor.resolve(
         c.CupertinoColors.tertiarySystemBackground,
         context,
@@ -57,10 +57,10 @@ class Day extends StatelessWidget {
   Color _getBackgroundColor(BuildContext context) {
     if (activity == null) {
       // show white/transparent colors
-      return Color(0x00ffffff);
-    } else if (activity.moodId != null) {
+      return const Color(0x00ffffff);
+    } else if (activity!.moodId != null) {
       // get color by sending mood,
-      int colorCode = activity.moodId;
+      final int colorCode = activity!.moodId!;
       return c.CupertinoDynamicColor.resolve(
         getColor(MoodColor.values[colorCode]),
         context,
@@ -75,20 +75,18 @@ class Day extends StatelessWidget {
   }
 
   void _onDayPressed(BuildContext context) async {
-    if (activity == null ||
-        isAfterCurrentDate(activity.year, activity.month, activity.day)) {
+    if (activity == null || isAfterCurrentDate(activity!.year, activity!.month, activity!.day)) {
       await c.showCupertinoDialog(
         context: context,
         builder: (_) {
           return AlertDialog(
             title: 'Cannot Add Activity',
-            content:
-                'You cannot add a activity for ${activity.day}-${activity.month}-${activity.year}.',
+            content: 'You cannot add a activity for ${activity!.day}-${activity!.month}-${activity!.year}.',
           );
         },
       );
-    } else if (activity.moodId == null) {
-      Navigator.of(context).pushNamed("edit", arguments: activity);
+    } else if (activity!.moodId == null) {
+      Navigator.of(context).pushNamed('edit', arguments: activity);
     } else {
       Navigator.of(context).pushNamed('activity', arguments: activity);
     }
@@ -98,13 +96,11 @@ class Day extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (BuildContext context, BoxConstraints constraints) {
-        final double _size = (size == null) ? constraints.maxWidth : size;
+        final double _size = (size == null) ? constraints.maxWidth : size!;
         // print('day size: $_size');
         return c.CupertinoButton(
           padding: EdgeInsets.zero,
-          onPressed: (onPressed && activity != null)
-              ? () => _onDayPressed(context)
-              : null,
+          onPressed: (onPressed && activity != null) ? () => _onDayPressed(context) : null,
           child: Container(
             height: _size,
             width: _size,
