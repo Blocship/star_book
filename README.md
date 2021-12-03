@@ -21,7 +21,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/hashirshoaeb/star_book?color=ffcc66&style=for-the-badge)](https://github.com/hashirshoaeb/star_book/issues)
 [![GitHub license](https://img.shields.io/github/license/hashirshoaeb/star_book?style=for-the-badge)](https://github.com/hashirshoaeb/star_book/blob/master/LICENSE)
 [![Twitter Follow](https://img.shields.io/twitter/follow/hashirshoaeb?color=ffcc66&logo=twitter&logoColor=ffffff&style=for-the-badge)](https://twitter.com/hashirshoaeb)
-[![Flutter Version](https://img.shields.io/static/v1?label=Flutter&message=1.22.2&color=ffcc66&style=for-the-badge)](https://flutter.dev/docs/development/tools/sdk/releases)
+[![Flutter Version](https://img.shields.io/static/v1?label=Flutter&message=2.5.1&color=ffcc66&style=for-the-badge)](https://flutter.dev/docs/development/tools/sdk/releases)
 
 ## Get the App
 
