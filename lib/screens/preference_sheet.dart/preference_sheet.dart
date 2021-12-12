@@ -18,6 +18,7 @@ import '../time_picker_sheet.dart';
 
 part 'about_developer.dart';
 part 'legal.dart';
+part 'data_privacy.dart';
 
 Map<BrightnessOption, Widget> options = {
   BrightnessOption.auto: SlidingSegment(c.CupertinoIcons.circle_lefthalf_fill),
@@ -180,6 +181,8 @@ class PreferenceSheetState extends State<PreferenceSheet> {
               ),
               Padding(padding: EdgeInsets.symmetric(vertical: 18)),
               AboutDeveloper(),
+              Padding(padding: EdgeInsets.symmetric(vertical: 18)),
+              Privacy(),
               Padding(padding: EdgeInsets.symmetric(vertical: 18)),
               Legal(),
               Padding(padding: EdgeInsets.symmetric(vertical: 18)),
