@@ -11,6 +11,7 @@ import '../package_sheet.dart';
 part 'license_data.dart';
 
 class AcknowledgementSheet extends StatelessWidget {
+  static const String Acknowledgement = '/preference/acknowledgement';
   final Future<_LicenseData> licenses = LicenseRegistry.licenses
       .fold<_LicenseData>(
         _LicenseData(),
@@ -75,7 +76,7 @@ class AcknowledgementSheet extends StatelessWidget {
                   ),
                   onTap: () {
                     Navigator.of(context).pushNamed(
-                      'preference/acknowledgement/licenses',
+                      PackageSheet.Licenses,
                       arguments: PackageSheetArgument(
                         package: package,
                         licenses: data.packageLicenseBindings[package]!.map((index) => data.licenses[index]).toList(),

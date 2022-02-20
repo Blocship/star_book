@@ -6,6 +6,8 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:star_book/models/brightness.dart';
 import 'package:star_book/models/user.dart';
+import 'package:star_book/screens/home_page.dart';
+import 'package:star_book/screens/username_add_sheet.dart';
 
 // Files
 import './controllers/global_setting.dart';
@@ -52,8 +54,8 @@ class MyApp extends StatelessWidget {
       builder: (context, box, widget) {
         return c.CupertinoApp(
           initialRoute: (isNullOrEmpty(GlobalSettingController.getuser().name))
-              ? 'username_add'
-              : 'home',
+              ? UsernameAddSheet.UsernameAdd
+              : Home.id,
           title: 'StarBook',
           theme: c.CupertinoThemeData(brightness: brightness),
           localizationsDelegates: const [

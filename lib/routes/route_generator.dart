@@ -30,7 +30,7 @@ class RouteGenerator {
   ) {
     final args = settings.arguments;
     switch (settings.name) {
-      case 'username_add':
+      case UsernameAddSheet.UsernameAdd:
         return MaterialWithModalsPageRoute(
           builder: (context) => UsernameAddSheet(),
         );
@@ -42,15 +42,15 @@ class RouteGenerator {
         return MaterialWithModalsPageRoute(
           builder: (context) => ActivityPage(args as Activity),
         );
-      case 'year':
+      case YearPage.Year:
         return MaterialWithModalsPageRoute(
           builder: (context) => YearPage(),
         );
-      case 'preferance':
+      case PreferenceRouteInitializer.Preference:
         return CupertinoModalBottomSheetRouteWrapper(
           builder: (context) => PreferenceRouteInitializer(),
         );
-      case 'edit':
+      case ActivityRouteInitializer.Edit:
         return CupertinoModalBottomSheetRouteWrapper(
           builder: (context) => ActivityRouteInitializer(args as Activity),
         );
@@ -67,19 +67,19 @@ class RouteGenerator {
   ) {
     final args = settings.arguments;
     switch (settings.name) {
-      case 'edit/title':
+      case ActivityEditSheet.Title:
         return MaterialWithModalsPageRoute(
           builder: (context) => ActivityEditSheet(activity),
         );
-      case 'edit/mood':
+      case MoodSheet.Mood:
         return MaterialWithModalsPageRoute(
           builder: (context) => MoodSheet(),
         );
-      case 'edit/date':
+      case DatePickerSheet.Date:
         return MaterialWithModalsPageRoute(
           builder: (context) => DatePickerSheet(settings),
         );
-      case 'edit/time':
+      case TimePickerSheet.Time:
         return MaterialWithModalsPageRoute(
           builder: (context) => TimePickerSheet(settings),
         );
@@ -95,15 +95,15 @@ class RouteGenerator {
   ) {
     final args = settings.arguments;
     switch (settings.name) {
-      case 'preference/settings':
+      case PreferenceSheet.Settings:
         return MaterialWithModalsPageRoute(
           builder: (context) => PreferenceSheet(),
         );
-      case 'preference/acknowledgement':
+      case AcknowledgementSheet.Acknowledgement:
         return MaterialWithModalsPageRoute(
           builder: (context) => AcknowledgementSheet(),
         );
-      case 'preference/acknowledgement/licenses':
+      case PackageSheet.Licenses:
         return MaterialWithModalsPageRoute(
           builder: (context) => PackageSheet(args as PackageSheetArgument),
         );

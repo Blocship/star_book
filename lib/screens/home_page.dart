@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/material.dart' as m;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:star_book/screens/year_page.dart';
 
 // Files
 import './profile_page/profile_page.dart';
@@ -12,7 +13,7 @@ import '../widgets/background_images.dart';
 import '../widgets/month.dart';
 
 class Home extends StatefulWidget {
-  static const String id = 'home';
+  static const String id = '/home';
   @override
   _HomeState createState() => _HomeState();
 }
@@ -120,9 +121,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     // set the brightness on status bar
-    SystemChrome.setSystemUIOverlayStyle((brightness == Brightness.dark)
-        ? SystemUiOverlayStyle.light
-        : SystemUiOverlayStyle.dark);
+    SystemChrome.setSystemUIOverlayStyle(
+        (brightness == Brightness.dark) ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark);
 
     return Stack(
       children: [
@@ -177,7 +177,7 @@ class YearButton extends StatelessWidget {
     return c.CupertinoButton(
       padding: EdgeInsets.zero,
       onPressed: () {
-        Navigator.of(context, rootNavigator: true).pushNamed('year');
+        Navigator.of(context, rootNavigator: true).pushNamed(YearPage.Year);
       },
       child: Row(
         mainAxisSize: MainAxisSize.min,
