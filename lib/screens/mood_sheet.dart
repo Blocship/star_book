@@ -9,6 +9,7 @@ import '../models/mood.dart';
 /// of moods, on picking a [Mood] it pop it's scope
 /// and pass the id back to the navigator
 class MoodSheet extends StatelessWidget {
+  static const String route = '/edit/mood';
   @override
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(

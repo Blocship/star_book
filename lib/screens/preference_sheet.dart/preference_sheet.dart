@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:star_book/models/brightness.dart';
+import 'package:star_book/screens/acknowledgement_sheet/acknowledgement_sheet.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 // Files
@@ -45,6 +46,7 @@ class SlidingSegment extends StatelessWidget {
 /// Preference Sheet Screen widget displays the
 /// settings option, Privacy Policy, LICENCE, Terms and Conditions etc.
 class PreferenceSheet extends StatefulWidget {
+  static const String route = '/preference/settings';
   @override
   PreferenceSheetState createState() => PreferenceSheetState();
 }
@@ -214,6 +216,7 @@ class PreferenceSheetState extends State<PreferenceSheet> {
 ///
 /// [PreferenceSheet] initial route.
 class PreferenceRouteInitializer extends StatelessWidget {
+  static const String route = '/preference';
   PreferenceRouteInitializer();
 
   @override

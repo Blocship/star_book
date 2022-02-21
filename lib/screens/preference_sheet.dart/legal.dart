@@ -13,7 +13,7 @@ class Legal extends StatelessWidget {
               label: 'Acknowledgement',
               icon: c.CupertinoIcons.right_chevron,
               onTap: () async {
-                Navigator.of(context).pushNamed('preference/acknowledgement');
+                Navigator.of(context).pushNamed(AcknowledgementSheet.route);
               },
             ),
             GroupAction(

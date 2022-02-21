@@ -9,6 +9,7 @@ import '../widgets/my_container.dart';
 /// from 1st of this month to current date of present month.
 @deprecated
 class DatePickerSheet extends StatefulWidget {
+  static const String route = '/edit/date';
   final RouteSettings settings;
   DatePickerSheet(this.settings);
 
@@ -106,8 +107,7 @@ class _DatePickerSheetState extends State<DatePickerSheet> {
                         month = newdate.month;
                         year = newdate.year;
                       });
-                      dateController.text =
-                          getDateFormat(DateTime(year, month, day));
+                      dateController.text = getDateFormat(DateTime(year, month, day));
                     },
                     use24hFormat: true,
                     maximumDate: DateTime.now(),

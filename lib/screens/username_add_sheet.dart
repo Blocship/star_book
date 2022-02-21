@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
 import 'package:star_book/models/user.dart';
+import 'package:star_book/screens/home_page.dart';
 
 //Files
 import '../controllers/global_setting.dart';
@@ -11,6 +12,7 @@ import '../utils/string.dart';
 ///
 /// Input form to store Username of user in [User] table.
 class UsernameAddSheet extends StatefulWidget {
+  static const String route = '/username_add';
   @override
   _UsernameAddSheetState createState() => _UsernameAddSheetState();
 }
@@ -118,6 +120,6 @@ class _UsernameAddSheetState extends State<UsernameAddSheet> {
 
   void onContinuePressed(c.BuildContext context) async {
     GlobalSettingController.setUser(user);
-    await Navigator.of(context).pushReplacementNamed('home');
+    await Navigator.of(context).pushNamed(Home.route);
   }
 }
