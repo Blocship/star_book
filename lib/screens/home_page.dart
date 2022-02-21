@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/material.dart' as m;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:star_book/controllers/activity.dart';
+import 'package:star_book/models/activity.dart';
 import 'package:star_book/screens/year_page.dart';
 
 // Files
@@ -11,6 +13,7 @@ import '../utils/date.dart';
 import '../utils/enums.dart';
 import '../widgets/background_images.dart';
 import '../widgets/month.dart';
+import 'activity_edit_sheet.dart';
 
 class Home extends StatefulWidget {
   static const String route = '/home';
@@ -123,6 +126,9 @@ class _HomePageState extends State<HomePage> {
     // set the brightness on status bar
     SystemChrome.setSystemUIOverlayStyle(
         (brightness == Brightness.dark) ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark);
+    Activity? _getActivity(int day) {
+      return ActivityController.readAt(day, month, year);
+    }
 
     return Stack(
       children: [
@@ -160,6 +166,17 @@ class _HomePageState extends State<HomePage> {
                         year: year,
                       ),
                     ),
+                  ),
+                ),
+                c.Padding(
+                  padding: c.EdgeInsets.only(
+                      top: c.MediaQuery.of(context).size.height * 0.4, left: c.MediaQuery.of(context).size.width * 0.8),
+                  child: m.FloatingActionButton(
+                    onPressed: () {
+                      Navigator.of(context).pushNamed(ActivityRouteInitializer.route,
+                          arguments: Activity(day: DateTime.now().day, month: DateTime.now().month, year: DateTime.now().year));
+                    },
+                    child: c.Icon(m.Icons.app_registration_rounded),
                   ),
                 ),
               ],
