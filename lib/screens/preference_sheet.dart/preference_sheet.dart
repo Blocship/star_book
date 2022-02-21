@@ -46,7 +46,7 @@ class SlidingSegment extends StatelessWidget {
 /// Preference Sheet Screen widget displays the
 /// settings option, Privacy Policy, LICENCE, Terms and Conditions etc.
 class PreferenceSheet extends StatefulWidget {
-  static const String Settings = '/preference/settings';
+  static const String route = '/preference/settings';
   @override
   PreferenceSheetState createState() => PreferenceSheetState();
 }
@@ -216,7 +216,7 @@ class PreferenceSheetState extends State<PreferenceSheet> {
 ///
 /// [PreferenceSheet] initial route.
 class PreferenceRouteInitializer extends StatelessWidget {
-  static const String Preference = '/preference';
+  static const String route = '/preference';
   PreferenceRouteInitializer();
 
   @override

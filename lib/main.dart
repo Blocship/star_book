@@ -54,8 +54,8 @@ class MyApp extends StatelessWidget {
       builder: (context, box, widget) {
         return c.CupertinoApp(
           initialRoute: (isNullOrEmpty(GlobalSettingController.getuser().name))
-              ? UsernameAddSheet.UsernameAdd
-              : Home.id,
+              ? UsernameAddSheet.route
+              : Home.route,
           title: 'StarBook',
           theme: c.CupertinoThemeData(brightness: brightness),
           localizationsDelegates: const [

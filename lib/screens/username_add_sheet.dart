@@ -12,7 +12,7 @@ import '../utils/string.dart';
 ///
 /// Input form to store Username of user in [User] table.
 class UsernameAddSheet extends StatefulWidget {
-  static const String UsernameAdd = '/username_add';
+  static const String route = '/username_add';
   @override
   _UsernameAddSheetState createState() => _UsernameAddSheetState();
 }
@@ -120,6 +120,6 @@ class _UsernameAddSheetState extends State<UsernameAddSheet> {
 
   void onContinuePressed(c.BuildContext context) async {
     GlobalSettingController.setUser(user);
-    await Navigator.of(context).pushNamed(Home.id);
+    await Navigator.of(context).pushNamed(Home.route);
   }
 }

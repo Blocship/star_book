@@ -12,14 +12,14 @@ import '../styles/style.dart';
 class ActivityPage extends StatelessWidget {
   // TODO: moodID and color id is same, this may break change later,
   // will get the mood from list on the basis of moodId.
-  static const String id = '/activity';
+  static const String route = '/activity';
   ActivityPage(this.activity) : mood = mMoodList[activity.moodId!];
 
   final Mood mood;
   final Activity activity;
 
   void onEdit(BuildContext context) async {
-    await Navigator.of(context).popAndPushNamed(ActivityRouteInitializer.Edit, arguments: activity);
+    await Navigator.of(context).popAndPushNamed(ActivityRouteInitializer.route, arguments: activity);
   }
 
   @override

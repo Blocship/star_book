@@ -17,7 +17,7 @@ import '../widgets/my_container.dart';
 ///
 /// Input form to create update and delete [Activity]
 class ActivityEditSheet extends StatefulWidget {
-  static const String Title = '/edit/title';
+  static const String route = '/edit/title';
   ActivityEditSheet(this.activity);
 
   final Activity activity;
@@ -73,14 +73,14 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
   }
 
   void onMoodTap() async {
-    dynamic moodId = await Navigator.of(context).pushNamed(MoodSheet.Mood);
+    dynamic moodId = await Navigator.of(context).pushNamed(MoodSheet.route);
     activity = activity?.copyWith(moodId: moodId);
     setState(() {});
   }
 
   void onDateTap() async {
     dynamic date = await Navigator.of(context)
-        .pushNamed(DatePickerSheet.Date, arguments: {'day': activity?.day, 'month': activity?.month, 'year': activity?.year});
+        .pushNamed(DatePickerSheet.route, arguments: {'day': activity?.day, 'month': activity?.month, 'year': activity?.year});
 
     // After getting date update the state.
     setState(() {
@@ -192,7 +192,7 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
 /// [ActivityEditSheet] initial route.
 /// Takes confirmation before poping the scope with [CupertinoActionSheet]
 class ActivityRouteInitializer extends StatelessWidget {
-  static const String Edit = '/edit';
+  static const String route = '/edit';
   ActivityRouteInitializer(this.activity);
 
   final Activity activity;
@@ -229,7 +229,7 @@ class ActivityRouteInitializer extends StatelessWidget {
     return WillPopScope(
       onWillPop: () => _handlePopScope(context),
       child: Navigator(
-        initialRoute: ActivityEditSheet.Title,
+        initialRoute: ActivityEditSheet.route,
         onGenerateRoute: (settings) => RouteGenerator.activityRoute(settings, activity),
       ),
     );

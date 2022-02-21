@@ -30,27 +30,27 @@ class RouteGenerator {
   ) {
     final args = settings.arguments;
     switch (settings.name) {
-      case UsernameAddSheet.UsernameAdd:
+      case UsernameAddSheet.route:
         return MaterialWithModalsPageRoute(
           builder: (context) => UsernameAddSheet(),
         );
-      case Home.id:
+      case Home.route:
         return MaterialWithModalsPageRoute(
           builder: (context) => Home(),
         );
-      case ActivityPage.id:
+      case ActivityPage.route:
         return MaterialWithModalsPageRoute(
           builder: (context) => ActivityPage(args as Activity),
         );
-      case YearPage.Year:
+      case YearPage.route:
         return MaterialWithModalsPageRoute(
           builder: (context) => YearPage(),
         );
-      case PreferenceRouteInitializer.Preference:
+      case PreferenceRouteInitializer.route:
         return CupertinoModalBottomSheetRouteWrapper(
           builder: (context) => PreferenceRouteInitializer(),
         );
-      case ActivityRouteInitializer.Edit:
+      case ActivityRouteInitializer.route:
         return CupertinoModalBottomSheetRouteWrapper(
           builder: (context) => ActivityRouteInitializer(args as Activity),
         );
@@ -67,19 +67,19 @@ class RouteGenerator {
   ) {
     final args = settings.arguments;
     switch (settings.name) {
-      case ActivityEditSheet.Title:
+      case ActivityEditSheet.route:
         return MaterialWithModalsPageRoute(
           builder: (context) => ActivityEditSheet(activity),
         );
-      case MoodSheet.Mood:
+      case MoodSheet.route:
         return MaterialWithModalsPageRoute(
           builder: (context) => MoodSheet(),
         );
-      case DatePickerSheet.Date:
+      case DatePickerSheet.route:
         return MaterialWithModalsPageRoute(
           builder: (context) => DatePickerSheet(settings),
         );
-      case TimePickerSheet.Time:
+      case TimePickerSheet.route:
         return MaterialWithModalsPageRoute(
           builder: (context) => TimePickerSheet(settings),
         );
@@ -95,15 +95,15 @@ class RouteGenerator {
   ) {
     final args = settings.arguments;
     switch (settings.name) {
-      case PreferenceSheet.Settings:
+      case PreferenceSheet.route:
         return MaterialWithModalsPageRoute(
           builder: (context) => PreferenceSheet(),
         );
-      case AcknowledgementSheet.Acknowledgement:
+      case AcknowledgementSheet.route:
         return MaterialWithModalsPageRoute(
           builder: (context) => AcknowledgementSheet(),
         );
-      case PackageSheet.Licenses:
+      case PackageSheet.route:
         return MaterialWithModalsPageRoute(
           builder: (context) => PackageSheet(args as PackageSheetArgument),
         );

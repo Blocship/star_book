@@ -13,7 +13,7 @@ import '../widgets/background_images.dart';
 import '../widgets/month.dart';
 
 class Home extends StatefulWidget {
-  static const String id = '/home';
+  static const String route = '/home';
   @override
   _HomeState createState() => _HomeState();
 }
@@ -177,7 +177,7 @@ class YearButton extends StatelessWidget {
     return c.CupertinoButton(
       padding: EdgeInsets.zero,
       onPressed: () {
-        Navigator.of(context, rootNavigator: true).pushNamed(YearPage.Year);
+        Navigator.of(context, rootNavigator: true).pushNamed(YearPage.route);
       },
       child: Row(
         mainAxisSize: MainAxisSize.min,

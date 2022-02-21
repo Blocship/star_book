@@ -3,7 +3,7 @@ part of 'profile_page.dart';
 /// Hamburger icon, that navigates to [PreferanceSheet]
 class PreferenceButton extends StatelessWidget {
   void onTap(context) {
-    Navigator.of(context).pushNamed(PreferenceRouteInitializer.Preference);
+    Navigator.of(context).pushNamed(PreferenceRouteInitializer.route);
   }
 
   @override
