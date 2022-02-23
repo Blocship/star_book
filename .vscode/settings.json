@@ -43,5 +43,5 @@
 
     "editor.suggestOnTriggerCharacters": true
   },
-  "cmake.configureOnOpen": false
+  "cmake.configureOnOpen": false,
 }

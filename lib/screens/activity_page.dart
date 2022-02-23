@@ -37,10 +37,7 @@ class ActivityPage extends StatelessWidget {
         middle: const Text('Activity'),
         trailing: GestureDetector(
           onTap: () => onEdit(context),
-          child: Text(
-            'Edit',
-            style: c.CupertinoTheme.of(context).textTheme.navActionTextStyle,
-          ),
+          child: const c.Icon(Icons.more_horiz_rounded),
         ),
         border: null,
       ),
