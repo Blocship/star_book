@@ -22,6 +22,24 @@ class ActivityPage extends StatelessWidget {
     await Navigator.of(context).popAndPushNamed(ActivityRouteInitializer.route, arguments: activity);
   }
 
+  void actionSheet(BuildContext context) async {
+    await c.showCupertinoModalPopup(
+        context: context,
+        builder: (c.BuildContext context) => c.CupertinoActionSheet(
+              actions: <c.CupertinoActionSheetAction>[
+                c.CupertinoActionSheetAction(onPressed: () {}, child: const c.Text('Share')),
+                c.CupertinoActionSheetAction(onPressed: () => onEdit(context), child: const c.Text('Edit')),
+                c.CupertinoActionSheetAction(onPressed: () {}, child: const c.Text('Add to Favorite')),
+              ],
+              cancelButton: c.CupertinoActionSheetAction(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const c.Text('Cancel'),
+              ),
+            ));
+  }
+
   @override
   Widget build(BuildContext context) {
     return c.CupertinoPageScaffold(
@@ -36,7 +54,7 @@ class ActivityPage extends StatelessWidget {
         ),
         middle: const Text('Activity'),
         trailing: GestureDetector(
-          onTap: () => onEdit(context),
+          onTap: () => actionSheet(context),
           child: const c.Icon(Icons.more_horiz_rounded),
         ),
         border: null,
