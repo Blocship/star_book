@@ -222,7 +222,7 @@ class PreferenceRouteInitializer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Navigator(
-      initialRoute: 'preference/settings',
+      initialRoute: PreferenceSheet.route,
       onGenerateRoute: (settings) => RouteGenerator.preferenceRoute(settings),
     );
   }
