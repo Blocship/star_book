@@ -2,6 +2,11 @@ import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/material.dart' as m;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:star_book/controllers/activity.dart';
+import 'package:star_book/models/activity.dart';
+import 'package:star_book/screens/activity_edit_sheet.dart';
+import 'package:star_book/screens/activity_page.dart';
+import 'package:star_book/screens/year_page.dart';
 
 // Files
 import './profile_page/profile_page.dart';
@@ -12,7 +17,7 @@ import '../widgets/background_images.dart';
 import '../widgets/month.dart';
 
 class Home extends StatefulWidget {
-  static const String id = 'home';
+  static const String route = '/home';
   @override
   _HomeState createState() => _HomeState();
 }
@@ -54,9 +59,31 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return m.Scaffold(
-      floatingActionButton: m.FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(m.Icons.edit),
+      floatingActionButtonLocation: m.FloatingActionButtonLocation.endTop,
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+            // margin = kTabBarHeight + bottomPadding(SafeArea)
+            margin: const EdgeInsets.only(bottom: 70),
+            child: m.FloatingActionButton(
+              onPressed: () {
+                print('click en botton');
+                final DateTime now = DateTime.now();
+                final Activity? activity = ActivityController.readAt(now.day, now.month, now.year);
+
+                if (activity?.moodId == null) {
+                  Navigator.of(context).pushNamed(ActivityRouteInitializer.route, arguments: activity);
+                } else {
+                  Navigator.of(context).pushNamed(ActivityPage.route, arguments: activity);
+                }
+              },
+              child: const Icon(
+                m.Icons.add,
+              ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: c.CupertinoTabScaffold(
         backgroundColor: const Color(0x00000000),
@@ -120,9 +147,8 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     // set the brightness on status bar
-    SystemChrome.setSystemUIOverlayStyle((brightness == Brightness.dark)
-        ? SystemUiOverlayStyle.light
-        : SystemUiOverlayStyle.dark);
+    SystemChrome.setSystemUIOverlayStyle(
+        (brightness == Brightness.dark) ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark);
 
     return Stack(
       children: [
@@ -177,7 +203,7 @@ class YearButton extends StatelessWidget {
     return c.CupertinoButton(
       padding: EdgeInsets.zero,
       onPressed: () {
-        Navigator.of(context, rootNavigator: true).pushNamed('year');
+        Navigator.of(context, rootNavigator: true).pushNamed(YearPage.route);
       },
       child: Row(
         mainAxisSize: MainAxisSize.min,

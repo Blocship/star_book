@@ -15,6 +15,7 @@ class PackageSheetArgument {
 }
 
 class PackageSheet extends StatefulWidget {
+  static const String route = '/preference/acknowledgement/licenses';
   final PackageSheetArgument args;
 
   const PackageSheet(this.args);

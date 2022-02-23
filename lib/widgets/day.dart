@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
+import 'package:star_book/screens/activity_edit_sheet.dart';
+import 'package:star_book/screens/activity_page.dart';
 
 // Files
 import './dialog.dart';
@@ -86,9 +88,9 @@ class Day extends StatelessWidget {
         },
       );
     } else if (activity!.moodId == null) {
-      Navigator.of(context).pushNamed('edit', arguments: activity);
+      Navigator.of(context).pushNamed(ActivityRouteInitializer.route, arguments: activity);
     } else {
-      Navigator.of(context).pushNamed('activity', arguments: activity);
+      Navigator.of(context).pushNamed(ActivityPage.route, arguments: activity);
     }
   }
 

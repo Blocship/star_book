@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart' as c;
 import 'package:flutter/widgets.dart';
+import 'package:star_book/screens/date_picker_sheet.dart';
+import 'package:star_book/screens/mood_sheet.dart';
 
 // Files
 import '../controllers/activity.dart';
@@ -15,6 +17,7 @@ import '../widgets/my_container.dart';
 ///
 /// Input form to create update and delete [Activity]
 class ActivityEditSheet extends StatefulWidget {
+  static const String route = '/edit/title';
   ActivityEditSheet(this.activity);
 
   final Activity activity;
@@ -70,23 +73,18 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
   }
 
   void onMoodTap() async {
-    dynamic moodId = await Navigator.of(context).pushNamed('edit/mood');
+    dynamic moodId = await Navigator.of(context).pushNamed(MoodSheet.route);
     activity = activity?.copyWith(moodId: moodId);
     setState(() {});
   }
 
   void onDateTap() async {
-    dynamic date = await Navigator.of(context).pushNamed('edit/date',
-        arguments: {
-          'day': activity?.day,
-          'month': activity?.month,
-          'year': activity?.year
-        });
+    dynamic date = await Navigator.of(context)
+        .pushNamed(DatePickerSheet.route, arguments: {'day': activity?.day, 'month': activity?.month, 'year': activity?.year});
 
     // After getting date update the state.
     setState(() {
-      activity =
-          ActivityController.readAt(date['day'], date['month'], date['year']);
+      activity = ActivityController.readAt(date['day'], date['month'], date['year']);
       titleController.text = activity?.title == null ? '' : activity!.title!;
       noteController.text = activity?.note == null ? '' : activity!.note!;
       type = (activity?.moodId == null) ? ActivityType.add : ActivityType.edit;
@@ -194,6 +192,7 @@ class _ActivityEditSheetState extends State<ActivityEditSheet> {
 /// [ActivityEditSheet] initial route.
 /// Takes confirmation before poping the scope with [CupertinoActionSheet]
 class ActivityRouteInitializer extends StatelessWidget {
+  static const String route = '/edit';
   ActivityRouteInitializer(this.activity);
 
   final Activity activity;
@@ -230,9 +229,8 @@ class ActivityRouteInitializer extends StatelessWidget {
     return WillPopScope(
       onWillPop: () => _handlePopScope(context),
       child: Navigator(
-        initialRoute: 'edit/title',
-        onGenerateRoute: (settings) =>
-            RouteGenerator.activityRoute(settings, activity),
+        initialRoute: ActivityEditSheet.route,
+        onGenerateRoute: (settings) => RouteGenerator.activityRoute(settings, activity),
       ),
     );
   }
