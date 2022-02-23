@@ -49,9 +49,7 @@ abstract class Activity with _$Activity {
   /// Checks if any of the fields is null or not.
   /// Except [key] and [id]
   bool isFilled() {
-    return (this.moodId != null &&
-        !isNullOrEmpty(this.title) &&
-        !isNullOrEmpty(this.note));
+    return (this.moodId != null && !isNullOrEmpty(this.title) && !isNullOrEmpty(this.note));
   }
 
   bool isNullOrEmpty(String? value) {
