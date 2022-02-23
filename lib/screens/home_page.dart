@@ -4,6 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:star_book/controllers/activity.dart';
 import 'package:star_book/models/activity.dart';
+import 'package:star_book/screens/activity_edit_sheet.dart';
+import 'package:star_book/screens/activity_page.dart';
 import 'package:star_book/screens/year_page.dart';
 
 // Files
@@ -13,7 +15,6 @@ import '../utils/date.dart';
 import '../utils/enums.dart';
 import '../widgets/background_images.dart';
 import '../widgets/month.dart';
-import 'activity_edit_sheet.dart';
 
 class Home extends StatefulWidget {
   static const String route = '/home';
@@ -58,9 +59,31 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return m.Scaffold(
-      floatingActionButton: m.FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(m.Icons.edit),
+      floatingActionButtonLocation: m.FloatingActionButtonLocation.endTop,
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          Container(
+            // margin = kTabBarHeight + bottomPadding(SafeArea)
+            margin: const EdgeInsets.only(bottom: 70),
+            child: m.FloatingActionButton(
+              onPressed: () {
+                print('click en botton');
+                final DateTime now = DateTime.now();
+                final Activity? activity = ActivityController.readAt(now.day, now.month, now.year);
+
+                if (activity?.moodId == null) {
+                  Navigator.of(context).pushNamed(ActivityRouteInitializer.route, arguments: activity);
+                } else {
+                  Navigator.of(context).pushNamed(ActivityPage.route, arguments: activity);
+                }
+              },
+              child: const Icon(
+                m.Icons.add,
+              ),
+            ),
+          ),
+        ],
       ),
       bottomNavigationBar: c.CupertinoTabScaffold(
         backgroundColor: const Color(0x00000000),
@@ -126,9 +149,6 @@ class _HomePageState extends State<HomePage> {
     // set the brightness on status bar
     SystemChrome.setSystemUIOverlayStyle(
         (brightness == Brightness.dark) ? SystemUiOverlayStyle.light : SystemUiOverlayStyle.dark);
-    Activity? _getActivity(int day) {
-      return ActivityController.readAt(day, month, year);
-    }
 
     return Stack(
       children: [
@@ -166,17 +186,6 @@ class _HomePageState extends State<HomePage> {
                         year: year,
                       ),
                     ),
-                  ),
-                ),
-                c.Padding(
-                  padding: c.EdgeInsets.only(
-                      top: c.MediaQuery.of(context).size.height * 0.4, left: c.MediaQuery.of(context).size.width * 0.8),
-                  child: m.FloatingActionButton(
-                    onPressed: () {
-                      Navigator.of(context).pushNamed(ActivityRouteInitializer.route,
-                          arguments: Activity(day: DateTime.now().day, month: DateTime.now().month, year: DateTime.now().year));
-                    },
-                    child: c.Icon(m.Icons.app_registration_rounded),
                   ),
                 ),
               ],
