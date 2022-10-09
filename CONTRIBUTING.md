@@ -52,14 +52,6 @@ The following are guidelines for contributing to this project.
 
 Read more from linting here: https://dart.dev/guides/language/effective-dart/style
 
-## Mock-up
-
-Following are the mock-up screens and the flow of the App.
-
-![Mock-up Image](READMEdocs/mock-up.png)
-
-Please download the PDF to view it: [Download PDF](READMEdocs/StarBook.pdf)
-
 ## 🐛 How to Report Bugs
 
 Please open a [new issue](https://github.com/hashirshoaeb/star_book/issues/new) including steps to reproduce the problem
