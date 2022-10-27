@@ -4,7 +4,7 @@ import 'journal/journal.dart';
 
 class HiveTypeIds {
   static const int journal = 0;
-  static const int mood = 0;
+  static const int mood = 1;
 }
 
 void registerHiveAdapter() {
