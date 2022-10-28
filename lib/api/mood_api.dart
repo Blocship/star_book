@@ -1,13 +1,25 @@
-import 'package:star_book/api/base_api.dart';
-import 'package:star_book/models/journal/journal.dart';
 import 'package:star_book/models/mood/mood.dart';
-import 'package:star_book/packages/hive_collection.dart';
 
-abstract class MoodApi extends BaseApi {
-  static const String collectionName = 'journalCollection';
+import '../packages/hive_collection.dart';
+import 'base_api.dart';
 
-  Stream<List<Mood>> getJournalStream();
+abstract class IMoodApi extends BaseApi {
+  static const String collectionName = 'moodCollection';
+  Future<List<Mood>> getAll();
+  Future<Mood> getById(String moodId);
+}
 
-  Future<void> delete(String journalId);
-  Future post(Mood mood);
+class LSMoodApi extends IMoodApi {
+  final HiveCollectionReference<Mood> collection;
+  LSMoodApi({required this.collection});
+
+  @override
+  Future<Mood> getById(String moodId) async {
+    return collection.doc(moodId)!.get();
+  }
+
+  @override
+  Future<List<Mood>> getAll() async {
+    return collection.docs().map((e) => e.get()).toList();
+  }
 }
