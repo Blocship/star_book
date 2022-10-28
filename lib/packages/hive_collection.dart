@@ -20,8 +20,8 @@ class HiveStore {
       collections[collectionName] = T.runtimeType;
     }
     assert(
-    collections[collectionName].runtimeType == T.runtimeType,
-    'Collection type is not match, previously collection [$collectionName] was saved with [${collections[collectionName].runtimeType}] type, but now is [${T.runtimeType}] type',
+      collections[collectionName].runtimeType == T.runtimeType,
+      'Collection type is not match, previously collection [$collectionName] was saved with [${collections[collectionName].runtimeType}] type, but now is [${T.runtimeType}] type',
     );
     return HiveCollectionReference<T>(collectionName, box);
   }
@@ -96,6 +96,7 @@ class HiveCollectionReference<T extends HiveBaseModel> extends HiveQuery<T> {
 // Todo: Late
 // HiveCollectionReference get parent;
 // String get path;
+
 }
 
 /// A Document wrapper around [HiveBaseModel]
@@ -137,21 +138,21 @@ class HiveDocumentReference<T extends HiveBaseModel> {
       }
     });
   }
+  
+  // Todo: later
+  // Future<void> update(T data){
+  //   final old = _box.get(id);
+  //   if(old == null){
+  //     throw HiveStoreException('Document does not exist');
+  //   }
+  //   final newData = old.copywith(data);
+  // }
 
-// Todo: later
-// Future<void> update(T data){
-//   final old = _box.get(id);
-//   if(old == null){
-//     throw HiveStoreException('Document does not exist');
-//   }
-//   final newData = old.copywith(data);
-// }
-
-// HiveCollectionReference collection(String collectionPath);
-// FirebaseFirestore get firestore;
-// HiveCollectionReference get parent;
-// String get path;
-// Stream<HiveDocumentSnapshot> snapshots({bool includeMetadataChanges = false});
+  // HiveCollectionReference collection(String collectionPath);
+  // FirebaseFirestore get firestore;
+  // HiveCollectionReference get parent;
+  // String get path;
+  // Stream<HiveDocumentSnapshot> snapshots({bool includeMetadataChanges = false});
 }
 
 abstract class HiveQuery<T extends HiveBaseModel> {

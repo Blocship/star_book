@@ -7,7 +7,7 @@ part 'user.g.dart';
 
 @freezed
 @HiveType(typeId: HiveTypeIds.user)
-class User with _$User, HiveBaseModel{
+class User with _$User, HiveBaseModel {
   const User._();
   const factory User({
     @HiveField(0) @JsonKey(name: '_id') required final String id,
