@@ -6,6 +6,8 @@ abstract class IUserApi extends BaseApi {
   static const String collectionName = 'userCollection';
   Future<void> updateUser(User user);
   Future<void> deleteUser(String uuid);
+  Future<void> createUser(User user);
+  Future<User> getUser(String uuid);
 }
 
 class LSUserApi extends IUserApi {
@@ -20,5 +22,16 @@ class LSUserApi extends IUserApi {
   @override
   Future<void> deleteUser(String uuid) async {
     await collection.doc(uuid)!.delete();
+  }
+  
+  /// not in use
+  @override
+  Future<void> createUser(User user) async {
+    UnimplementedError('User cannot be created locally');
+  }
+
+  @override
+  Future<User> getUser(String uuid) async {
+    return collection.doc(uuid)!.get();
   }
 }
