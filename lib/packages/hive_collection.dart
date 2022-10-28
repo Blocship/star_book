@@ -137,7 +137,6 @@ class HiveDocumentReference<T extends HiveBaseModel> {
       }
     });
   }
-
   // Todo: later
   // Future<void> update(T data){
   //   final old = _box.get(id);
