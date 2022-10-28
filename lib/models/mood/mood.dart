@@ -7,7 +7,7 @@ part 'mood.g.dart';
 
 @freezed
 @HiveType(typeId: HiveTypeIds.mood)
-class Mood with _$Mood , HiveBaseModel{
+class Mood with _$Mood, HiveBaseModel {
   const Mood._();
   const factory Mood({
     @HiveField(0) @JsonKey(name: '_id') required final String id,
