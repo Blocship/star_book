@@ -1,12 +1,13 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
 import 'package:star_book/models/app.dart';
+import 'package:star_book/packages/hive_collection.dart';
 part 'journal.freezed.dart';
 part 'journal.g.dart';
 
 @freezed
 @HiveType(typeId: HiveTypeIds.journal)
-class Journal with _$Journal {
+class Journal with _$Journal , HiveBaseModel{
   const Journal._();
   const factory Journal({
     @HiveField(0) @JsonKey(name: '_id') required final String id,
