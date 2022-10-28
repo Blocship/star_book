@@ -14,12 +14,12 @@ class LSMoodApi extends IMoodApi {
   LSMoodApi({required this.collection});
 
   @override
-  Future<List<Mood>> getAll() async {
-    return collection.docs().map((e) => e.get()).toList();
-  }
-  
-  @override
   Future<Mood> getById(String moodId) async {
     return collection.doc(moodId)!.get();
+  }
+
+  @override
+  Future<List<Mood>> getAll() async {
+    return collection.docs().map((e) => e.get()).toList();
   }
 }
