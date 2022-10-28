@@ -18,7 +18,6 @@ class MoodRepo extends BaseRepo {
     moods = await lSMoodApi.getAll();
     return moods;
   }
-
   void populateMood(Mood mood) {
     _moodCollection.add(mood);
   }
