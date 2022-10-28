@@ -4,26 +4,16 @@ import 'package:star_book/packages/hive_collection.dart';
 
 abstract class IUserApi extends BaseApi {
   static const String collectionName = 'userCollection';
-  Future<void> updateUser(User user);
-  Future<void> deleteUser(String uuid);
   Future<void> createUser(User user);
   Future<User> getUser(String uuid);
+  Future<void> updateUser(User user);
+  Future<void> deleteUser(String uuid);
 }
 
 class LSUserApi extends IUserApi {
   final HiveCollectionReference<User> collection;
   LSUserApi({required this.collection});
 
-  @override
-  Future<void> updateUser(User user) async {
-    await collection.doc(user.id)!.set(user);
-  }
-
-  @override
-  Future<void> deleteUser(String uuid) async {
-    await collection.doc(uuid)!.delete();
-  }
-  
   /// not in use
   @override
   Future<void> createUser(User user) async {
@@ -33,5 +23,15 @@ class LSUserApi extends IUserApi {
   @override
   Future<User> getUser(String uuid) async {
     return collection.doc(uuid)!.get();
+  }
+
+  @override
+  Future<void> updateUser(User user) async {
+    await collection.doc(user.id)!.set(user);
+  }
+
+  @override
+  Future<void> deleteUser(String uuid) async {
+    await collection.doc(uuid)!.delete();
   }
 }
