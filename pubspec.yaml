@@ -24,6 +24,10 @@ dependencies:
   # Non Technical Dependencies
   logger: ^1.1.0
 
+  # Firebase Dependencies
+  firebase_core: ^2.1.1
+  cloud_firestore: ^4.0.3
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
