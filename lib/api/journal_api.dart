@@ -25,7 +25,6 @@ class LSJournalApi extends IJournalApi {
   }
 
   @override
-
   Future<void> delete(String journalId) async {
     await collection.doc(journalId)!.delete();
   }

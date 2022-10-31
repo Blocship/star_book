@@ -35,4 +35,5 @@ class JournalRepo extends BaseRepo {
   void populateJournal(Journal journal) {
     _journalCollection.add(journal);
   }
+
 }
