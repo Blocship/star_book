@@ -25,6 +25,7 @@ class LSJournalApi extends IJournalApi {
   }
 
   @override
+
   Future<void> delete(String journalId) async {
     await collection.doc(journalId)!.delete();
   }
@@ -32,5 +33,6 @@ class LSJournalApi extends IJournalApi {
   @override
   Future post(Journal journal) async {
     await collection.add(journal);
+
   }
 }
