@@ -25,14 +25,13 @@ class LSJournalApi extends IJournalApi {
   }
 
   @override
-  Future<void> delete(String journalId) {
-    // TODO: implement delete
-    throw UnimplementedError();
+  Future<void> delete(String journalId) async {
+    await collection.doc(journalId)!.delete();
   }
 
   @override
-  Future post(Journal journal) {
-    // TODO: implement post
-    throw UnimplementedError();
+  Future post(Journal journal) async {
+    await collection.add(journal);
+
   }
 }
