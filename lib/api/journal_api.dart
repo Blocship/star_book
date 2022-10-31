@@ -32,5 +32,6 @@ class LSJournalApi extends IJournalApi {
   @override
   Future post(Journal journal) async {
     await collection.add(journal);
+
   }
 }
