@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/service/logger.dart';
 
-class QtNavigatorObserver extends NavigatorObserver {
+class LoggerNavigatorObserver extends NavigatorObserver {
   /// The [Navigator] pushed `route`.
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {

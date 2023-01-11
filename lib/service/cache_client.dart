@@ -1,6 +1,6 @@
 
 
-abstract class CacheClient {
-  Future writeData({required Object object, required String key});
-  Object readData({required String key});
+abstract class CacheClient<T> {
+  Future writeData({required T object, required String key});
+  T readData({required String key});
 }
