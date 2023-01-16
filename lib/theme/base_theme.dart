@@ -19,9 +19,15 @@ class ForegroundTheme {
 
 class BackgroundTheme {
   final Color primaryColor;
+  final Color secondaryColor;
+  final Color tertiaryColor;
+  final Color quaternaryColor;
 
   const BackgroundTheme({
     required this.primaryColor,
+    required this.secondaryColor,
+    required this.tertiaryColor,
+    required this.quaternaryColor,
   });
 }
 

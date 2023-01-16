@@ -13,6 +13,9 @@ class UltramarineLightTheme extends BaseTheme {
   BackgroundTheme get backgroundTheme {
     return const BackgroundTheme(
       primaryColor: Color(0xFFFFFFFF),
+      secondaryColor: Color(0xFF1F1F1F),
+      tertiaryColor: Color(0x1F1F1F08),
+      quaternaryColor: Color(0xFFF1F2F4),
     );
   }
 
