@@ -1,7 +1,8 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive/hive.dart';
-import 'package:star_book/models/app.dart';
-import 'package:star_book/packages/hive_collection.dart';
+import 'package:star_book/data/models/app.dart';
+import 'package:star_book/data/packages/hive_collection.dart';
+
 part 'user.freezed.dart';
 part 'user.g.dart';
 

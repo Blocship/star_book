@@ -1,6 +1,7 @@
 import 'package:hive/hive.dart';
-import 'package:star_book/models/mood/mood.dart';
-import 'package:star_book/models/user/user.dart';
+import 'package:star_book/data/models/mood/mood.dart';
+import 'package:star_book/data/models/user/user.dart';
+
 import 'journal/journal.dart';
 
 class HiveTypeIds {
