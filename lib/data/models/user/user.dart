@@ -1,21 +1,17 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive/hive.dart';
-import 'package:star_book/data/models/app.dart';
-import 'package:star_book/data/packages/hive_collection.dart';
+import 'package:isar/isar.dart';
+import 'package:star_book/data/utils/utils.dart';
 
-part 'user.freezed.dart';
 part 'user.g.dart';
 
-@freezed
-@HiveType(typeId: HiveTypeIds.user)
-class User with _$User, HiveBaseModel {
-  const User._();
-  const factory User({
-    @HiveField(0) @JsonKey(name: '_id') required final String id,
-    @HiveField(1) required final String name,
-  }) = _User;
+@collection
+class User {
+  final String id;
+  final String name;
 
-  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+  const User({
+    required this.id,
+    required this.name,
+  });
 
-  String get key => id;
+  Id get key => id.fnvHash;
 }

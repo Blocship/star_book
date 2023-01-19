@@ -14,19 +14,11 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-User _$UserFromJson(Map<String, dynamic> json) {
-  return _User.fromJson(json);
-}
-
 /// @nodoc
 mixin _$User {
-  @HiveField(0)
-  @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
-  @HiveField(1)
   String get name => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $UserCopyWith<User> get copyWith => throw _privateConstructorUsedError;
 }
@@ -36,9 +28,7 @@ abstract class $UserCopyWith<$Res> {
   factory $UserCopyWith(User value, $Res Function(User) then) =
       _$UserCopyWithImpl<$Res, User>;
   @useResult
-  $Res call(
-      {@HiveField(0) @JsonKey(name: '_id') String id,
-      @HiveField(1) String name});
+  $Res call({String id, String name});
 }
 
 /// @nodoc
@@ -76,9 +66,7 @@ abstract class _$$_UserCopyWith<$Res> implements $UserCopyWith<$Res> {
       __$$_UserCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@HiveField(0) @JsonKey(name: '_id') String id,
-      @HiveField(1) String name});
+  $Res call({String id, String name});
 }
 
 /// @nodoc
@@ -107,21 +95,13 @@ class __$$_UserCopyWithImpl<$Res> extends _$UserCopyWithImpl<$Res, _$_User>
 }
 
 /// @nodoc
-@JsonSerializable()
-class _$_User extends _User {
-  const _$_User(
-      {@HiveField(0) @JsonKey(name: '_id') required this.id,
-      @HiveField(1) required this.name})
-      : super._();
 
-  factory _$_User.fromJson(Map<String, dynamic> json) => _$$_UserFromJson(json);
+class _$_User extends _User {
+  const _$_User({required this.id, required this.name}) : super._();
 
   @override
-  @HiveField(0)
-  @JsonKey(name: '_id')
   final String id;
   @override
-  @HiveField(1)
   final String name;
 
   @override
@@ -138,7 +118,6 @@ class _$_User extends _User {
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, name);
 
@@ -147,29 +126,16 @@ class _$_User extends _User {
   @pragma('vm:prefer-inline')
   _$$_UserCopyWith<_$_User> get copyWith =>
       __$$_UserCopyWithImpl<_$_User>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_UserToJson(
-      this,
-    );
-  }
 }
 
 abstract class _User extends User {
-  const factory _User(
-      {@HiveField(0) @JsonKey(name: '_id') required final String id,
-      @HiveField(1) required final String name}) = _$_User;
+  const factory _User({required final String id, required final String name}) =
+      _$_User;
   const _User._() : super._();
 
-  factory _User.fromJson(Map<String, dynamic> json) = _$_User.fromJson;
-
   @override
-  @HiveField(0)
-  @JsonKey(name: '_id')
   String get id;
   @override
-  @HiveField(1)
   String get name;
   @override
   @JsonKey(ignore: true)

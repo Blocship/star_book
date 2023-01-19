@@ -44,3 +44,9 @@ abstract class Util {
     return autoId;
   }
 }
+
+extension XString on String {
+  int get fnvHash {
+    return Util.fnvHash(this);
+  }
+}

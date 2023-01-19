@@ -14,21 +14,12 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Mood _$MoodFromJson(Map<String, dynamic> json) {
-  return _Mood.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Mood {
-  @HiveField(0)
-  @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
-  @HiveField(1)
   String get label => throw _privateConstructorUsedError;
-  @HiveField(2)
   String get color => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $MoodCopyWith<Mood> get copyWith => throw _privateConstructorUsedError;
 }
@@ -38,10 +29,7 @@ abstract class $MoodCopyWith<$Res> {
   factory $MoodCopyWith(Mood value, $Res Function(Mood) then) =
       _$MoodCopyWithImpl<$Res, Mood>;
   @useResult
-  $Res call(
-      {@HiveField(0) @JsonKey(name: '_id') String id,
-      @HiveField(1) String label,
-      @HiveField(2) String color});
+  $Res call({String id, String label, String color});
 }
 
 /// @nodoc
@@ -84,10 +72,7 @@ abstract class _$$_MoodCopyWith<$Res> implements $MoodCopyWith<$Res> {
       __$$_MoodCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@HiveField(0) @JsonKey(name: '_id') String id,
-      @HiveField(1) String label,
-      @HiveField(2) String color});
+  $Res call({String id, String label, String color});
 }
 
 /// @nodoc
@@ -121,25 +106,16 @@ class __$$_MoodCopyWithImpl<$Res> extends _$MoodCopyWithImpl<$Res, _$_Mood>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$_Mood extends _Mood {
-  const _$_Mood(
-      {@HiveField(0) @JsonKey(name: '_id') required this.id,
-      @HiveField(1) required this.label,
-      @HiveField(2) required this.color})
+  const _$_Mood({required this.id, required this.label, required this.color})
       : super._();
 
-  factory _$_Mood.fromJson(Map<String, dynamic> json) => _$$_MoodFromJson(json);
-
   @override
-  @HiveField(0)
-  @JsonKey(name: '_id')
   final String id;
   @override
-  @HiveField(1)
   final String label;
   @override
-  @HiveField(2)
   final String color;
 
   @override
@@ -157,7 +133,6 @@ class _$_Mood extends _Mood {
             (identical(other.color, color) || other.color == color));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, label, color);
 
@@ -166,33 +141,20 @@ class _$_Mood extends _Mood {
   @pragma('vm:prefer-inline')
   _$$_MoodCopyWith<_$_Mood> get copyWith =>
       __$$_MoodCopyWithImpl<_$_Mood>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_MoodToJson(
-      this,
-    );
-  }
 }
 
 abstract class _Mood extends Mood {
   const factory _Mood(
-      {@HiveField(0) @JsonKey(name: '_id') required final String id,
-      @HiveField(1) required final String label,
-      @HiveField(2) required final String color}) = _$_Mood;
+      {required final String id,
+      required final String label,
+      required final String color}) = _$_Mood;
   const _Mood._() : super._();
 
-  factory _Mood.fromJson(Map<String, dynamic> json) = _$_Mood.fromJson;
-
   @override
-  @HiveField(0)
-  @JsonKey(name: '_id')
   String get id;
   @override
-  @HiveField(1)
   String get label;
   @override
-  @HiveField(2)
   String get color;
   @override
   @JsonKey(ignore: true)

@@ -1,4 +1,4 @@
-import 'package:star_book/data/models/journal/journal.dart';
+import 'package:star_book/domain/models/journal/journal.dart';
 
 import 'base_repo.dart';
 
@@ -7,5 +7,5 @@ abstract class JournalRepo extends BaseRepo {
   Future<void> deleteJournal(String journalId);
   Future<void> updateJournal(Journal journal);
   Future<void> addJournal(Journal journal);
-  Future<Journal> getById(String journalId);
+  Future<Journal> getJournalById(String journalId);
 }

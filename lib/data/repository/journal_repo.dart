@@ -1,23 +1,16 @@
-import 'package:star_book/data/data_source/hive_data_source/journal_api.dart';
-import 'package:star_book/data/models/journal/journal.dart';
-import 'package:star_book/data/packages/hive_collection.dart';
+import 'package:star_book/data/data_source/local_data_source/journal_api.dart';
+import 'package:star_book/domain/models/journal/journal.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
 
 class JournalRepoImpl implements JournalRepo {
-  late final LSJournalApi lsJournalApi;
-
-  late final HiveCollectionReference<Journal> _journalCollection;
+  late final IJournalApi lsJournalApi;
 
   @override
-  Future<void> initialize() async {
-    _journalCollection = await HiveStore.instance
-        .collection<Journal>(IJournalApi.collectionName);
-    lsJournalApi = LSJournalApi(collection: _journalCollection);
-  }
+  Future<void> initialize() async {}
 
   @override
-  Future<List<Journal>> getJournals() async {
-    return lsJournalApi.fetchAll();
+  Future<void> addJournal(Journal journal) async {
+    await lsJournalApi.create(journal.toLSJournal);
   }
 
   @override
@@ -26,17 +19,23 @@ class JournalRepoImpl implements JournalRepo {
   }
 
   @override
+  Future<Journal> getJournalById(String journalId) async {
+    final journal = await lsJournalApi.fetchById(journalId);
+    return Journal.fromLSJournal(journal);
+  }
+
+  @override
+  Future<List<Journal>> getJournals() async {
+    final journals = await lsJournalApi.fetchAll();
+    List<Journal> list = [];
+    for (var journal in journals) {
+      list.add(Journal.fromLSJournal(journal));
+    }
+    return list;
+  }
+
+  @override
   Future<void> updateJournal(Journal journal) async {
-    await lsJournalApi.update(journal);
-  }
-
-  @override
-  Future<void> addJournal(Journal journal) async {
-    return lsJournalApi.create(journal);
-  }
-
-  @override
-  Future<Journal> getById(String journalId) async {
-    return lsJournalApi.fetchById(journalId);
+    await lsJournalApi.update(journal.toLSJournal);
   }
 }

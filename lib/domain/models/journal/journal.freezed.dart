@@ -14,27 +14,15 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-Journal _$JournalFromJson(Map<String, dynamic> json) {
-  return _Journal.fromJson(json);
-}
-
 /// @nodoc
 mixin _$Journal {
-  @HiveField(0)
-  @JsonKey(name: '_id')
   String get id => throw _privateConstructorUsedError;
-  @HiveField(1)
   DateTime get createdAt => throw _privateConstructorUsedError;
-  @HiveField(2)
   DateTime get updatedAt => throw _privateConstructorUsedError;
-  @HiveField(3)
   List<String> get mood => throw _privateConstructorUsedError;
-  @HiveField(4)
   String get title => throw _privateConstructorUsedError;
-  @HiveField(5)
   String get memo => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $JournalCopyWith<Journal> get copyWith => throw _privateConstructorUsedError;
 }
@@ -45,12 +33,12 @@ abstract class $JournalCopyWith<$Res> {
       _$JournalCopyWithImpl<$Res, Journal>;
   @useResult
   $Res call(
-      {@HiveField(0) @JsonKey(name: '_id') String id,
-      @HiveField(1) DateTime createdAt,
-      @HiveField(2) DateTime updatedAt,
-      @HiveField(3) List<String> mood,
-      @HiveField(4) String title,
-      @HiveField(5) String memo});
+      {String id,
+      DateTime createdAt,
+      DateTime updatedAt,
+      List<String> mood,
+      String title,
+      String memo});
 }
 
 /// @nodoc
@@ -110,12 +98,12 @@ abstract class _$$_JournalCopyWith<$Res> implements $JournalCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@HiveField(0) @JsonKey(name: '_id') String id,
-      @HiveField(1) DateTime createdAt,
-      @HiveField(2) DateTime updatedAt,
-      @HiveField(3) List<String> mood,
-      @HiveField(4) String title,
-      @HiveField(5) String memo});
+      {String id,
+      DateTime createdAt,
+      DateTime updatedAt,
+      List<String> mood,
+      String title,
+      String memo});
 }
 
 /// @nodoc
@@ -165,44 +153,34 @@ class __$$_JournalCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$_Journal extends _Journal {
   const _$_Journal(
-      {@HiveField(0) @JsonKey(name: '_id') required this.id,
-      @HiveField(1) required this.createdAt,
-      @HiveField(2) required this.updatedAt,
-      @HiveField(3) required final List<String> mood,
-      @HiveField(4) required this.title,
-      @HiveField(5) required this.memo})
+      {required this.id,
+      required this.createdAt,
+      required this.updatedAt,
+      required final List<String> mood,
+      required this.title,
+      required this.memo})
       : _mood = mood,
         super._();
 
-  factory _$_Journal.fromJson(Map<String, dynamic> json) =>
-      _$$_JournalFromJson(json);
-
   @override
-  @HiveField(0)
-  @JsonKey(name: '_id')
   final String id;
   @override
-  @HiveField(1)
   final DateTime createdAt;
   @override
-  @HiveField(2)
   final DateTime updatedAt;
   final List<String> _mood;
   @override
-  @HiveField(3)
   List<String> get mood {
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(_mood);
   }
 
   @override
-  @HiveField(4)
   final String title;
   @override
-  @HiveField(5)
   final String memo;
 
   @override
@@ -225,7 +203,6 @@ class _$_Journal extends _Journal {
             (identical(other.memo, memo) || other.memo == memo));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, id, createdAt, updatedAt,
       const DeepCollectionEquality().hash(_mood), title, memo);
@@ -235,45 +212,29 @@ class _$_Journal extends _Journal {
   @pragma('vm:prefer-inline')
   _$$_JournalCopyWith<_$_Journal> get copyWith =>
       __$$_JournalCopyWithImpl<_$_Journal>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$_JournalToJson(
-      this,
-    );
-  }
 }
 
 abstract class _Journal extends Journal {
   const factory _Journal(
-      {@HiveField(0) @JsonKey(name: '_id') required final String id,
-      @HiveField(1) required final DateTime createdAt,
-      @HiveField(2) required final DateTime updatedAt,
-      @HiveField(3) required final List<String> mood,
-      @HiveField(4) required final String title,
-      @HiveField(5) required final String memo}) = _$_Journal;
+      {required final String id,
+      required final DateTime createdAt,
+      required final DateTime updatedAt,
+      required final List<String> mood,
+      required final String title,
+      required final String memo}) = _$_Journal;
   const _Journal._() : super._();
 
-  factory _Journal.fromJson(Map<String, dynamic> json) = _$_Journal.fromJson;
-
   @override
-  @HiveField(0)
-  @JsonKey(name: '_id')
   String get id;
   @override
-  @HiveField(1)
   DateTime get createdAt;
   @override
-  @HiveField(2)
   DateTime get updatedAt;
   @override
-  @HiveField(3)
   List<String> get mood;
   @override
-  @HiveField(4)
   String get title;
   @override
-  @HiveField(5)
   String get memo;
   @override
   @JsonKey(ignore: true)

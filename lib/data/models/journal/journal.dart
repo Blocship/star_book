@@ -1,26 +1,26 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive/hive.dart';
-import 'package:star_book/data/models/app.dart';
-import 'package:star_book/data/packages/hive_collection.dart';
+import 'package:isar/isar.dart';
+import 'package:star_book/data/utils/utils.dart';
 
-part 'journal.freezed.dart';
 part 'journal.g.dart';
 
-@freezed
-@HiveType(typeId: HiveTypeIds.journal)
-class Journal with _$Journal, HiveBaseModel {
-  const Journal._();
-  const factory Journal({
-    @HiveField(0) @JsonKey(name: '_id') required final String id,
-    @HiveField(1) required final DateTime createdAt,
-    @HiveField(2) required final DateTime updatedAt,
-    @HiveField(3) required final List<String> mood,
-    @HiveField(4) required final String title,
-    @HiveField(5) required final String memo,
-  }) = _Journal;
+@collection
+class Journal {
+  final String id;
+  @Index()
+  final DateTime createdAt;
+  final DateTime updatedAt;
+  final List<String> mood;
+  final String title;
+  final String memo;
 
-  factory Journal.fromJson(Map<String, dynamic> json) =>
-      _$JournalFromJson(json);
+  const Journal({
+    required this.id,
+    required this.createdAt,
+    required this.updatedAt,
+    required this.mood,
+    required this.title,
+    required this.memo,
+  });
 
   factory Journal.initial() => Journal(
         id: '',
@@ -31,6 +31,5 @@ class Journal with _$Journal, HiveBaseModel {
         memo: '',
       );
 
-  @override
-  String get key => id;
+  Id get key => id.fnvHash;
 }

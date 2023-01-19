@@ -1,17 +1,8 @@
-import 'package:hive/hive.dart';
+import 'package:isar/isar.dart';
+import 'package:star_book/data/models/journal/journal.dart';
 import 'package:star_book/data/models/mood/mood.dart';
 import 'package:star_book/data/models/user/user.dart';
 
-import 'journal/journal.dart';
-
-class HiveTypeIds {
-  static const int journal = 0;
-  static const int mood = 1;
-  static const int user = 2;
-}
-
-void registerHiveAdapter() {
-  Hive.registerAdapter(JournalAdapter());
-  Hive.registerAdapter(MoodAdapter());
-  Hive.registerAdapter(UserAdapter());
+Future<void> registerSchema() async {
+  await Isar.open([JournalSchema, MoodSchema, UserSchema]);
 }

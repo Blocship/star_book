@@ -1,22 +1,19 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hive/hive.dart';
-import 'package:star_book/data/models/app.dart';
-import 'package:star_book/data/packages/hive_collection.dart';
+import 'package:isar/isar.dart';
+import 'package:star_book/data/utils/utils.dart';
 
-part 'mood.freezed.dart';
 part 'mood.g.dart';
 
-@freezed
-@HiveType(typeId: HiveTypeIds.mood)
-class Mood with _$Mood, HiveBaseModel {
-  const Mood._();
-  const factory Mood({
-    @HiveField(0) @JsonKey(name: '_id') required final String id,
-    @HiveField(1) required final String label,
-    @HiveField(2) required final String color,
-  }) = _Mood;
+@collection
+class Mood {
+  final String id;
+  final String label;
+  final String color;
 
-  factory Mood.fromJson(Map<String, dynamic> json) => _$MoodFromJson(json);
+  const Mood({
+    required this.id,
+    required this.label,
+    required this.color,
+  });
 
   factory Mood.initial() => const Mood(
         id: '',
@@ -24,5 +21,5 @@ class Mood with _$Mood, HiveBaseModel {
         color: '',
       );
 
-  String get key => id;
+  Id get key => id.fnvHash;
 }
