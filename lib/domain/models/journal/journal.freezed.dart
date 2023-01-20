@@ -19,7 +19,7 @@ mixin _$Journal {
   String get id => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
   DateTime get updatedAt => throw _privateConstructorUsedError;
-  List<String> get mood => throw _privateConstructorUsedError;
+  Mood get mood => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get memo => throw _privateConstructorUsedError;
 
@@ -36,9 +36,11 @@ abstract class $JournalCopyWith<$Res> {
       {String id,
       DateTime createdAt,
       DateTime updatedAt,
-      List<String> mood,
+      Mood mood,
       String title,
       String memo});
+
+  $MoodCopyWith<$Res> get mood;
 }
 
 /// @nodoc
@@ -77,7 +79,7 @@ class _$JournalCopyWithImpl<$Res, $Val extends Journal>
       mood: null == mood
           ? _value.mood
           : mood // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as Mood,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -87,6 +89,14 @@ class _$JournalCopyWithImpl<$Res, $Val extends Journal>
           : memo // ignore: cast_nullable_to_non_nullable
               as String,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MoodCopyWith<$Res> get mood {
+    return $MoodCopyWith<$Res>(_value.mood, (value) {
+      return _then(_value.copyWith(mood: value) as $Val);
+    });
   }
 }
 
@@ -101,9 +111,12 @@ abstract class _$$_JournalCopyWith<$Res> implements $JournalCopyWith<$Res> {
       {String id,
       DateTime createdAt,
       DateTime updatedAt,
-      List<String> mood,
+      Mood mood,
       String title,
       String memo});
+
+  @override
+  $MoodCopyWith<$Res> get mood;
 }
 
 /// @nodoc
@@ -137,9 +150,9 @@ class __$$_JournalCopyWithImpl<$Res>
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as DateTime,
       mood: null == mood
-          ? _value._mood
+          ? _value.mood
           : mood // ignore: cast_nullable_to_non_nullable
-              as List<String>,
+              as Mood,
       title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
@@ -159,11 +172,10 @@ class _$_Journal extends _Journal {
       {required this.id,
       required this.createdAt,
       required this.updatedAt,
-      required final List<String> mood,
+      required this.mood,
       required this.title,
       required this.memo})
-      : _mood = mood,
-        super._();
+      : super._();
 
   @override
   final String id;
@@ -171,13 +183,8 @@ class _$_Journal extends _Journal {
   final DateTime createdAt;
   @override
   final DateTime updatedAt;
-  final List<String> _mood;
   @override
-  List<String> get mood {
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_mood);
-  }
-
+  final Mood mood;
   @override
   final String title;
   @override
@@ -198,14 +205,14 @@ class _$_Journal extends _Journal {
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
                 other.updatedAt == updatedAt) &&
-            const DeepCollectionEquality().equals(other._mood, _mood) &&
+            (identical(other.mood, mood) || other.mood == mood) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.memo, memo) || other.memo == memo));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, createdAt, updatedAt,
-      const DeepCollectionEquality().hash(_mood), title, memo);
+  int get hashCode =>
+      Object.hash(runtimeType, id, createdAt, updatedAt, mood, title, memo);
 
   @JsonKey(ignore: true)
   @override
@@ -219,7 +226,7 @@ abstract class _Journal extends Journal {
       {required final String id,
       required final DateTime createdAt,
       required final DateTime updatedAt,
-      required final List<String> mood,
+      required final Mood mood,
       required final String title,
       required final String memo}) = _$_Journal;
   const _Journal._() : super._();
@@ -231,7 +238,7 @@ abstract class _Journal extends Journal {
   @override
   DateTime get updatedAt;
   @override
-  List<String> get mood;
+  Mood get mood;
   @override
   String get title;
   @override

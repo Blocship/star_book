@@ -7,18 +7,18 @@ part 'mood.g.dart';
 class Mood {
   final String id;
   final String label;
-  final String color;
+  final int color;
 
   const Mood({
     required this.id,
     required this.label,
-    required this.color,
-  });
+    required int color,
+  }) : color = color & 0xFFFFFFFF;
 
   factory Mood.initial() => const Mood(
         id: '',
         label: '',
-        color: '',
+        color: 0xFFFFFFFF,
       );
 
   Id get key => id.fnvHash;

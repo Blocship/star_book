@@ -9,13 +9,13 @@ class Mood with _$Mood {
   const factory Mood({
     required final String id,
     required final String label,
-    required final String color,
+    required final int color,
   }) = _Mood;
 
   factory Mood.initial() => const Mood(
         id: '',
         label: '',
-        color: '',
+        color: 0xFFFFFFFF,
       );
 
   factory Mood.fromLSMood(M.Mood from) {

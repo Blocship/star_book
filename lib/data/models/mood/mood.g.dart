@@ -20,7 +20,7 @@ const MoodSchema = CollectionSchema(
     r'color': PropertySchema(
       id: 0,
       name: r'color',
-      type: IsarType.string,
+      type: IsarType.long,
     ),
     r'id': PropertySchema(
       id: 1,
@@ -53,7 +53,6 @@ int _moodEstimateSize(
   Map<Type, List<int>> allOffsets,
 ) {
   var bytesCount = offsets.last;
-  bytesCount += 3 + object.color.length * 3;
   bytesCount += 3 + object.id.length * 3;
   bytesCount += 3 + object.label.length * 3;
   return bytesCount;
@@ -65,7 +64,7 @@ void _moodSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeString(offsets[0], object.color);
+  writer.writeLong(offsets[0], object.color);
   writer.writeString(offsets[1], object.id);
   writer.writeString(offsets[2], object.label);
 }
@@ -77,7 +76,7 @@ Mood _moodDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = Mood(
-    color: reader.readString(offsets[0]),
+    color: reader.readLong(offsets[0]),
     id: reader.readString(offsets[1]),
     label: reader.readString(offsets[2]),
   );
@@ -92,7 +91,7 @@ P _moodDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readString(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 1:
       return (reader.readString(offset)) as P;
     case 2:
@@ -188,55 +187,46 @@ extension MoodQueryWhere on QueryBuilder<Mood, Mood, QWhereClause> {
 }
 
 extension MoodQueryFilter on QueryBuilder<Mood, Mood, QFilterCondition> {
-  QueryBuilder<Mood, Mood, QAfterFilterCondition> colorEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
+  QueryBuilder<Mood, Mood, QAfterFilterCondition> colorEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'color',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Mood, Mood, QAfterFilterCondition> colorGreaterThan(
-    String value, {
+    int value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
         property: r'color',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Mood, Mood, QAfterFilterCondition> colorLessThan(
-    String value, {
+    int value, {
     bool include = false,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
         property: r'color',
         value: value,
-        caseSensitive: caseSensitive,
       ));
     });
   }
 
   QueryBuilder<Mood, Mood, QAfterFilterCondition> colorBetween(
-    String lower,
-    String upper, {
+    int lower,
+    int upper, {
     bool includeLower = true,
     bool includeUpper = true,
-    bool caseSensitive = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
@@ -245,73 +235,6 @@ extension MoodQueryFilter on QueryBuilder<Mood, Mood, QFilterCondition> {
         includeLower: includeLower,
         upper: upper,
         includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Mood, Mood, QAfterFilterCondition> colorStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'color',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Mood, Mood, QAfterFilterCondition> colorEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'color',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Mood, Mood, QAfterFilterCondition> colorContains(String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'color',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Mood, Mood, QAfterFilterCondition> colorMatches(String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'color',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Mood, Mood, QAfterFilterCondition> colorIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'color',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Mood, Mood, QAfterFilterCondition> colorIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'color',
-        value: '',
       ));
     });
   }
@@ -718,10 +641,9 @@ extension MoodQuerySortThenBy on QueryBuilder<Mood, Mood, QSortThenBy> {
 }
 
 extension MoodQueryWhereDistinct on QueryBuilder<Mood, Mood, QDistinct> {
-  QueryBuilder<Mood, Mood, QDistinct> distinctByColor(
-      {bool caseSensitive = true}) {
+  QueryBuilder<Mood, Mood, QDistinct> distinctByColor() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'color', caseSensitive: caseSensitive);
+      return query.addDistinctBy(r'color');
     });
   }
 
@@ -747,7 +669,7 @@ extension MoodQueryProperty on QueryBuilder<Mood, Mood, QQueryProperty> {
     });
   }
 
-  QueryBuilder<Mood, String, QQueryOperations> colorProperty() {
+  QueryBuilder<Mood, int, QQueryOperations> colorProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'color');
     });

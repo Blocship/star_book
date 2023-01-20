@@ -10,14 +10,29 @@ class JournalRepoImpl implements JournalRepo {
   @override
   Future<void> initialize() async {}
 
+  // Stream for journals of a month
+
   @override
-  Future<void> addJournal(Journal journal) async {
-    await lsJournalApi.create(journal.toLSJournal);
+  Stream<Journal?> journalById$(String journalId) {
+    return lsJournalApi.streamById(journalId).map<Journal?>((event) {
+      if (event == null) {
+        return null;
+      } else {
+        return Journal.fromLSJournal(event);
+      }
+    });
   }
 
   @override
-  Future<void> deleteJournal(String journalId) async {
-    await lsJournalApi.delete(journalId);
+  Stream<List<Journal>> journalsByDay$(DateTime day) {
+    return lsJournalApi.streamByDay(day).map((event) {
+      return event.map((e) => Journal.fromLSJournal(e)).toList();
+    });
+  }
+
+  @override
+  Future<void> addJournal(Journal journal) async {
+    await lsJournalApi.create(journal.toLSJournal);
   }
 
   @override
@@ -42,22 +57,7 @@ class JournalRepoImpl implements JournalRepo {
   }
 
   @override
-  Stream<Journal?> journalById$(String journalId) {
-    return lsJournalApi.streamById(journalId).map<Journal?>((event) {
-      if (event == null) {
-        return null;
-      } else {
-        return Journal.fromLSJournal(event);
-      }
-    });
+  Future<void> deleteJournal(String journalId) async {
+    await lsJournalApi.delete(journalId);
   }
-
-  @override
-  Stream<List<Journal>> journalsByDay$(DateTime day) {
-    return lsJournalApi.streamByDay(day).map((event) {
-      return event.map((e) => Journal.fromLSJournal(e)).toList();
-    });
-  }
-
-  // Stream for journals of a month
 }

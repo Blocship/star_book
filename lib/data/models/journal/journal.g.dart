@@ -32,18 +32,13 @@ const JournalSchema = CollectionSchema(
       name: r'memo',
       type: IsarType.string,
     ),
-    r'mood': PropertySchema(
-      id: 3,
-      name: r'mood',
-      type: IsarType.stringList,
-    ),
     r'title': PropertySchema(
-      id: 4,
+      id: 3,
       name: r'title',
       type: IsarType.string,
     ),
     r'updatedAt': PropertySchema(
-      id: 5,
+      id: 4,
       name: r'updatedAt',
       type: IsarType.dateTime,
     )
@@ -68,7 +63,14 @@ const JournalSchema = CollectionSchema(
       ],
     )
   },
-  links: {},
+  links: {
+    r'moodRelation': LinkSchema(
+      id: -3469746102957476051,
+      name: r'moodRelation',
+      target: r'Mood',
+      single: true,
+    )
+  },
   embeddedSchemas: {},
   getId: _journalGetId,
   getLinks: _journalGetLinks,
@@ -84,13 +86,6 @@ int _journalEstimateSize(
   var bytesCount = offsets.last;
   bytesCount += 3 + object.id.length * 3;
   bytesCount += 3 + object.memo.length * 3;
-  bytesCount += 3 + object.mood.length * 3;
-  {
-    for (var i = 0; i < object.mood.length; i++) {
-      final value = object.mood[i];
-      bytesCount += value.length * 3;
-    }
-  }
   bytesCount += 3 + object.title.length * 3;
   return bytesCount;
 }
@@ -104,9 +99,8 @@ void _journalSerialize(
   writer.writeDateTime(offsets[0], object.createdAt);
   writer.writeString(offsets[1], object.id);
   writer.writeString(offsets[2], object.memo);
-  writer.writeStringList(offsets[3], object.mood);
-  writer.writeString(offsets[4], object.title);
-  writer.writeDateTime(offsets[5], object.updatedAt);
+  writer.writeString(offsets[3], object.title);
+  writer.writeDateTime(offsets[4], object.updatedAt);
 }
 
 Journal _journalDeserialize(
@@ -119,9 +113,8 @@ Journal _journalDeserialize(
     createdAt: reader.readDateTime(offsets[0]),
     id: reader.readString(offsets[1]),
     memo: reader.readString(offsets[2]),
-    mood: reader.readStringList(offsets[3]) ?? [],
-    title: reader.readString(offsets[4]),
-    updatedAt: reader.readDateTime(offsets[5]),
+    title: reader.readString(offsets[3]),
+    updatedAt: reader.readDateTime(offsets[4]),
   );
   return object;
 }
@@ -140,10 +133,8 @@ P _journalDeserializeProp<P>(
     case 2:
       return (reader.readString(offset)) as P;
     case 3:
-      return (reader.readStringList(offset) ?? []) as P;
-    case 4:
       return (reader.readString(offset)) as P;
-    case 5:
+    case 4:
       return (reader.readDateTime(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -155,10 +146,13 @@ Id _journalGetId(Journal object) {
 }
 
 List<IsarLinkBase<dynamic>> _journalGetLinks(Journal object) {
-  return [];
+  return [object.moodRelation];
 }
 
-void _journalAttach(IsarCollection<dynamic> col, Id id, Journal object) {}
+void _journalAttach(IsarCollection<dynamic> col, Id id, Journal object) {
+  object.moodRelation
+      .attach(col, col.isar.collection<Mood>(), r'moodRelation', id);
+}
 
 extension JournalQueryWhereSort on QueryBuilder<Journal, Journal, QWhere> {
   QueryBuilder<Journal, Journal, QAfterWhere> anyKey() {
@@ -699,221 +693,6 @@ extension JournalQueryFilter
     });
   }
 
-  QueryBuilder<Journal, Journal, QAfterFilterCondition> moodElementEqualTo(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'mood',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Journal, Journal, QAfterFilterCondition> moodElementGreaterThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'mood',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Journal, Journal, QAfterFilterCondition> moodElementLessThan(
-    String value, {
-    bool include = false,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'mood',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Journal, Journal, QAfterFilterCondition> moodElementBetween(
-    String lower,
-    String upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'mood',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Journal, Journal, QAfterFilterCondition> moodElementStartsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.startsWith(
-        property: r'mood',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Journal, Journal, QAfterFilterCondition> moodElementEndsWith(
-    String value, {
-    bool caseSensitive = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.endsWith(
-        property: r'mood',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Journal, Journal, QAfterFilterCondition> moodElementContains(
-      String value,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.contains(
-        property: r'mood',
-        value: value,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Journal, Journal, QAfterFilterCondition> moodElementMatches(
-      String pattern,
-      {bool caseSensitive = true}) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.matches(
-        property: r'mood',
-        wildcard: pattern,
-        caseSensitive: caseSensitive,
-      ));
-    });
-  }
-
-  QueryBuilder<Journal, Journal, QAfterFilterCondition> moodElementIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'mood',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Journal, Journal, QAfterFilterCondition>
-      moodElementIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        property: r'mood',
-        value: '',
-      ));
-    });
-  }
-
-  QueryBuilder<Journal, Journal, QAfterFilterCondition> moodLengthEqualTo(
-      int length) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'mood',
-        length,
-        true,
-        length,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<Journal, Journal, QAfterFilterCondition> moodIsEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'mood',
-        0,
-        true,
-        0,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<Journal, Journal, QAfterFilterCondition> moodIsNotEmpty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'mood',
-        0,
-        false,
-        999999,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<Journal, Journal, QAfterFilterCondition> moodLengthLessThan(
-    int length, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'mood',
-        0,
-        true,
-        length,
-        include,
-      );
-    });
-  }
-
-  QueryBuilder<Journal, Journal, QAfterFilterCondition> moodLengthGreaterThan(
-    int length, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'mood',
-        length,
-        include,
-        999999,
-        true,
-      );
-    });
-  }
-
-  QueryBuilder<Journal, Journal, QAfterFilterCondition> moodLengthBetween(
-    int lower,
-    int upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.listLength(
-        r'mood',
-        lower,
-        includeLower,
-        upper,
-        includeUpper,
-      );
-    });
-  }
-
   QueryBuilder<Journal, Journal, QAfterFilterCondition> titleEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -1102,7 +881,20 @@ extension JournalQueryObject
     on QueryBuilder<Journal, Journal, QFilterCondition> {}
 
 extension JournalQueryLinks
-    on QueryBuilder<Journal, Journal, QFilterCondition> {}
+    on QueryBuilder<Journal, Journal, QFilterCondition> {
+  QueryBuilder<Journal, Journal, QAfterFilterCondition> moodRelation(
+      FilterQuery<Mood> q) {
+    return QueryBuilder.apply(this, (query) {
+      return query.link(q, r'moodRelation');
+    });
+  }
+
+  QueryBuilder<Journal, Journal, QAfterFilterCondition> moodRelationIsNull() {
+    return QueryBuilder.apply(this, (query) {
+      return query.linkLength(r'moodRelation', 0, true, 0, true);
+    });
+  }
+}
 
 extension JournalQuerySortBy on QueryBuilder<Journal, Journal, QSortBy> {
   QueryBuilder<Journal, Journal, QAfterSortBy> sortByCreatedAt() {
@@ -1263,12 +1055,6 @@ extension JournalQueryWhereDistinct
     });
   }
 
-  QueryBuilder<Journal, Journal, QDistinct> distinctByMood() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'mood');
-    });
-  }
-
   QueryBuilder<Journal, Journal, QDistinct> distinctByTitle(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
@@ -1306,12 +1092,6 @@ extension JournalQueryProperty
   QueryBuilder<Journal, String, QQueryOperations> memoProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'memo');
-    });
-  }
-
-  QueryBuilder<Journal, List<String>, QQueryOperations> moodProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'mood');
     });
   }
 

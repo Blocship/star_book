@@ -18,7 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$Mood {
   String get id => throw _privateConstructorUsedError;
   String get label => throw _privateConstructorUsedError;
-  String get color => throw _privateConstructorUsedError;
+  int get color => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $MoodCopyWith<Mood> get copyWith => throw _privateConstructorUsedError;
@@ -29,7 +29,7 @@ abstract class $MoodCopyWith<$Res> {
   factory $MoodCopyWith(Mood value, $Res Function(Mood) then) =
       _$MoodCopyWithImpl<$Res, Mood>;
   @useResult
-  $Res call({String id, String label, String color});
+  $Res call({String id, String label, int color});
 }
 
 /// @nodoc
@@ -61,7 +61,7 @@ class _$MoodCopyWithImpl<$Res, $Val extends Mood>
       color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
     ) as $Val);
   }
 }
@@ -72,7 +72,7 @@ abstract class _$$_MoodCopyWith<$Res> implements $MoodCopyWith<$Res> {
       __$$_MoodCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String label, String color});
+  $Res call({String id, String label, int color});
 }
 
 /// @nodoc
@@ -100,7 +100,7 @@ class __$$_MoodCopyWithImpl<$Res> extends _$MoodCopyWithImpl<$Res, _$_Mood>
       color: null == color
           ? _value.color
           : color // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
     ));
   }
 }
@@ -116,7 +116,7 @@ class _$_Mood extends _Mood {
   @override
   final String label;
   @override
-  final String color;
+  final int color;
 
   @override
   String toString() {
@@ -147,7 +147,7 @@ abstract class _Mood extends Mood {
   const factory _Mood(
       {required final String id,
       required final String label,
-      required final String color}) = _$_Mood;
+      required final int color}) = _$_Mood;
   const _Mood._() : super._();
 
   @override
@@ -155,7 +155,7 @@ abstract class _Mood extends Mood {
   @override
   String get label;
   @override
-  String get color;
+  int get color;
   @override
   @JsonKey(ignore: true)
   _$$_MoodCopyWith<_$_Mood> get copyWith => throw _privateConstructorUsedError;

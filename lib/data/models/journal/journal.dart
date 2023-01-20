@@ -1,4 +1,5 @@
 import 'package:isar/isar.dart';
+import 'package:star_book/data/models/mood/mood.dart';
 import 'package:star_book/data/utils/utils.dart';
 
 part 'journal.g.dart';
@@ -9,15 +10,13 @@ class Journal {
   @Index()
   final DateTime createdAt;
   final DateTime updatedAt;
-  final List<String> mood;
   final String title;
   final String memo;
 
-  const Journal({
+  Journal({
     required this.id,
     required this.createdAt,
     required this.updatedAt,
-    required this.mood,
     required this.title,
     required this.memo,
   });
@@ -26,10 +25,19 @@ class Journal {
         id: '',
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
-        mood: ['happy'],
         title: '',
         memo: '',
       );
 
+  @ignore
+  Mood get mood {
+    return moodRelation.value!;
+  }
+
+  set mood(Mood value) {
+    moodRelation.value = value;
+  }
+
   Id get key => id.fnvHash;
+  final moodRelation = IsarLink<Mood>();
 }
