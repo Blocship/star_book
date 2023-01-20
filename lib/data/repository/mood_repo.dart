@@ -3,7 +3,9 @@ import 'package:star_book/domain/models/mood/mood.dart';
 import 'package:star_book/domain/repository/mood_repo.dart';
 
 class MoodRepoImpl implements MoodRepo {
-  late final IMoodApi lSMoodApi;
+  final IMoodApi lSMoodApi;
+
+  MoodRepoImpl({required this.lSMoodApi});
 
   @override
   Future<void> initialize() async {}

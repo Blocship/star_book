@@ -3,7 +3,9 @@ import 'package:star_book/domain/models/user/user.dart';
 import 'package:star_book/domain/repository/user_repo.dart';
 
 class UserRepoImpl implements UserRepo {
-  late final IUserApi lSUserApi;
+  final IUserApi lSUserApi;
+
+  UserRepoImpl({required this.lSUserApi});
 
   @override
   Future<void> initialize() async {}

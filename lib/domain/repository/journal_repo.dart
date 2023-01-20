@@ -8,4 +8,6 @@ abstract class JournalRepo extends BaseRepo {
   Future<void> updateJournal(Journal journal);
   Future<void> addJournal(Journal journal);
   Future<Journal> getJournalById(String journalId);
+  Stream<Journal?> journalById$(String journalId);
+  Stream<List<Journal>> journalsByDay$(DateTime day);
 }

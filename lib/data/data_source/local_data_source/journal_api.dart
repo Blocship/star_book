@@ -1,6 +1,7 @@
 import 'package:isar/isar.dart';
 import 'package:star_book/data/data_source/local_data_source/base_api.dart';
 import 'package:star_book/data/models/journal/journal.dart';
+import 'package:star_book/data/utils/datetime.dart';
 import 'package:star_book/data/utils/utils.dart';
 
 abstract class IJournalApi extends BaseApi {
@@ -12,6 +13,8 @@ abstract class IJournalApi extends BaseApi {
   Future<List<Journal>> fetchByDate();
   Future<void> update(Journal journal);
   Future<void> delete(String journalId);
+  Stream<Journal?> streamById(String journalId);
+  Stream<List<Journal>> streamByDay(DateTime day);
 }
 
 class LSJournalApi implements IJournalApi {
@@ -82,5 +85,23 @@ class LSJournalApi implements IJournalApi {
       // todo: check: if deleted good else throw
     });
     return;
+  }
+
+  @override
+  Stream<Journal?> streamById(String journalId) =>
+      collection.watchObject(journalId.fnvHash, fireImmediately: true);
+
+  @override
+  Stream<List<Journal>> streamByDay(DateTime day) {
+    final query = collection
+        .filter()
+        .createdAtBetween(
+          day.startTimeofDay,
+          day.endTimeofDay,
+          includeLower: true,
+          includeUpper: true,
+        )
+        .build();
+    return query.watch(fireImmediately: true);
   }
 }

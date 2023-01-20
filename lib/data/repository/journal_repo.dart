@@ -3,7 +3,9 @@ import 'package:star_book/domain/models/journal/journal.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
 
 class JournalRepoImpl implements JournalRepo {
-  late final IJournalApi lsJournalApi;
+  final IJournalApi lsJournalApi;
+
+  JournalRepoImpl({required this.lsJournalApi});
 
   @override
   Future<void> initialize() async {}
@@ -38,4 +40,24 @@ class JournalRepoImpl implements JournalRepo {
   Future<void> updateJournal(Journal journal) async {
     await lsJournalApi.update(journal.toLSJournal);
   }
+
+  @override
+  Stream<Journal?> journalById$(String journalId) {
+    return lsJournalApi.streamById(journalId).map<Journal?>((event) {
+      if (event == null) {
+        return null;
+      } else {
+        return Journal.fromLSJournal(event);
+      }
+    });
+  }
+
+  @override
+  Stream<List<Journal>> journalsByDay$(DateTime day) {
+    return lsJournalApi.streamByDay(day).map((event) {
+      return event.map((e) => Journal.fromLSJournal(e)).toList();
+    });
+  }
+
+  // Stream for journals of a month
 }
