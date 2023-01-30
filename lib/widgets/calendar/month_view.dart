@@ -1,123 +1,86 @@
-import 'dart:developer';
 import 'package:flutter/material.dart';
+import 'package:star_book/widgets/calendar/day_number.dart';
+import 'package:star_book/widgets/calendar/month_title.dart';
+import 'package:star_book/utils/screen_sizes.dart';
 import 'package:star_book/utils/dates.dart';
 
-class MonthTile extends StatelessWidget {
-  const MonthTile({Key? key}) : super(key: key);
+class MonthView extends StatelessWidget {
+  const MonthView({
+    super.key,
+    required this.year,
+    required this.month,
+  });
 
-  @override
-  Widget build(BuildContext context) {
-    final List<String> monthName = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
-
-    return GridView.builder(
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate:
-          const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
-      itemCount: monthName.length,
-      itemBuilder: (context, index) {
-        return CalendarCard(monthName: monthName[index], index: index);
-      },
-    );
-  }
-}
-
-class CalendarCard extends StatelessWidget {
-  final String monthName;
-  final int index;
-
-  const CalendarCard({
-    Key? key,
-    required this.monthName,
-    required this.index,
-  }) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Padding(
-          padding: const EdgeInsets.all(4),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MonthsView(month: index),
-                ),
-              );
-            },
-            child: Container(
-              width: 70,
-              height: 70,
-              decoration: BoxDecoration(
-                color: Colors.blue,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Center(
-                child: Text(
-                  monthName,
-                  textAlign: TextAlign.center,
-                ),
-              ),
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class MonthsView extends StatelessWidget {
+  final int year;
   final int month;
 
-  const MonthsView({
-    Key? key,
-    required this.month,
-  }) : super(key: key);
+  Color getDayNumberColor(DateTime date) {
+    Color color = Colors.transparent;
+    if (Dates.isCurrentDate(date)) {
+      color = Colors.pink;
+    }
+    return color;
+  }
 
-  @override
-  Widget build(BuildContext context) {
+  Widget buildMonthDays() {
     final List<Row> dayRows = <Row>[];
-    final List datesRow = [];
-    final int daysInMonth = Dates.getDaysInMonth(2023, month);
-    final int firstWeekdayOfMonth = DateTime(2023, month, 1).weekday;
+    final List<DayNumber> dayRowChildren = <DayNumber>[];
+
+    final int daysInMonth = Dates.getDaysInMonth(year, month);
+    final int firstWeekdayOfMonth = DateTime(year, month, 1).weekday;
 
     for (int day = 2 - firstWeekdayOfMonth; day <= daysInMonth; day++) {
-      datesRow.add(Text(day.toString()));
+      Color color = Colors.transparent;
+      if (day > 0) {
+        color = getDayNumberColor(DateTime(year, month, day));
+      }
+
+      dayRowChildren.add(
+        DayNumber(
+          day: day,
+        ),
+      );
+
       if ((day - 1 + firstWeekdayOfMonth) % DateTime.daysPerWeek == 0 ||
           day == daysInMonth) {
-        log('day: $day');
-        log('firstWeekdayOfMonth: $firstWeekdayOfMonth');
-        log('daysInMonth: $daysInMonth');
-        log('datesRow: $datesRow');
         dayRows.add(
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: List.from(datesRow),
+            children: List<DayNumber>.from(dayRowChildren),
           ),
         );
-        datesRow.clear();
+        dayRowChildren.clear();
       }
     }
 
-    return Scaffold(
-      body: Column(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: dayRows,
+    );
+  }
+
+  Widget buildMonthView(BuildContext context) {
+    return Container(
+      width: 7.0 * getDayNumberSize(context),
+      margin: const EdgeInsets.all(8.0),
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: dayRows,
+        children: <Widget>[
+          MonthTitle(
+            month: month,
+          ),
+          Container(
+            margin: const EdgeInsets.only(top: 8.0),
+            child: buildMonthDays(),
+          ),
+        ],
       ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: buildMonthView(context),
     );
   }
 }
