@@ -62,7 +62,7 @@ abstract class BaseTheme {
   BackgroundTheme get backgroundTheme;
   FontTheme get fontTheme;
   FontFamily get fontFamily;
-
+  // ElevatedButtonTheme get elevatedButtonTheme;
   ThemeData get theme {
     return ThemeData(
       primaryColor: foregroundTheme.primaryColor,

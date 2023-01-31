@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/presentation/shared/flat_buttons.dart';
 import 'package:star_book/theme/ultramarine_light.dart';
 
 void main() {
@@ -51,6 +52,9 @@ class _MyHomePageState extends State<MyHomePage> {
             Text(
               '$_counter',
               style: Theme.of(context).textTheme.headline4,
+            ),
+            const SBPrimaryFlatButton(
+              label: 'Text',
             ),
           ],
         ),
