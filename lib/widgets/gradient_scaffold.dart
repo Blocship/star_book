@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/theme/ultramarine_light.dart';
 
 class GradientScaffold extends StatelessWidget {
   final Widget body;
@@ -109,8 +110,11 @@ class OrangeShadow extends StatelessWidget {
           BoxShadow(
             spreadRadius: spreadRadius,
             blurRadius: blurRadius,
-            color: const Color(0xffFF833D).withOpacity(shadowOpacity),
-          )
+            color: UltramarineLightTheme()
+                .gradientScaffoldColorTheme
+                .secondaryGradientScaffoldColor
+                .withOpacity(shadowOpacity),
+          ),
         ],
       ),
     );
@@ -146,8 +150,11 @@ class BlueShadow extends StatelessWidget {
           BoxShadow(
             spreadRadius: spreadRadius,
             blurRadius: blurRadius,
-            color: const Color(0xff57D7FF).withOpacity(shadowOpacity),
-          )
+            color: UltramarineLightTheme()
+                .gradientScaffoldColorTheme
+                .primaryGradientScaffoldColor
+                .withOpacity(shadowOpacity),
+          ),
         ],
       ),
     );
@@ -183,8 +190,11 @@ class PinkShadow extends StatelessWidget {
           BoxShadow(
             spreadRadius: spreadRadius,
             blurRadius: blurRadius,
-            color: const Color(0xffF400F9).withOpacity(shadowOpacity),
-          )
+            color: UltramarineLightTheme()
+                .gradientScaffoldColorTheme
+                .tertiaryGradientScaffoldColor
+                .withOpacity(shadowOpacity),
+          ),
         ],
       ),
     );

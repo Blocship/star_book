@@ -48,4 +48,13 @@ class UltramarineLightTheme extends BaseTheme {
       primary: 'primary',
     );
   }
+
+  @override
+  ColorTheme get gradientScaffoldColorTheme {
+    return const ColorTheme(
+      primaryGradientScaffoldColor: Color(0xff57D7FF),
+      secondaryGradientScaffoldColor: Color(0xffFF833D),
+      tertiaryGradientScaffoldColor: Color(0xffF400F9),
+    );
+  }
 }

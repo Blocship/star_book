@@ -57,10 +57,27 @@ class FontFamily {
   });
 }
 
+class ColorTheme {
+  final Color primaryGradientScaffoldColor;
+  final Color secondaryGradientScaffoldColor;
+  final Color tertiaryGradientScaffoldColor;
+
+  const ColorTheme({
+    required this.primaryGradientScaffoldColor,
+    required this.secondaryGradientScaffoldColor,
+    required this.tertiaryGradientScaffoldColor,
+  });
+}
+
 abstract class BaseTheme {
   ForegroundTheme get foregroundTheme;
+
   BackgroundTheme get backgroundTheme;
+
+  ColorTheme get gradientScaffoldColorTheme;
+
   FontTheme get fontTheme;
+
   FontFamily get fontFamily;
 
   ThemeData get theme {
