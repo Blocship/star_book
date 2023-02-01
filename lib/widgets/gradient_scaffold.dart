@@ -15,7 +15,9 @@ class GradientScaffold extends StatelessWidget {
       color: Colors.white,
       child: Stack(
         children: [
-          body,
+          Scaffold(
+            body: body,
+          ),
           const Positioned(
             top: 80,
             right: -10,

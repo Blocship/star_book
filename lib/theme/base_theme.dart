@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/theme/styling/gradient_scaffold_style.dart';
 
 class ForegroundTheme {
   final Color primaryColor;
@@ -66,21 +67,17 @@ abstract class BaseTheme {
 
   FontFamily get fontFamily;
 
+  GradientScaffoldStyle get gradientScaffoldStyle;
+
   ThemeData get theme {
     return ThemeData(
       primaryColor: foregroundTheme.primaryColor,
       appBarTheme: AppBarTheme(
         color: foregroundTheme.primaryColor,
       ),
-    );
-  }
-
-  ThemeData get darkTheme {
-    return ThemeData(
-      primaryColor: backgroundTheme.primaryColor,
-      appBarTheme: AppBarTheme(
-        color: backgroundTheme.primaryColor,
-      ),
+      extensions: <ThemeExtension<dynamic>>{
+        gradientScaffoldStyle,
+      },
     );
   }
 }

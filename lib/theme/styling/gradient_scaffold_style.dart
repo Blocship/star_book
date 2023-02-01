@@ -39,9 +39,4 @@ class GradientScaffoldStyle extends ThemeExtension<GradientScaffoldStyle> {
   //   return 'AppTheme(primaryColor: $primaryColor, secondaryColor: $secondaryColor, tertiaryColor: $tertiaryColor)';
   // }
 
-  static const lightGradientScaffoldColor = GradientScaffoldStyle(
-    primaryColor: Color(0xff57D7FF),
-    secondaryColor: Color(0xffFF833D),
-    tertiaryColor: Color(0xffF400F9),
-  );
 }

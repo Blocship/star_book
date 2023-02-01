@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:star_book/theme/styling/gradient_scaffold_style.dart';
+import 'package:star_book/theme/ultramarine_light.dart';
 import 'package:star_book/widgets/gradient_scaffold.dart';
 
 void main() {
@@ -13,9 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       // theme: UltramarineLightTheme().theme,
-      theme: ThemeData(extensions: const <ThemeExtension<dynamic>>{
-        GradientScaffoldStyle.lightGradientScaffoldColor,
-      }),
+      theme: UltramarineLightTheme().theme,
       // home: const MyHomePage(title: 'Flutter Demo Home Page'),
       home: const GradientScaffold(body: SizedBox()),
     );

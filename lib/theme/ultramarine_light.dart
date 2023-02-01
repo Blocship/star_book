@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/theme/base_theme.dart';
+import 'package:star_book/theme/styling/gradient_scaffold_style.dart';
 
 /// Ultramarine is a deep blue color pigment which was originally made by
 /// grinding lapis lazuli into a powder.
@@ -46,6 +47,15 @@ class UltramarineLightTheme extends BaseTheme {
   FontFamily get fontFamily {
     return FontFamily(
       primary: 'primary',
+    );
+  }
+
+  @override
+  GradientScaffoldStyle get gradientScaffoldStyle {
+    return const GradientScaffoldStyle(
+      primaryColor: Color(0xff57D7FF),
+      secondaryColor: Color(0xffFF833D),
+      tertiaryColor: Color(0xffF400F9),
     );
   }
 }
