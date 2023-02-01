@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/theme/styling/gradient_scaffold_style.dart';
 
 class ForegroundTheme {
   final Color primaryColor;
@@ -59,10 +60,16 @@ class FontFamily {
 
 abstract class BaseTheme {
   ForegroundTheme get foregroundTheme;
+
   BackgroundTheme get backgroundTheme;
+
   FontTheme get fontTheme;
+
   FontFamily get fontFamily;
   ElevatedButtonThemeData get elevatedButtonThemeData;
+
+  GradientScaffoldStyle get gradientScaffoldStyle;
+
   ThemeData get theme {
     return ThemeData(
       elevatedButtonTheme: elevatedButtonThemeData,
@@ -70,6 +77,9 @@ abstract class BaseTheme {
       appBarTheme: AppBarTheme(
         color: foregroundTheme.primaryColor,
       ),
+      extensions: <ThemeExtension<dynamic>>{
+        gradientScaffoldStyle,
+      },
     );
   }
 }
