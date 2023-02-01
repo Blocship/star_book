@@ -58,4 +58,11 @@ class UltramarineLightTheme extends BaseTheme {
       tertiaryColor: Color(0xffF400F9),
     );
   }
+
+  @override
+  FloatingActionButtonThemeData get floatingActionButton {
+    return const FloatingActionButtonThemeData(
+      backgroundColor: Color(0xff32C74F),
+    );
+  }
 }

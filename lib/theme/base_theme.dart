@@ -67,11 +67,14 @@ abstract class BaseTheme {
 
   FontFamily get fontFamily;
 
+  FloatingActionButtonThemeData get floatingActionButton;
+
   GradientScaffoldStyle get gradientScaffoldStyle;
 
   ThemeData get theme {
     return ThemeData(
       primaryColor: foregroundTheme.primaryColor,
+      floatingActionButtonTheme: floatingActionButton,
       appBarTheme: AppBarTheme(
         color: foregroundTheme.primaryColor,
       ),
