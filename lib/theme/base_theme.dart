@@ -57,24 +57,10 @@ class FontFamily {
   });
 }
 
-class ColorTheme {
-  final Color primaryGradientScaffoldColor;
-  final Color secondaryGradientScaffoldColor;
-  final Color tertiaryGradientScaffoldColor;
-
-  const ColorTheme({
-    required this.primaryGradientScaffoldColor,
-    required this.secondaryGradientScaffoldColor,
-    required this.tertiaryGradientScaffoldColor,
-  });
-}
-
 abstract class BaseTheme {
   ForegroundTheme get foregroundTheme;
 
   BackgroundTheme get backgroundTheme;
-
-  ColorTheme get gradientScaffoldColorTheme;
 
   FontTheme get fontTheme;
 
@@ -85,6 +71,15 @@ abstract class BaseTheme {
       primaryColor: foregroundTheme.primaryColor,
       appBarTheme: AppBarTheme(
         color: foregroundTheme.primaryColor,
+      ),
+    );
+  }
+
+  ThemeData get darkTheme {
+    return ThemeData(
+      primaryColor: backgroundTheme.primaryColor,
+      appBarTheme: AppBarTheme(
+        color: backgroundTheme.primaryColor,
       ),
     );
   }
