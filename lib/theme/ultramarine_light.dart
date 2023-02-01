@@ -66,10 +66,10 @@ class UltramarineLightTheme extends BaseTheme {
         backgroundColor:
             MaterialStateProperty.all<Color>(const Color(0xFF4C4DFF)),
         elevation: MaterialStateProperty.all<double>(0),
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
         textStyle: MaterialStateProperty.all<TextStyle>(
           const TextStyle(
             fontSize: 14,
-            color: Colors.white,
             fontWeight: FontWeight.w500,
           ),
         ),

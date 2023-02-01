@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-abstract class SBFlatButton extends StatelessWidget {
+abstract class SBElevatedButton extends StatelessWidget {
   final VoidCallback? onTap;
 
-  const SBFlatButton({Key? key, this.onTap}) : super(key: key);
+  const SBElevatedButton({Key? key, this.onTap}) : super(key: key);
 
   Widget childWidget();
 
@@ -16,11 +16,11 @@ abstract class SBFlatButton extends StatelessWidget {
   }
 }
 
-class SBPrimaryFlatButton extends SBFlatButton {
+class SBPrimaryElevatedButton extends SBElevatedButton {
   final Widget? child;
   final String? label;
 
-  const SBPrimaryFlatButton({
+  const SBPrimaryElevatedButton({
     this.child,
     this.label,
     final VoidCallback? onTap,
@@ -31,15 +31,7 @@ class SBPrimaryFlatButton extends SBFlatButton {
   @override
   Widget childWidget() {
     return FittedBox(
-      child: child ??
-          Text(
-            label!,
-            style: const TextStyle(
-              fontSize: 14,
-              color: Colors.white,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
+      child: child ?? Text(label!),
     );
   }
 
