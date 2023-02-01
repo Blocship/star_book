@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/utils/calendar.dart';
+import 'package:star_book/widgets/gradient_scaffold.dart';
 
 class DaysOfMonth extends StatelessWidget {
   final int year;
@@ -40,7 +41,7 @@ class DaysOfMonth extends StatelessWidget {
     }
 
     /// This will display the week days and dates of the month
-    return Scaffold(
+    return GradientScaffold(
       appBar: AppBar(
         centerTitle: true,
         title: const Text(
