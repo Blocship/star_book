@@ -66,6 +66,8 @@ class UltramarineLightTheme extends BaseTheme {
         backgroundColor:
             MaterialStateProperty.all<Color>(const Color(0xFF4C4DFF)),
         elevation: MaterialStateProperty.all<double>(0),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
         foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
         textStyle: MaterialStateProperty.all<TextStyle>(
           const TextStyle(
