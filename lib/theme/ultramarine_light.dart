@@ -64,22 +64,16 @@ class UltramarineLightTheme extends BaseTheme {
     return ElevatedButtonThemeData(
       style: ButtonStyle(
         backgroundColor:
-        MaterialStateProperty.all<Color>(const Color(0xFF4C4DFF)),
-        // foregroundColor: MaterialStateProperty.all<Color>(),
-        overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
+            MaterialStateProperty.all<Color>(const Color(0xFF4C4DFF)),
         elevation: MaterialStateProperty.all<double>(0),
-        // textStyle: MaterialStateProperty.all<TextStyle>(
-        // const TextStyle(
-        //   fontFamily: bodyFontFamily,
-        //   fontSize: tertiaryBodyTextSize,
-        //   fontWeight: FontWeight.w500,
-        // ),
-        // ),
-        //   padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
-        //     const EdgeInsets.symmetric(vertical: 10, horizontal: 22),
-        //   ),
+        textStyle: MaterialStateProperty.all<TextStyle>(
+          const TextStyle(
+            fontSize: 14,
+            color: Colors.white,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ),
     );
   }
 }
-
