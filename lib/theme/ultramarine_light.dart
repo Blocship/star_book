@@ -48,4 +48,27 @@ class UltramarineLightTheme extends BaseTheme {
       primary: 'primary',
     );
   }
+
+  @override
+  ElevatedButtonThemeData get elevatedButtonThemeData {
+    return ElevatedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor:
+            MaterialStateProperty.all<Color>(const Color(0xFF4C4DFF)),
+        // foregroundColor: MaterialStateProperty.all<Color>(),
+        overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
+        elevation: MaterialStateProperty.all<double>(0),
+        // textStyle: MaterialStateProperty.all<TextStyle>(
+        // const TextStyle(
+        //   fontFamily: bodyFontFamily,
+        //   fontSize: tertiaryBodyTextSize,
+        //   fontWeight: FontWeight.w500,
+        // ),
+        // ),
+        //   padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+        //     const EdgeInsets.symmetric(vertical: 10, horizontal: 22),
+        //   ),
+      ),
+    );
+  }
 }

@@ -62,9 +62,10 @@ abstract class BaseTheme {
   BackgroundTheme get backgroundTheme;
   FontTheme get fontTheme;
   FontFamily get fontFamily;
-  // ElevatedButtonTheme get elevatedButtonTheme;
+  ElevatedButtonThemeData get elevatedButtonThemeData;
   ThemeData get theme {
     return ThemeData(
+      elevatedButtonTheme: elevatedButtonThemeData,
       primaryColor: foregroundTheme.primaryColor,
       appBarTheme: AppBarTheme(
         color: foregroundTheme.primaryColor,

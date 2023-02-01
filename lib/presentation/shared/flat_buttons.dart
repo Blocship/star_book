@@ -7,9 +7,9 @@ abstract class SBFlatButton extends StatelessWidget {
 
   Widget childWidget();
 
-ThemeData theme(BuildContext context){
-  return Theme.of(context);
-}
+  ThemeData theme(BuildContext context) {
+    return Theme.of(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,8 +31,13 @@ class SBPrimaryFlatButton extends SBFlatButton {
     this.label,
     final VoidCallback? onTap,
     Key? key,
-  }) : assert((label == null) ^ (child == null)),
+  })  : assert((label == null) ^ (child == null)),
         super(onTap: onTap, key: key);
+  // @override
+  // ThemeData theme(BuildContext context) {
+  // return Theme.of(context).copyWith(
+  //     elevatedButtonTheme:
+  // }
 
   @override
   Widget childWidget() {
