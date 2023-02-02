@@ -72,6 +72,7 @@ abstract class BaseTheme {
   ThemeData get theme {
     return ThemeData(
       primaryColor: foregroundTheme.primaryColor,
+      fontFamily: fontFamily.primary,
       appBarTheme: AppBarTheme(
         color: foregroundTheme.primaryColor,
       ),
