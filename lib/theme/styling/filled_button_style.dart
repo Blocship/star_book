@@ -1,16 +1,14 @@
-
 import 'package:flutter/material.dart';
 
-class CustomButtonTheme
-    extends ThemeExtension<CustomButtonTheme> {
+class CustomButtonTheme extends ThemeExtension<CustomButtonTheme> {
   final ButtonStyle? primaryFilledButtonTheme;
   final ButtonStyle? dangerFilledButtonTheme;
   final ButtonStyle? inactiveFilledButtonTheme;
 
   const CustomButtonTheme({
-    required this.dangerFilledButtonTheme,
-    required this.inactiveFilledButtonTheme,
-    required this.primaryFilledButtonTheme,
+    this.dangerFilledButtonTheme,
+    this.inactiveFilledButtonTheme,
+    this.primaryFilledButtonTheme,
   });
 
   @override
