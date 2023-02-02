@@ -36,18 +36,23 @@ class UltramarineLightTheme extends BaseTheme {
     return const FontTheme(
       heading1: TextStyle(
         fontSize: 30,
+        letterSpacing: -2,
       ),
       heading2: TextStyle(
         fontSize: 25,
+        letterSpacing: -2,
+        height: 35,
       ),
       heading3: TextStyle(
         fontSize: 20,
+        height: 20,
       ),
       body1: TextStyle(
         fontSize: 16,
       ),
       body2: TextStyle(
         fontSize: 14,
+        height: 18,
       ),
       caption: TextStyle(
         fontSize: 12,
@@ -58,7 +63,7 @@ class UltramarineLightTheme extends BaseTheme {
   @override
   FontFamily get fontFamily {
     return FontFamily(
-      primary: 'primary',
+      primary: 'Inter',
     );
   }
 
