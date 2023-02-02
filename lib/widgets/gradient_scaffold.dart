@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:star_book/theme/styling/gradient_scaffold_style.dart';
 
 class GradientScaffold extends StatelessWidget {
+  final PreferredSizeWidget? appBar;
   final Widget? body;
 
   const GradientScaffold({
     Key? key,
+    this.appBar,
     this.body,
   }) : super(key: key);
 
@@ -15,9 +17,6 @@ class GradientScaffold extends StatelessWidget {
       color: Colors.white,
       child: Stack(
         children: [
-          Scaffold(
-            body: body,
-          ),
           Positioned(
             top: 80,
             right: -10,
@@ -96,6 +95,11 @@ class GradientScaffold extends StatelessWidget {
                   .tertiaryColor!
                   .withOpacity(0.08),
             ),
+          ),
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            appBar: appBar,
+            body: body,
           ),
         ],
       ),
