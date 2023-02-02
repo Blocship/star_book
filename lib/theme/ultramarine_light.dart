@@ -34,12 +34,24 @@ class UltramarineLightTheme extends BaseTheme {
   @override
   FontTheme get fontTheme {
     return const FontTheme(
-      heading1: TextStyle(),
-      heading2: TextStyle(),
-      heading3: TextStyle(),
-      body1: TextStyle(),
-      body2: TextStyle(),
-      caption: TextStyle(),
+      heading1: TextStyle(
+        fontSize: 30,
+      ),
+      heading2: TextStyle(
+        fontSize: 25,
+      ),
+      heading3: TextStyle(
+        fontSize: 20,
+      ),
+      body1: TextStyle(
+        fontSize: 16,
+      ),
+      body2: TextStyle(
+        fontSize: 14,
+      ),
+      caption: TextStyle(
+        fontSize: 12,
+      ),
     );
   }
 
