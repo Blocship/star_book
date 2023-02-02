@@ -1,45 +1,77 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/theme/styling/filled_button_style.dart';
 
-abstract class SBElevatedButton extends StatelessWidget {
-  final VoidCallback? onTap;
+class SBPrimaryFilledButton extends StatelessWidget {
+  final VoidCallback onTap;
+  final String label;
 
-  const SBElevatedButton({Key? key, this.onTap}) : super(key: key);
-
-  Widget childWidget();
-
-  @override
-  Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: onTap,
-      child: childWidget(),
-    );
-  }
-}
-
-class SBPrimaryElevatedButton extends SBElevatedButton {
-  final Widget? child;
-  final String? label;
-
-  const SBPrimaryElevatedButton({
-    this.child,
-    this.label,
-    final VoidCallback? onTap,
-    Key? key,
-  })  : assert((label == null) ^ (child == null)),
-        super(onTap: onTap, key: key);
-
-  @override
-  Widget childWidget() {
-    return FittedBox(
-      child: child ?? Text(label!),
-    );
-  }
+  const SBPrimaryFilledButton({
+    super.key,
+    required this.onTap,
+    required this.label,
+  });
 
   @override
   Widget build(BuildContext context) {
     return SizedBox.fromSize(
       size: const Size(306, 40),
-      child: super.build(context),
+      child: ElevatedButton(
+        onPressed: onTap,
+        style: Theme.of(context)
+            .extension<PrimaryFilledButtonTheme>()!
+            .primaryFilledButtonTheme,
+        child: Text(label),
+      ),
+    );
+  }
+}
+
+class SBDangerFilledButton extends StatelessWidget {
+  final VoidCallback onTap;
+  final String label;
+
+  const SBDangerFilledButton({
+    super.key,
+    required this.onTap,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox.fromSize(
+      size: const Size(120, 40),
+      child: ElevatedButton(
+        onPressed: onTap,
+        style: Theme.of(context)
+            .extension<DangerFilledButtonTheme>()!
+            .dangerFilledButtonTheme,
+        child: Text(label),
+      ),
+    );
+  }
+}
+
+class SBInactiveFilledButton extends StatelessWidget {
+  final VoidCallback onTap;
+  final String label;
+
+  const SBInactiveFilledButton({
+    super.key,
+    required this.onTap,
+    required this.label,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox.fromSize(
+      size: const Size(120, 40),
+      child: ElevatedButton(
+        onPressed: onTap,
+        style: Theme.of(context)
+            .extension<InactiveFilledButtonTheme>()!
+            .inactiveFilledButtonTheme,
+        child: Text(label),
+      ),
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/theme/base_theme.dart';
+import 'package:star_book/theme/styling/filled_button_style.dart';
 import 'package:star_book/theme/styling/gradient_scaffold_style.dart';
 
 /// Ultramarine is a deep blue color pigment which was originally made by
@@ -28,6 +29,8 @@ class UltramarineLightTheme extends BaseTheme {
       tertiaryColor: Color(0xFF8B8B8B),
       quaternaryColor: Color(0xFF7B7CFF),
       quinary: Color(0xFFFFFFFF),
+      senary: Color(0xFFFF3932),
+      septenary: Color(0xFFF1F2F4),
     );
   }
 
@@ -60,21 +63,46 @@ class UltramarineLightTheme extends BaseTheme {
   }
 
   @override
-  ElevatedButtonThemeData get elevatedButtonThemeData {
-    return ElevatedButtonThemeData(
-      style: ButtonStyle(
+  PrimaryFilledButtonTheme get primaryFilledButtonTheme {
+    return PrimaryFilledButtonTheme(
+      primaryFilledButtonTheme: ButtonStyle(
         backgroundColor:
-            MaterialStateProperty.all<Color>(const Color(0xFF4C4DFF)),
+            MaterialStateProperty.all<Color>(foregroundTheme.primaryColor),
         elevation: MaterialStateProperty.all<double>(0),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
         foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
-        textStyle: MaterialStateProperty.all<TextStyle>(
-          const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
+        // textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body1),
+      ),
+    );
+  }
+
+  @override
+  DangerFilledButtonTheme get dangerFilledButtonTheme {
+    return DangerFilledButtonTheme(
+      dangerFilledButtonTheme: ButtonStyle(
+        backgroundColor:
+            MaterialStateProperty.all<Color>(foregroundTheme.senary),
+        elevation: MaterialStateProperty.all<double>(0),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        // textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body1),
+      ),
+    );
+  }
+
+  @override
+  InactiveFilledButtonTheme get inactiveFilledButtonTheme {
+    return InactiveFilledButtonTheme(
+      inactiveFilledButtonTheme: ButtonStyle(
+        backgroundColor:
+            MaterialStateProperty.all<Color>(backgroundTheme.quaternaryColor),
+        elevation: MaterialStateProperty.all<double>(0),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
+        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        // textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body1),
       ),
     );
   }
