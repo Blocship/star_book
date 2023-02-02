@@ -1,14 +1,16 @@
+
 import 'package:flutter/material.dart';
 
-class CustomButtonTheme extends ThemeExtension<CustomButtonTheme> {
-  final ButtonStyle? primaryFilledButtonTheme;
-  final ButtonStyle? dangerFilledButtonTheme;
-  final ButtonStyle? inactiveFilledButtonTheme;
+class CustomButtonTheme
+    extends ThemeExtension<CustomButtonTheme> {
+  final ButtonStyle primaryFilledButtonTheme;
+  final ButtonStyle dangerFilledButtonTheme;
+  final ButtonStyle inactiveFilledButtonTheme;
 
   const CustomButtonTheme({
-    this.dangerFilledButtonTheme,
-    this.inactiveFilledButtonTheme,
-    this.primaryFilledButtonTheme,
+    required this.dangerFilledButtonTheme,
+    required this.inactiveFilledButtonTheme,
+    required this.primaryFilledButtonTheme,
   });
 
   @override
@@ -35,11 +37,11 @@ class CustomButtonTheme extends ThemeExtension<CustomButtonTheme> {
     }
     return CustomButtonTheme(
       primaryFilledButtonTheme: ButtonStyle.lerp(
-          primaryFilledButtonTheme, other.primaryFilledButtonTheme, t),
+          primaryFilledButtonTheme, other.primaryFilledButtonTheme, t)!,
       dangerFilledButtonTheme: ButtonStyle.lerp(
-          dangerFilledButtonTheme, other.dangerFilledButtonTheme, t),
+          dangerFilledButtonTheme, other.dangerFilledButtonTheme, t)!,
       inactiveFilledButtonTheme: ButtonStyle.lerp(
-          inactiveFilledButtonTheme, other.inactiveFilledButtonTheme, t),
+          inactiveFilledButtonTheme, other.inactiveFilledButtonTheme, t)!,
     );
   }
 }
