@@ -63,8 +63,8 @@ class UltramarineLightTheme extends BaseTheme {
   }
 
   @override
-  SBButtonTheme get sBButtonTheme {
-    return SBButtonTheme(
+  CustomButtonTheme get sBButtonTheme {
+    return CustomButtonTheme(
       primaryFilledButtonTheme: ButtonStyle(
         backgroundColor:
             MaterialStateProperty.all<Color>(foregroundTheme.primaryColor),

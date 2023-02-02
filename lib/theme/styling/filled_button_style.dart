@@ -1,25 +1,25 @@
 
 import 'package:flutter/material.dart';
 
-class SBButtonTheme
-    extends ThemeExtension<SBButtonTheme> {
+class CustomButtonTheme
+    extends ThemeExtension<CustomButtonTheme> {
   final ButtonStyle? primaryFilledButtonTheme;
   final ButtonStyle? dangerFilledButtonTheme;
   final ButtonStyle? inactiveFilledButtonTheme;
 
-  const SBButtonTheme({
+  const CustomButtonTheme({
     required this.dangerFilledButtonTheme,
     required this.inactiveFilledButtonTheme,
     required this.primaryFilledButtonTheme,
   });
 
   @override
-  ThemeExtension<SBButtonTheme> copyWith({
+  ThemeExtension<CustomButtonTheme> copyWith({
     ButtonStyle? primaryFilledButtonTheme,
     ButtonStyle? dangerFilledButtonTheme,
     ButtonStyle? inactiveFilledButtonTheme,
   }) {
-    return SBButtonTheme(
+    return CustomButtonTheme(
       primaryFilledButtonTheme:
           primaryFilledButtonTheme ?? this.primaryFilledButtonTheme,
       dangerFilledButtonTheme:
@@ -30,12 +30,12 @@ class SBButtonTheme
   }
 
   @override
-  ThemeExtension<SBButtonTheme> lerp(
-      ThemeExtension<SBButtonTheme>? other, double t) {
-    if (other is! SBButtonTheme) {
+  ThemeExtension<CustomButtonTheme> lerp(
+      ThemeExtension<CustomButtonTheme>? other, double t) {
+    if (other is! CustomButtonTheme) {
       return this;
     }
-    return SBButtonTheme(
+    return CustomButtonTheme(
       primaryFilledButtonTheme: ButtonStyle.lerp(
           primaryFilledButtonTheme, other.primaryFilledButtonTheme, t),
       dangerFilledButtonTheme: ButtonStyle.lerp(

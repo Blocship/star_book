@@ -72,7 +72,7 @@ abstract class BaseTheme {
 
   FontFamily get fontFamily;
 
-  SBButtonTheme get sBButtonTheme;
+  CustomButtonTheme get sBButtonTheme;
 
   GradientScaffoldStyle get gradientScaffoldStyle;
 

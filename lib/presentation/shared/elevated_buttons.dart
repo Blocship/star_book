@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/theme/styling/filled_button_style.dart';
 
-class SBPrimaryFilledButton extends StatelessWidget {
+class PrimaryFilledButton extends StatelessWidget {
   final VoidCallback onTap;
   final String label;
 
-  const SBPrimaryFilledButton({
+  const PrimaryFilledButton({
     super.key,
     required this.onTap,
     required this.label,
@@ -18,7 +18,7 @@ class SBPrimaryFilledButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onTap,
         style: Theme.of(context)
-            .extension<SBButtonTheme>()!
+            .extension<CustomButtonTheme>()!
             .primaryFilledButtonTheme,
         child: Text(label),
       ),
@@ -26,11 +26,11 @@ class SBPrimaryFilledButton extends StatelessWidget {
   }
 }
 
-class SBDangerFilledButton extends StatelessWidget {
+class DangerFilledButton extends StatelessWidget {
   final VoidCallback onTap;
   final String label;
 
-  const SBDangerFilledButton({
+  const DangerFilledButton({
     super.key,
     required this.onTap,
     required this.label,
@@ -43,7 +43,7 @@ class SBDangerFilledButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onTap,
         style: Theme.of(context)
-            .extension<SBButtonTheme>()!
+            .extension<CustomButtonTheme>()!
             .dangerFilledButtonTheme,
         child: Text(label),
       ),
@@ -51,11 +51,11 @@ class SBDangerFilledButton extends StatelessWidget {
   }
 }
 
-class SBInactiveFilledButton extends StatelessWidget {
+class InactiveFilledButton extends StatelessWidget {
   final VoidCallback onTap;
   final String label;
 
-  const SBInactiveFilledButton({
+  const InactiveFilledButton({
     super.key,
     required this.onTap,
     required this.label,
@@ -68,7 +68,7 @@ class SBInactiveFilledButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onTap,
         style: Theme.of(context)
-            .extension<SBButtonTheme>()!
+            .extension<CustomButtonTheme>()!
             .inactiveFilledButtonTheme,
         child: Text(label),
       ),
