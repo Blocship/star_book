@@ -35,20 +35,40 @@ class UltramarineLightTheme extends BaseTheme {
 
   @override
   FontTheme get fontTheme {
-    return const FontTheme(
-      heading1: TextStyle(),
-      heading2: TextStyle(),
-      heading3: TextStyle(),
-      body1: TextStyle(),
-      body2: TextStyle(),
-      caption: TextStyle(),
+    return FontTheme(
+      heading1: const TextStyle(
+        fontSize: 30,
+        letterSpacing: -1,
+      ),
+      heading2: TextStyle(
+        fontSize: 25,
+        letterSpacing: -1,
+        height: 1.8,
+        color: foregroundTheme.secondaryColor,
+      ),
+      heading3: const TextStyle(
+        fontSize: 20,
+        height: 1.4,
+      ),
+      body1: TextStyle(
+        fontSize: 16,
+        color: foregroundTheme.tertiaryColor,
+      ),
+      body2: TextStyle(
+        fontSize: 14,
+        height: 1.0,
+        color: foregroundTheme.tertiaryColor,
+      ),
+      caption: const TextStyle(
+        fontSize: 12,
+      ),
     );
   }
 
   @override
   FontFamily get fontFamily {
     return FontFamily(
-      primary: 'primary',
+      primary: 'Inter',
     );
   }
 

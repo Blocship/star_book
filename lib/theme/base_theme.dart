@@ -76,8 +76,26 @@ abstract class BaseTheme {
   ThemeData get theme {
     return ThemeData(
       primaryColor: foregroundTheme.primaryColor,
+      fontFamily: fontFamily.primary,
       appBarTheme: AppBarTheme(
         color: foregroundTheme.primaryColor,
+      ),
+      textTheme: TextTheme(
+        //  displayLarge: ,
+        //  displayMedium:,
+        //  displaySmall:,
+        headlineLarge: fontTheme.heading1,
+        headlineMedium: fontTheme.heading2,
+        headlineSmall: fontTheme.heading3,
+        //  titleLarge:,
+        //  titleMedium:,
+        //  titleSmall:,
+        bodyLarge: fontTheme.body1,
+        bodyMedium: fontTheme.body2,
+        //  bodySmall:,
+        labelLarge: fontTheme.body2,
+        // labelMedium: ,
+        //  labelSmall: ,
       ),
       extensions: <ThemeExtension<dynamic>>{
         gradientScaffoldStyle,
