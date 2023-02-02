@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/theme/styling/floating_action_button_style.dart';
 
-class SBPrimaryFloatingActionButton extends StatelessWidget {
+class PrimaryFloatingActionButton extends StatelessWidget {
   final VoidCallback onTap;
   final Widget child;
-  const SBPrimaryFloatingActionButton({
+  const PrimaryFloatingActionButton({
     super.key,
     required this.onTap,
     required this.child,
@@ -22,10 +22,10 @@ class SBPrimaryFloatingActionButton extends StatelessWidget {
   }
 }
 
-class SBSecondaryFloatingActionButton extends StatelessWidget {
+class SecondaryFloatingActionButton extends StatelessWidget {
   final VoidCallback onTap;
   final Widget child;
-  const SBSecondaryFloatingActionButton({
+  const SecondaryFloatingActionButton({
     super.key,
     required this.onTap,
     required this.child,
