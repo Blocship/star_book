@@ -33,8 +33,8 @@ class UltramarineLightTheme extends BaseTheme {
 
   @override
   FontTheme get fontTheme {
-    return const FontTheme(
-      heading1: TextStyle(
+    return FontTheme(
+      heading1: const TextStyle(
         fontSize: 30,
         letterSpacing: -1,
       ),
@@ -42,19 +42,22 @@ class UltramarineLightTheme extends BaseTheme {
         fontSize: 25,
         letterSpacing: -1,
         height: 1.8,
+        color: foregroundTheme.secondaryColor,
       ),
-      heading3: TextStyle(
+      heading3: const TextStyle(
         fontSize: 20,
         height: 1.4,
       ),
       body1: TextStyle(
         fontSize: 16,
+        color: foregroundTheme.tertiaryColor,
       ),
       body2: TextStyle(
         fontSize: 14,
         height: 1.0,
+        color: foregroundTheme.tertiaryColor,
       ),
-      caption: TextStyle(
+      caption: const TextStyle(
         fontSize: 12,
       ),
     );
