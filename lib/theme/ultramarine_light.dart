@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/theme/base_theme.dart';
+import 'package:star_book/theme/styling/filled_button_style.dart';
 import 'package:star_book/theme/styling/gradient_scaffold_style.dart';
 
 /// Ultramarine is a deep blue color pigment which was originally made by
@@ -28,6 +29,8 @@ class UltramarineLightTheme extends BaseTheme {
       tertiaryColor: Color(0xFF8B8B8B),
       quaternaryColor: Color(0xFF7B7CFF),
       quinary: Color(0xFFFFFFFF),
+      senary: Color(0xFFFF3932),
+      septenary: Color(0xFFF1F2F4),
     );
   }
 
@@ -76,6 +79,39 @@ class UltramarineLightTheme extends BaseTheme {
       primaryColor: Color(0xff57D7FF),
       secondaryColor: Color(0xffFF833D),
       tertiaryColor: Color(0xffF400F9),
+    );
+  }
+
+  @override
+  CustomButtonTheme get customButtonTheme {
+    return CustomButtonTheme(
+      primaryFilledButtonTheme: ButtonStyle(
+        backgroundColor:
+            MaterialStateProperty.all<Color>(foregroundTheme.primaryColor),
+        elevation: MaterialStateProperty.all<double>(0),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
+        foregroundColor: MaterialStateProperty.all<Color>(foregroundTheme.quinary),
+        textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
+      ),
+      dangerFilledButtonTheme: ButtonStyle(
+        backgroundColor:
+            MaterialStateProperty.all<Color>(foregroundTheme.senary),
+        elevation: MaterialStateProperty.all<double>(0),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
+        foregroundColor: MaterialStateProperty.all<Color>(foregroundTheme.quinary),
+        textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
+      ),
+      inactiveFilledButtonTheme: ButtonStyle(
+        backgroundColor:
+            MaterialStateProperty.all<Color>(backgroundTheme.quaternaryColor),
+        elevation: MaterialStateProperty.all<double>(0),
+        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+            RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
+        foregroundColor: MaterialStateProperty.all<Color>(foregroundTheme.tertiaryColor),
+        textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
+      ),
     );
   }
 }
