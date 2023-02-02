@@ -13,10 +13,10 @@ class GradientScaffoldStyle extends ThemeExtension<GradientScaffoldStyle> {
 
   @override
   ThemeExtension<GradientScaffoldStyle> copyWith(
-      {Color? backgroundColor, Color? foregroundColor, Color? tertiaryColor}) {
+      {Color? primaryColor, Color? secondaryColor, Color? tertiaryColor}) {
     return GradientScaffoldStyle(
-      primaryColor: backgroundColor ?? this.primaryColor,
-      secondaryColor: foregroundColor ?? this.secondaryColor,
+      primaryColor: primaryColor ?? this.primaryColor,
+      secondaryColor: secondaryColor ?? this.secondaryColor,
       tertiaryColor: tertiaryColor ?? this.tertiaryColor,
     );
   }
