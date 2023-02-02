@@ -92,7 +92,7 @@ class UltramarineLightTheme extends BaseTheme {
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
         foregroundColor: MaterialStateProperty.all<Color>(foregroundTheme.quinary),
-        // textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body1),
+        textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
       ),
       dangerFilledButtonTheme: ButtonStyle(
         backgroundColor:
@@ -101,7 +101,7 @@ class UltramarineLightTheme extends BaseTheme {
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
         foregroundColor: MaterialStateProperty.all<Color>(foregroundTheme.quinary),
-        // textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body1),
+        textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
       ),
       inactiveFilledButtonTheme: ButtonStyle(
         backgroundColor:
@@ -109,8 +109,8 @@ class UltramarineLightTheme extends BaseTheme {
         elevation: MaterialStateProperty.all<double>(0),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-        foregroundColor: MaterialStateProperty.all<Color>(foregroundTheme.quinary),
-        // textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body1),
+        foregroundColor: MaterialStateProperty.all<Color>(foregroundTheme.tertiaryColor),
+        textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
       ),
     );
   }
