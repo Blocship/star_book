@@ -1,64 +1,32 @@
 import 'package:flutter/material.dart';
 
-class PrimaryFloatingActionButtonStyle extends ThemeExtension<PrimaryFloatingActionButtonStyle> {
-  final Color? backgroundColor;
-  final Color? foregroundColor;
+class FloatingActionButtonStyle extends ThemeExtension<FloatingActionButtonStyle> {
+  final Color? primaryFloatingButton;
+  final Color? secondaryFloatingButton;
 
-  const PrimaryFloatingActionButtonStyle({
-    required this.backgroundColor,
-    required this.foregroundColor,
+  const FloatingActionButtonStyle({
+    required this.primaryFloatingButton,
+    required this.secondaryFloatingButton,
   });
 
   @override
-  ThemeExtension<PrimaryFloatingActionButtonStyle> copyWith(
-      {Color? backgroundColor, Color? foregroundColor}) {
-    return PrimaryFloatingActionButtonStyle(
-      backgroundColor: backgroundColor ?? this.backgroundColor,
-      foregroundColor: foregroundColor ?? this.foregroundColor,
+  ThemeExtension<FloatingActionButtonStyle> copyWith(
+      {Color? primaryFloatingButton, Color? secondaryFloatingButton}) {
+    return FloatingActionButtonStyle(
+      primaryFloatingButton: primaryFloatingButton ?? this.primaryFloatingButton,
+      secondaryFloatingButton: secondaryFloatingButton ?? this.secondaryFloatingButton,
     );
   }
 
   @override
-  ThemeExtension<PrimaryFloatingActionButtonStyle> lerp(
-      ThemeExtension<PrimaryFloatingActionButtonStyle>? other, double t) {
-    if (other is! PrimaryFloatingActionButtonStyle) {
+  ThemeExtension<FloatingActionButtonStyle> lerp(
+      ThemeExtension<FloatingActionButtonStyle>? other, double t) {
+    if (other is! FloatingActionButtonStyle) {
       return this;
     }
-    return PrimaryFloatingActionButtonStyle(
-      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
-      foregroundColor: Color.lerp(foregroundColor, other.foregroundColor, t),
-    );
-  }
-}
-
-
-class SecondaryFloatingActionButtonStyle extends ThemeExtension<SecondaryFloatingActionButtonStyle> {
-  final Color? backgroundColor;
-  final Color? foregroundColor;
-
-  const SecondaryFloatingActionButtonStyle({
-    required this.backgroundColor,
-    required this.foregroundColor,
-  });
-
-  @override
-  ThemeExtension<SecondaryFloatingActionButtonStyle> copyWith(
-      {Color? backgroundColor, Color? foregroundColor}) {
-    return SecondaryFloatingActionButtonStyle(
-      backgroundColor: backgroundColor ?? this.backgroundColor,
-      foregroundColor: foregroundColor ?? this.foregroundColor,
-    );
-  }
-
-  @override
-  ThemeExtension<SecondaryFloatingActionButtonStyle> lerp(
-      ThemeExtension<SecondaryFloatingActionButtonStyle>? other, double t) {
-    if (other is! SecondaryFloatingActionButtonStyle) {
-      return this;
-    }
-    return SecondaryFloatingActionButtonStyle(
-      backgroundColor: Color.lerp(backgroundColor, other.backgroundColor, t),
-      foregroundColor: Color.lerp(foregroundColor, other.foregroundColor, t),
+    return FloatingActionButtonStyle(
+      primaryFloatingButton: Color.lerp(primaryFloatingButton, other.primaryFloatingButton, t),
+      secondaryFloatingButton: Color.lerp(secondaryFloatingButton, other.secondaryFloatingButton, t),
     );
   }
 }

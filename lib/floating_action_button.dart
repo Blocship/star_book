@@ -13,12 +13,9 @@ class SBPrimaryFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      foregroundColor: Theme.of(context)
-          .extension<PrimaryFloatingActionButtonStyle>()!
-          .foregroundColor!,
       backgroundColor: Theme.of(context)
-          .extension<PrimaryFloatingActionButtonStyle>()!
-          .backgroundColor!,
+          .extension<FloatingActionButtonStyle>()!
+          .primaryFloatingButton!,
       onPressed: onTap,
       child: child,
     );
@@ -37,12 +34,9 @@ class SBSecondaryFloatingActionButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      foregroundColor: Theme.of(context)
-          .extension<SecondaryFloatingActionButtonStyle>()!
-          .foregroundColor!,
       backgroundColor: Theme.of(context)
-          .extension<SecondaryFloatingActionButtonStyle>()!
-          .backgroundColor!,
+          .extension<FloatingActionButtonStyle>()!
+          .secondaryFloatingButton!,
       onPressed: onTap,
       child: child,
     );

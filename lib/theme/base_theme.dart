@@ -71,9 +71,7 @@ abstract class BaseTheme {
 
   GradientScaffoldStyle get gradientScaffoldStyle;
 
-  PrimaryFloatingActionButtonStyle get primaryFloatingActionButtonStyle;
-
-  SecondaryFloatingActionButtonStyle get secondaryFloatingActionButtonStyle;
+  FloatingActionButtonStyle get floatingActionButtonStyle;
 
   ThemeData get theme {
     return ThemeData(
@@ -83,8 +81,7 @@ abstract class BaseTheme {
       ),
       extensions: <ThemeExtension<dynamic>>{
         gradientScaffoldStyle,
-        primaryFloatingActionButtonStyle,
-        secondaryFloatingActionButtonStyle,
+        floatingActionButtonStyle,
       },
     );
   }

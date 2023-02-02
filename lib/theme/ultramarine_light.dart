@@ -62,18 +62,11 @@ class UltramarineLightTheme extends BaseTheme {
   }
 
   @override
-  PrimaryFloatingActionButtonStyle get primaryFloatingActionButtonStyle {
-    return PrimaryFloatingActionButtonStyle(
-      backgroundColor: foregroundTheme.primaryColor,
-      foregroundColor: foregroundTheme.quinary,
+  FloatingActionButtonStyle get floatingActionButtonStyle {
+    return FloatingActionButtonStyle(
+      primaryFloatingButton: foregroundTheme.primaryColor,
+      secondaryFloatingButton: backgroundTheme.senary,
     );
   }
 
-  @override
-  SecondaryFloatingActionButtonStyle get secondaryFloatingActionButtonStyle {
-    return SecondaryFloatingActionButtonStyle(
-      backgroundColor: backgroundTheme.senary,
-      foregroundColor: backgroundTheme.primaryColor,
-    );
-  }
 }
