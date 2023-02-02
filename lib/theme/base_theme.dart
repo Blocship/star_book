@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/theme/styling/floating_action_button_style.dart';
 import 'package:star_book/theme/styling/gradient_scaffold_style.dart';
 
 class ForegroundTheme {
@@ -23,12 +24,13 @@ class BackgroundTheme {
   final Color secondaryColor;
   final Color tertiaryColor;
   final Color quaternaryColor;
-
+  final Color senary;
   const BackgroundTheme({
     required this.primaryColor,
     required this.secondaryColor,
     required this.tertiaryColor,
     required this.quaternaryColor,
+    required this.senary,
   });
 }
 
@@ -67,19 +69,22 @@ abstract class BaseTheme {
 
   FontFamily get fontFamily;
 
-  FloatingActionButtonThemeData get floatingActionButton;
-
   GradientScaffoldStyle get gradientScaffoldStyle;
+
+  PrimaryFloatingActionButtonStyle get primaryFloatingActionButtonStyle;
+
+  SecondaryFloatingActionButtonStyle get secondaryFloatingActionButtonStyle;
 
   ThemeData get theme {
     return ThemeData(
       primaryColor: foregroundTheme.primaryColor,
-      floatingActionButtonTheme: floatingActionButton,
       appBarTheme: AppBarTheme(
         color: foregroundTheme.primaryColor,
       ),
       extensions: <ThemeExtension<dynamic>>{
         gradientScaffoldStyle,
+        primaryFloatingActionButtonStyle,
+        secondaryFloatingActionButtonStyle,
       },
     );
   }

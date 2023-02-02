@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/theme/base_theme.dart';
+import 'package:star_book/theme/styling/floating_action_button_style.dart';
 import 'package:star_book/theme/styling/gradient_scaffold_style.dart';
 
 /// Ultramarine is a deep blue color pigment which was originally made by
@@ -17,6 +18,7 @@ class UltramarineLightTheme extends BaseTheme {
       secondaryColor: Color(0xFF1F1F1F),
       tertiaryColor: Color(0x1F1F1F08),
       quaternaryColor: Color(0xFFF1F2F4),
+      senary: Color(0xff32C74F),
     );
   }
 
@@ -60,9 +62,18 @@ class UltramarineLightTheme extends BaseTheme {
   }
 
   @override
-  FloatingActionButtonThemeData get floatingActionButton {
-    return const FloatingActionButtonThemeData(
-      backgroundColor: Color(0xff32C74F),
+  PrimaryFloatingActionButtonStyle get primaryFloatingActionButtonStyle {
+    return PrimaryFloatingActionButtonStyle(
+      backgroundColor: foregroundTheme.primaryColor,
+      foregroundColor: foregroundTheme.quinary,
+    );
+  }
+
+  @override
+  SecondaryFloatingActionButtonStyle get secondaryFloatingActionButtonStyle {
+    return SecondaryFloatingActionButtonStyle(
+      backgroundColor: backgroundTheme.senary,
+      foregroundColor: backgroundTheme.primaryColor,
     );
   }
 }
