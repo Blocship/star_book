@@ -18,7 +18,7 @@ class SBPrimaryFilledButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onTap,
         style: Theme.of(context)
-            .extension<PrimaryFilledButtonTheme>()!
+            .extension<SBButtonTheme>()!
             .primaryFilledButtonTheme,
         child: Text(label),
       ),
@@ -43,7 +43,7 @@ class SBDangerFilledButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onTap,
         style: Theme.of(context)
-            .extension<DangerFilledButtonTheme>()!
+            .extension<SBButtonTheme>()!
             .dangerFilledButtonTheme,
         child: Text(label),
       ),
@@ -68,7 +68,7 @@ class SBInactiveFilledButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: onTap,
         style: Theme.of(context)
-            .extension<InactiveFilledButtonTheme>()!
+            .extension<SBButtonTheme>()!
             .inactiveFilledButtonTheme,
         child: Text(label),
       ),

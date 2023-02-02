@@ -63,45 +63,33 @@ class UltramarineLightTheme extends BaseTheme {
   }
 
   @override
-  PrimaryFilledButtonTheme get primaryFilledButtonTheme {
-    return PrimaryFilledButtonTheme(
+  SBButtonTheme get sBButtonTheme {
+    return SBButtonTheme(
       primaryFilledButtonTheme: ButtonStyle(
         backgroundColor:
             MaterialStateProperty.all<Color>(foregroundTheme.primaryColor),
         elevation: MaterialStateProperty.all<double>(0),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        foregroundColor: MaterialStateProperty.all<Color>(foregroundTheme.quinary),
         // textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body1),
       ),
-    );
-  }
-
-  @override
-  DangerFilledButtonTheme get dangerFilledButtonTheme {
-    return DangerFilledButtonTheme(
       dangerFilledButtonTheme: ButtonStyle(
         backgroundColor:
             MaterialStateProperty.all<Color>(foregroundTheme.senary),
         elevation: MaterialStateProperty.all<double>(0),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        foregroundColor: MaterialStateProperty.all<Color>(foregroundTheme.quinary),
         // textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body1),
       ),
-    );
-  }
-
-  @override
-  InactiveFilledButtonTheme get inactiveFilledButtonTheme {
-    return InactiveFilledButtonTheme(
       inactiveFilledButtonTheme: ButtonStyle(
         backgroundColor:
             MaterialStateProperty.all<Color>(backgroundTheme.quaternaryColor),
         elevation: MaterialStateProperty.all<double>(0),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+        foregroundColor: MaterialStateProperty.all<Color>(foregroundTheme.quinary),
         // textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body1),
       ),
     );

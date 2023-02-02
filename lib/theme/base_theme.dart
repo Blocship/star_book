@@ -72,11 +72,7 @@ abstract class BaseTheme {
 
   FontFamily get fontFamily;
 
-  PrimaryFilledButtonTheme get primaryFilledButtonTheme;
-
-  DangerFilledButtonTheme get dangerFilledButtonTheme;
-
-  InactiveFilledButtonTheme get inactiveFilledButtonTheme;
+  SBButtonTheme get sBButtonTheme;
 
   GradientScaffoldStyle get gradientScaffoldStyle;
 
@@ -88,9 +84,7 @@ abstract class BaseTheme {
       ),
       extensions: <ThemeExtension<dynamic>>{
         gradientScaffoldStyle,
-        primaryFilledButtonTheme,
-        dangerFilledButtonTheme,
-        inactiveFilledButtonTheme,
+        sBButtonTheme,
       },
     );
   }
