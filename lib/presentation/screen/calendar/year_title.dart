@@ -11,10 +11,7 @@ class YearTitle extends StatelessWidget {
       padding: const EdgeInsets.only(left: 6),
       child: Text(
         year.toString(),
-        style: const TextStyle(
-          fontSize: 22,
-          fontWeight: FontWeight.w600,
-        ),
+        style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.w700),
       ),
     );
   }

@@ -62,7 +62,7 @@ class DaysOfMonth extends StatelessWidget {
               child: Text(
                 CalendarUtils.getFullMonthName(month),
                 textAlign: TextAlign.left,
-                style: const TextStyle(fontSize: 25),
+                style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.w700),
               ),
             ),
             const SizedBox(height: 35),
@@ -104,10 +104,7 @@ class WeekDaysView extends StatelessWidget {
             child: Text(
               weekDays[index],
               textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 16.0,
-                fontWeight: FontWeight.normal,
-              ),
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w400),
             ),
           );
         },
@@ -132,9 +129,8 @@ class Date extends StatelessWidget {
       alignment: Alignment.center,
       child: Text(
         day < 1 ? '' : day.toString(),
-        style: const TextStyle(
-          fontSize: 15.0,
-        ),
+        style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w400),
+
       ),
     );
   }

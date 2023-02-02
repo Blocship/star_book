@@ -39,6 +39,7 @@ class CustomCalendarCard extends StatelessWidget {
             child: Center(
               child: Text(
                 CalendarUtils.getMonthName(monthIndex),
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w400),
               ),
             ),
           ),

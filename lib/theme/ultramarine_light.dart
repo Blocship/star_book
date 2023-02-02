@@ -36,23 +36,23 @@ class UltramarineLightTheme extends BaseTheme {
     return const FontTheme(
       heading1: TextStyle(
         fontSize: 30,
-        letterSpacing: -2,
+        letterSpacing: -1,
       ),
       heading2: TextStyle(
         fontSize: 25,
-        letterSpacing: -2,
-        height: 35,
+        letterSpacing: -1,
+        height: 1.8,
       ),
       heading3: TextStyle(
         fontSize: 20,
-        height: 20,
+        height: 1.4,
       ),
       body1: TextStyle(
         fontSize: 16,
       ),
       body2: TextStyle(
         fontSize: 14,
-        height: 18,
+        height: 1.0,
       ),
       caption: TextStyle(
         fontSize: 12,
