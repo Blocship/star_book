@@ -72,7 +72,7 @@ abstract class BaseTheme {
 
   FontFamily get fontFamily;
 
-  CustomButtonTheme get sBButtonTheme;
+  CustomButtonTheme get customButtonTheme;
 
   GradientScaffoldStyle get gradientScaffoldStyle;
 
@@ -102,7 +102,7 @@ abstract class BaseTheme {
       ),
       extensions: <ThemeExtension<dynamic>>{
         gradientScaffoldStyle,
-        sBButtonTheme,
+        customButtonTheme,
       },
     );
   }

@@ -83,7 +83,7 @@ class UltramarineLightTheme extends BaseTheme {
   }
 
   @override
-  CustomButtonTheme get sBButtonTheme {
+  CustomButtonTheme get customButtonTheme {
     return CustomButtonTheme(
       primaryFilledButtonTheme: ButtonStyle(
         backgroundColor:
