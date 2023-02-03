@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/theme/base_theme.dart';
+import 'package:star_book/theme/styling/floating_action_button_style.dart';
 import 'package:star_book/theme/styling/filled_button_style.dart';
 import 'package:star_book/theme/styling/gradient_scaffold_style.dart';
 
@@ -18,6 +19,7 @@ class UltramarineLightTheme extends BaseTheme {
       secondaryColor: Color(0xFF1F1F1F),
       tertiaryColor: Color(0x1F1F1F08),
       quaternaryColor: Color(0xFFF1F2F4),
+      senary: Color(0xff32C74F),
     );
   }
 
@@ -82,6 +84,14 @@ class UltramarineLightTheme extends BaseTheme {
     );
   }
 
+  @override
+  FloatingActionButtonStyle get floatingActionButtonStyle {
+    return FloatingActionButtonStyle(
+      primaryFloatingButton: foregroundTheme.primaryColor,
+      secondaryFloatingButton: backgroundTheme.senary,
+    );
+  }
+  
   @override
   CustomButtonTheme get customButtonTheme {
     return CustomButtonTheme(
