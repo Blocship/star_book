@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/theme/styling/floating_action_button_style.dart';
+import 'package:star_book/theme/styling/filled_button_style.dart';
 import 'package:star_book/theme/styling/gradient_scaffold_style.dart';
 
 class ForegroundTheme {
@@ -8,6 +9,8 @@ class ForegroundTheme {
   final Color tertiaryColor;
   final Color quaternaryColor;
   final Color quinary;
+  final Color senary;
+  final Color septenary;
 
   const ForegroundTheme({
     required this.primaryColor,
@@ -15,7 +18,9 @@ class ForegroundTheme {
     required this.tertiaryColor,
     required this.quaternaryColor,
     required this.quinary,
-    // senary, septenary, octonary, nonary, denary
+    required this.senary,
+    required this.septenary,
+    //   octonary, nonary, denary
   });
 }
 
@@ -69,6 +74,8 @@ abstract class BaseTheme {
 
   FontFamily get fontFamily;
 
+  CustomButtonTheme get customButtonTheme;
+
   GradientScaffoldStyle get gradientScaffoldStyle;
 
   FloatingActionButtonStyle get floatingActionButtonStyle;
@@ -99,6 +106,7 @@ abstract class BaseTheme {
       ),
       extensions: <ThemeExtension<dynamic>>{
         gradientScaffoldStyle,
+        customButtonTheme,
         floatingActionButtonStyle,
       },
     );
