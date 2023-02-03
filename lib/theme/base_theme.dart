@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:star_book/theme/styling/floating_action_button_style.dart';
 import 'package:star_book/theme/styling/filled_button_style.dart';
 import 'package:star_book/theme/styling/gradient_scaffold_style.dart';
+import 'package:star_book/theme/styling/padding_style.dart';
 
 class ForegroundTheme {
   final Color primaryColor;
@@ -80,6 +81,8 @@ abstract class BaseTheme {
 
   FloatingActionButtonStyle get floatingActionButtonStyle;
 
+  PaddingStyle get paddingStyle;
+
   ThemeData get theme {
     return ThemeData(
       primaryColor: foregroundTheme.primaryColor,
@@ -108,6 +111,7 @@ abstract class BaseTheme {
         gradientScaffoldStyle,
         customButtonTheme,
         floatingActionButtonStyle,
+        paddingStyle,
       },
     );
   }

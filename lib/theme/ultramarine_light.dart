@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:star_book/theme/base_theme.dart';
 import 'package:star_book/theme/styling/floating_action_button_style.dart';
 import 'package:star_book/theme/styling/filled_button_style.dart';
 import 'package:star_book/theme/styling/gradient_scaffold_style.dart';
+import 'package:star_book/theme/styling/padding_style.dart';
 
 /// Ultramarine is a deep blue color pigment which was originally made by
 /// grinding lapis lazuli into a powder.
@@ -91,7 +94,7 @@ class UltramarineLightTheme extends BaseTheme {
       secondaryFloatingButton: backgroundTheme.senary,
     );
   }
-  
+
   @override
   CustomButtonTheme get customButtonTheme {
     return CustomButtonTheme(
@@ -101,8 +104,10 @@ class UltramarineLightTheme extends BaseTheme {
         elevation: MaterialStateProperty.all<double>(0),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-        foregroundColor: MaterialStateProperty.all<Color>(foregroundTheme.quinary),
-        textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
+        foregroundColor:
+            MaterialStateProperty.all<Color>(foregroundTheme.quinary),
+        textStyle: MaterialStateProperty.all<TextStyle>(
+            fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
       ),
       dangerFilledButtonTheme: ButtonStyle(
         backgroundColor:
@@ -110,8 +115,10 @@ class UltramarineLightTheme extends BaseTheme {
         elevation: MaterialStateProperty.all<double>(0),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-        foregroundColor: MaterialStateProperty.all<Color>(foregroundTheme.quinary),
-        textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
+        foregroundColor:
+            MaterialStateProperty.all<Color>(foregroundTheme.quinary),
+        textStyle: MaterialStateProperty.all<TextStyle>(
+            fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
       ),
       inactiveFilledButtonTheme: ButtonStyle(
         backgroundColor:
@@ -119,9 +126,21 @@ class UltramarineLightTheme extends BaseTheme {
         elevation: MaterialStateProperty.all<double>(0),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-        foregroundColor: MaterialStateProperty.all<Color>(foregroundTheme.tertiaryColor),
-        textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
+        foregroundColor:
+            MaterialStateProperty.all<Color>(foregroundTheme.tertiaryColor),
+        textStyle: MaterialStateProperty.all<TextStyle>(
+            fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
       ),
+    );
+  }
+
+  @override
+  PaddingStyle get paddingStyle {
+    log('Testing');
+    return const PaddingStyle(
+      smallPadding: EdgeInsets.only(top: 10, bottom: 10),
+      mediumPadding: EdgeInsets.only(top: 30, bottom: 30),
+      largePadding: EdgeInsets.only(top: 50, bottom: 50),
     );
   }
 }
