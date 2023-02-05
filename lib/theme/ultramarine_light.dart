@@ -88,11 +88,11 @@ class UltramarineLightTheme extends BaseTheme {
   @override
   FloatingActionButtonStyle get floatingActionButtonStyle {
     return FloatingActionButtonStyle(
-      primaryFloatingButton: foregroundTheme.primaryColor,
+      primaryFloatingButton: themeColorStyle.primaryColor,
       secondaryFloatingButton: backgroundTheme.senary,
     );
   }
-  
+
   @override
   CustomButtonTheme get customButtonTheme {
     return CustomButtonTheme(

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:star_book/theme/styling/theme_color_style.dart';
 
@@ -85,6 +87,169 @@ class PrimaryTextField extends StatelessWidget {
 //     );
 //   }
 // }
+// class CustomTextFormField extends StatefulWidget {
+//   final String heading;
+//   final String label;
+//
+//   const CustomTextFormField({
+//     Key? key,
+//     required this.heading,
+//     required this.label,
+//   }) : super(key: key);
+//
+//   @override
+//   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
+// }
+
+// class _CustomTextFormFieldState extends State<CustomTextFormField> {
+//   final FocusNode focusNode = FocusNode();
+//   final GlobalKey _formFieldKey = GlobalKey();
+//   final TextEditingController controller = TextEditingController();
+//   @override
+//   void initState() {
+//     focusNode.addListener(() {
+//       setState(() {});
+//     });
+//     super.initState();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     // log(focusNode.hasFocus.toString());
+//     return Container(
+//       width: 306,
+//       // height: 200,
+//       // height: _formFieldKey.currentContext?.size?.height ?? 60,
+//       // height: textHeight.size.height,
+//       padding: const EdgeInsets.symmetric(horizontal: 12.0),
+//       decoration: BoxDecoration(
+//         // color: Colors.blue,
+//         borderRadius: BorderRadius.circular(8.0),
+//         border: Border.all(color: Colors.grey),
+//       ),
+//       child: Column(
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: [
+//           AnimatedDefaultTextStyle(
+//             style: focusNode.hasFocus
+//                 ? const TextStyle(
+//                     fontSize: 18,
+//                     color: Colors.red,
+//                   )
+//                 : const TextStyle(
+//                     fontSize: 17,
+//                     color: Colors.blue,
+//                   ),
+//             duration: const Duration(milliseconds: 200),
+//             child: Text(widget.heading),
+//           ),
+//           const SizedBox(height: 8),
+//           SizedBox(
+//             height: 30,
+//             child: TextFormField(
+//               // key: _formFieldKey,
+//               expands: true,
+//               minLines: null,
+//               maxLines: null,
+//               focusNode: focusNode,
+//               controller: controller,
+//               keyboardType: TextInputType.multiline,
+//               decoration: InputDecoration(
+//                 contentPadding: EdgeInsets.zero,
+//                 isDense: true,
+//                 hintText: widget.label,
+//                 border: const OutlineInputBorder(
+//                   borderSide: BorderSide.none,
+//                 ),
+//               ),
+//             ),
+//           ),
+//         ],
+//       ),
+//     );
+//   }
+// }
+class CustomTextFormField extends StatefulWidget {
+  final String heading;
+  final String label;
+
+  const CustomTextFormField({
+    Key? key,
+    required this.heading,
+    required this.label,
+  }) : super(key: key);
+
+  @override
+  State<CustomTextFormField> createState() => _CustomTextFormFieldState();
+}
+
+class _CustomTextFormFieldState extends State<CustomTextFormField> {
+  final FocusNode focusNode = FocusNode();
+
+  final TextEditingController controller = TextEditingController();
+  @override
+  void initState() {
+    focusNode.addListener(() {
+      setState(() {});
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 306,
+      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        border: Border.all(color: Colors.grey),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          AnimatedDefaultTextStyle(
+            style: focusNode.hasFocus
+                ? const TextStyle(
+                    fontSize: 18,
+                    color: Colors.red,
+                  )
+                : const TextStyle(
+                    fontSize: 17,
+                    color: Colors.blue,
+                  ),
+            duration: const Duration(milliseconds: 200),
+            child: Text(widget.heading),
+          ),
+          const SizedBox(height: 8),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              return Container(
+                width: constraints.maxWidth,
+                height: constraints.maxHeight,
+                child: TextFormField(
+                  expands: true,
+                  minLines: null,
+                  maxLines: null,
+                  focusNode: focusNode,
+                  controller: controller,
+                  keyboardType: TextInputType.multiline,
+                  decoration: InputDecoration(
+                    contentPadding: EdgeInsets.zero,
+                    isDense: true,
+                    hintText: widget.label,
+                    border: const OutlineInputBorder(
+                      borderSide: BorderSide.none,
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
 
 class SelectableTile extends StatelessWidget {
   final String title;
