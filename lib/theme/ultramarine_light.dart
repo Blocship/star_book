@@ -64,6 +64,7 @@ class UltramarineLightTheme extends BaseTheme {
       ),
       caption: const TextStyle(
         fontSize: 12,
+        // color:
       ),
     );
   }
@@ -91,7 +92,7 @@ class UltramarineLightTheme extends BaseTheme {
       secondaryFloatingButton: backgroundTheme.senary,
     );
   }
-  
+
   @override
   CustomButtonTheme get customButtonTheme {
     return CustomButtonTheme(
@@ -101,8 +102,10 @@ class UltramarineLightTheme extends BaseTheme {
         elevation: MaterialStateProperty.all<double>(0),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-        foregroundColor: MaterialStateProperty.all<Color>(foregroundTheme.quinary),
-        textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
+        foregroundColor:
+            MaterialStateProperty.all<Color>(foregroundTheme.quinary),
+        textStyle: MaterialStateProperty.all<TextStyle>(
+            fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
       ),
       dangerFilledButtonTheme: ButtonStyle(
         backgroundColor:
@@ -110,8 +113,10 @@ class UltramarineLightTheme extends BaseTheme {
         elevation: MaterialStateProperty.all<double>(0),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-        foregroundColor: MaterialStateProperty.all<Color>(foregroundTheme.quinary),
-        textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
+        foregroundColor:
+            MaterialStateProperty.all<Color>(foregroundTheme.quinary),
+        textStyle: MaterialStateProperty.all<TextStyle>(
+            fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
       ),
       inactiveFilledButtonTheme: ButtonStyle(
         backgroundColor:
@@ -119,8 +124,10 @@ class UltramarineLightTheme extends BaseTheme {
         elevation: MaterialStateProperty.all<double>(0),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-        foregroundColor: MaterialStateProperty.all<Color>(foregroundTheme.tertiaryColor),
-        textStyle: MaterialStateProperty.all<TextStyle>(fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
+        foregroundColor:
+            MaterialStateProperty.all<Color>(foregroundTheme.tertiaryColor),
+        textStyle: MaterialStateProperty.all<TextStyle>(
+            fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
       ),
     );
   }

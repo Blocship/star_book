@@ -99,7 +99,7 @@ abstract class BaseTheme {
         //  titleSmall:,
         bodyLarge: fontTheme.body1,
         bodyMedium: fontTheme.body2,
-        //  bodySmall:,
+        bodySmall: fontTheme.caption,
         labelLarge: fontTheme.body2,
         // labelMedium: ,
         //  labelSmall: ,
