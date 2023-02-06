@@ -25,6 +25,7 @@ dependencies:
   
   # Non Technical Dependencies
   logger: ^1.1.0
+  fl_chart: ^0.60.0
 
 dev_dependencies:
   flutter_test:
