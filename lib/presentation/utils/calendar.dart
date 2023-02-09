@@ -26,6 +26,13 @@ class CalendarUtils {
       'Nov',
       'Dec',
     ];
+    if (month < 0) {
+      month = month + 12;
+    }
+
+    if (month > monthName.length) {
+      month = month - 12;
+    }
     return monthName[month - 1];
   }
 
