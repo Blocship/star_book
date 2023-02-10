@@ -4,11 +4,13 @@ import 'package:star_book/theme/styling/gradient_scaffold_style.dart';
 class GradientScaffold extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final Widget? body;
+  final Widget? bottomNavigationBar;
 
   const GradientScaffold({
     Key? key,
     this.appBar,
     this.body,
+    this.bottomNavigationBar,
   }) : super(key: key);
 
   @override
@@ -100,6 +102,7 @@ class GradientScaffold extends StatelessWidget {
             backgroundColor: Colors.transparent,
             appBar: appBar,
             body: body,
+            bottomNavigationBar: bottomNavigationBar,
           ),
         ],
       ),
