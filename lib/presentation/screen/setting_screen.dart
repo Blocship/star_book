@@ -9,14 +9,16 @@ class SettingScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        centerTitle: true,
-        title: Text('Settings',
-            style: Theme.of(context)
-                .textTheme
-                .headlineSmall!
-                .copyWith(fontWeight: FontWeight.w700)),
         elevation: 0,
         backgroundColor: Colors.transparent,
+        centerTitle: true,
+        title: Text(
+          'Settings',
+          style: Theme.of(context)
+              .textTheme
+              .headlineSmall!
+              .copyWith(fontWeight: FontWeight.w700),
+        ),
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,
@@ -39,46 +41,109 @@ class SettingScreen extends StatelessWidget {
               title: 'License Agreement',
               subtitle: 'Your licensed agreement with starbook',
               onTap: () {}),
-          SizedBox(height: screenHeight * 0.32),
-          Text('App version 2.0',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(fontWeight: FontWeight.w400)),
+          SizedBox(height: screenHeight * 0.34),
+          Text(
+            'App version 2.0',
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(fontWeight: FontWeight.w400),
+          ),
           const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          const BlocShipTile(),
+          const SizedBox(height: 10),
+          const UxerShipTile(),
+        ],
+      ),
+    );
+  }
+}
+
+class BlocShipTile extends StatelessWidget {
+  const BlocShipTile({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Image(
+          image: AssetImage('assets/icons/blocship_logo.png'),
+          width: 16,
+        ),
+        const SizedBox(width: 6),
+        RichText(
+          textScaleFactor: MediaQuery.of(context).textScaleFactor,
+          text: TextSpan(
+            text: 'Powered by ',
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(fontWeight: FontWeight.w400),
             children: [
-              const Icon(Icons.add),
-              Text('Powered by ',
+              TextSpan(
+                text: 'Blocship',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.w400,
+                      color: const Color(0xFF1F1F1F),
+                      decoration: TextDecoration.underline,
+                    ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class UxerShipTile extends StatelessWidget {
+  const UxerShipTile({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Image(
+          image: AssetImage('assets/icons/ux_logo.png'),
+          width: 22,
+        ),
+        const SizedBox(width: 6),
+        RichText(
+          textScaleFactor: MediaQuery.of(context).textScaleFactor,
+          text: TextSpan(
+            text: 'Design & Crafted with ',
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(fontWeight: FontWeight.w400),
+            children: [
+              const WidgetSpan(
+                child: Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                  size: 17,
+                ),
+              ),
+              TextSpan(
+                  text: ' by ',
                   style: Theme.of(context)
                       .textTheme
                       .bodyMedium!
                       .copyWith(fontWeight: FontWeight.w400)),
-              Text('Blocship',
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              TextSpan(
+                text: 'Uxership',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontWeight: FontWeight.w400,
                       color: const Color(0xFF1F1F1F),
-                      decoration: TextDecoration.underline)),
+                      decoration: TextDecoration.underline,
+                    ),
+              ),
             ],
           ),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Icon(Icons.add),
-              const Text('Design & Crafted with ❤ by '),
-              Text('Uxership',
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      fontWeight: FontWeight.w400,
-                      color: const Color(0xFF1F1F1F),
-                      decoration: TextDecoration.underline)),
-            ],
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
