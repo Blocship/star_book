@@ -80,6 +80,40 @@ class GradientScaffold extends StatelessWidget {
                   .withOpacity(0.1),
             ),
           ),
+
+          /// New changes in shadow styling
+          Positioned(
+            top: 320,
+            left: 190,
+            child: BlurShadow(
+              shadowWidth: 40,
+              shadowHeight: 40,
+              borderRadius: 150,
+              spreadRadius: 40,
+              blurRadius: 50,
+              shadowOpacity: 0.08,
+              color: Theme.of(context)
+                  .extension<GradientScaffoldStyle>()!
+                  .tertiaryColor!
+                  .withOpacity(0.04),
+            ),
+          ),
+          Positioned(
+            top: 320,
+            left: 120,
+            child: BlurShadow(
+              shadowWidth: 40,
+              shadowHeight: 40,
+              borderRadius: 150,
+              spreadRadius: 40,
+              blurRadius: 50,
+              shadowOpacity: 0.08,
+              color: Theme.of(context)
+                  .extension<GradientScaffoldStyle>()!
+                  .tertiaryColor!
+                  .withOpacity(0.04),
+            ),
+          ),
           Positioned(
             top: 380,
             left: 160,
@@ -93,9 +127,27 @@ class GradientScaffold extends StatelessWidget {
               color: Theme.of(context)
                   .extension<GradientScaffoldStyle>()!
                   .tertiaryColor!
-                  .withOpacity(0.08),
+                  .withOpacity(0.06),
             ),
           ),
+
+          /// Previous Shadow Styling
+          // Positioned(
+          //   top: 380,
+          //   left: 160,
+          //   child: BlurShadow(
+          //     shadowWidth: 20,
+          //     shadowHeight: 20,
+          //     borderRadius: 120,
+          //     spreadRadius: 30,
+          //     blurRadius: 35,
+          //     shadowOpacity: 0.08,
+          //     color: Theme.of(context)
+          //         .extension<GradientScaffoldStyle>()!
+          //         .tertiaryColor!
+          //         .withOpacity(0.08),
+          //   ),
+          // ),
           Scaffold(
             backgroundColor: Colors.transparent,
             appBar: appBar,
