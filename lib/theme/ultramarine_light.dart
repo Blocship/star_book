@@ -49,9 +49,10 @@ class UltramarineLightTheme extends BaseTheme {
         height: 1.8,
         color: foregroundTheme.secondaryColor,
       ),
-      heading3: const TextStyle(
+      heading3: TextStyle(
         fontSize: 20,
         height: 1.4,
+        color: foregroundTheme.secondaryColor,
       ),
       body1: TextStyle(
         fontSize: 16,
