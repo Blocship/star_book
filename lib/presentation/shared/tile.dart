@@ -37,3 +37,92 @@ class CustomTile extends StatelessWidget {
     );
   }
 }
+
+class BlocShipTile extends StatelessWidget {
+  const BlocShipTile({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Image(
+          image: AssetImage('assets/icons/blocship_logo.png'),
+          width: 16,
+        ),
+        const SizedBox(width: 6),
+        RichText(
+          textScaleFactor: MediaQuery.of(context).textScaleFactor,
+          text: TextSpan(
+            text: 'Powered by ',
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(fontWeight: FontWeight.w400),
+            children: [
+              TextSpan(
+                text: 'Blocship',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.w400,
+                      color: const Color(0xFF1F1F1F),
+                      decoration: TextDecoration.underline,
+                    ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class UxerShipTile extends StatelessWidget {
+  const UxerShipTile({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Image(
+          image: AssetImage('assets/icons/ux_logo.png'),
+          width: 22,
+        ),
+        const SizedBox(width: 6),
+        RichText(
+          textScaleFactor: MediaQuery.of(context).textScaleFactor,
+          text: TextSpan(
+            text: 'Design & Crafted with ',
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium!
+                .copyWith(fontWeight: FontWeight.w400),
+            children: [
+              const WidgetSpan(
+                child: Icon(
+                  Icons.favorite,
+                  color: Colors.red,
+                  size: 17,
+                ),
+              ),
+              TextSpan(
+                  text: ' by ',
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(fontWeight: FontWeight.w400)),
+              TextSpan(
+                text: 'Uxership',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.w400,
+                      color: const Color(0xFF1F1F1F),
+                      decoration: TextDecoration.underline,
+                    ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
