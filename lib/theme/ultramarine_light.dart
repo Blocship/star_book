@@ -127,7 +127,7 @@ class UltramarineLightTheme extends BaseTheme {
         foregroundColor:
             MaterialStateProperty.all<Color>(foregroundTheme.tertiaryColor),
         textStyle: MaterialStateProperty.all<TextStyle>(
-            fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
+            fontTheme.body2.copyWith(fontWeight: FontWeight.w400)),
       ),
     );
   }
