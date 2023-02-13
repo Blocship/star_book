@@ -26,15 +26,13 @@ class MoodTile extends StatelessWidget {
       onTap: onTap,
       leading: Text(
         title,
-        style: Theme.of(context)
-            .textTheme
-            .bodyLarge!
-            .copyWith(fontWeight: FontWeight.w400, color: color),
-        // style: TextStyle(color: color),
+        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+            fontWeight: FontWeight.w400,
+            color: isSelected ? color : color.withOpacity(0.4)),
       ),
       trailing: CircleAvatar(
         radius: 6,
-        backgroundColor: color,
+        backgroundColor: isSelected ? color : color.withOpacity(0.4),
       ),
       selected: isSelected,
     );
