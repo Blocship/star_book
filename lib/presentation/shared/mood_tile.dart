@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 
 class MoodTile extends StatelessWidget {
@@ -17,9 +15,6 @@ class MoodTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    log(isSelected.toString());
-
-    ///TODO: remove splash color from theme
     return ListTile(
       dense: true,
       shape: RoundedRectangleBorder(
@@ -27,13 +22,18 @@ class MoodTile extends StatelessWidget {
               color: isSelected ? color : Colors.transparent, width: 2.0),
           borderRadius: BorderRadius.circular(8)),
       tileColor: color.withOpacity(0.1),
+      selectedTileColor: color.withOpacity(0.1),
       onTap: onTap,
       leading: Text(
         title,
-        style: TextStyle(color: color),
+        style: Theme.of(context)
+            .textTheme
+            .bodyLarge!
+            .copyWith(fontWeight: FontWeight.w400, color: color),
+        // style: TextStyle(color: color),
       ),
       trailing: CircleAvatar(
-        radius: 8,
+        radius: 6,
         backgroundColor: color,
       ),
       selected: isSelected,
