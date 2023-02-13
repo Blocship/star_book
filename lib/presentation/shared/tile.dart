@@ -20,7 +20,9 @@ class CustomTile extends StatelessWidget {
         title: Text(
           title,
           style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              fontWeight: FontWeight.w600, color: const Color(0xFF1F1F1F)),
+                fontWeight: FontWeight.w600,
+                color: const Color(0xFF1F1F1F),
+              ),
         ),
         subtitle: Text(
           subtitle,
@@ -33,7 +35,7 @@ class CustomTile extends StatelessWidget {
           Icons.keyboard_arrow_right,
           color: Color(0xFF1F1F1F),
         ),
-        onTap: () => onTap,
+        onTap: onTap,
       ),
     );
   }
