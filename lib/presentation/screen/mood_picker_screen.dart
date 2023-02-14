@@ -15,18 +15,6 @@ class _MoodPickerScreenState extends State<MoodPickerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Select Mood',
-          style: Theme.of(context)
-              .textTheme
-              .headlineSmall!
-              .copyWith(fontWeight: FontWeight.w700),
-        ),
-        centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
       body: Column(
         children: [
           const SizedBox(height: CustomPadding.mediumPadding),
@@ -35,15 +23,21 @@ class _MoodPickerScreenState extends State<MoodPickerScreen> {
             itemCount: MoodTilePair.moods.length,
             itemBuilder: (context, index) {
               MapEntry<String, Color> getPair = MoodTilePair().getPair(index);
-              return MoodTile(
-                  title: getPair.key,
-                  color: getPair.value,
-                  isSelected: selectedIndex == index,
-                  onTap: () {
-                    setState(() {
-                      selectedIndex = index;
-                    });
-                  });
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: CustomPadding.smallPadding,
+                  horizontal: CustomPadding.mediumPadding,
+                ),
+                child: MoodTile(
+                    title: getPair.key,
+                    color: getPair.value,
+                    isSelected: selectedIndex == index,
+                    onTap: () {
+                      setState(() {
+                        selectedIndex = index;
+                      });
+                    }),
+              );
             },
           ),
         ],
@@ -86,32 +80,26 @@ class MoodTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: CustomPadding.smallPadding,
-        horizontal: CustomPadding.mediumPadding,
+    return ListTile(
+      dense: true,
+      shape: RoundedRectangleBorder(
+          side: BorderSide(
+              color: isSelected ? color : Colors.transparent, width: 2.0),
+          borderRadius: BorderRadius.circular(8)),
+      tileColor: color.withOpacity(0.1),
+      selectedTileColor: color.withOpacity(0.1),
+      onTap: onTap,
+      leading: Text(
+        title,
+        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+            fontWeight: FontWeight.w400,
+            color: isSelected ? color : color.withOpacity(0.4)),
       ),
-      child: ListTile(
-        dense: true,
-        shape: RoundedRectangleBorder(
-            side: BorderSide(
-                color: isSelected ? color : Colors.transparent, width: 2.0),
-            borderRadius: BorderRadius.circular(8)),
-        tileColor: color.withOpacity(0.1),
-        selectedTileColor: color.withOpacity(0.1),
-        onTap: onTap,
-        leading: Text(
-          title,
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              fontWeight: FontWeight.w400,
-              color: isSelected ? color : color.withOpacity(0.4)),
-        ),
-        trailing: CircleAvatar(
-          radius: 6,
-          backgroundColor: isSelected ? color : color.withOpacity(0.4),
-        ),
-        selected: isSelected,
+      trailing: CircleAvatar(
+        radius: 6,
+        backgroundColor: isSelected ? color : color.withOpacity(0.4),
       ),
+      selected: isSelected,
     );
   }
 }
