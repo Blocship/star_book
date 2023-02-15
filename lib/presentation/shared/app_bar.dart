@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
+import 'package:star_book/theme/styling/theme_color_style.dart';
 
 class PrimaryAppBarItem {
   final String? label;
@@ -71,17 +72,20 @@ class _PrimaryLeading extends StatelessWidget {
       onTap: leading?.onTap,
       child: Row(
         children: [
-          const Icon(
+          Icon(
             Icons.keyboard_arrow_left_outlined,
             size: 24,
-            color: Color(0xFF1F1F1F),
+            color:
+                Theme.of(context).extension<ThemeColorStyle>()!.secondaryColor,
           ),
           if (leading!.label != null)
             Text(
               leading!.label!,
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     fontWeight: FontWeight.w400,
-                    color: const Color(0xFF1F1F1F),
+                    color: Theme.of(context)
+                        .extension<ThemeColorStyle>()!
+                        .secondaryColor,
                   ),
             ),
         ],
@@ -105,7 +109,9 @@ class _PrimaryTrailing extends StatelessWidget {
               trailing!.label!,
               style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                     fontWeight: FontWeight.w400,
-                    color: const Color(0xFF1F1F1F),
+                    color: Theme.of(context)
+                        .extension<ThemeColorStyle>()!
+                        .secondaryColor,
                   ),
             )
           : const SizedBox(),
