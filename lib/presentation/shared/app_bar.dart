@@ -130,8 +130,10 @@ class _PrimaryTitle extends StatelessWidget {
 
     return Text(
       title ?? '',
-      style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
             fontWeight: FontWeight.w700,
+            color:
+                Theme.of(context).extension<ThemeColorStyle>()!.secondaryColor,
           ),
     );
   }

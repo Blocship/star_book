@@ -19,7 +19,6 @@ class CalendarView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          SizedBox(height: screenHeight * 0.02),
           YearTitle(year),
           SizedBox(height: screenHeight * 0.03),
           CalendarMonthView(year: year),
