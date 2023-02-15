@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/shared/elevated_buttons.dart';
+import 'package:star_book/presentation/shared/text_field.dart';
 import 'package:star_book/widgets/gradient_scaffold.dart';
 
 class IntroScreen extends StatelessWidget {
@@ -9,6 +10,7 @@ class IntroScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     return GradientScaffold(
+      resizeToAvoidBottomInset: false,
       body: Center(
         child: Column(
           children: [
@@ -32,10 +34,8 @@ class IntroScreen extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.w700),
             ),
             SizedBox(height: screenHeight * 0.028),
-
-            /// Todo: Primary Text Field
-
-            SizedBox(height: screenHeight * 0.5),
+            const PrimaryTextField(hintText: 'Enter your name'),
+            SizedBox(height: screenHeight * 0.42),
             PrimaryFilledButton(onTap: () {}, label: 'Continue'),
           ],
         ),
