@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/theme/base_theme.dart';
+import 'package:star_book/theme/styling/doughnut_chart_style.dart';
 import 'package:star_book/theme/styling/floating_action_button_style.dart';
 import 'package:star_book/theme/styling/filled_button_style.dart';
 import 'package:star_book/theme/styling/gradient_scaffold_style.dart';
@@ -133,6 +134,18 @@ class UltramarineLightTheme extends BaseTheme {
         textStyle: MaterialStateProperty.all<TextStyle>(
             fontTheme.body2.copyWith(fontWeight: FontWeight.w400)),
       ),
+    );
+  }
+
+  @override
+  DoughnutChartStyle get doughnutChartStyle {
+    return const DoughnutChartStyle(
+      primaryColor: Color(0xFF8EFFA4),
+      secondaryColor: Color(0xFF6C71FF),
+      tertiaryColor: Color(0xFFFF716C),
+      quaternaryColor: Color(0xFF60ABFF),
+      quinaryColor: Color(0xFFFFC169),
+      octonaryColor: Color(0xFFFFFFFF),
     );
   }
 }
