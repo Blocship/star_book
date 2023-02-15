@@ -44,59 +44,56 @@ class _MoodDoughnutChartState extends State<MoodDoughnutChart> {
     //     color: const Color(0xFFFFC169),
     //   ),
     // ];
-    return Scaffold(
-      body: SfCircularChart(
-        annotations: <CircularChartAnnotation>[
-          CircularChartAnnotation(
-            widget: PhysicalModel(
-              shape: BoxShape.circle,
-              color:
-                  Theme.of(context).extension<ThemeColorStyle>()!.quinaryColor,
-            ),
+    return SfCircularChart(
+      annotations: <CircularChartAnnotation>[
+        CircularChartAnnotation(
+          widget: PhysicalModel(
+            shape: BoxShape.circle,
+            color: Theme.of(context).extension<ThemeColorStyle>()!.quinaryColor,
           ),
-          CircularChartAnnotation(
-            widget: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                Text(
-                  'Mood of The Month',
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        fontWeight: FontWeight.w400,
-                      ),
-                ),
-                // Text(
-                //   '45%', // Percentage based on calculation
-                //   style: Theme.of(context)
-                //       .textTheme
-                //       .headlineLarge!
-                //       .copyWith(fontWeight: FontWeight.w700),
-                // ),
-                Text(
-                  'Productive',
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.w500,
-                        color: Theme.of(context)
-                            .extension<ThemeColorStyle>()!
-                            .secondaryColor,
-                      ),
-                ),
-              ],
-            ),
+        ),
+        CircularChartAnnotation(
+          widget: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Text(
+                'Mood of The Month',
+                style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      fontWeight: FontWeight.w400,
+                    ),
+              ),
+              // Text(
+              //   '45%', // Percentage based on calculation
+              //   style: Theme.of(context)
+              //       .textTheme
+              //       .headlineLarge!
+              //       .copyWith(fontWeight: FontWeight.w700),
+              // ),
+              Text(
+                'Productive',
+                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.w500,
+                      color: Theme.of(context)
+                          .extension<ThemeColorStyle>()!
+                          .secondaryColor,
+                    ),
+              ),
+            ],
           ),
-        ],
-        series: <CircularSeries>[
-          DoughnutSeries<ChartData, String>(
-            dataSource: widget.moodDataMap,
-            xValueMapper: (ChartData data, _) => data.x,
-            yValueMapper: (ChartData data, _) => data.y,
-            pointColorMapper: (datum, index) => widget.moodDataMap[index].color,
-            // Radius of doughnut
-            radius: '75%',
-            innerRadius: '60%',
-          )
-        ],
-      ),
+        ),
+      ],
+      series: <CircularSeries>[
+        DoughnutSeries<ChartData, String>(
+          dataSource: widget.moodDataMap,
+          xValueMapper: (ChartData data, _) => data.x,
+          yValueMapper: (ChartData data, _) => data.y,
+          pointColorMapper: (datum, index) => widget.moodDataMap[index].color,
+          // Radius of doughnut
+          radius: '75%',
+          innerRadius: '60%',
+        )
+      ],
     );
   }
 }
