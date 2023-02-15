@@ -3,14 +3,30 @@ import 'package:intl/intl.dart';
 
 enum PickerComponent { date, month, year }
 
-class DatePicker extends StatefulWidget {
-  const DatePicker({super.key});
-
+class DatePicker extends StatelessWidget {
+  const DatePicker({Key? key}) : super(key: key);
   @override
-  State<DatePicker> createState() => _DatePickerState();
+  Widget build(BuildContext context) {
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.25,
+      width: MediaQuery.of(context).size.width * 0.85,
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          border: Border.all(color: Colors.grey)),
+      child: const PickerWidget(),
+    );
+  }
 }
 
-class _DatePickerState extends State<DatePicker> {
+class PickerWidget extends StatefulWidget {
+  const PickerWidget({Key? key}) : super(key: key);
+
+  @override
+  State<PickerWidget> createState() => _PickerWidgetState();
+}
+
+class _PickerWidgetState extends State<PickerWidget> {
   /// Current Date
   DateTime currentDate = DateTime.now();
 
@@ -31,65 +47,116 @@ class _DatePickerState extends State<DatePicker> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        height: MediaQuery.of(context).size.height * 0.25,
-        width: MediaQuery.of(context).size.width * 0.85,
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: Colors.grey)),
-        child: Row(
+    return Row(children: [
+      Expanded(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            pickerWidget(
-                data: _month, pickerDateComponent: PickerComponent.month),
-            pickerWidget(data: _day, pickerDateComponent: PickerComponent.date),
-            pickerWidget(
-                data: _year, pickerDateComponent: PickerComponent.year),
+            GestureDetector(
+              child: const Icon(Icons.keyboard_arrow_up_outlined),
+              onTap: () {
+                onDecrement(PickerComponent.month);
+              },
+            ),
+            const SizedBox(height: 6),
+            Text(
+              _month,
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium!
+                  .copyWith(fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              getPickerDateComponentName(PickerComponent.month),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge!
+                  .copyWith(fontWeight: FontWeight.w400),
+            ),
+            const SizedBox(height: 15),
+            GestureDetector(
+              child: const Icon(Icons.keyboard_arrow_down_outlined),
+              onTap: () {
+                onIncrement(PickerComponent.month);
+              },
+            ),
           ],
         ),
       ),
-    );
-  }
-
-  Widget pickerWidget(
-      {required String data, required PickerComponent pickerDateComponent}) {
-    return Expanded(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          GestureDetector(
-            child: const Icon(Icons.keyboard_arrow_up_outlined),
-            onTap: () {
-              onDecrement(pickerDateComponent);
-            },
-          ),
-          const SizedBox(height: 6),
-          Text(
-            data,
-            style: Theme.of(context)
-                .textTheme
-                .headlineMedium!
-                .copyWith(fontWeight: FontWeight.w700),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            getPickerDateComponentName(pickerDateComponent),
-            style: Theme.of(context)
-                .textTheme
-                .bodyLarge!
-                .copyWith(fontWeight: FontWeight.w400),
-          ),
-          const SizedBox(height: 15),
-          GestureDetector(
-            child: const Icon(Icons.keyboard_arrow_down_outlined),
-            onTap: () {
-              onIncrement(pickerDateComponent);
-            },
-          ),
-        ],
+      Expanded(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+              child: const Icon(Icons.keyboard_arrow_up_outlined),
+              onTap: () {
+                onDecrement(PickerComponent.date);
+              },
+            ),
+            const SizedBox(height: 6),
+            Text(
+              _day,
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium!
+                  .copyWith(fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              getPickerDateComponentName(PickerComponent.date),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge!
+                  .copyWith(fontWeight: FontWeight.w400),
+            ),
+            const SizedBox(height: 15),
+            GestureDetector(
+              child: const Icon(Icons.keyboard_arrow_down_outlined),
+              onTap: () {
+                onIncrement(PickerComponent.date);
+              },
+            ),
+          ],
+        ),
       ),
-    );
+      Expanded(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            GestureDetector(
+              child: const Icon(Icons.keyboard_arrow_up_outlined),
+              onTap: () {
+                onDecrement(PickerComponent.year);
+              },
+            ),
+            const SizedBox(height: 6),
+            Text(
+              _year,
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium!
+                  .copyWith(fontWeight: FontWeight.w700),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              getPickerDateComponentName(PickerComponent.year),
+              style: Theme.of(context)
+                  .textTheme
+                  .bodyLarge!
+                  .copyWith(fontWeight: FontWeight.w400),
+            ),
+            const SizedBox(height: 15),
+            GestureDetector(
+              child: const Icon(Icons.keyboard_arrow_down_outlined),
+              onTap: () {
+                onIncrement(PickerComponent.year);
+              },
+            ),
+          ],
+        ),
+      ),
+    ]);
   }
 
   /// Get Picker Component Name
