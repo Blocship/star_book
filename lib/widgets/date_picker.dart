@@ -9,7 +9,6 @@ class DatePicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: MediaQuery.of(context).size.height * 0.25,
-      width: MediaQuery.of(context).size.width * 0.85,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
