@@ -24,9 +24,8 @@ class PrimaryTextField extends StatelessWidget {
                     .tertiaryColor,
               ),
           isDense: true,
-          contentPadding: const EdgeInsets.all(12.0),
+          contentPadding: const EdgeInsets.all(16.0),
           border: OutlineInputBorder(
-            borderSide: BorderSide.none,
             borderRadius: BorderRadius.circular(8.0),
           ),
         ),
@@ -95,8 +94,6 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               return SizedBox(
                 width: 306,
                 height: 40,
-                // width: constraints.maxWidth,
-                // height: constraints.maxHeight,
                 child: TextFormField(
                   expands: true,
                   minLines: null,
