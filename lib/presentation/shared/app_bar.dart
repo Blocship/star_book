@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 
-class AppBarItem {
+class PrimaryAppBarItem {
   final String? label;
   final IconData? icon;
   final VoidCallback? onTap;
 
-  AppBarItem({
+  PrimaryAppBarItem({
     this.label,
     this.icon,
     this.onTap,
   });
 }
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final AppBarItem? leading;
+class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final PrimaryAppBarItem? leading;
   final String? center;
-  final AppBarItem? trailing;
+  final PrimaryAppBarItem? trailing;
 
-  const CustomAppBar({
+  const PrimaryAppBar({
     super.key,
     this.leading,
     this.center,
@@ -41,16 +41,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           Positioned(
             top: 50,
             left: 0,
-            child: _Leading(leading: leading),
+            child: _PrimaryLeading(leading: leading),
           ),
           Positioned(
             top: 50,
-            child: _Title(title: center),
+            child: _PrimaryTitle(title: center),
           ),
           Positioned(
             top: 54,
             right: 0,
-            child: _Trailing(trailing: trailing),
+            child: _PrimaryTrailing(trailing: trailing),
           ),
         ],
       ),
@@ -58,10 +58,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 }
 
-class _Leading extends StatelessWidget {
-  final AppBarItem? leading;
+class _PrimaryLeading extends StatelessWidget {
+  final PrimaryAppBarItem? leading;
 
-  const _Leading({this.leading});
+  const _PrimaryLeading({this.leading});
 
   @override
   Widget build(BuildContext context) {
@@ -90,10 +90,10 @@ class _Leading extends StatelessWidget {
   }
 }
 
-class _Trailing extends StatelessWidget {
-  final AppBarItem? trailing;
+class _PrimaryTrailing extends StatelessWidget {
+  final PrimaryAppBarItem? trailing;
 
-  const _Trailing({this.trailing});
+  const _PrimaryTrailing({this.trailing});
 
   @override
   Widget build(BuildContext context) {
@@ -113,10 +113,10 @@ class _Trailing extends StatelessWidget {
   }
 }
 
-class _Title extends StatelessWidget {
+class _PrimaryTitle extends StatelessWidget {
   final String? title;
 
-  const _Title({required this.title});
+  const _PrimaryTitle({required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -127,6 +127,95 @@ class _Title extends StatelessWidget {
       style: Theme.of(context).textTheme.headlineSmall!.copyWith(
             fontWeight: FontWeight.w700,
           ),
+    );
+  }
+}
+
+class SecondaryAppBarItem {
+  final Widget? icon;
+  final VoidCallback? onTap;
+
+  SecondaryAppBarItem({
+    this.icon,
+    this.onTap,
+  });
+}
+
+class SecondaryAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final SecondaryAppBarItem? leadingIcon;
+  final SecondaryAppBarItem? trailingIcon;
+
+  const SecondaryAppBar({
+    super.key,
+    this.leadingIcon,
+    this.trailingIcon,
+  });
+
+  @override
+  Size get preferredSize {
+    return const Size.fromHeight(50);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding:
+          const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
+      child: Stack(
+        alignment: AlignmentDirectional.bottomCenter,
+        children: [
+          Positioned(
+            top: 50,
+            left: 0,
+            child: _SecondaryLeading(leadingIcon: leadingIcon),
+          ),
+          Positioned(
+            top: 54,
+            right: 0,
+            child: _SecondaryTrailing(trailingIcon: trailingIcon),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _SecondaryLeading extends StatelessWidget {
+  final SecondaryAppBarItem? leadingIcon;
+
+  const _SecondaryLeading({this.leadingIcon});
+
+  @override
+  Widget build(BuildContext context) {
+    if (leadingIcon == null) return const SizedBox();
+
+    return (leadingIcon!.icon != null)
+        ? SizedBox(
+            width: 24,
+            height: 24,
+            child: leadingIcon!.icon!,
+          )
+        : const SizedBox();
+  }
+}
+
+class _SecondaryTrailing extends StatelessWidget {
+  final SecondaryAppBarItem? trailingIcon;
+
+  const _SecondaryTrailing({this.trailingIcon});
+
+  @override
+  Widget build(BuildContext context) {
+    if (trailingIcon == null) return const SizedBox();
+    return GestureDetector(
+      onTap: trailingIcon?.onTap,
+      child: (trailingIcon!.icon != null)
+          ? SizedBox(
+              width: 24,
+              height: 24,
+              child: trailingIcon!.icon!,
+            )
+          : const SizedBox(),
     );
   }
 }
