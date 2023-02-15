@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/theme/styling/doughnut_chart_style.dart';
 import 'package:star_book/theme/styling/floating_action_button_style.dart';
 import 'package:star_book/theme/styling/filled_button_style.dart';
 import 'package:star_book/theme/styling/gradient_scaffold_style.dart';
@@ -10,6 +11,7 @@ class BackgroundTheme {
   final Color tertiaryColor;
   final Color quaternaryColor;
   final Color senary;
+
   const BackgroundTheme({
     required this.primaryColor,
     required this.secondaryColor,
@@ -48,6 +50,8 @@ class FontFamily {
 abstract class BaseTheme {
   ThemeColorStyle get themeColorStyle;
 
+  DoughnutChartStyle get doughnutChartStyle;
+
   BackgroundTheme get backgroundTheme;
 
   FontTheme get fontTheme;
@@ -80,7 +84,7 @@ abstract class BaseTheme {
         bodyLarge: fontTheme.body1,
         bodyMedium: fontTheme.body2,
         //  bodySmall:,
-        labelLarge: fontTheme.body2,
+        labelLarge: fontTheme.caption,
         // labelMedium: ,
         //  labelSmall: ,
       ),
@@ -89,6 +93,7 @@ abstract class BaseTheme {
         customButtonTheme,
         floatingActionButtonStyle,
         themeColorStyle,
+        doughnutChartStyle,
       },
     );
   }
