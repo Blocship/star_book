@@ -39,7 +39,7 @@ class DangerFilledButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox.fromSize(
-      size: const Size(120, 40),
+      size: const Size(125, 40),
       child: ElevatedButton(
         onPressed: onTap,
         style: Theme.of(context)
@@ -64,7 +64,7 @@ class InactiveFilledButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox.fromSize(
-      size: const Size(120, 40),
+      size: const Size(125, 40),
       child: ElevatedButton(
         onPressed: onTap,
         style: Theme.of(context)
