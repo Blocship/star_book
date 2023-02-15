@@ -38,5 +38,4 @@ class GradientScaffoldStyle extends ThemeExtension<GradientScaffoldStyle> {
   // String toString() {
   //   return 'AppTheme(primaryColor: $primaryColor, secondaryColor: $secondaryColor, tertiaryColor: $tertiaryColor)';
   // }
-
 }

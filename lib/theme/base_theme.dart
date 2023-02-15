@@ -2,27 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:star_book/theme/styling/floating_action_button_style.dart';
 import 'package:star_book/theme/styling/filled_button_style.dart';
 import 'package:star_book/theme/styling/gradient_scaffold_style.dart';
-
-class ForegroundTheme {
-  final Color primaryColor;
-  final Color secondaryColor;
-  final Color tertiaryColor;
-  final Color quaternaryColor;
-  final Color quinary;
-  final Color senary;
-  final Color septenary;
-
-  const ForegroundTheme({
-    required this.primaryColor,
-    required this.secondaryColor,
-    required this.tertiaryColor,
-    required this.quaternaryColor,
-    required this.quinary,
-    required this.senary,
-    required this.septenary,
-    //   octonary, nonary, denary
-  });
-}
+import 'package:star_book/theme/styling/theme_color_style.dart';
 
 class BackgroundTheme {
   final Color primaryColor;
@@ -66,7 +46,7 @@ class FontFamily {
 }
 
 abstract class BaseTheme {
-  ForegroundTheme get foregroundTheme;
+  ThemeColorStyle get themeColorStyle;
 
   BackgroundTheme get backgroundTheme;
 
@@ -82,10 +62,10 @@ abstract class BaseTheme {
 
   ThemeData get theme {
     return ThemeData(
-      primaryColor: foregroundTheme.primaryColor,
+      primaryColor: themeColorStyle.primaryColor,
       fontFamily: fontFamily.primary,
       appBarTheme: AppBarTheme(
-        color: foregroundTheme.primaryColor,
+        color: themeColorStyle.primaryColor,
       ),
       textTheme: TextTheme(
         //  displayLarge: ,
@@ -108,6 +88,7 @@ abstract class BaseTheme {
         gradientScaffoldStyle,
         customButtonTheme,
         floatingActionButtonStyle,
+        themeColorStyle,
       },
     );
   }
