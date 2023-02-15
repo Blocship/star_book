@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/utils/calendar.dart';
-import 'package:star_book/widgets/gradient_scaffold.dart';
+import 'package:star_book/theme/styling/theme_color_style.dart';
 
 class DaysOfMonth extends StatelessWidget {
   final int year;
@@ -41,42 +41,33 @@ class DaysOfMonth extends StatelessWidget {
     }
 
     /// This will display the week days and dates of the month
-    return GradientScaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text(
-          'Year',
-          style: TextStyle(color: Colors.black),
-        ),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        iconTheme: const IconThemeData(color: Colors.black),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
-        child: Column(
-          children: [
-            const SizedBox(height: 40),
-            SizedBox(
-              width: screenWidth * 0.9,
-              child: Text(
-                CalendarUtils.getFullMonthName(month),
-                textAlign: TextAlign.left,
-                style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.w700),
-              ),
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      child: Column(
+        children: [
+          const SizedBox(height: 25),
+          SizedBox(
+            width: screenWidth * 0.84,
+            child: Text(
+              CalendarUtils.getFullMonthName(month),
+              textAlign: TextAlign.left,
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium!
+                  .copyWith(fontWeight: FontWeight.w700),
             ),
-            const SizedBox(height: 35),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: const [
-                WeekDaysView(),
-              ],
-            ),
-            Column(
-              children: dayRows,
-            ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 35),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: const [
+              WeekDaysView(),
+            ],
+          ),
+          Column(
+            children: dayRows,
+          ),
+        ],
       ),
     );
   }
@@ -104,7 +95,12 @@ class WeekDaysView extends StatelessWidget {
             child: Text(
               weekDays[index],
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w400),
+              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: Theme.of(context)
+                        .extension<ThemeColorStyle>()!
+                        .secondaryColor,
+                  ),
             ),
           );
         },
@@ -129,8 +125,10 @@ class Date extends StatelessWidget {
       alignment: Alignment.center,
       child: Text(
         day < 1 ? '' : day.toString(),
-        style: Theme.of(context).textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w400),
-
+        style: Theme.of(context)
+            .textTheme
+            .bodyMedium!
+            .copyWith(fontWeight: FontWeight.w400),
       ),
     );
   }
