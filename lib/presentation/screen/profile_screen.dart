@@ -18,8 +18,7 @@ class ProfileScreen extends StatelessWidget {
       appBar: SecondaryAppBar(
         leadingIcon: SecondaryAppBarItem(
             icon: const Image(
-          image: AssetImage('assets/icons/shooting_star.png'),
-        )),
+                image: AssetImage('assets/icons/shooting_star.png'))),
         trailingIcon:
             SecondaryAppBarItem(icon: const Icon(Icons.menu_outlined)),
       ),
@@ -39,7 +38,7 @@ class ProfileScreen extends StatelessWidget {
             ),
             const SizedBox(height: 6),
             Text(
-              'User Name 👋',
+              'Noor Ul Abedin 👋',
               style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                     fontWeight: FontWeight.w700,
                     color: Theme.of(context)
@@ -60,17 +59,19 @@ class ProfileScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Image(
+                    // alignment: Alignment.center,
+                    // filterQuality: FilterQuality.high,
                     image: AssetImage('assets/icons/analytics_donut_chart.png'),
-                    height: 20),
+                    height: 22),
                 SizedBox(width: screenWidth * 0.03),
                 Text(
                   'Analytics',
                   style: Theme.of(context)
                       .textTheme
                       .headlineMedium!
-                      .copyWith(fontWeight: FontWeight.w700),
+                      .copyWith(fontWeight: FontWeight.w700, height: 1.4),
                 ),
-                SizedBox(width: screenWidth * 0.288),
+                SizedBox(width: screenWidth * 0.285),
                 Text(
                   'View Details',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
