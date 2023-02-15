@@ -27,6 +27,7 @@ dependencies:
   logger: ^1.1.0
   syncfusion_flutter_charts: ^20.4.50
   intl: ^0.18.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
