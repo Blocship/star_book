@@ -25,8 +25,29 @@ class PrimaryTextField extends StatelessWidget {
               ),
           isDense: true,
           contentPadding: const EdgeInsets.all(16.0),
+          filled: true,
+          fillColor:
+              Theme.of(context).extension<ThemeColorStyle>()!.quinaryColor,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(8.0),
+            borderSide: BorderSide(
+              color:
+                  Theme.of(context).extension<ThemeColorStyle>()!.octonaryColor,
+            ),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.0),
+            borderSide: BorderSide(
+              color:
+                  Theme.of(context).extension<ThemeColorStyle>()!.octonaryColor,
+            ),
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8.0),
+            borderSide: BorderSide(
+              color:
+                  Theme.of(context).extension<ThemeColorStyle>()!.octonaryColor,
+            ),
           ),
         ),
       ),
