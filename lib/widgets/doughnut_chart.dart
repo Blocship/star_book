@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/theme/styling/theme_color_style.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class MoodDoughnutChart extends StatefulWidget {
@@ -47,9 +48,10 @@ class _MoodDoughnutChartState extends State<MoodDoughnutChart> {
       body: SfCircularChart(
         annotations: <CircularChartAnnotation>[
           CircularChartAnnotation(
-            widget: const PhysicalModel(
+            widget: PhysicalModel(
               shape: BoxShape.circle,
-              color: Colors.white,
+              color:
+                  Theme.of(context).extension<ThemeColorStyle>()!.quinaryColor,
             ),
           ),
           CircularChartAnnotation(
@@ -63,19 +65,20 @@ class _MoodDoughnutChartState extends State<MoodDoughnutChart> {
                         fontWeight: FontWeight.w400,
                       ),
                 ),
+                // Text(
+                //   '45%', // Percentage based on calculation
+                //   style: Theme.of(context)
+                //       .textTheme
+                //       .headlineLarge!
+                //       .copyWith(fontWeight: FontWeight.w700),
+                // ),
                 Text(
-                  '45%', // Percentage based on calculation
-                  // '${widget.percentage}%',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineLarge!
-                      .copyWith(fontWeight: FontWeight.w700),
-                ),
-                Text(
-                  'Productive', // Change This
+                  'Productive',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                         fontWeight: FontWeight.w500,
-                        color: const Color(0xFF1F1F1F),
+                        color: Theme.of(context)
+                            .extension<ThemeColorStyle>()!
+                            .secondaryColor,
                       ),
                 ),
               ],

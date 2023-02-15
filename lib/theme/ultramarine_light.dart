@@ -27,14 +27,15 @@ class UltramarineLightTheme extends BaseTheme {
   @override
   ThemeColorStyle get themeColorStyle {
     return const ThemeColorStyle(
-        primaryColor: Color(0xFF4C4DFF),
-        secondaryColor: Color(0xFF1F1F1F),
-        tertiaryColor: Color(0xFF8B8B8B),
-        quaternaryColor: Color(0xFF7B7CFF),
-        quinaryColor: Color(0xFFFFFFFF),
-        senaryColor: Color(0xFFFF3932),
-        septenaryColor: Color(0xFFF1F2F4),
-        octonaryColor: Color(0xFFBCBCBC));
+      primaryColor: Color(0xFF4C4DFF),
+      secondaryColor: Color(0xFF1F1F1F),
+      tertiaryColor: Color(0xFF8B8B8B),
+      quaternaryColor: Color(0xFF7B7CFF),
+      quinaryColor: Color(0xFFFFFFFF),
+      senaryColor: Color(0xFFFF3932),
+      septenaryColor: Color(0xFFF1F2F4),
+      octonaryColor: Color(0xFFBCBCBC),
+    );
   }
 
   @override
@@ -43,7 +44,7 @@ class UltramarineLightTheme extends BaseTheme {
       heading1: TextStyle(
         fontSize: 30,
         letterSpacing: -1,
-        color: foregroundTheme.secondaryColor,
+        color: themeColorStyle.secondaryColor,
       ),
       heading2: TextStyle(
         fontSize: 25,
@@ -67,7 +68,7 @@ class UltramarineLightTheme extends BaseTheme {
       ),
       caption: TextStyle(
         fontSize: 12,
-        color: foregroundTheme.tertiaryColor,
+        color: themeColorStyle.tertiaryColor,
       ),
     );
   }
