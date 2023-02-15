@@ -25,7 +25,7 @@ dependencies:
   
   # Non Technical Dependencies
   logger: ^1.1.0
-  pie_chart: ^5.3.2
+  syncfusion_flutter_charts: ^20.4.50
 
 dev_dependencies:
   flutter_test:

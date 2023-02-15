@@ -307,6 +307,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      sha256: a3715e3bc90294e971cb7dc063fbf3cd9ee0ebf8604ffeafabd9e6f16abbdbe6
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.18.0"
   io:
     dependency: transitive
     description:
@@ -451,14 +459,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.2"
-  pie_chart:
-    dependency: "direct main"
-    description:
-      name: pie_chart
-      sha256: "5dba6d0eb4718e8ed00a9079361cd8947c3f84ac5a5d76f05a27f4ec5e27589e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.3.2"
   pool:
     dependency: transitive
     description:
@@ -568,6 +568,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  syncfusion_flutter_charts:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_charts
+      sha256: "34d4c1cd35de6ebe5a3cdfe72a1154fdb04117625517609308d992789121bf78"
+      url: "https://pub.dev"
+    source: hosted
+    version: "20.4.50"
+  syncfusion_flutter_core:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_core
+      sha256: "33141f9073c607bd113898d241aa6a03ccc1856a314bd061015180c35d47012f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "20.4.50"
   term_glyph:
     dependency: transitive
     description:

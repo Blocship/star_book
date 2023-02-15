@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:pie_chart/pie_chart.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
 class MoodDoughnutChart extends StatefulWidget {
-  final String percentage;
-  final String mood;
-  final Map<String, double> moodDataMap;
+  final List<ChartData> moodDataMap;
+
   const MoodDoughnutChart({
     Key? key,
-    required this.percentage,
-    required this.mood,
     required this.moodDataMap,
   }) : super(key: key);
 
@@ -16,122 +13,95 @@ class MoodDoughnutChart extends StatefulWidget {
   State<MoodDoughnutChart> createState() => _MoodDoughnutChartState();
 }
 
-class _MoodDoughnutChartState extends State<MoodDoughnutChart>
-    with SingleTickerProviderStateMixin {
-  // final dataMap = <String, double>{
-  //   "Productive": 4,
-  //   "Sad": 1,
-  //   "Angry": 1,
-  //   "Happy": 1,
-  //   "Sick": 1,
-  // };
-
-  // late AnimationController animationController;
-  // @override
-  // void initState() {
-  //   animationController =
-  //       AnimationController(vsync: this, duration: const Duration(seconds: 2))
-  //         ..repeat();
-  //   super.initState();
-  // }
-
+class _MoodDoughnutChartState extends State<MoodDoughnutChart> {
   @override
   Widget build(BuildContext context) {
+    // final List<ChartData> chartData = [
+    //   ChartData(
+    //     x: 'Productive',
+    //     y: 3.5,
+    //     color: const Color(0xFF8EFFA4),
+    //   ),
+    //   ChartData(
+    //     x: 'Sad',
+    //     y: 1.5,
+    //     color: const Color(0xFF6C71FF),
+    //   ),
+    //   ChartData(
+    //     x: 'Angry',
+    //     y: 1.5,
+    //     color: const Color(0xFFFF716C),
+    //   ),
+    //   ChartData(
+    //     x: 'Happy',
+    //     y: 1.5,
+    //     color: const Color(0xFF60ABFF),
+    //   ),
+    //   ChartData(
+    //     x: 'Sick',
+    //     y: 2.0,
+    //     color: const Color(0xFFFFC169),
+    //   ),
+    // ];
     return Scaffold(
-      body: Stack(
-        children: [
-          Positioned(
-            top: 286,
-            left: 80,
-            child: Container(
-              width: 200,
-              height: 200,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(360),
-              ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    'Mood of The Month',
-                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                          fontWeight: FontWeight.w400,
-                        ),
-                  ),
-                  Text(
-                    '${widget.percentage}%',
-                    style: Theme.of(context)
-                        .textTheme
-                        .headlineLarge!
-                        .copyWith(fontWeight: FontWeight.w700),
-                  ),
-                  Text(
-                    widget.mood,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                          fontWeight: FontWeight.w500,
-                          color: const Color(0xFF1F1F1F),
-                        ),
-                  ),
-                ],
-              ),
+      body: SfCircularChart(
+        annotations: <CircularChartAnnotation>[
+          CircularChartAnnotation(
+            widget: const PhysicalModel(
+              shape: BoxShape.circle,
+              color: Colors.white,
             ),
           ),
-          PieChart(
-            dataMap: widget.moodDataMap,
-            colorList: const [
-              Color(0xFFFFC169),
-              Color(0xFF6C71FF),
-              Color(0xFF60ABFF),
-              Color(0xFF8EFFA4),
-              Color(0xFFFF716C),
-            ],
-            chartType: ChartType.ring,
-            ringStrokeWidth: 55,
-            chartRadius: 250,
-            legendOptions: const LegendOptions(
-              showLegends: false,
+          CircularChartAnnotation(
+            widget: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Mood of The Month',
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        fontWeight: FontWeight.w400,
+                      ),
+                ),
+                Text(
+                  '45%', // Percentage based on calculation
+                  // '${widget.percentage}%',
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineLarge!
+                      .copyWith(fontWeight: FontWeight.w700),
+                ),
+                Text(
+                  'Productive', // Change This
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontWeight: FontWeight.w500,
+                        color: const Color(0xFF1F1F1F),
+                      ),
+                ),
+              ],
             ),
-            chartValuesOptions:
-                const ChartValuesOptions(showChartValues: false),
-            animationDuration: const Duration(milliseconds: 2000),
           ),
-          // Positioned(
-          //   top: 386,
-          //   left: animationController.value,
-          //   child: AnimatedBuilder(
-          //     animation: animationController,
-          //     builder: (BuildContext context, Widget? child) {
-          //       return Transform.rotate(
-          //         angle: animationController.value * 2 * math.pi,
-          //         child: CustomPaint(
-          //           size: const Size(30, 30),
-          //           painter: ArrowIndicator(),
-          //         ),
-          //       );
-          //     },
-          //   ),
-          // )
+        ],
+        series: <CircularSeries>[
+          DoughnutSeries<ChartData, String>(
+            dataSource: widget.moodDataMap,
+            xValueMapper: (ChartData data, _) => data.x,
+            yValueMapper: (ChartData data, _) => data.y,
+            pointColorMapper: (datum, index) => widget.moodDataMap[index].color,
+            // Radius of doughnut
+            radius: '75%',
+            innerRadius: '60%',
+          )
         ],
       ),
     );
   }
 }
 
-class ArrowIndicator extends CustomPainter {
-  @override
-  void paint(Canvas canvas, Size size) {
-    var path = Path();
-    path.moveTo(size.width / 2, 0);
-    path.lineTo(0, size.height);
-    path.lineTo(size.height, size.width);
-    path.close();
-    canvas.drawPath(path, Paint()..color = Colors.black);
-  }
+class ChartData {
+  ChartData({required this.x, required this.y, required this.color});
 
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
-  }
+  final String x;
+  final double y;
+  final Color color;
 }
