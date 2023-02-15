@@ -50,9 +50,10 @@ class UltramarineLightTheme extends BaseTheme {
         height: 1.8,
         color: themeColorStyle.secondaryColor,
       ),
-      heading3: const TextStyle(
+      heading3: TextStyle(
         fontSize: 20,
         height: 1.4,
+        color: foregroundTheme.secondaryColor,
       ),
       body1: TextStyle(
         fontSize: 16,
@@ -102,8 +103,7 @@ class UltramarineLightTheme extends BaseTheme {
         elevation: MaterialStateProperty.all<double>(0),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-        foregroundColor:
-            MaterialStateProperty.all<Color>(themeColorStyle.quinaryColor),
+        foregroundColor:  MaterialStateProperty.all<Color>(themeColorStyle.quinaryColor),
         textStyle: MaterialStateProperty.all<TextStyle>(
             fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
       ),
@@ -113,8 +113,7 @@ class UltramarineLightTheme extends BaseTheme {
         elevation: MaterialStateProperty.all<double>(0),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-        foregroundColor:
-            MaterialStateProperty.all<Color>(themeColorStyle.quinaryColor),
+        foregroundColor: MaterialStateProperty.all<Color>(themeColorStyle.quinaryColor),
         textStyle: MaterialStateProperty.all<TextStyle>(
             fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
       ),
@@ -124,10 +123,9 @@ class UltramarineLightTheme extends BaseTheme {
         elevation: MaterialStateProperty.all<double>(0),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
-        foregroundColor:
-            MaterialStateProperty.all<Color>(themeColorStyle.tertiaryColor),
+        foregroundColor: MaterialStateProperty.all<Color>(themeColorStyle.tertiaryColor),
         textStyle: MaterialStateProperty.all<TextStyle>(
-            fontTheme.body2.copyWith(fontWeight: FontWeight.w500)),
+            fontTheme.body2.copyWith(fontWeight: FontWeight.w400)),
       ),
     );
   }
