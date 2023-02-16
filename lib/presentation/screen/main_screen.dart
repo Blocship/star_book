@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/presentation/screen/home_screen.dart';
+import 'package:star_book/presentation/screen/profile_screen.dart';
 import 'package:star_book/presentation/shared/custom_bottom_nav_bar.dart';
 import 'package:star_book/widgets/gradient_scaffold.dart';
 
@@ -30,7 +32,10 @@ class _MainScreenState extends State<MainScreen> {
     pageController.jumpToPage(page);
   }
 
-  List<Widget> pages = <Widget>[];
+  List<Widget> pages = <Widget>[
+    const HomeScreen(),
+    const ProfileScreen(),
+  ];
 
   @override
   Widget build(BuildContext context) {
