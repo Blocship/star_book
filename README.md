@@ -47,7 +47,7 @@ Prerequisite: https://flutter.dev/docs/get-started/install
     ```
 4. Run project.
     ```sh
-     flutter run
+     flutter run --dart-define=flavor=dev
     ```
 
 ## 🤝 Contributing
