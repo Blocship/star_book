@@ -64,7 +64,7 @@ class UltramarineLightTheme extends BaseTheme {
       ),
       body2: TextStyle(
         fontSize: 14,
-        height: 1.0,
+        height: 1.6,
         color: themeColorStyle.tertiaryColor,
       ),
       caption: TextStyle(
