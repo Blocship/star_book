@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/shared/elevated_buttons.dart';
 import 'package:star_book/theme/styling/theme_color_style.dart';
 
@@ -48,7 +49,7 @@ Ullamcorper sit adipiscing sed id nisl at integer. Tristique in lectus interdum 
             SizedBox(height: screenHeight * 0.02),
             PrimaryFilledButton(
               label: 'Done',
-              onTap: () {},
+              onTap: () => context.go('/homeScree'),
             ),
             SizedBox(height: screenHeight * 0.03),
           ],

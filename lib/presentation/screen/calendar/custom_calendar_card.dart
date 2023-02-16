@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:star_book/presentation/screen/calendar/month_days.dart';
+import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/utils/calendar.dart';
 
 class CustomCalendarCard extends StatelessWidget {
@@ -19,15 +19,18 @@ class CustomCalendarCard extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DaysOfMonth(
-                  year: year,
-                  month: monthIndex,
-                ),
-              ),
-            );
+            ///Todo: it will give error because it takes arguments
+            context.go(
+                '/introScreen/mainScreen/yearScreen/homeScreen/daysOfMonth');
+            // Navigator.push(
+            //   context,
+            //   MaterialPageRoute(
+            //     builder: (context) => DaysOfMonth(
+            //       year: year,
+            //       month: monthIndex,
+            //     ),
+            //   ),
+            // );
           },
           child: Container(
             width: 70,
@@ -39,7 +42,10 @@ class CustomCalendarCard extends StatelessWidget {
             child: Center(
               child: Text(
                 CalendarUtils.getMonthName(monthIndex),
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w400),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge!
+                    .copyWith(fontWeight: FontWeight.w400),
               ),
             ),
           ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:star_book/floating_action_button.dart';
 import 'package:star_book/presentation/screen/calendar/month_days.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
@@ -12,15 +13,17 @@ class HomeScreen extends StatelessWidget {
     return GradientScaffold(
       appBar: PrimaryAppBar(
         leading: PrimaryAppBarItem(
-          icon: Icons.keyboard_arrow_left_outlined,
+          icon: Icons.arrow_back_ios_new_outlined,
           label: 'Year',
+          onTap: () => context.go('/introScreen/mainScreen/yearScreen'),
         ),
       ),
       body: DaysOfMonth(year: DateTime.now().year, month: DateTime.now().month),
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 90),
         child: PrimaryFloatingActionButton(
-          onTap: () {},
+          onTap: () =>
+              context.go('/introScreen/mainScreen/journalCreateScreen'),
           child: const Image(
             image: AssetImage('assets/icons/calendar_add_on.png'),
             height: 20,

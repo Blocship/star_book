@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/tile.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/widgets/gradient_scaffold.dart';
@@ -10,17 +12,13 @@ class SettingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     return GradientScaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        centerTitle: true,
-        title: Text(
-          'Settings',
-          style: Theme.of(context)
-              .textTheme
-              .headlineSmall!
-              .copyWith(fontWeight: FontWeight.w700),
+      appBar: PrimaryAppBar(
+        leading: PrimaryAppBarItem(
+          icon: Icons.arrow_back_ios_new_outlined,
+          label: 'Back',
+          onTap: () => context.go('/profileScreen'),
         ),
+        center: 'Settings',
       ),
       body: Padding(
         padding:

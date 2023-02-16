@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:star_book/floating_action_button.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
@@ -22,13 +23,13 @@ class JournalDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: PrimaryAppBar(
         leading: PrimaryAppBarItem(
           icon: Icons.arrow_back_ios_new_outlined,
           label: 'Back',
+          onTap: () => context.go('/homeScreen'),
         ),
         center: 'Mood Journal',
         trailing: PrimaryAppBarItem(
@@ -51,7 +52,8 @@ class JournalDetailScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: PrimaryFloatingActionButton(
-          onTap: () {}, child: const Icon(Icons.edit_outlined)),
+          onTap: () => context.go('/journalEditScreen'),
+          child: const Icon(Icons.edit_outlined)),
     );
   }
 }
@@ -117,7 +119,6 @@ class DocumentWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

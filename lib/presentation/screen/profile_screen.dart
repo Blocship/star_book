@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/doughnut_chart_widget.dart';
 import 'package:star_book/presentation/shared/stats_widget.dart';
@@ -11,7 +12,6 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
 
     return GradientScaffold(
@@ -19,8 +19,10 @@ class ProfileScreen extends StatelessWidget {
         leadingIcon: SecondaryAppBarItem(
             icon: const Image(
                 image: AssetImage('assets/icons/shooting_star.png'))),
-        trailingIcon:
-            SecondaryAppBarItem(icon: const Icon(Icons.menu_outlined)),
+        trailingIcon: SecondaryAppBarItem(
+          icon: const Icon(Icons.menu_outlined),
+          onTap: () => context.go('introScreen/mainScreen/settingScreen'),
+        ),
       ),
       body: Padding(
         padding:
@@ -59,10 +61,9 @@ class ProfileScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Image(
-                    // alignment: Alignment.center,
-                    // filterQuality: FilterQuality.high,
-                    image: AssetImage('assets/icons/analytics_donut_chart.png'),
-                    height: 22),
+                  image: AssetImage('assets/icons/analytics_donut_chart.png'),
+                  height: 22,
+                ),
                 SizedBox(width: screenWidth * 0.03),
                 Text(
                   'Analytics',
@@ -72,16 +73,24 @@ class ProfileScreen extends StatelessWidget {
                       .copyWith(fontWeight: FontWeight.w700, height: 1.4),
                 ),
                 SizedBox(width: screenWidth * 0.285),
-                Text(
-                  'View Details',
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.w500,
-                        color: Theme.of(context)
-                            .extension<ThemeColorStyle>()!
-                            .secondaryColor,
+                GestureDetector(
+                  onTap: () =>
+                      context.go('introScreen/mainScreen/analyticsScreen'),
+                  child: Row(
+                    children: [
+                      Text(
+                        'View Details',
+                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                              fontWeight: FontWeight.w500,
+                              color: Theme.of(context)
+                                  .extension<ThemeColorStyle>()!
+                                  .secondaryColor,
+                            ),
                       ),
-                ),
-                const Icon(Icons.keyboard_arrow_right_outlined),
+                      const Icon(Icons.keyboard_arrow_right_outlined),
+                    ],
+                  ),
+                )
               ],
             ),
             const SizedBox(height: 22),

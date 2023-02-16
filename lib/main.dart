@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/injector/injector.dart';
-import 'package:star_book/presentation/screen/calendar/custom_calendar.dart';
+import 'package:star_book/routes/routes.dart';
 import 'package:star_book/theme/ultramarine_light.dart';
 
 void main() async {
@@ -14,9 +14,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       theme: UltramarineLightTheme().theme,
-      home: const CustomCalendar(),
+      routerConfig: AppRouter().appRoutes,
     );
   }
 }
