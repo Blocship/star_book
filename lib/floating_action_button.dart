@@ -38,6 +38,7 @@ class SecondaryFloatingActionButton extends StatelessWidget {
       backgroundColor: Theme.of(context)
           .extension<FloatingActionButtonStyle>()!
           .secondaryFloatingButton!,
+      elevation: 0,
       onPressed: onTap,
       child: child,
     );
