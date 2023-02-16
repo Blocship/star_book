@@ -18,11 +18,6 @@ import 'package:star_book/domain/repository/user_repo.dart';
 abstract class Injector {
   // maybe pass config
   static Future<void> initialise() async {
-    await Isar.open([
-      JournalSchema,
-      MoodSchema,
-      UserSchema,
-    ]);
     _Injector()._initialise();
   }
 

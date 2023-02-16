@@ -1,18 +1,27 @@
 {
   // Configurations to set the launch of `quran_talk` dart files in debug mode
   // https://dartcode.org/docs/launch-configuration/
-  "version": "0.2.0",
+  "version": "0.3.0",
   "configurations": [
     {
-      "name": "starbook",
+      "name": "starbook dev",
       "request": "launch",
       "type": "dart",
-      // "debug", "profile" or "release".
-      "flutterMode": "debug",
-      // "debugConsole" or "terminal". If set to "terminal", will run in the built-in
-		  // terminal and will support reading from `stdin`. However some other debug
-		  // features may be limited.
-		  "console": "debugConsole",
+      "flutterMode": "debug", // "debug", "profile" or "release".
+		  "console": "debugConsole", // "debugConsole" or "terminal"
+      "args": [
+        "--dart-define", "flavor=dev", // --dart-define=flavor=dev
+      ],
     }, 
+    {
+      "name": "starbook prod",
+      "request": "launch",
+      "type": "dart",
+      "flutterMode": "debug",
+		  "console": "debugConsole",
+      "args": [
+        "--dart-define", "flavor=prod",
+      ],
+    },
   ]
 }
