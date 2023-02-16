@@ -27,7 +27,7 @@ class _DoughnutChartWidgetState extends State<DoughnutChartWidget> {
     return Container(
       height: screenHeight * 0.26,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
+        borderRadius: BorderRadius.circular(20),
         color: doughnutColor.octonaryColor,
       ),
       padding: const EdgeInsets.symmetric(
