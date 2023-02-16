@@ -17,6 +17,9 @@ class MoodDoughnutChart extends StatefulWidget {
 class _MoodDoughnutChartState extends State<MoodDoughnutChart> {
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
+
     // final List<ChartData> chartData = [
     //   ChartData(
     //     x: 'Productive',
@@ -53,45 +56,54 @@ class _MoodDoughnutChartState extends State<MoodDoughnutChart> {
           ),
         ),
         CircularChartAnnotation(
-          widget: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Text(
-                'Mood of The Month',
-                style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                      fontWeight: FontWeight.w400,
-                    ),
-              ),
-              // Text(
-              //   '45%', // Percentage based on calculation
-              //   style: Theme.of(context)
-              //       .textTheme
-              //       .headlineLarge!
-              //       .copyWith(fontWeight: FontWeight.w700),
-              // ),
-              Text(
-                'Productive',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      fontWeight: FontWeight.w500,
-                      color: Theme.of(context)
-                          .extension<ThemeColorStyle>()!
-                          .secondaryColor,
-                    ),
-              ),
-            ],
+          widget: Container(
+            height: screenHeight * 0.26,
+            width: screenWidth * 0.55,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(100),
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Mood of The Month',
+                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                        fontWeight: FontWeight.w400,
+                      ),
+                ),
+                Text(
+                  '45%', // Percentage based on calculation
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineLarge!
+                      .copyWith(fontWeight: FontWeight.w700),
+                ),
+                Text(
+                  'Productive',
+                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontWeight: FontWeight.w500,
+                        color: Theme.of(context)
+                            .extension<ThemeColorStyle>()!
+                            .secondaryColor,
+                      ),
+                ),
+              ],
+            ),
           ),
         ),
       ],
       series: <CircularSeries>[
         DoughnutSeries<ChartData, String>(
+          animationDuration: 0,
           dataSource: widget.moodDataMap,
           xValueMapper: (ChartData data, _) => data.x,
           yValueMapper: (ChartData data, _) => data.y,
           pointColorMapper: (datum, index) => widget.moodDataMap[index].color,
           // Radius of doughnut
-          radius: '75%',
-          innerRadius: '60%',
+          radius: '105%',
+          innerRadius: '65%',
         )
       ],
     );
