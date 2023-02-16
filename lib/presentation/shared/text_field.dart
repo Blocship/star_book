@@ -57,13 +57,16 @@ class PrimaryTextField extends StatelessWidget {
 
 class CustomTextFormField extends StatefulWidget {
   final String heading;
-  final String label;
-
+  final String? label;
+  final String? initialValue;
   const CustomTextFormField({
     Key? key,
     required this.heading,
-    required this.label,
-  }) : super(key: key);
+    this.label,
+    this.initialValue,
+  })  : assert(label != null || initialValue != null,
+            'Label and initialValue both cannot be null'),
+        super(key: key);
 
   @override
   State<CustomTextFormField> createState() => _CustomTextFormFieldState();
@@ -84,6 +87,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   @override
   Widget build(BuildContext context) {
+    controller.text = (widget.label ?? widget.initialValue)!;
     return Container(
       width: 306,
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
@@ -125,7 +129,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.zero,
                     isDense: true,
-                    hintText: widget.label,
+                    // hintText: widget.label ?? '',
                     hintStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           fontWeight: FontWeight.w400,
                         ),
