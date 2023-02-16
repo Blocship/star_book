@@ -17,11 +17,14 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: DaysOfMonth(year: DateTime.now().year, month: DateTime.now().month),
-      floatingActionButton: PrimaryFloatingActionButton(
-        onTap: () {},
-        child: const Image(
-          image: AssetImage('assets/icons/calendar_add_on.png'),
-          height: 20,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 90),
+        child: PrimaryFloatingActionButton(
+          onTap: () {},
+          child: const Image(
+            image: AssetImage('assets/icons/calendar_add_on.png'),
+            height: 20,
+          ),
         ),
       ),
     );
