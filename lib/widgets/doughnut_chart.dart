@@ -17,6 +17,9 @@ class MoodDoughnutChart extends StatefulWidget {
 class _MoodDoughnutChartState extends State<MoodDoughnutChart> {
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
+
     // final List<ChartData> chartData = [
     //   ChartData(
     //     x: 'Productive',
@@ -44,18 +47,23 @@ class _MoodDoughnutChartState extends State<MoodDoughnutChart> {
     //     color: const Color(0xFFFFC169),
     //   ),
     // ];
-    return Scaffold(
-      body: SfCircularChart(
-        annotations: <CircularChartAnnotation>[
-          CircularChartAnnotation(
-            widget: PhysicalModel(
-              shape: BoxShape.circle,
-              color:
-                  Theme.of(context).extension<ThemeColorStyle>()!.quinaryColor,
-            ),
+    return SfCircularChart(
+      annotations: <CircularChartAnnotation>[
+        CircularChartAnnotation(
+          widget: PhysicalModel(
+            shape: BoxShape.circle,
+            color: Theme.of(context).extension<ThemeColorStyle>()!.quinaryColor,
           ),
-          CircularChartAnnotation(
-            widget: Column(
+        ),
+        CircularChartAnnotation(
+          widget: Container(
+            height: screenHeight * 0.26,
+            width: screenWidth * 0.55,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(100),
+            ),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
@@ -65,13 +73,13 @@ class _MoodDoughnutChartState extends State<MoodDoughnutChart> {
                         fontWeight: FontWeight.w400,
                       ),
                 ),
-                // Text(
-                //   '45%', // Percentage based on calculation
-                //   style: Theme.of(context)
-                //       .textTheme
-                //       .headlineLarge!
-                //       .copyWith(fontWeight: FontWeight.w700),
-                // ),
+                Text(
+                  '45%', // Percentage based on calculation
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineLarge!
+                      .copyWith(fontWeight: FontWeight.w700),
+                ),
                 Text(
                   'Productive',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
@@ -84,19 +92,20 @@ class _MoodDoughnutChartState extends State<MoodDoughnutChart> {
               ],
             ),
           ),
-        ],
-        series: <CircularSeries>[
-          DoughnutSeries<ChartData, String>(
-            dataSource: widget.moodDataMap,
-            xValueMapper: (ChartData data, _) => data.x,
-            yValueMapper: (ChartData data, _) => data.y,
-            pointColorMapper: (datum, index) => widget.moodDataMap[index].color,
-            // Radius of doughnut
-            radius: '75%',
-            innerRadius: '60%',
-          )
-        ],
-      ),
+        ),
+      ],
+      series: <CircularSeries>[
+        DoughnutSeries<ChartData, String>(
+          animationDuration: 0,
+          dataSource: widget.moodDataMap,
+          xValueMapper: (ChartData data, _) => data.x,
+          yValueMapper: (ChartData data, _) => data.y,
+          pointColorMapper: (datum, index) => widget.moodDataMap[index].color,
+          // Radius of doughnut
+          radius: '105%',
+          innerRadius: '65%',
+        )
+      ],
     );
   }
 }
