@@ -1,5 +1,6 @@
 import 'package:star_book/data/data_source/local_data_source/mood_api.dart';
 import 'package:star_book/domain/models/mood/mood.dart';
+import 'package:star_book/domain/models/mood/mood_frequency.dart';
 import 'package:star_book/domain/models/mood/mood_info.dart';
 import 'package:star_book/domain/repository/mood_repo.dart';
 
@@ -59,6 +60,22 @@ class MoodRepoImpl implements MoodRepo {
 
   @override
   Future<void> updateMood({required Mood mood}) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<MoodFrequency> getMoodFrequencyByMonth({
+    required int month,
+    required int year,
+  }) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<MoodFrequency> getMoodFrequencyByRange({
+    required DateTime start,
+    required DateTime end,
+  }) {
     throw UnimplementedError();
   }
 }

@@ -1,4 +1,5 @@
 import 'package:star_book/domain/models/mood/mood.dart';
+import 'package:star_book/domain/models/mood/mood_frequency.dart';
 import 'package:star_book/domain/models/mood/mood_info.dart';
 
 import 'base_repo.dart';
@@ -14,5 +15,8 @@ abstract class MoodRepo extends BaseRepo {
   Future<MoodInfo> getMoodInfoByYear({required int year});
   Future<MoodInfo> getMoodInfoByRange(
       {required DateTime start, required DateTime end});
-  // mood frequency by month
+  Future<MoodFrequency> getMoodFrequencyByMonth(
+      {required int month, required int year});
+  Future<MoodFrequency> getMoodFrequencyByRange(
+      {required DateTime start, required DateTime end});
 }
