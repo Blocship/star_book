@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen>
       duration: const Duration(milliseconds: 2000),
       vsync: this,
     )..forward().then((_) {
-        context.pushReplacement('/introScreen');
+        context.pushReplacementNamed('IntroScreen');
       });
   }
 

@@ -16,7 +16,7 @@ class SettingScreen extends StatelessWidget {
         leading: PrimaryAppBarItem(
           icon: Icons.arrow_back_ios_new_outlined,
           label: 'Back',
-          onTap: () => context.go('/profileScreen'),
+          onTap: () => context.goNamed('MainScreen'),
         ),
         center: 'Settings',
       ),
@@ -43,7 +43,7 @@ class SettingScreen extends StatelessWidget {
             CustomTile(
                 title: 'License Agreement',
                 subtitle: 'Your licensed agreement with starbook',
-                onTap: () {}),
+                onTap: () => context.goNamed('LicenseAgreementScreen')),
             SizedBox(height: screenHeight * 0.34),
             Text(
               'App version 2.0',

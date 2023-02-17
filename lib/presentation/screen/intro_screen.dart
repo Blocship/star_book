@@ -38,7 +38,7 @@ class IntroScreen extends StatelessWidget {
             const PrimaryTextField(hintText: 'Enter your name'),
             SizedBox(height: screenHeight * 0.42),
             PrimaryFilledButton(
-              onTap: () => context.pushReplacement('/introScreen/mainScreen'),
+              onTap: () => context.pushReplacementNamed('MainScreen'),
               label: 'Continue',
             ),
           ],

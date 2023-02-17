@@ -20,17 +20,11 @@ class CustomCalendarCard extends StatelessWidget {
         GestureDetector(
           onTap: () {
             ///Todo: it will give error because it takes arguments
-            context.go(
-                '/introScreen/mainScreen/yearScreen/homeScreen/daysOfMonth');
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(
-            //     builder: (context) => DaysOfMonth(
-            //       year: year,
-            //       month: monthIndex,
-            //     ),
-            //   ),
-            // );
+            context.goNamed('MonthScreen', params: {
+              'year': year.toString(),
+              'month': monthIndex.toString(),
+              'isHomeScreen': false.toString(),
+            });
           },
           child: Container(
             width: 70,

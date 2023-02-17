@@ -30,7 +30,7 @@ class JournalEditScreen extends StatelessWidget {
         leading: PrimaryAppBarItem(
           icon: Icons.arrow_back_ios_new_outlined,
           label: 'Back',
-          onTap: () => context.go('/journalDetailScreen'),
+          onTap: () => context.goNamed('JournalDetailScreen'),
         ),
         center: 'Mood Journal',
       ),
@@ -51,7 +51,7 @@ class JournalEditScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: SecondaryFloatingActionButton(
-        onTap: () => context.go('/journalDetailScreen'),
+        onTap: () => context.goNamed('JournalDetailScreen'),
         child: const Icon(Icons.check),
       ),
     );

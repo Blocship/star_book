@@ -22,8 +22,7 @@ class _MoodPickerScreenState extends State<MoodPickerScreen> {
         leading: PrimaryAppBarItem(
           icon: Icons.arrow_back_ios_new_outlined,
           label: 'Back',
-          onTap: () =>
-              context.go('/introScreen/mainScreen/journalCreateScreen'),
+          onTap: () => context.goNamed('JournalCreateScreen'),
         ),
         center: 'Select Mood',
       ),
@@ -55,7 +54,7 @@ class _MoodPickerScreenState extends State<MoodPickerScreen> {
         ],
       ),
       floatingActionButton: SecondaryFloatingActionButton(
-        onTap: () => context.go('/introScreen/mainScreen/journalCreateScreen'),
+        onTap: () => context.goNamed('JournalCreateScreen'),
         child: const Icon(Icons.done),
       ),
     );

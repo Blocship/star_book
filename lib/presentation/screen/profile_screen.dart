@@ -21,7 +21,7 @@ class ProfileScreen extends StatelessWidget {
                 image: AssetImage('assets/icons/shooting_star.png'))),
         trailingIcon: SecondaryAppBarItem(
           icon: const Icon(Icons.menu_outlined),
-          onTap: () => context.go('introScreen/mainScreen/settingScreen'),
+          onTap: () => context.goNamed('SettingScreen'),
         ),
       ),
       body: Padding(
@@ -74,9 +74,9 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 SizedBox(width: screenWidth * 0.285),
                 GestureDetector(
-                  onTap: () =>
-                      context.go('introScreen/mainScreen/analyticsScreen'),
+                  onTap: () => context.goNamed('AnalyticsScreen'),
                   child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         'View Details',

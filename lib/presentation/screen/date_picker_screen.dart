@@ -17,8 +17,7 @@ class DatePickerScreen extends StatelessWidget {
         leading: PrimaryAppBarItem(
           icon: Icons.arrow_back_ios_outlined,
           label: 'Back',
-          onTap: () =>
-              context.go('/introScreen/mainScreen/journalCreateScreen'),
+          onTap: () => context.goNamed('JournalCreateScreen'),
         ),
         center: 'Select Date',
       ),
@@ -55,7 +54,7 @@ class DatePickerScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: SecondaryFloatingActionButton(
-        onTap: () => context.go('/introScreen/mainScreen/journalCreateScreen'),
+        onTap: () => context.goNamed('JournalCreateScreen'),
         child: const Icon(Icons.check),
       ),
     );

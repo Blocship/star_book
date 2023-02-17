@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/shared/elevated_buttons.dart';
 
 class CustomDialogBox extends StatelessWidget {
@@ -34,8 +35,14 @@ class CustomDialogBox extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                InactiveFilledButton(onTap: () {}, label: 'Cancel'),
-                DangerFilledButton(onTap: () {}, label: 'Delete Note'),
+                InactiveFilledButton(
+                    onTap: () => context.goNamed('JournalDetailScreen'),
+                    label: 'Cancel'),
+                DangerFilledButton(
+
+                    ///TOdo: Change it to pop (mainScreen or monthScreen)
+                    onTap: () => context.goNamed('DialogBox'),
+                    label: 'Delete Note'),
               ],
             ),
             // const SizedBox(height: 20),

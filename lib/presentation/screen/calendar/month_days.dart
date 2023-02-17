@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:star_book/floating_action_button.dart';
+import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/utils/calendar.dart';
 import 'package:star_book/theme/styling/theme_color_style.dart';
+import 'package:star_book/widgets/gradient_scaffold.dart';
 
 class DaysOfMonth extends StatelessWidget {
   final int year;
   final int month;
-
+  final bool isHomeScreen;
   const DaysOfMonth({
     Key? key,
     required this.year,
     required this.month,
+    required this.isHomeScreen,
   }) : super(key: key);
 
   @override
@@ -41,35 +46,53 @@ class DaysOfMonth extends StatelessWidget {
     }
 
     /// This will display the week days and dates of the month
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: Column(
-        children: [
-          const SizedBox(height: 25),
-          SizedBox(
-            width: screenWidth * 0.84,
-            child: Text(
-              CalendarUtils.getFullMonthName(month),
-              textAlign: TextAlign.left,
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium!
-                  .copyWith(fontWeight: FontWeight.w700),
-            ),
+    return GradientScaffold(
+        appBar: PrimaryAppBar(
+          leading: PrimaryAppBarItem(
+            icon: Icons.arrow_back_ios_new_outlined,
+            label: 'Year',
+            onTap: () => context.goNamed('YearScreen'),
           ),
-          const SizedBox(height: 35),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: const [
-              WeekDaysView(),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Column(
+            children: [
+              const SizedBox(height: 25),
+              SizedBox(
+                width: screenWidth * 0.84,
+                child: Text(
+                  CalendarUtils.getFullMonthName(month),
+                  textAlign: TextAlign.left,
+                  style: Theme.of(context)
+                      .textTheme
+                      .headlineMedium!
+                      .copyWith(fontWeight: FontWeight.w700),
+                ),
+              ),
+              const SizedBox(height: 35),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: const [
+                  WeekDaysView(),
+                ],
+              ),
+              Column(
+                children: dayRows,
+              ),
             ],
           ),
-          Column(
-            children: dayRows,
+        ),
+        floatingActionButton: Padding(
+          padding: EdgeInsets.only(bottom: (isHomeScreen) ? 90 : 20),
+          child: PrimaryFloatingActionButton(
+            onTap: () => context.goNamed('JournalCreateScreen'),
+            child: const Image(
+              image: AssetImage('assets/icons/calendar_add_on.png'),
+              height: 20,
+            ),
           ),
-        ],
-      ),
-    );
+        ));
   }
 }
 
@@ -119,16 +142,19 @@ class Date extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 48,
-      height: 50,
-      alignment: Alignment.center,
-      child: Text(
-        day < 1 ? '' : day.toString(),
-        style: Theme.of(context)
-            .textTheme
-            .bodyMedium!
-            .copyWith(fontWeight: FontWeight.w400),
+    return GestureDetector(
+      onTap: () => context.goNamed('JournalCreateScreen'),
+      child: Container(
+        width: 48,
+        height: 50,
+        alignment: Alignment.center,
+        child: Text(
+          day < 1 ? '' : day.toString(),
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium!
+              .copyWith(fontWeight: FontWeight.w400),
+        ),
       ),
     );
   }

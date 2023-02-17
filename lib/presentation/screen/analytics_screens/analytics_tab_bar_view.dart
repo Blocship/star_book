@@ -35,7 +35,7 @@ class _AnalyticsTabBarViewState extends State<AnalyticsTabBarView>
           leading: PrimaryAppBarItem(
             icon: Icons.arrow_back_ios_outlined,
             label: 'Back',
-            onTap: () => context.go('/profileScreen'),
+            onTap: () => context.goNamed('MainScreen'),
           ),
           center: 'Analytics',
         ),

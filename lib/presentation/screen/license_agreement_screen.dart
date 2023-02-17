@@ -49,7 +49,7 @@ Ullamcorper sit adipiscing sed id nisl at integer. Tristique in lectus interdum 
             SizedBox(height: screenHeight * 0.02),
             PrimaryFilledButton(
               label: 'Done',
-              onTap: () => context.go('/homeScree'),
+              onTap: () => context.goNamed('SettingScreen'),
             ),
             SizedBox(height: screenHeight * 0.03),
           ],

@@ -13,11 +13,12 @@ class JournalCreateScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: PrimaryAppBar(
         leading: PrimaryAppBarItem(
           icon: Icons.arrow_back_ios_new_outlined,
           label: 'Back',
-          onTap: () => context.go('/introScreen/mainScreen'),
+          onTap: () => Navigator.pop(context),
         ),
         center: 'New Thought',
       ),
@@ -32,14 +33,12 @@ class JournalCreateScreen extends StatelessWidget {
             SizedBox(height: screenHeight * 0.04),
             SelectableTile(
               title: 'Date',
-              onTap: () => context.go(
-                  '/introScreen/mainScreen/journalCreateScreen/datePickerScreen'),
+              onTap: () => context.goNamed('DatePickerScreen'),
             ),
             SizedBox(height: screenHeight * 0.04),
             SelectableTile(
               title: 'Mood',
-              onTap: () => context.go(
-                  '/introScreen/mainScreen/journalCreateScreen/moodPickerScreen'),
+              onTap: () => context.goNamed('MoodPickerScreen'),
             ),
             SizedBox(height: screenHeight * 0.04),
             const CustomTextFormField(
@@ -50,7 +49,8 @@ class JournalCreateScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: SecondaryFloatingActionButton(
-          onTap: () => context.go('/introScreen/mainScreen'),
+          onTap: () => Navigator.pop(context),
+          // onTap: () => context.goNamed('MainScreen'),
           child: const Icon(Icons.check)),
     );
   }

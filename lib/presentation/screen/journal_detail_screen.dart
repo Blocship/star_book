@@ -9,7 +9,7 @@ class JournalDetailScreen extends StatelessWidget {
   final String date;
   final Color moodColor;
   final String mood;
-  final String titleDescriptoin;
+  final String titleDescription;
   final String noteDescription;
 
   const JournalDetailScreen({
@@ -17,7 +17,7 @@ class JournalDetailScreen extends StatelessWidget {
     required this.date,
     required this.moodColor,
     required this.mood,
-    required this.titleDescriptoin,
+    required this.titleDescription,
     required this.noteDescription,
   }) : super(key: key);
 
@@ -29,12 +29,11 @@ class JournalDetailScreen extends StatelessWidget {
         leading: PrimaryAppBarItem(
           icon: Icons.arrow_back_ios_new_outlined,
           label: 'Back',
-          onTap: () => context.go('/homeScreen'),
+          onTap: () => context.goNamed('MainScreen'),
         ),
         center: 'Mood Journal',
         trailing: PrimaryAppBarItem(
-          label: 'Delete',
-        ),
+            label: 'Delete', onTap: () => context.goNamed('DialogBox')),
       ),
       body: Padding(
         padding:
@@ -45,14 +44,14 @@ class JournalDetailScreen extends StatelessWidget {
             SizedBox(height: screenHeight * 0.06),
             MoodWidget(date: date, moodColor: moodColor, mood: mood),
             SizedBox(height: screenHeight * 0.04),
-            DocumentWidget(title: 'Title', description: titleDescriptoin),
+            DocumentWidget(title: 'Title', description: titleDescription),
             SizedBox(height: screenHeight * 0.02),
             DocumentWidget(title: 'Note', description: noteDescription),
           ],
         ),
       ),
       floatingActionButton: PrimaryFloatingActionButton(
-          onTap: () => context.go('/journalEditScreen'),
+          onTap: () => context.goNamed('JournalEditScreen'),
           child: const Icon(Icons.edit_outlined)),
     );
   }
