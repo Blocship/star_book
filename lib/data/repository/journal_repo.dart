@@ -60,4 +60,34 @@ class JournalRepoImpl implements JournalRepo {
   Future<void> deleteJournal(String journalId) async {
     await lsJournalApi.delete(journalId);
   }
+
+  @override
+  Future<List<Journal>> getJournalByDay(DateTime day) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<Journal>> getJournalByMonth(int month, int year) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<Journal>> getJournalByRange(DateTime start, DateTime end) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<Journal>> getJournalByYear(int year) {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<int> point() {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<int> streak() {
+    throw UnimplementedError();
+  }
 }
