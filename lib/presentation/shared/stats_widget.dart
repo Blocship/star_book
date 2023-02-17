@@ -60,17 +60,20 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
     return Expanded(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          SizedBox(height: screenHeight * 0.028),
           Image(image: AssetImage(imagePath), height: 55),
+          SizedBox(height: screenHeight * 0.025),
           Text(
             count,
             style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                 fontWeight: FontWeight.w700, color: const Color(0xFF1F1F1F)),
           ),
+          SizedBox(height: screenHeight * 0.02),
           Text(
             title,
             style: Theme.of(context)
@@ -78,6 +81,7 @@ class CustomCard extends StatelessWidget {
                 .bodyLarge!
                 .copyWith(fontWeight: FontWeight.w400),
           ),
+          SizedBox(height: screenHeight * 0.028),
         ],
       ),
     );

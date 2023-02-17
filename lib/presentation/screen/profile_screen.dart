@@ -71,7 +71,7 @@ class ProfileScreen extends StatelessWidget {
                       .headlineMedium!
                       .copyWith(fontWeight: FontWeight.w700, height: 1.4),
                 ),
-                SizedBox(width: screenWidth * 0.285),
+                SizedBox(width: screenWidth * 0.26),
                 Text(
                   'View Details',
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(

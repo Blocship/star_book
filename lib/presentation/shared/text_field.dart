@@ -87,9 +87,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   @override
   Widget build(BuildContext context) {
-    controller.text = (widget.label ?? widget.initialValue)!;
     return Container(
-      width: 306,
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
@@ -129,7 +127,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
                   decoration: InputDecoration(
                     contentPadding: EdgeInsets.zero,
                     isDense: true,
-                    // hintText: widget.label ?? '',
+                    hintText: widget.label ?? '',
                     hintStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
                           fontWeight: FontWeight.w400,
                         ),
@@ -161,49 +159,51 @@ class SelectableTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final selectedData = select ?? 'Select';
+    final bool isEmpty = (selectedData != 'Select');
     final double screenWidth = MediaQuery.of(context).size.width;
-    return SizedBox(
-      width: screenWidth * 0.85,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color:
-                Theme.of(context).extension<ThemeColorStyle>()!.octonaryColor,
-          ),
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        border: Border.all(
+          color: Theme.of(context).extension<ThemeColorStyle>()!.octonaryColor,
         ),
-        child: ListTile(
-          onTap: onTap,
-          dense: true,
-          title: Text(
-            title,
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                  fontWeight: FontWeight.w400,
-                  color: Theme.of(context)
-                      .extension<ThemeColorStyle>()!
-                      .secondaryColor,
-                ),
-          ),
-          trailing: SizedBox(
-            width: screenWidth * 0.19,
-            child: Row(
-              children: [
-                Text(
-                  select ?? 'Select',
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        fontWeight: FontWeight.w400,
-                        color: Theme.of(context)
-                            .extension<ThemeColorStyle>()!
-                            .tertiaryColor,
-                      ),
-                ),
-                const SizedBox(width: 4),
-                const Icon(
-                  Icons.keyboard_arrow_right,
-                  size: 20,
-                ),
-              ],
-            ),
+      ),
+      child: ListTile(
+        onTap: onTap,
+        dense: true,
+        title: Text(
+          title,
+          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                fontWeight: FontWeight.w400,
+                color: isEmpty
+                    ? Theme.of(context)
+                        .extension<ThemeColorStyle>()!
+                        .secondaryColor
+                    : Theme.of(context)
+                        .extension<ThemeColorStyle>()!
+                        .tertiaryColor,
+              ),
+        ),
+        trailing: SizedBox(
+          width: screenWidth * 0.19,
+          child: Row(
+            children: [
+              Text(
+                selectedData,
+                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context)
+                          .extension<ThemeColorStyle>()!
+                          .tertiaryColor,
+                    ),
+              ),
+              const SizedBox(width: 4),
+              const Icon(
+                Icons.keyboard_arrow_right,
+                size: 20,
+              ),
+            ],
           ),
         ),
       ),

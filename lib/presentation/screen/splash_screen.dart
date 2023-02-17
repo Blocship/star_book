@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:star_book/presentation/screen/calendar/custom_calendar.dart';
+import 'package:star_book/presentation/screen/intro_screen.dart';
 import 'package:star_book/widgets/gradient_scaffold.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen>
       vsync: this,
     )..forward().then((_) {
         Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const CustomCalendar()));
+            MaterialPageRoute(builder: (context) => const IntroScreen()));
       });
   }
 

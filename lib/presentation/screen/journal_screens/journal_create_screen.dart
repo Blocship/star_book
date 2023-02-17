@@ -13,6 +13,7 @@ class JournalCreateScreen extends StatelessWidget {
     final double screenHeight = MediaQuery.of(context).size.height;
     // final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: PrimaryAppBar(
         leading: PrimaryAppBarItem(
           icon: Icons.arrow_back_ios_new_outlined,

@@ -36,6 +36,7 @@ class UltramarineLightTheme extends BaseTheme {
       senaryColor: Color(0xFFFF3932),
       septenaryColor: Color(0xFFF1F2F4),
       octonaryColor: Color(0xFFBCBCBC),
+      nonaryColor: Color(0xFFE31414),
     );
   }
 
@@ -44,12 +45,10 @@ class UltramarineLightTheme extends BaseTheme {
     return FontTheme(
       heading1: TextStyle(
         fontSize: 30,
-        letterSpacing: -1,
         color: themeColorStyle.secondaryColor,
       ),
       heading2: TextStyle(
         fontSize: 25,
-        letterSpacing: -1,
         height: 1.8,
         color: themeColorStyle.secondaryColor,
       ),
@@ -64,7 +63,7 @@ class UltramarineLightTheme extends BaseTheme {
       ),
       body2: TextStyle(
         fontSize: 14,
-        height: 1.6,
+        height: 1.0,
         color: themeColorStyle.tertiaryColor,
       ),
       caption: TextStyle(
@@ -114,7 +113,7 @@ class UltramarineLightTheme extends BaseTheme {
       ),
       dangerFilledButtonTheme: ButtonStyle(
         backgroundColor:
-            MaterialStateProperty.all<Color>(themeColorStyle.senaryColor),
+            MaterialStateProperty.all<Color>(themeColorStyle.nonaryColor),
         elevation: MaterialStateProperty.all<double>(0),
         shape: MaterialStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(borderRadius: BorderRadius.circular(5.0))),
@@ -141,11 +140,17 @@ class UltramarineLightTheme extends BaseTheme {
   DoughnutChartStyle get doughnutChartStyle {
     return const DoughnutChartStyle(
       primaryColor: Color(0xFF8EFFA4),
-      secondaryColor: Color(0xFF6C71FF),
-      tertiaryColor: Color(0xFFFF716C),
-      quaternaryColor: Color(0xFF60ABFF),
-      quinaryColor: Color(0xFFFFC169),
+      secondaryColor: Color(0xFFFF716C),
+      tertiaryColor: Color(0xFFFFC169),
+      quaternaryColor: Color(0xFF6C71FF),
+      quinaryColor: Color(0xFF60ABFF),
       octonaryColor: Color(0xFFFFFFFF),
     );
   }
 }
+//      primaryColor: Color(0xff32C74F),
+//       secondaryColor: Color(0xFFFF3932),
+//       tertiaryColor: Color(0xFFFF9600),
+//       quaternaryColor: Color(0xFF565AC9),
+//       quinaryColor: Color(0xFF0179FF),
+//       octonaryColor: Color(0xFFFFFFFF),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/presentation/screen/main_screen.dart';
 import 'package:star_book/presentation/shared/elevated_buttons.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
 import 'package:star_book/widgets/gradient_scaffold.dart';
@@ -36,7 +37,14 @@ class IntroScreen extends StatelessWidget {
             SizedBox(height: screenHeight * 0.028),
             const PrimaryTextField(hintText: 'Enter your name'),
             SizedBox(height: screenHeight * 0.42),
-            PrimaryFilledButton(onTap: () {}, label: 'Continue'),
+            PrimaryFilledButton(
+                onTap: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const MainScreen()));
+                },
+                label: 'Continue'),
           ],
         ),
       ),

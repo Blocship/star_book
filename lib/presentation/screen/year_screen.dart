@@ -8,11 +8,16 @@ class YearScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const GradientScaffold(
+    return GradientScaffold(
       appBar: PrimaryAppBar(
+        leading: PrimaryAppBarItem(
+          icon: Icons.keyboard_arrow_left_outlined,
+          label: 'Back',
+          onTap: () => Navigator.pop(context),
+        ),
         center: 'Year',
       ),
-      body: CustomCalendar(),
+      body: const CustomCalendar(),
     );
   }
 }

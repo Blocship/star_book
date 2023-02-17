@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/floating_action_button.dart';
+import 'package:star_book/presentation/screen/year_screen.dart';
+import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/utils/calendar.dart';
 import 'package:star_book/theme/styling/theme_color_style.dart';
+import 'package:star_book/widgets/gradient_scaffold.dart';
 
 class DaysOfMonth extends StatelessWidget {
   final int year;
@@ -41,33 +45,54 @@ class DaysOfMonth extends StatelessWidget {
     }
 
     /// This will display the week days and dates of the month
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      child: Column(
-        children: [
-          const SizedBox(height: 25),
-          SizedBox(
-            width: screenWidth * 0.84,
-            child: Text(
-              CalendarUtils.getFullMonthName(month),
-              textAlign: TextAlign.left,
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium!
-                  .copyWith(fontWeight: FontWeight.w700),
+    return GradientScaffold(
+      appBar: PrimaryAppBar(
+        leading: PrimaryAppBarItem(
+            icon: Icons.keyboard_arrow_left_outlined,
+            label: 'Year',
+            onTap: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const YearScreen()));
+            }),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: Column(
+          children: [
+            const SizedBox(height: 25),
+            SizedBox(
+              width: screenWidth * 0.84,
+              child: Text(
+                CalendarUtils.getFullMonthName(month),
+                textAlign: TextAlign.left,
+                style: Theme.of(context)
+                    .textTheme
+                    .headlineMedium!
+                    .copyWith(fontWeight: FontWeight.w700),
+              ),
             ),
+            const SizedBox(height: 35),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: const [
+                WeekDaysView(),
+              ],
+            ),
+            Column(
+              children: dayRows,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 90),
+        child: PrimaryFloatingActionButton(
+          onTap: () {},
+          child: const Image(
+            image: AssetImage('assets/icons/calendar_add_on.png'),
+            height: 20,
           ),
-          const SizedBox(height: 35),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: const [
-              WeekDaysView(),
-            ],
-          ),
-          Column(
-            children: dayRows,
-          ),
-        ],
+        ),
       ),
     );
   }
