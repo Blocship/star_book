@@ -86,7 +86,13 @@ class DaysOfMonth extends StatelessWidget {
         floatingActionButton: Padding(
           padding: EdgeInsets.only(bottom: (isHomeScreen) ? 90 : 20),
           child: PrimaryFloatingActionButton(
-            onTap: () => context.goNamed('JournalCreateScreen'),
+            onTap: () => context.goNamed('JournalDetailScreen', params: {
+              'detailDate': DateTime.now().toString(),
+              // 'detailMoodColor': ,
+              'detailMood': 'Productive',
+              'detailTitleDescription': 'Feeling Productive',
+              'detailNoteDescription': 'Feeling Productive Feeling Productive',
+            }),
             child: const Image(
               image: AssetImage('assets/icons/calendar_add_on.png'),
               height: 20,

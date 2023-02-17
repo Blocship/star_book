@@ -18,7 +18,7 @@ class JournalCreateScreen extends StatelessWidget {
         leading: PrimaryAppBarItem(
           icon: Icons.arrow_back_ios_new_outlined,
           label: 'Back',
-          onTap: () => Navigator.pop(context),
+          onTap: () => context.pop(),
         ),
         center: 'New Thought',
       ),
@@ -49,7 +49,7 @@ class JournalCreateScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: SecondaryFloatingActionButton(
-          onTap: () => Navigator.pop(context),
+          onTap: () => context.pop(),
           // onTap: () => context.goNamed('MainScreen'),
           child: const Icon(Icons.check)),
     );

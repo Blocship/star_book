@@ -8,7 +8,7 @@ import 'package:star_book/theme/styling/theme_color_style.dart';
 
 class JournalEditScreen extends StatelessWidget {
   final String date;
-  final Color moodColor;
+  // final Color moodColor;
   final String mood;
   final String titleDescription;
   final String noteDescription;
@@ -16,7 +16,7 @@ class JournalEditScreen extends StatelessWidget {
   const JournalEditScreen({
     Key? key,
     required this.date,
-    required this.moodColor,
+    // required this.moodColor,
     required this.mood,
     required this.titleDescription,
     required this.noteDescription,
@@ -30,7 +30,13 @@ class JournalEditScreen extends StatelessWidget {
         leading: PrimaryAppBarItem(
           icon: Icons.arrow_back_ios_new_outlined,
           label: 'Back',
-          onTap: () => context.goNamed('JournalDetailScreen'),
+          onTap: () => context.goNamed('JournalDetailScreen', params: {
+            'detailDate': '05 September 2022',
+            // 'detailMoodColor': ,
+            'detailMood': 'Productive',
+            'detailTitleDescription': 'Feeling Productive',
+            'detailNoteDescription': 'Feeling Productive Feeling Productive',
+          }),
         ),
         center: 'Mood Journal',
       ),
@@ -41,7 +47,7 @@ class JournalEditScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: screenHeight * 0.06),
-            MoodWidget(date: date, moodColor: moodColor, mood: mood),
+            MoodWidget(date: date, moodColor: Colors.green, mood: mood),
             SizedBox(height: screenHeight * 0.04),
             CustomTextFormField(
                 heading: 'Title', initialValue: titleDescription),
@@ -51,7 +57,13 @@ class JournalEditScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: SecondaryFloatingActionButton(
-        onTap: () => context.goNamed('JournalDetailScreen'),
+        onTap: () => context.goNamed('JournalDetailScreen', params: {
+          'detailDate': '05 September 2022',
+          // 'detailMoodColor': ,
+          'detailMood': 'Productive',
+          'detailTitleDescription': 'Feeling Productive',
+          'detailNoteDescription': 'Feeling Productive Feeling Productive',
+        }),
         child: const Icon(Icons.check),
       ),
     );
