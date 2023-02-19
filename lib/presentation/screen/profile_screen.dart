@@ -4,6 +4,7 @@ import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/doughnut_chart_widget.dart';
 import 'package:star_book/presentation/shared/stats_widget.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
+import 'package:star_book/routes/app_router_name.dart';
 import 'package:star_book/theme/styling/theme_color_style.dart';
 import 'package:star_book/widgets/gradient_scaffold.dart';
 
@@ -21,7 +22,7 @@ class ProfileScreen extends StatelessWidget {
                 image: AssetImage('assets/icons/shooting_star.png'))),
         trailingIcon: SecondaryAppBarItem(
           icon: const Icon(Icons.menu_outlined),
-          onTap: () => context.goNamed('SettingScreen'),
+          onTap: () => context.goNamed(AppRouterName.settingScreen),
         ),
       ),
       body: Padding(
@@ -74,7 +75,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 SizedBox(width: screenWidth * 0.285),
                 GestureDetector(
-                  onTap: () => context.goNamed('AnalyticsScreen'),
+                  onTap: () => context.goNamed(AppRouterName.analyticScreen),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

@@ -7,19 +7,19 @@ import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/theme/styling/theme_color_style.dart';
 
 class JournalDetailScreen extends StatelessWidget {
-  final String date;
+  // final String date;
   // final Color moodColor;
-  final String mood;
-  final String titleDescription;
-  final String noteDescription;
+  // final String mood;
+  // final String titleDescription;
+  // final String noteDescription;
 
   const JournalDetailScreen({
     Key? key,
-    required this.date,
+    // required this.date,
     // required this.moodColor,
-    required this.mood,
-    required this.titleDescription,
-    required this.noteDescription,
+    // required this.mood,
+    // required this.titleDescription,
+    // required this.noteDescription,
   }) : super(key: key);
 
   @override
@@ -48,11 +48,14 @@ class JournalDetailScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: screenHeight * 0.06),
-            MoodWidget(date: date, moodColor: Colors.green, mood: mood),
+            MoodWidget(
+                date: '05 September 2022',
+                moodColor: Colors.green,
+                mood: 'Productive'),
             SizedBox(height: screenHeight * 0.04),
-            DocumentWidget(title: 'Title', description: titleDescription),
+            DocumentWidget(title: 'Title', description: 'titleDescription'),
             SizedBox(height: screenHeight * 0.02),
-            DocumentWidget(title: 'Note', description: noteDescription),
+            DocumentWidget(title: 'Note', description: 'noteDescription'),
           ],
         ),
       ),

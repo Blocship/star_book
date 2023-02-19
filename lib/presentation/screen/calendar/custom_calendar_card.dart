@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/utils/calendar.dart';
+import 'package:star_book/routes/app_router_name.dart';
 
 class CustomCalendarCard extends StatelessWidget {
   final int year;
@@ -20,7 +21,7 @@ class CustomCalendarCard extends StatelessWidget {
         GestureDetector(
           onTap: () {
             ///Todo: it will give error because it takes arguments
-            context.goNamed('MonthScreen', params: {
+            context.goNamed(AppRouterName.monthScreen, params: {
               'year': year.toString(),
               'month': monthIndex.toString(),
               'isHomeScreen': false.toString(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:star_book/routes/app_router_name.dart';
 import 'package:star_book/widgets/gradient_scaffold.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -20,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen>
       duration: const Duration(milliseconds: 2000),
       vsync: this,
     )..forward().then((_) {
-        context.pushReplacementNamed('IntroScreen');
+        context.pushReplacementNamed(AppRouterName.introScreen);
       });
   }
 

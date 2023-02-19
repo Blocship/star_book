@@ -3,14 +3,15 @@ import 'package:go_router/go_router.dart';
 import 'package:star_book/floating_action_button.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/utils/calendar.dart';
+import 'package:star_book/routes/app_router_name.dart';
 import 'package:star_book/theme/styling/theme_color_style.dart';
 import 'package:star_book/widgets/gradient_scaffold.dart';
 
-class DaysOfMonth extends StatelessWidget {
+class MonthScreen extends StatelessWidget {
   final int year;
   final int month;
   final bool isHomeScreen;
-  const DaysOfMonth({
+  const MonthScreen({
     Key? key,
     required this.year,
     required this.month,
@@ -51,7 +52,7 @@ class DaysOfMonth extends StatelessWidget {
           leading: PrimaryAppBarItem(
             icon: Icons.arrow_back_ios_new_outlined,
             label: 'Year',
-            onTap: () => context.goNamed('YearScreen'),
+            onTap: () => context.goNamed(AppRouterName.yearScreen),
           ),
         ),
         body: Padding(
@@ -86,13 +87,7 @@ class DaysOfMonth extends StatelessWidget {
         floatingActionButton: Padding(
           padding: EdgeInsets.only(bottom: (isHomeScreen) ? 90 : 20),
           child: PrimaryFloatingActionButton(
-            onTap: () => context.goNamed('JournalDetailScreen', params: {
-              'detailDate': DateTime.now().toString(),
-              // 'detailMoodColor': ,
-              'detailMood': 'Productive',
-              'detailTitleDescription': 'Feeling Productive',
-              'detailNoteDescription': 'Feeling Productive Feeling Productive',
-            }),
+            onTap: () => context.goNamed(AppRouterName.journalCreateScreen),
             child: const Image(
               image: AssetImage('assets/icons/calendar_add_on.png'),
               height: 20,

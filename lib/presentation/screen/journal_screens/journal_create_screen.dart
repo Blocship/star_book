@@ -4,6 +4,7 @@ import 'package:star_book/floating_action_button.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
+import 'package:star_book/routes/app_router_name.dart';
 import 'package:star_book/theme/styling/theme_color_style.dart';
 
 class JournalCreateScreen extends StatelessWidget {
@@ -33,12 +34,12 @@ class JournalCreateScreen extends StatelessWidget {
             SizedBox(height: screenHeight * 0.04),
             SelectableTile(
               title: 'Date',
-              onTap: () => context.goNamed('DatePickerScreen'),
+              onTap: () => context.goNamed(AppRouterName.datePickerScreen),
             ),
             SizedBox(height: screenHeight * 0.04),
             SelectableTile(
               title: 'Mood',
-              onTap: () => context.goNamed('MoodPickerScreen'),
+              onTap: () => context.goNamed(AppRouterName.moodPickerScreen),
             ),
             SizedBox(height: screenHeight * 0.04),
             const CustomTextFormField(
@@ -49,6 +50,8 @@ class JournalCreateScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: SecondaryFloatingActionButton(
+
+          ///Todo: Here we can't pop screen or we need to handle data from pop()
           onTap: () => context.pop(),
           // onTap: () => context.goNamed('MainScreen'),
           child: const Icon(Icons.check)),

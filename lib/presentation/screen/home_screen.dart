@@ -6,9 +6,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DaysOfMonth(
-        year: DateTime.now().year,
-        month: DateTime.now().month,
-        isHomeScreen: true);
+    return MonthScreen(
+      year: DateTime.now().year,
+      month: DateTime.now().month,
+      isHomeScreen: true,
+    );
   }
 }

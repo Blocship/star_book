@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/screen/analytics_screens/monthly_analytics.dart';
 import 'package:star_book/presentation/screen/analytics_screens/weekly_analytics.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
+import 'package:star_book/routes/app_router_name.dart';
 import 'package:star_book/theme/styling/theme_color_style.dart';
 import 'package:star_book/widgets/gradient_scaffold.dart';
 
@@ -35,7 +36,7 @@ class _AnalyticsTabBarViewState extends State<AnalyticsTabBarView>
           leading: PrimaryAppBarItem(
             icon: Icons.arrow_back_ios_outlined,
             label: 'Back',
-            onTap: () => context.goNamed('MainScreen'),
+            onTap: () => context.goNamed(AppRouterName.mainScreen),
           ),
           center: 'Analytics',
         ),

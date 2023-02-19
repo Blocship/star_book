@@ -14,7 +14,7 @@ class YearScreen extends StatelessWidget {
         leading: PrimaryAppBarItem(
           icon: Icons.arrow_back_ios_new_outlined,
           label: 'Back',
-          onTap: () => context.goNamed('MainScreen'),
+          onTap: () => context.pop(),
         ),
         center: 'Year',
       ),

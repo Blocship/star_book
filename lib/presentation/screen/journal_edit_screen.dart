@@ -7,19 +7,19 @@ import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/theme/styling/theme_color_style.dart';
 
 class JournalEditScreen extends StatelessWidget {
-  final String date;
+  // final String date;
   // final Color moodColor;
-  final String mood;
-  final String titleDescription;
-  final String noteDescription;
+  // final String mood;
+  // final String titleDescription;
+  // final String noteDescription;
 
   const JournalEditScreen({
     Key? key,
-    required this.date,
+    // required this.date,
     // required this.moodColor,
-    required this.mood,
-    required this.titleDescription,
-    required this.noteDescription,
+    // required this.mood,
+    // required this.titleDescription,
+    // required this.noteDescription,
   }) : super(key: key);
 
   @override
@@ -47,12 +47,16 @@ class JournalEditScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: screenHeight * 0.06),
-            MoodWidget(date: date, moodColor: Colors.green, mood: mood),
+            MoodWidget(
+                date: '05 September 2022',
+                moodColor: Colors.green,
+                mood: 'Productive'),
             SizedBox(height: screenHeight * 0.04),
             CustomTextFormField(
-                heading: 'Title', initialValue: titleDescription),
+                heading: 'Title', initialValue: 'titleDescription'),
             SizedBox(height: screenHeight * 0.02),
-            CustomTextFormField(heading: 'Note', initialValue: noteDescription),
+            CustomTextFormField(
+                heading: 'Note', initialValue: 'noteDescription'),
           ],
         ),
       ),

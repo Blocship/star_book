@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/tile.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
+import 'package:star_book/routes/app_router_name.dart';
 import 'package:star_book/widgets/gradient_scaffold.dart';
 
 class SettingScreen extends StatelessWidget {
@@ -16,7 +17,7 @@ class SettingScreen extends StatelessWidget {
         leading: PrimaryAppBarItem(
           icon: Icons.arrow_back_ios_new_outlined,
           label: 'Back',
-          onTap: () => context.goNamed('MainScreen'),
+          onTap: () => context.goNamed(AppRouterName.mainScreen),
         ),
         center: 'Settings',
       ),
@@ -43,7 +44,8 @@ class SettingScreen extends StatelessWidget {
             CustomTile(
                 title: 'License Agreement',
                 subtitle: 'Your licensed agreement with starbook',
-                onTap: () => context.goNamed('LicenseAgreementScreen')),
+                onTap: () =>
+                    context.goNamed(AppRouterName.licenseAgreementScreen)),
             SizedBox(height: screenHeight * 0.34),
             Text(
               'App version 2.0',
