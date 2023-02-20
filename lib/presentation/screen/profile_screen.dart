@@ -63,9 +63,9 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 const Image(
                   image: AssetImage('assets/icons/analytics_donut_chart.png'),
-                  height: 22,
+                  height: 25,
                 ),
-                SizedBox(width: screenWidth * 0.03),
+                SizedBox(width: screenWidth * 0.02),
                 Text(
                   'Analytics',
                   style: Theme.of(context)

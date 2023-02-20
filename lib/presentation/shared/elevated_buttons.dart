@@ -13,8 +13,9 @@ class PrimaryFilledButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.fromSize(
-      size: const Size(306, 40),
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
+      height: MediaQuery.of(context).size.height * 0.052,
       child: ElevatedButton(
         onPressed: onTap,
         style: Theme.of(context)

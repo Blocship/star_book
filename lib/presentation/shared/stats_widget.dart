@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
+import 'package:star_book/theme/styling/theme_color_style.dart';
 
 class StatsWidget extends StatelessWidget {
   final String pointsImagePath;
@@ -23,6 +24,15 @@ class StatsWidget extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context)
+                .extension<ThemeColorStyle>()!
+                .secondaryColor
+                .withOpacity(0.1),
+            blurRadius: 100,
+          ),
+        ],
       ),
       padding: const EdgeInsets.symmetric(
           vertical: CustomPadding.smallPadding,

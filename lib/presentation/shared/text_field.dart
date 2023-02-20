@@ -11,43 +11,37 @@ class PrimaryTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    return SizedBox(
-      width: screenWidth * 0.85,
-      child: TextFormField(
-        decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                fontWeight: FontWeight.w400,
-                color: Theme.of(context)
-                    .extension<ThemeColorStyle>()!
-                    .tertiaryColor,
-              ),
-          isDense: true,
-          contentPadding: const EdgeInsets.all(16.0),
-          filled: true,
-          fillColor:
-              Theme.of(context).extension<ThemeColorStyle>()!.quinaryColor,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide(
+    return TextFormField(
+      decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              fontWeight: FontWeight.w400,
               color:
-                  Theme.of(context).extension<ThemeColorStyle>()!.octonaryColor,
+                  Theme.of(context).extension<ThemeColorStyle>()!.tertiaryColor,
             ),
+        isDense: true,
+        contentPadding: const EdgeInsets.all(16.0),
+        filled: true,
+        fillColor: Theme.of(context).extension<ThemeColorStyle>()!.quinaryColor,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          borderSide: BorderSide(
+            color:
+                Theme.of(context).extension<ThemeColorStyle>()!.octonaryColor,
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide(
-              color:
-                  Theme.of(context).extension<ThemeColorStyle>()!.octonaryColor,
-            ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          borderSide: BorderSide(
+            color:
+                Theme.of(context).extension<ThemeColorStyle>()!.octonaryColor,
           ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide(
-              color:
-                  Theme.of(context).extension<ThemeColorStyle>()!.octonaryColor,
-            ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          borderSide: BorderSide(
+            color:
+                Theme.of(context).extension<ThemeColorStyle>()!.octonaryColor,
           ),
         ),
       ),
@@ -87,6 +81,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   @override
   Widget build(BuildContext context) {
+    controller.text = widget.initialValue!;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12.0),
       decoration: BoxDecoration(

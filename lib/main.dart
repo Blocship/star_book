@@ -20,7 +20,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   assert(
     Config().isDevelopment,
-    'Please run in dev enveriment for debugging. i.e. --dart-define=flavor=dev',
+    'Please run in dev environment for debugging. i.e. --dart-define=flavor=dev',
   );
   final directory = await getApplicationDocumentsDirectory();
   await LocalDatabase.initialise(
@@ -44,7 +44,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      debugShowCheckedModeBanner: false,
       theme: UltramarineLightTheme().theme,
       routerConfig: AppRouter.appRoutes,
     );

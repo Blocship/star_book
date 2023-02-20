@@ -50,6 +50,7 @@ class UltramarineLightTheme extends BaseTheme {
       heading2: TextStyle(
         fontSize: 25,
         height: 1.8,
+        letterSpacing: -0.2,
         color: themeColorStyle.secondaryColor,
       ),
       heading3: TextStyle(
