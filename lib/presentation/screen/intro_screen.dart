@@ -17,39 +17,38 @@ class IntroScreen extends StatelessWidget {
       body: Padding(
         padding:
             const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(height: screenHeight * 0.08),
-              Image(
-                  image: const AssetImage('assets/images/intro_image.png'),
-                  height: screenHeight * 0.2),
-              SizedBox(height: screenHeight * 0.024),
-              Text(
-                'So nice to meet you!',
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineMedium!
-                    .copyWith(fontWeight: FontWeight.w400),
-              ),
-              Text(
-                'What do your friends call you?',
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineMedium!
-                    .copyWith(fontWeight: FontWeight.w700),
-              ),
-              SizedBox(height: screenHeight * 0.028),
-              const PrimaryTextField(hintText: 'Enter your name'),
-              SizedBox(height: screenHeight * 0.41),
-              PrimaryFilledButton(
-                onTap: () =>
-                    context.pushReplacementNamed(AppRouterName.mainScreen),
-                label: 'Continue',
-              ),
-            ],
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: screenHeight * 0.08),
+            Image(
+                image: const AssetImage('assets/images/intro_image.png'),
+                height: screenHeight * 0.2),
+            SizedBox(height: screenHeight * 0.024),
+            Text(
+              'So nice to meet you!',
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium!
+                  .copyWith(fontWeight: FontWeight.w400),
+            ),
+            Text(
+              'What do your friends call you?',
+              style: Theme.of(context)
+                  .textTheme
+                  .headlineMedium!
+                  .copyWith(fontWeight: FontWeight.w700),
+            ),
+            SizedBox(height: screenHeight * 0.028),
+            const PrimaryTextField(hintText: 'Enter your name'),
+            SizedBox(height: screenHeight * 0.41),
+            PrimaryFilledButton(
+              onTap: () =>
+                  context.pushReplacementNamed(AppRouterName.mainScreen),
+              label: 'Continue',
+            ),
+          ],
         ),
       ),
     );
