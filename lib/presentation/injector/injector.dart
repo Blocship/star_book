@@ -62,7 +62,8 @@ class _Injector extends Injector {
     container
       ..registerFactory<JournalRepo>(
           (c) => JournalRepoImpl(lsJournalApi: c<IJournalApi>()))
-      ..registerFactory<MoodRepo>((c) => MoodRepoImpl(lSMoodApi: c<IMoodApi>()))
+      ..registerFactory<MoodRepo>((c) => MoodRepoImpl(
+          lSMoodApi: c<IMoodApi>(), lSJournalApi: c<IJournalApi>()))
       ..registerFactory<UserRepo>(
           (c) => UserRepoImpl(lSUserApi: c<IUserApi>()));
   }

@@ -1,3 +1,4 @@
+import 'package:star_book/data/data_source/local_data_source/journal_api.dart';
 import 'package:star_book/data/data_source/local_data_source/mood_api.dart';
 import 'package:star_book/domain/models/mood/mood.dart';
 import 'package:star_book/domain/models/mood/mood_frequency.dart';
@@ -6,8 +7,12 @@ import 'package:star_book/domain/repository/mood_repo.dart';
 
 class MoodRepoImpl implements MoodRepo {
   final IMoodApi lSMoodApi;
+  final IJournalApi lSJournalApi;
 
-  MoodRepoImpl({required this.lSMoodApi});
+  MoodRepoImpl({
+    required this.lSMoodApi,
+    required this.lSJournalApi,
+  });
 
   @override
   Future<void> initialize() async {}
@@ -39,44 +44,56 @@ class MoodRepoImpl implements MoodRepo {
   }
 
   @override
-  Future<List<Mood>> getMoodInfoByDay({required DateTime day}) {
-    throw UnimplementedError();
+  Future<List<Mood>> getMoodInfoByDay({required DateTime day}) async {
+    final journals = await lSJournalApi.fetchByDate(day);
+    final moodInfo = MoodInfo.fromJournal(journals: journals);
+    return moodInfo.getMoodsFor(day: day);
   }
 
   @override
-  Future<MoodInfo> getMoodInfoByMonth({required int month, required int year}) {
-    throw UnimplementedError();
+  Future<MoodInfo> getMoodInfoByMonth({
+    required int month,
+    required int year,
+  }) async {
+    final journals = await lSJournalApi.getJournalByMonth(month, year);
+    return MoodInfo.fromJournal(journals: journals);
   }
 
   @override
   Future<MoodInfo> getMoodInfoByRange(
-      {required DateTime start, required DateTime end}) {
-    throw UnimplementedError();
+      {required DateTime start, required DateTime end}) async {
+    final journals = await lSJournalApi.getJournalByRange(start, end);
+    return MoodInfo.fromJournal(journals: journals);
   }
 
   @override
-  Future<MoodInfo> getMoodInfoByYear({required int year}) {
-    throw UnimplementedError();
+  Future<MoodInfo> getMoodInfoByYear({required int year}) async {
+    final journals = await lSJournalApi.getJournalByYear(year);
+    return MoodInfo.fromJournal(journals: journals);
   }
 
   @override
-  Future<void> updateMood({required Mood mood}) {
-    throw UnimplementedError();
+  Future<void> updateMood({required Mood mood}) async {
+    return lSMoodApi.update(mood.toLSMood);
   }
 
   @override
   Future<MoodFrequency> getMoodFrequencyByMonth({
     required int month,
     required int year,
-  }) {
-    throw UnimplementedError();
+  }) async {
+    final journals = await lSJournalApi.getJournalByMonth(month, year);
+    final moodFrequency = MoodFrequency.fromJournal(journals: journals);
+    return moodFrequency;
   }
 
   @override
   Future<MoodFrequency> getMoodFrequencyByRange({
     required DateTime start,
     required DateTime end,
-  }) {
-    throw UnimplementedError();
+  }) async {
+    final journals = await lSJournalApi.getJournalByRange(start, end);
+    final moodFrequency = MoodFrequency.fromJournal(journals: journals);
+    return moodFrequency;
   }
 }
