@@ -40,12 +40,12 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
         alignment: AlignmentDirectional.bottomCenter,
         children: [
           Positioned(
-            top: 50,
+            top: 55,
             left: 0,
             child: _PrimaryLeading(leading: leading),
           ),
           Positioned(
-            top: 50,
+            top: 56,
             child: _PrimaryTitle(title: center),
           ),
           Positioned(

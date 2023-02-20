@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:star_book/config.dart';
 import 'package:star_book/data/utils/local_database.dart';
@@ -19,7 +20,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   assert(
     Config().isDevelopment,
-    'Please run in dev enveriment for debugging. i.e. --dart-define=flavor=dev',
+    'Please run in dev environment for debugging. i.e. --dart-define=flavor=dev',
   );
   final directory = await getApplicationDocumentsDirectory();
   await LocalDatabase.initialise(
@@ -28,6 +29,12 @@ void main() async {
     ),
   );
   await Injector.initialise();
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ),
+  );
   runApp(const MyApp());
 }
 

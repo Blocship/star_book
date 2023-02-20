@@ -36,7 +36,9 @@ class JournalEditScreen extends StatelessWidget {
                 mood: 'Productive'),
             SizedBox(height: screenHeight * 0.04),
             const CustomTextFormField(
-                heading: 'Title', initialValue: 'titleDescription'),
+              heading: 'Title',
+              initialValue: 'titleDescription',
+            ),
             SizedBox(height: screenHeight * 0.02),
             const CustomTextFormField(
                 heading: 'Note', initialValue: 'noteDescription'),

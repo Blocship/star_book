@@ -118,6 +118,8 @@ class _SelectableTabState extends State<SelectableTab> {
 
   @override
   Widget build(BuildContext context) {
+    final double screenHeight = MediaQuery.of(context).size.height;
+    final double screenWidth = MediaQuery.of(context).size.width;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -129,6 +131,8 @@ class _SelectableTabState extends State<SelectableTab> {
             });
           },
           child: Container(
+            width: screenWidth * 0.105,
+            height: screenHeight * 0.03,
             decoration: BoxDecoration(
               color: (day == _selectedTab)
                   ? Theme.of(context)
@@ -140,7 +144,7 @@ class _SelectableTabState extends State<SelectableTab> {
                       .withOpacity(0.03),
               borderRadius: BorderRadius.circular(100),
             ),
-            padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
+            alignment: Alignment.center,
             child: Text(
               day,
               style: Theme.of(context).textTheme.labelLarge!.copyWith(
