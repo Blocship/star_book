@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/presentation/theme/styling/doughnut_chart_style.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
-import 'package:star_book/theme/styling/doughnut_chart_style.dart';
-import 'package:star_book/theme/styling/theme_color_style.dart';
-import 'package:star_book/widgets/doughnut_chart.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/widgets/doughnut_chart.dart';
 
 class WeeklyAnalyticsTab extends StatelessWidget {
   const WeeklyAnalyticsTab({Key? key}) : super(key: key);

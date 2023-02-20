@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/presentation/theme/styling/doughnut_chart_style.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
-import 'package:star_book/theme/styling/doughnut_chart_style.dart';
-import 'package:star_book/theme/styling/theme_color_style.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class DoughnutChartWidget extends StatefulWidget {

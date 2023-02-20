@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:star_book/floating_action_button.dart';
+import 'package:star_book/presentation/widgets/floating_action_button.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
-import 'package:star_book/routes/app_router_name.dart';
-import 'package:star_book/theme/styling/theme_color_style.dart';
-import 'package:star_book/widgets/date_picker.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/routes/app_router_name.dart';
+import 'package:star_book/presentation/widgets/date_picker.dart';
 
 class DatePickerScreen extends StatelessWidget {
   const DatePickerScreen({Key? key}) : super(key: key);

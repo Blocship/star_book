@@ -1,6 +1,5 @@
-
 import 'package:flutter/material.dart';
-import 'package:star_book/service/logger.dart';
+import 'package:star_book/presentation/service/logger.dart';
 
 class LoggerNavigatorObserver extends NavigatorObserver {
   /// The [Navigator] pushed `route`.
@@ -29,7 +28,8 @@ class LoggerNavigatorObserver extends NavigatorObserver {
 
   /// The [Navigator]'s routes are being moved by a user gesture.
   @override
-  void didStartUserGesture(Route<dynamic> route, Route<dynamic>? previousRoute) {}
+  void didStartUserGesture(
+      Route<dynamic> route, Route<dynamic>? previousRoute) {}
 
   /// User gesture is no longer controlling the [Navigator].
   @override

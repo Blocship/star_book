@@ -3,8 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/tile.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
-import 'package:star_book/routes/app_router_name.dart';
-import 'package:star_book/widgets/gradient_scaffold.dart';
+import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
+import 'package:star_book/presentation/routes/app_router_name.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({Key? key}) : super(key: key);

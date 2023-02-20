@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/screen/analytics_screens/analytics_tab_bar_view.dart';
 import 'package:star_book/presentation/screen/calendar/month_days.dart';
 import 'package:star_book/presentation/screen/date_picker_screen.dart';
 import 'package:star_book/presentation/screen/intro_screen.dart';
-import 'package:star_book/presentation/screen/journal_detail_screen.dart';
-import 'package:star_book/presentation/screen/journal_edit_screen.dart';
+import 'package:star_book/presentation/screen/journal_screens/journal_detail_screen.dart';
+import 'package:star_book/presentation/screen/journal_screens/journal_edit_screen.dart';
 import 'package:star_book/presentation/screen/journal_screens/journal_create_screen.dart';
 import 'package:star_book/presentation/screen/license_agreement_screen.dart';
 import 'package:star_book/presentation/screen/main_screen.dart';
@@ -15,7 +16,6 @@ import 'package:star_book/presentation/screen/splash_screen.dart';
 import 'package:star_book/presentation/screen/year_screen.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/month_details.dart';
-import 'package:star_book/routes/app_router_name.dart';
 
 class AppRouter {
   ///Routes Paths

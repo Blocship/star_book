@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:star_book/theme/styling/gradient_scaffold_style.dart';
+import 'package:star_book/presentation/theme/styling/gradient_scaffold_style.dart';
 
 class GradientScaffold extends StatelessWidget {
   final PreferredSizeWidget? appBar;

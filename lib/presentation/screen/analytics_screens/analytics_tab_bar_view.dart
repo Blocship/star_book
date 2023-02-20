@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import 'package:star_book/presentation/screen/analytics_screens/monthly_analytics.dart';
 import 'package:star_book/presentation/screen/analytics_screens/weekly_analytics.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
-import 'package:star_book/routes/app_router_name.dart';
-import 'package:star_book/theme/styling/theme_color_style.dart';
-import 'package:star_book/widgets/gradient_scaffold.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
+import 'package:star_book/presentation/routes/app_router_name.dart';
 
 class AnalyticsTabBarView extends StatefulWidget {
   const AnalyticsTabBarView({Key? key}) : super(key: key);
