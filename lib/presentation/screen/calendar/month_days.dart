@@ -87,7 +87,7 @@ class MonthScreen extends StatelessWidget {
       floatingActionButton: Padding(
         padding: EdgeInsets.only(bottom: (monthDetails.isHomeScreen) ? 90 : 20),
         child: PrimaryFloatingActionButton(
-          onTap: () => context.goNamed(AppRouterName.journalDetailScreen),
+          onTap: () => context.pushNamed(AppRouterName.journalCreateScreen),
           child: const Image(
             image: AssetImage('assets/icons/calendar_add_on.png'),
             height: 20,
@@ -141,11 +141,10 @@ class Date extends StatelessWidget {
   });
 
   final int day;
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => context.goNamed(AppRouterName.journalDetailScreen),
+      onTap: () => context.goNamed(AppRouterName.journalCreateScreen),
       child: Container(
         width: 48,
         height: 50,
