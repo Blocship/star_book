@@ -13,7 +13,7 @@ class MoodRepoImpl implements MoodRepo {
   Future<void> initialize() async {}
 
   @override
-  Future<List<Mood>> getMoods({required String emotionId}) async {
+  Future<List<Mood>> getMoods() async {
     final moods = await lSMoodApi.fetchAll();
     List<Mood> list = [];
     for (var mood in moods) {
@@ -23,18 +23,19 @@ class MoodRepoImpl implements MoodRepo {
   }
 
   @override
-  Future<void> addMood({required Mood mood}) {
-    throw UnimplementedError();
+  Future<void> addMood({required Mood mood}) async {
+    return lSMoodApi.create(mood.toLSMood);
   }
 
   @override
-  Future<void> deleteMood({required String id}) {
-    throw UnimplementedError();
+  Future<void> deleteMood({required String id}) async {
+    return lSMoodApi.delete(id);
   }
 
   @override
-  Future<Mood> getMood({required String id}) {
-    throw UnimplementedError();
+  Future<Mood> getMood({required String id}) async {
+    final mood = await lSMoodApi.fetchById(id);
+    return Mood.fromLSMood(mood);
   }
 
   @override

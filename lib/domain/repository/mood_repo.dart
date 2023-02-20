@@ -5,7 +5,7 @@ import 'package:star_book/domain/models/mood/mood_info.dart';
 import 'base_repo.dart';
 
 abstract class MoodRepo extends BaseRepo {
-  Future<List<Mood>> getMoods({required String emotionId});
+  Future<List<Mood>> getMoods();
   Future<Mood> getMood({required String id});
   Future<void> addMood({required Mood mood});
   Future<void> updateMood({required Mood mood});
