@@ -22,8 +22,8 @@ class JournalCreateScreen extends StatelessWidget {
         ),
         center: 'New Thought',
       ),
-      body: Padding(
-        padding:
+      body: SafeArea(
+        minimum:
             const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
         child: SingleChildScrollView(
           child: Column(
