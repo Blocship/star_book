@@ -1,35 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
 import 'package:star_book/floating_action_button.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
+import 'package:star_book/routes/app_router_name.dart';
 import 'package:star_book/theme/styling/theme_color_style.dart';
 
 class JournalEditScreen extends StatelessWidget {
-  final String date;
-  final Color moodColor;
-  final String mood;
-  final String titleDescription;
-  final String noteDescription;
-
-  const JournalEditScreen({
-    Key? key,
-    required this.date,
-    required this.moodColor,
-    required this.mood,
-    required this.titleDescription,
-    required this.noteDescription,
-  }) : super(key: key);
+  const JournalEditScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // final double screenWidth = MediaQuery.of(context).size.width;
     final double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: PrimaryAppBar(
         leading: PrimaryAppBarItem(
           icon: Icons.arrow_back_ios_new_outlined,
           label: 'Back',
+          onTap: () => context.goNamed(AppRouterName.journalDetailScreen),
         ),
         center: 'Mood Journal',
       ),
@@ -40,17 +30,23 @@ class JournalEditScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(height: screenHeight * 0.06),
-            MoodWidget(date: date, moodColor: moodColor, mood: mood),
+            const MoodWidget(
+                date: '05 September 2022',
+                moodColor: Colors.green,
+                mood: 'Productive'),
             SizedBox(height: screenHeight * 0.04),
-            CustomTextFormField(
-                heading: 'Title', initialValue: titleDescription),
+            const CustomTextFormField(
+                heading: 'Title', initialValue: 'titleDescription'),
             SizedBox(height: screenHeight * 0.02),
-            CustomTextFormField(heading: 'Note', initialValue: noteDescription),
+            const CustomTextFormField(
+                heading: 'Note', initialValue: 'noteDescription'),
           ],
         ),
       ),
       floatingActionButton: SecondaryFloatingActionButton(
-          onTap: () {}, child: const Icon(Icons.check)),
+        onTap: () => context.goNamed(AppRouterName.journalDetailScreen),
+        child: const Icon(Icons.check),
+      ),
     );
   }
 }

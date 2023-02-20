@@ -13,7 +13,7 @@ enum Env {
       );
 }
 
-class Config {
+abstract class Config {
   // https://github.com/flutter/flutter/issues/55870
   static const String _flavor =
       String.fromEnvironment('flavor', defaultValue: kDefaultFlavor);

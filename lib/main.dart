@@ -6,7 +6,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:star_book/config.dart';
 import 'package:star_book/data/utils/local_database.dart';
 import 'package:star_book/presentation/injector/injector.dart';
-import 'package:star_book/presentation/screen/splash_screen.dart';
+import 'package:star_book/routes/routes.dart';
 import 'package:star_book/theme/ultramarine_light.dart';
 
 String createDirectory({required String path}) {
@@ -18,7 +18,6 @@ String createDirectory({required String path}) {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   assert(
     Config().isDevelopment,
     'Please run in dev enveriment for debugging. i.e. --dart-define=flavor=dev',
@@ -44,10 +43,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
+    return MaterialApp.router(
       theme: UltramarineLightTheme().theme,
-      home: const SplashScreen(),
+      routerConfig: AppRouter.appRoutes,
     );
   }
 }

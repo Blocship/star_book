@@ -60,4 +60,42 @@ class JournalRepoImpl implements JournalRepo {
   Future<void> deleteJournal(String journalId) async {
     await lsJournalApi.delete(journalId);
   }
+
+  @override
+  Future<List<Journal>> getJournalByDay(DateTime day) {
+    return lsJournalApi.fetchByDate(day).then((value) {
+      return value.map((e) => Journal.fromLSJournal(e)).toList();
+    });
+  }
+
+  @override
+  Future<List<Journal>> getJournalByMonth(int month, int year) {
+    return lsJournalApi.getJournalByMonth(month, year).then((value) {
+      return value.map((e) => Journal.fromLSJournal(e)).toList();
+    });
+  }
+
+  @override
+  Future<List<Journal>> getJournalByRange(DateTime start, DateTime end) {
+    return lsJournalApi.getJournalByRange(start, end).then((value) {
+      return value.map((e) => Journal.fromLSJournal(e)).toList();
+    });
+  }
+
+  @override
+  Future<List<Journal>> getJournalByYear(int year) {
+    return lsJournalApi.getJournalByYear(year).then((value) {
+      return value.map((e) => Journal.fromLSJournal(e)).toList();
+    });
+  }
+
+  @override
+  Future<int> point() {
+    return lsJournalApi.point();
+  }
+
+  @override
+  Future<int> streak() {
+    return lsJournalApi.streak();
+  }
 }

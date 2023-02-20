@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:star_book/floating_action_button.dart';
+import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/mood_tile.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
+import 'package:star_book/routes/app_router_name.dart';
 
 class MoodPickerScreen extends StatefulWidget {
   const MoodPickerScreen({Key? key}) : super(key: key);
@@ -16,6 +19,14 @@ class _MoodPickerScreenState extends State<MoodPickerScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: PrimaryAppBar(
+        leading: PrimaryAppBarItem(
+          icon: Icons.arrow_back_ios_new_outlined,
+          label: 'Back',
+          onTap: () => context.goNamed(AppRouterName.journalCreateScreen),
+        ),
+        center: 'Select Mood',
+      ),
       body: Column(
         children: [
           const SizedBox(height: CustomPadding.mediumPadding),
@@ -44,7 +55,7 @@ class _MoodPickerScreenState extends State<MoodPickerScreen> {
         ],
       ),
       floatingActionButton: SecondaryFloatingActionButton(
-        onTap: () {},
+        onTap: () => context.goNamed(AppRouterName.journalCreateScreen),
         child: const Icon(Icons.done),
       ),
     );
