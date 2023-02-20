@@ -4,9 +4,9 @@ import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/doughnut_chart_widget.dart';
 import 'package:star_book/presentation/shared/stats_widget.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
-import 'package:star_book/routes/app_router_name.dart';
-import 'package:star_book/theme/styling/theme_color_style.dart';
-import 'package:star_book/widgets/gradient_scaffold.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
+import 'package:star_book/presentation/routes/app_router_name.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({Key? key}) : super(key: key);

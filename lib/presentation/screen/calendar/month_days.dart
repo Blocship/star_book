@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:star_book/floating_action_button.dart';
+import 'package:star_book/presentation/widgets/floating_action_button.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/utils/calendar.dart';
 import 'package:star_book/presentation/utils/month_details.dart';
-import 'package:star_book/routes/app_router_name.dart';
-import 'package:star_book/theme/styling/theme_color_style.dart';
-import 'package:star_book/widgets/gradient_scaffold.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
+import 'package:star_book/presentation/routes/app_router_name.dart';
 
 class MonthScreen extends StatelessWidget {
   final MonthDetails monthDetails;

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/shared/elevated_buttons.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
+import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
+import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
-import 'package:star_book/routes/app_router_name.dart';
-import 'package:star_book/widgets/gradient_scaffold.dart';
 
 class IntroScreen extends StatelessWidget {
   const IntroScreen({Key? key}) : super(key: key);

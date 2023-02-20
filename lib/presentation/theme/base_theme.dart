@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:star_book/theme/styling/doughnut_chart_style.dart';
-import 'package:star_book/theme/styling/floating_action_button_style.dart';
-import 'package:star_book/theme/styling/filled_button_style.dart';
-import 'package:star_book/theme/styling/gradient_scaffold_style.dart';
-import 'package:star_book/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/theme/styling/doughnut_chart_style.dart';
+import 'package:star_book/presentation/theme/styling/filled_button_style.dart';
+import 'package:star_book/presentation/theme/styling/floating_action_button_style.dart';
+import 'package:star_book/presentation/theme/styling/gradient_scaffold_style.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 
 class BackgroundTheme {
   final Color primaryColor;
