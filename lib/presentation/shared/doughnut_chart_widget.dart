@@ -25,10 +25,19 @@ class _DoughnutChartWidgetState extends State<DoughnutChartWidget> {
     final double screenHeight = MediaQuery.of(context).size.height;
 
     return Container(
-      height: screenHeight * 0.26,
+      height: screenHeight * 0.3,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: doughnutColor.octonaryColor,
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context)
+                .extension<ThemeColorStyle>()!
+                .secondaryColor
+                .withOpacity(0.1),
+            blurRadius: 100,
+          ),
+        ],
       ),
       padding: const EdgeInsets.symmetric(
           vertical: CustomPadding.smallPadding,
@@ -44,7 +53,7 @@ class _DoughnutChartWidgetState extends State<DoughnutChartWidget> {
           ),
           CircularChartAnnotation(
             widget: Text(
-              'Mood of The\nMonth',
+              'Mood of the Month',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.labelLarge!.copyWith(
                     fontWeight: FontWeight.w400,
@@ -64,7 +73,7 @@ class _DoughnutChartWidgetState extends State<DoughnutChartWidget> {
             yValueMapper: (ChartData data, _) => data.y,
             pointColorMapper: (datum, index) => chartData[index].color,
             // Radius of doughnut
-            radius: '90%',
+            radius: '98%',
             innerRadius: '60%',
           )
         ],

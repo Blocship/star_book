@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/theme/styling/theme_color_style.dart';
 
 class CustomBottomNavBar extends StatefulWidget {
   final int currentIndex;
@@ -33,8 +34,18 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
       children: [
         Positioned(
           bottom: 20,
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
+          child: Container(
+            width: MediaQuery.of(context).size.width * 0.9,
+            height: MediaQuery.of(context).size.height * 0.08,
+            decoration: BoxDecoration(boxShadow: [
+              BoxShadow(
+                color: Theme.of(context)
+                    .extension<ThemeColorStyle>()!
+                    .secondaryColor
+                    .withOpacity(0.1),
+                blurRadius: 100,
+              )
+            ]),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(100),
               child: Theme(

@@ -9,6 +9,7 @@ class ThemeColorStyle extends ThemeExtension<ThemeColorStyle> {
   final Color senaryColor;
   final Color septenaryColor;
   final Color octonaryColor;
+  final Color nonaryColor;
 
   const ThemeColorStyle({
     required this.primaryColor,
@@ -19,19 +20,22 @@ class ThemeColorStyle extends ThemeExtension<ThemeColorStyle> {
     required this.senaryColor,
     required this.septenaryColor,
     required this.octonaryColor,
+    required this.nonaryColor,
     //   nonary, denary
   });
 
   @override
-  ThemeExtension<ThemeColorStyle> copyWith(
-      {Color? primaryColor,
-      Color? secondaryColor,
-      Color? tertiaryColor,
-      Color? quaternaryColor,
-      Color? quinaryColor,
-      Color? senaryColor,
-      Color? septenaryColor,
-      Color? octonaryColor}) {
+  ThemeExtension<ThemeColorStyle> copyWith({
+    Color? primaryColor,
+    Color? secondaryColor,
+    Color? tertiaryColor,
+    Color? quaternaryColor,
+    Color? quinaryColor,
+    Color? senaryColor,
+    Color? septenaryColor,
+    Color? octonaryColor,
+    Color? nonaryColor,
+  }) {
     return ThemeColorStyle(
       primaryColor: primaryColor ?? this.primaryColor,
       secondaryColor: secondaryColor ?? this.secondaryColor,
@@ -41,6 +45,7 @@ class ThemeColorStyle extends ThemeExtension<ThemeColorStyle> {
       senaryColor: senaryColor ?? this.senaryColor,
       septenaryColor: septenaryColor ?? this.septenaryColor,
       octonaryColor: octonaryColor ?? this.octonaryColor,
+      nonaryColor: nonaryColor ?? this.nonaryColor,
     );
   }
 
@@ -59,6 +64,7 @@ class ThemeColorStyle extends ThemeExtension<ThemeColorStyle> {
       senaryColor: Color.lerp(senaryColor, other.senaryColor, t)!,
       septenaryColor: Color.lerp(septenaryColor, other.septenaryColor, t)!,
       octonaryColor: Color.lerp(octonaryColor, other.octonaryColor, t)!,
+      nonaryColor: Color.lerp(nonaryColor, other.nonaryColor, t)!,
     );
   }
 }

@@ -17,7 +17,7 @@ class MoodDoughnutChart extends StatefulWidget {
 class _MoodDoughnutChartState extends State<MoodDoughnutChart> {
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
+    // final double screenHeight = MediaQuery.of(context).size.height;
     final double screenWidth = MediaQuery.of(context).size.width;
 
     // final List<ChartData> chartData = [
@@ -56,13 +56,9 @@ class _MoodDoughnutChartState extends State<MoodDoughnutChart> {
           ),
         ),
         CircularChartAnnotation(
-          widget: Container(
-            height: screenHeight * 0.26,
-            width: screenWidth * 0.55,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(100),
-            ),
+          widget: CircleAvatar(
+            radius: screenWidth / 4,
+            backgroundColor: Colors.white,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -103,7 +99,7 @@ class _MoodDoughnutChartState extends State<MoodDoughnutChart> {
           pointColorMapper: (datum, index) => widget.moodDataMap[index].color,
           // Radius of doughnut
           radius: '105%',
-          innerRadius: '65%',
+          innerRadius: '60%',
         )
       ],
     );
