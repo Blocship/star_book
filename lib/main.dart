@@ -5,7 +5,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:star_book/config.dart';
 import 'package:star_book/data/utils/local_database.dart';
 import 'package:star_book/presentation/injector/injector.dart';
-import 'package:star_book/presentation/screen/calendar/custom_calendar.dart';
+import 'package:star_book/routes/routes.dart';
 import 'package:star_book/theme/ultramarine_light.dart';
 
 String createDirectory({required String path}) {
@@ -36,9 +36,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       theme: UltramarineLightTheme().theme,
-      home: const CustomCalendar(),
+      routerConfig: AppRouter.appRoutes,
     );
   }
 }

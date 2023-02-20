@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:star_book/floating_action_button.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
+import 'package:star_book/routes/app_router_name.dart';
 import 'package:star_book/theme/styling/theme_color_style.dart';
 
 class JournalCreateScreen extends StatelessWidget {
@@ -11,12 +13,13 @@ class JournalCreateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
-    // final double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: PrimaryAppBar(
         leading: PrimaryAppBarItem(
           icon: Icons.arrow_back_ios_new_outlined,
           label: 'Back',
+          onTap: () => context.pop(),
         ),
         center: 'New Thought',
       ),
@@ -29,9 +32,15 @@ class JournalCreateScreen extends StatelessWidget {
             SizedBox(height: screenHeight * 0.04),
             const AddNewDetails(),
             SizedBox(height: screenHeight * 0.04),
-            SelectableTile(title: 'Date', onTap: () {}),
+            SelectableTile(
+              title: 'Date',
+              onTap: () => context.goNamed(AppRouterName.datePickerScreen),
+            ),
             SizedBox(height: screenHeight * 0.04),
-            SelectableTile(title: 'Mood', onTap: () {}),
+            SelectableTile(
+              title: 'Mood',
+              onTap: () => context.goNamed(AppRouterName.moodPickerScreen),
+            ),
             SizedBox(height: screenHeight * 0.04),
             const CustomTextFormField(
                 heading: 'Title', label: 'Enter Mood Title'),
@@ -41,7 +50,24 @@ class JournalCreateScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: SecondaryFloatingActionButton(
-          onTap: () {}, child: const Icon(Icons.check)),
+
+          ///Todo: Here we can't pop screen or we need to handle data from pop()
+          onTap: () => context.pop(),
+
+          // onTap: () {
+          //   if (isHomeScreen) {
+          //     log('If: $isHomeScreen');
+          //     context.goNamed(AppRouterName.monthScreen, params: {
+          //       'year': year.toString(),
+          //       'month': month.toString(),
+          //       'isHomeScreen': isHomeScreen.toString(),
+          //     });
+          //   } else {
+          //     log('Else');
+          //     context.pop();
+          //   }
+          // },
+          child: const Icon(Icons.check)),
     );
   }
 }

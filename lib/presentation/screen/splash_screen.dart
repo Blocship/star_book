@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:star_book/presentation/screen/calendar/custom_calendar.dart';
+import 'package:go_router/go_router.dart';
+import 'package:star_book/routes/app_router_name.dart';
 import 'package:star_book/widgets/gradient_scaffold.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -20,8 +21,7 @@ class _SplashScreenState extends State<SplashScreen>
       duration: const Duration(milliseconds: 2000),
       vsync: this,
     )..forward().then((_) {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const CustomCalendar()));
+        context.pushReplacementNamed(AppRouterName.introScreen);
       });
   }
 
