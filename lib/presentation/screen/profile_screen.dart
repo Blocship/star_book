@@ -73,11 +73,11 @@ class ProfileScreen extends StatelessWidget {
                       .headlineMedium!
                       .copyWith(fontWeight: FontWeight.w700, height: 1.4),
                 ),
-                SizedBox(width: screenWidth * 0.285),
+                SizedBox(width: screenWidth * 0.26),
                 GestureDetector(
                   onTap: () => context.goNamed(AppRouterName.analyticScreen),
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Text(
                         'View Details',
