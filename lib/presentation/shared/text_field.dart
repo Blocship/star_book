@@ -53,11 +53,13 @@ class CustomTextFormField extends StatefulWidget {
   final String heading;
   final String? label;
   final String? initialValue;
+  final bool isMultiline;
   const CustomTextFormField({
     Key? key,
     required this.heading,
     this.label,
     this.initialValue,
+    this.isMultiline = false,
   })  : assert(label != null || initialValue != null,
             'Label and initialValue both cannot be null'),
         super(key: key);
@@ -81,17 +83,16 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   @override
   Widget build(BuildContext context) {
-    controller.text = widget.initialValue ?? '';
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
         border: Border.all(color: Colors.grey),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 8),
           AnimatedDefaultTextStyle(
             style: focusNode.hasFocus
                 ? Theme.of(context).textTheme.bodySmall!.copyWith(
@@ -106,33 +107,23 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             duration: const Duration(milliseconds: 200),
             child: Text(widget.heading),
           ),
-          const SizedBox(height: 8),
-          LayoutBuilder(
-            builder: (context, constraints) {
-              return SizedBox(
-                width: 306,
-                height: 40,
-                child: TextFormField(
-                  expands: true,
-                  minLines: null,
-                  maxLines: null,
-                  focusNode: focusNode,
-                  controller: controller,
-                  keyboardType: TextInputType.multiline,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.zero,
-                    isDense: true,
-                    hintText: widget.label ?? '',
-                    hintStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          fontWeight: FontWeight.w400,
-                        ),
-                    border: const OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                    ),
+          const SizedBox(height: 16),
+          TextFormField(
+            maxLines: widget.isMultiline ? null : 1,
+            focusNode: focusNode,
+            controller: controller,
+            keyboardType: TextInputType.multiline,
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.zero,
+              isDense: true,
+              hintText: widget.label ?? '',
+              hintStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                    fontWeight: FontWeight.w400,
                   ),
-                ),
-              );
-            },
+              border: const OutlineInputBorder(
+                borderSide: BorderSide.none,
+              ),
+            ),
           ),
         ],
       ),

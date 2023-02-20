@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:star_book/presentation/widgets/floating_action_button.dart';
+import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
-import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
+import 'package:star_book/presentation/utils/padding_style.dart';
+import 'package:star_book/presentation/widgets/floating_action_button.dart';
 
 class JournalCreateScreen extends StatelessWidget {
   const JournalCreateScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: PrimaryAppBar(
@@ -26,27 +25,36 @@ class JournalCreateScreen extends StatelessWidget {
       body: Padding(
         padding:
             const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            SizedBox(height: screenHeight * 0.04),
-            const AddNewDetails(),
-            SizedBox(height: screenHeight * 0.04),
-            SelectableTile(
-              title: 'Date',
-              onTap: () => context.goNamed(AppRouterName.datePickerScreen),
-            ),
-            SizedBox(height: screenHeight * 0.04),
-            SelectableTile(
-              title: 'Mood',
-              onTap: () => context.goNamed(AppRouterName.moodPickerScreen),
-            ),
-            SizedBox(height: screenHeight * 0.04),
-            const CustomTextFormField(
-                heading: 'Title', label: 'Enter Mood Title'),
-            SizedBox(height: screenHeight * 0.04),
-            const CustomTextFormField(heading: 'Note', label: 'Write Note'),
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 30),
+              const AddNewDetails(),
+              const SizedBox(height: 30),
+              SelectableTile(
+                title: 'Date',
+                onTap: () => context.goNamed(AppRouterName.datePickerScreen),
+              ),
+              const SizedBox(height: 30),
+              SelectableTile(
+                title: 'Mood',
+                onTap: () => context.goNamed(AppRouterName.moodPickerScreen),
+              ),
+              const SizedBox(height: 30),
+              const CustomTextFormField(
+                heading: 'Title',
+                label: 'Enter Mood Title',
+              ),
+              const SizedBox(height: 30),
+              const CustomTextFormField(
+                heading: 'Note',
+                label: 'Write Note',
+                isMultiline: true,
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: SecondaryFloatingActionButton(
