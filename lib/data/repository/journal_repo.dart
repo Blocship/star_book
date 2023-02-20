@@ -63,31 +63,39 @@ class JournalRepoImpl implements JournalRepo {
 
   @override
   Future<List<Journal>> getJournalByDay(DateTime day) {
-    throw UnimplementedError();
+    return lsJournalApi.fetchByDate(day).then((value) {
+      return value.map((e) => Journal.fromLSJournal(e)).toList();
+    });
   }
 
   @override
   Future<List<Journal>> getJournalByMonth(int month, int year) {
-    throw UnimplementedError();
+    return lsJournalApi.getJournalByMonth(month, year).then((value) {
+      return value.map((e) => Journal.fromLSJournal(e)).toList();
+    });
   }
 
   @override
   Future<List<Journal>> getJournalByRange(DateTime start, DateTime end) {
-    throw UnimplementedError();
+    return lsJournalApi.getJournalByRange(start, end).then((value) {
+      return value.map((e) => Journal.fromLSJournal(e)).toList();
+    });
   }
 
   @override
   Future<List<Journal>> getJournalByYear(int year) {
-    throw UnimplementedError();
+    return lsJournalApi.getJournalByYear(year).then((value) {
+      return value.map((e) => Journal.fromLSJournal(e)).toList();
+    });
   }
 
   @override
   Future<int> point() {
-    throw UnimplementedError();
+    return lsJournalApi.point();
   }
 
   @override
   Future<int> streak() {
-    throw UnimplementedError();
+    return lsJournalApi.streak();
   }
 }
