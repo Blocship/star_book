@@ -40,45 +40,34 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return GradientScaffold(
-      body: Stack(
-        children: [
-          PageView(
-            controller: pageController,
-            onPageChanged: onPageChanged,
-            children: pages,
+      body: PageView(
+        controller: pageController,
+        onPageChanged: onPageChanged,
+        children: pages,
+      ),
+      bottomNavigationBar: CustomBottomNavBar(
+        backgroundColor: Colors.white,
+        selectedItemColor: const Color(0xFF7B7CFF),
+        unselectedItemColor: const Color(0xFF7B7CFF).withOpacity(0.4),
+        selectedLabelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            fontWeight: FontWeight.w500, color: const Color(0xFF7B7CFF)),
+        unselectedLabelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
+            fontWeight: FontWeight.w400,
+            color: const Color(0xFF7B7CFF).withOpacity(0.4)),
+        currentIndex: _selectedPage,
+        onTap: onNavBarItemTapped,
+        items: const [
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage('assets/icons/home_outlined.png'),
+            ),
+            label: 'Home',
           ),
-          CustomBottomNavBar(
-            backgroundColor: Colors.white,
-            selectedItemColor: const Color(0xFF7B7CFF),
-            unselectedItemColor: const Color(0xFF7B7CFF).withOpacity(0.4),
-            selectedLabelStyle: Theme.of(context)
-                .textTheme
-                .bodyMedium!
-                .copyWith(
-                    fontWeight: FontWeight.w500,
-                    color: const Color(0xFF7B7CFF)),
-            unselectedLabelStyle: Theme.of(context)
-                .textTheme
-                .bodyMedium!
-                .copyWith(
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xFF7B7CFF).withOpacity(0.4)),
-            currentIndex: _selectedPage,
-            onTap: onNavBarItemTapped,
-            items: const [
-              BottomNavigationBarItem(
-                icon: ImageIcon(
-                  AssetImage('assets/icons/home_outlined.png'),
-                ),
-                label: 'Home',
-              ),
-              BottomNavigationBarItem(
-                icon: ImageIcon(
-                  AssetImage('assets/icons/account_circle.png'),
-                ),
-                label: 'Profile',
-              ),
-            ],
+          BottomNavigationBarItem(
+            icon: ImageIcon(
+              AssetImage('assets/icons/account_circle.png'),
+            ),
+            label: 'Profile',
           ),
         ],
       ),
