@@ -14,89 +14,127 @@ import 'package:star_book/presentation/screen/setting_screen.dart';
 import 'package:star_book/presentation/screen/splash_screen.dart';
 import 'package:star_book/presentation/screen/year_screen.dart';
 import 'package:star_book/presentation/utils/extension.dart';
+import 'package:star_book/presentation/utils/month_details.dart';
 import 'package:star_book/routes/app_router_name.dart';
 
 class AppRouter {
+  ///Routes Paths
+  static const String splashScreenPath = '/';
+  static const String introScreenPath = '/introScreen';
+  static const String mainScreenPath = '/mainScreen';
+  static const String yearScreenPath = 'yearScreen';
+  static const String monthScreenPath =
+      'mainScreen/monthScreen/:year/:month/:isHomeScreen';
+  static const String journalCreateScreenPath = 'journalCreateScreen';
+  static const String moodPickerScreenPath = 'moodPickerScreen';
+  static const String datePickerScreenPath = 'datePickerScreen';
+  static const String journalDetailScreenPath =
+      'mainScreen/monthScreen/journalDetailScreen';
+  static const String journalEditScreenPath =
+      'mainScreen/monthScreen/journalEditScreen';
+  static const String analyticScreenPath = 'analyticScreen';
+  static const String settingScreenPath = 'settingScreen';
+  static const String licenseAgreementScreenPath = 'licenseAgreementScreen';
+
   static final GoRouter appRoutes = GoRouter(
     routes: <RouteBase>[
+      ///SplashScreen
       GoRoute(
         name: AppRouterName.splashScreen,
-        path: '/',
+        path: splashScreenPath,
         builder: (context, state) => const SplashScreen(),
       ),
+
+      ///IntroScreen
       GoRoute(
         name: AppRouterName.introScreen,
-        path: '/introScreen',
+        path: introScreenPath,
         builder: (context, state) => const IntroScreen(),
       ),
+
+      ///MainScreen
       GoRoute(
         name: AppRouterName.mainScreen,
-        path: '/mainScreen',
+        path: mainScreenPath,
         builder: (context, state) => const MainScreen(),
         routes: <RouteBase>[
+          ///YearScreen
           GoRoute(
-              name: AppRouterName.yearScreen,
-              path: 'mainScreen/yearScreen',
-              builder: (context, state) => const YearScreen(),
-              routes: <RouteBase>[
-                GoRoute(
-                  name: AppRouterName.monthScreen,
-                  path: 'mainScreen/monthScreen/:year/:month/:isHomeScreen',
-                  builder: (context, state) => MonthScreen(
-                    year: int.parse(state.params['year']!),
-                    month: int.parse(state.params['month']!),
-                    isHomeScreen: state.params['isHomeScreen']!.parseBool(),
-                  ),
-                  routes: [
-                    GoRoute(
-                      name: AppRouterName.journalCreateScreen,
-                      path: 'monthScreen/journalCreateScreen',
-                      builder: (context, state) => const JournalCreateScreen(),
-                      routes: [
-                        GoRoute(
-                          name: AppRouterName.moodPickerScreen,
-                          path:
-                              'monthScreen/journalCreateScreen/moodPickerScreen',
-                          builder: (context, state) => const MoodPickerScreen(),
-                        ),
-                        GoRoute(
-                          name: AppRouterName.datePickerScreen,
-                          path:
-                              'monthScreen/journalCreateScreen/datePickerScreen',
-                          builder: (context, state) => const DatePickerScreen(),
-                        ),
-                      ],
-                    ),
-                    GoRoute(
-                      name: AppRouterName.journalDetailScreen,
-                      path: 'monthScreen/journalDetailScreen',
-                      builder: (context, state) => const JournalDetailScreen(),
-                      routes: <RouteBase>[
-                        GoRoute(
-                          name: AppRouterName.journalEditScreen,
-                          path:
-                              'monthScreen/journalDetailScreen/journalEditScreen',
-                          builder: (context, state) =>
-                              const JournalEditScreen(),
-                        ),
-                      ],
-                    ),
-                  ],
+            name: AppRouterName.yearScreen,
+            path: yearScreenPath,
+            builder: (context, state) => const YearScreen(),
+            routes: <RouteBase>[
+              ///MonthScreen
+              GoRoute(
+                name: AppRouterName.monthScreen,
+                path: monthScreenPath,
+                builder: (context, state) => MonthScreen(
+                  monthDetails: MonthDetails(
+                      year: int.parse(state.params['year'] ??
+                          DateTime.now().year.toString()),
+                      month: int.parse(state.params['month'] ??
+                          DateTime.now().month.toString()),
+                      isHomeScreen:
+                          (state.params['isHomeScreen'] ?? 'true').parseBool()),
                 ),
-              ]),
+              ),
+            ],
+          ),
+
+          ///JournalCreateScreen
+          GoRoute(
+            name: AppRouterName.journalCreateScreen,
+            path: journalCreateScreenPath,
+            builder: (context, state) => const JournalCreateScreen(),
+            routes: [
+              ///MoodPickerScreen
+              GoRoute(
+                name: AppRouterName.moodPickerScreen,
+                path: moodPickerScreenPath,
+                builder: (context, state) => const MoodPickerScreen(),
+              ),
+
+              ///DatePickerScreen
+              GoRoute(
+                name: AppRouterName.datePickerScreen,
+                path: datePickerScreenPath,
+                builder: (context, state) => const DatePickerScreen(),
+              ),
+            ],
+          ),
+
+          ///JournalDetailScreen
+          GoRoute(
+            name: AppRouterName.journalDetailScreen,
+            path: journalDetailScreenPath,
+            builder: (context, state) => const JournalDetailScreen(),
+            routes: <RouteBase>[
+              ///JournalEditScreen
+              GoRoute(
+                name: AppRouterName.journalEditScreen,
+                path: journalEditScreenPath,
+                builder: (context, state) => const JournalEditScreen(),
+              ),
+            ],
+          ),
+
+          ///AnalyticScreen
           GoRoute(
             name: AppRouterName.analyticScreen,
-            path: 'mainScreen/analyticScreen',
+            path: analyticScreenPath,
             builder: (context, state) => const AnalyticsTabBarView(),
           ),
+
+          ///SettingScreen
           GoRoute(
             name: AppRouterName.settingScreen,
-            path: 'mainScreen/settingScreen',
+            path: settingScreenPath,
             builder: (context, state) => const SettingScreen(),
             routes: <RouteBase>[
+              ///LicenseAgreementScreen
               GoRoute(
                 name: AppRouterName.licenseAgreementScreen,
-                path: 'mainScreen/settingScreen/licenseAgreementScreen',
+                path: licenseAgreementScreenPath,
                 pageBuilder: (context, state) => const MaterialPage(
                   child: LicenseAgreementScreen(),
                   fullscreenDialog: true,
@@ -109,140 +147,3 @@ class AppRouter {
     ],
   );
 }
-
-// class AppRouter {
-//   final GoRouter appRoutes = GoRouter(
-//     routes: <RouteBase>[
-//       /// Splash Screen Navigation InitialRoute
-//       GoRoute(
-//         path: '/',
-//         builder: (context, state) => const SplashScreen(),
-//         routes: <RouteBase>[
-//           /// IntroScreen Navigation from SplashScreen
-//           GoRoute(
-//             name: 'IntroScreen',
-//             path: 'introScreen',
-//             builder: (context, state) => const IntroScreen(),
-//             routes: const <RouteBase>[],
-//           ),
-//
-//           /// MainScreen Navigation from IntroScreen
-//           GoRoute(
-//             name: 'MainScreen',
-//             path: 'mainScreen',
-//             builder: (context, state) => const MainScreen(),
-//             routes: <RouteBase>[
-//               /// Journal Create Screen from HomeScree
-//               GoRoute(
-//                 name: 'JournalCreateScreen',
-//                 path: 'journalCreateScreen',
-//                 builder: (context, state) => const JournalCreateScreen(),
-//                 routes: <RouteBase>[
-//                   /// Date Picker Screen from Journal Create Screen
-//                   GoRoute(
-//                     name: 'DatePickerScreen',
-//                     path: 'datePickerScreen',
-//                     builder: (context, state) => const DatePickerScreen(),
-//                   ),
-//
-//                   /// Mood Picker Screen from Journal Create Screen
-//                   GoRoute(
-//                     name: 'MoodPickerScreen',
-//                     path: 'moodPickerScreen',
-//                     builder: (context, state) => const MoodPickerScreen(),
-//                   ),
-//                 ],
-//               ),
-//
-//               /// Journal Detail Screen from HomeScreen
-//               /// Journal Detail Screen and Journal Edit Screen takes parameter
-//               GoRoute(
-//                 name: 'JournalDetailScreen',
-//                 path:
-//                     'journalDetailScreen/:detailDate/:detailMood/:detailTitleDescription/:detailNoteDescription',
-//                 builder: (context, state) => JournalDetailScreen(
-//                   date: state.params['detailDate']!,
-//                   // moodColor: Color(int.parse(
-//                   //     state.params['detailColor']!.substring(1),
-//                   //     radix: 16)),
-//                   // moodColor: state.params['detailMoodColor']!,
-//                   mood: state.params['detailMood']!,
-//                   titleDescription: state.params['detailTitleDescription']!,
-//                   noteDescription: state.params['detailNoteDescription']!,
-//                 ),
-//                 routes: <RouteBase>[],
-//               ),
-//
-//               ///Journal Edit Screen from JournalDetailScreen
-//               GoRoute(
-//                 name: 'JournalEditScreen',
-//                 path:
-//                     'journalEditScreen/:date/:mood/:titleDescription/:noteDescription',
-//                 builder: (context, state) => JournalEditScreen(
-//                   date: state.params['date']!,
-//                   // moodColor: Color(int.parse(
-//                   //     state.params['color']!.substring(1),
-//                   //     radix: 16)),
-//                   // moodColor: state.params['moodColor']!,
-//                   mood: state.params['mood']!,
-//                   titleDescription: state.params['titleDescription']!,
-//                   noteDescription: state.params['noteDescription']!,
-//                 ),
-//               ),
-//
-//               /// DialogBox from Journal Detail Screen
-//               // GoRoute(
-//               //   name: 'DialogBox',
-//               //   path: 'dialogBox',
-//               //   builder: (context, state) => const CustomDialogBox(),
-//               // ),
-//
-//               /// Year Screen Navigation from HomeScreen
-//               GoRoute(
-//                 name: 'YearScreen',
-//                 path: 'yearScreen',
-//                 builder: (context, state) => const YearScreen(),
-//                 routes: <RouteBase>[
-//                   /// Month Screen Navigation from YearScreen
-//                   GoRoute(
-//                     name: 'MonthScreen',
-//                     path: 'daysOfMonth/:year/:month/:isHomeScreen',
-//                     builder: (context, state) => DaysOfMonth(
-//                       year: int.parse(state.params['year']!),
-//                       month: int.parse(state.params['month']!),
-//                       isHomeScreen: state.params['isHomeScreen']!.parseBool(),
-//                     ),
-//                   ),
-//                 ],
-//               ),
-//
-//               /// Setting Screen Navigation from ProfileScreen
-//               GoRoute(
-//                 name: 'SettingScreen',
-//                 path: 'settingScreen',
-//                 builder: (context, state) => const SettingScreen(),
-//               ),
-//
-//               /// LicenseScreenAgreement Bottom Sheet pop-up from Setting Screen
-//               GoRoute(
-//                 name: 'LicenseAgreementScreen',
-//                 path: 'licenseAgreementScreen',
-//                 pageBuilder: (context, state) => const MaterialPage(
-//                   child: LicenseAgreementScreen(),
-//                   fullscreenDialog: true,
-//                 ),
-//               ),
-//
-//               /// Analytics Screen Navigation from ProfileScreen
-//               GoRoute(
-//                 name: 'AnalyticsScreen',
-//                 path: 'analyticsScreen',
-//                 builder: (context, state) => const AnalyticsTabBarView(),
-//               ),
-//             ],
-//           ),
-//         ],
-//       ),
-//     ],
-//   );
-// }

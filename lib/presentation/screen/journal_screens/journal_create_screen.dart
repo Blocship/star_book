@@ -53,7 +53,20 @@ class JournalCreateScreen extends StatelessWidget {
 
           ///Todo: Here we can't pop screen or we need to handle data from pop()
           onTap: () => context.pop(),
-          // onTap: () => context.goNamed('MainScreen'),
+
+          // onTap: () {
+          //   if (isHomeScreen) {
+          //     log('If: $isHomeScreen');
+          //     context.goNamed(AppRouterName.monthScreen, params: {
+          //       'year': year.toString(),
+          //       'month': month.toString(),
+          //       'isHomeScreen': isHomeScreen.toString(),
+          //     });
+          //   } else {
+          //     log('Else');
+          //     context.pop();
+          //   }
+          // },
           child: const Icon(Icons.check)),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/screen/calendar/month_days.dart';
+import 'package:star_book/presentation/utils/month_details.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -7,9 +8,11 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MonthScreen(
-      year: DateTime.now().year,
-      month: DateTime.now().month,
-      isHomeScreen: true,
+      monthDetails: MonthDetails(
+        year: DateTime.now().year,
+        month: DateTime.now().month,
+        isHomeScreen: true,
+      ),
     );
   }
 }

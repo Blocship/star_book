@@ -43,24 +43,13 @@ class CustomDialogBox extends StatelessWidget {
                   children: [
                     InactiveFilledButton(
                         onTap: () {
-                          print('testing');
                           context.pop();
-                          // context.goNamed('JournalDetailScreen', params: {
-                          //   'detailDate':
-                          //       DateFormat.jm().format(DateTime.now()),
-                          //   // 'detailMoodColor': ,
-                          //   'detailMood': 'Productive',
-                          //   'detailTitleDescription': 'Feeling Productive',
-                          //   'detailNoteDescription':
-                          //       'Feeling Productive Feeling Productive',
-                          // });
                         },
                         label: 'Cancel'),
                     DangerFilledButton(
-
-                        ///TOdo: Change it to pop (mainScreen or monthScreen)
-                        onTap: () => context.pop(),
-                        label: 'Delete Note'),
+                      onTap: () => context.pop(),
+                      label: 'Delete Note',
+                    ),
                   ],
                 ),
                 // const SizedBox(height: 20),
