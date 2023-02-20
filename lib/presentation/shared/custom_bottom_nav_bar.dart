@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 
-class CustomBottomNavBar extends StatefulWidget {
+class BottomNavBar extends StatefulWidget {
   final int currentIndex;
   final List<BottomNavigationBarItem> items;
   final ValueChanged<int> onTap;
@@ -11,7 +11,7 @@ class CustomBottomNavBar extends StatefulWidget {
   final TextStyle? unselectedLabelStyle;
   final Color? backgroundColor;
 
-  const CustomBottomNavBar({
+  const BottomNavBar({
     Key? key,
     required this.currentIndex,
     required this.items,
@@ -24,10 +24,10 @@ class CustomBottomNavBar extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<CustomBottomNavBar> createState() => _CustomBottomNavBarState();
+  State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
-class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
+class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -55,11 +55,31 @@ class _CustomBottomNavBarState extends State<CustomBottomNavBar> {
               highlightColor: Colors.transparent,
             ),
             child: BottomNavigationBar(
-              backgroundColor: widget.backgroundColor,
-              selectedItemColor: widget.selectedItemColor,
-              unselectedItemColor: widget.unselectedItemColor,
-              selectedLabelStyle: widget.selectedLabelStyle,
-              unselectedLabelStyle: widget.unselectedLabelStyle,
+              backgroundColor:
+                  Theme.of(context).extension<ThemeColorStyle>()!.quinaryColor,
+              selectedItemColor: Theme.of(context)
+                  .extension<ThemeColorStyle>()!
+                  .quaternaryColor,
+              unselectedItemColor: Theme.of(context)
+                  .extension<ThemeColorStyle>()!
+                  .quaternaryColor
+                  .withOpacity(0.4),
+              selectedLabelStyle:
+                  Theme.of(context).textTheme.bodyMedium!.copyWith(
+                        fontWeight: FontWeight.w500,
+                        color: Theme.of(context)
+                            .extension<ThemeColorStyle>()!
+                            .quaternaryColor,
+                      ),
+              unselectedLabelStyle: Theme.of(context)
+                  .textTheme
+                  .bodyMedium!
+                  .copyWith(
+                      fontWeight: FontWeight.w400,
+                      color: Theme.of(context)
+                          .extension<ThemeColorStyle>()!
+                          .quaternaryColor
+                          .withOpacity(0.4)),
               currentIndex: widget.currentIndex,
               onTap: widget.onTap,
               items: widget.items,

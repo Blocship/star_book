@@ -5,7 +5,6 @@ import 'package:star_book/presentation/shared/doughnut_chart_widget.dart';
 import 'package:star_book/presentation/shared/stats_widget.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
-import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -15,7 +14,8 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final double screenWidth = MediaQuery.of(context).size.width;
 
-    return GradientScaffold(
+    return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: SecondaryAppBar(
         leadingIcon: SecondaryAppBarItem(
             icon: const Image(

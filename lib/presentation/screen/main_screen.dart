@@ -45,15 +45,7 @@ class _MainScreenState extends State<MainScreen> {
         onPageChanged: onPageChanged,
         children: pages,
       ),
-      bottomNavigationBar: CustomBottomNavBar(
-        backgroundColor: Colors.white,
-        selectedItemColor: const Color(0xFF7B7CFF),
-        unselectedItemColor: const Color(0xFF7B7CFF).withOpacity(0.4),
-        selectedLabelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-            fontWeight: FontWeight.w500, color: const Color(0xFF7B7CFF)),
-        unselectedLabelStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-            fontWeight: FontWeight.w400,
-            color: const Color(0xFF7B7CFF).withOpacity(0.4)),
+      bottomNavigationBar: BottomNavBar(
         currentIndex: _selectedPage,
         onTap: onNavBarItemTapped,
         items: const [
