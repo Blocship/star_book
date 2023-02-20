@@ -14,10 +14,10 @@ class IntroScreen extends StatelessWidget {
     final double screenHeight = MediaQuery.of(context).size.height;
     return GradientScaffold(
       resizeToAvoidBottomInset: false,
-      body: Center(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: CustomPadding.mediumPadding),
+      body: Padding(
+        padding:
+            const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
+        child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
