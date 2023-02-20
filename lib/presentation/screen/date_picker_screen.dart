@@ -15,12 +15,10 @@ class DatePickerScreen extends StatelessWidget {
     final double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: PrimaryAppBar(
-        leading: PrimaryAppBarItem(
-          icon: Icons.arrow_back_ios_outlined,
-          label: 'Back',
-          onTap: () => context.goNamed(AppRouterName.journalCreateScreen),
-        ),
-        center: 'Select Date',
+        icon: Icons.keyboard_arrow_left_outlined,
+        leadingText: 'Back',
+        leadingOnTap: () => context.goNamed(AppRouterName.journalCreateScreen),
+        centerTitle: 'Select Date',
       ),
       body: Padding(
         padding:

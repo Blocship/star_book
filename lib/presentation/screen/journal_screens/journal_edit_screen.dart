@@ -16,12 +16,10 @@ class JournalEditScreen extends StatelessWidget {
     final double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       appBar: PrimaryAppBar(
-        leading: PrimaryAppBarItem(
-          icon: Icons.arrow_back_ios_new_outlined,
-          label: 'Back',
-          onTap: () => context.goNamed(AppRouterName.journalDetailScreen),
-        ),
-        center: 'Mood Journal',
+        icon: Icons.keyboard_arrow_left_outlined,
+        leadingText: 'Back',
+        leadingOnTap: () => context.goNamed(AppRouterName.journalDetailScreen),
+        centerTitle: 'Mood Journal',
       ),
       body: Padding(
         padding:

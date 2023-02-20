@@ -11,12 +11,10 @@ class YearScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GradientScaffold(
       appBar: PrimaryAppBar(
-        leading: PrimaryAppBarItem(
-          icon: Icons.arrow_back_ios_new_outlined,
-          label: 'Back',
-          onTap: () => context.pop(),
-        ),
-        center: 'Year',
+        icon: Icons.keyboard_arrow_left_outlined,
+        leadingText: 'Back',
+        leadingOnTap: () => context.pop(),
+        centerTitle: 'Year',
       ),
       body: const CustomCalendar(),
     );
