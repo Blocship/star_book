@@ -17,19 +17,13 @@ class JournalDetailScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: PrimaryAppBar(
-        leading: PrimaryAppBarItem(
-          icon: Icons.arrow_back_ios_new_outlined,
-          label: 'Back',
-          onTap: () => context.goNamed(AppRouterName.mainScreen),
-        ),
-        center: 'Mood Journal',
-        trailing: PrimaryAppBarItem(
-            label: 'Delete',
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (context) => const CustomDialogBox());
-            }),
+        leadingOnTap: () => context.goNamed(AppRouterName.mainScreen),
+        centerTitle: 'Mood Journal',
+        trailingText: 'Delete',
+        trailingOnTap: () {
+          showDialog(
+              context: context, builder: (context) => const CustomDialogBox());
+        },
       ),
       body: Padding(
         padding:

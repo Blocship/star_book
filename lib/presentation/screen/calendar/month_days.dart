@@ -12,6 +12,7 @@ import 'package:star_book/presentation/routes/app_router_name.dart';
 
 class MonthScreen extends StatelessWidget {
   final MonthDetails monthDetails;
+
   const MonthScreen({
     Key? key,
     required this.monthDetails,
@@ -51,11 +52,8 @@ class MonthScreen extends StatelessWidget {
     /// This will display the week days and dates of the month
     return GradientScaffold(
       appBar: PrimaryAppBar(
-        leading: PrimaryAppBarItem(
-          icon: Icons.arrow_back_ios_new_outlined,
-          label: 'Year',
-          onTap: () => context.goNamed(AppRouterName.yearScreen),
-        ),
+        leadingText: 'Year',
+        leadingOnTap: () => context.goNamed(AppRouterName.yearScreen),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -141,6 +139,7 @@ class Date extends StatelessWidget {
   });
 
   final int day;
+
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = context.textTheme;

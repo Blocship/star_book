@@ -18,12 +18,8 @@ class JournalEditScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: PrimaryAppBar(
-        leading: PrimaryAppBarItem(
-          icon: Icons.arrow_back_ios_new_outlined,
-          label: 'Back',
-          onTap: () => context.goNamed(AppRouterName.journalDetailScreen),
-        ),
-        center: 'Mood Journal',
+        leadingOnTap: () => context.goNamed(AppRouterName.journalDetailScreen),
+        centerTitle: 'Mood Journal',
       ),
       body: Padding(
         padding:

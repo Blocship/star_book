@@ -19,12 +19,8 @@ class DatePickerScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: PrimaryAppBar(
-        leading: PrimaryAppBarItem(
-          icon: Icons.arrow_back_ios_outlined,
-          label: 'Back',
-          onTap: () => context.goNamed(AppRouterName.journalCreateScreen),
-        ),
-        center: 'Select Date',
+        leadingOnTap: () => context.goNamed(AppRouterName.journalCreateScreen),
+        centerTitle: 'Select Date',
       ),
       body: Padding(
         padding:

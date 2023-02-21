@@ -16,12 +16,8 @@ class SettingScreen extends StatelessWidget {
     final double deviceHeight = context.deviceHeight;
     return GradientScaffold(
       appBar: PrimaryAppBar(
-        leading: PrimaryAppBarItem(
-          icon: Icons.arrow_back_ios_new_outlined,
-          label: 'Back',
-          onTap: () => context.goNamed(AppRouterName.mainScreen),
-        ),
-        center: 'Settings',
+        leadingOnTap: () => context.goNamed(AppRouterName.mainScreen),
+        centerTitle: 'Settings',
       ),
       body: Padding(
         padding:

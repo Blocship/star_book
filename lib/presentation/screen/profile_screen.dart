@@ -6,7 +6,6 @@ import 'package:star_book/presentation/shared/stats_widget.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
-import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -18,15 +17,14 @@ class ProfileScreen extends StatelessWidget {
     final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     final double deviceWidth = context.deviceWidth;
 
-    return GradientScaffold(
+    return Scaffold(
+      backgroundColor: Colors.transparent,
       appBar: SecondaryAppBar(
-        leadingIcon: SecondaryAppBarItem(
-            icon: const Image(
-                image: AssetImage('assets/icons/shooting_star.png'))),
-        trailingIcon: SecondaryAppBarItem(
-          icon: const Icon(Icons.menu_outlined),
-          onTap: () => context.goNamed(AppRouterName.settingScreen),
+        leading: const Image(
+          image: AssetImage('assets/icons/shooting_star.png'),
         ),
+        trailing: Icons.menu_outlined,
+        trailingOnTap: () => context.goNamed(AppRouterName.settingScreen),
       ),
       body: Padding(
         padding:

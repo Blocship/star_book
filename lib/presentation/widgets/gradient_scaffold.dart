@@ -93,6 +93,7 @@ class GradientScaffold extends StatelessWidget {
             ),
           ),
           Scaffold(
+            extendBody: true,
             backgroundColor: Colors.transparent,
             resizeToAvoidBottomInset: resizeToAvoidBottomInset,
             appBar: appBar,
