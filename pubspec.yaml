@@ -29,7 +29,6 @@ dependencies:
   intl: ^0.18.0
   go_router: ^6.0.7
   path_provider: ^2.0.12
-  flutter_launcher_icons: ^0.11.0
 
 dev_dependencies:
   flutter_test:
@@ -39,12 +38,6 @@ dev_dependencies:
   flutter_lints: ^2.0.0
   isar_generator: ^3.0.5
 
-
-flutter_icons:
-  ios: true
-  android: true
-  image_path_android: 'assets/icon.png'
-  image_path_ios: 'assets/icon.png'
 
 flutter:
 
