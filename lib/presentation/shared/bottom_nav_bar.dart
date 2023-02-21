@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 
-class BottomNavBar extends StatefulWidget {
+class BottomNavBar extends StatelessWidget {
   final int currentIndex;
   final List<BottomNavigationBarItem> items;
   final ValueChanged<int> onTap;
@@ -23,11 +23,6 @@ class BottomNavBar extends StatefulWidget {
     this.backgroundColor,
   }) : super(key: key);
 
-  @override
-  State<BottomNavBar> createState() => _BottomNavBarState();
-}
-
-class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -80,9 +75,9 @@ class _BottomNavBarState extends State<BottomNavBar> {
                           .extension<ThemeColorStyle>()!
                           .quaternaryColor
                           .withOpacity(0.4)),
-              currentIndex: widget.currentIndex,
-              onTap: widget.onTap,
-              items: widget.items,
+              currentIndex: currentIndex,
+              onTap: onTap,
+              items: items,
             ),
           ),
         ),
