@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/shared/elevated_buttons.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 
 class CustomDialogBox extends StatelessWidget {
   const CustomDialogBox({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceHeight = context.deviceHeight;
     return Center(
       child: SizedBox(
-        height: MediaQuery.of(context).size.height * 0.35,
+        height: deviceHeight * 0.35,
         child: Dialog(
           elevation: 0,
           insetPadding: const EdgeInsets.symmetric(horizontal: 22),
@@ -26,17 +31,18 @@ class CustomDialogBox extends StatelessWidget {
                 Text(
                   'You’re going to delete this note!',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+                  style: textTheme.bodyLarge!.copyWith(
                       fontWeight: FontWeight.w700,
-                      color: const Color(0xFF000000)),
+                      color: themeColorStyle.secondaryColor),
                 ),
                 const SizedBox(height: 10),
                 Text(
                     'By deleting this note you won’t be able to view or edit this note',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                    style: textTheme.bodyMedium!.copyWith(
                         fontWeight: FontWeight.w400,
-                        color: const Color(0xFF000000).withOpacity(0.5))),
+                        color:
+                            themeColorStyle.secondaryColor.withOpacity(0.5))),
                 const SizedBox(height: 30),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

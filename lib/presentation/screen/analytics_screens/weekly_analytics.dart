@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/theme/styling/doughnut_chart_style.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/widgets/doughnut_chart.dart';
@@ -9,9 +10,11 @@ class WeeklyAnalyticsTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
-    final double screenWidth = MediaQuery.of(context).size.width;
-    final doughnutColor = Theme.of(context).extension<DoughnutChartStyle>()!;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceHeight = context.deviceHeight;
+    final double deviceWidth = context.deviceWidth;
+    final DoughnutChartStyle doughnutChartStyle = context.doughnutChartStyle;
+
     return Padding(
       padding:
           const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
@@ -20,22 +23,26 @@ class WeeklyAnalyticsTab extends StatelessWidget {
           MoodDoughnutChart(
             moodDataMap: [
               ChartData(
-                  x: 'Productive', y: 3.5, color: doughnutColor.primaryColor),
-              ChartData(x: 'Sad', y: 1.5, color: doughnutColor.secondaryColor),
-              ChartData(x: 'Angry', y: 1.5, color: doughnutColor.tertiaryColor),
-              ChartData(x: 'Happy', y: 1.5, color: doughnutColor.quinaryColor),
+                  x: 'Productive',
+                  y: 3.5,
+                  color: doughnutChartStyle.primaryColor),
               ChartData(
-                  x: 'Sick', y: 2.0, color: doughnutColor.quaternaryColor),
+                  x: 'Sad', y: 1.5, color: doughnutChartStyle.secondaryColor),
+              ChartData(
+                  x: 'Angry', y: 1.5, color: doughnutChartStyle.tertiaryColor),
+              ChartData(
+                  x: 'Happy', y: 1.5, color: doughnutChartStyle.quinaryColor),
+              ChartData(
+                  x: 'Sick', y: 2.0, color: doughnutChartStyle.quaternaryColor),
             ],
           ),
-          SizedBox(height: screenHeight * 0.05),
+          SizedBox(height: deviceHeight * 0.05),
           const SelectableTab(),
-          SizedBox(height: screenHeight * 0.03),
+          SizedBox(height: deviceHeight * 0.03),
           Container(
-            height: screenHeight * 0.15,
+            height: deviceHeight * 0.15,
             decoration: BoxDecoration(
-              color:
-                  Theme.of(context).extension<ThemeColorStyle>()!.quinaryColor,
+              color: themeColorStyle.quinaryColor,
               borderRadius: BorderRadius.circular(20),
             ),
             child: Padding(
@@ -48,41 +55,41 @@ class WeeklyAnalyticsTab extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       CircleAvatar(
-                        backgroundColor: doughnutColor.primaryColor,
+                        backgroundColor: doughnutChartStyle.primaryColor,
                         radius: 7,
                       ),
                       const Text('Productive'),
-                      SizedBox(width: screenWidth * 0.03),
+                      SizedBox(width: deviceWidth * 0.03),
                       CircleAvatar(
-                        backgroundColor: doughnutColor.secondaryColor,
+                        backgroundColor: doughnutChartStyle.secondaryColor,
                         radius: 7,
                       ),
                       const Text('Angry'),
-                      SizedBox(width: screenWidth * 0.03),
+                      SizedBox(width: deviceWidth * 0.03),
                       CircleAvatar(
-                        backgroundColor: doughnutColor.tertiaryColor,
+                        backgroundColor: doughnutChartStyle.tertiaryColor,
                         radius: 7,
                       ),
                       const Text('Sick'),
-                      SizedBox(width: screenWidth * 0.03),
+                      SizedBox(width: deviceWidth * 0.03),
                     ],
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SizedBox(width: screenWidth * 0.035),
+                      SizedBox(width: deviceWidth * 0.035),
                       CircleAvatar(
-                        backgroundColor: doughnutColor.quinaryColor,
+                        backgroundColor: doughnutChartStyle.quinaryColor,
                         radius: 7,
                       ),
-                      SizedBox(width: screenWidth * 0.03),
+                      SizedBox(width: deviceWidth * 0.03),
                       const Text('Sad'),
-                      SizedBox(width: screenWidth * 0.2),
+                      SizedBox(width: deviceWidth * 0.2),
                       CircleAvatar(
-                        backgroundColor: doughnutColor.quaternaryColor,
+                        backgroundColor: doughnutChartStyle.quaternaryColor,
                         radius: 7,
                       ),
-                      SizedBox(width: screenWidth * 0.03),
+                      SizedBox(width: deviceWidth * 0.03),
                       const Text('Happy'),
                     ],
                   ),
@@ -118,8 +125,10 @@ class _SelectableTabState extends State<SelectableTab> {
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
-    final double screenWidth = MediaQuery.of(context).size.width;
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceHeight = context.deviceHeight;
+    final double deviceWidth = context.deviceWidth;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -131,32 +140,23 @@ class _SelectableTabState extends State<SelectableTab> {
             });
           },
           child: Container(
-            width: screenWidth * 0.105,
-            height: screenHeight * 0.03,
+            width: deviceWidth * 0.105,
+            height: deviceHeight * 0.03,
             decoration: BoxDecoration(
               color: (day == _selectedTab)
-                  ? Theme.of(context)
-                      .extension<ThemeColorStyle>()!
-                      .secondaryColor
-                  : Theme.of(context)
-                      .extension<ThemeColorStyle>()!
-                      .secondaryColor
-                      .withOpacity(0.03),
+                  ? themeColorStyle.secondaryColor
+                  : themeColorStyle.secondaryColor.withOpacity(0.03),
               borderRadius: BorderRadius.circular(100),
             ),
             alignment: Alignment.center,
             child: Text(
               day,
-              style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                    fontWeight: FontWeight.w400,
-                    color: (day == _selectedTab)
-                        ? Theme.of(context)
-                            .extension<ThemeColorStyle>()!
-                            .quinaryColor
-                        : Theme.of(context)
-                            .extension<ThemeColorStyle>()!
-                            .secondaryColor,
-                  ),
+              style: textTheme.labelLarge!.copyWith(
+                fontWeight: FontWeight.w400,
+                color: (day == _selectedTab)
+                    ? themeColorStyle.quinaryColor
+                    : themeColorStyle.secondaryColor,
+              ),
             ),
           ),
         );

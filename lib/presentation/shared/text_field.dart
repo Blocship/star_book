@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 
 class PrimaryTextField extends StatelessWidget {
   final String hintText;
@@ -11,37 +12,35 @@ class PrimaryTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     return TextFormField(
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-              fontWeight: FontWeight.w400,
-              color:
-                  Theme.of(context).extension<ThemeColorStyle>()!.tertiaryColor,
-            ),
+        hintStyle: textTheme.bodyMedium!.copyWith(
+          fontWeight: FontWeight.w400,
+          color: themeColorStyle.tertiaryColor,
+        ),
         isDense: true,
         contentPadding: const EdgeInsets.all(16.0),
         filled: true,
-        fillColor: Theme.of(context).extension<ThemeColorStyle>()!.quinaryColor,
+        fillColor: themeColorStyle.quinaryColor,
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: BorderSide(
-            color:
-                Theme.of(context).extension<ThemeColorStyle>()!.octonaryColor,
+            color: themeColorStyle.octonaryColor,
           ),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: BorderSide(
-            color:
-                Theme.of(context).extension<ThemeColorStyle>()!.octonaryColor,
+            color: themeColorStyle.octonaryColor,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: BorderSide(
-            color:
-                Theme.of(context).extension<ThemeColorStyle>()!.octonaryColor,
+            color: themeColorStyle.octonaryColor,
           ),
         ),
       ),
@@ -83,11 +82,13 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
-        border: Border.all(color: Colors.grey),
+        border: Border.all(color: themeColorStyle.octonaryColor),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -95,15 +96,11 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
         children: [
           AnimatedDefaultTextStyle(
             style: focusNode.hasFocus
-                ? Theme.of(context).textTheme.bodySmall!.copyWith(
-                      fontWeight: FontWeight.w400,
-                    )
-                : Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.w400,
-                      color: Theme.of(context)
-                          .extension<ThemeColorStyle>()!
-                          .secondaryColor,
-                    ),
+                ? textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w400)
+                : textTheme.bodyLarge!.copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: themeColorStyle.secondaryColor,
+                  ),
             duration: const Duration(milliseconds: 200),
             child: Text(widget.heading),
           ),
@@ -117,9 +114,8 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
               contentPadding: EdgeInsets.zero,
               isDense: true,
               hintText: widget.label ?? '',
-              hintStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    fontWeight: FontWeight.w400,
-                  ),
+              hintStyle:
+                  textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w400),
               border: const OutlineInputBorder(
                 borderSide: BorderSide.none,
               ),
@@ -145,14 +141,16 @@ class SelectableTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceWidth = context.deviceWidth;
     final selectedData = select ?? 'Select';
     final bool isEmpty = (selectedData != 'Select');
-    final double screenWidth = MediaQuery.of(context).size.width;
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
         border: Border.all(
-          color: Theme.of(context).extension<ThemeColorStyle>()!.octonaryColor,
+          color: themeColorStyle.octonaryColor,
         ),
       ),
       child: ListTile(
@@ -160,29 +158,23 @@ class SelectableTile extends StatelessWidget {
         dense: true,
         title: Text(
           title,
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                fontWeight: FontWeight.w400,
-                color: isEmpty
-                    ? Theme.of(context)
-                        .extension<ThemeColorStyle>()!
-                        .secondaryColor
-                    : Theme.of(context)
-                        .extension<ThemeColorStyle>()!
-                        .tertiaryColor,
-              ),
+          style: textTheme.bodyLarge!.copyWith(
+            fontWeight: FontWeight.w400,
+            color: isEmpty
+                ? themeColorStyle.secondaryColor
+                : themeColorStyle.tertiaryColor,
+          ),
         ),
         trailing: SizedBox(
-          width: screenWidth * 0.19,
+          width: deviceWidth * 0.19,
           child: Row(
             children: [
               Text(
                 selectedData,
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.w400,
-                      color: Theme.of(context)
-                          .extension<ThemeColorStyle>()!
-                          .tertiaryColor,
-                    ),
+                style: textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.w400,
+                  color: themeColorStyle.tertiaryColor,
+                ),
               ),
               const SizedBox(width: 4),
               const Icon(

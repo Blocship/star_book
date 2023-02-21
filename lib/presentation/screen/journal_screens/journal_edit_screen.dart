@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
@@ -13,7 +14,8 @@ class JournalEditScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
+    final double deviceHeight = context.deviceHeight;
+
     return Scaffold(
       appBar: PrimaryAppBar(
         leadingOnTap: () => context.goNamed(AppRouterName.journalDetailScreen),
@@ -25,17 +27,17 @@ class JournalEditScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: screenHeight * 0.06),
+            SizedBox(height: deviceHeight * 0.06),
             const MoodWidget(
                 date: '05 September 2022',
                 moodColor: Colors.green,
                 mood: 'Productive'),
-            SizedBox(height: screenHeight * 0.04),
+            SizedBox(height: deviceHeight * 0.04),
             const CustomTextFormField(
               heading: 'Title',
               initialValue: 'titleDescription',
             ),
-            SizedBox(height: screenHeight * 0.02),
+            SizedBox(height: deviceHeight * 0.02),
             const CustomTextFormField(
                 heading: 'Note', initialValue: 'noteDescription'),
           ],
@@ -63,34 +65,32 @@ class MoodWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    final double screenHeight = MediaQuery.of(context).size.height;
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceHeight = context.deviceHeight;
+    final double deviceWidth = context.deviceWidth;
 
     return SizedBox(
-      width: screenWidth,
+      width: deviceWidth,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             date,
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+            style: textTheme.bodyLarge!.copyWith(
                 fontWeight: FontWeight.w500,
-                color: Theme.of(context)
-                    .extension<ThemeColorStyle>()!
-                    .secondaryColor),
+                color: themeColorStyle.secondaryColor),
           ),
-          SizedBox(height: screenHeight * 0.04),
+          SizedBox(height: deviceHeight * 0.04),
           CircleAvatar(
             backgroundColor: moodColor,
-            radius: screenWidth * 0.075,
+            radius: deviceWidth * 0.075,
           ),
-          SizedBox(height: screenHeight * 0.02),
+          SizedBox(height: deviceHeight * 0.02),
           Text(
             mood,
-            style: Theme.of(context)
-                .textTheme
-                .headlineSmall!
-                .copyWith(fontWeight: FontWeight.w700),
+            style:
+                textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w700),
           ),
         ],
       ),

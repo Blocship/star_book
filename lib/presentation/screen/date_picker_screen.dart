@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
@@ -12,7 +13,10 @@ class DatePickerScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceHeight = context.deviceHeight;
+
     return Scaffold(
       appBar: PrimaryAppBar(
         leadingOnTap: () => context.goNamed(AppRouterName.journalCreateScreen),
@@ -25,27 +29,23 @@ class DatePickerScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: screenHeight * 0.04),
+            SizedBox(height: deviceHeight * 0.04),
             Container(
-              height: screenHeight * 0.06,
+              height: deviceHeight * 0.06,
               decoration: BoxDecoration(
-                color: Theme.of(context)
-                    .extension<ThemeColorStyle>()!
-                    .septenaryColor,
+                color: themeColorStyle.septenaryColor,
                 borderRadius: BorderRadius.circular(8.0),
               ),
               alignment: Alignment.center,
               child: Text(
                 'MM--DD--YY',
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.w400,
-                      color: Theme.of(context)
-                          .extension<ThemeColorStyle>()!
-                          .secondaryColor,
-                    ),
+                style: textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.w400,
+                  color: themeColorStyle.secondaryColor,
+                ),
               ),
             ),
-            SizedBox(height: screenHeight * 0.04),
+            SizedBox(height: deviceHeight * 0.04),
             const DatePicker(),
           ],
         ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 
 enum PickerComponent { date, month, year }
 
@@ -7,8 +8,9 @@ class DatePicker extends StatelessWidget {
   const DatePicker({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final double deviceHeight = context.deviceHeight;
     return Container(
-      height: MediaQuery.of(context).size.height * 0.25,
+      height: deviceHeight * 0.25,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -46,6 +48,7 @@ class _PickerWidgetState extends State<PickerWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = context.textTheme;
     return Row(children: [
       Expanded(
         child: Column(
@@ -60,18 +63,13 @@ class _PickerWidgetState extends State<PickerWidget> {
             const SizedBox(height: 6),
             Text(
               _month,
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium!
+              style: textTheme.headlineMedium!
                   .copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 8),
             Text(
               getPickerDateComponentName(PickerComponent.month),
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge!
-                  .copyWith(fontWeight: FontWeight.w400),
+              style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w400),
             ),
             const SizedBox(height: 15),
             GestureDetector(
@@ -96,18 +94,13 @@ class _PickerWidgetState extends State<PickerWidget> {
             const SizedBox(height: 6),
             Text(
               _day,
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium!
+              style: textTheme.headlineMedium!
                   .copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 8),
             Text(
               getPickerDateComponentName(PickerComponent.date),
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge!
-                  .copyWith(fontWeight: FontWeight.w400),
+              style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w400),
             ),
             const SizedBox(height: 15),
             GestureDetector(
@@ -132,18 +125,13 @@ class _PickerWidgetState extends State<PickerWidget> {
             const SizedBox(height: 6),
             Text(
               _year,
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium!
+              style: textTheme.headlineMedium!
                   .copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 8),
             Text(
               getPickerDateComponentName(PickerComponent.year),
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyLarge!
-                  .copyWith(fontWeight: FontWeight.w400),
+              style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w400),
             ),
             const SizedBox(height: 15),
             GestureDetector(

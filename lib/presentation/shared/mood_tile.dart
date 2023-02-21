@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 
 class MoodTile extends StatelessWidget {
   final String title;
@@ -15,6 +16,7 @@ class MoodTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = context.textTheme;
     return ListTile(
       dense: true,
       shape: RoundedRectangleBorder(
@@ -26,7 +28,7 @@ class MoodTile extends StatelessWidget {
       onTap: onTap,
       leading: Text(
         title,
-        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+        style: textTheme.bodyLarge!.copyWith(
             fontWeight: FontWeight.w400,
             color: isSelected ? color : color.withOpacity(0.4)),
       ),

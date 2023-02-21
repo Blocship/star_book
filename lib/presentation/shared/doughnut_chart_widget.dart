@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/theme/styling/doughnut_chart_style.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
@@ -14,27 +15,26 @@ class DoughnutChartWidget extends StatefulWidget {
 class _DoughnutChartWidgetState extends State<DoughnutChartWidget> {
   @override
   Widget build(BuildContext context) {
-    final doughnutColor = Theme.of(context).extension<DoughnutChartStyle>()!;
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceHeight = context.deviceHeight;
+    final DoughnutChartStyle doughnutChartStyle = context.doughnutChartStyle;
     final List<ChartData> chartData = [
-      ChartData(x: 'Productive', y: 3.5, color: doughnutColor.primaryColor),
-      ChartData(x: 'Sad', y: 1.5, color: doughnutColor.secondaryColor),
-      ChartData(x: 'Angry', y: 1.5, color: doughnutColor.tertiaryColor),
-      ChartData(x: 'Happy', y: 1.5, color: doughnutColor.quinaryColor),
-      ChartData(x: 'Sick', y: 2.0, color: doughnutColor.quaternaryColor),
+      ChartData(
+          x: 'Productive', y: 3.5, color: doughnutChartStyle.primaryColor),
+      ChartData(x: 'Sad', y: 1.5, color: doughnutChartStyle.secondaryColor),
+      ChartData(x: 'Angry', y: 1.5, color: doughnutChartStyle.tertiaryColor),
+      ChartData(x: 'Happy', y: 1.5, color: doughnutChartStyle.quinaryColor),
+      ChartData(x: 'Sick', y: 2.0, color: doughnutChartStyle.quaternaryColor),
     ];
-    final double screenHeight = MediaQuery.of(context).size.height;
-
     return Container(
-      height: screenHeight * 0.3,
+      height: deviceHeight * 0.3,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
-        color: doughnutColor.octonaryColor,
+        color: doughnutChartStyle.octonaryColor,
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context)
-                .extension<ThemeColorStyle>()!
-                .secondaryColor
-                .withOpacity(0.1),
+            color: themeColorStyle.secondaryColor.withOpacity(0.1),
             blurRadius: 100,
           ),
         ],
@@ -47,21 +47,17 @@ class _DoughnutChartWidgetState extends State<DoughnutChartWidget> {
           CircularChartAnnotation(
             widget: PhysicalModel(
               shape: BoxShape.circle,
-              color:
-                  Theme.of(context).extension<ThemeColorStyle>()!.quinaryColor,
+              color: themeColorStyle.quinaryColor,
             ),
           ),
           CircularChartAnnotation(
             widget: Text(
               'Mood of the Month',
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.labelLarge!.copyWith(
-                    fontWeight: FontWeight.w400,
-                    color: Theme.of(context)
-                        .extension<ThemeColorStyle>()!
-                        .secondaryColor
-                        .withOpacity(0.5),
-                  ),
+              style: textTheme.labelLarge!.copyWith(
+                fontWeight: FontWeight.w400,
+                color: themeColorStyle.secondaryColor.withOpacity(0.5),
+              ),
             ),
           ),
         ],

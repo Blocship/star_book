@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
 
@@ -33,7 +35,10 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceHeight = context.deviceHeight;
+
     return GradientScaffold(
       body: Center(
         child: Column(
@@ -43,17 +48,16 @@ class _SplashScreenState extends State<SplashScreen>
               image: AssetImage('assets/icons/splash_screen_logo.png'),
               width: 115,
             ),
-            SizedBox(height: screenHeight * 0.02),
+            SizedBox(height: deviceHeight * 0.02),
             Text('Starbook',
-                style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                    fontWeight: FontWeight.w700, color: Colors.black)),
-            SizedBox(height: screenHeight * 0.33),
+                style: textTheme.headlineLarge!.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color: themeColorStyle.secondaryColor)),
+            SizedBox(height: deviceHeight * 0.33),
             Text('Beta Version V2.0',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
+                style: textTheme.bodyMedium!
                     .copyWith(fontWeight: FontWeight.w400)),
-            SizedBox(height: screenHeight * 0.05),
+            SizedBox(height: deviceHeight * 0.05),
           ],
         ),
       ),

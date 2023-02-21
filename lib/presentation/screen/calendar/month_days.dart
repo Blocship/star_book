@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
@@ -19,7 +20,8 @@ class MonthScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
+    final TextTheme textTheme = context.textTheme;
+    final double deviceWidth = context.deviceWidth;
 
     final List<Row> dayRows = <Row>[];
     final List<Date> dayRowChildren = <Date>[];
@@ -59,13 +61,11 @@ class MonthScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 25),
             SizedBox(
-              width: screenWidth * 0.84,
+              width: deviceWidth * 0.84,
               child: Text(
                 CalendarUtils.getFullMonthName(monthDetails.month),
                 textAlign: TextAlign.left,
-                style: Theme.of(context)
-                    .textTheme
-                    .headlineMedium!
+                style: textTheme.headlineMedium!
                     .copyWith(fontWeight: FontWeight.w700),
               ),
             ),
@@ -101,13 +101,15 @@ class WeekDaysView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
-    final double screenWidth = MediaQuery.of(context).size.width;
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceHeight = context.deviceHeight;
+    final double deviceWidth = context.deviceWidth;
 
     List<String> weekDays = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
     return SizedBox(
-      width: screenWidth * 0.933,
-      height: screenHeight * 0.04,
+      width: deviceWidth * 0.933,
+      height: deviceHeight * 0.04,
       child: ListView.builder(
         itemCount: weekDays.length,
         scrollDirection: Axis.horizontal,
@@ -118,12 +120,10 @@ class WeekDaysView extends StatelessWidget {
             child: Text(
               weekDays[index],
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    fontWeight: FontWeight.w400,
-                    color: Theme.of(context)
-                        .extension<ThemeColorStyle>()!
-                        .secondaryColor,
-                  ),
+              style: textTheme.bodyLarge!.copyWith(
+                fontWeight: FontWeight.w400,
+                color: themeColorStyle.secondaryColor,
+              ),
             ),
           );
         },
@@ -142,6 +142,7 @@ class Date extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = context.textTheme;
     return GestureDetector(
       onTap: () => context.goNamed(AppRouterName.journalCreateScreen),
       child: Container(
@@ -150,10 +151,7 @@ class Date extends StatelessWidget {
         alignment: Alignment.center,
         child: Text(
           day < 1 ? '' : day.toString(),
-          style: Theme.of(context)
-              .textTheme
-              .bodyMedium!
-              .copyWith(fontWeight: FontWeight.w400),
+          style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w400),
         ),
       ),
     );

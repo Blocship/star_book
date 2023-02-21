@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/screen/calendar/custom_calendar_card.dart';
 import 'package:star_book/presentation/screen/calendar/year_title.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 
 class CalendarView extends StatelessWidget {
   const CalendarView({
@@ -12,15 +13,16 @@ class CalendarView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
+    final double deviceHeight = context.deviceHeight;
+
     return Container(
-      height: screenHeight * 0.42,
+      height: deviceHeight * 0.42,
       padding: const EdgeInsets.symmetric(horizontal: 18.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           YearTitle(year),
-          SizedBox(height: screenHeight * 0.03),
+          SizedBox(height: deviceHeight * 0.03),
           CalendarMonthView(year: year),
         ],
       ),
@@ -38,9 +40,9 @@ class CalendarMonthView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
+    final double deviceHeight = context.deviceHeight;
     return SizedBox(
-      height: screenHeight * 0.32,
+      height: deviceHeight * 0.32,
       child: GridView.builder(
         physics: const NeverScrollableScrollPhysics(),
         gridDelegate:

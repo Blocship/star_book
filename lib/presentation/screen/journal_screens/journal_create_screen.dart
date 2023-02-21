@@ -4,6 +4,7 @@ import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 
@@ -81,33 +82,31 @@ class AddNewDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
-    final double screenWidth = MediaQuery.of(context).size.width;
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceHeight = context.deviceHeight;
+    final double deviceWidth = context.deviceWidth;
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        SizedBox(width: screenWidth * 0.02),
+        SizedBox(width: deviceWidth * 0.02),
         const Image(image: AssetImage('assets/icons/book.png'), height: 36),
-        SizedBox(width: screenWidth * 0.03),
+        SizedBox(width: deviceWidth * 0.03),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               'Add New Details',
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: Theme.of(context)
-                        .extension<ThemeColorStyle>()!
-                        .secondaryColor,
-                  ),
+              style: textTheme.bodyLarge!.copyWith(
+                fontWeight: FontWeight.w700,
+                color: themeColorStyle.secondaryColor,
+              ),
             ),
-            SizedBox(height: screenHeight * 0.004),
+            SizedBox(height: deviceHeight * 0.004),
             Text(
               'Write your today’s thought details below',
-              style: Theme.of(context)
-                  .textTheme
-                  .labelLarge!
-                  .copyWith(fontWeight: FontWeight.w400),
+              style:
+                  textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w400),
             ),
           ],
         ),

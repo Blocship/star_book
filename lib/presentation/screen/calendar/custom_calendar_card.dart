@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/calendar.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 
 class CustomCalendarCard extends StatelessWidget {
   final int year;
@@ -15,6 +17,9 @@ class CustomCalendarCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -30,16 +35,14 @@ class CustomCalendarCard extends StatelessWidget {
             width: 70,
             height: 70,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: themeColorStyle.quinaryColor,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
               child: Text(
                 CalendarUtils.getMonthName(monthIndex),
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge!
-                    .copyWith(fontWeight: FontWeight.w400),
+                style:
+                    textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w400),
               ),
             ),
           ),

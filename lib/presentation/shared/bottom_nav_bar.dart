@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 
 class BottomNavBar extends StatelessWidget {
   final int currentIndex;
@@ -25,19 +26,20 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceHeight = context.deviceHeight;
+    final double deviceWidth = context.deviceWidth;
     return SafeArea(
       top: false,
       minimum: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
       child: Container(
-        width: MediaQuery.of(context).size.width * 0.9,
-        height: MediaQuery.of(context).size.height * 0.08,
+        width: deviceWidth * 0.9,
+        height: deviceHeight * 0.08,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Theme.of(context)
-                  .extension<ThemeColorStyle>()!
-                  .secondaryColor
-                  .withOpacity(0.1),
+              color: themeColorStyle.secondaryColor.withOpacity(0.1),
               blurRadius: 100,
             ),
           ],
@@ -50,31 +52,17 @@ class BottomNavBar extends StatelessWidget {
               highlightColor: Colors.transparent,
             ),
             child: BottomNavigationBar(
-              backgroundColor:
-                  Theme.of(context).extension<ThemeColorStyle>()!.quinaryColor,
-              selectedItemColor: Theme.of(context)
-                  .extension<ThemeColorStyle>()!
-                  .quaternaryColor,
-              unselectedItemColor: Theme.of(context)
-                  .extension<ThemeColorStyle>()!
-                  .quaternaryColor
-                  .withOpacity(0.4),
-              selectedLabelStyle:
-                  Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.w500,
-                        color: Theme.of(context)
-                            .extension<ThemeColorStyle>()!
-                            .quaternaryColor,
-                      ),
-              unselectedLabelStyle: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(
-                      fontWeight: FontWeight.w400,
-                      color: Theme.of(context)
-                          .extension<ThemeColorStyle>()!
-                          .quaternaryColor
-                          .withOpacity(0.4)),
+              backgroundColor: themeColorStyle.quinaryColor,
+              selectedItemColor: themeColorStyle.quaternaryColor,
+              unselectedItemColor:
+                  themeColorStyle.quaternaryColor.withOpacity(0.4),
+              selectedLabelStyle: textTheme.bodyMedium!.copyWith(
+                fontWeight: FontWeight.w500,
+                color: themeColorStyle.quaternaryColor,
+              ),
+              unselectedLabelStyle: textTheme.bodyMedium!.copyWith(
+                  fontWeight: FontWeight.w400,
+                  color: themeColorStyle.quaternaryColor.withOpacity(0.4)),
               currentIndex: currentIndex,
               onTap: onTap,
               items: items,
