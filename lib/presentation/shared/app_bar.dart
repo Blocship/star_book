@@ -4,7 +4,6 @@ import 'package:star_book/presentation/utils/padding_style.dart';
 
 class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? leadingText;
-  final IconData? icon;
   final String? centerTitle;
   final String? trailingText;
   final VoidCallback? leadingOnTap;
@@ -13,7 +12,6 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   const PrimaryAppBar({
     super.key,
     this.leadingText,
-    this.icon,
     this.centerTitle,
     this.trailingText,
     this.leadingOnTap,
@@ -33,14 +31,14 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
           child: Row(
             children: [
               Icon(
-                icon,
+                Icons.keyboard_arrow_left_outlined,
                 size: 24,
                 color: Theme.of(context)
                     .extension<ThemeColorStyle>()!
                     .secondaryColor,
               ),
               Text(
-                leadingText ?? '',
+                leadingText ?? 'Back',
                 style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontWeight: FontWeight.w400,
                       color: Theme.of(context)

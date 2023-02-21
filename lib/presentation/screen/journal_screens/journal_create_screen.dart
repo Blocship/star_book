@@ -16,8 +16,6 @@ class JournalCreateScreen extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: PrimaryAppBar(
-        icon: Icons.keyboard_arrow_left_outlined,
-        leadingText: 'Back',
         leadingOnTap: () => context.pop(),
         centerTitle: 'New Thought',
       ),

@@ -50,7 +50,6 @@ class MonthScreen extends StatelessWidget {
     /// This will display the week days and dates of the month
     return GradientScaffold(
       appBar: PrimaryAppBar(
-        icon: Icons.keyboard_arrow_left_outlined,
         leadingText: 'Year',
         leadingOnTap: () => context.goNamed(AppRouterName.yearScreen),
       ),

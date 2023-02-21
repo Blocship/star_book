@@ -33,8 +33,6 @@ class _AnalyticsTabBarViewState extends State<AnalyticsTabBarView>
       length: 2,
       child: GradientScaffold(
         appBar: PrimaryAppBar(
-          icon: Icons.keyboard_arrow_left_outlined,
-          leadingText: 'Back',
           leadingOnTap: () => context.goNamed(AppRouterName.mainScreen),
           centerTitle: 'Analytics',
         ),

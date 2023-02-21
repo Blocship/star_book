@@ -11,8 +11,6 @@ class YearScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return GradientScaffold(
       appBar: PrimaryAppBar(
-        icon: Icons.keyboard_arrow_left_outlined,
-        leadingText: 'Back',
         leadingOnTap: () => context.pop(),
         centerTitle: 'Year',
       ),

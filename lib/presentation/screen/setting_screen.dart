@@ -14,8 +14,6 @@ class SettingScreen extends StatelessWidget {
     final double screenHeight = MediaQuery.of(context).size.height;
     return GradientScaffold(
       appBar: PrimaryAppBar(
-        icon: Icons.keyboard_arrow_left_outlined,
-        leadingText: 'Back',
         leadingOnTap: () => context.goNamed(AppRouterName.mainScreen),
         centerTitle: 'Settings',
       ),

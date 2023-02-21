@@ -20,8 +20,6 @@ class _MoodPickerScreenState extends State<MoodPickerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PrimaryAppBar(
-        icon: Icons.keyboard_arrow_left_outlined,
-        leadingText: 'Back',
         leadingOnTap: () => context.goNamed(AppRouterName.journalCreateScreen),
         centerTitle: 'Select Mood',
       ),
