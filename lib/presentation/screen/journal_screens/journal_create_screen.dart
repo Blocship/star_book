@@ -13,7 +13,6 @@ class JournalCreateScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double deviceHeight = context.deviceHeight;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: PrimaryAppBar(
@@ -28,30 +27,30 @@ class JournalCreateScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              SizedBox(height: deviceHeight * 0.038),
+              const SizedBox(height: 30),
               const AddNewDetails(),
-              SizedBox(height: deviceHeight * 0.038),
+              const SizedBox(height: 30),
               SelectableTile(
                 title: 'Date',
                 onTap: () => context.goNamed(AppRouterName.datePickerScreen),
               ),
-              SizedBox(height: deviceHeight * 0.038),
+              const SizedBox(height: 30),
               SelectableTile(
                 title: 'Mood',
                 onTap: () => context.goNamed(AppRouterName.moodPickerScreen),
               ),
-              SizedBox(height: deviceHeight * 0.038),
+              const SizedBox(height: 30),
               const CustomTextFormField(
                 heading: 'Title',
                 label: 'Enter Mood Title',
               ),
-              SizedBox(height: deviceHeight * 0.038),
+              const SizedBox(height: 30),
               const CustomTextFormField(
                 heading: 'Note',
                 label: 'Write Note',
                 isMultiline: true,
               ),
-              SizedBox(height: deviceHeight * 0.04),
+              const SizedBox(height: 30),
             ],
           ),
         ),

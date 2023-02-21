@@ -33,7 +33,7 @@ class JournalEditScreen extends StatelessWidget {
                   date: '05 September 2022',
                   moodColor: Colors.green,
                   mood: 'Productive'),
-              SizedBox(height: deviceHeight * 0.04),
+              const SizedBox(height: 30),
               const CustomTextFormField(
                 heading: 'Title',
                 initialValue: 'titleDescription',
