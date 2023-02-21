@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 
 class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -20,6 +21,8 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     return Padding(
       padding:
           const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
@@ -33,18 +36,14 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
               Icon(
                 Icons.keyboard_arrow_left_outlined,
                 size: 24,
-                color: Theme.of(context)
-                    .extension<ThemeColorStyle>()!
-                    .secondaryColor,
+                color: themeColorStyle.secondaryColor,
               ),
               Text(
                 leadingText ?? 'Back',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      fontWeight: FontWeight.w400,
-                      color: Theme.of(context)
-                          .extension<ThemeColorStyle>()!
-                          .secondaryColor,
-                    ),
+                style: textTheme.bodyMedium!.copyWith(
+                  fontWeight: FontWeight.w400,
+                  color: themeColorStyle.secondaryColor,
+                ),
               ),
             ],
           ),
@@ -52,12 +51,10 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
         centerTitle: true,
         title: Text(
           centerTitle ?? '',
-          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                fontWeight: FontWeight.w700,
-                color: Theme.of(context)
-                    .extension<ThemeColorStyle>()!
-                    .secondaryColor,
-              ),
+          style: textTheme.bodyLarge!.copyWith(
+            fontWeight: FontWeight.w700,
+            color: themeColorStyle.secondaryColor,
+          ),
         ),
         actions: [
           Padding(
@@ -66,12 +63,10 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
                 onTap: trailingOnTap,
                 child: Text(
                   trailingText ?? '',
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.w400,
-                        color: Theme.of(context)
-                            .extension<ThemeColorStyle>()!
-                            .secondaryColor,
-                      ),
+                  style: textTheme.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: themeColorStyle.secondaryColor,
+                  ),
                 ),
               )),
         ],
@@ -99,6 +94,7 @@ class SecondaryAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     return Padding(
       padding:
           const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
@@ -112,11 +108,8 @@ class SecondaryAppBar extends StatelessWidget implements PreferredSizeWidget {
             padding: EdgeInsets.zero,
             constraints: const BoxConstraints(),
             onPressed: trailingOnTap,
-            icon: Icon(trailing,
-                size: 24,
-                color: Theme.of(context)
-                    .extension<ThemeColorStyle>()!
-                    .secondaryColor),
+            icon:
+                Icon(trailing, size: 24, color: themeColorStyle.secondaryColor),
           )
         ],
       ),
