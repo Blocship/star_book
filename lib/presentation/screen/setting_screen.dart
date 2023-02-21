@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/tile.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
@@ -11,7 +12,8 @@ class SettingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
+    final TextTheme textTheme = context.textTheme;
+    final double deviceHeight = context.deviceHeight;
     return GradientScaffold(
       appBar: PrimaryAppBar(
         leading: PrimaryAppBarItem(
@@ -28,7 +30,7 @@ class SettingScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: screenHeight * 0.04),
+            SizedBox(height: deviceHeight * 0.04),
             CustomTile(
                 title: 'Starbook Community',
                 subtitle: 'Know who’s using starbook app',
@@ -46,13 +48,11 @@ class SettingScreen extends StatelessWidget {
                 subtitle: 'Your licensed agreement with starbook',
                 onTap: () =>
                     context.goNamed(AppRouterName.licenseAgreementScreen)),
-            SizedBox(height: screenHeight * 0.34),
+            SizedBox(height: deviceHeight * 0.34),
             Text(
               'App version 2.0',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(fontWeight: FontWeight.w400),
+              style:
+                  textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w400),
             ),
             const SizedBox(height: 10),
             const BlocShipTile(),

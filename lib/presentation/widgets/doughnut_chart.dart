@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class MoodDoughnutChart extends StatefulWidget {
@@ -17,73 +18,42 @@ class MoodDoughnutChart extends StatefulWidget {
 class _MoodDoughnutChartState extends State<MoodDoughnutChart> {
   @override
   Widget build(BuildContext context) {
-    // final double screenHeight = MediaQuery.of(context).size.height;
-    final double screenWidth = MediaQuery.of(context).size.width;
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceWidth = context.deviceWidth;
 
-    // final List<ChartData> chartData = [
-    //   ChartData(
-    //     x: 'Productive',
-    //     y: 3.5,
-    //     color: const Color(0xFF8EFFA4),
-    //   ),
-    //   ChartData(
-    //     x: 'Sad',
-    //     y: 1.5,
-    //     color: const Color(0xFF6C71FF),
-    //   ),
-    //   ChartData(
-    //     x: 'Angry',
-    //     y: 1.5,
-    //     color: const Color(0xFFFF716C),
-    //   ),
-    //   ChartData(
-    //     x: 'Happy',
-    //     y: 1.5,
-    //     color: const Color(0xFF60ABFF),
-    //   ),
-    //   ChartData(
-    //     x: 'Sick',
-    //     y: 2.0,
-    //     color: const Color(0xFFFFC169),
-    //   ),
-    // ];
     return SfCircularChart(
       annotations: <CircularChartAnnotation>[
         CircularChartAnnotation(
           widget: PhysicalModel(
             shape: BoxShape.circle,
-            color: Theme.of(context).extension<ThemeColorStyle>()!.quinaryColor,
+            color: themeColorStyle.quinaryColor,
           ),
         ),
         CircularChartAnnotation(
           widget: CircleAvatar(
-            radius: screenWidth / 4,
-            backgroundColor: Colors.white,
+            radius: deviceWidth / 4,
+            backgroundColor: themeColorStyle.quinaryColor,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Text(
                   'Mood of The Month',
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                        fontWeight: FontWeight.w400,
-                      ),
+                  style: textTheme.bodySmall!
+                      .copyWith(fontWeight: FontWeight.w400),
                 ),
                 Text(
                   '45%', // Percentage based on calculation
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineLarge!
+                  style: textTheme.headlineLarge!
                       .copyWith(fontWeight: FontWeight.w700),
                 ),
                 Text(
                   'Productive',
-                  style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                        fontWeight: FontWeight.w500,
-                        color: Theme.of(context)
-                            .extension<ThemeColorStyle>()!
-                            .secondaryColor,
-                      ),
+                  style: textTheme.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.w500,
+                    color: themeColorStyle.secondaryColor,
+                  ),
                 ),
               ],
             ),

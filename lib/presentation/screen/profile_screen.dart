@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/doughnut_chart_widget.dart';
 import 'package:star_book/presentation/shared/stats_widget.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
@@ -13,7 +14,9 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceWidth = context.deviceWidth;
 
     return GradientScaffold(
       appBar: SecondaryAppBar(
@@ -34,20 +37,16 @@ class ProfileScreen extends StatelessWidget {
           children: [
             Text(
               'Welcome Back',
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineSmall!
+              style: textTheme.headlineSmall!
                   .copyWith(fontWeight: FontWeight.w400),
             ),
             const SizedBox(height: 6),
             Text(
               'Noor Ul Abedin 👋',
-              style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: Theme.of(context)
-                        .extension<ThemeColorStyle>()!
-                        .secondaryColor,
-                  ),
+              style: textTheme.headlineLarge!.copyWith(
+                fontWeight: FontWeight.w700,
+                color: themeColorStyle.secondaryColor,
+              ),
             ),
             const SizedBox(height: 22),
             const StatsWidget(
@@ -65,15 +64,13 @@ class ProfileScreen extends StatelessWidget {
                   image: AssetImage('assets/icons/analytics_donut_chart.png'),
                   height: 25,
                 ),
-                SizedBox(width: screenWidth * 0.02),
+                SizedBox(width: deviceWidth * 0.02),
                 Text(
                   'Analytics',
-                  style: Theme.of(context)
-                      .textTheme
-                      .headlineMedium!
+                  style: textTheme.headlineMedium!
                       .copyWith(fontWeight: FontWeight.w700, height: 1.4),
                 ),
-                SizedBox(width: screenWidth * 0.26),
+                SizedBox(width: deviceWidth * 0.26),
                 GestureDetector(
                   onTap: () => context.goNamed(AppRouterName.analyticScreen),
                   child: Row(
@@ -81,12 +78,10 @@ class ProfileScreen extends StatelessWidget {
                     children: [
                       Text(
                         'View Details',
-                        style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                              fontWeight: FontWeight.w500,
-                              color: Theme.of(context)
-                                  .extension<ThemeColorStyle>()!
-                                  .secondaryColor,
-                            ),
+                        style: textTheme.bodyMedium!.copyWith(
+                          fontWeight: FontWeight.w500,
+                          color: themeColorStyle.secondaryColor,
+                        ),
                       ),
                       const Icon(Icons.keyboard_arrow_right_outlined),
                     ],

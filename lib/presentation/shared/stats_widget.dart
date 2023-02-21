@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 
 class StatsWidget extends StatelessWidget {
@@ -18,18 +19,16 @@ class StatsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceHeight = context.deviceHeight;
     return Container(
-      height: screenHeight * 0.26,
+      height: deviceHeight * 0.26,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            color: Theme.of(context)
-                .extension<ThemeColorStyle>()!
-                .secondaryColor
-                .withOpacity(0.1),
+            color: themeColorStyle.secondaryColor.withOpacity(0.1),
             blurRadius: 100,
           ),
         ],
@@ -70,28 +69,28 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceHeight = context.deviceHeight;
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: screenHeight * 0.028),
+          SizedBox(height: deviceHeight * 0.028),
           Image(image: AssetImage(imagePath), height: 55),
-          SizedBox(height: screenHeight * 0.025),
+          SizedBox(height: deviceHeight * 0.025),
           Text(
             count,
-            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                fontWeight: FontWeight.w700, color: const Color(0xFF1F1F1F)),
+            style: textTheme.headlineLarge!.copyWith(
+                fontWeight: FontWeight.w700,
+                color: themeColorStyle.secondaryColor),
           ),
-          SizedBox(height: screenHeight * 0.02),
+          SizedBox(height: deviceHeight * 0.02),
           Text(
             title,
-            style: Theme.of(context)
-                .textTheme
-                .bodyLarge!
-                .copyWith(fontWeight: FontWeight.w400),
+            style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w400),
           ),
-          SizedBox(height: screenHeight * 0.028),
+          SizedBox(height: deviceHeight * 0.028),
         ],
       ),
     );

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/shared/elevated_buttons.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
@@ -11,7 +12,8 @@ class IntroScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
+    final TextTheme textTheme = context.textTheme;
+    final double deviceHeight = context.deviceHeight;
     return GradientScaffold(
       resizeToAvoidBottomInset: false,
       body: Padding(
@@ -21,28 +23,24 @@ class IntroScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: screenHeight * 0.08),
+            SizedBox(height: deviceHeight * 0.08),
             Image(
                 image: const AssetImage('assets/images/intro_image.png'),
-                height: screenHeight * 0.2),
-            SizedBox(height: screenHeight * 0.024),
+                height: deviceHeight * 0.2),
+            SizedBox(height: deviceHeight * 0.024),
             Text(
               'So nice to meet you!',
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium!
+              style: textTheme.headlineMedium!
                   .copyWith(fontWeight: FontWeight.w400),
             ),
             Text(
               'What do your friends call you?',
-              style: Theme.of(context)
-                  .textTheme
-                  .headlineMedium!
+              style: textTheme.headlineMedium!
                   .copyWith(fontWeight: FontWeight.w700),
             ),
-            SizedBox(height: screenHeight * 0.028),
+            SizedBox(height: deviceHeight * 0.028),
             const PrimaryTextField(hintText: 'Enter your name'),
-            SizedBox(height: screenHeight * 0.41),
+            SizedBox(height: deviceHeight * 0.41),
             PrimaryFilledButton(
               onTap: () =>
                   context.pushReplacementNamed(AppRouterName.mainScreen),
