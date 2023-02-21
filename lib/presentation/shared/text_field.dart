@@ -166,8 +166,9 @@ class SelectableTile extends StatelessWidget {
           ),
         ),
         trailing: SizedBox(
-          width: deviceWidth * 0.19,
+          width: deviceWidth * 0.21,
           child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
                 selectedData,
@@ -176,7 +177,6 @@ class SelectableTile extends StatelessWidget {
                   color: themeColorStyle.tertiaryColor,
                 ),
               ),
-              const SizedBox(width: 4),
               const Icon(
                 Icons.keyboard_arrow_right,
                 size: 20,

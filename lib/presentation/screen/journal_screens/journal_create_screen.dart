@@ -13,6 +13,7 @@ class JournalCreateScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double deviceHeight = context.deviceHeight;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: PrimaryAppBar(
@@ -27,29 +28,30 @@ class JournalCreateScreen extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              const SizedBox(height: 30),
+              SizedBox(height: deviceHeight * 0.038),
               const AddNewDetails(),
-              const SizedBox(height: 30),
+              SizedBox(height: deviceHeight * 0.038),
               SelectableTile(
                 title: 'Date',
                 onTap: () => context.goNamed(AppRouterName.datePickerScreen),
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: deviceHeight * 0.038),
               SelectableTile(
                 title: 'Mood',
                 onTap: () => context.goNamed(AppRouterName.moodPickerScreen),
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: deviceHeight * 0.038),
               const CustomTextFormField(
                 heading: 'Title',
                 label: 'Enter Mood Title',
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: deviceHeight * 0.038),
               const CustomTextFormField(
                 heading: 'Note',
                 label: 'Write Note',
                 isMultiline: true,
               ),
+              SizedBox(height: deviceHeight * 0.04),
             ],
           ),
         ),
@@ -58,20 +60,6 @@ class JournalCreateScreen extends StatelessWidget {
 
           ///Todo: Here we can't pop screen or we need to handle data from pop()
           onTap: () => context.pop(),
-
-          // onTap: () {
-          //   if (isHomeScreen) {
-          //     log('If: $isHomeScreen');
-          //     context.goNamed(AppRouterName.monthScreen, params: {
-          //       'year': year.toString(),
-          //       'month': month.toString(),
-          //       'isHomeScreen': isHomeScreen.toString(),
-          //     });
-          //   } else {
-          //     log('Else');
-          //     context.pop();
-          //   }
-          // },
           child: const Icon(Icons.check)),
     );
   }

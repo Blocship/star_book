@@ -33,9 +33,8 @@ class StatsWidget extends StatelessWidget {
           ),
         ],
       ),
-      padding: const EdgeInsets.symmetric(
-          vertical: CustomPadding.smallPadding,
-          horizontal: CustomPadding.mediumPadding),
+      padding:
+          const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -76,7 +75,7 @@ class CustomCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: deviceHeight * 0.028),
+          SizedBox(height: deviceHeight * 0.035),
           Image(image: AssetImage(imagePath), height: 55),
           SizedBox(height: deviceHeight * 0.025),
           Text(
@@ -90,7 +89,6 @@ class CustomCard extends StatelessWidget {
             title,
             style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w400),
           ),
-          SizedBox(height: deviceHeight * 0.028),
         ],
       ),
     );

@@ -25,23 +25,26 @@ class JournalDetailScreen extends StatelessWidget {
               context: context, builder: (context) => const CustomDialogBox());
         },
       ),
-      body: Padding(
-        padding:
-            const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: deviceHeight * 0.06),
-            const MoodWidget(
-                date: '05 September 2022',
-                moodColor: Colors.green,
-                mood: 'Productive'),
-            SizedBox(height: deviceHeight * 0.04),
-            const DocumentWidget(
-                title: 'Title', description: 'titleDescription'),
-            SizedBox(height: deviceHeight * 0.02),
-            const DocumentWidget(title: 'Note', description: 'noteDescription'),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: CustomPadding.mediumPadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: deviceHeight * 0.06),
+              const MoodWidget(
+                  date: '05 September 2022',
+                  moodColor: Colors.green,
+                  mood: 'Productive'),
+              SizedBox(height: deviceHeight * 0.04),
+              const DocumentWidget(
+                  title: 'Title', description: 'titleDescription'),
+              SizedBox(height: deviceHeight * 0.02),
+              const DocumentWidget(
+                  title: 'Note', description: 'noteDescription'),
+            ],
+          ),
         ),
       ),
       floatingActionButton: PrimaryFloatingActionButton(

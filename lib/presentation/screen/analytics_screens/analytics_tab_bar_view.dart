@@ -44,7 +44,7 @@ class _AnalyticsTabBarViewState extends State<AnalyticsTabBarView>
           children: [
             SizedBox(height: deviceHeight * 0.05),
             Container(
-              width: deviceWidth * 0.55,
+              width: deviceWidth * 0.56,
               height: deviceHeight * 0.055,
               padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
               decoration: BoxDecoration(
@@ -72,7 +72,6 @@ class _AnalyticsTabBarViewState extends State<AnalyticsTabBarView>
             ),
             SizedBox(height: deviceHeight * 0.06),
             SizedBox(
-              // color: Colors.blue,
               height: deviceHeight * 0.7,
               child: TabBarView(
                 controller: _tabController,

@@ -22,6 +22,7 @@ class MonthScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = context.textTheme;
     final double deviceWidth = context.deviceWidth;
+    final double deviceHeight = context.deviceHeight;
 
     final List<Row> dayRows = <Row>[];
     final List<Date> dayRowChildren = <Date>[];
@@ -59,7 +60,7 @@ class MonthScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: Column(
           children: [
-            const SizedBox(height: 25),
+            SizedBox(height: deviceHeight * 0.032),
             SizedBox(
               width: deviceWidth * 0.84,
               child: Text(
@@ -69,7 +70,7 @@ class MonthScreen extends StatelessWidget {
                     .copyWith(fontWeight: FontWeight.w700),
               ),
             ),
-            const SizedBox(height: 35),
+            SizedBox(height: deviceHeight * 0.045),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: const [
@@ -115,8 +116,8 @@ class WeekDaysView extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemBuilder: (context, index) {
           return SizedBox(
-            width: 48,
-            height: 50,
+            width: deviceWidth * 0.133,
+            height: deviceHeight * 0.064,
             child: Text(
               weekDays[index],
               textAlign: TextAlign.center,
@@ -142,12 +143,14 @@ class Date extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double deviceHeight = context.deviceHeight;
+    final double deviceWidth = context.deviceWidth;
     final TextTheme textTheme = context.textTheme;
     return GestureDetector(
       onTap: () => context.goNamed(AppRouterName.journalCreateScreen),
       child: Container(
-        width: 48,
-        height: 50,
+        width: deviceWidth * 0.133,
+        height: deviceHeight * 0.064,
         alignment: Alignment.center,
         child: Text(
           day < 1 ? '' : day.toString(),
