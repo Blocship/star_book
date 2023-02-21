@@ -13,7 +13,6 @@ class SettingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = context.textTheme;
-    final double deviceHeight = context.deviceHeight;
     return GradientScaffold(
       appBar: PrimaryAppBar(
         leadingOnTap: () => context.goNamed(AppRouterName.mainScreen),
@@ -26,7 +25,7 @@ class SettingScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: deviceHeight * 0.04),
+            const SizedBox(height: 30),
             CustomTile(
                 title: 'Starbook Community',
                 subtitle: 'Know who’s using starbook app',
@@ -44,7 +43,7 @@ class SettingScreen extends StatelessWidget {
                 subtitle: 'Your licensed agreement with starbook',
                 onTap: () =>
                     context.goNamed(AppRouterName.licenseAgreementScreen)),
-            SizedBox(height: deviceHeight * 0.34),
+            const Spacer(),
             Text(
               'App version 2.0',
               style:
@@ -54,6 +53,7 @@ class SettingScreen extends StatelessWidget {
             const BlocShipTile(),
             const SizedBox(height: 10),
             const UxerShipTile(),
+            const SizedBox(height: 30),
           ],
         ),
       ),

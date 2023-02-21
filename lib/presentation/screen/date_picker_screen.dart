@@ -29,7 +29,7 @@ class DatePickerScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: deviceHeight * 0.04),
+            const SizedBox(height: 30),
             Container(
               height: deviceHeight * 0.06,
               decoration: BoxDecoration(
@@ -45,7 +45,7 @@ class DatePickerScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: deviceHeight * 0.04),
+            const SizedBox(height: 30),
             const DatePicker(),
           ],
         ),
