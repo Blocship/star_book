@@ -21,26 +21,28 @@ class JournalEditScreen extends StatelessWidget {
         leadingOnTap: () => context.goNamed(AppRouterName.journalDetailScreen),
         centerTitle: 'Mood Journal',
       ),
-      body: Padding(
-        padding:
-            const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(height: deviceHeight * 0.06),
-            const MoodWidget(
-                date: '05 September 2022',
-                moodColor: Colors.green,
-                mood: 'Productive'),
-            SizedBox(height: deviceHeight * 0.04),
-            const CustomTextFormField(
-              heading: 'Title',
-              initialValue: 'titleDescription',
-            ),
-            SizedBox(height: deviceHeight * 0.02),
-            const CustomTextFormField(
-                heading: 'Note', initialValue: 'noteDescription'),
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+              horizontal: CustomPadding.mediumPadding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: deviceHeight * 0.06),
+              const MoodWidget(
+                  date: '05 September 2022',
+                  moodColor: Colors.green,
+                  mood: 'Productive'),
+              SizedBox(height: deviceHeight * 0.04),
+              const CustomTextFormField(
+                heading: 'Title',
+                initialValue: 'titleDescription',
+              ),
+              SizedBox(height: deviceHeight * 0.02),
+              const CustomTextFormField(
+                  heading: 'Note', initialValue: 'noteDescription'),
+            ],
+          ),
         ),
       ),
       floatingActionButton: SecondaryFloatingActionButton(

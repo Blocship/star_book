@@ -23,12 +23,15 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = context.textTheme;
     final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceWidth = context.deviceWidth;
+
     return Padding(
       padding:
           const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
       child: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
+        leadingWidth: deviceWidth * 0.175,
         leading: GestureDetector(
           onTap: leadingOnTap,
           child: Row(

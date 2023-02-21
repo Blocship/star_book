@@ -30,22 +30,25 @@ class IntroScreen extends StatelessWidget {
             SizedBox(height: deviceHeight * 0.024),
             Text(
               'So nice to meet you!',
+              textAlign: TextAlign.center,
               style: textTheme.headlineMedium!
                   .copyWith(fontWeight: FontWeight.w400),
             ),
             Text(
               'What do your friends call you?',
+              textAlign: TextAlign.center,
               style: textTheme.headlineMedium!
                   .copyWith(fontWeight: FontWeight.w700),
             ),
             SizedBox(height: deviceHeight * 0.028),
             const PrimaryTextField(hintText: 'Enter your name'),
-            SizedBox(height: deviceHeight * 0.41),
+            const Spacer(),
             PrimaryFilledButton(
               onTap: () =>
                   context.pushReplacementNamed(AppRouterName.mainScreen),
               label: 'Continue',
             ),
+            SizedBox(height: deviceHeight * 0.03),
           ],
         ),
       ),
