@@ -17,13 +17,11 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: SecondaryAppBar(
-        leadingIcon: SecondaryAppBarItem(
-            icon: const Image(
-                image: AssetImage('assets/icons/shooting_star.png'))),
-        trailingIcon: SecondaryAppBarItem(
-          icon: const Icon(Icons.menu_outlined),
-          onTap: () => context.goNamed(AppRouterName.settingScreen),
+        leading: const Image(
+          image: AssetImage('assets/icons/shooting_star.png'),
         ),
+        trailing: Icons.menu_outlined,
+        trailingOnTap: () => context.goNamed(AppRouterName.settingScreen),
       ),
       body: Padding(
         padding:
