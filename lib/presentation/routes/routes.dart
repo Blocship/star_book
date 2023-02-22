@@ -49,7 +49,7 @@ class AppRouter {
       GoRoute(
         name: AppRouterName.introScreen,
         path: introScreenPath,
-        builder: (context, state) => const IntroScreen(),
+        builder: (context, state) => IntroScreen(),
       ),
 
       ///MainScreen

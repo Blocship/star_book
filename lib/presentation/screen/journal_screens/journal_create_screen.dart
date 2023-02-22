@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
+import 'package:star_book/presentation/shared/form_models/jounral_form_model.dart';
 import 'package:star_book/presentation/shared/form_validator.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
@@ -51,7 +52,7 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
                 ),
                 const SizedBox(height: 30),
                 CustomTextFormField(
-                  fieldKey: 'EnterMood',
+                  fieldKey: JournalFormModel.titleKey,
                   heading: 'Title',
                   label: 'Enter Mood Title',
                   validator: FormValidator.compose([
@@ -61,7 +62,7 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
                 ),
                 const SizedBox(height: 30),
                 CustomTextFormField(
-                  fieldKey: 'WriteNote',
+                  fieldKey: JournalFormModel.memoKey,
                   heading: 'Note',
                   label: 'Write Note',
                   isMultiline: true,

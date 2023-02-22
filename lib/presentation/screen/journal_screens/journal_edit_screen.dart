@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:star_book/presentation/shared/form_models/jounral_form_model.dart';
 import 'package:star_book/presentation/shared/form_validator.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 
@@ -44,7 +45,7 @@ class _JournalEditScreenState extends State<JournalEditScreen> {
               ),
               const SizedBox(height: 30),
               CustomTextFormField(
-                fieldKey: 'EditTitle',
+                fieldKey: JournalFormModel.titleKey,
                 heading: 'Title',
                 initialValue: 'titleDescription',
                 validator: FormValidator.compose([
@@ -54,7 +55,7 @@ class _JournalEditScreenState extends State<JournalEditScreen> {
               ),
               SizedBox(height: deviceHeight * 0.02),
               CustomTextFormField(
-                fieldKey: 'EditNote',
+                fieldKey: JournalFormModel.memoKey,
                 heading: 'Note',
                 initialValue: 'noteDescription',
                 validator: FormValidator.required(),

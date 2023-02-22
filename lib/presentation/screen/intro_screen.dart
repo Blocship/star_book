@@ -1,20 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/shared/elevated_buttons.dart';
+import 'package:star_book/presentation/shared/form_validator.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 
-class IntroScreen extends StatefulWidget {
-  const IntroScreen({Key? key}) : super(key: key);
+class IntroScreen extends StatelessWidget {
+  IntroScreen({Key? key}) : super(key: key);
 
-  @override
-  State<IntroScreen> createState() => _IntroScreenState();
-}
-
-class _IntroScreenState extends State<IntroScreen> {
   final nameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
@@ -54,7 +50,7 @@ class _IntroScreenState extends State<IntroScreen> {
               child: PrimaryTextField(
                 hintText: 'Enter your name',
                 controller: nameController,
-                validator: _nameValidator,
+                validator: FormValidator.nameValidator,
               ),
             ),
             const Spacer(),
@@ -71,17 +67,5 @@ class _IntroScreenState extends State<IntroScreen> {
         ),
       ),
     );
-  }
-
-  String? _nameValidator(value) {
-    final name = RegExp(r'^[a-zA-Z]+$');
-    if (value == null || value.isEmpty) {
-      return 'Please enter your name';
-    } else if (value.length > 15) {
-      return 'name should be less than 15 characters';
-    } else if (!name.hasMatch(value)) {
-      return 'name should only contain alphabetic characters';
-    }
-    return null;
   }
 }
