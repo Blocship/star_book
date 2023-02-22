@@ -53,6 +53,8 @@ class _SelectableTabState extends State<SelectableTab> {
   Widget build(BuildContext context) {
     final TextTheme textTheme = context.textTheme;
     final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceHeight = context.deviceHeight;
+    final double deviceWidth = context.deviceWidth;
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -64,13 +66,15 @@ class _SelectableTabState extends State<SelectableTab> {
             });
           },
           child: Container(
+            width: deviceWidth * 0.105,
+            height: deviceHeight * 0.03,
             decoration: BoxDecoration(
               color: (month == selectedMonths)
                   ? themeColorStyle.secondaryColor
                   : themeColorStyle.secondaryColor.withOpacity(0.03),
               borderRadius: BorderRadius.circular(100),
             ),
-            padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
+            alignment: Alignment.center,
             child: Text(
               month,
               style: textTheme.labelLarge!.copyWith(

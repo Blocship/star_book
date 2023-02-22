@@ -54,14 +54,14 @@ class LegendsChart extends StatelessWidget {
               children: [
                 SizedBox(width: deviceWidth * 0.035),
                 CircleAvatar(
-                  backgroundColor: doughnutChartStyle.quinaryColor,
+                  backgroundColor: doughnutChartStyle.quaternaryColor,
                   radius: 7,
                 ),
                 SizedBox(width: deviceWidth * 0.03),
                 const Text('Sad'),
                 SizedBox(width: deviceWidth * 0.2),
                 CircleAvatar(
-                  backgroundColor: doughnutChartStyle.quaternaryColor,
+                  backgroundColor: doughnutChartStyle.quinaryColor,
                   radius: 7,
                 ),
                 SizedBox(width: deviceWidth * 0.03),
