@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/shared/elevated_buttons.dart';
+import 'package:star_book/presentation/shared/form_validator.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
@@ -8,7 +9,10 @@ import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 
 class IntroScreen extends StatelessWidget {
-  const IntroScreen({Key? key}) : super(key: key);
+  IntroScreen({Key? key}) : super(key: key);
+
+  final nameController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -41,11 +45,21 @@ class IntroScreen extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.w700),
             ),
             SizedBox(height: deviceHeight * 0.028),
-            const PrimaryTextField(hintText: 'Enter your name'),
+            Form(
+              key: _formKey,
+              child: PrimaryTextField(
+                hintText: 'Enter your name',
+                controller: nameController,
+                validator: FormValidator.nameValidator,
+              ),
+            ),
             const Spacer(),
             PrimaryFilledButton(
-              onTap: () =>
-                  context.pushReplacementNamed(AppRouterName.mainScreen),
+              onTap: () {
+                if (_formKey.currentState!.validate()) {
+                  context.pushReplacementNamed(AppRouterName.mainScreen);
+                }
+              },
               label: 'Continue',
             ),
             SizedBox(height: deviceHeight * 0.03),
