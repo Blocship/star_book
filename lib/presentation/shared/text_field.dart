@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/extension.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class PrimaryTextField extends StatelessWidget {
   final String hintText;
+  final TextEditingController controller;
+  final FormFieldValidator<String>? validator;
 
   const PrimaryTextField({
     Key? key,
     required this.hintText,
+    required this.controller,
+    this.validator,
   }) : super(key: key);
 
   @override
@@ -15,6 +20,8 @@ class PrimaryTextField extends StatelessWidget {
     final TextTheme textTheme = context.textTheme;
     final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     return TextFormField(
+      controller: controller,
+      validator: validator,
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: textTheme.bodyMedium!.copyWith(
@@ -53,12 +60,19 @@ class CustomTextFormField extends StatefulWidget {
   final String? label;
   final String? initialValue;
   final bool isMultiline;
+  final String fieldKey;
+  final ValueChanged<String?>? onChanged;
+  final FormFieldValidator<String>? validator;
+
   const CustomTextFormField({
     Key? key,
     required this.heading,
     this.label,
     this.initialValue,
     this.isMultiline = false,
+    required this.fieldKey,
+    this.validator,
+    this.onChanged,
   })  : assert(label != null || initialValue != null,
             'Label and initialValue both cannot be null'),
         super(key: key);
@@ -69,8 +83,6 @@ class CustomTextFormField extends StatefulWidget {
 
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   final FocusNode focusNode = FocusNode();
-
-  final TextEditingController controller = TextEditingController();
 
   @override
   void initState() {
@@ -105,10 +117,12 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             child: Text(widget.heading),
           ),
           const SizedBox(height: 16),
-          TextFormField(
+          FormBuilderTextField(
+            name: widget.fieldKey,
             maxLines: widget.isMultiline ? null : 1,
             focusNode: focusNode,
-            controller: controller,
+            onChanged: widget.onChanged,
+            validator: widget.validator,
             keyboardType: TextInputType.multiline,
             decoration: InputDecoration(
               contentPadding: EdgeInsets.zero,

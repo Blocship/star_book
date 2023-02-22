@@ -2,14 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
+import 'package:star_book/presentation/shared/form_validator.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 
-class JournalCreateScreen extends StatelessWidget {
+class JournalCreateScreen extends StatefulWidget {
   const JournalCreateScreen({Key? key}) : super(key: key);
+
+  @override
+  State<JournalCreateScreen> createState() => _JournalCreateScreenState();
+}
+
+class _JournalCreateScreenState extends State<JournalCreateScreen> {
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -23,42 +31,55 @@ class JournalCreateScreen extends StatelessWidget {
         minimum:
             const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
         child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const SizedBox(height: 30),
-              const AddNewDetails(),
-              const SizedBox(height: 30),
-              SelectableTile(
-                title: 'Date',
-                onTap: () => context.goNamed(AppRouterName.datePickerScreen),
-              ),
-              const SizedBox(height: 30),
-              SelectableTile(
-                title: 'Mood',
-                onTap: () => context.goNamed(AppRouterName.moodPickerScreen),
-              ),
-              const SizedBox(height: 30),
-              const CustomTextFormField(
-                heading: 'Title',
-                label: 'Enter Mood Title',
-              ),
-              const SizedBox(height: 30),
-              const CustomTextFormField(
-                heading: 'Note',
-                label: 'Write Note',
-                isMultiline: true,
-              ),
-              const SizedBox(height: 30),
-            ],
+          child: Form(
+            key: _formKey,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const SizedBox(height: 30),
+                const AddNewDetails(),
+                const SizedBox(height: 30),
+                SelectableTile(
+                  title: 'Date',
+                  onTap: () => context.goNamed(AppRouterName.datePickerScreen),
+                ),
+                const SizedBox(height: 30),
+                SelectableTile(
+                  title: 'Mood',
+                  onTap: () => context.goNamed(AppRouterName.moodPickerScreen),
+                ),
+                const SizedBox(height: 30),
+                CustomTextFormField(
+                  fieldKey: 'EnterMood',
+                  heading: 'Title',
+                  label: 'Enter Mood Title',
+                  validator: FormValidator.compose([
+                    FormValidator.required(),
+                    FormValidator.minLength(3),
+                  ]),
+                ),
+                const SizedBox(height: 30),
+                CustomTextFormField(
+                  fieldKey: 'WriteNote',
+                  heading: 'Note',
+                  label: 'Write Note',
+                  isMultiline: true,
+                  validator: FormValidator.required(),
+                ),
+                const SizedBox(height: 30),
+              ],
+            ),
           ),
         ),
       ),
       floatingActionButton: SecondaryFloatingActionButton(
-
-          ///Todo: Here we can't pop screen or we need to handle data from pop()
-          onTap: () => context.pop(),
+          onTap: () {
+            if (_formKey.currentState!.validate()) {
+              ///Todo: Here we can't pop screen or we need to handle data from pop()
+              context.pop();
+            }
+          },
           child: const Icon(Icons.check)),
     );
   }

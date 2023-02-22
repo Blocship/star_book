@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:star_book/presentation/shared/form_validator.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
@@ -9,8 +10,15 @@ import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
 
-class JournalEditScreen extends StatelessWidget {
+class JournalEditScreen extends StatefulWidget {
   const JournalEditScreen({Key? key}) : super(key: key);
+
+  @override
+  State<JournalEditScreen> createState() => _JournalEditScreenState();
+}
+
+class _JournalEditScreenState extends State<JournalEditScreen> {
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -30,23 +38,37 @@ class JournalEditScreen extends StatelessWidget {
             children: [
               SizedBox(height: deviceHeight * 0.06),
               const MoodWidget(
-                  date: '05 September 2022',
-                  moodColor: Colors.green,
-                  mood: 'Productive'),
+                date: '05 September 2022',
+                moodColor: Colors.green,
+                mood: 'Productive',
+              ),
               const SizedBox(height: 30),
-              const CustomTextFormField(
+              CustomTextFormField(
+                fieldKey: 'EditTitle',
                 heading: 'Title',
                 initialValue: 'titleDescription',
+                validator: FormValidator.compose([
+                  FormValidator.required(),
+                  FormValidator.minLength(3),
+                ]),
               ),
               SizedBox(height: deviceHeight * 0.02),
-              const CustomTextFormField(
-                  heading: 'Note', initialValue: 'noteDescription'),
+              CustomTextFormField(
+                fieldKey: 'EditNote',
+                heading: 'Note',
+                initialValue: 'noteDescription',
+                validator: FormValidator.required(),
+              ),
             ],
           ),
         ),
       ),
       floatingActionButton: SecondaryFloatingActionButton(
-        onTap: () => context.goNamed(AppRouterName.journalDetailScreen),
+        onTap: () {
+          if (_formKey.currentState!.validate()) {
+            context.goNamed(AppRouterName.journalDetailScreen);
+          }
+        },
         child: const Icon(Icons.check),
       ),
     );
