@@ -9,6 +9,11 @@ class JournalDetailCubit extends Cubit<CubitState> {
 
   JournalDetailCubit({required this.journalRepo}) : super(const InitialState());
 
+  Future<void> fetchJournals() async {
+    emit(const LoadingState());
+    await journalRepo.getJournals();
+  }
+
   Future<void> deleteJournal({required String journalId}) async {
     emit(const LoadingState());
     await journalRepo.deleteJournal(journalId);
