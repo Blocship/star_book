@@ -17,7 +17,7 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$JournalState {
   List<Journal> get journals => throw _privateConstructorUsedError;
-  DateTime get selectedDate => throw _privateConstructorUsedError;
+  String get journalId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $JournalStateCopyWith<JournalState> get copyWith =>
@@ -30,7 +30,7 @@ abstract class $JournalStateCopyWith<$Res> {
           JournalState value, $Res Function(JournalState) then) =
       _$JournalStateCopyWithImpl<$Res, JournalState>;
   @useResult
-  $Res call({List<Journal> journals, DateTime selectedDate});
+  $Res call({List<Journal> journals, String journalId});
 }
 
 /// @nodoc
@@ -47,17 +47,17 @@ class _$JournalStateCopyWithImpl<$Res, $Val extends JournalState>
   @override
   $Res call({
     Object? journals = null,
-    Object? selectedDate = null,
+    Object? journalId = null,
   }) {
     return _then(_value.copyWith(
       journals: null == journals
           ? _value.journals
           : journals // ignore: cast_nullable_to_non_nullable
               as List<Journal>,
-      selectedDate: null == selectedDate
-          ? _value.selectedDate
-          : selectedDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+      journalId: null == journalId
+          ? _value.journalId
+          : journalId // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -70,7 +70,7 @@ abstract class _$$_JournalStateCopyWith<$Res>
       __$$_JournalStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Journal> journals, DateTime selectedDate});
+  $Res call({List<Journal> journals, String journalId});
 }
 
 /// @nodoc
@@ -85,17 +85,17 @@ class __$$_JournalStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? journals = null,
-    Object? selectedDate = null,
+    Object? journalId = null,
   }) {
     return _then(_$_JournalState(
       journals: null == journals
           ? _value._journals
           : journals // ignore: cast_nullable_to_non_nullable
               as List<Journal>,
-      selectedDate: null == selectedDate
-          ? _value.selectedDate
-          : selectedDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+      journalId: null == journalId
+          ? _value.journalId
+          : journalId // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -104,7 +104,7 @@ class __$$_JournalStateCopyWithImpl<$Res>
 
 class _$_JournalState implements _JournalState {
   _$_JournalState(
-      {required final List<Journal> journals, required this.selectedDate})
+      {required final List<Journal> journals, required this.journalId})
       : _journals = journals;
 
   final List<Journal> _journals;
@@ -116,11 +116,11 @@ class _$_JournalState implements _JournalState {
   }
 
   @override
-  final DateTime selectedDate;
+  final String journalId;
 
   @override
   String toString() {
-    return 'JournalState(journals: $journals, selectedDate: $selectedDate)';
+    return 'JournalState(journals: $journals, journalId: $journalId)';
   }
 
   @override
@@ -129,13 +129,13 @@ class _$_JournalState implements _JournalState {
         (other.runtimeType == runtimeType &&
             other is _$_JournalState &&
             const DeepCollectionEquality().equals(other._journals, _journals) &&
-            (identical(other.selectedDate, selectedDate) ||
-                other.selectedDate == selectedDate));
+            (identical(other.journalId, journalId) ||
+                other.journalId == journalId));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType,
-      const DeepCollectionEquality().hash(_journals), selectedDate);
+  int get hashCode => Object.hash(
+      runtimeType, const DeepCollectionEquality().hash(_journals), journalId);
 
   @JsonKey(ignore: true)
   @override
@@ -147,12 +147,12 @@ class _$_JournalState implements _JournalState {
 abstract class _JournalState implements JournalState {
   factory _JournalState(
       {required final List<Journal> journals,
-      required final DateTime selectedDate}) = _$_JournalState;
+      required final String journalId}) = _$_JournalState;
 
   @override
   List<Journal> get journals;
   @override
-  DateTime get selectedDate;
+  String get journalId;
   @override
   @JsonKey(ignore: true)
   _$$_JournalStateCopyWith<_$_JournalState> get copyWith =>
