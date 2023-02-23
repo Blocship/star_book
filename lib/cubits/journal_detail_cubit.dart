@@ -1,54 +1,18 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:star_book/cubits/cubit_state/cubit_state.dart';
-import 'package:star_book/domain/models/journal/journal.dart';
+import 'package:star_book/cubits/journal_state.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
-import 'package:star_book/presentation/shared/form_models/jounral_form_model.dart';
 
-class JournalCubit extends Cubit<CubitState> {
+class JournalDetailCubit extends Cubit<CubitState> {
   final GlobalKey<FormBuilderState>? formKey;
   final JournalRepo journalRepo;
   StreamSubscription? journalStream;
 
-  JournalCubit(this.formKey, {required this.journalRepo})
+  JournalDetailCubit(this.formKey, {required this.journalRepo})
       : super(const InitialState());
-
-  /// I don't think so we need [UpdateJournal] we can use
-  /// post journal for update journal
-  ///
-  /// Just add id in post journal as parameter
-  /// by using this id we can post new journal or
-  /// just replaced the previous journal
-  /// by this:
-  /// id: id ?? IdGenerator,
-
-  Future<void> postJournal() async {
-    formKey?.currentState?.save();
-    if (formKey?.currentState?.validate() ?? false) {
-      final journalFormData =
-          JournalFormModel.fromJson(formKey!.currentState!.value);
-      emit(const LoadingState());
-      await journalRepo.addJournal(
-        Journal(
-          id: 'id',
-          createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
-          mood: journalFormData.mood,
-          title: journalFormData.title,
-          memo: journalFormData.memo,
-        ),
-      );
-    }
-  }
-
-  Future<void> deleteJournal({required String journalId}) async {
-    emit(const LoadingState());
-    await journalRepo.deleteJournal(journalId);
-  }
-
   Future<void> fetchJournals() async {
     emit(const LoadingState());
     await journalRepo.getJournals();
@@ -95,26 +59,26 @@ class JournalCubit extends Cubit<CubitState> {
     await journalRepo.getJournalByRange(start, end);
   }
 
-  Future<void> getStreak() async {
+  Future<void> deleteJournal({required String journalId}) async {
     emit(const LoadingState());
-    await journalRepo.streak();
+    await journalRepo.deleteJournal(journalId);
   }
 
-  Future<void> getPoint() async {
-    emit(const LoadingState());
-    await journalRepo.point();
+  /// Journal Stream by Id
+  Future<void> journalById$({required String journalId}) async {
+    journalStream =
+        journalRepo.journalById$(journalId).listen((journal) => journal);
+    emit(LoadedState(journalStream));
   }
 
-  /// Journal Stream
-  /// Didn't get the concept of stream of journal by id
-  Future<void> journalById$({required DateTime dateTime}) async {
+  /// Journal Stream by Day
+  Future<void> journalByDay$({required DateTime dateTime}) async {
     journalStream = journalRepo.journalsByDay$(dateTime).listen((journals) {
       journals.sort((a, b) {
         return b.createdAt.compareTo(a.createdAt);
       });
-
-      /// Need to create JournalState for stream?
-      /// like in QT
+      emit(LoadedState(
+          JournalState(journals: List.of(journals), selectedDate: dateTime)));
     });
   }
 
