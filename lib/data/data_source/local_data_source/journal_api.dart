@@ -9,7 +9,7 @@ abstract class IJournalApi extends BaseApi {
   static const String collectionName = 'journalCollection';
   Stream<Journal?> streamById(String journalId);
   Stream<List<Journal>> streamByDay(DateTime day);
-  Future<void> create(Journal journal);
+  Future<void> create(JournalBody journal);
   Future<List<Journal>> fetchAll();
   Future<Journal> fetchById(String journalId);
   Future<List<Journal>> fetchByMood(String moodId);
@@ -17,7 +17,7 @@ abstract class IJournalApi extends BaseApi {
   Future<List<Journal>> getJournalByMonth(int month, int year);
   Future<List<Journal>> getJournalByYear(int year);
   Future<List<Journal>> getJournalByRange(DateTime start, DateTime end);
-  Future<void> update(Journal journal);
+  Future<void> update(String id, JournalBody journal);
   Future<void> delete(String journalId);
   Future<int> streak();
   Future<int> point();
@@ -33,11 +33,22 @@ class LSJournalApi implements IJournalApi {
   });
 
   @override
-  Future<void> create(Journal journal) async {
+  Future<void> create(JournalBody journal) async {
+    assert(journal.createdAt != null, 'createdAt must not be null');
+    // check that mood is already created and exists in database
+    final mood = await moodCollection.get(journal.mood.id.fnvHash);
+    assert(mood != null, 'mood must be created before creating journal');
+    final newJournal = Journal(
+      id: Util.uid,
+      createdAt: journal.createdAt ?? DateTime.now(),
+      updatedAt: DateTime.now(),
+      title: journal.title,
+      memo: journal.memo,
+    );
     await journalCollection.isar.writeTxn(() async {
-      await journalCollection.put(journal);
-      await moodCollection.put(journal.mood);
-      await journal.moodRelation.save();
+      await journalCollection.put(newJournal);
+      await moodCollection.put(newJournal.mood);
+      await newJournal.moodRelation.save();
     });
     return;
   }
@@ -88,9 +99,18 @@ class LSJournalApi implements IJournalApi {
   }
 
   @override
-  Future<void> update(Journal journal) async {
+  Future<void> update(String id, JournalBody journal) async {
+    assert(journal.createdAt == null, 'createdAt must be null');
+    final oldJournal = await fetchById(id);
+    final newJournal = Journal(
+      id: oldJournal.id,
+      createdAt: oldJournal.createdAt,
+      updatedAt: DateTime.now(),
+      title: journal.title,
+      memo: journal.memo,
+    );
     await journalCollection.isar.writeTxn(() async {
-      await journalCollection.put(journal);
+      await journalCollection.put(newJournal);
     });
   }
 

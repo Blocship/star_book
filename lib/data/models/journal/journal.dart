@@ -41,3 +41,17 @@ class Journal {
   Id get key => id.fnvHash;
   final moodRelation = IsarLink<Mood>();
 }
+
+class JournalBody {
+  final Mood mood;
+  final String title;
+  final String memo;
+  final DateTime? createdAt;
+
+  JournalBody({
+    required this.mood,
+    required this.title,
+    required this.memo,
+    required this.createdAt,
+  });
+}

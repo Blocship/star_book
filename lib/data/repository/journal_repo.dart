@@ -31,8 +31,8 @@ class JournalRepoImpl implements JournalRepo {
   }
 
   @override
-  Future<void> addJournal(Journal journal) async {
-    await lsJournalApi.create(journal.toLSJournal);
+  Future<void> addJournal(JournalBody journal) async {
+    await lsJournalApi.create(journal.toLSJournalBody);
   }
 
   @override
@@ -52,8 +52,8 @@ class JournalRepoImpl implements JournalRepo {
   }
 
   @override
-  Future<void> updateJournal(Journal journal) async {
-    await lsJournalApi.update(journal.toLSJournal);
+  Future<void> updateJournal(String id, JournalBody journal) async {
+    await lsJournalApi.update(id, journal.toLSJournalBody);
   }
 
   @override

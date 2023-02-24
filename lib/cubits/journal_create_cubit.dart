@@ -13,21 +13,18 @@ class JournalCreateCubit extends Cubit<CubitState<Journal>> {
   JournalCreateCubit({required this.journalRepo, required this.formKey})
       : super(const InitialState());
 
-  Future<void> addJournal({DateTime? createdAt}) async {
+  Future<void> addJournal() async {
     formKey.currentState?.save();
     if (formKey.currentState?.validate() ?? false) {
       final formData = JournalFormModel.fromJson(formKey.currentState!.value);
       emit(const LoadingState());
-      await journalRepo.addJournal(
-        Journal(
-          id: '',
-          createdAt: createdAt ?? DateTime.now(),
-          updatedAt: DateTime.now(),
-          mood: formData.mood,
-          title: formData.title,
-          memo: formData.memo,
-        ),
+      final newJournal = JournalBody(
+        mood: formData.mood,
+        title: formData.title,
+        memo: formData.memo,
+        createdAt: formData.createdAt ?? DateTime.now(),
       );
+      await journalRepo.addJournal(newJournal);
     }
   }
 }

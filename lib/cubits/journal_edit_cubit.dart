@@ -15,19 +15,14 @@ class JournalEditCubit extends Cubit<CubitState<Journal>> {
   Future<void> updateJournal({required String journalId}) async {
     formKey?.currentState?.save();
     if (formKey?.currentState?.validate() ?? false) {
-      final journalFormData =
-          JournalFormModel.fromJson(formKey!.currentState!.value);
+      final formData = JournalFormModel.fromJson(formKey!.currentState!.value);
       emit(const LoadingState());
-      await journalRepo.updateJournal(
-        Journal(
-          id: journalId,
-          createdAt: DateTime.now(),
-          updatedAt: DateTime.now(),
-          mood: journalFormData.mood,
-          title: journalFormData.title,
-          memo: journalFormData.memo,
-        ),
+      final journalBody = JournalBody(
+        mood: formData.mood,
+        title: formData.title,
+        memo: formData.memo,
       );
+      await journalRepo.updateJournal(journalId, journalBody);
     }
   }
 }

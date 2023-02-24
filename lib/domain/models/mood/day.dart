@@ -22,6 +22,8 @@ class Day with _$Day {
         day: dateTime.day,
       );
 
+  factory Day.today() => Day.fromDateTime(DateTime.now());
+
   DateTime toDateTime() => DateTime(year, month, day);
 
   // factory Day.fromDayKey(String dayKey) {
@@ -34,7 +36,6 @@ class Day with _$Day {
   // }
 
   // String get dayKey => '$year-$month-$day';
-
 }
 
 extension XDateTime on DateTime {
