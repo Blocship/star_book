@@ -52,6 +52,55 @@ The following are guidelines for contributing to this project.
 
 Read more from linting here: https://dart.dev/guides/language/effective-dart/style
 
+## Architecture Diagram
+
+```
+                                       +-----------------+
+                                       |                 |
++------+  Events  +------+  Request    |                 |
+|      +--------->|      +------------>|                 |
+|  UI  |          | Bloc |             |   Repository    |
+|      <----------+      <-------------+                 |
++------+  States  +------+  Response   |                 |
+                                       |                 |
+                                       +-------^-----+---+
+                                               |     |
+                                      Response |     |  Request
+                                               |     |
+                                       +-------+-----v--+
+                                       |                |
+                             Class     | +------------+ |
+                  +-------+  Object    | |API Provider| |
+                  |       +----------->| +------------+ |
+                  | Model |            |                |
+                  |       <------------+   +--------+   |
+                  +-------+   Json     |   |Local DB|   |
+                                       |   +--------+   |
+                                       |                |
+                                       +----------------+
+```
+
+## Directory Structure
+
+```
+lib
+├── data
+│   ├── data_source
+│   ├── models
+│   ├── repository
+|   └── utils
+├── domain
+│   ├── models
+|   └── repository
+├── presentation
+│   ├── service
+│   ├── shared
+│   ├── theme
+│   ├── utils
+|   └── screen
+└── main.dart
+```
+
 ## 🐛 How to Report Bugs
 
 Please open a [new issue](https://github.com/hashirshoaeb/star_book/issues/new) including steps to reproduce the problem

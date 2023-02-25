@@ -17,7 +17,7 @@
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/hashirshoaeb?color=ffcc66&logo=twitter&logoColor=ffffff&style=for-the-badge)](https://twitter.com/hashirshoaeb)
 [![GitHub license](https://img.shields.io/github/license/hashirshoaeb/star_book?style=for-the-badge)](https://github.com/hashirshoaeb/star_book/blob/master/LICENSE)
-[![Flutter Version](https://img.shields.io/static/v1?label=Flutter&message=3.3.4&color=ffcc66&style=for-the-badge)](https://flutter.dev/docs/development/tools/sdk/releases)
+[![Flutter Version](https://img.shields.io/static/v1?label=Flutter&message=3.7.4&color=ffcc66&style=for-the-badge)](https://flutter.dev/docs/development/tools/sdk/releases)
 
 ## Get the App
 
