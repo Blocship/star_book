@@ -25,71 +25,66 @@ class IntroScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextTheme textTheme = context.textTheme;
     final double deviceHeight = context.deviceHeight;
-    return RepositoryProvider(
-      create: (context) => Injector.resolve<UserRepo>(),
-      child: BlocProvider<IntroScreenCubit>(
-        create: (context) => IntroScreenCubit(
-          formKey: _formKey,
-          userRepo: Injector.resolve<UserRepo>(),
-        ),
-        child: BlocBuilder<IntroScreenCubit, CubitState<User>>(
-          builder: (context, state) {
-            return GradientScaffold(
-              resizeToAvoidBottomInset: false,
-              body: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: CustomPadding.mediumPadding),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(height: deviceHeight * 0.08),
-                    Image(
-                        image:
-                            const AssetImage('assets/images/intro_image.png'),
-                        height: deviceHeight * 0.2),
-                    SizedBox(height: deviceHeight * 0.024),
-                    Text(
-                      'So nice to meet you!',
-                      textAlign: TextAlign.center,
-                      style: textTheme.headlineMedium!
-                          .copyWith(fontWeight: FontWeight.w400),
+    return BlocProvider<IntroScreenCubit>(
+      create: (context) => IntroScreenCubit(
+        formKey: _formKey,
+        userRepo: Injector.resolve<UserRepo>(),
+      ),
+      child: BlocBuilder<IntroScreenCubit, CubitState<User>>(
+        builder: (context, state) {
+          return GradientScaffold(
+            resizeToAvoidBottomInset: false,
+            body: Padding(
+              padding: const EdgeInsets.symmetric(
+                  horizontal: CustomPadding.mediumPadding),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: deviceHeight * 0.08),
+                  Image(
+                      image: const AssetImage('assets/images/intro_image.png'),
+                      height: deviceHeight * 0.2),
+                  SizedBox(height: deviceHeight * 0.024),
+                  Text(
+                    'So nice to meet you!',
+                    textAlign: TextAlign.center,
+                    style: textTheme.headlineMedium!
+                        .copyWith(fontWeight: FontWeight.w400),
+                  ),
+                  Text(
+                    'What do your friends call you?',
+                    textAlign: TextAlign.center,
+                    style: textTheme.headlineMedium!
+                        .copyWith(fontWeight: FontWeight.w700),
+                  ),
+                  SizedBox(height: deviceHeight * 0.028),
+                  FormBuilder(
+                    key: _formKey,
+                    child: PrimaryTextField(
+                      hintText: 'Enter your name',
+                      controller: nameController,
+                      validator: FormValidator.nameValidator,
                     ),
-                    Text(
-                      'What do your friends call you?',
-                      textAlign: TextAlign.center,
-                      style: textTheme.headlineMedium!
-                          .copyWith(fontWeight: FontWeight.w700),
-                    ),
-                    SizedBox(height: deviceHeight * 0.028),
-                    FormBuilder(
-                      key: _formKey,
-                      child: PrimaryTextField(
-                        hintText: 'Enter your name',
-                        controller: nameController,
-                        validator: FormValidator.nameValidator,
-                      ),
-                    ),
-                    const Spacer(),
-                    PrimaryFilledButton(
-                      onTap: () {
-                        if (_formKey.currentState!.validate()) {
-                          context
-                              .read<IntroScreenCubit>()
-                              .createUser(nameController.text);
-                          context
-                              .pushReplacementNamed(AppRouterName.mainScreen);
-                        }
-                      },
-                      label: 'Continue',
-                    ),
-                    SizedBox(height: deviceHeight * 0.03),
-                  ],
-                ),
+                  ),
+                  const Spacer(),
+                  PrimaryFilledButton(
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        context
+                            .read<IntroScreenCubit>()
+                            .createUser(nameController.text);
+                        context.pushReplacementNamed(AppRouterName.mainScreen);
+                      }
+                    },
+                    label: 'Continue',
+                  ),
+                  SizedBox(height: deviceHeight * 0.03),
+                ],
               ),
-            );
-          },
-        ),
+            ),
+          );
+        },
       ),
     );
   }
