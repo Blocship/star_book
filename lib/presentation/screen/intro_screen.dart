@@ -62,7 +62,7 @@ class IntroScreen extends StatelessWidget {
                           .copyWith(fontWeight: FontWeight.w700),
                     ),
                     SizedBox(height: deviceHeight * 0.028),
-                    Form(
+                    FormBuilder(
                       key: _formKey,
                       child: PrimaryTextField(
                         hintText: 'Enter your name',
@@ -74,7 +74,9 @@ class IntroScreen extends StatelessWidget {
                     PrimaryFilledButton(
                       onTap: () {
                         if (_formKey.currentState!.validate()) {
-                          context.read<IntroScreenCubit>().createUser();
+                          context
+                              .read<IntroScreenCubit>()
+                              .createUser(nameController.text);
                           context
                               .pushReplacementNamed(AppRouterName.mainScreen);
                         }

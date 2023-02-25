@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -12,17 +14,17 @@ class IntroScreenCubit extends Cubit<CubitState<User>> {
   IntroScreenCubit({required this.formKey, required this.userRepo})
       : super(const InitialState());
 
-  Future<void> createUser() async {
-    formKey.currentState?.save();
-    if (formKey.currentState?.validate() ?? false) {
-      final formData = formKey.currentState!.value;
+  Future<void> createUser(String name) async {
+    try {
       emit(const LoadingState());
       await userRepo.createUser(
         User(
           id: '',
-          name: formData.values.first,
+          name: name,
         ),
       );
+    } catch (e) {
+      log(e.toString());
     }
   }
 
@@ -31,10 +33,9 @@ class IntroScreenCubit extends Cubit<CubitState<User>> {
     await userRepo.deleteUser(userId);
   }
 
-  Future<void> updateUser({required String userId}) async {
-    final formData = formKey.currentState!.value;
+  Future<void> updateUser({required String name}) async {
     emit(const LoadingState());
-    await userRepo.updateUser(User(id: '', name: formData.values.first));
+    await userRepo.updateUser(User(id: '', name: name));
   }
 
   Future<void> getUser({required String userId}) async {
