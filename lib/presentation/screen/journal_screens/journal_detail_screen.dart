@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:star_book/cubits/cubit_state/cubit_state.dart';
+import 'package:star_book/cubits/journal_detail_cubit.dart';
+import 'package:star_book/domain/repository/journal_repo.dart';
+import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
@@ -15,43 +20,53 @@ class JournalDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final double deviceHeight = context.deviceHeight;
 
-    return Scaffold(
-      appBar: PrimaryAppBar(
-        leadingOnTap: () => context.goNamed(AppRouterName.mainScreen),
-        centerTitle: 'Mood Journal',
-        trailingText: 'Delete',
-        trailingOnTap: () {
-          showDialog(
-              context: context, builder: (context) => const CustomDialogBox());
-        },
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-              horizontal: CustomPadding.mediumPadding),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: deviceHeight * 0.06),
-              const MoodWidget(
-                  date: '05 September 2022',
-                  moodColor: Colors.green,
-                  mood: 'Productive'),
-              SizedBox(height: deviceHeight * 0.04),
-              const DocumentWidget(
-                  title: 'Title', description: 'titleDescription'),
-              SizedBox(height: deviceHeight * 0.02),
-              const DocumentWidget(
-                  title: 'Note', description: 'noteDescription'),
-            ],
-          ),
-        ),
-      ),
-      floatingActionButton: PrimaryFloatingActionButton(
-        onTap: () => context.goNamed(AppRouterName.journalEditScreen),
-        child: const Icon(Icons.edit_outlined),
-      ),
-    );
+    return BlocProvider<JournalDetailCubit>(
+        create: (context) => JournalDetailCubit(
+              journalRepo: Injector.resolve<JournalRepo>(),
+            )..fetchJournals(),
+        child: BlocBuilder<JournalDetailCubit, CubitState>(
+            builder: (context, state) {
+          // final deleteJournal = context.read<JournalDetailCubit>().deleteJournal(journalId: journalId);
+          // final getJournalById = context.read<JournalDetailCubit>().journalById$(journalId: journalId);
+          return Scaffold(
+            appBar: PrimaryAppBar(
+              leadingOnTap: () => context.goNamed(AppRouterName.mainScreen),
+              centerTitle: 'Mood Journal',
+              trailingText: 'Delete',
+              trailingOnTap: () {
+                showDialog(
+                    context: context,
+                    builder: (context) => const CustomDialogBox());
+              },
+            ),
+            body: SingleChildScrollView(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: CustomPadding.mediumPadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: deviceHeight * 0.06),
+                    const MoodWidget(
+                        date: '05 September 2022',
+                        moodColor: Colors.green,
+                        mood: 'Productive'),
+                    SizedBox(height: deviceHeight * 0.04),
+                    const DocumentWidget(
+                        title: 'Title', description: 'titleDescription'),
+                    SizedBox(height: deviceHeight * 0.02),
+                    const DocumentWidget(
+                        title: 'Note', description: 'noteDescription'),
+                  ],
+                ),
+              ),
+            ),
+            floatingActionButton: PrimaryFloatingActionButton(
+              onTap: () => context.goNamed(AppRouterName.journalEditScreen),
+              child: const Icon(Icons.edit_outlined),
+            ),
+          );
+        }));
   }
 }
 
