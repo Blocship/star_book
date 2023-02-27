@@ -13,12 +13,16 @@ import 'package:star_book/presentation/shared/form_models/jounral_form_model.dar
 import 'package:star_book/presentation/shared/form_validator.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/utils/calendar.dart';
 import 'package:star_book/presentation/utils/extension.dart';
+import 'package:star_book/presentation/utils/month_details.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 
 class JournalCreateScreen extends StatefulWidget {
-  const JournalCreateScreen({Key? key}) : super(key: key);
+  final DateTimeDetails? dateTime;
+
+  const JournalCreateScreen({Key? key, this.dateTime}) : super(key: key);
 
   @override
   State<JournalCreateScreen> createState() => _JournalCreateScreenState();
@@ -29,6 +33,8 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final String selectedDateTime =
+        '${CalendarUtils.getMonthName(widget.dateTime!.month)} ${widget.dateTime!.day}, ${widget.dateTime!.year}';
     return BlocProvider<JournalCreateCubit>(
       create: (context) => JournalCreateCubit(
         journalRepo: Injector.resolve<JournalRepo>(),
@@ -58,14 +64,20 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
                       const SizedBox(height: 30),
                       SelectableTile(
                         title: 'Date',
-                        onTap: () =>
-                            context.goNamed(AppRouterName.datePickerScreen),
+                        select: selectedDateTime,
+                        onTap: () => context
+                            .pushNamed(AppRouterName.datePickerScreen, params: {
+                          'day': widget.dateTime!.day.toString(),
+                          'month': widget.dateTime!.month.toString(),
+                          'year': widget.dateTime!.year.toString(),
+                        }),
                       ),
                       const SizedBox(height: 30),
                       SelectableTile(
                         title: 'Mood',
                         onTap: () =>
-                            context.goNamed(AppRouterName.moodPickerScreen),
+                            context.pushNamed(AppRouterName.moodPickerScreen),
+                        select: 'Mood',
                       ),
                       const SizedBox(height: 30),
                       CustomTextFormField(

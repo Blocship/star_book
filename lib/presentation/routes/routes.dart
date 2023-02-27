@@ -25,7 +25,8 @@ class AppRouter {
   static const String yearScreenPath = 'yearScreen';
   static const String monthScreenPath =
       'mainScreen/monthScreen/:year/:month/:isHomeScreen';
-  static const String journalCreateScreenPath = 'journalCreateScreen';
+  static const String journalCreateScreenPath =
+      'journalCreateScreen/:day/:month/:year';
   static const String moodPickerScreenPath = 'moodPickerScreen';
   static const String datePickerScreenPath = 'datePickerScreen';
   static const String journalDetailScreenPath =
@@ -85,7 +86,13 @@ class AppRouter {
           GoRoute(
             name: AppRouterName.journalCreateScreen,
             path: journalCreateScreenPath,
-            builder: (context, state) => const JournalCreateScreen(),
+            builder: (context, state) => JournalCreateScreen(
+              dateTime: DateTimeDetails(
+                day: int.parse(state.params['day']!),
+                year: int.parse(state.params['year']!),
+                month: int.parse(state.params['month']!),
+              ),
+            ),
             routes: [
               ///MoodPickerScreen
               GoRoute(

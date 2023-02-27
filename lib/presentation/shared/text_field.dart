@@ -143,13 +143,13 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
 class SelectableTile extends StatelessWidget {
   final String title;
-  final String? select;
+  final String select;
   final VoidCallback onTap;
 
   const SelectableTile({
     Key? key,
     required this.title,
-    this.select,
+    required this.select,
     required this.onTap,
   }) : super(key: key);
 
@@ -158,7 +158,10 @@ class SelectableTile extends StatelessWidget {
     final TextTheme textTheme = context.textTheme;
     final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     final double deviceWidth = context.deviceWidth;
-    final selectedData = select ?? 'Select';
+    String selectedData = select;
+    if (selectedData == 'Jan 1, 1' || selectedData == 'Mood') {
+      selectedData = 'Select';
+    }
     final bool isEmpty = (selectedData != 'Select');
     return Container(
       decoration: BoxDecoration(
@@ -180,7 +183,7 @@ class SelectableTile extends StatelessWidget {
           ),
         ),
         trailing: SizedBox(
-          width: deviceWidth * 0.21,
+          width: deviceWidth * 0.3,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -188,7 +191,11 @@ class SelectableTile extends StatelessWidget {
                 selectedData,
                 style: textTheme.bodyLarge!.copyWith(
                   fontWeight: FontWeight.w400,
-                  color: themeColorStyle.tertiaryColor,
+                  color: (selectedData == 'Jan 1, 1' ||
+                          selectedData == 'Mood' ||
+                          selectedData == 'Select')
+                      ? themeColorStyle.tertiaryColor
+                      : themeColorStyle.secondaryColor,
                 ),
               ),
               const Icon(
