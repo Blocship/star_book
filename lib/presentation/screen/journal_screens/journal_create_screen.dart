@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
+import 'package:star_book/cubits/cubit_state/cubit_state.dart';
+import 'package:star_book/cubits/journal_create_cubit.dart';
+import 'package:star_book/domain/models/journal/journal.dart';
+import 'package:star_book/domain/repository/journal_repo.dart';
+import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/form_models/jounral_form_model.dart';
@@ -18,70 +25,83 @@ class JournalCreateScreen extends StatefulWidget {
 }
 
 class _JournalCreateScreenState extends State<JournalCreateScreen> {
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: PrimaryAppBar(
-        leadingOnTap: () => context.pop(),
-        centerTitle: 'New Thought',
+    return BlocProvider<JournalCreateCubit>(
+      create: (context) => JournalCreateCubit(
+        journalRepo: Injector.resolve<JournalRepo>(),
+        formKey: _formKey,
       ),
-      body: SafeArea(
-        minimum:
-            const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
-        child: SingleChildScrollView(
-          child: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const SizedBox(height: 30),
-                const AddNewDetails(),
-                const SizedBox(height: 30),
-                SelectableTile(
-                  title: 'Date',
-                  onTap: () => context.goNamed(AppRouterName.datePickerScreen),
-                ),
-                const SizedBox(height: 30),
-                SelectableTile(
-                  title: 'Mood',
-                  onTap: () => context.goNamed(AppRouterName.moodPickerScreen),
-                ),
-                const SizedBox(height: 30),
-                CustomTextFormField(
-                  fieldKey: JournalFormModel.titleKey,
-                  heading: 'Title',
-                  label: 'Enter Mood Title',
-                  validator: FormValidator.compose([
-                    FormValidator.required(),
-                    FormValidator.minLength(3),
-                  ]),
-                ),
-                const SizedBox(height: 30),
-                CustomTextFormField(
-                  fieldKey: JournalFormModel.memoKey,
-                  heading: 'Note',
-                  label: 'Write Note',
-                  isMultiline: true,
-                  validator: FormValidator.required(),
-                ),
-                const SizedBox(height: 30),
-              ],
+      child: BlocBuilder<JournalCreateCubit, CubitState<Journal>>(
+        builder: (context, state) {
+          // final addJournal = context.read<JournalCreateCubit>().addJournal();
+          return Scaffold(
+            resizeToAvoidBottomInset: false,
+            appBar: PrimaryAppBar(
+              leadingOnTap: () => context.pop(),
+              centerTitle: 'New Thought',
             ),
-          ),
-        ),
+            body: SafeArea(
+              minimum: const EdgeInsets.symmetric(
+                  horizontal: CustomPadding.mediumPadding),
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(height: 30),
+                      const AddNewDetails(),
+                      const SizedBox(height: 30),
+                      SelectableTile(
+                        title: 'Date',
+                        onTap: () =>
+                            context.goNamed(AppRouterName.datePickerScreen),
+                      ),
+                      const SizedBox(height: 30),
+                      SelectableTile(
+                        title: 'Mood',
+                        onTap: () =>
+                            context.goNamed(AppRouterName.moodPickerScreen),
+                      ),
+                      const SizedBox(height: 30),
+                      CustomTextFormField(
+                        fieldKey: JournalFormModel.titleKey,
+                        heading: 'Title',
+                        label: 'Enter Mood Title',
+                        validator: FormValidator.compose([
+                          FormValidator.required(),
+                          FormValidator.minLength(3),
+                        ]),
+                      ),
+                      const SizedBox(height: 30),
+                      CustomTextFormField(
+                        fieldKey: JournalFormModel.memoKey,
+                        heading: 'Note',
+                        label: 'Write Note',
+                        isMultiline: true,
+                        validator: FormValidator.required(),
+                      ),
+                      const SizedBox(height: 30),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            floatingActionButton: SecondaryFloatingActionButton(
+                onTap: () {
+                  if (_formKey.currentState!.validate()) {
+                    ///Todo: Here we can't pop screen or we need to handle data from pop()
+                    context.pop();
+                  }
+                },
+                child: const Icon(Icons.check)),
+          );
+        },
       ),
-      floatingActionButton: SecondaryFloatingActionButton(
-          onTap: () {
-            if (_formKey.currentState!.validate()) {
-              ///Todo: Here we can't pop screen or we need to handle data from pop()
-              context.pop();
-            }
-          },
-          child: const Icon(Icons.check)),
     );
   }
 }
