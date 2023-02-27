@@ -7,15 +7,15 @@ import 'package:star_book/domain/repository/journal_repo.dart';
 import 'package:star_book/presentation/shared/form_models/jounral_form_model.dart';
 
 class JournalEditCubit extends Cubit<CubitState<Journal>> {
-  final GlobalKey<FormBuilderState>? formKey;
+  final GlobalKey<FormBuilderState> formKey;
   final JournalRepo journalRepo;
-  JournalEditCubit(this.formKey, this.journalRepo)
+  JournalEditCubit({required this.formKey, required this.journalRepo})
       : super(const InitialState());
 
   Future<void> updateJournal({required String journalId}) async {
-    formKey?.currentState?.save();
-    if (formKey?.currentState?.validate() ?? false) {
-      final formData = JournalFormModel.fromJson(formKey!.currentState!.value);
+    formKey.currentState?.save();
+    if (formKey.currentState?.validate() ?? false) {
+      final formData = JournalFormModel.fromJson(formKey.currentState!.value);
       emit(const LoadingState());
       final journalBody = JournalBody(
         mood: formData.mood,
