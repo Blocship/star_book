@@ -5,6 +5,8 @@ import 'package:go_router/go_router.dart';
 import 'package:star_book/cubits/cubit_state/cubit_state.dart';
 import 'package:star_book/cubits/journal_create_cubit.dart';
 import 'package:star_book/domain/models/journal/journal.dart';
+import 'package:star_book/domain/models/mood/day.dart';
+import 'package:star_book/domain/models/mood/mood.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
@@ -15,14 +17,14 @@ import 'package:star_book/presentation/shared/text_field.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/calendar.dart';
 import 'package:star_book/presentation/utils/extension.dart';
-import 'package:star_book/presentation/utils/month_details.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 
 class JournalCreateScreen extends StatefulWidget {
-  final DateTimeDetails? dateTime;
-
-  const JournalCreateScreen({Key? key, this.dateTime}) : super(key: key);
+  final Day? dateTime;
+  final Mood? mood;
+  const JournalCreateScreen({Key? key, this.dateTime, this.mood})
+      : super(key: key);
 
   @override
   State<JournalCreateScreen> createState() => _JournalCreateScreenState();
@@ -33,8 +35,11 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final String selectedDateTime =
-        '${CalendarUtils.getMonthName(widget.dateTime!.month)} ${widget.dateTime!.day}, ${widget.dateTime!.year}';
+    String? selectedDateTime =
+        '${CalendarUtils.getMonthName(widget.dateTime?.month)} ${widget.dateTime?.day}, ${widget.dateTime?.year}';
+    if (selectedDateTime == ' , ') {
+      selectedDateTime = null;
+    }
     return BlocProvider<JournalCreateCubit>(
       create: (context) => JournalCreateCubit(
         journalRepo: Injector.resolve<JournalRepo>(),
@@ -64,20 +69,16 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
                       const SizedBox(height: 30),
                       SelectableTile(
                         title: 'Date',
-                        select: selectedDateTime,
-                        onTap: () => context
-                            .pushNamed(AppRouterName.datePickerScreen, params: {
-                          'day': widget.dateTime!.day.toString(),
-                          'month': widget.dateTime!.month.toString(),
-                          'year': widget.dateTime!.year.toString(),
-                        }),
+                        select: selectedDateTime ?? 'Select',
+                        onTap: () =>
+                            context.pushNamed(AppRouterName.datePickerScreen),
                       ),
                       const SizedBox(height: 30),
                       SelectableTile(
                         title: 'Mood',
                         onTap: () =>
                             context.pushNamed(AppRouterName.moodPickerScreen),
-                        select: 'Mood',
+                        select: widget.mood?.label ?? 'Select',
                       ),
                       const SizedBox(height: 30),
                       CustomTextFormField(

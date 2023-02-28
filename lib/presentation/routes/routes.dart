@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:star_book/domain/models/mood/day.dart';
+import 'package:star_book/domain/models/mood/mood.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/screen/analytics_screens/analytics_tab_bar_view.dart';
 import 'package:star_book/presentation/screen/calendar/month_days.dart';
@@ -25,8 +27,7 @@ class AppRouter {
   static const String yearScreenPath = 'yearScreen';
   static const String monthScreenPath =
       'mainScreen/monthScreen/:year/:month/:isHomeScreen';
-  static const String journalCreateScreenPath =
-      'journalCreateScreen/:day/:month/:year';
+  static const String journalCreateScreenPath = 'journalCreateScreen';
   static const String moodPickerScreenPath = 'moodPickerScreen';
   static const String datePickerScreenPath = 'datePickerScreen';
   static const String journalDetailScreenPath =
@@ -87,10 +88,16 @@ class AppRouter {
             name: AppRouterName.journalCreateScreen,
             path: journalCreateScreenPath,
             builder: (context, state) => JournalCreateScreen(
-              dateTime: DateTimeDetails(
-                day: int.parse(state.params['day']!),
-                year: int.parse(state.params['year']!),
-                month: int.parse(state.params['month']!),
+              dateTime: Day(
+                day: int.parse(state.queryParams['day'] ?? '1'),
+                year: int.parse(state.queryParams['year'] ?? '1000'),
+                month: int.parse(state.queryParams['month'] ?? '1'),
+              ),
+              mood: Mood(
+                id: state.queryParams['moodId'] ?? '0',
+                label: state.queryParams['moodLabel'] ?? 'label',
+                color:
+                    int.parse(state.queryParams['moodColor'] ?? '0xFFFFFFFF'),
               ),
             ),
             routes: [

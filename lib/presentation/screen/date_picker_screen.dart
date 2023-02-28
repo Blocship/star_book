@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:star_book/cubits/date_picker_cubit.dart';
+import 'package:star_book/cubits/mood_picker_cubit.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
@@ -18,8 +18,8 @@ class DatePickerScreen extends StatelessWidget {
     final TextTheme textTheme = context.textTheme;
     final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     final double deviceHeight = context.deviceHeight;
-    return BlocProvider<DatePickerCubit>(
-      create: (context) => DatePickerCubit(),
+    return BlocProvider<PickerCubit>(
+      create: (context) => PickerCubit(),
       child: Scaffold(
         appBar: PrimaryAppBar(
           leadingOnTap: () => context.pop(),
@@ -53,14 +53,15 @@ class DatePickerScreen extends StatelessWidget {
             ],
           ),
         ),
-        floatingActionButton: BlocBuilder<DatePickerCubit, DateTime>(
+        floatingActionButton: BlocBuilder<PickerCubit, PickerData>(
           builder: (context, state) {
             return SecondaryFloatingActionButton(
               onTap: () {
-                context.goNamed(AppRouterName.journalCreateScreen, params: {
-                  'day': state.day.toString(),
-                  'month': state.month.toString(),
-                  'year': state.year.toString(),
+                context
+                    .goNamed(AppRouterName.journalCreateScreen, queryParams: {
+                  'day': state.dateTime.day.toString(),
+                  'month': state.dateTime.month.toString(),
+                  'year': state.dateTime.year.toString(),
                 });
               },
               child: const Icon(Icons.check),

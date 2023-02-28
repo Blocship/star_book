@@ -159,7 +159,7 @@ class SelectableTile extends StatelessWidget {
     final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     final double deviceWidth = context.deviceWidth;
     String selectedData = select;
-    if (selectedData == 'Jan 1, 1' || selectedData == 'Mood') {
+    if (selectedData == 'Jan 1, 1000' || selectedData == 'label') {
       selectedData = 'Select';
     }
     final bool isEmpty = (selectedData != 'Select');
@@ -191,11 +191,9 @@ class SelectableTile extends StatelessWidget {
                 selectedData,
                 style: textTheme.bodyLarge!.copyWith(
                   fontWeight: FontWeight.w400,
-                  color: (selectedData == 'Jan 1, 1' ||
-                          selectedData == 'Mood' ||
-                          selectedData == 'Select')
-                      ? themeColorStyle.tertiaryColor
-                      : themeColorStyle.secondaryColor,
+                  color: isEmpty
+                      ? themeColorStyle.secondaryColor
+                      : themeColorStyle.tertiaryColor,
                 ),
               ),
               const Icon(

@@ -87,17 +87,7 @@ class MonthScreen extends StatelessWidget {
         padding: EdgeInsets.only(bottom: (monthDetails.isHomeScreen) ? 90 : 20),
         child: PrimaryFloatingActionButton(
           onTap: () {
-            context.goNamed(AppRouterName.journalCreateScreen, params: {
-              /// Not the right way, didn't find the way to
-              /// pass null values in go router
-              'day': '1',
-              'month': '1',
-              'year': '0001',
-
-              // 'day': DateTime.now().day.toString(),
-              // 'month': DateTime.now().month.toString(),
-              // 'year': DateTime.now().year.toString(),
-            });
+            context.goNamed(AppRouterName.journalCreateScreen);
           },
           // onTap: () => context.pushNamed(AppRouterName.journalCreateScreen),
           child: const Image(

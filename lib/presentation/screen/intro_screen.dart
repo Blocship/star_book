@@ -32,6 +32,7 @@ class IntroScreen extends StatelessWidget {
       ),
       child: BlocBuilder<IntroScreenCubit, CubitState<User>>(
         builder: (context, state) {
+          nameController.text = 'Abdullah';
           return GradientScaffold(
             resizeToAvoidBottomInset: false,
             body: Padding(
