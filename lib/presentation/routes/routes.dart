@@ -5,9 +5,9 @@ import 'package:star_book/presentation/screen/analytics_screens/analytics_tab_ba
 import 'package:star_book/presentation/screen/calendar/month_days.dart';
 import 'package:star_book/presentation/screen/date_picker_screen.dart';
 import 'package:star_book/presentation/screen/intro_screen.dart';
+import 'package:star_book/presentation/screen/journal_screens/journal_create_screen.dart';
 import 'package:star_book/presentation/screen/journal_screens/journal_detail_screen.dart';
 import 'package:star_book/presentation/screen/journal_screens/journal_edit_screen.dart';
-import 'package:star_book/presentation/screen/journal_screens/journal_create_screen.dart';
 import 'package:star_book/presentation/screen/license_agreement_screen.dart';
 import 'package:star_book/presentation/screen/main_screen.dart';
 import 'package:star_book/presentation/screen/mood_picker_screen.dart';
@@ -17,9 +17,16 @@ import 'package:star_book/presentation/screen/year_screen.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/month_details.dart';
 
+abstract class RouteArg {
+  const RouteArg();
+
+  String get parsedPath => uri.toString();
+  Uri get uri;
+}
+
 class AppRouter {
   ///Routes Paths
-  static const String splashScreenPath = '/';
+
   static const String introScreenPath = '/introScreen';
   static const String mainScreenPath = '/mainScreen';
   static const String yearScreenPath = 'yearScreen';
@@ -40,8 +47,7 @@ class AppRouter {
     routes: <RouteBase>[
       ///SplashScreen
       GoRoute(
-        name: AppRouterName.splashScreen,
-        path: splashScreenPath,
+        path: SplashScreenRoute.path,
         builder: (context, state) => const SplashScreen(),
       ),
 

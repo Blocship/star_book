@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:star_book/presentation/routes/app_router_name.dart';
+import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
+
+class SplashScreenRoute extends RouteArg {
+  static const String path = '/';
+
+  const SplashScreenRoute() : super();
+
+  @override
+  Uri get uri => Uri(path: path);
+}
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
