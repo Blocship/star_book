@@ -19,15 +19,16 @@ import 'package:star_book/presentation/utils/month_details.dart';
 
 abstract class RouteArg {
   const RouteArg();
-
   String get parsedPath => uri.toString();
   Uri get uri;
 }
 
+abstract class Screen<T extends RouteArg> {
+  T get arg;
+}
+
 class AppRouter {
   ///Routes Paths
-
-  static const String introScreenPath = '/introScreen';
   static const String mainScreenPath = '/mainScreen';
   static const String yearScreenPath = 'yearScreen';
   static const String monthScreenPath =
@@ -44,18 +45,25 @@ class AppRouter {
   static const String licenseAgreementScreenPath = 'licenseAgreementScreen';
 
   static final GoRouter appRoutes = GoRouter(
+    debugLogDiagnostics: true,
+    initialLocation: SplashScreenRoute.path,
     routes: <RouteBase>[
       ///SplashScreen
       GoRoute(
         path: SplashScreenRoute.path,
-        builder: (context, state) => const SplashScreen(),
+        builder: (context, state) {
+          const arg = SplashScreenRoute();
+          return const SplashScreen(arg: arg);
+        },
       ),
 
       ///IntroScreen
       GoRoute(
-        name: AppRouterName.introScreen,
-        path: introScreenPath,
-        builder: (context, state) => IntroScreen(),
+        path: IntroScreenRoute.path,
+        builder: (context, state) {
+          const arg = IntroScreenRoute();
+          return IntroScreen(arg: arg);
+        },
       ),
 
       ///MainScreen
@@ -152,4 +160,10 @@ class AppRouter {
       ),
     ],
   );
+}
+
+extension XBuildContext on BuildContext {
+  void goToScreen({required RouteArg arg}) {
+    go(arg.parsedPath);
+  }
 }

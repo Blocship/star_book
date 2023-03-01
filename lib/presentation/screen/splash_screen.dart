@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/routes/routes.dart';
+import 'package:star_book/presentation/screen/intro_screen.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
@@ -15,8 +14,11 @@ class SplashScreenRoute extends RouteArg {
   Uri get uri => Uri(path: path);
 }
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class SplashScreen extends StatefulWidget implements Screen<SplashScreenRoute> {
+  @override
+  final SplashScreenRoute arg;
+
+  const SplashScreen({Key? key, required this.arg}) : super(key: key);
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -33,7 +35,7 @@ class _SplashScreenState extends State<SplashScreen>
       duration: const Duration(milliseconds: 2000),
       vsync: this,
     )..forward().then((_) {
-        context.pushReplacementNamed(AppRouterName.introScreen);
+        context.goToScreen(arg: const IntroScreenRoute());
       });
   }
 
