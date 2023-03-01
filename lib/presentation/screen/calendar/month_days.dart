@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:star_book/cubits/cubit_state/cubit_state.dart';
+import 'package:star_book/cubits/home_screen_cubit.dart';
+import 'package:star_book/domain/models/mood/mood_info.dart';
+import 'package:star_book/domain/repository/mood_repo.dart';
+import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
@@ -149,16 +155,27 @@ class Date extends StatelessWidget {
     final double deviceHeight = context.deviceHeight;
     final double deviceWidth = context.deviceWidth;
     final TextTheme textTheme = context.textTheme;
-    return GestureDetector(
-      onTap: () => context.goNamed(AppRouterName.journalCreateScreen),
-      child: Container(
-        width: deviceWidth * 0.133,
-        height: deviceHeight * 0.064,
-        alignment: Alignment.center,
-        child: Text(
-          day < 1 ? '' : day.toString(),
-          style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w400),
-        ),
+    return BlocProvider<HomeScreenCubit>(
+      create: (context) => HomeScreenCubit(
+        moodRepo: Injector.resolve<MoodRepo>(),
+      ),
+      child: BlocBuilder<HomeScreenCubit, CubitState<MoodInfo>>(
+        builder: (context, state) {
+          // final get = context.read<HomeScreenCubit>().getMoodInfoByDate(day: day);
+          return GestureDetector(
+            onTap: () => context.goNamed(AppRouterName.journalCreateScreen),
+            child: Container(
+              width: deviceWidth * 0.133,
+              height: deviceHeight * 0.064,
+              alignment: Alignment.center,
+              child: Text(
+                day < 1 ? '' : day.toString(),
+                style:
+                    textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w400),
+              ),
+            ),
+          );
+        },
       ),
     );
   }
