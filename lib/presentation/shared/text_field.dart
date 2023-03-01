@@ -141,15 +141,15 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
   }
 }
 
-class SelectableTile extends StatelessWidget {
+class SelectableDateTile extends StatelessWidget {
   final String title;
-  final String select;
+  final String? select;
   final VoidCallback onTap;
 
-  const SelectableTile({
+  const SelectableDateTile({
     Key? key,
     required this.title,
-    required this.select,
+    this.select,
     required this.onTap,
   }) : super(key: key);
 
@@ -158,11 +158,7 @@ class SelectableTile extends StatelessWidget {
     final TextTheme textTheme = context.textTheme;
     final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     final double deviceWidth = context.deviceWidth;
-    String selectedData = select;
-    if (selectedData == 'Jan 1, 1000' || selectedData == 'label') {
-      selectedData = 'Select';
-    }
-    final bool isEmpty = (selectedData != 'Select');
+    final bool isEmpty = (select != null);
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
@@ -188,7 +184,7 @@ class SelectableTile extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Text(
-                selectedData,
+                select ?? 'Select',
                 style: textTheme.bodyLarge!.copyWith(
                   fontWeight: FontWeight.w400,
                   color: isEmpty
@@ -196,6 +192,78 @@ class SelectableTile extends StatelessWidget {
                       : themeColorStyle.tertiaryColor,
                 ),
               ),
+              const Icon(
+                Icons.keyboard_arrow_right,
+                size: 20,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SelectableMoodTile extends StatelessWidget {
+  final String title;
+  final String? select;
+  final Color? color;
+  final VoidCallback onTap;
+
+  const SelectableMoodTile({
+    Key? key,
+    required this.title,
+    required this.onTap,
+    this.color,
+    this.select,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceWidth = context.deviceWidth;
+    final bool isEmpty = (select != null);
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        border: Border.all(
+          color: themeColorStyle.octonaryColor,
+        ),
+      ),
+      child: ListTile(
+        onTap: onTap,
+        dense: true,
+        title: Text(
+          title,
+          style: textTheme.bodyLarge!.copyWith(
+            fontWeight: FontWeight.w400,
+            color: isEmpty
+                ? themeColorStyle.secondaryColor
+                : themeColorStyle.tertiaryColor,
+          ),
+        ),
+        trailing: SizedBox(
+          width: deviceWidth * 0.3,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                select ?? 'Select',
+                style: textTheme.bodyLarge!.copyWith(
+                  fontWeight: FontWeight.w400,
+                  color: isEmpty
+                      ? themeColorStyle.secondaryColor
+                      : themeColorStyle.tertiaryColor,
+                ),
+              ),
+              if (isEmpty) ...[
+                const SizedBox(width: 5),
+                CircleAvatar(
+                  backgroundColor: color,
+                  radius: 7,
+                ),
+              ],
               const Icon(
                 Icons.keyboard_arrow_right,
                 size: 20,

@@ -18,8 +18,8 @@ class DatePickerScreen extends StatelessWidget {
     final TextTheme textTheme = context.textTheme;
     final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     final double deviceHeight = context.deviceHeight;
-    return BlocProvider<PickerCubit>(
-      create: (context) => PickerCubit(),
+    return BlocProvider<DatePickerCubit>(
+      create: (context) => DatePickerCubit(),
       child: Scaffold(
         appBar: PrimaryAppBar(
           leadingOnTap: () => context.pop(),
@@ -53,15 +53,15 @@ class DatePickerScreen extends StatelessWidget {
             ],
           ),
         ),
-        floatingActionButton: BlocBuilder<PickerCubit, PickerData>(
+        floatingActionButton: BlocBuilder<DatePickerCubit, DateTime>(
           builder: (context, state) {
             return SecondaryFloatingActionButton(
               onTap: () {
                 context
                     .goNamed(AppRouterName.journalCreateScreen, queryParams: {
-                  'day': state.dateTime.day.toString(),
-                  'month': state.dateTime.month.toString(),
-                  'year': state.dateTime.year.toString(),
+                  'day': state.day.toString(),
+                  'month': state.month.toString(),
+                  'year': state.year.toString(),
                 });
               },
               child: const Icon(Icons.check),

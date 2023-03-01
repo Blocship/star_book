@@ -21,9 +21,9 @@ class _MoodPickerScreenState extends State<MoodPickerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<PickerCubit>(
-      create: (context) => PickerCubit(),
-      child: BlocBuilder<PickerCubit, PickerData>(
+    return BlocProvider<MoodPickerCubit>(
+      create: (context) => MoodPickerCubit(),
+      child: BlocBuilder<MoodPickerCubit, Mood>(
         builder: (context, state) {
           return Scaffold(
             appBar: PrimaryAppBar(
@@ -50,11 +50,15 @@ class _MoodPickerScreenState extends State<MoodPickerScreen> {
                           onTap: () {
                             setState(() {
                               selectedIndex = index;
-                              context.read<PickerCubit>().savePickerData(
-                                  //mood: MoodTilePair.moods[selectedIndex]
-                                  pickerData: PickerData(
-                                      mood: MoodTilePair.moods[selectedIndex],
-                                      dateTime: state.dateTime));
+                              context.read<MoodPickerCubit>().saveMood(
+                                    mood: Mood(
+                                      id: '',
+                                      label: MoodTilePair
+                                          .moods[selectedIndex].label,
+                                      color: MoodTilePair
+                                          .moods[selectedIndex].color,
+                                    ),
+                                  );
                             });
                           }),
                     );
@@ -66,9 +70,9 @@ class _MoodPickerScreenState extends State<MoodPickerScreen> {
               onTap: () {
                 context
                     .goNamed(AppRouterName.journalCreateScreen, queryParams: {
-                  'moodId': state.mood.id,
-                  'moodLabel': state.mood.label,
-                  'moodColor': state.mood.color.toString(),
+                  'moodId': state.id,
+                  'moodLabel': state.label,
+                  'moodColor': state.color.toString(),
                 });
               },
               child: const Icon(Icons.done),

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:star_book/cubits/mood_picker_cubit.dart';
-import 'package:star_book/domain/models/mood/mood.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 
 enum PickerComponent { date, month, year }
 
 class DatePicker extends StatelessWidget {
   const DatePicker({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     final double deviceHeight = context.deviceHeight;
@@ -52,9 +52,9 @@ class _PickerWidgetState extends State<PickerWidget> {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = context.textTheme;
-    return BlocProvider<PickerCubit>(
-      create: (context) => PickerCubit(),
-      child: BlocBuilder<PickerCubit, PickerData>(
+    return BlocProvider<DatePickerCubit>(
+      create: (context) => DatePickerCubit(),
+      child: BlocBuilder<DatePickerCubit, DateTime>(
         builder: (context, state) {
           return Row(
             children: [
@@ -187,9 +187,7 @@ class _PickerWidgetState extends State<PickerWidget> {
           currentDate = tempDate;
           if (tempDate.compareTo(firstValue!) >= 0) {
             currentDate = tempDate;
-            context.read<PickerCubit>().savePickerData(
-                pickerData:
-                    PickerData(mood: Mood.initial(), dateTime: currentDate));
+            context.read<DatePickerCubit>().saveDate(dateTime: currentDate);
           }
         });
         break;
@@ -206,9 +204,7 @@ class _PickerWidgetState extends State<PickerWidget> {
           currentDate = tempDate;
           if (tempDate.compareTo(firstValue!) >= 0) {
             currentDate = tempDate;
-            context.read<PickerCubit>().savePickerData(
-                pickerData:
-                    PickerData(mood: Mood.initial(), dateTime: currentDate));
+            context.read<DatePickerCubit>().saveDate(dateTime: currentDate);
           }
         });
         break;
@@ -222,9 +218,7 @@ class _PickerWidgetState extends State<PickerWidget> {
           currentDate = tempDate;
           if (tempDate.compareTo(firstValue!) >= 0) {
             currentDate = tempDate;
-            context.read<PickerCubit>().savePickerData(
-                pickerData:
-                    PickerData(mood: Mood.initial(), dateTime: currentDate));
+            context.read<DatePickerCubit>().saveDate(dateTime: currentDate);
           }
         });
         break;
@@ -242,16 +236,12 @@ class _PickerWidgetState extends State<PickerWidget> {
         DateTime tempDate = DateTime(currentDate.year, currentDate.month, tDay);
         setState(() {
           currentDate = tempDate;
-          context.read<PickerCubit>().savePickerData(
-              pickerData:
-                  PickerData(mood: Mood.initial(), dateTime: currentDate));
+          context.read<DatePickerCubit>().saveDate(dateTime: currentDate);
         });
         if (tempDate.compareTo(lastValue!) <= 0) {
           setState(() {
             currentDate = tempDate;
-            context.read<PickerCubit>().savePickerData(
-                pickerData:
-                    PickerData(mood: Mood.initial(), dateTime: currentDate));
+            context.read<DatePickerCubit>().saveDate(dateTime: currentDate);
           });
         }
         break;
@@ -267,9 +257,7 @@ class _PickerWidgetState extends State<PickerWidget> {
           currentDate = tempDate;
           if (tempDate.compareTo(lastValue!) <= 0) {
             currentDate = tempDate;
-            context.read<PickerCubit>().savePickerData(
-                pickerData:
-                    PickerData(mood: Mood.initial(), dateTime: currentDate));
+            context.read<DatePickerCubit>().saveDate(dateTime: currentDate);
           }
         });
         break;
@@ -282,9 +270,7 @@ class _PickerWidgetState extends State<PickerWidget> {
           currentDate = tempDate;
           if (tempDate.compareTo(lastValue!) <= 0) {
             currentDate = tempDate;
-            context.read<PickerCubit>().savePickerData(
-                pickerData:
-                    PickerData(mood: Mood.initial(), dateTime: currentDate));
+            context.read<DatePickerCubit>().saveDate(dateTime: currentDate);
           }
         });
         break;

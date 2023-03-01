@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:star_book/domain/models/mood/day.dart';
-import 'package:star_book/domain/models/mood/mood.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/screen/analytics_screens/analytics_tab_bar_view.dart';
 import 'package:star_book/presentation/screen/calendar/month_days.dart';
@@ -26,14 +24,12 @@ class AppRouter {
   static const String mainScreenPath = '/mainScreen';
   static const String yearScreenPath = 'yearScreen';
   static const String monthScreenPath =
-      'mainScreen/monthScreen/:year/:month/:isHomeScreen';
+      'monthScreen/:year/:month/:isHomeScreen';
   static const String journalCreateScreenPath = 'journalCreateScreen';
   static const String moodPickerScreenPath = 'moodPickerScreen';
   static const String datePickerScreenPath = 'datePickerScreen';
-  static const String journalDetailScreenPath =
-      'mainScreen/monthScreen/journalDetailScreen';
-  static const String journalEditScreenPath =
-      'mainScreen/monthScreen/journalEditScreen';
+  static const String journalDetailScreenPath = 'journalDetailScreen';
+  static const String journalEditScreenPath = 'journalEditScreen';
   static const String analyticScreenPath = 'analyticScreen';
   static const String settingScreenPath = 'settingScreen';
   static const String licenseAgreementScreenPath = 'licenseAgreementScreen';
@@ -88,16 +84,15 @@ class AppRouter {
             name: AppRouterName.journalCreateScreen,
             path: journalCreateScreenPath,
             builder: (context, state) => JournalCreateScreen(
-              dateTime: Day(
-                day: int.parse(state.queryParams['day'] ?? '1'),
-                year: int.parse(state.queryParams['year'] ?? '1000'),
-                month: int.parse(state.queryParams['month'] ?? '1'),
+              dateTime: DateTimeQueryParamModel(
+                day: state.queryParams['day'],
+                year: state.queryParams['year'],
+                month: state.queryParams['month'],
               ),
-              mood: Mood(
-                id: state.queryParams['moodId'] ?? '0',
-                label: state.queryParams['moodLabel'] ?? 'label',
-                color:
-                    int.parse(state.queryParams['moodColor'] ?? '0xFFFFFFFF'),
+              mood: MoodQueryParamModel(
+                id: state.queryParams['moodId'],
+                label: state.queryParams['moodLabel'],
+                color: state.queryParams['moodColor'],
               ),
             ),
             routes: [
@@ -160,4 +155,20 @@ class AppRouter {
       ),
     ],
   );
+}
+
+class DateTimeQueryParamModel {
+  final String? day;
+  final String? month;
+  final String? year;
+
+  DateTimeQueryParamModel({this.day, this.month, this.year});
+}
+
+class MoodQueryParamModel {
+  final String? id;
+  final String? label;
+  final String? color;
+
+  MoodQueryParamModel({this.id, this.label, this.color});
 }

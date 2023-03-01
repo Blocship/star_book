@@ -12,7 +12,7 @@ class CalendarUtils {
 
   ///This function returns month Name (like; month = 1 => January)
   static String getMonthName(int? month) {
-    if (month == null) return '';
+    if (month == null || month == 0) return '';
     final List<String> monthName = [
       'Jan',
       'Feb',
