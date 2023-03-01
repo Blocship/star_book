@@ -253,8 +253,8 @@ abstract class _Journal extends Journal {
 mixin _$JournalBody {
   Mood get mood => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
-  DateTime? get createdAt => throw _privateConstructorUsedError;
   String get memo => throw _privateConstructorUsedError;
+  DateTime? get createdAt => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $JournalBodyCopyWith<JournalBody> get copyWith =>
@@ -267,7 +267,7 @@ abstract class $JournalBodyCopyWith<$Res> {
           JournalBody value, $Res Function(JournalBody) then) =
       _$JournalBodyCopyWithImpl<$Res, JournalBody>;
   @useResult
-  $Res call({Mood mood, String title, DateTime? createdAt, String memo});
+  $Res call({Mood mood, String title, String memo, DateTime? createdAt});
 
   $MoodCopyWith<$Res> get mood;
 }
@@ -287,8 +287,8 @@ class _$JournalBodyCopyWithImpl<$Res, $Val extends JournalBody>
   $Res call({
     Object? mood = null,
     Object? title = null,
-    Object? createdAt = freezed,
     Object? memo = null,
+    Object? createdAt = freezed,
   }) {
     return _then(_value.copyWith(
       mood: null == mood
@@ -299,14 +299,14 @@ class _$JournalBodyCopyWithImpl<$Res, $Val extends JournalBody>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       memo: null == memo
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ) as $Val);
   }
 
@@ -327,7 +327,7 @@ abstract class _$$_JournalBodyCopyWith<$Res>
       __$$_JournalBodyCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({Mood mood, String title, DateTime? createdAt, String memo});
+  $Res call({Mood mood, String title, String memo, DateTime? createdAt});
 
   @override
   $MoodCopyWith<$Res> get mood;
@@ -346,8 +346,8 @@ class __$$_JournalBodyCopyWithImpl<$Res>
   $Res call({
     Object? mood = null,
     Object? title = null,
-    Object? createdAt = freezed,
     Object? memo = null,
+    Object? createdAt = freezed,
   }) {
     return _then(_$_JournalBody(
       mood: null == mood
@@ -358,14 +358,14 @@ class __$$_JournalBodyCopyWithImpl<$Res>
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
               as String,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
       memo: null == memo
           ? _value.memo
           : memo // ignore: cast_nullable_to_non_nullable
               as String,
+      createdAt: freezed == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
     ));
   }
 }
@@ -376,8 +376,8 @@ class _$_JournalBody extends _JournalBody {
   const _$_JournalBody(
       {required this.mood,
       required this.title,
-      this.createdAt,
-      required this.memo})
+      required this.memo,
+      this.createdAt})
       : super._();
 
   @override
@@ -385,13 +385,13 @@ class _$_JournalBody extends _JournalBody {
   @override
   final String title;
   @override
-  final DateTime? createdAt;
-  @override
   final String memo;
+  @override
+  final DateTime? createdAt;
 
   @override
   String toString() {
-    return 'JournalBody(mood: $mood, title: $title, createdAt: $createdAt, memo: $memo)';
+    return 'JournalBody(mood: $mood, title: $title, memo: $memo, createdAt: $createdAt)';
   }
 
   @override
@@ -401,13 +401,13 @@ class _$_JournalBody extends _JournalBody {
             other is _$_JournalBody &&
             (identical(other.mood, mood) || other.mood == mood) &&
             (identical(other.title, title) || other.title == title) &&
+            (identical(other.memo, memo) || other.memo == memo) &&
             (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.memo, memo) || other.memo == memo));
+                other.createdAt == createdAt));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, mood, title, createdAt, memo);
+  int get hashCode => Object.hash(runtimeType, mood, title, memo, createdAt);
 
   @JsonKey(ignore: true)
   @override
@@ -420,8 +420,8 @@ abstract class _JournalBody extends JournalBody {
   const factory _JournalBody(
       {required final Mood mood,
       required final String title,
-      final DateTime? createdAt,
-      required final String memo}) = _$_JournalBody;
+      required final String memo,
+      final DateTime? createdAt}) = _$_JournalBody;
   const _JournalBody._() : super._();
 
   @override
@@ -429,9 +429,9 @@ abstract class _JournalBody extends JournalBody {
   @override
   String get title;
   @override
-  DateTime? get createdAt;
-  @override
   String get memo;
+  @override
+  DateTime? get createdAt;
   @override
   @JsonKey(ignore: true)
   _$$_JournalBodyCopyWith<_$_JournalBody> get copyWith =>

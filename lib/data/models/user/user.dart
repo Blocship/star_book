@@ -15,3 +15,11 @@ class User {
 
   Id get key => id.fnvHash;
 }
+
+class UserBody {
+  final String name;
+
+  const UserBody({
+    required this.name,
+  });
+}

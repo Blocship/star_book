@@ -17,29 +17,10 @@ class IntroScreenCubit extends Cubit<CubitState<User>> {
   Future<void> createUser(String name) async {
     try {
       emit(const LoadingState());
-      await userRepo.createUser(
-        User(
-          id: '',
-          name: name,
-        ),
-      );
+      final body = UserBody(name: name);
+      await userRepo.createUser(body);
     } catch (e) {
       log(e.toString());
     }
-  }
-
-  Future<void> deleteUser({required String userId}) async {
-    emit(const LoadingState());
-    await userRepo.deleteUser(userId);
-  }
-
-  Future<void> updateUser({required String name}) async {
-    emit(const LoadingState());
-    await userRepo.updateUser(User(id: '', name: name));
-  }
-
-  Future<void> getUser({required String userId}) async {
-    emit(const LoadingState());
-    await userRepo.getUser(userId: userId);
   }
 }
