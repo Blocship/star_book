@@ -88,4 +88,6 @@ extension XBuildContext on BuildContext {
   void goToScreen({required RouteArg arg}) {
     go(arg.parsedPath);
   }
+
+  String get location => GoRouter.of(this).location;
 }
