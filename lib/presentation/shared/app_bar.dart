@@ -9,7 +9,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? trailingText;
   final VoidCallback? leadingOnTap;
   final VoidCallback? trailingOnTap;
-
+  final bool isBottomSheet;
   const PrimaryAppBar({
     super.key,
     this.leadingText,
@@ -17,6 +17,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.trailingText,
     this.leadingOnTap,
     this.trailingOnTap,
+    this.isBottomSheet = false,
   });
 
   @override
@@ -26,8 +27,9 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
     final double deviceWidth = context.deviceWidth;
 
     return Padding(
-      padding:
-          const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
+      padding: isBottomSheet
+          ? const EdgeInsets.fromLTRB(20, 54, 20, 0)
+          : const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
       child: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -79,7 +81,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize {
-    return const Size.fromHeight(50);
+    return Size.fromHeight(isBottomSheet ? 80 : 50);
   }
 }
 

@@ -27,6 +27,7 @@ class _MoodPickerScreenState extends State<MoodPickerScreen> {
         builder: (context, state) {
           return Scaffold(
             appBar: PrimaryAppBar(
+              isBottomSheet: true,
               leadingOnTap: () => context.pop(),
               centerTitle: 'Select Mood',
             ),
@@ -68,12 +69,14 @@ class _MoodPickerScreenState extends State<MoodPickerScreen> {
             ),
             floatingActionButton: SecondaryFloatingActionButton(
               onTap: () {
+                /// Refactor this, look for the right way to done this
                 context
                     .goNamed(AppRouterName.journalCreateScreen, queryParams: {
                   'moodId': state.id,
                   'moodLabel': state.label,
                   'moodColor': state.color.toString(),
                 });
+                context.pop();
               },
               child: const Icon(Icons.done),
             ),

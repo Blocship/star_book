@@ -17,13 +17,18 @@ class MoodPickerCubit extends Cubit<Mood> {
   }
 }
 
-// class PickerData {
-//   final Mood mood;
-//   final DateTime dateTime;
-//   const PickerData({required this.mood, required this.dateTime});
-//   factory PickerData.initial() => PickerData(
-//         mood: const Mood(id: '0', label: 'label', color: 0xFFFFFFFF),
-//         dateTime: DateTime(
-//             DateTime.now().year, DateTime.now().month, DateTime.now().day),
-//       );
-// }
+class DateTimeQueryParamModel {
+  final String? day;
+  final String? month;
+  final String? year;
+
+  DateTimeQueryParamModel({this.day, this.month, this.year});
+}
+
+class MoodQueryParamModel {
+  final String? id;
+  final String? label;
+  final String? color;
+
+  MoodQueryParamModel({this.id, this.label, this.color});
+}

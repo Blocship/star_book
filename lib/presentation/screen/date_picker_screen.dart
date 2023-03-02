@@ -22,6 +22,7 @@ class DatePickerScreen extends StatelessWidget {
       create: (context) => DatePickerCubit(),
       child: Scaffold(
         appBar: PrimaryAppBar(
+          isBottomSheet: true,
           leadingOnTap: () => context.pop(),
           centerTitle: 'Select Date',
         ),
@@ -57,12 +58,14 @@ class DatePickerScreen extends StatelessWidget {
           builder: (context, state) {
             return SecondaryFloatingActionButton(
               onTap: () {
+                /// Refactor this, look for the right way to done this
                 context
                     .goNamed(AppRouterName.journalCreateScreen, queryParams: {
                   'day': state.day.toString(),
                   'month': state.month.toString(),
                   'year': state.year.toString(),
                 });
+                context.pop();
               },
               child: const Icon(Icons.check),
             );

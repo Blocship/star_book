@@ -4,11 +4,12 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/cubits/cubit_state/cubit_state.dart';
 import 'package:star_book/cubits/journal_create_cubit.dart';
+import 'package:star_book/cubits/mood_picker_cubit.dart';
 import 'package:star_book/domain/models/journal/journal.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
-import 'package:star_book/presentation/routes/routes.dart';
+import 'package:star_book/presentation/screen/date_picker_screen.dart';
+import 'package:star_book/presentation/screen/mood_picker_screen.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/form_models/jounral_form_model.dart';
 import 'package:star_book/presentation/shared/form_validator.dart';
@@ -22,6 +23,7 @@ import 'package:star_book/presentation/widgets/floating_action_button.dart';
 class JournalCreateScreen extends StatefulWidget {
   final DateTimeQueryParamModel? dateTime;
   final MoodQueryParamModel? mood;
+
   const JournalCreateScreen({Key? key, this.dateTime, this.mood})
       : super(key: key);
 
@@ -31,7 +33,9 @@ class JournalCreateScreen extends StatefulWidget {
 
 class _JournalCreateScreenState extends State<JournalCreateScreen> {
   final _formKey = GlobalKey<FormBuilderState>();
+
   int? get getMonth => int.parse(widget.dateTime?.month ?? '0');
+
   @override
   Widget build(BuildContext context) {
     String? selectedDateTime;
@@ -68,21 +72,45 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
                       const SizedBox(height: 30),
                       const AddNewDetails(),
                       const SizedBox(height: 30),
+                      // SelectableDateTile(
+                      //   title: 'Date',
+                      //   select: selectedDateTime,
+                      //   onTap: () =>
+                      //       context.pushNamed(AppRouterName.datePickerScreen),
+                      // ),
                       SelectableDateTile(
                         title: 'Date',
                         select: selectedDateTime,
-                        onTap: () =>
-                            context.pushNamed(AppRouterName.datePickerScreen),
+                        onTap: () {
+                          showModalBottomSheet<void>(
+                            isScrollControlled: true,
+                            context: context,
+                            builder: (context) {
+                              return const DatePickerScreen();
+                            },
+                          );
+                        },
                       ),
                       const SizedBox(height: 30),
                       SelectableMoodTile(
                         title: 'Mood',
-                        onTap: () =>
-                            context.pushNamed(AppRouterName.moodPickerScreen),
                         select: widget.mood?.label,
                         color: Color(
                             int.parse(widget.mood?.color ?? '0xFFFFFFFF')),
+                        onTap: () {
+                          showModalBottomSheet<void>(
+                            isScrollControlled: true,
+                            context: context,
+                            builder: (context) {
+                              return const MoodPickerScreen();
+                            },
+                          );
+                        },
                       ),
+                      // context.pushNamed(AppRouterName.moodPickerScreen),
+                      // select: widget.mood?.label,
+                      // color: Color(
+                      //     int.parse(widget.mood?.color ?? '0xFFFFFFFF')),
                       const SizedBox(height: 30),
                       CustomTextFormField(
                         fieldKey: JournalFormModel.titleKey,

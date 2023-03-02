@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:star_book/cubits/mood_picker_cubit.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/screen/analytics_screens/analytics_tab_bar_view.dart';
 import 'package:star_book/presentation/screen/calendar/month_days.dart';
-import 'package:star_book/presentation/screen/date_picker_screen.dart';
 import 'package:star_book/presentation/screen/intro_screen.dart';
 import 'package:star_book/presentation/screen/journal_screens/journal_detail_screen.dart';
 import 'package:star_book/presentation/screen/journal_screens/journal_edit_screen.dart';
 import 'package:star_book/presentation/screen/journal_screens/journal_create_screen.dart';
 import 'package:star_book/presentation/screen/license_agreement_screen.dart';
 import 'package:star_book/presentation/screen/main_screen.dart';
-import 'package:star_book/presentation/screen/mood_picker_screen.dart';
 import 'package:star_book/presentation/screen/setting_screen.dart';
 import 'package:star_book/presentation/screen/splash_screen.dart';
 import 'package:star_book/presentation/screen/year_screen.dart';
@@ -26,8 +25,8 @@ class AppRouter {
   static const String monthScreenPath =
       'monthScreen/:year/:month/:isHomeScreen';
   static const String journalCreateScreenPath = 'journalCreateScreen';
-  static const String moodPickerScreenPath = 'moodPickerScreen';
-  static const String datePickerScreenPath = 'datePickerScreen';
+  // static const String moodPickerScreenPath = 'moodPickerScreen';
+  // static const String datePickerScreenPath = 'datePickerScreen';
   static const String journalDetailScreenPath = 'journalDetailScreen';
   static const String journalEditScreenPath = 'journalEditScreen';
   static const String analyticScreenPath = 'analyticScreen';
@@ -95,21 +94,27 @@ class AppRouter {
                 color: state.queryParams['moodColor'],
               ),
             ),
-            routes: [
-              ///MoodPickerScreen
-              GoRoute(
-                name: AppRouterName.moodPickerScreen,
-                path: moodPickerScreenPath,
-                builder: (context, state) => const MoodPickerScreen(),
-              ),
+            // routes: [
+            ///MoodPickerScreen
+            // GoRoute(
+            //   name: AppRouterName.moodPickerScreen,
+            //   path: moodPickerScreenPath,
+            //   pageBuilder: (context, state) => const MaterialPage(
+            //     child: MoodPickerScreen(),
+            //     fullscreenDialog: true,
+            //   ),
+            // ),
 
-              ///DatePickerScreen
-              GoRoute(
-                name: AppRouterName.datePickerScreen,
-                path: datePickerScreenPath,
-                builder: (context, state) => const DatePickerScreen(),
-              ),
-            ],
+            ///DatePickerScreen
+            // GoRoute(
+            //   name: AppRouterName.datePickerScreen,
+            //   path: datePickerScreenPath,
+            //   pageBuilder: (context, state) => const MaterialPage(
+            //     child: DatePickerScreen(),
+            //     fullscreenDialog: true,
+            //   ),
+            // ),
+            // ],
           ),
 
           ///JournalDetailScreen
@@ -155,20 +160,4 @@ class AppRouter {
       ),
     ],
   );
-}
-
-class DateTimeQueryParamModel {
-  final String? day;
-  final String? month;
-  final String? year;
-
-  DateTimeQueryParamModel({this.day, this.month, this.year});
-}
-
-class MoodQueryParamModel {
-  final String? id;
-  final String? label;
-  final String? color;
-
-  MoodQueryParamModel({this.id, this.label, this.color});
 }
