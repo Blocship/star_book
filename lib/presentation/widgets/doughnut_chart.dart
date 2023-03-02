@@ -1,8 +1,8 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/extension.dart';
+import 'package:star_book/presentation/widgets/arrow_indicator.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class MoodDoughnutChart extends StatefulWidget {
@@ -20,15 +20,16 @@ class MoodDoughnutChart extends StatefulWidget {
 class _MoodDoughnutChartState extends State<MoodDoughnutChart> {
   @override
   Widget build(BuildContext context) {
-    double highestValue = highestSector(widget.moodDataMap);
+    List<double> yValues =
+        widget.moodDataMap.map((ChartData chartData) => chartData.y).toList();
     final TextTheme textTheme = context.textTheme;
     final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     final double deviceWidth = context.deviceWidth;
-    print(highestValue);
     return SfCircularChart(
       annotations: <CircularChartAnnotation>[
         CircularChartAnnotation(
-          widget: ArrowIndicator(direction: pi / 2),
+          widget:
+              ArrowIndicator(direction: getHighestSectorCenterAngle(yValues)),
         ),
         CircularChartAnnotation(
           widget: CircleAvatar(
@@ -75,68 +76,61 @@ class _MoodDoughnutChartState extends State<MoodDoughnutChart> {
     );
   }
 
-  double highestSector(List<ChartData> data) {
-    double highestAngle = 0.0;
-    for (int i = 0; i < data.length; i++) {
-      // Checking for largest value in the list
-      if (data[i].y > highestAngle) {
-        highestAngle = data[i].y;
+  /// For getting the center angle of the highest sector
+  double getHighestSectorCenterAngle(List<double> sectorValues) {
+    /// The index of highest sector
+    int highestSectorIndex = 0;
+
+    /// Initially, first sector supposed to be the highest
+    /// value.
+    double highestSectorValue = sectorValues[0];
+
+    /// Finding the index of the highest sector and its value
+    for (int i = 1; i < sectorValues.length; i++) {
+      if (sectorValues[i] > highestSectorValue) {
+        highestSectorIndex = i;
+        highestSectorValue = sectorValues[i];
       }
     }
 
-    return highestAngle;
+    /// Calculating the starting and ending angles for each sector
+    /// Store List of sectors angles
+    List<double> sectorAngles = [];
+
+    /// Get the sum of sector values
+    double totalValue = sectorValues.reduce((a, b) => a + b);
+
+    /// Use for startAngle
+    double startAngle = 0;
+
+    /// Getting Starting Angle
+    for (int i = 0; i < sectorValues.length; i++) {
+      double sectorAngle = (sectorValues[i] / totalValue) * 2 * pi;
+      sectorAngles.add(startAngle + sectorAngle);
+      startAngle += sectorAngle;
+    }
+
+    /// Calculating the center point angle of the highest sector
+    double centerAngle = 0.0;
+    if (highestSectorIndex == 0) {
+      centerAngle = sectorAngles[highestSectorIndex] / 2;
+    } else {
+      centerAngle = (sectorAngles[highestSectorIndex - 1] +
+              sectorAngles[highestSectorIndex]) /
+          2;
+    }
+    return centerAngle;
   }
 }
 
 class ChartData {
-  ChartData({required this.x, required this.y, required this.color});
+  ChartData({
+    required this.x,
+    this.y = 2.0,
+    required this.color,
+  });
 
   final String x;
   final double y;
   final Color color;
-}
-
-class ArrowIndicator extends StatelessWidget {
-  final double direction;
-  const ArrowIndicator({Key? key, required this.direction}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Transform.rotate(
-      // angle should be in radian
-      // so rad = degree * pi / 180
-      // since motion is relative, we move the phone
-      // not the arrow, so -1 for inverting direction
-      angle: (direction),
-      alignment: Alignment.center,
-      child: Center(
-        child: CustomPaint(
-          size: const Size(50, 50),
-          painter: DrawTriangleShape(),
-        ),
-      ),
-    );
-  }
-}
-
-class DrawTriangleShape extends CustomPainter {
-  var painter = Paint()
-    ..color = Colors.white
-    ..style = PaintingStyle.fill;
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    var path = Path();
-    path.moveTo(size.width / 2, size.height * -1.8); // For Top point
-    path.lineTo(0, size.height * -1); // For Bottom right point
-    path.lineTo(size.width, size.height * -1); // For Bottom left point
-    // path.lineTo(size.height, size.width); // For Bottom left point
-    path.close();
-    canvas.drawPath(path, painter);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
-  }
 }
