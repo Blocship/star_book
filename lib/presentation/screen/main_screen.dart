@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/routes/routes.dart';
-import 'package:star_book/presentation/screen/home_screen.dart';
-import 'package:star_book/presentation/screen/profile_screen.dart';
 import 'package:star_book/presentation/shared/bottom_nav_bar.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
 
@@ -51,18 +49,14 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   List<Widget> pages = <Widget>[
-    const HomeScreen(),
-    const ProfileScreen(),
+    // YearScreen(),
+    // ProfileScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return GradientScaffold(
-      body: PageView(
-        controller: pageController,
-        onPageChanged: onPageChanged,
-        children: pages,
-      ),
+      body: widget.child,
       bottomNavigationBar: BottomNavBar(
         currentIndex: _selectedPage,
         onTap: onNavBarItemTapped,
