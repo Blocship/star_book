@@ -5,13 +5,13 @@ import 'package:star_book/cubits/cubit_state/cubit_state.dart';
 import 'package:star_book/cubits/journal_detail_cubit.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
-import 'package:star_book/presentation/utils/extension.dart';
-import 'package:star_book/presentation/widgets/floating_action_button.dart';
+import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/dialog_box.dart';
-import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
+import 'package:star_book/presentation/utils/extension.dart';
+import 'package:star_book/presentation/utils/padding_style.dart';
+import 'package:star_book/presentation/widgets/floating_action_button.dart';
 
 class JournalDetailScreen extends StatelessWidget {
   const JournalDetailScreen({Key? key}) : super(key: key);
@@ -30,7 +30,7 @@ class JournalDetailScreen extends StatelessWidget {
           // final getJournalById = context.read<JournalDetailCubit>().journalById$(journalId: journalId);
           return Scaffold(
             appBar: PrimaryAppBar(
-              leadingOnTap: () => context.goNamed(AppRouterName.mainScreen),
+              leadingOnTap: () => context.goNamed('AppRouterName.mainScreen'),
               centerTitle: 'Mood Journal',
               trailingText: 'Delete',
               trailingOnTap: () {

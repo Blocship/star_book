@@ -29,7 +29,6 @@ abstract class Screen<T extends RouteArg> {
 
 class AppRouter {
   ///Routes Paths
-  static const String mainScreenPath = '/mainScreen';
   static const String yearScreenPath = 'yearScreen';
   static const String monthScreenPath =
       'mainScreen/monthScreen/:year/:month/:isHomeScreen';
@@ -66,96 +65,115 @@ class AppRouter {
         },
       ),
 
-      ///MainScreen
-      GoRoute(
-        name: AppRouterName.mainScreen,
-        path: mainScreenPath,
-        builder: (context, state) => const MainScreen(),
+      /// MainScreen
+      ShellRoute(
+        builder: (context, state, child) {
+          const arg = MainScreenRoute();
+          return MainScreen(arg: arg, child: child);
+        },
         routes: <RouteBase>[
-          ///YearScreen
+          /// main/year
           GoRoute(
-            name: AppRouterName.yearScreen,
             path: yearScreenPath,
-            builder: (context, state) => const YearScreen(),
-            routes: <RouteBase>[
-              ///MonthScreen
-              GoRoute(
-                name: AppRouterName.monthScreen,
-                path: monthScreenPath,
-                builder: (context, state) => MonthScreen(
-                  monthDetails: MonthDetails(
-                      year: int.parse(state.params['year'] ??
-                          DateTime.now().year.toString()),
-                      month: int.parse(state.params['month'] ??
-                          DateTime.now().month.toString()),
-                      isHomeScreen:
-                          (state.params['isHomeScreen'] ?? 'true').parseBool()),
-                ),
-              ),
-            ],
+            builder: (context, state) {
+              const arg = YearScreenRoute();
+              return YearScreen(arg: arg);
+            },
           ),
 
-          ///JournalCreateScreen
+          /// main/profile
           GoRoute(
-            name: AppRouterName.journalCreateScreen,
-            path: journalCreateScreenPath,
-            builder: (context, state) => const JournalCreateScreen(),
-            routes: [
-              ///MoodPickerScreen
-              GoRoute(
-                name: AppRouterName.moodPickerScreen,
-                path: moodPickerScreenPath,
-                builder: (context, state) => const MoodPickerScreen(),
-              ),
-
-              ///DatePickerScreen
-              GoRoute(
-                name: AppRouterName.datePickerScreen,
-                path: datePickerScreenPath,
-                builder: (context, state) => const DatePickerScreen(),
-              ),
-            ],
-          ),
-
-          ///JournalDetailScreen
-          GoRoute(
-            name: AppRouterName.journalDetailScreen,
-            path: journalDetailScreenPath,
-            builder: (context, state) => const JournalDetailScreen(),
-            routes: <RouteBase>[
-              ///JournalEditScreen
-              GoRoute(
-                name: AppRouterName.journalEditScreen,
-                path: journalEditScreenPath,
-                builder: (context, state) => const JournalEditScreen(),
-              ),
-            ],
-          ),
-
-          ///AnalyticScreen
-          GoRoute(
-            name: AppRouterName.analyticScreen,
-            path: analyticScreenPath,
-            builder: (context, state) => const AnalyticsTabBarView(),
-          ),
-
-          ///SettingScreen
-          GoRoute(
-            name: AppRouterName.settingScreen,
             path: settingScreenPath,
-            builder: (context, state) => const SettingScreen(),
-            routes: <RouteBase>[
-              ///LicenseAgreementScreen
-              GoRoute(
-                name: AppRouterName.licenseAgreementScreen,
-                path: licenseAgreementScreenPath,
-                pageBuilder: (context, state) => const MaterialPage(
-                  child: LicenseAgreementScreen(),
-                  fullscreenDialog: true,
-                ),
-              )
-            ],
+            builder: (context, state) {
+              const arg = SettingScreenRoute();
+              return SettingScreen(arg: arg);
+            },
           ),
+        ],
+      ),
+
+      ///YearScreen
+      GoRoute(
+        name: AppRouterName.yearScreen,
+        path: yearScreenPath,
+        builder: (context, state) => const YearScreen(),
+        routes: <RouteBase>[
+          ///MonthScreen
+          GoRoute(
+            name: AppRouterName.monthScreen,
+            path: monthScreenPath,
+            builder: (context, state) => MonthScreen(
+              monthDetails: MonthDetails(
+                  year: int.parse(
+                      state.params['year'] ?? DateTime.now().year.toString()),
+                  month: int.parse(
+                      state.params['month'] ?? DateTime.now().month.toString()),
+                  isHomeScreen:
+                      (state.params['isHomeScreen'] ?? 'true').parseBool()),
+            ),
+          ),
+        ],
+      ),
+
+      ///JournalCreateScreen
+      GoRoute(
+        name: AppRouterName.journalCreateScreen,
+        path: journalCreateScreenPath,
+        builder: (context, state) => const JournalCreateScreen(),
+        routes: [
+          ///MoodPickerScreen
+          GoRoute(
+            name: AppRouterName.moodPickerScreen,
+            path: moodPickerScreenPath,
+            builder: (context, state) => const MoodPickerScreen(),
+          ),
+
+          ///DatePickerScreen
+          GoRoute(
+            name: AppRouterName.datePickerScreen,
+            path: datePickerScreenPath,
+            builder: (context, state) => const DatePickerScreen(),
+          ),
+        ],
+      ),
+
+      ///JournalDetailScreen
+      GoRoute(
+        name: AppRouterName.journalDetailScreen,
+        path: journalDetailScreenPath,
+        builder: (context, state) => const JournalDetailScreen(),
+        routes: <RouteBase>[
+          ///JournalEditScreen
+          GoRoute(
+            name: AppRouterName.journalEditScreen,
+            path: journalEditScreenPath,
+            builder: (context, state) => const JournalEditScreen(),
+          ),
+        ],
+      ),
+
+      ///AnalyticScreen
+      GoRoute(
+        name: AppRouterName.analyticScreen,
+        path: analyticScreenPath,
+        builder: (context, state) => const AnalyticsTabBarView(),
+      ),
+
+      ///SettingScreen
+      GoRoute(
+        name: AppRouterName.settingScreen,
+        path: settingScreenPath,
+        builder: (context, state) => const SettingScreen(),
+        routes: <RouteBase>[
+          ///LicenseAgreementScreen
+          GoRoute(
+            name: AppRouterName.licenseAgreementScreen,
+            path: licenseAgreementScreenPath,
+            pageBuilder: (context, state) => const MaterialPage(
+              child: LicenseAgreementScreen(),
+              fullscreenDialog: true,
+            ),
+          )
         ],
       ),
     ],

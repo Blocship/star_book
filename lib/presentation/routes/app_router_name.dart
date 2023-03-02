@@ -1,5 +1,4 @@
 class AppRouterName {
-  static const String mainScreen = 'mainScreen';
   static const String yearScreen = 'yearScreen';
   static const String monthScreen = 'monthScreen';
   static const String journalCreateScreen = 'journalCreateScreen';

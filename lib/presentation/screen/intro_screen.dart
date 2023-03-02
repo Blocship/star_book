@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:go_router/go_router.dart';
 import 'package:star_book/cubits/cubit_state/cubit_state.dart';
 import 'package:star_book/cubits/intro_screen_cubit.dart';
 import 'package:star_book/domain/models/user/user.dart';
 import 'package:star_book/domain/repository/user_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/routes/routes.dart';
+import 'package:star_book/presentation/screen/main_screen.dart';
 import 'package:star_book/presentation/shared/elevated_buttons.dart';
 import 'package:star_book/presentation/shared/form_validator.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
@@ -89,7 +88,7 @@ class IntroScreen extends StatelessWidget implements Screen<IntroScreenRoute> {
                         context
                             .read<IntroScreenCubit>()
                             .createUser(nameController.text);
-                        context.pushReplacementNamed(AppRouterName.mainScreen);
+                        context.goToScreen(arg: const MainScreenRoute());
                       }
                     },
                     label: 'Continue',

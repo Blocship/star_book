@@ -14,8 +14,16 @@ class MainScreenRoute extends RouteArg {
   Uri get uri => Uri(path: path);
 }
 
-class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+class MainScreen extends StatefulWidget implements Screen<MainScreenRoute> {
+  @override
+  final MainScreenRoute arg;
+  final Widget child;
+
+  const MainScreen({
+    super.key,
+    required this.arg,
+    required this.child,
+  });
 
   @override
   State<MainScreen> createState() => _MainScreenState();

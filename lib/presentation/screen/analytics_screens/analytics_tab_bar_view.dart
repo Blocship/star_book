@@ -6,7 +6,6 @@ import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
 
 class AnalyticsTabBarView extends StatefulWidget {
   const AnalyticsTabBarView({Key? key}) : super(key: key);
@@ -35,7 +34,7 @@ class _AnalyticsTabBarViewState extends State<AnalyticsTabBarView>
       length: 2,
       child: GradientScaffold(
         appBar: PrimaryAppBar(
-          leadingOnTap: () => context.goNamed(AppRouterName.mainScreen),
+          leadingOnTap: () => context.goNamed('AppRouterName.mainScreen'),
           centerTitle: 'Analytics',
         ),
         body: Column(

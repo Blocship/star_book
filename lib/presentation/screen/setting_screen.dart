@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/tile.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
 
 class SettingScreen extends StatelessWidget {
   const SettingScreen({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class SettingScreen extends StatelessWidget {
     final TextTheme textTheme = context.textTheme;
     return GradientScaffold(
       appBar: PrimaryAppBar(
-        leadingOnTap: () => context.goNamed(AppRouterName.mainScreen),
+        leadingOnTap: () => context.goNamed('AppRouterName.mainScreen'),
         centerTitle: 'Settings',
       ),
       body: Padding(
