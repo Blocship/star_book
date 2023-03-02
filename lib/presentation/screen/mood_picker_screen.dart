@@ -7,7 +7,6 @@ import 'package:star_book/presentation/widgets/floating_action_button.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/mood_tile.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
 
 class MoodPickerScreen extends StatefulWidget {
   const MoodPickerScreen({Key? key}) : super(key: key);
@@ -53,6 +52,7 @@ class _MoodPickerScreenState extends State<MoodPickerScreen> {
                               selectedIndex = index;
                               context.read<MoodPickerCubit>().saveMood(
                                     mood: Mood(
+                                      /// What to do with id?
                                       id: '',
                                       label: MoodTilePair
                                           .moods[selectedIndex].label,
@@ -68,16 +68,7 @@ class _MoodPickerScreenState extends State<MoodPickerScreen> {
               ],
             ),
             floatingActionButton: SecondaryFloatingActionButton(
-              onTap: () {
-                /// Refactor this, look for the right way to done this
-                context
-                    .goNamed(AppRouterName.journalCreateScreen, queryParams: {
-                  'moodId': state.id,
-                  'moodLabel': state.label,
-                  'moodColor': state.color.toString(),
-                });
-                context.pop();
-              },
+              onTap: () => context.pop(),
               child: const Icon(Icons.done),
             ),
           );

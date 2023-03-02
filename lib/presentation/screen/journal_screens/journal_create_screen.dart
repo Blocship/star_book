@@ -3,9 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/cubits/cubit_state/cubit_state.dart';
+import 'package:star_book/cubits/date_picker_cubit.dart';
 import 'package:star_book/cubits/journal_create_cubit.dart';
 import 'package:star_book/cubits/mood_picker_cubit.dart';
 import 'package:star_book/domain/models/journal/journal.dart';
+import 'package:star_book/domain/models/mood/mood.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/screen/date_picker_screen.dart';
@@ -34,22 +36,23 @@ class JournalCreateScreen extends StatefulWidget {
 class _JournalCreateScreenState extends State<JournalCreateScreen> {
   final _formKey = GlobalKey<FormBuilderState>();
 
-  int? get getMonth => int.parse(widget.dateTime?.month ?? '0');
-
   @override
   Widget build(BuildContext context) {
-    String? selectedDateTime;
-    if (widget.dateTime?.day != null ||
-        widget.dateTime?.year != null ||
-        widget.dateTime?.month != null) {
-      selectedDateTime =
-          '${CalendarUtils.getMonthName(getMonth)} ${widget.dateTime?.day}, ${widget.dateTime?.year}';
-    }
-    return BlocProvider<JournalCreateCubit>(
-      create: (context) => JournalCreateCubit(
-        journalRepo: Injector.resolve<JournalRepo>(),
-        formKey: _formKey,
-      ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<JournalCreateCubit>(
+          create: (context) => JournalCreateCubit(
+            journalRepo: Injector.resolve<JournalRepo>(),
+            formKey: _formKey,
+          ),
+        ),
+        BlocProvider<DatePickerCubit>(
+          create: (context) => DatePickerCubit(),
+        ),
+        BlocProvider<MoodPickerCubit>(
+          create: (context) => MoodPickerCubit(),
+        ),
+      ],
       child: BlocBuilder<JournalCreateCubit, CubitState<Journal>>(
         builder: (context, state) {
           // final addJournal = context.read<JournalCreateCubit>().addJournal();
@@ -72,45 +75,44 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
                       const SizedBox(height: 30),
                       const AddNewDetails(),
                       const SizedBox(height: 30),
-                      // SelectableDateTile(
-                      //   title: 'Date',
-                      //   select: selectedDateTime,
-                      //   onTap: () =>
-                      //       context.pushNamed(AppRouterName.datePickerScreen),
-                      // ),
-                      SelectableDateTile(
-                        title: 'Date',
-                        select: selectedDateTime,
-                        onTap: () {
-                          showModalBottomSheet<void>(
-                            isScrollControlled: true,
-                            context: context,
-                            builder: (context) {
-                              return const DatePickerScreen();
+                      BlocBuilder<DatePickerCubit, DateTime>(
+                        builder: (context, state) {
+                          String selectedDate =
+                              '${CalendarUtils.getMonthName(state.month)} ${state.day}, ${state.year}';
+                          return SelectableDateTile(
+                            title: 'Date',
+                            select: selectedDate,
+                            onTap: () {
+                              showModalBottomSheet<void>(
+                                isScrollControlled: true,
+                                context: context,
+                                builder: (context) {
+                                  return const DatePickerScreen();
+                                },
+                              );
                             },
                           );
                         },
                       ),
                       const SizedBox(height: 30),
-                      SelectableMoodTile(
-                        title: 'Mood',
-                        select: widget.mood?.label,
-                        color: Color(
-                            int.parse(widget.mood?.color ?? '0xFFFFFFFF')),
-                        onTap: () {
-                          showModalBottomSheet<void>(
-                            isScrollControlled: true,
-                            context: context,
-                            builder: (context) {
-                              return const MoodPickerScreen();
+                      BlocBuilder<MoodPickerCubit, Mood>(
+                        builder: (context, state) {
+                          return SelectableMoodTile(
+                            title: 'Mood',
+                            select: state.label,
+                            color: Color(state.color),
+                            onTap: () {
+                              showModalBottomSheet<void>(
+                                isScrollControlled: true,
+                                context: context,
+                                builder: (context) {
+                                  return const MoodPickerScreen();
+                                },
+                              );
                             },
                           );
                         },
                       ),
-                      // context.pushNamed(AppRouterName.moodPickerScreen),
-                      // select: widget.mood?.label,
-                      // color: Color(
-                      //     int.parse(widget.mood?.color ?? '0xFFFFFFFF')),
                       const SizedBox(height: 30),
                       CustomTextFormField(
                         fieldKey: JournalFormModel.titleKey,

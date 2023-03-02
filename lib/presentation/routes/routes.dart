@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:star_book/cubits/mood_picker_cubit.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/screen/analytics_screens/analytics_tab_bar_view.dart';
 import 'package:star_book/presentation/screen/calendar/month_days.dart';
@@ -25,8 +24,6 @@ class AppRouter {
   static const String monthScreenPath =
       'monthScreen/:year/:month/:isHomeScreen';
   static const String journalCreateScreenPath = 'journalCreateScreen';
-  // static const String moodPickerScreenPath = 'moodPickerScreen';
-  // static const String datePickerScreenPath = 'datePickerScreen';
   static const String journalDetailScreenPath = 'journalDetailScreen';
   static const String journalEditScreenPath = 'journalEditScreen';
   static const String analyticScreenPath = 'analyticScreen';
@@ -82,39 +79,7 @@ class AppRouter {
           GoRoute(
             name: AppRouterName.journalCreateScreen,
             path: journalCreateScreenPath,
-            builder: (context, state) => JournalCreateScreen(
-              dateTime: DateTimeQueryParamModel(
-                day: state.queryParams['day'],
-                year: state.queryParams['year'],
-                month: state.queryParams['month'],
-              ),
-              mood: MoodQueryParamModel(
-                id: state.queryParams['moodId'],
-                label: state.queryParams['moodLabel'],
-                color: state.queryParams['moodColor'],
-              ),
-            ),
-            // routes: [
-            ///MoodPickerScreen
-            // GoRoute(
-            //   name: AppRouterName.moodPickerScreen,
-            //   path: moodPickerScreenPath,
-            //   pageBuilder: (context, state) => const MaterialPage(
-            //     child: MoodPickerScreen(),
-            //     fullscreenDialog: true,
-            //   ),
-            // ),
-
-            ///DatePickerScreen
-            // GoRoute(
-            //   name: AppRouterName.datePickerScreen,
-            //   path: datePickerScreenPath,
-            //   pageBuilder: (context, state) => const MaterialPage(
-            //     child: DatePickerScreen(),
-            //     fullscreenDialog: true,
-            //   ),
-            // ),
-            // ],
+            builder: (context, state) => const JournalCreateScreen(),
           ),
 
           ///JournalDetailScreen

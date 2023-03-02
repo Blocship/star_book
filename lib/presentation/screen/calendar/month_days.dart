@@ -93,9 +93,11 @@ class MonthScreen extends StatelessWidget {
         padding: EdgeInsets.only(bottom: (monthDetails.isHomeScreen) ? 90 : 20),
         child: PrimaryFloatingActionButton(
           onTap: () {
+            /// Search for better way
+            /// This will run but give error
+            /// this issue is already opened on github
             context.goNamed(AppRouterName.journalCreateScreen);
           },
-          // onTap: () => context.pushNamed(AppRouterName.journalCreateScreen),
           child: const Image(
             image: AssetImage('assets/icons/calendar_add_on.png'),
             height: 20,
