@@ -78,3 +78,14 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 }
+
+// https://codewithandrea.com/articles/flutter-bottom-navigation-bar-nested-routes-gorouter-beamer/
+class GoRouteBottomNavBarItem extends BottomNavigationBarItem {
+  final String path;
+
+  GoRouteBottomNavBarItem({
+    required this.path,
+    required super.icon,
+    super.label,
+  });
+}
