@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:star_book/presentation/screen/home_screen.dart';
 import 'package:star_book/presentation/screen/intro_screen.dart';
 import 'package:star_book/presentation/screen/main_screen.dart';
 import 'package:star_book/presentation/screen/profile_screen.dart';
@@ -64,15 +65,37 @@ class AppRouter {
           /// main/year
           GoRoute(
             path: YearScreenRoute.path,
+            // pageBuilder: (context, state) {
+            //   const arg = YearScreenRoute();
+            //   return const NoTransitionPage(child: YearScreen(arg: arg));
+            // },
             builder: (context, state) {
               const arg = YearScreenRoute();
               return const YearScreen(arg: arg);
             },
+            routes: [
+              /// main/year/month
+              GoRoute(
+                path: HomeScreenRoute.path,
+                // pageBuilder: (context, state) {
+                //   const arg = HomeScreenRoute(month: 3, year: 2023);
+                //   return const NoTransitionPage(child: HomeScreen(arg: arg));
+                // },
+                builder: (context, state) {
+                  const arg = HomeScreenRoute(month: 3, year: 2023);
+                  return const HomeScreen(arg: arg);
+                },
+              ),
+            ],
           ),
 
           /// main/profile
           GoRoute(
             path: ProfileScreenRoute.path,
+            // pageBuilder: (context, state) {
+            //   const arg = ProfileScreenRoute();
+            //   return const NoTransitionPage(child: ProfileScreen(arg: arg));
+            // },
             builder: (context, state) {
               const arg = ProfileScreenRoute();
               return const ProfileScreen(arg: arg);
@@ -87,6 +110,10 @@ class AppRouter {
 extension XBuildContext on BuildContext {
   void goToScreen({required RouteArg arg}) {
     go(arg.parsedPath);
+  }
+
+  void pushScreen({required RouteArg arg}) {
+    push(arg.parsedPath);
   }
 
   String get location => GoRouter.of(this).location;

@@ -6,15 +6,14 @@ import 'package:star_book/cubits/home_screen_cubit.dart';
 import 'package:star_book/domain/models/mood/mood_info.dart';
 import 'package:star_book/domain/repository/mood_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
-import 'package:star_book/presentation/utils/extension.dart';
-
-import 'package:star_book/presentation/widgets/floating_action_button.dart';
-import 'package:star_book/presentation/shared/app_bar.dart';
-import 'package:star_book/presentation/utils/calendar.dart';
-import 'package:star_book/presentation/utils/month_details.dart';
-import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
-import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
+import 'package:star_book/presentation/shared/app_bar.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/utils/calendar.dart';
+import 'package:star_book/presentation/utils/extension.dart';
+import 'package:star_book/presentation/utils/month_details.dart';
+import 'package:star_book/presentation/widgets/floating_action_button.dart';
+import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
 
 class MonthScreen extends StatelessWidget {
   final MonthDetails monthDetails;
@@ -60,7 +59,7 @@ class MonthScreen extends StatelessWidget {
     return GradientScaffold(
       appBar: PrimaryAppBar(
         leadingText: 'Year',
-        leadingOnTap: () => context.goNamed(AppRouterName.yearScreen),
+        leadingOnTap: () => context.pop(),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),

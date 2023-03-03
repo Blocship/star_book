@@ -7,7 +7,7 @@ import 'package:star_book/domain/models/user/user.dart';
 import 'package:star_book/domain/repository/user_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
-import 'package:star_book/presentation/screen/year_screen.dart';
+import 'package:star_book/presentation/screen/home_screen.dart';
 import 'package:star_book/presentation/shared/elevated_buttons.dart';
 import 'package:star_book/presentation/shared/form_validator.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
@@ -88,7 +88,8 @@ class IntroScreen extends StatelessWidget implements Screen<IntroScreenRoute> {
                         context
                             .read<IntroScreenCubit>()
                             .createUser(nameController.text);
-                        context.goToScreen(arg: const YearScreenRoute());
+                        context.goToScreen(
+                            arg: const HomeScreenRoute(month: 3, year: 2023));
                       }
                     },
                     label: 'Continue',
