@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:star_book/cubits/date_picker_cubit.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
@@ -10,7 +8,12 @@ import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/widgets/date_picker.dart';
 
 class DatePickerScreen extends StatelessWidget {
-  const DatePickerScreen({Key? key}) : super(key: key);
+  final Function(DateTime) onDateSelected;
+
+  const DatePickerScreen({
+    Key? key,
+    required this.onDateSelected,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,17 +50,15 @@ class DatePickerScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-            const DatePicker(),
+            DatePicker(onDateSelected: onDateSelected),
           ],
         ),
       ),
-      floatingActionButton: BlocBuilder<DatePickerCubit, DateTime>(
-        builder: (context, state) {
-          return SecondaryFloatingActionButton(
-            onTap: () => context.pop(),
-            child: const Icon(Icons.check),
-          );
+      floatingActionButton: SecondaryFloatingActionButton(
+        onTap: () {
+          context.pop();
         },
+        child: const Icon(Icons.check),
       ),
     );
   }

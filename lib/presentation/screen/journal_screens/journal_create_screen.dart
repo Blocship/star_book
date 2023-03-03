@@ -3,9 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/cubits/cubit_state/cubit_state.dart';
-import 'package:star_book/cubits/date_picker_cubit.dart';
 import 'package:star_book/cubits/journal_create_cubit.dart';
-import 'package:star_book/cubits/mood_picker_cubit.dart';
 import 'package:star_book/domain/models/journal/journal.dart';
 import 'package:star_book/domain/models/mood/mood.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
@@ -23,36 +21,24 @@ import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 
 class JournalCreateScreen extends StatefulWidget {
-  final DateTimeQueryParamModel? dateTime;
-  final MoodQueryParamModel? mood;
+  Mood? mood;
 
-  const JournalCreateScreen({Key? key, this.dateTime, this.mood})
-      : super(key: key);
+  JournalCreateScreen({Key? key, this.mood}) : super(key: key);
 
   @override
   State<JournalCreateScreen> createState() => _JournalCreateScreenState();
 }
 
 class _JournalCreateScreenState extends State<JournalCreateScreen> {
+  String? selectedDate;
   final _formKey = GlobalKey<FormBuilderState>();
-
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<JournalCreateCubit>(
-          create: (context) => JournalCreateCubit(
-            journalRepo: Injector.resolve<JournalRepo>(),
-            formKey: _formKey,
-          ),
-        ),
-        BlocProvider<DatePickerCubit>(
-          create: (context) => DatePickerCubit(),
-        ),
-        BlocProvider<MoodPickerCubit>(
-          create: (context) => MoodPickerCubit(),
-        ),
-      ],
+    return BlocProvider<JournalCreateCubit>(
+      create: (context) => JournalCreateCubit(
+        journalRepo: Injector.resolve<JournalRepo>(),
+        formKey: _formKey,
+      ),
       child: BlocBuilder<JournalCreateCubit, CubitState<Journal>>(
         builder: (context, state) {
           // final addJournal = context.read<JournalCreateCubit>().addJournal();
@@ -75,42 +61,40 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
                       const SizedBox(height: 30),
                       const AddNewDetails(),
                       const SizedBox(height: 30),
-                      BlocBuilder<DatePickerCubit, DateTime>(
-                        builder: (context, state) {
-                          String selectedDate =
-                              '${CalendarUtils.getMonthName(state.month)} ${state.day}, ${state.year}';
-                          return SelectableDateTile(
-                            title: 'Date',
-                            select: selectedDate,
-                            onTap: () {
-                              showModalBottomSheet<void>(
-                                isScrollControlled: true,
-                                context: context,
-                                builder: (context) {
-                                  return const DatePickerScreen();
-                                },
-                              );
-                            },
+                      SelectableDateTile(
+                        title: 'Date',
+                        select: selectedDate,
+                        onTap: () {
+                          showModalBottomSheet(
+                            isScrollControlled: true,
+                            context: context,
+                            builder: (context) => DatePickerScreen(
+                              onDateSelected: (DateTime) {
+                                setState(() {
+                                  selectedDate =
+                                      '${CalendarUtils.getMonthName(DateTime.month)} ${DateTime.day}, ${DateTime.year}';
+                                });
+                              },
+                            ),
                           );
                         },
                       ),
                       const SizedBox(height: 30),
-                      BlocBuilder<MoodPickerCubit, Mood>(
-                        builder: (context, state) {
-                          return SelectableMoodTile(
-                            title: 'Mood',
-                            select: state.label,
-                            color: Color(state.color),
-                            onTap: () {
-                              showModalBottomSheet<void>(
-                                isScrollControlled: true,
-                                context: context,
-                                builder: (context) {
-                                  return const MoodPickerScreen();
-                                },
-                              );
+                      SelectableMoodTile(
+                        title: 'Mood',
+                        select: widget.mood?.label,
+                        color: Color(widget.mood?.color ?? 0xFFFFFFFF),
+                        onTap: () async {
+                          Mood? selectedMood = await showModalBottomSheet<Mood>(
+                            isScrollControlled: true,
+                            context: context,
+                            builder: (context) {
+                              return const MoodPickerScreen();
                             },
                           );
+                          setState(() {
+                            widget.mood = selectedMood;
+                          });
                         },
                       ),
                       const SizedBox(height: 30),

@@ -79,7 +79,7 @@ class AppRouter {
           GoRoute(
             name: AppRouterName.journalCreateScreen,
             path: journalCreateScreenPath,
-            builder: (context, state) => const JournalCreateScreen(),
+            builder: (context, state) => JournalCreateScreen(),
           ),
 
           ///JournalDetailScreen

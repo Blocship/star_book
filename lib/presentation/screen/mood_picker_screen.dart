@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:star_book/cubits/mood_picker_cubit.dart';
 import 'package:star_book/domain/models/mood/mood.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
@@ -17,62 +15,59 @@ class MoodPickerScreen extends StatefulWidget {
 
 class _MoodPickerScreenState extends State<MoodPickerScreen> {
   int selectedIndex = 0;
-
+  Mood selectedMood = const Mood(
+    id: '0',
+    label: '',
+    color: 0xFFFFFFFF,
+  );
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<MoodPickerCubit>(
-      create: (context) => MoodPickerCubit(),
-      child: BlocBuilder<MoodPickerCubit, Mood>(
-        builder: (context, state) {
-          return Scaffold(
-            appBar: PrimaryAppBar(
-              isBottomSheet: true,
-              leadingOnTap: () => context.pop(),
-              centerTitle: 'Select Mood',
-            ),
-            body: Column(
-              children: [
-                const SizedBox(height: CustomPadding.mediumPadding),
-                ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: MoodTilePair.moods.length,
-                  itemBuilder: (context, index) {
-                    Mood getPair = MoodTilePair.moods[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: CustomPadding.smallPadding,
-                        horizontal: CustomPadding.mediumPadding,
-                      ),
-                      child: MoodTile(
-                          title: getPair.label,
-                          color: Color(getPair.color),
-                          isSelected: selectedIndex == index,
-                          onTap: () {
-                            setState(() {
-                              selectedIndex = index;
-                              context.read<MoodPickerCubit>().saveMood(
-                                    mood: Mood(
-                                      /// What to do with id?
-                                      id: '',
-                                      label: MoodTilePair
-                                          .moods[selectedIndex].label,
-                                      color: MoodTilePair
-                                          .moods[selectedIndex].color,
-                                    ),
-                                  );
-                            });
-                          }),
-                    );
-                  },
+    return Scaffold(
+      appBar: PrimaryAppBar(
+        isBottomSheet: true,
+        leadingOnTap: () => context.pop(),
+        centerTitle: 'Select Mood',
+      ),
+      body: Column(
+        children: [
+          const SizedBox(height: CustomPadding.mediumPadding),
+          ListView.builder(
+            shrinkWrap: true,
+            itemCount: MoodTilePair.moods.length,
+            itemBuilder: (context, index) {
+              Mood getPair = MoodTilePair.moods[index];
+              return Padding(
+                padding: const EdgeInsets.symmetric(
+                  vertical: CustomPadding.smallPadding,
+                  horizontal: CustomPadding.mediumPadding,
                 ),
-              ],
-            ),
-            floatingActionButton: SecondaryFloatingActionButton(
-              onTap: () => context.pop(),
-              child: const Icon(Icons.done),
-            ),
+                child: MoodTile(
+                    title: getPair.label,
+                    color: Color(getPair.color),
+                    isSelected: selectedIndex == index,
+                    onTap: () {
+                      setState(() {
+                        selectedIndex = index;
+                      });
+                    }),
+              );
+            },
+          ),
+        ],
+      ),
+      floatingActionButton: SecondaryFloatingActionButton(
+        onTap: () {
+          final selected = Mood(
+            id: 'id',
+            label: MoodTilePair.moods[selectedIndex].label,
+            color: MoodTilePair.moods[selectedIndex].color,
           );
+          setState(() {
+            selectedMood = selected;
+          });
+          context.pop(selectedMood);
         },
+        child: const Icon(Icons.done),
       ),
     );
   }
