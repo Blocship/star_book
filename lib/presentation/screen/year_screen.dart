@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/screen/calendar/custom_calendar.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
@@ -22,12 +21,12 @@ class YearScreen extends StatelessWidget implements Screen<YearScreenRoute> {
 
   @override
   Widget build(BuildContext context) {
-    return GradientScaffold(
+    return const GradientScaffold(
       appBar: PrimaryAppBar(
-        leadingOnTap: () => context.pop(),
+        showLeading: false,
         centerTitle: 'Year',
       ),
-      body: const CustomCalendar(),
+      body: CustomCalendar(),
     );
   }
 }
