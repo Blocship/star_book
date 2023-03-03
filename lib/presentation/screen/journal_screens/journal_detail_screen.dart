@@ -6,6 +6,7 @@ import 'package:star_book/cubits/journal_detail_cubit.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
+import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/dialog_box.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
@@ -13,8 +14,21 @@ import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 
-class JournalDetailScreen extends StatelessWidget {
-  const JournalDetailScreen({Key? key}) : super(key: key);
+class JournalDetailScreenRoute extends RouteArg {
+  static const String path = '/journal/:id';
+
+  final String id;
+  const JournalDetailScreenRoute({required this.id}) : super();
+
+  @override
+  Uri get uri => Uri(path: '$path/$id');
+}
+
+class JournalDetailScreen extends StatelessWidget
+    implements Screen<JournalDetailScreenRoute> {
+  @override
+  final JournalDetailScreenRoute arg;
+  const JournalDetailScreen({super.key, required this.arg});
 
   @override
   Widget build(BuildContext context) {

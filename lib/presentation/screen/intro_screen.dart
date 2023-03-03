@@ -28,9 +28,9 @@ class IntroScreen extends StatelessWidget implements Screen<IntroScreenRoute> {
   @override
   final IntroScreenRoute arg;
   IntroScreen({
-    Key? key,
+    super.key,
     required this.arg,
-  }) : super(key: key);
+  });
 
   final nameController = TextEditingController();
   final _formKey = GlobalKey<FormBuilderState>();
