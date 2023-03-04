@@ -114,14 +114,6 @@ class AppRouter {
 
       /// Journal
       GoRoute(
-        path: JournalDetailScreenRoute.path,
-        parentNavigatorKey: _rootNavigatorKey,
-        builder: (context, state) {
-          final arg = JournalDetailScreenRoute(id: state.params['id']!);
-          return JournalDetailScreen(arg: arg);
-        },
-      ),
-      GoRoute(
         path: JournalCreateScreenRoute.path,
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) {
@@ -129,6 +121,14 @@ class AppRouter {
           final day = dayKey != null ? Day.fromDayKey(dayKey) : Day.today();
           final arg = JournalCreateScreenRoute(day: day);
           return JournalCreateScreen(arg: arg);
+        },
+      ),
+      GoRoute(
+        path: JournalDetailScreenRoute.path,
+        parentNavigatorKey: _rootNavigatorKey,
+        builder: (context, state) {
+          final arg = JournalDetailScreenRoute(id: state.params['id']!);
+          return JournalDetailScreen(arg: arg);
         },
       ),
     ],
