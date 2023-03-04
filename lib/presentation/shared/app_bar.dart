@@ -7,17 +7,21 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? leadingText;
   final String? centerTitle;
   final String? trailingText;
+  final bool showLeading;
   final VoidCallback? leadingOnTap;
   final VoidCallback? trailingOnTap;
 
   const PrimaryAppBar({
     super.key,
     this.leadingText,
+    this.leadingOnTap,
+    this.showLeading = true,
     this.centerTitle,
     this.trailingText,
-    this.leadingOnTap,
     this.trailingOnTap,
-  });
+  })
+  // assert that if showLeading is false, then leading and leadingOnTap must be null
+  : assert(showLeading ? true : leadingText == null && leadingOnTap == null);
 
   @override
   Widget build(BuildContext context) {
@@ -32,25 +36,27 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
         elevation: 0,
         backgroundColor: Colors.transparent,
         leadingWidth: deviceWidth * 0.175,
-        leading: GestureDetector(
-          onTap: leadingOnTap,
-          child: Row(
-            children: [
-              Icon(
-                Icons.keyboard_arrow_left_outlined,
-                size: 24,
-                color: themeColorStyle.secondaryColor,
-              ),
-              Text(
-                leadingText ?? 'Back',
-                style: textTheme.bodyMedium!.copyWith(
-                  fontWeight: FontWeight.w400,
-                  color: themeColorStyle.secondaryColor,
+        leading: showLeading
+            ? GestureDetector(
+                onTap: leadingOnTap,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.keyboard_arrow_left_outlined,
+                      size: 24,
+                      color: themeColorStyle.secondaryColor,
+                    ),
+                    Text(
+                      leadingText ?? 'Back',
+                      style: textTheme.bodyMedium!.copyWith(
+                        fontWeight: FontWeight.w400,
+                        color: themeColorStyle.secondaryColor,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-        ),
+              )
+            : null,
         centerTitle: true,
         title: Text(
           centerTitle ?? '',

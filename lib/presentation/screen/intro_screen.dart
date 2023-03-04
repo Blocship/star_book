@@ -1,22 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:go_router/go_router.dart';
 import 'package:star_book/cubits/cubit_state/cubit_state.dart';
 import 'package:star_book/cubits/intro_screen_cubit.dart';
 import 'package:star_book/domain/models/user/user.dart';
 import 'package:star_book/domain/repository/user_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
+import 'package:star_book/presentation/routes/routes.dart';
+import 'package:star_book/presentation/screen/home_screen.dart';
 import 'package:star_book/presentation/shared/elevated_buttons.dart';
 import 'package:star_book/presentation/shared/form_validator.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
 import 'package:star_book/presentation/utils/extension.dart';
-import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
+import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
 
-class IntroScreen extends StatelessWidget {
-  IntroScreen({Key? key}) : super(key: key);
+class IntroScreenRoute extends RouteArg {
+  static const String path = '/intro';
+
+  const IntroScreenRoute() : super();
+
+  @override
+  Uri get uri => Uri(path: path);
+}
+
+class IntroScreen extends StatelessWidget implements Screen<IntroScreenRoute> {
+  @override
+  final IntroScreenRoute arg;
+  IntroScreen({
+    super.key,
+    required this.arg,
+  });
 
   final nameController = TextEditingController();
   final _formKey = GlobalKey<FormBuilderState>();
@@ -74,7 +88,8 @@ class IntroScreen extends StatelessWidget {
                         context
                             .read<IntroScreenCubit>()
                             .createUser(nameController.text);
-                        context.pushReplacementNamed(AppRouterName.mainScreen);
+                        context.goToScreen(
+                            arg: const HomeScreenRoute(month: 3, year: 2023));
                       }
                     },
                     label: 'Continue',

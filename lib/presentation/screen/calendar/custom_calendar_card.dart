@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:star_book/presentation/routes/routes.dart';
+import 'package:star_book/presentation/screen/home_screen.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/calendar.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 
 class CustomCalendarCard extends StatelessWidget {
@@ -25,11 +25,12 @@ class CustomCalendarCard extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            context.goNamed(AppRouterName.monthScreen, params: {
-              'year': year.toString(),
-              'month': monthIndex.toString(),
-              'isHomeScreen': false.toString(),
-            });
+            context.goToScreen(
+              arg: HomeScreenRoute(
+                month: monthIndex,
+                year: year,
+              ),
+            );
           },
           child: Container(
             width: 70,
