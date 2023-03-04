@@ -6,6 +6,7 @@ import 'package:star_book/presentation/screen/intro_screen.dart';
 import 'package:star_book/presentation/screen/journal_screens/journal_create_screen.dart';
 import 'package:star_book/presentation/screen/journal_screens/journal_detail_screen.dart';
 import 'package:star_book/presentation/screen/main_screen.dart';
+import 'package:star_book/presentation/screen/profile_screen.dart';
 import 'package:star_book/presentation/screen/splash_screen.dart';
 import 'package:star_book/presentation/screen/year_screen.dart';
 
@@ -32,13 +33,18 @@ class AppRouter {
   static const String settingScreenPath = 'settingScreen';
   static const String licenseAgreementScreenPath = 'licenseAgreementScreen';
 
+  static final _rootNavigatorKey = GlobalKey<NavigatorState>();
+  static final _shellNavigatorKey = GlobalKey<NavigatorState>();
+
   static final GoRouter appRoutes = GoRouter(
     debugLogDiagnostics: true,
     initialLocation: SplashScreenRoute.path,
+    navigatorKey: _rootNavigatorKey,
     routes: <RouteBase>[
       ///SplashScreen
       GoRoute(
         path: SplashScreenRoute.path,
+        parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) {
           const arg = SplashScreenRoute();
           return const SplashScreen(arg: arg);
@@ -48,6 +54,7 @@ class AppRouter {
       ///IntroScreen
       GoRoute(
         path: IntroScreenRoute.path,
+        parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) {
           const arg = IntroScreenRoute();
           return IntroScreen(arg: arg);
@@ -56,6 +63,7 @@ class AppRouter {
 
       /// MainScreen
       ShellRoute(
+        navigatorKey: _shellNavigatorKey,
         builder: (context, state, child) {
           const arg = MainScreenRoute();
           return MainScreen(arg: arg, child: child);
@@ -64,6 +72,7 @@ class AppRouter {
           /// main/year
           GoRoute(
             path: YearScreenRoute.path,
+            parentNavigatorKey: _shellNavigatorKey,
             // pageBuilder: (context, state) {
             //   const arg = YearScreenRoute();
             //   return const NoTransitionPage(child: YearScreen(arg: arg));
@@ -76,6 +85,7 @@ class AppRouter {
               /// main/year/month
               GoRoute(
                 path: HomeScreenRoute.path,
+                parentNavigatorKey: _shellNavigatorKey,
                 // pageBuilder: (context, state) {
                 //   const arg = HomeScreenRoute(month: 3, year: 2023);
                 //   return const NoTransitionPage(child: HomeScreen(arg: arg));
@@ -87,12 +97,25 @@ class AppRouter {
               ),
             ],
           ),
+          GoRoute(
+            path: ProfileScreenRoute.path,
+            parentNavigatorKey: _shellNavigatorKey,
+            // pageBuilder: (context, state) {
+            //   const arg = ProfileScreenRoute();
+            //   return const NoTransitionPage(child: ProfileScreen(arg: arg));
+            // },
+            builder: (context, state) {
+              const arg = ProfileScreenRoute();
+              return const ProfileScreen(arg: arg);
+            },
+          ),
         ],
       ),
 
       /// Journal
       GoRoute(
         path: JournalDetailScreenRoute.path,
+        parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) {
           final arg = JournalDetailScreenRoute(id: state.params['id']!);
           return JournalDetailScreen(arg: arg);
@@ -100,6 +123,7 @@ class AppRouter {
       ),
       GoRoute(
         path: JournalCreateScreenRoute.path,
+        parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) {
           final dayKey = state.params['date'];
           final day = dayKey != null ? Day.fromDayKey(dayKey) : Day.today();

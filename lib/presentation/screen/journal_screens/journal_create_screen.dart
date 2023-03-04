@@ -21,7 +21,7 @@ import 'package:star_book/presentation/widgets/floating_action_button.dart';
 
 class JournalCreateScreenRoute extends RouteArg {
   // ?date=2020-01-01
-  static const String path = '/main/journal/new';
+  static const String path = '/journal/new';
 
   final Day? day;
   const JournalCreateScreenRoute({this.day});

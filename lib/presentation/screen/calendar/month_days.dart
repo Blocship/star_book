@@ -3,10 +3,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/cubits/cubit_state/cubit_state.dart';
 import 'package:star_book/cubits/home_screen_cubit.dart';
+import 'package:star_book/domain/models/mood/day.dart';
 import 'package:star_book/domain/models/mood/mood_info.dart';
 import 'package:star_book/domain/repository/mood_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
+import 'package:star_book/presentation/routes/routes.dart';
+import 'package:star_book/presentation/screen/journal_screens/journal_create_screen.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/calendar.dart';
@@ -91,7 +93,11 @@ class MonthScreen extends StatelessWidget {
       floatingActionButton: Padding(
         padding: EdgeInsets.only(bottom: (monthDetails.isHomeScreen) ? 90 : 20),
         child: PrimaryFloatingActionButton(
-          onTap: () => context.pushNamed(AppRouterName.journalCreateScreen),
+          onTap: () {
+            context.pushScreen(
+              arg: JournalCreateScreenRoute(day: Day.today()),
+            );
+          },
           child: const Image(
             image: AssetImage('assets/icons/calendar_add_on.png'),
             height: 20,
@@ -159,7 +165,11 @@ class Date extends StatelessWidget {
         builder: (context, state) {
           // final get = context.read<HomeScreenCubit>().getMoodInfoByDate(day: day);
           return GestureDetector(
-            onTap: () => context.goNamed(AppRouterName.journalCreateScreen),
+            onTap: () {
+              context.pushScreen(
+                arg: JournalCreateScreenRoute(day: Day.today()),
+              );
+            },
             child: Container(
               width: deviceWidth * 0.133,
               height: deviceHeight * 0.064,
