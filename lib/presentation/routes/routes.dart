@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:star_book/domain/models/mood/day.dart';
 import 'package:star_book/presentation/screen/home_screen.dart';
 import 'package:star_book/presentation/screen/intro_screen.dart';
+import 'package:star_book/presentation/screen/journal_screens/journal_create_screen.dart';
+import 'package:star_book/presentation/screen/journal_screens/journal_detail_screen.dart';
 import 'package:star_book/presentation/screen/main_screen.dart';
-import 'package:star_book/presentation/screen/profile_screen.dart';
 import 'package:star_book/presentation/screen/splash_screen.dart';
 import 'package:star_book/presentation/screen/year_screen.dart';
 
@@ -19,14 +21,11 @@ abstract class Screen<T extends RouteArg> {
 
 class AppRouter {
   ///Routes Paths
-  static const String yearScreenPath = 'yearScreen';
-  static const String monthScreenPath =
-      'mainScreen/monthScreen/:year/:month/:isHomeScreen';
+
   static const String journalCreateScreenPath = 'journalCreateScreen';
   static const String moodPickerScreenPath = 'moodPickerScreen';
   static const String datePickerScreenPath = 'datePickerScreen';
-  static const String journalDetailScreenPath =
-      'mainScreen/monthScreen/journalDetailScreen';
+
   static const String journalEditScreenPath =
       'mainScreen/monthScreen/journalEditScreen';
   static const String analyticScreenPath = 'analyticScreen';
@@ -88,20 +87,25 @@ class AppRouter {
               ),
             ],
           ),
-
-          /// main/profile
-          GoRoute(
-            path: ProfileScreenRoute.path,
-            // pageBuilder: (context, state) {
-            //   const arg = ProfileScreenRoute();
-            //   return const NoTransitionPage(child: ProfileScreen(arg: arg));
-            // },
-            builder: (context, state) {
-              const arg = ProfileScreenRoute();
-              return const ProfileScreen(arg: arg);
-            },
-          ),
         ],
+      ),
+
+      /// Journal
+      GoRoute(
+        path: JournalDetailScreenRoute.path,
+        builder: (context, state) {
+          final arg = JournalDetailScreenRoute(id: state.params['id']!);
+          return JournalDetailScreen(arg: arg);
+        },
+      ),
+      GoRoute(
+        path: JournalCreateScreenRoute.path,
+        builder: (context, state) {
+          final dayKey = state.params['date'];
+          final day = dayKey != null ? Day.fromDayKey(dayKey) : Day.today();
+          final arg = JournalCreateScreenRoute(day: day);
+          return JournalCreateScreen(arg: arg);
+        },
       ),
     ],
   );
