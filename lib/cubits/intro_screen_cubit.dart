@@ -15,12 +15,14 @@ class IntroScreenCubit extends Cubit<CubitState<User>> {
       : super(const InitialState());
 
   Future<void> createUser(String name) async {
-    try {
-      emit(const LoadingState());
-      final body = UserBody(name: name);
-      await userRepo.createUser(body);
-    } catch (e) {
-      log(e.toString());
+    if (formKey.currentState?.validate() ?? false) {
+      try {
+        emit(const LoadingState());
+        final body = UserBody(name: name);
+        await userRepo.createUser(body);
+      } catch (e) {
+        log(e.toString());
+      }
     }
   }
 }

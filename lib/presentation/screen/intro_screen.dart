@@ -27,16 +27,17 @@ class IntroScreenRoute extends RouteArg {
 class IntroScreen extends StatelessWidget implements Screen<IntroScreenRoute> {
   @override
   final IntroScreenRoute arg;
+
   IntroScreen({
     super.key,
     required this.arg,
   });
 
-  final nameController = TextEditingController();
   final _formKey = GlobalKey<FormBuilderState>();
 
   @override
   Widget build(BuildContext context) {
+    late String name;
     final TextTheme textTheme = context.textTheme;
     final double deviceHeight = context.deviceHeight;
     return BlocProvider<IntroScreenCubit>(
@@ -77,24 +78,23 @@ class IntroScreen extends StatelessWidget implements Screen<IntroScreenRoute> {
                     key: _formKey,
                     child: PrimaryTextField(
                       hintText: 'Enter your name',
-                      controller: nameController,
                       validator: FormValidator.nameValidator,
+                      onSaved: (value) {
+                        name = value ?? '';
+                      },
                     ),
                   ),
                   const Spacer(),
                   PrimaryFilledButton(
                     onTap: () {
-                      if (_formKey.currentState!.validate()) {
-                        context
-                            .read<IntroScreenCubit>()
-                            .createUser(nameController.text);
-                        final datetime = DateTime.now();
-                        context.goToScreen(
-                            arg: HomeScreenRoute(
-                          year: datetime.year,
-                          month: datetime.month,
-                        ));
-                      }
+                      _formKey.currentState!.save();
+                      context.read<IntroScreenCubit>().createUser(name);
+                      final datetime = DateTime.now();
+                      context.goToScreen(
+                          arg: HomeScreenRoute(
+                        year: datetime.year,
+                        month: datetime.month,
+                      ));
                     },
                     label: 'Continue',
                   ),

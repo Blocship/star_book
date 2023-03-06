@@ -5,14 +5,13 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 class PrimaryTextField extends StatelessWidget {
   final String hintText;
-  final TextEditingController controller;
   final FormFieldValidator<String>? validator;
-
+  final Function(String?)? onSaved;
   const PrimaryTextField({
     Key? key,
     required this.hintText,
-    required this.controller,
     this.validator,
+    required this.onSaved,
   }) : super(key: key);
 
   @override
@@ -20,7 +19,6 @@ class PrimaryTextField extends StatelessWidget {
     final TextTheme textTheme = context.textTheme;
     final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     return TextFormField(
-      controller: controller,
       validator: validator,
       decoration: InputDecoration(
         hintText: hintText,
@@ -51,6 +49,7 @@ class PrimaryTextField extends StatelessWidget {
           ),
         ),
       ),
+      onSaved: onSaved,
     );
   }
 }
