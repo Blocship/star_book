@@ -10,6 +10,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   final bool showLeading;
   final VoidCallback? leadingOnTap;
   final VoidCallback? trailingOnTap;
+  final bool isBottomSheet;
 
   const PrimaryAppBar({
     super.key,
@@ -19,6 +20,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.centerTitle,
     this.trailingText,
     this.trailingOnTap,
+    this.isBottomSheet = false,
   })
   // assert that if showLeading is false, then leading and leadingOnTap must be null
   : assert(showLeading ? true : leadingText == null && leadingOnTap == null);
@@ -30,8 +32,9 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
     final double deviceWidth = context.deviceWidth;
 
     return Padding(
-      padding:
-          const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
+      padding: isBottomSheet
+          ? const EdgeInsets.fromLTRB(20, 54, 20, 0)
+          : const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
       child: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -85,7 +88,7 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Size get preferredSize {
-    return const Size.fromHeight(50);
+    return Size.fromHeight(isBottomSheet ? 80 : 50);
   }
 }
 
@@ -104,24 +107,27 @@ class SecondaryAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final ThemeColorStyle themeColorStyle = context.themeColorStyle;
-    return Padding(
-      padding:
-          const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
-      child: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        leading: leading,
-        leadingWidth: 24,
-        actions: [
-          IconButton(
-            padding: EdgeInsets.zero,
-            constraints: const BoxConstraints(),
-            onPressed: trailingOnTap,
-            icon:
-                Icon(trailing, size: 24, color: themeColorStyle.secondaryColor),
-          )
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Colors.transparent,
+      leading: Row(
+        children: [
+          const SizedBox(width: 20),
+          leading,
         ],
       ),
+      actions: [
+        IconButton(
+          padding: EdgeInsets.zero,
+          constraints: const BoxConstraints(),
+          onPressed: trailingOnTap,
+          splashRadius: 25,
+          iconSize: 24,
+          color: themeColorStyle.secondaryColor,
+          icon: Icon(trailing),
+        ),
+        const SizedBox(width: 20)
+      ],
     );
   }
 

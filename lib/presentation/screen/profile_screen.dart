@@ -50,6 +50,7 @@ class ProfileScreen extends StatelessWidget
             appBar: SecondaryAppBar(
               leading: const Image(
                 image: AssetImage('assets/icons/shooting_star.png'),
+                width: 24,
               ),
               trailing: Icons.menu_outlined,
               trailingOnTap: () => context.goNamed(AppRouterName.settingScreen),
