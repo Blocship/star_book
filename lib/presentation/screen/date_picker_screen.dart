@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:star_book/presentation/utils/extension.dart';
-import 'package:star_book/presentation/widgets/floating_action_button.dart';
-import 'package:star_book/presentation/shared/app_bar.dart';
-import 'package:star_book/presentation/utils/padding_style.dart';
-import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
+import 'package:star_book/presentation/shared/app_bar.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/utils/extension.dart';
+import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/date_picker.dart';
+import 'package:star_book/presentation/widgets/floating_action_button.dart';
 
 class DatePickerScreen extends StatelessWidget {
   const DatePickerScreen({Key? key}) : super(key: key);
@@ -46,7 +46,7 @@ class DatePickerScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-            const DatePicker(),
+            DatePicker(),
           ],
         ),
       ),

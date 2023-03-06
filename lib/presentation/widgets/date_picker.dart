@@ -88,116 +88,38 @@ class _PickerWidgetState extends State<PickerWidget> {
     final TextTheme textTheme = context.textTheme;
     return Row(
       children: [
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GestureDetector(
-                child: const Icon(Icons.keyboard_arrow_up_outlined),
-                onTap: () {
-                  onDecrement(PickerComponent.month);
-                },
-              ),
-              const SizedBox(height: 6),
-              Text(
-                _month,
-                style: textTheme.headlineMedium!
-                    .copyWith(fontWeight: FontWeight.w700),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                getPickerDateComponentName(PickerComponent.month),
-                style:
-                    textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w400),
-              ),
-              const SizedBox(height: 15),
-              GestureDetector(
-                child: const Icon(Icons.keyboard_arrow_down_outlined),
-                onTap: () {
-                  onIncrement(PickerComponent.month);
-                },
-              ),
-            ],
-          ),
+        _PickerItem(
+          onIncrement: (value) {
+            onIncrement(PickerComponent.month);
+          },
+          onDecrement: (value) {
+            onDecrement(PickerComponent.month);
+          },
+          value: _month,
+          name: 'Month',
         ),
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GestureDetector(
-                child: const Icon(Icons.keyboard_arrow_up_outlined),
-                onTap: () {
-                  onDecrement(PickerComponent.date);
-                },
-              ),
-              const SizedBox(height: 6),
-              Text(
-                _day,
-                style: textTheme.headlineMedium!
-                    .copyWith(fontWeight: FontWeight.w700),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                getPickerDateComponentName(PickerComponent.date),
-                style:
-                    textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w400),
-              ),
-              const SizedBox(height: 15),
-              GestureDetector(
-                child: const Icon(Icons.keyboard_arrow_down_outlined),
-                onTap: () {
-                  onIncrement(PickerComponent.date);
-                },
-              ),
-            ],
-          ),
+        _PickerItem(
+          onIncrement: (value) {
+            onIncrement(PickerComponent.date);
+          },
+          onDecrement: (value) {
+            onDecrement(PickerComponent.date);
+          },
+          value: _day,
+          name: 'Day',
         ),
-        Expanded(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GestureDetector(
-                child: const Icon(Icons.keyboard_arrow_up_outlined),
-                onTap: () {
-                  onDecrement(PickerComponent.year);
-                },
-              ),
-              const SizedBox(height: 6),
-              Text(
-                _year,
-                style: textTheme.headlineMedium!
-                    .copyWith(fontWeight: FontWeight.w700),
-              ),
-              const SizedBox(height: 8),
-              Text(
-                getPickerDateComponentName(PickerComponent.year),
-                style:
-                    textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w400),
-              ),
-              const SizedBox(height: 15),
-              GestureDetector(
-                child: const Icon(Icons.keyboard_arrow_down_outlined),
-                onTap: () {
-                  onIncrement(PickerComponent.year);
-                },
-              ),
-            ],
-          ),
+        _PickerItem(
+          onIncrement: (value) {
+            onIncrement(PickerComponent.year);
+          },
+          onDecrement: (value) {
+            onDecrement(PickerComponent.year);
+          },
+          value: _year,
+          name: 'Year',
         ),
       ],
     );
-  }
-
-  /// Get Picker Component Name
-  String getPickerDateComponentName(PickerComponent pickerDateComponent) {
-    switch (pickerDateComponent) {
-      case PickerComponent.date:
-        return 'Date';
-      case PickerComponent.month:
-        return 'Month';
-      case PickerComponent.year:
-        return 'Year';
-    }
   }
 
   /// On Arrow Up
