@@ -1,10 +1,7 @@
 class AppRouterName {
-  static const String splashScreen = 'splashScreen';
-  static const String introScreen = 'introScreen';
-  static const String mainScreen = 'mainScreen';
   static const String yearScreen = 'yearScreen';
-  static const String monthScreen = 'monthScreen';
   static const String journalCreateScreen = 'journalCreateScreen';
+  static const String monthScreen = 'monthScreen';
   static const String moodPickerScreen = 'moodPickerScreen';
   static const String datePickerScreen = 'datePickerScreen';
   static const String journalDetailScreen = 'journalDetailScreen';

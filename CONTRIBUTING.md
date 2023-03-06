@@ -101,6 +101,22 @@ lib
 └── main.dart
 ```
 
+## Routes
+
+```
+├── / (SplashScreen)
+├── /intro (IntroScreen)
+├── /main (MainScreen)
+├── /main/year (YearScreen)
+├── /main/profile (ProfileScreen)
+├── /main/year/month (HomeScreen)
+├── /main/settings (SettingsScreen)
+├── /main/journal/:id (JournalDetailScreen)
+├── /main/journals?date=2020-01-01 (JournalsListScreen)
+├── /main/journal/:id/edit (EditJournalScreen)
+├── /main/journal/new?date=2020-01-01 (NewJournalScreen)
+```
+
 ## 🐛 How to Report Bugs
 
 Please open a [new issue](https://github.com/hashirshoaeb/star_book/issues/new) including steps to reproduce the problem

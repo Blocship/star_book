@@ -75,8 +75,8 @@ class JournalBody with _$JournalBody {
         createdAt: journal.createdAt,
       );
 
-  factory JournalBody.fromLSJournal(Journal journal) => JournalBody(
-      mood: journal.mood,
+  factory JournalBody.fromLSJournal(J.Journal journal) => JournalBody(
+      mood: Mood.fromLSMood(journal.mood),
       title: journal.title,
       memo: journal.memo,
       createdAt: journal.createdAt);

@@ -22,12 +22,12 @@ class UserRepoImpl implements UserRepo {
   }
 
   @override
-  Future<void> createUser(User user) async {
-    await lSUserApi.create(user.toLSUser);
+  Future<void> createUser(UserBody user) async {
+    await lSUserApi.create(user.toLSUserBody);
   }
 
   @override
-  Future<void> updateUser(User user) async {
-    await lSUserApi.update(user.toLSUser);
+  Future<void> updateUser(String id, UserBody user) async {
+    await lSUserApi.update(id, user.toLSUserBody);
   }
 }

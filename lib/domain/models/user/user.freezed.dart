@@ -141,3 +141,119 @@ abstract class _User extends User {
   @JsonKey(ignore: true)
   _$$_UserCopyWith<_$_User> get copyWith => throw _privateConstructorUsedError;
 }
+
+/// @nodoc
+mixin _$UserBody {
+  String get name => throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $UserBodyCopyWith<UserBody> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $UserBodyCopyWith<$Res> {
+  factory $UserBodyCopyWith(UserBody value, $Res Function(UserBody) then) =
+      _$UserBodyCopyWithImpl<$Res, UserBody>;
+  @useResult
+  $Res call({String name});
+}
+
+/// @nodoc
+class _$UserBodyCopyWithImpl<$Res, $Val extends UserBody>
+    implements $UserBodyCopyWith<$Res> {
+  _$UserBodyCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+  }) {
+    return _then(_value.copyWith(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$_UserBodyCopyWith<$Res> implements $UserBodyCopyWith<$Res> {
+  factory _$$_UserBodyCopyWith(
+          _$_UserBody value, $Res Function(_$_UserBody) then) =
+      __$$_UserBodyCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String name});
+}
+
+/// @nodoc
+class __$$_UserBodyCopyWithImpl<$Res>
+    extends _$UserBodyCopyWithImpl<$Res, _$_UserBody>
+    implements _$$_UserBodyCopyWith<$Res> {
+  __$$_UserBodyCopyWithImpl(
+      _$_UserBody _value, $Res Function(_$_UserBody) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+  }) {
+    return _then(_$_UserBody(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$_UserBody extends _UserBody {
+  const _$_UserBody({required this.name}) : super._();
+
+  @override
+  final String name;
+
+  @override
+  String toString() {
+    return 'UserBody(name: $name)';
+  }
+
+  @override
+  bool operator ==(dynamic other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$_UserBody &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, name);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$_UserBodyCopyWith<_$_UserBody> get copyWith =>
+      __$$_UserBodyCopyWithImpl<_$_UserBody>(this, _$identity);
+}
+
+abstract class _UserBody extends UserBody {
+  const factory _UserBody({required final String name}) = _$_UserBody;
+  const _UserBody._() : super._();
+
+  @override
+  String get name;
+  @override
+  @JsonKey(ignore: true)
+  _$$_UserBodyCopyWith<_$_UserBody> get copyWith =>
+      throw _privateConstructorUsedError;
+}

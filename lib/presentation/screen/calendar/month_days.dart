@@ -3,16 +3,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/cubits/cubit_state/cubit_state.dart';
 import 'package:star_book/cubits/home_screen_cubit.dart';
+import 'package:star_book/domain/models/mood/day.dart';
 import 'package:star_book/domain/models/mood/mood_info.dart';
 import 'package:star_book/domain/repository/mood_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
-import 'package:star_book/presentation/utils/extension.dart';
-
-import 'package:star_book/presentation/widgets/floating_action_button.dart';
+import 'package:star_book/presentation/routes/routes.dart';
+import 'package:star_book/presentation/screen/journal_screens/journal_create_screen.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
-import 'package:star_book/presentation/utils/calendar.dart';
-import 'package:star_book/presentation/utils/month_details.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/utils/calendar.dart';
+import 'package:star_book/presentation/utils/extension.dart';
+import 'package:star_book/presentation/utils/month_details.dart';
+import 'package:star_book/presentation/widgets/floating_action_button.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
 
@@ -60,7 +62,7 @@ class MonthScreen extends StatelessWidget {
     return GradientScaffold(
       appBar: PrimaryAppBar(
         leadingText: 'Year',
-        leadingOnTap: () => context.goNamed(AppRouterName.yearScreen),
+        leadingOnTap: () => context.pop(),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -93,10 +95,9 @@ class MonthScreen extends StatelessWidget {
         padding: EdgeInsets.only(bottom: (monthDetails.isHomeScreen) ? 90 : 20),
         child: PrimaryFloatingActionButton(
           onTap: () {
-            /// Search for better way
-            /// This will run but give error
-            /// this issue is already opened on github
-            context.goNamed(AppRouterName.journalCreateScreen);
+            context.pushScreen(
+              arg: JournalCreateScreenRoute(day: Day.today()),
+            );
           },
           child: const Image(
             image: AssetImage('assets/icons/calendar_add_on.png'),
@@ -165,7 +166,11 @@ class Date extends StatelessWidget {
         builder: (context, state) {
           // final get = context.read<HomeScreenCubit>().getMoodInfoByDate(day: day);
           return GestureDetector(
-            onTap: () => context.goNamed(AppRouterName.journalCreateScreen),
+            onTap: () {
+              context.pushScreen(
+                arg: JournalCreateScreenRoute(day: Day.today()),
+              );
+            },
             child: Container(
               width: deviceWidth * 0.133,
               height: deviceHeight * 0.064,

@@ -26,29 +26,29 @@ class Day with _$Day {
 
   DateTime toDateTime() => DateTime(year, month, day);
 
-  // factory Day.fromDayKey(String dayKey) {
-  //   final parts = dayKey.split('-');
-  //   return Day(
-  //     year: int.parse(parts[0]),
-  //     month: int.parse(parts[1]),
-  //     day: int.parse(parts[2]),
-  //   );
-  // }
+  factory Day.fromDayKey(String dayKey) {
+    final parts = dayKey.split('-');
+    return Day(
+      year: int.parse(parts[0]),
+      month: int.parse(parts[1]),
+      day: int.parse(parts[2]),
+    );
+  }
 
-  // String get dayKey => '$year-$month-$day';
+  String get dayKey => '$year-$month-$day';
 }
 
 extension XDateTime on DateTime {
-  // String get dayKey => '$year-$month-$day';
+  String get dayKey => '$year-$month-$day';
 
-  // DateTime fromDayKey(String dayKey) {
-  //   final parts = dayKey.split('-');
-  //   return DateTime(
-  //     int.parse(parts[0]),
-  //     int.parse(parts[1]),
-  //     int.parse(parts[2]),
-  //   );
-  // }
+  DateTime fromDayKey(String dayKey) {
+    final parts = dayKey.split('-');
+    return DateTime(
+      int.parse(parts[0]),
+      int.parse(parts[1]),
+      int.parse(parts[2]),
+    );
+  }
 
   Day get toDay => Day(
         year: year,
