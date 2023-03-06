@@ -16,7 +16,6 @@ import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/month_details.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
 
 class MonthScreen extends StatelessWidget {
   final MonthDetails monthDetails;
