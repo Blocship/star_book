@@ -76,8 +76,7 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
                       const SizedBox(height: 30),
                       SelectableTile(
                         title: 'Date',
-                        onTap: () =>
-                            context.goNamed(AppRouterName.datePickerScreen),
+                        onTap: () => context.go(AppRouterName.datePickerScreen),
                       ),
                       const SizedBox(height: 30),
                       SelectableTile(
