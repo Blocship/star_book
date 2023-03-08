@@ -169,6 +169,7 @@ class _PickerWidgetState extends State<PickerWidget> {
         });
         break;
     }
+    widget.onDateChanged?.call(currentDate);
   }
 
   /// On Arrow Down
@@ -217,6 +218,7 @@ class _PickerWidgetState extends State<PickerWidget> {
         });
         break;
     }
+    widget.onDateChanged?.call(currentDate);
   }
 }
 

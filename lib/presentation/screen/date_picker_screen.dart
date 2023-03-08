@@ -1,12 +1,38 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
+import 'package:star_book/presentation/shared/text_field.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/date_picker.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
+
+class CustomDatePickerFormField extends FormBuilderField<DateTime> {
+  final String name;
+
+  CustomDatePickerFormField({
+    Key? key,
+    required this.name,
+  }) : super(
+            key: key,
+            name: name,
+            builder: (FormFieldState<DateTime> field) {
+              return SelectableTile(
+                title: 'Date',
+                onTap: () => field.context.go(AppRouterName.datePickerScreen),
+              );
+            });
+
+  @override
+  FormBuilderFieldState<CustomDatePickerFormField, DateTime> createState() =>
+      _CustomDatePickerFormFieldState();
+}
+
+class _CustomDatePickerFormFieldState
+    extends FormBuilderFieldState<CustomDatePickerFormField, DateTime> {}
 
 class DatePickerScreen extends StatelessWidget {
   const DatePickerScreen({Key? key}) : super(key: key);
@@ -46,7 +72,9 @@ class DatePickerScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-            DatePicker(),
+            DatePicker(
+              onDateChanged: (DateTime date) {},
+            ),
           ],
         ),
       ),

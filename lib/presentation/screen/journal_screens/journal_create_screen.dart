@@ -10,6 +10,7 @@ import 'package:star_book/domain/repository/journal_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/routes/routes.dart';
+import 'package:star_book/presentation/screen/date_picker_screen.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/form_models/jounral_form_model.dart';
 import 'package:star_book/presentation/shared/form_validator.dart';
@@ -77,6 +78,9 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
                       SelectableTile(
                         title: 'Date',
                         onTap: () => context.go(AppRouterName.datePickerScreen),
+                      ),
+                      CustomDatePickerFormField(
+                        name: 'date',
                       ),
                       const SizedBox(height: 30),
                       SelectableTile(
