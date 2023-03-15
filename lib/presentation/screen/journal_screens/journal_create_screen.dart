@@ -82,6 +82,7 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
                       CustomDatePickerFormField(
                         name: 'date',
                       ),
+                      // FormBuilderDateTimePicker(name: name),
                       const SizedBox(height: 30),
                       SelectableTile(
                         title: 'Mood',

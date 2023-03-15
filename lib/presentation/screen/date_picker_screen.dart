@@ -12,26 +12,31 @@ import 'package:star_book/presentation/widgets/date_picker.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 
 class CustomDatePickerFormField extends FormBuilderField<DateTime> {
-  final String name;
-
   CustomDatePickerFormField({
-    Key? key,
-    required this.name,
-  }) : super(
-            key: key,
-            name: name,
-            builder: (FormFieldState<DateTime> field) {
-              return SelectableTile(
-                  title: 'Date',
-                  onTap: () {
-                    showModalBottomSheet(
-                      context: field.context,
-                      builder: (context) {
-                        return DatePickerScreen();
-                      },
-                    );
-                  });
-            });
+    super.key,
+    required super.name,
+    super.validator,
+    super.initialValue,
+    super.onChanged,
+    super.valueTransformer,
+    super.enabled = true,
+    super.onSaved,
+    super.autovalidateMode = AutovalidateMode.disabled,
+    super.onReset,
+    super.focusNode,
+  }) : super(builder: (final FormFieldState<DateTime> field) {
+          final state = field as _CustomDatePickerFormFieldState;
+
+          return Focus(
+            focusNode: state.effectiveFocusNode,
+            canRequestFocus: state.effectiveFocusNode.canRequestFocus,
+            child: SelectableTile(
+                title: 'Date: ${state.dateTime.toString()}',
+                onTap: () {
+                  state.effectiveFocusNode.requestFocus();
+                }),
+          );
+        });
 
   @override
   FormBuilderFieldState<CustomDatePickerFormField, DateTime> createState() =>
@@ -39,10 +44,45 @@ class CustomDatePickerFormField extends FormBuilderField<DateTime> {
 }
 
 class _CustomDatePickerFormFieldState
-    extends FormBuilderFieldState<CustomDatePickerFormField, DateTime> {}
+    extends FormBuilderFieldState<CustomDatePickerFormField, DateTime> {
+  late DateTime dateTime;
+
+  @override
+  void initState() {
+    super.initState();
+    dateTime = widget.initialValue ?? DateTime.now();
+    effectiveFocusNode.addListener(_handleFocus);
+  }
+
+  void _handleFocus() {
+    if (effectiveFocusNode.hasFocus && enabled) {
+      effectiveFocusNode.unfocus();
+      showModalBottomSheet(
+        context: context,
+        builder: (context) {
+          return DatePickerScreen(
+            initialDate: dateTime,
+            onDateChanged: (DateTime date) {
+              setState(() {
+                dateTime = date;
+              });
+            },
+          );
+        },
+      );
+    }
+  }
+}
 
 class DatePickerScreen extends StatelessWidget {
-  const DatePickerScreen({Key? key}) : super(key: key);
+  final DateTime initialDate;
+  final Function(DateTime)? onDateChanged;
+
+  const DatePickerScreen({
+    Key? key,
+    required this.initialDate,
+    required this.onDateChanged,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +120,10 @@ class DatePickerScreen extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             DatePicker(
-              onDateChanged: (DateTime date) {},
+              initialDate: initialDate,
+              onDateChanged: (DateTime date) {
+                onDateChanged?.call(date);
+              },
             ),
           ],
         ),

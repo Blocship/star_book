@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/domain/models/mood/day.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
-import 'package:star_book/presentation/screen/date_picker_screen.dart';
 import 'package:star_book/presentation/screen/home_screen.dart';
 import 'package:star_book/presentation/screen/intro_screen.dart';
 import 'package:star_book/presentation/screen/journal_screens/journal_create_screen.dart';
@@ -134,12 +132,12 @@ class AppRouter {
         },
       ),
       // named AppRouterName.datePickerScreen
-      GoRoute(
-          path: AppRouterName.datePickerScreen,
-          parentNavigatorKey: _rootNavigatorKey,
-          builder: (context, state) {
-            return DatePickerScreen();
-          }),
+      // GoRoute(
+      //     path: AppRouterName.datePickerScreen,
+      //     parentNavigatorKey: _rootNavigatorKey,
+      //     builder: (context, state) {
+      //       return DatePickerScreen();
+      //     }),
     ],
   );
 }
