@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
+import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
@@ -21,9 +22,15 @@ class CustomDatePickerFormField extends FormBuilderField<DateTime> {
             name: name,
             builder: (FormFieldState<DateTime> field) {
               return SelectableTile(
-                title: 'Date',
-                onTap: () => field.context.go(AppRouterName.datePickerScreen),
-              );
+                  title: 'Date',
+                  onTap: () {
+                    showModalBottomSheet(
+                      context: field.context,
+                      builder: (context) {
+                        return DatePickerScreen();
+                      },
+                    );
+                  });
             });
 
   @override
@@ -45,7 +52,7 @@ class DatePickerScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: PrimaryAppBar(
-        leadingOnTap: () => context.goNamed(AppRouterName.journalCreateScreen),
+        leadingOnTap: () => context.shouldPop(),
         centerTitle: 'Select Date',
       ),
       body: Padding(

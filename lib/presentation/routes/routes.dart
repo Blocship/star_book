@@ -154,4 +154,10 @@ extension XBuildContext on BuildContext {
   }
 
   String get location => GoRouter.of(this).location;
+
+  void shouldPop() {
+    if (canPop()) {
+      pop();
+    }
+  }
 }
