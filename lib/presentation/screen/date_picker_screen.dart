@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:go_router/go_router.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
+import 'package:intl/intl.dart';
 import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
@@ -31,7 +30,10 @@ class CustomDatePickerFormField extends FormBuilderField<DateTime> {
             focusNode: state.effectiveFocusNode,
             canRequestFocus: state.effectiveFocusNode.canRequestFocus,
             child: SelectableTile(
-                title: 'Date: ${state.dateTime.toString()}',
+                title: 'Date',
+                select: DateFormat.yMMMd().format(
+                  state.dateTime ?? DateTime.now(),
+                ),
                 onTap: () {
                   state.effectiveFocusNode.requestFocus();
                 }),
@@ -60,14 +62,20 @@ class _CustomDatePickerFormFieldState
       showModalBottomSheet(
         context: context,
         builder: (context) {
-          return DatePickerScreen(
-            initialDate: dateTime,
-            onDateChanged: (DateTime date) {
+          return DatePickerBottomSheet(
+            initialDate: dateTime ?? DateTime.now(),
+            onDone: (DateTime date) {
               setState(() {
                 dateTime = date;
               });
               didChange(dateTime);
             },
+            // onDateChanged: (DateTime date) {
+            //   setState(() {
+            //     dateTime = date;
+            //   });
+            //   didChange(dateTime);
+            // },
           );
         },
       );
@@ -75,15 +83,32 @@ class _CustomDatePickerFormFieldState
   }
 }
 
-class DatePickerScreen extends StatelessWidget {
+class DatePickerBottomSheet extends StatefulWidget {
   final DateTime initialDate;
-  final Function(DateTime)? onDateChanged;
+  // @deprecated
+  // final Function(DateTime dateTime)? onDateChanged;
+  final Function(DateTime dateTime)? onDone;
 
-  const DatePickerScreen({
+  const DatePickerBottomSheet({
     Key? key,
     required this.initialDate,
-    required this.onDateChanged,
+    // @deprecated
+    // required this.onDateChanged,
+    required this.onDone,
   }) : super(key: key);
+
+  @override
+  State<DatePickerBottomSheet> createState() => _DatePickerBottomSheetState();
+}
+
+class _DatePickerBottomSheetState extends State<DatePickerBottomSheet> {
+  late DateTime dateTime;
+
+  @override
+  void initState() {
+    super.initState();
+    dateTime = widget.initialDate;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -92,13 +117,14 @@ class DatePickerScreen extends StatelessWidget {
     final double deviceHeight = context.deviceHeight;
 
     return Scaffold(
-      appBar: PrimaryAppBar(
-        leadingOnTap: () => context.shouldPop(),
+      appBar: const PrimaryAppBar(
+        showLeading: false,
         centerTitle: 'Select Date',
       ),
       body: Padding(
-        padding:
-            const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
+        padding: const EdgeInsets.symmetric(
+          horizontal: CustomPadding.mediumPadding,
+        ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -121,16 +147,22 @@ class DatePickerScreen extends StatelessWidget {
             ),
             const SizedBox(height: 30),
             DatePicker(
-              initialDate: initialDate,
+              initialDate: widget.initialDate,
               onDateChanged: (DateTime date) {
-                onDateChanged?.call(date);
+                setState(() {
+                  dateTime = date;
+                });
+                // widget.onDateChanged?.call(date);
               },
             ),
           ],
         ),
       ),
       floatingActionButton: SecondaryFloatingActionButton(
-        onTap: () => context.goNamed(AppRouterName.journalCreateScreen),
+        onTap: () {
+          widget.onDone?.call(dateTime);
+          context.shouldPop();
+        },
         child: const Icon(Icons.check),
       ),
     );

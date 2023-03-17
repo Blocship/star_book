@@ -17,7 +17,7 @@ class DatePicker extends StatelessWidget {
     this.onDateChanged,
   })  : initialDate = initialDate ?? DateTime.now(),
         firstDate = firstDate ?? DateTime(1970),
-        lastDate = lastDate ?? DateTime(2050);
+        lastDate = lastDate ?? DateTime.now();
 
   @override
   Widget build(BuildContext context) {
