@@ -10,6 +10,7 @@ import 'package:star_book/domain/repository/journal_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/routes/routes.dart';
+import 'package:star_book/presentation/screen/date_picker_screen.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/form_models/jounral_form_model.dart';
 import 'package:star_book/presentation/shared/form_validator.dart';
@@ -65,7 +66,7 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
               minimum: const EdgeInsets.symmetric(
                   horizontal: CustomPadding.mediumPadding),
               child: SingleChildScrollView(
-                child: Form(
+                child: FormBuilder(
                   key: _formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -76,15 +77,19 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
                       const SizedBox(height: 30),
                       SelectableTile(
                         title: 'Date',
-                        onTap: () =>
-                            context.goNamed(AppRouterName.datePickerScreen),
+                        onTap: () => context.go(AppRouterName.datePickerScreen),
                       ),
+                      CustomDatePickerFormField(
+                        name: 'date',
+                        initialValue: DateTime.now(),
+                      ),
+                      // FormBuilderDateTimePicker(name: name),
                       const SizedBox(height: 30),
-                      SelectableTile(
-                        title: 'Mood',
-                        onTap: () =>
-                            context.goNamed(AppRouterName.moodPickerScreen),
-                      ),
+                      // SelectableTile(
+                      //   title: 'Mood',
+                      //   onTap: () =>
+                      //       context.goNamed(AppRouterName.moodPickerScreen),
+                      // ),
                       const SizedBox(height: 30),
                       CustomTextFormField(
                         fieldKey: JournalFormModel.titleKey,
@@ -111,10 +116,8 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
             ),
             floatingActionButton: SecondaryFloatingActionButton(
                 onTap: () {
-                  if (_formKey.currentState!.validate()) {
-                    ///Todo: Here we can't pop screen or we need to handle data from pop()
-                    context.pop();
-                  }
+                  _formKey.currentState?.save();
+                  print(_formKey.currentState?.value);
                 },
                 child: const Icon(Icons.check)),
           );

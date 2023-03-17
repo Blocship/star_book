@@ -131,6 +131,13 @@ class AppRouter {
           return JournalDetailScreen(arg: arg);
         },
       ),
+      // named AppRouterName.datePickerScreen
+      // GoRoute(
+      //     path: AppRouterName.datePickerScreen,
+      //     parentNavigatorKey: _rootNavigatorKey,
+      //     builder: (context, state) {
+      //       return DatePickerScreen();
+      //     }),
     ],
   );
 }
@@ -145,4 +152,10 @@ extension XBuildContext on BuildContext {
   }
 
   String get location => GoRouter.of(this).location;
+
+  void shouldPop() {
+    if (canPop()) {
+      pop();
+    }
+  }
 }
