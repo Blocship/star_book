@@ -23,3 +23,18 @@ class Mood {
 
   Id get key => id.fnvHash;
 }
+
+class MoodBody {
+  final String label;
+  final int color;
+
+  const MoodBody({
+    required this.label,
+    required int color,
+  }) : color = color & 0xFFFFFFFF;
+
+  factory MoodBody.initial() => const MoodBody(
+        label: '',
+        color: 0xFFFFFFFF,
+      );
+}

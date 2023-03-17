@@ -1,3 +1,4 @@
+import 'package:flutter/widgets.dart';
 import 'package:star_book/data/data_source/local_data_source/journal_api.dart';
 import 'package:star_book/data/data_source/local_data_source/mood_api.dart';
 import 'package:star_book/domain/models/mood/mood.dart';
@@ -28,8 +29,8 @@ class MoodRepoImpl implements MoodRepo {
   }
 
   @override
-  Future<void> addMood({required Mood mood}) async {
-    return lSMoodApi.create(mood.toLSMood);
+  Future<void> addMood({required MoodBody mood}) async {
+    return lSMoodApi.create(mood.toLSMoodBody);
   }
 
   @override
@@ -73,8 +74,8 @@ class MoodRepoImpl implements MoodRepo {
   }
 
   @override
-  Future<void> updateMood({required Mood mood}) async {
-    return lSMoodApi.update(mood.toLSMood);
+  Future<void> updateMood({required String id, required MoodBody mood}) async {
+    return lSMoodApi.update(id, mood.toLSMoodBody);
   }
 
   @override
@@ -95,5 +96,19 @@ class MoodRepoImpl implements MoodRepo {
     final journals = await lSJournalApi.getJournalByRange(start, end);
     final moodFrequency = MoodFrequency.fromJournal(journals: journals);
     return moodFrequency;
+  }
+
+  @override
+  Future<void> addDefaultMoods() async {
+    final moods = [
+      MoodBody(label: 'Happy', color: const Color(0xff0179FF).value),
+      MoodBody(label: 'Sad', color: const Color(0xff565AC9).value),
+      MoodBody(label: 'Productive', color: const Color(0xff32C74F).value),
+      MoodBody(label: 'Sick', color: const Color(0xffFF9600).value),
+      MoodBody(label: 'Angry', color: const Color(0xffFF3932).value),
+    ];
+    for (var mood in moods) {
+      await addMood(mood: mood);
+    }
   }
 }

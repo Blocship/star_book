@@ -7,8 +7,9 @@ import 'base_repo.dart';
 abstract class MoodRepo extends BaseRepo {
   Future<List<Mood>> getMoods();
   Future<Mood> getMood({required String id});
-  Future<void> addMood({required Mood mood});
-  Future<void> updateMood({required Mood mood});
+  Future<void> addMood({required MoodBody mood});
+  Future<void> addDefaultMoods();
+  Future<void> updateMood({required String id, required MoodBody mood});
   Future<void> deleteMood({required String id});
   Future<List<Mood>> getMoodInfoByDay({required DateTime day});
   Future<MoodInfo> getMoodInfoByMonth({required int month, required int year});
