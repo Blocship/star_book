@@ -66,7 +66,7 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
               minimum: const EdgeInsets.symmetric(
                   horizontal: CustomPadding.mediumPadding),
               child: SingleChildScrollView(
-                child: Form(
+                child: FormBuilder(
                   key: _formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -84,11 +84,11 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
                       ),
                       // FormBuilderDateTimePicker(name: name),
                       const SizedBox(height: 30),
-                      SelectableTile(
-                        title: 'Mood',
-                        onTap: () =>
-                            context.goNamed(AppRouterName.moodPickerScreen),
-                      ),
+                      // SelectableTile(
+                      //   title: 'Mood',
+                      //   onTap: () =>
+                      //       context.goNamed(AppRouterName.moodPickerScreen),
+                      // ),
                       const SizedBox(height: 30),
                       CustomTextFormField(
                         fieldKey: JournalFormModel.titleKey,
@@ -115,10 +115,8 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
             ),
             floatingActionButton: SecondaryFloatingActionButton(
                 onTap: () {
-                  if (_formKey.currentState!.validate()) {
-                    ///Todo: Here we can't pop screen or we need to handle data from pop()
-                    context.pop();
-                  }
+                  _formKey.currentState?.save();
+                  print(_formKey.currentState?.value);
                 },
                 child: const Icon(Icons.check)),
           );

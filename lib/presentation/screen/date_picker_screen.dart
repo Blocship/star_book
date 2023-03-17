@@ -45,12 +45,12 @@ class CustomDatePickerFormField extends FormBuilderField<DateTime> {
 
 class _CustomDatePickerFormFieldState
     extends FormBuilderFieldState<CustomDatePickerFormField, DateTime> {
-  late DateTime dateTime;
+  late DateTime? dateTime;
 
   @override
   void initState() {
     super.initState();
-    dateTime = widget.initialValue ?? DateTime.now();
+    dateTime = widget.initialValue;
     effectiveFocusNode.addListener(_handleFocus);
   }
 
@@ -66,6 +66,7 @@ class _CustomDatePickerFormFieldState
               setState(() {
                 dateTime = date;
               });
+              didChange(dateTime);
             },
           );
         },
