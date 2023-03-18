@@ -8,9 +8,9 @@ import 'package:star_book/domain/models/journal/journal.dart';
 import 'package:star_book/domain/models/mood/day.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/screen/date_picker_screen.dart';
+import 'package:star_book/presentation/screen/mood_picker_screen.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/form_models/jounral_form_model.dart';
 import 'package:star_book/presentation/shared/form_validator.dart';
@@ -75,21 +75,13 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
                       const SizedBox(height: 30),
                       const AddNewDetails(),
                       const SizedBox(height: 30),
-                      SelectableTile(
-                        title: 'Date',
-                        onTap: () => context.go(AppRouterName.datePickerScreen),
-                      ),
                       CustomDatePickerFormField(
                         name: 'date',
                         initialValue: DateTime.now(),
                       ),
                       // FormBuilderDateTimePicker(name: name),
                       const SizedBox(height: 30),
-                      // SelectableTile(
-                      //   title: 'Mood',
-                      //   onTap: () =>
-                      //       context.goNamed(AppRouterName.moodPickerScreen),
-                      // ),
+                      MoodPickerFormField(name: 'mood'),
                       const SizedBox(height: 30),
                       CustomTextFormField(
                         fieldKey: JournalFormModel.titleKey,
@@ -115,7 +107,7 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
               ),
             ),
             floatingActionButton: SecondaryFloatingActionButton(
-                onTap: () {
+                onTap: () async {
                   _formKey.currentState?.save();
                   print(_formKey.currentState?.value);
                 },
