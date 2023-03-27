@@ -33,6 +33,7 @@ class MoodPickerFormField extends FormBuilderField<String> {
           return Focus(
             focusNode: state.effectiveFocusNode,
             canRequestFocus: state.effectiveFocusNode.canRequestFocus,
+            skipTraversal: state.effectiveFocusNode.skipTraversal,
             child: SelectableTile(
                 title: 'Mood',
                 select: state.mood ?? 'Happy',
@@ -63,7 +64,15 @@ class _MoodPickerFormFieldState
       showModalBottomSheet(
           context: context,
           builder: (context) {
-            return MoodPickerBottomSheet();
+            return MoodPickerBottomSheet(
+              onTap: (final String value) {
+                mood = value;
+                didChange(value);
+                effectiveFocusNode.unfocus();
+                FocusScope.of(context).unfocus();
+                Navigator.pop(context);
+              },
+            );
           });
     }
   }
@@ -101,7 +110,11 @@ class MoodPickerBottomSheetCubit extends Cubit<CubitState<List<Mood>>> {
 }
 
 class MoodPickerBottomSheet extends StatefulWidget {
-  const MoodPickerBottomSheet({Key? key}) : super(key: key);
+  final Function(String) onTap;
+  const MoodPickerBottomSheet({
+    Key? key,
+    required this.onTap,
+  }) : super(key: key);
 
   @override
   State<MoodPickerBottomSheet> createState() => _MoodPickerBottomSheetState();
@@ -125,9 +138,8 @@ class _MoodPickerBottomSheetState extends State<MoodPickerBottomSheet> {
           loaded: (value) {
             return Scaffold(
               appBar: PrimaryAppBar(
-                leadingOnTap: () =>
-                    context.goNamed(AppRouterName.journalCreateScreen),
                 centerTitle: 'Select Mood',
+                showLeading: false,
               ),
               body: Column(
                 children: [
@@ -146,9 +158,7 @@ class _MoodPickerBottomSheetState extends State<MoodPickerBottomSheet> {
                           color: Color(value[index].color),
                           isSelected: selectedIndex == index,
                           onTap: () {
-                            setState(() {
-                              selectedIndex = index;
-                            });
+                            widget.onTap(value[index].label);
                           },
                         ),
                       );
