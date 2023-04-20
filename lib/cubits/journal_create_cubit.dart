@@ -19,7 +19,7 @@ class JournalCreateCubit extends Cubit<CubitState<Journal>> {
       final formData = JournalFormModel.fromJson(formKey.currentState!.value);
       emit(const LoadingState());
       final newJournal = JournalBody(
-        mood: formData.mood,
+        mood: formData.mood!,
         title: formData.title,
         memo: formData.memo,
         createdAt: formData.createdAt ?? DateTime.now(),

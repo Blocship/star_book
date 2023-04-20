@@ -45,6 +45,7 @@ class LSJournalApi implements IJournalApi {
       title: journal.title,
       memo: journal.memo,
     );
+    newJournal.mood = journal.mood;
     await journalCollection.isar.writeTxn(() async {
       await journalCollection.put(newJournal);
       await moodCollection.put(newJournal.mood);

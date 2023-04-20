@@ -8,7 +8,7 @@ class JournalFormModel {
 
   final String title;
   final String memo;
-  final Mood mood;
+  final Mood? mood;
   final DateTime? createdAt;
 
   const JournalFormModel({
@@ -21,7 +21,7 @@ class JournalFormModel {
   static final Map<String, dynamic> initialValue = JournalFormModel(
     title: '',
     memo: '',
-    mood: Mood.initial(),
+    mood: null,
     createdAt: DateTime.now(),
   ).toMap();
 

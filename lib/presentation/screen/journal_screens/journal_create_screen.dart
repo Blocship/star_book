@@ -68,6 +68,7 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
               child: SingleChildScrollView(
                 child: FormBuilder(
                   key: _formKey,
+                  initialValue: JournalFormModel.initialValue,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
@@ -76,12 +77,13 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
                       const AddNewDetails(),
                       const SizedBox(height: 30),
                       CustomDatePickerFormField(
-                        name: 'date',
-                        initialValue: DateTime.now(),
+                        name: JournalFormModel.createdAtKey,
                       ),
                       // FormBuilderDateTimePicker(name: name),
                       const SizedBox(height: 30),
-                      MoodPickerFormField(name: 'mood'),
+                      MoodPickerFormField(
+                        name: JournalFormModel.moodKey,
+                      ),
                       const SizedBox(height: 30),
                       CustomTextFormField(
                         fieldKey: JournalFormModel.titleKey,
@@ -108,8 +110,7 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
             ),
             floatingActionButton: SecondaryFloatingActionButton(
                 onTap: () async {
-                  _formKey.currentState?.save();
-                  print(_formKey.currentState?.value);
+                  await context.read<JournalCreateCubit>().addJournal();
                 },
                 child: const Icon(Icons.check)),
           );

@@ -14,7 +14,7 @@ import 'package:star_book/presentation/shared/text_field.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 
-class MoodPickerFormField extends FormBuilderField<String> {
+class MoodPickerFormField extends FormBuilderField<Mood> {
   MoodPickerFormField({
     super.key,
     required super.name,
@@ -27,7 +27,7 @@ class MoodPickerFormField extends FormBuilderField<String> {
     super.autovalidateMode = AutovalidateMode.disabled,
     super.onReset,
     super.focusNode,
-  }) : super(builder: (final FormFieldState<String> field) {
+  }) : super(builder: (final FormFieldState<Mood> field) {
           final state = field as _MoodPickerFormFieldState;
 
           return Focus(
@@ -36,7 +36,7 @@ class MoodPickerFormField extends FormBuilderField<String> {
             skipTraversal: state.effectiveFocusNode.skipTraversal,
             child: SelectableTile(
                 title: 'Mood',
-                select: state.mood ?? 'Happy',
+                select: state.mood?.label,
                 onTap: () {
                   state.effectiveFocusNode.requestFocus();
                 }),
@@ -44,13 +44,13 @@ class MoodPickerFormField extends FormBuilderField<String> {
         });
 
   @override
-  FormBuilderFieldState<MoodPickerFormField, String> createState() =>
+  FormBuilderFieldState<MoodPickerFormField, Mood> createState() =>
       _MoodPickerFormFieldState();
 }
 
 class _MoodPickerFormFieldState
-    extends FormBuilderFieldState<MoodPickerFormField, String> {
-  late String? mood;
+    extends FormBuilderFieldState<MoodPickerFormField, Mood> {
+  late Mood? mood;
 
   @override
   void initState() {
@@ -65,7 +65,7 @@ class _MoodPickerFormFieldState
           context: context,
           builder: (context) {
             return MoodPickerBottomSheet(
-              onTap: (final String value) {
+              onTap: (final Mood value) {
                 mood = value;
                 didChange(value);
                 effectiveFocusNode.unfocus();
@@ -84,7 +84,7 @@ class _MoodPickerFormFieldState
   }
 
   @override
-  void didChange(final String? value) {
+  void didChange(final Mood? value) {
     super.didChange(value);
     mood = value;
   }
@@ -110,7 +110,7 @@ class MoodPickerBottomSheetCubit extends Cubit<CubitState<List<Mood>>> {
 }
 
 class MoodPickerBottomSheet extends StatefulWidget {
-  final Function(String) onTap;
+  final Function(Mood) onTap;
   const MoodPickerBottomSheet({
     Key? key,
     required this.onTap,
@@ -158,7 +158,7 @@ class _MoodPickerBottomSheetState extends State<MoodPickerBottomSheet> {
                           color: Color(value[index].color),
                           isSelected: selectedIndex == index,
                           onTap: () {
-                            widget.onTap(value[index].label);
+                            widget.onTap(value[index]);
                           },
                         ),
                       );
