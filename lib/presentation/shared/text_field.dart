@@ -144,6 +144,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 class SelectableTile extends StatelessWidget {
   final String title;
   final String? select;
+  final int? color;
   final VoidCallback onTap;
 
   const SelectableTile({
@@ -151,13 +152,13 @@ class SelectableTile extends StatelessWidget {
     required this.title,
     this.select,
     required this.onTap,
+    this.color,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = context.textTheme;
     final ThemeColorStyle themeColorStyle = context.themeColorStyle;
-    final double deviceWidth = context.deviceWidth;
     final selectedData = select ?? 'Select';
     final bool isEmpty = (selectedData != 'Select');
     return Container(
@@ -191,6 +192,14 @@ class SelectableTile extends StatelessWidget {
                   color: themeColorStyle.tertiaryColor,
                 ),
               ),
+              if (color != null) ...[
+                const SizedBox(width: 8),
+                CircleAvatar(
+                  radius: 7,
+                  backgroundColor: Color(color!),
+                ),
+                const SizedBox(width: 2),
+              ],
               const Icon(
                 Icons.keyboard_arrow_right,
                 size: 20,
