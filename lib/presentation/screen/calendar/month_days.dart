@@ -43,7 +43,10 @@ class MonthScreen extends StatelessWidget {
         DateTime(monthDetails.year, monthDetails.month, 1).weekday;
 
     for (int day = 2 - firstWeekdayOfMonth; day <= daysInMonth; day++) {
-      dayRowChildren.add(Date(day: day));
+      dayRowChildren.add(Date(
+        day: day,
+        dateTime: DateTime(monthDetails.year, monthDetails.month),
+      ));
 
       /// Move to new row
       if ((day - 1 + firstWeekdayOfMonth) % DateTime.daysPerWeek == 0 ||
@@ -147,9 +150,11 @@ class WeekDaysView extends StatelessWidget {
 class Date extends StatelessWidget {
   const Date({
     super.key,
+    required this.dateTime,
     required this.day,
   });
 
+  final DateTime dateTime;
   final int day;
 
   @override
@@ -157,32 +162,79 @@ class Date extends StatelessWidget {
     final double deviceHeight = context.deviceHeight;
     final double deviceWidth = context.deviceWidth;
     final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+
     return BlocProvider<HomeScreenCubit>(
       create: (context) => HomeScreenCubit(
         moodRepo: Injector.resolve<MoodRepo>(),
       ),
       child: BlocBuilder<HomeScreenCubit, CubitState<MoodInfo>>(
         builder: (context, state) {
-          // final get = context.read<HomeScreenCubit>().getMoodInfoByDate(day: day);
-          return GestureDetector(
-            onTap: () {
-              context.pushScreen(
-                arg: JournalCreateScreenRoute(day: Day.today()),
-              );
+          DateTime getMoodDate = DateTime.now();
+          if (day >= 1) {
+            getMoodDate = DateTime(dateTime.year, dateTime.month, day);
+          }
+          final getMoodInfo = context
+              .read<HomeScreenCubit>()
+              .getMoodInfoByDate(day: getMoodDate);
+          return FutureBuilder(
+            future: getMoodInfo,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return GestureDetector(
+                  onTap: () {
+                    context.pushScreen(
+                      arg: JournalCreateScreenRoute(day: Day.today()),
+                    );
+                  },
+                  child: Container(
+                    width: deviceWidth * 0.133,
+                    height: deviceHeight * 0.064,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      gradient: LinearGradient(
+                        colors: (snapshot.data!.isNotEmpty && day > 1)
+                            ? getDayColors(snapshot: snapshot, day: day)
+                            : [Colors.transparent, Colors.transparent],
+                      ),
+                    ),
+                    child: Text(
+                      day < 1 ? '' : day.toString(),
+                      style: textTheme.bodyMedium!.copyWith(
+                          fontWeight: FontWeight.w400,
+                          color: snapshot.data!.isNotEmpty
+                              ? Colors.white
+                              : themeColorStyle.tertiaryColor),
+                    ),
+                  ),
+                );
+              }
+              if (snapshot.hasError) {
+                return Text('$snapshot.error');
+              } else {
+                return const SizedBox();
+              }
             },
-            child: Container(
-              width: deviceWidth * 0.133,
-              height: deviceHeight * 0.064,
-              alignment: Alignment.center,
-              child: Text(
-                day < 1 ? '' : day.toString(),
-                style:
-                    textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w400),
-              ),
-            ),
           );
         },
       ),
     );
+  }
+}
+
+/// Create class for this or move this to utils
+/// or think better logic
+List<Color> getDayColors({required AsyncSnapshot snapshot, required int day}) {
+  List<Color> colorList = [];
+  if (snapshot.data!.length > 1) {
+    for (int i = 0; i < snapshot.data!.length; i++) {
+      colorList.add(Color(snapshot.data[i].color));
+    }
+    return colorList;
+  } else {
+    for (int i = 0; i < 2; i++) {
+      colorList.add(Color(snapshot.data.first.color));
+    }
+    return colorList;
   }
 }
