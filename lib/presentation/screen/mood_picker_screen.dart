@@ -77,6 +77,7 @@ class _MoodPickerFormFieldState
                 FocusScope.of(context).unfocus();
                 Navigator.pop(context);
               },
+              selectedMood: mood,
             );
           });
     }
@@ -116,9 +117,11 @@ class MoodPickerBottomSheetCubit extends Cubit<CubitState<List<Mood>>> {
 
 class MoodPickerBottomSheet extends StatefulWidget {
   final Function(Mood) onTap;
+  final Mood? selectedMood;
   const MoodPickerBottomSheet({
     Key? key,
     required this.onTap,
+    this.selectedMood,
   }) : super(key: key);
 
   @override
@@ -126,8 +129,6 @@ class MoodPickerBottomSheet extends StatefulWidget {
 }
 
 class _MoodPickerBottomSheetState extends State<MoodPickerBottomSheet> {
-  int selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     final double deviceWidth = context.deviceWidth;
@@ -202,7 +203,7 @@ class _MoodPickerBottomSheetState extends State<MoodPickerBottomSheet> {
                         child: MoodTile(
                           title: value[index].label,
                           color: Color(value[index].color),
-                          isSelected: selectedIndex == index,
+                          selectedMood: widget.selectedMood,
                           onTap: () {
                             widget.onTap(value[index]);
                           },

@@ -1,21 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/domain/models/mood/mood.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 
 class MoodTile extends StatelessWidget {
   final String title;
   final Color color;
-  final bool isSelected;
+  final Mood? selectedMood;
   final VoidCallback onTap;
   const MoodTile({
     Key? key,
     required this.title,
     required this.color,
-    required this.isSelected,
+    this.selectedMood,
     required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    bool isSelected = false;
+    if (selectedMood != null) {
+      isSelected = selectedMood?.label == title;
+    }
     final TextTheme textTheme = context.textTheme;
     return ListTile(
       dense: true,
