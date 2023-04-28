@@ -5,6 +5,7 @@ import 'package:star_book/cubits/cubit_state/cubit_state.dart';
 import 'package:star_book/domain/models/mood/mood.dart';
 import 'package:star_book/domain/repository/mood_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
+import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/shared/loader.dart';
 import 'package:star_book/presentation/shared/mood_tile.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
@@ -48,7 +49,9 @@ class MoodPickerFormField extends FormBuilderField<Mood> {
 }
 
 class _MoodPickerFormFieldState
-    extends FormBuilderFieldState<MoodPickerFormField, Mood> {
+    extends FormBuilderFieldState<MoodPickerFormField, Mood>
+    with TickerProviderStateMixin {
+  late AnimationController animationController;
   late Mood? mood;
 
   @override
@@ -64,6 +67,11 @@ class _MoodPickerFormFieldState
       showModalBottomSheet(
           context: context,
           isScrollControlled: true,
+          transitionAnimationController: AnimationController(
+            vsync: this,
+            duration: const Duration(milliseconds: 600),
+            animationBehavior: AnimationBehavior.preserve,
+          ),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               top: Radius.circular(40),
@@ -86,6 +94,7 @@ class _MoodPickerFormFieldState
   @override
   void dispose() {
     effectiveFocusNode.removeListener(_handleFocus);
+    animationController.dispose();
     super.dispose();
   }
 
@@ -183,7 +192,7 @@ class _MoodPickerBottomSheetState extends State<MoodPickerBottomSheet> {
                         ),
                         SizedBox(width: deviceWidth * 0.27),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () => context.shouldPop(),
                           child: Icon(
                             Icons.close,
                             color: themeColorStyle.secondaryColor,

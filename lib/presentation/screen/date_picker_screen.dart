@@ -45,7 +45,10 @@ class CustomDatePickerFormField extends FormBuilderField<DateTime> {
 }
 
 class _CustomDatePickerFormFieldState
-    extends FormBuilderFieldState<CustomDatePickerFormField, DateTime> {
+    extends FormBuilderFieldState<CustomDatePickerFormField, DateTime>
+    with TickerProviderStateMixin {
+  late AnimationController animationController;
+
   late DateTime? dateTime;
 
   @override
@@ -61,6 +64,11 @@ class _CustomDatePickerFormFieldState
       showModalBottomSheet(
         context: context,
         isScrollControlled: true,
+        transitionAnimationController: AnimationController(
+          vsync: this,
+          duration: const Duration(milliseconds: 600),
+          animationBehavior: AnimationBehavior.preserve,
+        ),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(40),
@@ -90,6 +98,7 @@ class _CustomDatePickerFormFieldState
 
 class DatePickerBottomSheet extends StatefulWidget {
   final DateTime initialDate;
+
   // @deprecated
   // final Function(DateTime dateTime)? onDateChanged;
   final Function(DateTime dateTime)? onDone;
@@ -163,7 +172,7 @@ class _DatePickerBottomSheetState extends State<DatePickerBottomSheet> {
                     ),
                     SizedBox(width: deviceWidth * 0.27),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () => context.shouldPop(),
                       child: Icon(
                         Icons.close,
                         color: themeColorStyle.secondaryColor,
