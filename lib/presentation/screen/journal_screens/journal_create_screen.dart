@@ -109,14 +109,15 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
               ),
             ),
             floatingActionButton: SecondaryFloatingActionButton(
-                onTap: () async {
-                  await context.read<JournalCreateCubit>().addJournal();
+              onTap: () async {
+                await context.read<JournalCreateCubit>().addJournal();
 
-                  /// Don't use 'BuildContext's across async gaps
-                  /// we can use .then() for solving this warning
-                  context.shouldPop();
-                },
-                child: const Icon(Icons.check)),
+                /// Don't use 'BuildContext's across async gaps
+                /// we can use .then() for solving this warning
+                context.shouldPop();
+              },
+              child: const Icon(Icons.check),
+            ),
           );
         },
       ),

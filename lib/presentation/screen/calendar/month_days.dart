@@ -9,6 +9,7 @@ import 'package:star_book/domain/repository/mood_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/screen/journal_screens/journal_create_screen.dart';
+import 'package:star_book/presentation/screen/journal_screens/journal_list_screen.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/calendar.dart';
@@ -183,16 +184,24 @@ class Date extends StatelessWidget {
               if (snapshot.hasData) {
                 return GestureDetector(
                   onTap: () {
-                    context.pushScreen(
-                      arg: JournalCreateScreenRoute(day: Day.today()),
-                    );
+                    (snapshot.data!.isNotEmpty && day > 1)
+                        ? Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  JournalList(getJournalsByDate: getMoodDate),
+                            ),
+                          )
+                        : context.pushScreen(
+                            arg: JournalCreateScreenRoute(day: Day.today()),
+                          );
                   },
                   child: Container(
                     width: deviceWidth * 0.133,
                     height: deviceHeight * 0.064,
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      gradient: LinearGradient(
+                      gradient: SweepGradient(
                         colors: (snapshot.data!.isNotEmpty && day > 1)
                             ? getDayColors(snapshot: snapshot, day: day)
                             : [Colors.transparent, Colors.transparent],

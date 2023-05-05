@@ -7,8 +7,7 @@ part 'journal_state.freezed.dart';
 class JournalState with _$JournalState {
   factory JournalState({
     required List<Journal> journals,
-    required String journalId,
   }) = _JournalState;
 
-  factory JournalState.initial() => _JournalState(journals: [], journalId: '');
+  factory JournalState.initial() => _JournalState(journals: []);
 }
