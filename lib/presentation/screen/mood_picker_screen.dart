@@ -5,6 +5,7 @@ import 'package:star_book/cubits/cubit_state/cubit_state.dart';
 import 'package:star_book/domain/models/mood/mood.dart';
 import 'package:star_book/domain/repository/mood_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
+import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/shared/loader.dart';
 import 'package:star_book/presentation/shared/mood_tile.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
@@ -77,6 +78,7 @@ class _MoodPickerFormFieldState
                 FocusScope.of(context).unfocus();
                 Navigator.pop(context);
               },
+              selectedMood: mood,
             );
           });
     }
@@ -116,9 +118,11 @@ class MoodPickerBottomSheetCubit extends Cubit<CubitState<List<Mood>>> {
 
 class MoodPickerBottomSheet extends StatefulWidget {
   final Function(Mood) onTap;
+  final Mood? selectedMood;
   const MoodPickerBottomSheet({
     Key? key,
     required this.onTap,
+    this.selectedMood,
   }) : super(key: key);
 
   @override
@@ -126,8 +130,6 @@ class MoodPickerBottomSheet extends StatefulWidget {
 }
 
 class _MoodPickerBottomSheetState extends State<MoodPickerBottomSheet> {
-  int selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     final double deviceWidth = context.deviceWidth;
@@ -182,7 +184,7 @@ class _MoodPickerBottomSheetState extends State<MoodPickerBottomSheet> {
                         ),
                         SizedBox(width: deviceWidth * 0.27),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () => context.shouldPop(),
                           child: Icon(
                             Icons.close,
                             color: themeColorStyle.secondaryColor,
@@ -202,7 +204,9 @@ class _MoodPickerBottomSheetState extends State<MoodPickerBottomSheet> {
                         child: MoodTile(
                           title: value[index].label,
                           color: Color(value[index].color),
-                          isSelected: selectedIndex == index,
+                          // selectedMood: widget.selectedMood,
+                          isSelected:
+                              widget.selectedMood?.label == value[index].label,
                           onTap: () {
                             widget.onTap(value[index]);
                           },

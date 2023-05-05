@@ -10,8 +10,8 @@ class MoodTile extends StatelessWidget {
     Key? key,
     required this.title,
     required this.color,
-    required this.isSelected,
     required this.onTap,
+    required this.isSelected,
   }) : super(key: key);
 
   @override

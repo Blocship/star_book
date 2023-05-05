@@ -90,6 +90,7 @@ class _CustomDatePickerFormFieldState
 
 class DatePickerBottomSheet extends StatefulWidget {
   final DateTime initialDate;
+
   // @deprecated
   // final Function(DateTime dateTime)? onDateChanged;
   final Function(DateTime dateTime)? onDone;
@@ -163,7 +164,7 @@ class _DatePickerBottomSheetState extends State<DatePickerBottomSheet> {
                     ),
                     SizedBox(width: deviceWidth * 0.27),
                     GestureDetector(
-                      onTap: () {},
+                      onTap: () => context.shouldPop(),
                       child: Icon(
                         Icons.close,
                         color: themeColorStyle.secondaryColor,
