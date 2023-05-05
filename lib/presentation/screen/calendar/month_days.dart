@@ -9,6 +9,7 @@ import 'package:star_book/domain/repository/mood_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/screen/journal_screens/journal_create_screen.dart';
+import 'package:star_book/presentation/screen/journal_screens/journal_list_screen.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/calendar.dart';
@@ -43,7 +44,15 @@ class MonthScreen extends StatelessWidget {
         DateTime(monthDetails.year, monthDetails.month, 1).weekday;
 
     for (int day = 2 - firstWeekdayOfMonth; day <= daysInMonth; day++) {
-      dayRowChildren.add(Date(day: day));
+      dayRowChildren.add(
+        Date(
+          dateTime: Day(
+            year: monthDetails.year,
+            month: monthDetails.month,
+            day: (day < 1) ? 0 : day,
+          ),
+        ),
+      );
 
       /// Move to new row
       if ((day - 1 + firstWeekdayOfMonth) % DateTime.daysPerWeek == 0 ||
@@ -147,42 +156,94 @@ class WeekDaysView extends StatelessWidget {
 class Date extends StatelessWidget {
   const Date({
     super.key,
-    required this.day,
+    required this.dateTime,
   });
 
-  final int day;
+  final Day dateTime;
 
   @override
   Widget build(BuildContext context) {
     final double deviceHeight = context.deviceHeight;
     final double deviceWidth = context.deviceWidth;
     final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+
     return BlocProvider<HomeScreenCubit>(
       create: (context) => HomeScreenCubit(
         moodRepo: Injector.resolve<MoodRepo>(),
       ),
       child: BlocBuilder<HomeScreenCubit, CubitState<MoodInfo>>(
         builder: (context, state) {
-          // final get = context.read<HomeScreenCubit>().getMoodInfoByDate(day: day);
-          return GestureDetector(
-            onTap: () {
-              context.pushScreen(
-                arg: JournalCreateScreenRoute(day: Day.today()),
-              );
+          DateTime getMoodDate = dateTime.toDateTime();
+          final getMoodInfo = context
+              .read<HomeScreenCubit>()
+              .getMoodInfoByDate(day: getMoodDate);
+          return FutureBuilder(
+            future: getMoodInfo,
+            builder: (context, snapshot) {
+              if (snapshot.hasData) {
+                return GestureDetector(
+                  onTap: () {
+                    (snapshot.data!.isNotEmpty)
+                        ? Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  JournalList(getJournalsByDate: getMoodDate),
+                            ),
+                          )
+                        : context.pushScreen(
+                            arg: JournalCreateScreenRoute(day: Day.today()),
+                          );
+                  },
+                  child: Container(
+                    width: deviceWidth * 0.133,
+                    height: deviceHeight * 0.064,
+                    alignment: Alignment.center,
+                    decoration: BoxDecoration(
+                      gradient: SweepGradient(
+                        colors: (snapshot.data!.isNotEmpty)
+                            ? getDayColors(snapshot: snapshot)
+                            : [Colors.transparent, Colors.transparent],
+                      ),
+                    ),
+                    child: Text(
+                      dateTime.day < 1 ? '' : dateTime.day.toString(),
+                      style: textTheme.bodyMedium!.copyWith(
+                          fontWeight: FontWeight.w400,
+                          color: snapshot.data!.isNotEmpty
+                              ? Colors.white
+                              : themeColorStyle.tertiaryColor),
+                    ),
+                  ),
+                );
+              }
+              if (snapshot.hasError) {
+                return Text('$snapshot.error');
+              } else {
+                return const SizedBox();
+              }
             },
-            child: Container(
-              width: deviceWidth * 0.133,
-              height: deviceHeight * 0.064,
-              alignment: Alignment.center,
-              child: Text(
-                day < 1 ? '' : day.toString(),
-                style:
-                    textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w400),
-              ),
-            ),
           );
         },
       ),
     );
+  }
+}
+
+/// Create class for this or move this to utils
+/// or think better logic
+List<Color> getDayColors({required AsyncSnapshot snapshot}) {
+  List<Color> colorList = [];
+  if (snapshot.data!.length > 1) {
+    for (int i = 0; i < snapshot.data!.length; i++) {
+      colorList.add(Color(snapshot.data[i].color));
+    }
+    return colorList;
+  } else {
+    for (int i = 0; i < 2; i++) {
+      colorList.add(Color(snapshot.data.first.color));
+    }
+    return colorList;
   }
 }

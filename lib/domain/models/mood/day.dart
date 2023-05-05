@@ -9,7 +9,6 @@ class Day with _$Day {
 
   @Assert('year >= 0')
   @Assert('month >= 1 && month <= 12')
-  @Assert('day >= 1 && day <= 31')
   const factory Day({
     required int year,
     required int month,

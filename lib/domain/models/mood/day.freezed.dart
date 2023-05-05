@@ -110,7 +110,6 @@ class _$_Day extends _Day {
   const _$_Day({required this.year, required this.month, required this.day})
       : assert(year >= 0),
         assert(month >= 1 && month <= 12),
-        assert(day >= 1 && day <= 31),
         super._();
 
   @override

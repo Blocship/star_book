@@ -120,6 +120,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           FormBuilderTextField(
             name: widget.fieldKey,
             maxLines: widget.isMultiline ? null : 1,
+            initialValue: widget.initialValue,
             focusNode: focusNode,
             onChanged: widget.onChanged,
             validator: widget.validator,

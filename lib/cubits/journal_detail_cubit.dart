@@ -1,11 +1,12 @@
 import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:star_book/cubits/cubit_state/cubit_state.dart';
+import 'package:star_book/domain/models/journal/journal.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
 
-class JournalDetailCubit extends Cubit<CubitState> {
+class JournalDetailCubit extends Cubit<CubitState<Journal>> {
   final JournalRepo journalRepo;
-  StreamSubscription? journalStream;
+  StreamSubscription<Journal?>? journalStream;
 
   JournalDetailCubit({required this.journalRepo}) : super(const InitialState());
 
@@ -21,9 +22,9 @@ class JournalDetailCubit extends Cubit<CubitState> {
 
   /// Journal Stream by Id
   Future<void> journalById$({required String journalId}) async {
-    journalStream =
-        journalRepo.journalById$(journalId).listen((journal) => journal);
-    emit(LoadedState(journalStream));
+    journalStream = journalRepo.journalById$(journalId).listen((journal) {
+      emit(LoadedState(journal ?? Journal.initial()));
+    });
   }
 
   @override
