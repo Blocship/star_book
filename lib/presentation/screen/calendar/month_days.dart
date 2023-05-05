@@ -44,10 +44,15 @@ class MonthScreen extends StatelessWidget {
         DateTime(monthDetails.year, monthDetails.month, 1).weekday;
 
     for (int day = 2 - firstWeekdayOfMonth; day <= daysInMonth; day++) {
-      dayRowChildren.add(Date(
-        day: day,
-        dateTime: DateTime(monthDetails.year, monthDetails.month),
-      ));
+      dayRowChildren.add(
+        Date(
+          dateTime: Day(
+            year: monthDetails.year,
+            month: monthDetails.month,
+            day: (day < 1) ? 0 : day,
+          ),
+        ),
+      );
 
       /// Move to new row
       if ((day - 1 + firstWeekdayOfMonth) % DateTime.daysPerWeek == 0 ||
@@ -152,11 +157,9 @@ class Date extends StatelessWidget {
   const Date({
     super.key,
     required this.dateTime,
-    required this.day,
   });
 
-  final DateTime dateTime;
-  final int day;
+  final Day dateTime;
 
   @override
   Widget build(BuildContext context) {
@@ -171,10 +174,7 @@ class Date extends StatelessWidget {
       ),
       child: BlocBuilder<HomeScreenCubit, CubitState<MoodInfo>>(
         builder: (context, state) {
-          DateTime getMoodDate = DateTime.now();
-          if (day >= 1) {
-            getMoodDate = DateTime(dateTime.year, dateTime.month, day);
-          }
+          DateTime getMoodDate = dateTime.toDateTime();
           final getMoodInfo = context
               .read<HomeScreenCubit>()
               .getMoodInfoByDate(day: getMoodDate);
@@ -184,7 +184,7 @@ class Date extends StatelessWidget {
               if (snapshot.hasData) {
                 return GestureDetector(
                   onTap: () {
-                    (snapshot.data!.isNotEmpty && day > 1)
+                    (snapshot.data!.isNotEmpty)
                         ? Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -202,13 +202,13 @@ class Date extends StatelessWidget {
                     alignment: Alignment.center,
                     decoration: BoxDecoration(
                       gradient: SweepGradient(
-                        colors: (snapshot.data!.isNotEmpty && day > 1)
-                            ? getDayColors(snapshot: snapshot, day: day)
+                        colors: (snapshot.data!.isNotEmpty)
+                            ? getDayColors(snapshot: snapshot)
                             : [Colors.transparent, Colors.transparent],
                       ),
                     ),
                     child: Text(
-                      day < 1 ? '' : day.toString(),
+                      dateTime.day < 1 ? '' : dateTime.day.toString(),
                       style: textTheme.bodyMedium!.copyWith(
                           fontWeight: FontWeight.w400,
                           color: snapshot.data!.isNotEmpty
@@ -233,7 +233,7 @@ class Date extends StatelessWidget {
 
 /// Create class for this or move this to utils
 /// or think better logic
-List<Color> getDayColors({required AsyncSnapshot snapshot, required int day}) {
+List<Color> getDayColors({required AsyncSnapshot snapshot}) {
   List<Color> colorList = [];
   if (snapshot.data!.length > 1) {
     for (int i = 0; i < snapshot.data!.length; i++) {
