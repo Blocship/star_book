@@ -49,9 +49,7 @@ class MoodPickerFormField extends FormBuilderField<Mood> {
 }
 
 class _MoodPickerFormFieldState
-    extends FormBuilderFieldState<MoodPickerFormField, Mood>
-    with TickerProviderStateMixin {
-  late AnimationController animationController;
+    extends FormBuilderFieldState<MoodPickerFormField, Mood> {
   late Mood? mood;
 
   @override
@@ -67,11 +65,6 @@ class _MoodPickerFormFieldState
       showModalBottomSheet(
           context: context,
           isScrollControlled: true,
-          transitionAnimationController: AnimationController(
-            vsync: this,
-            duration: const Duration(milliseconds: 600),
-            animationBehavior: AnimationBehavior.preserve,
-          ),
           shape: const RoundedRectangleBorder(
             borderRadius: BorderRadius.vertical(
               top: Radius.circular(40),
@@ -94,7 +87,6 @@ class _MoodPickerFormFieldState
   @override
   void dispose() {
     effectiveFocusNode.removeListener(_handleFocus);
-    animationController.dispose();
     super.dispose();
   }
 
@@ -212,7 +204,9 @@ class _MoodPickerBottomSheetState extends State<MoodPickerBottomSheet> {
                         child: MoodTile(
                           title: value[index].label,
                           color: Color(value[index].color),
-                          selectedMood: widget.selectedMood,
+                          // selectedMood: widget.selectedMood,
+                          isSelected:
+                              widget.selectedMood?.label == value[index].label,
                           onTap: () {
                             widget.onTap(value[index]);
                           },

@@ -45,10 +45,7 @@ class CustomDatePickerFormField extends FormBuilderField<DateTime> {
 }
 
 class _CustomDatePickerFormFieldState
-    extends FormBuilderFieldState<CustomDatePickerFormField, DateTime>
-    with TickerProviderStateMixin {
-  late AnimationController animationController;
-
+    extends FormBuilderFieldState<CustomDatePickerFormField, DateTime> {
   late DateTime? dateTime;
 
   @override
@@ -64,11 +61,6 @@ class _CustomDatePickerFormFieldState
       showModalBottomSheet(
         context: context,
         isScrollControlled: true,
-        transitionAnimationController: AnimationController(
-          vsync: this,
-          duration: const Duration(milliseconds: 600),
-          animationBehavior: AnimationBehavior.preserve,
-        ),
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(40),
