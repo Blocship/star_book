@@ -13,6 +13,13 @@ class HomeScreenRoute extends RouteArg {
     this.year,
   }) : super();
 
+  factory HomeScreenRoute.fromMap(Map<String, String> map) {
+    return HomeScreenRoute(
+      month: int.tryParse(map['month'] ?? ''),
+      year: int.tryParse(map['year'] ?? ''),
+    );
+  }
+
   @override
   Uri get uri => Uri(
         path: '/main/year/$path',

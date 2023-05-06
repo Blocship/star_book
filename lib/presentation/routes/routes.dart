@@ -91,8 +91,8 @@ class AppRouter {
                 //   return const NoTransitionPage(child: HomeScreen(arg: arg));
                 // },
                 builder: (context, state) {
-                  const arg = HomeScreenRoute(month: 4, year: 2023);
-                  return const HomeScreen(arg: arg);
+                  final arg = HomeScreenRoute.fromMap(state.queryParams);
+                  return HomeScreen(arg: arg);
                 },
               ),
             ],
