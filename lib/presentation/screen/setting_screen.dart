@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
+import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/tile.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
 
-class SettingScreen extends StatelessWidget {
-  const SettingScreen({Key? key}) : super(key: key);
+class SettingsScreen extends StatelessWidget
+    implements Screen<SettingsScreenRoute> {
+  @override
+  final SettingsScreenRoute arg;
+
+  const SettingsScreen({
+    Key? key,
+    required this.arg,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -39,10 +46,11 @@ class SettingScreen extends StatelessWidget {
                 subtitle: 'All your data and personal info terms',
                 onTap: () {}),
             CustomTile(
-                title: 'License Agreement',
-                subtitle: 'Your licensed agreement with starbook',
-                onTap: () =>
-                    context.goNamed(AppRouterName.licenseAgreementScreen)),
+              title: 'License Agreement',
+              subtitle: 'Your licensed agreement with starbook',
+              onTap: () =>
+                  context.goToScreen(arg: const LicenseAgreementScreenRoute()),
+            ),
             const Spacer(),
             Text(
               'App version 2.0',

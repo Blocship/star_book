@@ -5,15 +5,6 @@ import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
 
-class SplashScreenRoute extends RouteArg {
-  static const String path = '/';
-
-  const SplashScreenRoute() : super();
-
-  @override
-  Uri get uri => Uri(path: path);
-}
-
 class SplashScreen extends StatefulWidget implements Screen<SplashScreenRoute> {
   @override
   final SplashScreenRoute arg;

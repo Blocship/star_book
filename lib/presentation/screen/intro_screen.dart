@@ -15,15 +15,6 @@ import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
 
-class IntroScreenRoute extends RouteArg {
-  static const String path = '/intro';
-
-  const IntroScreenRoute() : super();
-
-  @override
-  Uri get uri => Uri(path: path);
-}
-
 class IntroScreen extends StatelessWidget implements Screen<IntroScreenRoute> {
   @override
   final IntroScreenRoute arg;

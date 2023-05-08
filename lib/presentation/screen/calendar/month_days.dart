@@ -8,8 +8,6 @@ import 'package:star_book/domain/models/mood/mood_info.dart';
 import 'package:star_book/domain/repository/mood_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
-import 'package:star_book/presentation/screen/journal_screens/journal_create_screen.dart';
-import 'package:star_book/presentation/screen/journal_screens/journal_list_screen.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/calendar.dart';
@@ -185,11 +183,9 @@ class Date extends StatelessWidget {
                 return GestureDetector(
                   onTap: () {
                     (snapshot.data!.isNotEmpty)
-                        ? Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) =>
-                                  JournalList(getJournalsByDate: getMoodDate),
+                        ? context.pushScreen(
+                            arg: JournalsListScreenRoute(
+                              day: dateTime,
                             ),
                           )
                         : context.pushScreen(

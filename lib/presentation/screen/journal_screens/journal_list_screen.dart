@@ -7,13 +7,28 @@ import 'package:star_book/domain/models/mood/day.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
-import 'package:star_book/presentation/screen/journal_screens/journal_detail_screen.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/loader.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 
-import 'journal_create_screen.dart';
+class JournalsListScreen extends StatelessWidget
+    implements Screen<JournalsListScreenRoute> {
+  @override
+  final JournalsListScreenRoute arg;
+
+  const JournalsListScreen({
+    super.key,
+    required this.arg,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return JournalList(
+      getJournalsByDate: arg.day?.toDateTime() ?? DateTime.now(),
+    );
+  }
+}
 
 class JournalList extends StatelessWidget {
   final DateTime getJournalsByDate;
@@ -47,14 +62,9 @@ class JournalList extends StatelessWidget {
                     return ListTile(
                       title: Text(journals.journals[index].title),
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => JournalDetailScreen(
-                              arg: JournalDetailScreenRoute(
-                                  id: journals.journals[index].id),
-                            ),
-                          ),
+                        context.goToScreen(
+                          arg: JournalDetailScreenRoute(
+                              id: journals.journals[index].id),
                         );
                       },
                     );

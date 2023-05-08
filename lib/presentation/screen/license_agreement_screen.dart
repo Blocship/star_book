@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/shared/elevated_buttons.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 
 class LicenseAgreementScreen extends StatelessWidget {
@@ -49,7 +48,7 @@ Ullamcorper sit adipiscing sed id nisl at integer. Tristique in lectus interdum 
             SizedBox(height: deviceHeight * 0.02),
             PrimaryFilledButton(
               label: 'Done',
-              onTap: () => context.goNamed(AppRouterName.settingScreen),
+              onTap: () => context.goToScreen(arg: const SettingsScreenRoute()),
             ),
             SizedBox(height: deviceHeight * 0.03),
           ],

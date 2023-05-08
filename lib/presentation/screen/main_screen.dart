@@ -6,15 +6,6 @@ import 'package:star_book/presentation/screen/year_screen.dart';
 import 'package:star_book/presentation/shared/bottom_nav_bar.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
 
-class MainScreenRoute extends RouteArg {
-  static const String path = '/main';
-
-  const MainScreenRoute() : super();
-
-  @override
-  Uri get uri => Uri(path: path);
-}
-
 class MainScreen extends StatefulWidget implements Screen<MainScreenRoute> {
   @override
   final MainScreenRoute arg;
