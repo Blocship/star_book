@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/tile.dart';
@@ -22,7 +21,7 @@ class SettingsScreen extends StatelessWidget
     final TextTheme textTheme = context.textTheme;
     return GradientScaffold(
       appBar: PrimaryAppBar(
-        leadingOnTap: () => context.goNamed('AppRouterName.mainScreen'),
+        leadingOnTap: () => context.shouldPop(),
         centerTitle: 'Settings',
       ),
       body: Padding(

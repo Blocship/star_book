@@ -44,8 +44,7 @@ class _JournalEditScreenState extends State<JournalEditScreen> {
         builder: (context, state) {
           return Scaffold(
             appBar: PrimaryAppBar(
-              leadingOnTap: () => context.goToScreen(
-                  arg: JournalDetailScreenRoute(id: widget.arg.id)),
+              leadingOnTap: () => context.shouldPop(),
               centerTitle: 'Mood Journal',
             ),
             body: SingleChildScrollView(

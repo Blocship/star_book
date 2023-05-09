@@ -62,7 +62,7 @@ class JournalList extends StatelessWidget {
                     return ListTile(
                       title: Text(journals.journals[index].title),
                       onTap: () {
-                        context.goToScreen(
+                        context.pushScreen(
                           arg: JournalDetailScreenRoute(
                               id: journals.journals[index].id),
                         );

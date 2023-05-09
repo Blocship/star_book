@@ -8,6 +8,7 @@ import 'package:star_book/presentation/screen/journal_screens/journal_create_scr
 import 'package:star_book/presentation/screen/journal_screens/journal_detail_screen.dart';
 import 'package:star_book/presentation/screen/journal_screens/journal_edit_screen.dart';
 import 'package:star_book/presentation/screen/journal_screens/journal_list_screen.dart';
+import 'package:star_book/presentation/screen/license_agreement_screen.dart';
 import 'package:star_book/presentation/screen/main_screen.dart';
 import 'package:star_book/presentation/screen/profile_screen.dart';
 import 'package:star_book/presentation/screen/setting_screen.dart';
@@ -99,6 +100,7 @@ class AppRouter {
               /// AnalyticsScreen
               GoRoute(
                 path: AnalyticsScreenRoute.path,
+                parentNavigatorKey: _rootNavigatorKey,
                 builder: (context, state) {
                   const arg = AnalyticsScreenRoute();
                   return const AnalyticsScreen(arg: arg);
@@ -108,10 +110,22 @@ class AppRouter {
               /// SettingsScreen
               GoRoute(
                 path: SettingsScreenRoute.path,
+                parentNavigatorKey: _rootNavigatorKey,
                 builder: (context, state) {
                   const arg = SettingsScreenRoute();
                   return const SettingsScreen(arg: arg);
                 },
+                routes: [
+                  /// LicenseAgreementScreen
+                  GoRoute(
+                    path: LicenseAgreementScreenRoute.path,
+                    parentNavigatorKey: _rootNavigatorKey,
+                    builder: (context, state) {
+                      const arg = LicenseAgreementScreenRoute();
+                      return const LicenseAgreementScreen(arg: arg);
+                    },
+                  ),
+                ],
               ),
             ],
           ),
@@ -121,6 +135,7 @@ class AppRouter {
       /// Journals
       GoRoute(
         path: JournalsListScreenRoute.path,
+        parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) {
           final arg = JournalsListScreenRoute.fromMap(state.queryParams);
           return JournalsListScreen(arg: arg);
@@ -129,6 +144,7 @@ class AppRouter {
           /// JournalCreateScreen
           GoRoute(
             path: JournalCreateScreenRoute.path,
+            parentNavigatorKey: _rootNavigatorKey,
             builder: (context, state) {
               final arg = JournalCreateScreenRoute.fromMap(state.queryParams);
               return JournalCreateScreen(arg: arg);
@@ -138,6 +154,7 @@ class AppRouter {
           /// JournalDetailScreen
           GoRoute(
             path: JournalDetailScreenRoute.path,
+            parentNavigatorKey: _rootNavigatorKey,
             builder: (context, state) {
               final arg = JournalDetailScreenRoute(id: state.params['id']!);
               return JournalDetailScreen(arg: arg);
@@ -146,6 +163,7 @@ class AppRouter {
               /// JournalEditScreen
               GoRoute(
                 path: JournalEditScreenRoute.path,
+                parentNavigatorKey: _rootNavigatorKey,
                 builder: (context, state) {
                   final arg = JournalEditScreenRoute(id: state.params['id']!);
                   return JournalEditScreen(arg: arg);

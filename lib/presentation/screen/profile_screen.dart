@@ -42,7 +42,7 @@ class ProfileScreen extends StatelessWidget
               ),
               trailing: Icons.menu_outlined,
               trailingOnTap: () =>
-                  context.goToScreen(arg: const SettingsScreenRoute()),
+                  context.pushScreen(arg: const SettingsScreenRoute()),
             ),
             body: SingleChildScrollView(
               child: Padding(

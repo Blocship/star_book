@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:star_book/cubits/cubit_state/cubit_state.dart';
 import 'package:star_book/cubits/journal_detail_cubit.dart';
 import 'package:star_book/domain/models/journal/journal.dart';
@@ -38,8 +37,7 @@ class JournalDetailScreen extends StatelessWidget
             loaded: (journal) {
               return Scaffold(
                 appBar: PrimaryAppBar(
-                  leadingOnTap: () =>
-                      context.goNamed('AppRouterName.mainScreen'),
+                  leadingOnTap: () => context.shouldPop(),
                   centerTitle: 'Mood Journal',
                   trailingText: 'Delete',
                   trailingOnTap: () {
@@ -78,7 +76,7 @@ class JournalDetailScreen extends StatelessWidget
                 ),
                 floatingActionButton: PrimaryFloatingActionButton(
                   onTap: () {
-                    context.goToScreen(
+                    context.pushScreen(
                       arg: JournalEditScreenRoute(id: journal.id),
                     );
                   },
