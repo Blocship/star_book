@@ -29,6 +29,10 @@ void main() async {
     ),
   );
   await Injector.initialise();
+
+  /// Run this statement when you reinstall your app
+  /// for adding moods in backend (run only once)
+  // Injector.resolve<MoodRepo>().addDefaultMoods();
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,

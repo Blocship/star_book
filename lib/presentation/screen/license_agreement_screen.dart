@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
+import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/shared/elevated_buttons.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 
-class LicenseAgreementScreen extends StatelessWidget {
-  const LicenseAgreementScreen({Key? key}) : super(key: key);
+class LicenseAgreementScreen extends StatelessWidget
+    implements Screen<LicenseAgreementScreenRoute> {
+  @override
+  final LicenseAgreementScreenRoute arg;
+  const LicenseAgreementScreen({
+    Key? key,
+    required this.arg,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +54,7 @@ Ullamcorper sit adipiscing sed id nisl at integer. Tristique in lectus interdum 
             SizedBox(height: deviceHeight * 0.02),
             PrimaryFilledButton(
               label: 'Done',
-              onTap: () => context.goNamed(AppRouterName.settingScreen),
+              onTap: () => context.shouldPop(),
             ),
             SizedBox(height: deviceHeight * 0.03),
           ],

@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:go_router/go_router.dart';
 import 'package:star_book/cubits/cubit_state/cubit_state.dart';
 import 'package:star_book/cubits/journal_edit_cubit.dart';
 import 'package:star_book/domain/models/journal/journal.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
+import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/form_models/jounral_form_model.dart';
 import 'package:star_book/presentation/shared/form_validator.dart';
+import 'package:star_book/presentation/shared/loader.dart';
+import 'package:star_book/presentation/shared/text_field.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/calendar.dart';
 import 'package:star_book/presentation/utils/extension.dart';
-
-import 'package:star_book/presentation/widgets/floating_action_button.dart';
-import 'package:star_book/presentation/shared/app_bar.dart';
-import 'package:star_book/presentation/shared/text_field.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
-import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
+import 'package:star_book/presentation/widgets/floating_action_button.dart';
 
-class JournalEditScreen extends StatefulWidget {
-  final Journal journal;
+class JournalEditScreen extends StatefulWidget
+    implements Screen<JournalEditScreenRoute> {
+  @override
+  final JournalEditScreenRoute arg;
 
   const JournalEditScreen({
     Key? key,
-    required this.journal,
+    required this.arg,
   }) : super(key: key);
 
   @override
@@ -43,65 +43,71 @@ class _JournalEditScreenState extends State<JournalEditScreen> {
       create: (context) => JournalEditCubit(
         formKey: _formKey,
         journalRepo: Injector.resolve<JournalRepo>(),
-      ),
-      child: BlocBuilder<JournalEditCubit, CubitState<Journal>>(
-        builder: (context, state) {
-          return Scaffold(
-            appBar: PrimaryAppBar(
-              leadingOnTap: () =>
-                  context.goNamed(AppRouterName.journalDetailScreen),
-              centerTitle: 'Mood Journal',
-            ),
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: CustomPadding.mediumPadding),
-                child: FormBuilder(
-                  key: _formKey,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      SizedBox(height: deviceHeight * 0.06),
-                      MoodWidget(
-                        date: widget.journal.createdAt,
-                        moodColor: widget.journal.mood.color,
-                        mood: widget.journal.mood.label,
+      )..journalById$(journalId: widget.arg.id),
+      child: Scaffold(
+        appBar: PrimaryAppBar(
+          leadingOnTap: () => context.shouldPop(),
+          centerTitle: 'Mood Journal',
+        ),
+        body: BlocBuilder<JournalEditCubit, CubitState<Journal>>(
+          builder: (context, state) {
+            return state.when(
+              initial: () => const Loader(),
+              loading: () => const Loader(),
+              loaded: (journal) {
+                return SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: CustomPadding.mediumPadding),
+                    child: FormBuilder(
+                      key: _formKey,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(height: deviceHeight * 0.06),
+                          MoodWidget(
+                            date: journal.createdAt,
+                            moodColor: journal.mood.color,
+                            mood: journal.mood.label,
+                          ),
+                          const SizedBox(height: 30),
+                          CustomTextFormField(
+                            fieldKey: JournalFormModel.titleKey,
+                            heading: 'Title',
+                            initialValue: journal.title,
+                            validator: FormValidator.compose([
+                              FormValidator.required(),
+                              FormValidator.minLength(3),
+                            ]),
+                          ),
+                          SizedBox(height: deviceHeight * 0.02),
+                          CustomTextFormField(
+                            fieldKey: JournalFormModel.memoKey,
+                            heading: 'Note',
+                            initialValue: journal.memo,
+                            validator: FormValidator.required(),
+                          ),
+                        ],
                       ),
-                      const SizedBox(height: 30),
-                      CustomTextFormField(
-                        fieldKey: JournalFormModel.titleKey,
-                        heading: 'Title',
-                        initialValue: widget.journal.title,
-                        validator: FormValidator.compose([
-                          FormValidator.required(),
-                          FormValidator.minLength(3),
-                        ]),
-                      ),
-                      SizedBox(height: deviceHeight * 0.02),
-                      CustomTextFormField(
-                        fieldKey: JournalFormModel.memoKey,
-                        heading: 'Note',
-                        initialValue: widget.journal.memo,
-                        validator: FormValidator.required(),
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            ),
-            floatingActionButton: SecondaryFloatingActionButton(
-              onTap: () {
-                if (_formKey.currentState!.validate()) {
-                  context
-                      .read<JournalEditCubit>()
-                      .updateJournal(journalId: widget.journal.id);
-                  context.shouldPop();
-                }
+                );
               },
-              child: const Icon(Icons.check),
-            ),
-          );
-        },
+              error: (e) => Text(e.toString()),
+            );
+          },
+        ),
+        floatingActionButton: SecondaryFloatingActionButton(
+          onTap: () {
+            if (_formKey.currentState!.validate()) {
+              context
+                  .read<JournalEditCubit>()
+                  .updateJournal(journalId: widget.arg.id);
+              context.shouldPop();
+            }
+          },
+          child: const Icon(Icons.check),
+        ),
       ),
     );
   }

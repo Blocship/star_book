@@ -1,38 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/domain/models/mood/day.dart';
+import 'package:star_book/presentation/screen/analytics_screens/analytics_tab_bar_view.dart';
 import 'package:star_book/presentation/screen/home_screen.dart';
 import 'package:star_book/presentation/screen/intro_screen.dart';
 import 'package:star_book/presentation/screen/journal_screens/journal_create_screen.dart';
 import 'package:star_book/presentation/screen/journal_screens/journal_detail_screen.dart';
+import 'package:star_book/presentation/screen/journal_screens/journal_edit_screen.dart';
+import 'package:star_book/presentation/screen/journal_screens/journal_list_screen.dart';
+import 'package:star_book/presentation/screen/license_agreement_screen.dart';
 import 'package:star_book/presentation/screen/main_screen.dart';
 import 'package:star_book/presentation/screen/profile_screen.dart';
+import 'package:star_book/presentation/screen/setting_screen.dart';
 import 'package:star_book/presentation/screen/splash_screen.dart';
 import 'package:star_book/presentation/screen/year_screen.dart';
 
-abstract class RouteArg {
-  const RouteArg();
-  String get parsedPath => uri.toString();
-  Uri get uri;
-}
-
-abstract class Screen<T extends RouteArg> {
-  T get arg;
-}
+part 'extension.dart';
+part 'route_argument.dart';
 
 class AppRouter {
-  ///Routes Paths
-
-  static const String journalCreateScreenPath = 'journalCreateScreen';
-  static const String moodPickerScreenPath = 'moodPickerScreen';
-  static const String datePickerScreenPath = 'datePickerScreen';
-
-  static const String journalEditScreenPath =
-      'mainScreen/monthScreen/journalEditScreen';
-  static const String analyticScreenPath = 'analyticScreen';
-  static const String settingScreenPath = 'settingScreen';
-  static const String licenseAgreementScreenPath = 'licenseAgreementScreen';
-
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
   static final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -69,7 +55,7 @@ class AppRouter {
           return MainScreen(arg: arg, child: child);
         },
         routes: <RouteBase>[
-          /// main/year
+          /// YearScreen
           GoRoute(
             path: YearScreenRoute.path,
             parentNavigatorKey: _shellNavigatorKey,
@@ -82,7 +68,7 @@ class AppRouter {
               return const YearScreen(arg: arg);
             },
             routes: [
-              /// main/year/month
+              /// HomeScreen
               GoRoute(
                 path: HomeScreenRoute.path,
                 parentNavigatorKey: _shellNavigatorKey,
@@ -97,6 +83,8 @@ class AppRouter {
               ),
             ],
           ),
+
+          /// ProfileScreen
           GoRoute(
             path: ProfileScreenRoute.path,
             parentNavigatorKey: _shellNavigatorKey,
@@ -108,54 +96,83 @@ class AppRouter {
               const arg = ProfileScreenRoute();
               return const ProfileScreen(arg: arg);
             },
+            routes: [
+              /// AnalyticsScreen
+              GoRoute(
+                path: AnalyticsScreenRoute.path,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) {
+                  const arg = AnalyticsScreenRoute();
+                  return const AnalyticsScreen(arg: arg);
+                },
+              ),
+
+              /// SettingsScreen
+              GoRoute(
+                path: SettingsScreenRoute.path,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) {
+                  const arg = SettingsScreenRoute();
+                  return const SettingsScreen(arg: arg);
+                },
+                routes: [
+                  /// LicenseAgreementScreen
+                  GoRoute(
+                    path: LicenseAgreementScreenRoute.path,
+                    parentNavigatorKey: _rootNavigatorKey,
+                    builder: (context, state) {
+                      const arg = LicenseAgreementScreenRoute();
+                      return const LicenseAgreementScreen(arg: arg);
+                    },
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       ),
 
-      /// Journal
+      /// Journals
       GoRoute(
-        path: JournalCreateScreenRoute.path,
+        path: JournalsListScreenRoute.path,
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) {
-          final dayKey = state.params['date'];
-          final day = dayKey != null ? Day.fromDayKey(dayKey) : Day.today();
-          final arg = JournalCreateScreenRoute(day: day);
-          return JournalCreateScreen(arg: arg);
+          final arg = JournalsListScreenRoute.fromMap(state.queryParams);
+          return JournalsListScreen(arg: arg);
         },
+        routes: [
+          /// JournalCreateScreen
+          GoRoute(
+            path: JournalCreateScreenRoute.path,
+            parentNavigatorKey: _rootNavigatorKey,
+            builder: (context, state) {
+              final arg = JournalCreateScreenRoute.fromMap(state.queryParams);
+              return JournalCreateScreen(arg: arg);
+            },
+          ),
+
+          /// JournalDetailScreen
+          GoRoute(
+            path: JournalDetailScreenRoute.path,
+            parentNavigatorKey: _rootNavigatorKey,
+            builder: (context, state) {
+              final arg = JournalDetailScreenRoute(id: state.params['id']!);
+              return JournalDetailScreen(arg: arg);
+            },
+            routes: [
+              /// JournalEditScreen
+              GoRoute(
+                path: JournalEditScreenRoute.path,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) {
+                  final arg = JournalEditScreenRoute(id: state.params['id']!);
+                  return JournalEditScreen(arg: arg);
+                },
+              ),
+            ],
+          ),
+        ],
       ),
-      GoRoute(
-        path: JournalDetailScreenRoute.path,
-        parentNavigatorKey: _rootNavigatorKey,
-        builder: (context, state) {
-          final arg = JournalDetailScreenRoute(id: state.params['id']!);
-          return JournalDetailScreen(arg: arg);
-        },
-      ),
-      // named AppRouterName.datePickerScreen
-      // GoRoute(
-      //     path: AppRouterName.datePickerScreen,
-      //     parentNavigatorKey: _rootNavigatorKey,
-      //     builder: (context, state) {
-      //       return DatePickerScreen();
-      //     }),
     ],
   );
-}
-
-extension XBuildContext on BuildContext {
-  void goToScreen({required RouteArg arg}) {
-    go(arg.parsedPath);
-  }
-
-  void pushScreen({required RouteArg arg}) {
-    push(arg.parsedPath);
-  }
-
-  String get location => GoRouter.of(this).location;
-
-  void shouldPop() {
-    if (canPop()) {
-      pop();
-    }
-  }
 }

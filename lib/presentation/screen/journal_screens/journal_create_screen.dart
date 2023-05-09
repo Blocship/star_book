@@ -5,7 +5,6 @@ import 'package:go_router/go_router.dart';
 import 'package:star_book/cubits/cubit_state/cubit_state.dart';
 import 'package:star_book/cubits/journal_create_cubit.dart';
 import 'package:star_book/domain/models/journal/journal.dart';
-import 'package:star_book/domain/models/mood/day.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
@@ -19,19 +18,6 @@ import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
-
-class JournalCreateScreenRoute extends RouteArg {
-  // ?date=2020-01-01
-  static const String path = '/journal/new';
-
-  final Day? day;
-  const JournalCreateScreenRoute({this.day});
-
-  @override
-  Uri get uri => Uri(path: path, queryParameters: {
-        if (day != null) 'date': day!.dayKey,
-      });
-}
 
 class JournalCreateScreen extends StatefulWidget
     implements Screen<JournalCreateScreenRoute> {

@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:star_book/cubits/cubit_state/cubit_state.dart';
 import 'package:star_book/cubits/profile_screen_cubit.dart';
 import 'package:star_book/data/models/journal/journal.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/doughnut_chart_widget.dart';
@@ -14,15 +12,6 @@ import 'package:star_book/presentation/shared/stats_widget.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
-
-class ProfileScreenRoute extends RouteArg {
-  static const String path = '/main/profile';
-
-  const ProfileScreenRoute() : super();
-
-  @override
-  Uri get uri => Uri(path: path);
-}
 
 class ProfileScreen extends StatelessWidget
     implements Screen<ProfileScreenRoute> {
@@ -52,7 +41,8 @@ class ProfileScreen extends StatelessWidget
                 image: AssetImage('assets/icons/shooting_star.png'),
               ),
               trailing: Icons.menu_outlined,
-              trailingOnTap: () => context.goNamed(AppRouterName.settingScreen),
+              trailingOnTap: () =>
+                  context.pushScreen(arg: const SettingsScreenRoute()),
             ),
             body: SingleChildScrollView(
               child: Padding(
@@ -104,7 +94,7 @@ class ProfileScreen extends StatelessWidget
                         const Spacer(),
                         GestureDetector(
                           onTap: () =>
-                              context.goNamed(AppRouterName.analyticScreen),
+                              context.goToScreen(arg: AnalyticsScreenRoute()),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [

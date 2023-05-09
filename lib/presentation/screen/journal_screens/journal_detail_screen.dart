@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 import 'package:star_book/cubits/cubit_state/cubit_state.dart';
 import 'package:star_book/cubits/journal_detail_cubit.dart';
 import 'package:star_book/domain/models/journal/journal.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
-import 'package:star_book/presentation/screen/journal_screens/journal_edit_screen.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/dialog_box.dart';
 import 'package:star_book/presentation/shared/loader.dart';
@@ -16,16 +14,6 @@ import 'package:star_book/presentation/utils/calendar.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
-
-class JournalDetailScreenRoute extends RouteArg {
-  static const String path = '/journal/:id';
-
-  final String id;
-  const JournalDetailScreenRoute({required this.id}) : super();
-
-  @override
-  Uri get uri => Uri(path: '$path/$id');
-}
 
 class JournalDetailScreen extends StatelessWidget
     implements Screen<JournalDetailScreenRoute> {
@@ -44,13 +32,12 @@ class JournalDetailScreen extends StatelessWidget
       child: BlocBuilder<JournalDetailCubit, CubitState<Journal>>(
         builder: (context, state) {
           return state.when(
-            initial: () => const Loader(),
-            loading: () => const Loader(),
+            initial: () => const ScaffoldLoader(),
+            loading: () => const ScaffoldLoader(),
             loaded: (journal) {
               return Scaffold(
                 appBar: PrimaryAppBar(
-                  leadingOnTap: () =>
-                      context.goNamed('AppRouterName.mainScreen'),
+                  leadingOnTap: () => context.shouldPop(),
                   centerTitle: 'Mood Journal',
                   trailingText: 'Delete',
                   trailingOnTap: () {
@@ -89,12 +76,8 @@ class JournalDetailScreen extends StatelessWidget
                 ),
                 floatingActionButton: PrimaryFloatingActionButton(
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            JournalEditScreen(journal: journal),
-                      ),
+                    context.pushScreen(
+                      arg: JournalEditScreenRoute(id: journal.id),
                     );
                   },
                   child: const Icon(Icons.edit_outlined),
