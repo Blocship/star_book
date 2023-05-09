@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -10,6 +12,8 @@ import 'package:star_book/presentation/shared/form_models/jounral_form_model.dar
 class JournalEditCubit extends Cubit<CubitState<Journal>> {
   final GlobalKey<FormBuilderState> formKey;
   final JournalRepo journalRepo;
+  StreamSubscription<Journal?>? journalStream;
+
   JournalEditCubit({required this.formKey, required this.journalRepo})
       : super(const InitialState());
 
@@ -25,5 +29,18 @@ class JournalEditCubit extends Cubit<CubitState<Journal>> {
       );
       await journalRepo.updateJournal(journalId, journalBody);
     }
+  }
+
+  /// Journal Stream by Id
+  Future<void> journalById$({required String journalId}) async {
+    journalStream = journalRepo.journalById$(journalId).listen((journal) {
+      emit(LoadedState(journal ?? Journal.initial()));
+    });
+  }
+
+  @override
+  Future<void> close() async {
+    await journalStream?.cancel();
+    return super.close();
   }
 }

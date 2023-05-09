@@ -32,8 +32,8 @@ class JournalDetailScreen extends StatelessWidget
       child: BlocBuilder<JournalDetailCubit, CubitState<Journal>>(
         builder: (context, state) {
           return state.when(
-            initial: () => const Loader(),
-            loading: () => const Loader(),
+            initial: () => const ScaffoldLoader(),
+            loading: () => const ScaffoldLoader(),
             loaded: (journal) {
               return Scaffold(
                 appBar: PrimaryAppBar(

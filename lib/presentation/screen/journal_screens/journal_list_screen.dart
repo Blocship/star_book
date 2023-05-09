@@ -9,6 +9,7 @@ import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/loader.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 
@@ -40,40 +41,59 @@ class JournalList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = context.textTheme;
     return Scaffold(
-      appBar: const PrimaryAppBar(
+      appBar: PrimaryAppBar(
         centerTitle: 'Journals',
+        leadingOnTap: () => context.shouldPop(),
       ),
-      body: BlocProvider<JournalListCubit>(
-        create: (context) => JournalListCubit(
-          journalRepo: Injector.resolve<JournalRepo>(),
-        )..getJournalByDate(dateTime: getJournalsByDate),
-        child: BlocBuilder<JournalListCubit, CubitState<JournalState>>(
-          builder: (context, state) {
-            return state.when(
-              initial: () => const Loader(),
-              loading: () => const Loader(),
-              loaded: (journals) {
-                return ListView.builder(
-                  itemCount: journals.journals.length,
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: CustomPadding.mediumPadding),
-                  itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(journals.journals[index].title),
-                      onTap: () {
-                        context.pushScreen(
-                          arg: JournalDetailScreenRoute(
-                              id: journals.journals[index].id),
+      body: Center(
+        child: BlocProvider<JournalListCubit>(
+          create: (context) => JournalListCubit(
+            journalRepo: Injector.resolve<JournalRepo>(),
+          )..getJournalByDate(dateTime: getJournalsByDate),
+          child: BlocBuilder<JournalListCubit, CubitState<JournalState>>(
+            builder: (context, state) {
+              return state.when(
+                initial: () => const Loader(),
+                loading: () => const Loader(),
+                loaded: (journals) {
+                  return journals.journals.isEmpty
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Oops! No Journals to read.',
+                              style: textTheme.bodyLarge,
+                            ),
+                            const SizedBox(height: 5),
+                            Text(
+                              'Want to read, Start writing journals.',
+                              style: textTheme.bodyLarge,
+                            ),
+                          ],
+                        )
+                      : ListView.builder(
+                          itemCount: journals.journals.length,
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: CustomPadding.mediumPadding),
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              title: Text(journals.journals[index].title),
+                              onTap: () {
+                                context.pushScreen(
+                                  arg: JournalDetailScreenRoute(
+                                      id: journals.journals[index].id),
+                                );
+                              },
+                            );
+                          },
                         );
-                      },
-                    );
-                  },
-                );
-              },
-              error: (e) => Text(e.toString()),
-            );
-          },
+                },
+                error: (e) => Text(e.toString()),
+              );
+            },
+          ),
         ),
       ),
       floatingActionButton: PrimaryFloatingActionButton(
