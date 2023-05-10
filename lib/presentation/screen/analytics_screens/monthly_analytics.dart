@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:star_book/cubits/analytiics_screen_cubit.dart';
 import 'package:star_book/cubits/cubit_state/cubit_state.dart';
-import 'package:star_book/domain/models/mood/mood.dart';
+import 'package:star_book/domain/models/mood/mood_frequency.dart';
 import 'package:star_book/domain/repository/mood_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/shared/legends_chart.dart';
-import 'package:star_book/presentation/theme/styling/doughnut_chart_style.dart';
+import 'package:star_book/presentation/shared/loader.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
@@ -18,37 +18,33 @@ class MonthlyAnalyticsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double deviceHeight = context.deviceHeight;
-    final DoughnutChartStyle doughnutChartStyle = context.doughnutChartStyle;
-    final List<ChartData> data = [
-      ChartData(
-          x: 'Productive', y: 3.5, color: doughnutChartStyle.primaryColor),
-      ChartData(x: 'Sad', y: 1.5, color: doughnutChartStyle.secondaryColor),
-      ChartData(x: 'Angry', y: 1.5, color: doughnutChartStyle.tertiaryColor),
-      ChartData(x: 'Happy', y: 1.5, color: doughnutChartStyle.quinaryColor),
-      ChartData(x: 'Sick', y: 2.0, color: doughnutChartStyle.quaternaryColor),
-    ];
-    return BlocProvider(
+    // final DoughnutChartStyle doughnutChartStyle = context.doughnutChartStyle;
+
+    return BlocProvider<AnalyticsScreenCubit>(
       create: (context) => AnalyticsScreenCubit(
         moodRepo: Injector.resolve<MoodRepo>(),
-      ),
-      child: BlocBuilder<AnalyticsScreenCubit, CubitState<Mood>>(
+      )..getMoodFrequencyByMonth(month: 5, year: 2023),
+      child: BlocBuilder<AnalyticsScreenCubit, CubitState<MoodFrequency>>(
         builder: (context, state) {
-          // final getMood = context.read<AnalyticsScreenCubit>().getMood();
-          // final getMoodFreqByMonth = context.read<AnalyticsScreenCubit>().getMoodFrequencyByMonth(month: month, year: year);
-          // final getMoodFreqByRange = context.read<AnalyticsScreenCubit>().getMoodFrequencyByRange(start: start, end: end);
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-                horizontal: CustomPadding.mediumPadding),
-            child: Column(
-              children: [
-                MoodDoughnutChart(moodDataMap: data),
-                SizedBox(height: deviceHeight * 0.05),
-                const SelectableTab(),
-                SizedBox(height: deviceHeight * 0.03),
-                const LegendsChart(),
-              ],
-            ),
-          );
+          return state.when(
+              initial: () => const Loader(),
+              loading: () => const Loader(),
+              loaded: (mood) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: CustomPadding.mediumPadding),
+                  child: Column(
+                    children: [
+                      MoodDoughnutChart(moodDataMap: mood.info),
+                      SizedBox(height: deviceHeight * 0.05),
+                      const SelectableTab(),
+                      SizedBox(height: deviceHeight * 0.03),
+                      const LegendsChart(),
+                    ],
+                  ),
+                );
+              },
+              error: (e) => Text(e.toString()));
         },
       ),
     );
@@ -73,7 +69,7 @@ class _SelectableTabState extends State<SelectableTab> {
     final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     final double deviceHeight = context.deviceHeight;
     final double deviceWidth = context.deviceWidth;
-    return BlocBuilder<AnalyticsScreenCubit, CubitState<Mood>>(
+    return BlocBuilder<AnalyticsScreenCubit, CubitState<MoodFrequency>>(
       builder: (context, state) {
         // final getMoodFreqByMonth = context.read<AnalyticsScreenCubit>().getMoodFrequencyByMonth(month: month, year: year);
         return Row(

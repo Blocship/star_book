@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:star_book/cubits/cubit_state/cubit_state.dart';
-import 'package:star_book/domain/models/mood/mood.dart';
+import 'package:star_book/domain/models/mood/mood_frequency.dart';
 import 'package:star_book/domain/repository/mood_repo.dart';
 
-class AnalyticsScreenCubit extends Cubit<CubitState<Mood>> {
+class AnalyticsScreenCubit extends Cubit<CubitState<MoodFrequency>> {
   final MoodRepo moodRepo;
 
   AnalyticsScreenCubit({required this.moodRepo}) : super(const InitialState());
@@ -22,12 +22,15 @@ class AnalyticsScreenCubit extends Cubit<CubitState<Mood>> {
   Future<void> getMoodFrequencyByMonth(
       {required int month, required int year}) async {
     emit(const LoadingState());
-    await moodRepo.getMoodFrequencyByMonth(month: month, year: year);
+    final mood =
+        await moodRepo.getMoodFrequencyByMonth(month: month, year: year);
+    emit(LoadedState(mood));
   }
 
   Future<void> getMoodFrequencyByRange(
       {required DateTime start, required DateTime end}) async {
     emit(const LoadingState());
-    await moodRepo.getMoodFrequencyByRange(start: start, end: end);
+    final mood = await moodRepo.getMoodFrequencyByRange(start: start, end: end);
+    emit(LoadedState(mood));
   }
 }
