@@ -8,7 +8,7 @@ import 'package:star_book/presentation/screen/journal_screens/journal_create_scr
 import 'package:star_book/presentation/screen/journal_screens/journal_detail_screen.dart';
 import 'package:star_book/presentation/screen/journal_screens/journal_edit_screen.dart';
 import 'package:star_book/presentation/screen/journal_screens/journal_list_screen.dart';
-import 'package:star_book/presentation/screen/license_agreement_screen.dart';
+import 'package:star_book/presentation/screen/license/license_agreement_screen.dart';
 import 'package:star_book/presentation/screen/main_screen.dart';
 import 'package:star_book/presentation/screen/profile_screen.dart';
 import 'package:star_book/presentation/screen/setting_screen.dart';
