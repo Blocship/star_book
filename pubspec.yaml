@@ -32,6 +32,7 @@ dependencies:
   flutter_launcher_icons: ^0.11.0
   flutter_form_builder: ^7.7.0
   form_builder_validators: ^8.4.0
+  url_launcher: ^6.1.11
 
 dev_dependencies:
   flutter_test:

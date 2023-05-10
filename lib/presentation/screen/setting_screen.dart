@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/routes/routes.dart';
+import 'package:star_book/presentation/service/links.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/tile.dart';
 import 'package:star_book/presentation/utils/extension.dart';
@@ -35,15 +36,15 @@ class SettingsScreen extends StatelessWidget
             CustomTile(
                 title: 'Starbook Community',
                 subtitle: 'Know who’s using starbook app',
-                onTap: () {}),
+                onTap: () => UrlLauncher().starBookCommunity()),
             CustomTile(
                 title: 'About Developer',
                 subtitle: 'Person info who developed this amazing app',
-                onTap: () {}),
+                onTap: () => UrlLauncher().developer()),
             CustomTile(
                 title: 'Privacy & Terms',
                 subtitle: 'All your data and personal info terms',
-                onTap: () {}),
+                onTap: () => UrlLauncher().privacyPolicy()),
             CustomTile(
               title: 'License Agreement',
               subtitle: 'Your licensed agreement with starbook',
