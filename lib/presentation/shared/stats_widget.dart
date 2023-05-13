@@ -5,9 +5,9 @@ import 'package:star_book/presentation/utils/padding_style.dart';
 
 class StatsWidget extends StatelessWidget {
   final String pointsImagePath;
-  final String points;
+  final int points;
   final String streakImagePath;
-  final String streak;
+  final int streak;
 
   const StatsWidget({
     Key? key,
@@ -56,7 +56,7 @@ class StatsWidget extends StatelessWidget {
 
 class CustomCard extends StatelessWidget {
   final String imagePath;
-  final String count;
+  final int count;
   final String title;
 
   const CustomCard({
@@ -79,7 +79,7 @@ class CustomCard extends StatelessWidget {
           Image(image: AssetImage(imagePath), height: 55),
           SizedBox(height: deviceHeight * 0.025),
           Text(
-            count,
+            '$count',
             style: textTheme.headlineLarge!.copyWith(
                 fontWeight: FontWeight.w700,
                 color: themeColorStyle.secondaryColor),

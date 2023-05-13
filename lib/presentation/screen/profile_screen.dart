@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:star_book/cubits/cubit_state/cubit_state.dart';
 import 'package:star_book/cubits/profile_screen_cubit.dart';
-import 'package:star_book/data/models/journal/journal.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
@@ -30,10 +28,10 @@ class ProfileScreen extends StatelessWidget
       create: (context) => ProfileScreenCubit(
         journalRepo: Injector.resolve<JournalRepo>(),
       ),
-      child: BlocBuilder<ProfileScreenCubit, CubitState<Journal>>(
+      child: BlocBuilder<ProfileScreenCubit, Points>(
         builder: (context, state) {
-          // final getStreaks = context.read<ProfileScreenCubit>().getStreak();
-          // final getPoints = context.read<ProfileScreenCubit>().getPoint();
+          final getPoints =
+              context.read<ProfileScreenCubit>().getStreakAndPoint();
           return Scaffold(
             backgroundColor: Colors.transparent,
             appBar: SecondaryAppBar(
@@ -66,13 +64,18 @@ class ProfileScreen extends StatelessWidget
                       ),
                     ),
                     SizedBox(height: deviceHeight * 0.028),
-                    const StatsWidget(
-                      pointsImagePath: 'assets/icons/crown.png',
-                      points: '30',
-                      // points: getPoints.toString(),
-                      streakImagePath: 'assets/icons/fire.png',
-                      streak: '06',
-                      // streak: getStreaks.toString(),
+                    FutureBuilder(
+                      future: getPoints,
+                      builder: (context, snapshot) {
+                        return snapshot.hasData
+                            ? StatsWidget(
+                                pointsImagePath: 'assets/icons/crown.png',
+                                points: snapshot.data!.point,
+                                streakImagePath: 'assets/icons/fire.png',
+                                streak: snapshot.data!.streak,
+                              )
+                            : const SizedBox();
+                      },
                     ),
                     SizedBox(height: deviceHeight * 0.045),
                     Row(
