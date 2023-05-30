@@ -7,9 +7,9 @@ import 'package:star_book/domain/repository/mood_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/shared/legends_chart.dart';
 import 'package:star_book/presentation/shared/loader.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
-import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/widgets/doughnut_chart.dart';
 
 class MonthlyAnalyticsTab extends StatelessWidget {

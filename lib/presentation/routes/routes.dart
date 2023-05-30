@@ -77,7 +77,7 @@ class AppRouter {
                 //   return const NoTransitionPage(child: HomeScreen(arg: arg));
                 // },
                 builder: (context, state) {
-                  final arg = HomeScreenRoute.fromMap(state.queryParams);
+                  final arg = HomeScreenRoute.fromMap(state.queryParameters);
                   return HomeScreen(arg: arg);
                 },
               ),
@@ -137,7 +137,7 @@ class AppRouter {
         path: JournalsListScreenRoute.path,
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) {
-          final arg = JournalsListScreenRoute.fromMap(state.queryParams);
+          final arg = JournalsListScreenRoute.fromMap(state.queryParameters);
           return JournalsListScreen(arg: arg);
         },
         routes: [
@@ -146,7 +146,8 @@ class AppRouter {
             path: JournalCreateScreenRoute.path,
             parentNavigatorKey: _rootNavigatorKey,
             builder: (context, state) {
-              final arg = JournalCreateScreenRoute.fromMap(state.queryParams);
+              final arg =
+                  JournalCreateScreenRoute.fromMap(state.queryParameters);
               return JournalCreateScreen(arg: arg);
             },
           ),
@@ -156,7 +157,8 @@ class AppRouter {
             path: JournalDetailScreenRoute.path,
             parentNavigatorKey: _rootNavigatorKey,
             builder: (context, state) {
-              final arg = JournalDetailScreenRoute(id: state.params['id']!);
+              final arg =
+                  JournalDetailScreenRoute(id: state.pathParameters['id']!);
               return JournalDetailScreen(arg: arg);
             },
             routes: [
@@ -165,7 +167,8 @@ class AppRouter {
                 path: JournalEditScreenRoute.path,
                 parentNavigatorKey: _rootNavigatorKey,
                 builder: (context, state) {
-                  final arg = JournalEditScreenRoute(id: state.params['id']!);
+                  final arg =
+                      JournalEditScreenRoute(id: state.pathParameters['id']!);
                   return JournalEditScreen(arg: arg);
                 },
               ),
