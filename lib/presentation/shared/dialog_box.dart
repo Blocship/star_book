@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
-import 'package:star_book/cubits/cubit_state/cubit_state.dart';
-import 'package:star_book/cubits/journal_detail_cubit.dart';
 import 'package:star_book/domain/models/journal/journal.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
+import 'package:star_book/presentation/cubits/cubit_state/cubit_state.dart';
+import 'package:star_book/presentation/cubits/journal_detail_cubit.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/shared/elevated_buttons.dart';

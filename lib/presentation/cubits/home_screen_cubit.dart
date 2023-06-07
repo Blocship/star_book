@@ -1,8 +1,8 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:star_book/cubits/cubit_state/cubit_state.dart';
 import 'package:star_book/domain/models/mood/mood.dart';
 import 'package:star_book/domain/models/mood/mood_info.dart';
 import 'package:star_book/domain/repository/mood_repo.dart';
+import 'package:star_book/presentation/cubits/cubit_state/cubit_state.dart';
 
 class HomeScreenCubit extends Cubit<CubitState<MoodInfo>> {
   final MoodRepo moodRepo;

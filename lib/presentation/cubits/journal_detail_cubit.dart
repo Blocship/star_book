@@ -1,8 +1,9 @@
 import 'dart:async';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:star_book/cubits/cubit_state/cubit_state.dart';
 import 'package:star_book/domain/models/journal/journal.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
+import 'package:star_book/presentation/cubits/cubit_state/cubit_state.dart';
 
 class JournalDetailCubit extends Cubit<CubitState<Journal>> {
   final JournalRepo journalRepo;

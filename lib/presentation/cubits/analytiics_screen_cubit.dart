@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:star_book/cubits/cubit_state/cubit_state.dart';
 import 'package:star_book/domain/models/mood/mood_frequency.dart';
 import 'package:star_book/domain/repository/mood_repo.dart';
+import 'package:star_book/presentation/cubits/cubit_state/cubit_state.dart';
 
 class AnalyticsScreenCubit extends Cubit<CubitState<MoodFrequency>> {
   final MoodRepo moodRepo;
