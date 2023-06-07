@@ -20,12 +20,15 @@ part 'route_argument.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
-  static final _shellNavigatorKey = GlobalKey<NavigatorState>();
+  // static final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
   static final GoRouter appRoutes = GoRouter(
     debugLogDiagnostics: true,
     initialLocation: SplashScreenRoute.path,
     navigatorKey: _rootNavigatorKey,
+    redirect: (context, state) {
+      return null;
+    },
     routes: <RouteBase>[
       ///SplashScreen
       GoRoute(
@@ -48,82 +51,89 @@ class AppRouter {
       ),
 
       /// MainScreen
-      ShellRoute(
-        navigatorKey: _shellNavigatorKey,
-        builder: (context, state, child) {
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
           const arg = MainScreenRoute();
-          return MainScreen(arg: arg, child: child);
+          return MainScreen(arg: arg, child: navigationShell);
         },
-        routes: <RouteBase>[
-          /// YearScreen
-          GoRoute(
-            path: YearScreenRoute.path,
-            parentNavigatorKey: _shellNavigatorKey,
-            // pageBuilder: (context, state) {
-            //   const arg = YearScreenRoute();
-            //   return const NoTransitionPage(child: YearScreen(arg: arg));
-            // },
-            builder: (context, state) {
-              const arg = YearScreenRoute();
-              return const YearScreen(arg: arg);
-            },
+        branches: [
+          StatefulShellBranch(
             routes: [
-              /// HomeScreen
+              /// YearScreen
               GoRoute(
-                path: HomeScreenRoute.path,
-                parentNavigatorKey: _shellNavigatorKey,
+                path: YearScreenRoute.path,
+                // parentNavigatorKey: _shellNavigatorKey,
                 // pageBuilder: (context, state) {
-                //   const arg = HomeScreenRoute(month: 3, year: 2023);
-                //   return const NoTransitionPage(child: HomeScreen(arg: arg));
+                //   const arg = YearScreenRoute();
+                //   return const NoTransitionPage(child: YearScreen(arg: arg));
                 // },
                 builder: (context, state) {
-                  final arg = HomeScreenRoute.fromMap(state.queryParameters);
-                  return HomeScreen(arg: arg);
+                  const arg = YearScreenRoute();
+                  return const YearScreen(arg: arg);
                 },
+                routes: [
+                  /// HomeScreen
+                  GoRoute(
+                    path: HomeScreenRoute.path,
+                    // parentNavigatorKey: _shellNavigatorKey,
+                    // pageBuilder: (context, state) {
+                    //   const arg = HomeScreenRoute(month: 3, year: 2023);
+                    //   return const NoTransitionPage(child: HomeScreen(arg: arg));
+                    // },
+                    builder: (context, state) {
+                      final arg =
+                          HomeScreenRoute.fromMap(state.queryParameters);
+                      return HomeScreen(arg: arg);
+                    },
+                  ),
+                ],
               ),
             ],
           ),
-
-          /// ProfileScreen
-          GoRoute(
-            path: ProfileScreenRoute.path,
-            parentNavigatorKey: _shellNavigatorKey,
-            // pageBuilder: (context, state) {
-            //   const arg = ProfileScreenRoute();
-            //   return const NoTransitionPage(child: ProfileScreen(arg: arg));
-            // },
-            builder: (context, state) {
-              const arg = ProfileScreenRoute();
-              return const ProfileScreen(arg: arg);
-            },
+          StatefulShellBranch(
             routes: [
-              /// AnalyticsScreen
+              /// ProfileScreen
               GoRoute(
-                path: AnalyticsScreenRoute.path,
-                parentNavigatorKey: _rootNavigatorKey,
+                path: ProfileScreenRoute.path,
+                // parentNavigatorKey: _shellNavigatorKey,
+                // pageBuilder: (context, state) {
+                //   const arg = ProfileScreenRoute();
+                //   return const NoTransitionPage(child: ProfileScreen(arg: arg));
+                // },
                 builder: (context, state) {
-                  const arg = AnalyticsScreenRoute();
-                  return const AnalyticsScreen(arg: arg);
-                },
-              ),
-
-              /// SettingsScreen
-              GoRoute(
-                path: SettingsScreenRoute.path,
-                parentNavigatorKey: _rootNavigatorKey,
-                builder: (context, state) {
-                  const arg = SettingsScreenRoute();
-                  return const SettingsScreen(arg: arg);
+                  const arg = ProfileScreenRoute();
+                  return const ProfileScreen(arg: arg);
                 },
                 routes: [
-                  /// LicenseAgreementScreen
+                  /// AnalyticsScreen
                   GoRoute(
-                    path: LicenseAgreementScreenRoute.path,
+                    path: AnalyticsScreenRoute.path,
                     parentNavigatorKey: _rootNavigatorKey,
                     builder: (context, state) {
-                      const arg = LicenseAgreementScreenRoute();
-                      return const LicenseAgreementScreen(arg: arg);
+                      const arg = AnalyticsScreenRoute();
+                      return const AnalyticsScreen(arg: arg);
                     },
+                  ),
+
+                  /// SettingsScreen
+                  GoRoute(
+                    path: SettingsScreenRoute.path,
+                    parentNavigatorKey: _rootNavigatorKey,
+                    builder: (context, state) {
+                      const arg = SettingsScreenRoute();
+                      return const SettingsScreen(arg: arg);
+                    },
+                    routes: [
+                      /// LicenseAgreementScreen
+                      GoRoute(
+                        path: LicenseAgreementScreenRoute.path,
+                        parentNavigatorKey: _rootNavigatorKey,
+                        builder: (context, state) {
+                          const arg = LicenseAgreementScreenRoute();
+                          return const LicenseAgreementScreen(arg: arg);
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),

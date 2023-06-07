@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/presentation/routes/routes.dart';
-import 'package:star_book/presentation/screen/profile_screen.dart';
-import 'package:star_book/presentation/screen/year_screen.dart';
 import 'package:star_book/presentation/shared/bottom_nav_bar.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
 
 class MainScreen extends StatefulWidget implements Screen<MainScreenRoute> {
   @override
   final MainScreenRoute arg;
-  final Widget child;
+  final StatefulNavigationShell child;
 
   const MainScreen({
     super.key,
@@ -25,19 +23,8 @@ class _MainScreenState extends State<MainScreen> {
   // late int _selectedPage;
   // late final PageController pageController;
 
-  int get _currentIndex => _locationToTabIndex(context.location);
-
-  int _locationToTabIndex(String location) {
-    final index = tabs.indexWhere((t) => location.startsWith(t.path));
-    // if index not found (-1), return 0
-    return index < 0 ? 0 : index;
-  }
-
-  void _onItemTapped(BuildContext context, int tabIndex) {
-    if (tabIndex != _currentIndex) {
-      // go to the initial location of the selected tab (by index)
-      context.go(tabs[tabIndex].path);
-    }
+  void _onItemTapped(int tabIndex) {
+    widget.child.goBranch(tabIndex);
   }
 
   @override
@@ -84,8 +71,8 @@ class _MainScreenState extends State<MainScreen> {
     return GradientScaffold(
       body: widget.child,
       bottomNavigationBar: BottomNavBar(
-        currentIndex: _currentIndex,
-        onTap: (index) => _onItemTapped(context, index),
+        currentIndex: widget.child.currentIndex,
+        onTap: _onItemTapped,
         items: tabs,
       ),
     );
