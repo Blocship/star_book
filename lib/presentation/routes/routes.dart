@@ -20,7 +20,6 @@ part 'route_argument.dart';
 
 class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
-  // static final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
   static final GoRouter appRoutes = GoRouter(
     debugLogDiagnostics: true,
@@ -62,11 +61,6 @@ class AppRouter {
               /// YearScreen
               GoRoute(
                 path: YearScreenRoute.path,
-                // parentNavigatorKey: _shellNavigatorKey,
-                // pageBuilder: (context, state) {
-                //   const arg = YearScreenRoute();
-                //   return const NoTransitionPage(child: YearScreen(arg: arg));
-                // },
                 builder: (context, state) {
                   const arg = YearScreenRoute();
                   return const YearScreen(arg: arg);
@@ -75,11 +69,6 @@ class AppRouter {
                   /// HomeScreen
                   GoRoute(
                     path: HomeScreenRoute.path,
-                    // parentNavigatorKey: _shellNavigatorKey,
-                    // pageBuilder: (context, state) {
-                    //   const arg = HomeScreenRoute(month: 3, year: 2023);
-                    //   return const NoTransitionPage(child: HomeScreen(arg: arg));
-                    // },
                     builder: (context, state) {
                       final arg =
                           HomeScreenRoute.fromMap(state.queryParameters);
@@ -95,11 +84,6 @@ class AppRouter {
               /// ProfileScreen
               GoRoute(
                 path: ProfileScreenRoute.path,
-                // parentNavigatorKey: _shellNavigatorKey,
-                // pageBuilder: (context, state) {
-                //   const arg = ProfileScreenRoute();
-                //   return const NoTransitionPage(child: ProfileScreen(arg: arg));
-                // },
                 builder: (context, state) {
                   const arg = ProfileScreenRoute();
                   return const ProfileScreen(arg: arg);
