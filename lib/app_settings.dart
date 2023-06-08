@@ -1,6 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-abstract class AppSettings implements FreshInstall {}
+abstract class AppSettings implements FreshInstall {
+  Future<void> clear();
+}
 
 class AppSettingsImpl implements AppSettings {
   final SharedPreferences _pref;
@@ -15,6 +17,7 @@ class AppSettingsImpl implements AppSettings {
     await _pref.setBool(FreshInstall.key, false);
   }
 
+  @override
   Future<void> clear() async {
     await _pref.clear();
   }

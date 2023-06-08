@@ -1,4 +1,7 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:star_book/app_settings.dart';
+import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/service/links.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
@@ -51,6 +54,24 @@ class SettingsScreen extends StatelessWidget
               onTap: () =>
                   context.goToScreen(arg: const LicenseAgreementScreenRoute()),
             ),
+            if (kDebugMode) ...[
+              const SizedBox(height: 30),
+              Text('Debug Mode', style: textTheme.bodyMedium),
+              CustomTile(
+                title: 'Clear App Settings',
+                subtitle: 'Clears all app settings',
+                onTap: () async {
+                  await Injector.resolve<AppSettings>().clear();
+                  // ignore: use_build_context_synchronously
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(
+                      content: Text('App settings cleared'),
+                      duration: Duration(seconds: 2),
+                    ),
+                  );
+                },
+              ),
+            ],
             const Spacer(),
             Text(
               'App version 2.0',
