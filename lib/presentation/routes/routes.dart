@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/domain/models/mood/day.dart';
@@ -22,7 +24,6 @@ class AppRouter {
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
 
   static final GoRouter appRoutes = GoRouter(
-    debugLogDiagnostics: true,
     initialLocation: SplashScreenRoute.path,
     navigatorKey: _rootNavigatorKey,
     redirect: (context, state) {
@@ -172,4 +173,77 @@ class AppRouter {
       ),
     ],
   );
+
+  @visibleForTesting
+  static void printPaths() {
+    final routes = appRoutes.routerDelegate.builder.configuration.routes;
+    final routesLength = routes.length;
+    for (int e = 0; e < routesLength; e++) {
+      String decorator = _getDecorator(depth: 0, isLast: e == routesLength - 1);
+      _printRoute(
+        depth: 0,
+        decorator: decorator,
+        route: (routes[e]),
+      );
+    }
+  }
+
+  static void _printRoute({
+    required int depth,
+    String decorator = "",
+    String previousPath = "",
+    required RouteBase route,
+  }) {
+    // ignore: no_leading_underscores_for_local_identifiers
+    late final String path;
+    if (route is GoRoute) {
+      path = previousPath + route.path;
+      String screenName =
+          route.builder?.runtimeType.toString().split("=> ").last ?? "";
+      log("$decorator$previousPath${route.path} ($screenName)");
+    } else if (route is StatefulShellRoute) {
+      log("$decorator$previousPath(Shell Route)");
+      path = previousPath;
+    } else {
+      log("$decorator$previousPath(Unknown Route)");
+      path = previousPath;
+    }
+
+    if (route.routes.isEmpty) {
+      return;
+    }
+
+    final int newDepth = depth + 1;
+    final routesLength = route.routes.length;
+
+    for (int e = 0; e < routesLength; e++) {
+      String decorator = _getDecorator(
+        depth: newDepth,
+        isLast: e == routesLength - 1,
+      );
+
+      _printRoute(
+        depth: newDepth,
+        decorator: decorator,
+        previousPath: path,
+        route: route.routes[e] as GoRoute,
+      );
+    }
+  }
+
+  static String _getDecorator({
+    required int depth,
+    required bool isLast,
+  }) {
+    String decorator = "";
+    for (int i = 0; i < depth; i++) {
+      decorator += "  ";
+    }
+    if (isLast) {
+      decorator += " └─";
+    } else {
+      decorator += " ├─";
+    }
+    return decorator;
+  }
 }

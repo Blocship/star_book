@@ -90,6 +90,14 @@ class SettingsScreen extends StatelessWidget
                   );
                 },
               ),
+              CustomTile(
+                title: 'Log Routes',
+                subtitle: 'Log Route tree',
+                onTap: () async {
+                  // ignore: invalid_use_of_visible_for_testing_member
+                  AppRouter.printPaths();
+                },
+              ),
             ],
             const Spacer(),
             Text(
