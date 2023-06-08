@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:star_book/app_settings.dart';
+import 'package:star_book/data/utils/local_database.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/service/links.dart';
@@ -67,6 +68,24 @@ class SettingsScreen extends StatelessWidget
                     const SnackBar(
                       content: Text('App settings cleared'),
                       duration: Duration(seconds: 2),
+                    ),
+                  );
+                },
+              ),
+              CustomTile(
+                title: 'Clear Local Database',
+                subtitle: 'Clears all local database',
+                onTap: () async {
+                  final isCleared = await LocalDatabase.clear();
+                  // ignore: use_build_context_synchronously
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        isCleared
+                            ? 'Local database cleared successfully'
+                            : 'Local database not cleared',
+                      ),
+                      duration: const Duration(seconds: 2),
                     ),
                   );
                 },
