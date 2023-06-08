@@ -18,14 +18,15 @@ String createDirectory({required String path}) {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  final config = Config();
   assert(
-    Config().isDevelopment,
+    config.isDevelopment,
     'Please run in dev environment for debugging. i.e. --dart-define=flavor=dev',
   );
   final directory = await getApplicationDocumentsDirectory();
   await LocalDatabase.initialise(
     directory: createDirectory(
-      path: directory.path + Config().cacheDirectory,
+      path: directory.path + config.cacheDirectory,
     ),
   );
   await Injector.initialise();

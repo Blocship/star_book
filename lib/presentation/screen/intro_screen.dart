@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:star_book/app_settings.dart';
 import 'package:star_book/domain/models/user/user.dart';
 import 'package:star_book/domain/repository/user_repo.dart';
 import 'package:star_book/presentation/cubits/cubit_state/cubit_state.dart';
@@ -79,6 +80,7 @@ class IntroScreen extends StatelessWidget implements Screen<IntroScreenRoute> {
                             .read<IntroScreenCubit>()
                             .createUser(nameController.text);
                         final datetime = DateTime.now();
+                        Injector.resolve<AppSettings>().setFreshInstalled();
                         context.goToScreen(
                             arg: HomeScreenRoute(
                           year: datetime.year,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/app_settings.dart';
+import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
-import 'package:star_book/presentation/screen/intro_screen.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
@@ -26,7 +27,12 @@ class _SplashScreenState extends State<SplashScreen>
       duration: const Duration(milliseconds: 2000),
       vsync: this,
     )..forward().then((_) {
-        context.goToScreen(arg: const IntroScreenRoute());
+        final isFreshInstall = Injector.resolve<AppSettings>().isFreshInstall;
+        if (isFreshInstall) {
+          context.goToScreen(arg: const IntroScreenRoute());
+        } else {
+          context.goToScreen(arg: const HomeScreenRoute());
+        }
       });
   }
 

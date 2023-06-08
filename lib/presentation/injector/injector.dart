@@ -2,6 +2,8 @@
 
 import 'package:isar/isar.dart';
 import 'package:kiwi/kiwi.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:star_book/app_settings.dart';
 import 'package:star_book/data/data_source/local_data_source/journal_api.dart';
 import 'package:star_book/data/data_source/local_data_source/mood_api.dart';
 import 'package:star_book/data/data_source/local_data_source/user_api.dart';
@@ -18,32 +20,37 @@ import 'package:star_book/domain/repository/user_repo.dart';
 abstract class Injector {
   // maybe pass config
   static Future<void> initialise() async {
-    _Injector()._initialise();
+    return _Injector()._initialise();
   }
 
   static final resolve = KiwiContainer().resolve;
   static final unregister = KiwiContainer().unregister;
   static final clear = KiwiContainer().clear;
 
-  void _initialise();
-  void _initialisesServices();
-  void _initialiseDatasource();
-  void _initialiseRepositories();
+  Future<void> _initialise();
+  Future<void> _initialisesServices();
+  Future<void> _initialiseDatasource();
+  Future<void> _initialiseRepositories();
 }
 
 class _Injector extends Injector {
   @override
-  void _initialise() {
-    _initialisesServices();
-    _initialiseDatasource();
-    _initialiseRepositories();
+  Future<void> _initialise() async {
+    await _initialisesServices();
+    await _initialiseDatasource();
+    await _initialiseRepositories();
   }
 
   @override
-  void _initialisesServices() {}
+  Future<void> _initialisesServices() async {
+    final KiwiContainer container = KiwiContainer();
+    final SharedPreferences preferences = await SharedPreferences.getInstance();
+    container
+        .registerSingleton<AppSettings>((c) => AppSettingsImpl(preferences));
+  }
 
   @override
-  void _initialiseDatasource() {
+  Future<void> _initialiseDatasource() async {
     final KiwiContainer container = KiwiContainer();
     final Isar isar = Isar.getInstance()!;
     container
@@ -57,7 +64,7 @@ class _Injector extends Injector {
   }
 
   @override
-  void _initialiseRepositories() {
+  Future<void> _initialiseRepositories() async {
     final KiwiContainer container = KiwiContainer();
     container
       ..registerFactory<JournalRepo>(

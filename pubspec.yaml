@@ -22,6 +22,7 @@ dependencies:
   isar_flutter_libs: ^3.0.5
   flutter_bloc: ^8.1.1
   kiwi: ^4.0.3
+  shared_preferences: ^2.1.1
   
   # Non Technical Dependencies
   logger: ^1.1.0

@@ -20,10 +20,15 @@ abstract class Config {
 
   final Env env;
   final String cacheDirectory;
+  final String appSettingsDirectory;
 
   static final Config _instance = Config.define();
   factory Config() => _instance;
-  Config._internal({required this.env, required this.cacheDirectory});
+  Config._internal({
+    required this.env,
+    required this.cacheDirectory,
+    required this.appSettingsDirectory,
+  });
 
   factory Config.define() {
     switch (Env.raw(_flavor)) {
@@ -48,6 +53,7 @@ class _DevelopmentConfig extends Config {
       : super._internal(
           env: Env.development,
           cacheDirectory: '/dev',
+          appSettingsDirectory: '/dev',
         );
 }
 
@@ -56,5 +62,6 @@ class _ProductionConfig extends Config {
       : super._internal(
           env: Env.production,
           cacheDirectory: '/prod',
+          appSettingsDirectory: '/prod',
         );
 }
