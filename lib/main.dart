@@ -3,8 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:star_book/app_settings.dart';
 import 'package:star_book/config.dart';
 import 'package:star_book/data/utils/local_database.dart';
+import 'package:star_book/domain/repository/mood_repo.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/theme/ultramarine_light.dart';
@@ -30,6 +32,10 @@ void main() async {
     ),
   );
   await Injector.initialise();
+  final isFreshInstall = Injector.resolve<AppSettings>().isFreshInstall;
+  if (isFreshInstall) {
+    Injector.resolve<MoodRepo>().addDefaultMoods();
+  }
 
   /// Run this statement when you reinstall your app
   /// for adding moods in backend (run only once)
