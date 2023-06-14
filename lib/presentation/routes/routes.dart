@@ -26,6 +26,9 @@ class AppRouter {
   static final GoRouter appRoutes = GoRouter(
     initialLocation: SplashScreenRoute.path,
     navigatorKey: _rootNavigatorKey,
+    observers: [
+      AppRouterObserver(),
+    ],
     redirect: (context, state) {
       return null;
     },
@@ -176,6 +179,9 @@ class AppRouter {
 
   @visibleForTesting
   static void printPaths() {
+    // final paths =
+    //     appRoutes.routerDelegate.builder.configuration.debugKnownRoutes();
+    // log(paths);
     final routes = appRoutes.routerDelegate.builder.configuration.routes;
     final routesLength = routes.length;
     for (int e = 0; e < routesLength; e++) {
@@ -245,5 +251,31 @@ class AppRouter {
       decorator += " ├─";
     }
     return decorator;
+  }
+}
+
+class AppRouterObserver extends NavigatorObserver {
+  @override
+  void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    super.didPush(route, previousRoute);
+    log("didPush ${route.settings.name}");
+  }
+
+  @override
+  void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    super.didPop(route, previousRoute);
+    log("didPop ${route.settings.name}");
+  }
+
+  @override
+  void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) {
+    super.didRemove(route, previousRoute);
+    log("didRemove ${route.settings.name}");
+  }
+
+  @override
+  void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) {
+    super.didReplace(newRoute: newRoute, oldRoute: oldRoute);
+    log("didReplace ${newRoute?.settings.name}");
   }
 }
