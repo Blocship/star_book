@@ -1,3 +1,4 @@
+import 'package:star_book/domain/models/mood/day.dart';
 import 'package:star_book/domain/models/mood/mood.dart';
 
 class JournalFormModel {
@@ -18,12 +19,12 @@ class JournalFormModel {
     this.createdAt,
   });
 
-  static final Map<String, dynamic> initialValue = JournalFormModel(
-    title: '',
-    memo: '',
-    mood: null,
-    createdAt: DateTime.now(),
-  ).toMap();
+  static Map<String, dynamic> initialValue(Day day) => JournalFormModel(
+        title: '',
+        memo: '',
+        mood: null,
+        createdAt: day.toDateTime(),
+      ).toMap();
 
   Map<String, dynamic> toMap() => {
         titleKey: title,

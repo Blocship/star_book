@@ -189,7 +189,7 @@ class Date extends StatelessWidget {
                             ),
                           )
                         : context.pushScreen(
-                            arg: JournalCreateScreenRoute(day: Day.today()),
+                            arg: JournalCreateScreenRoute(day: dateTime),
                           );
                   },
                   child: Container(

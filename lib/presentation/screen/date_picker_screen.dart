@@ -31,7 +31,7 @@ class CustomDatePickerFormField extends FormBuilderField<DateTime> {
             child: SelectableTile(
                 title: 'Date',
                 select: DateFormat.yMMMd().format(
-                  state.dateTime ?? DateTime.now(),
+                  state.value ?? DateTime.now(),
                 ),
                 onTap: () {
                   state.effectiveFocusNode.requestFocus();
@@ -46,12 +46,9 @@ class CustomDatePickerFormField extends FormBuilderField<DateTime> {
 
 class _CustomDatePickerFormFieldState
     extends FormBuilderFieldState<CustomDatePickerFormField, DateTime> {
-  late DateTime? dateTime;
-
   @override
   void initState() {
     super.initState();
-    dateTime = widget.initialValue;
     effectiveFocusNode.addListener(_handleFocus);
   }
 
@@ -68,12 +65,9 @@ class _CustomDatePickerFormFieldState
         ),
         builder: (context) {
           return DatePickerBottomSheet(
-            initialDate: dateTime ?? DateTime.now(),
+            initialDate: value ?? DateTime.now(),
             onDone: (DateTime date) {
-              setState(() {
-                dateTime = date;
-              });
-              didChange(dateTime);
+              didChange(value);
             },
             // onDateChanged: (DateTime date) {
             //   setState(() {

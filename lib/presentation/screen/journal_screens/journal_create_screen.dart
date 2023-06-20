@@ -54,7 +54,7 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
               child: SingleChildScrollView(
                 child: FormBuilder(
                   key: _formKey,
-                  initialValue: JournalFormModel.initialValue,
+                  initialValue: JournalFormModel.initialValue(widget.arg.day),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
