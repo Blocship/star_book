@@ -1,5 +1,7 @@
 import 'package:url_launcher/url_launcher.dart';
 
+// TODO: Make the methods static,
+// so that we don't have to create an instance of this class
 class UrlLauncher {
   Future<void> developer() async {
     final Uri url = Uri.parse('https://blocship.io/');
@@ -17,8 +19,21 @@ class UrlLauncher {
   }
 
   Future<void> starBookCommunity() async {
-    /// TODO: Add Url
-    final Uri url = Uri.parse('');
+    final Uri url = Uri.parse('https://discord.gg/bjVvQw2xnz');
+    if (!await launchUrl(url)) {
+      throw Exception('Could not launch $url');
+    }
+  }
+
+  Future<void> support() async {
+    final Uri url = Uri(
+      scheme: 'mailto',
+      path: 'hashirshoaeb@gmail.com',
+      queryParameters: {
+        'subject': Uri.encodeComponent('Starbook Support'),
+        'body': '',
+      },
+    );
     if (!await launchUrl(url)) {
       throw Exception('Could not launch $url');
     }

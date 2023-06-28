@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:star_book/app_settings.dart';
 import 'package:star_book/data/utils/local_database.dart';
 import 'package:star_book/presentation/injector/injector.dart';
@@ -43,17 +44,25 @@ class SettingsScreen extends StatelessWidget
                 onTap: () => UrlLauncher().starBookCommunity()),
             CustomTile(
                 title: 'About Developer',
-                subtitle: 'Person info who developed this amazing app',
+                subtitle: 'Amazing developers behind starbook',
                 onTap: () => UrlLauncher().developer()),
             CustomTile(
                 title: 'Privacy & Terms',
                 subtitle: 'All your data and personal info terms',
                 onTap: () => UrlLauncher().privacyPolicy()),
             CustomTile(
-              title: 'License Agreement',
-              subtitle: 'Your licensed agreement with starbook',
-              onTap: () =>
-                  context.goToScreen(arg: const LicenseAgreementScreenRoute()),
+              title: 'Acknowledgements',
+              subtitle: 'Open source libraries used in starbook',
+              onTap: () {
+                context.goToScreen(arg: const LicenseAgreementScreenRoute());
+              },
+            ),
+            CustomTile(
+              title: 'Support',
+              subtitle: 'Get help with starbook',
+              onTap: () {
+                UrlLauncher().support();
+              },
             ),
             if (kDebugMode) ...[
               const SizedBox(height: 30),
@@ -100,10 +109,18 @@ class SettingsScreen extends StatelessWidget
               ),
             ],
             const Spacer(),
-            Text(
-              'App version 2.0',
-              style:
-                  textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w400),
+            FutureBuilder<PackageInfo>(
+              future: PackageInfo.fromPlatform(),
+              builder: (context, sanpshot) {
+                if (!sanpshot.hasData) {
+                  return const SizedBox();
+                }
+                return Text(
+                  'App version ${sanpshot.data!.version} (${sanpshot.data!.buildNumber})',
+                  style: textTheme.bodyMedium!
+                      .copyWith(fontWeight: FontWeight.w400),
+                );
+              },
             ),
             const SizedBox(height: 10),
             const BlocShipTile(),
