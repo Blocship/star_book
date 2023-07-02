@@ -19,11 +19,12 @@ class MonthlyAnalyticsTab extends StatelessWidget {
   Widget build(BuildContext context) {
     final double deviceHeight = context.deviceHeight;
     // final DoughnutChartStyle doughnutChartStyle = context.doughnutChartStyle;
-
+    final currentDate = DateTime.now();
     return BlocProvider<AnalyticsScreenCubit>(
       create: (context) => AnalyticsScreenCubit(
         moodRepo: Injector.resolve<MoodRepo>(),
-      )..getMoodFrequencyByMonth(month: 5, year: 2023),
+      )..getMoodFrequencyByMonth(
+          month: currentDate.month, year: currentDate.year),
       child: BlocBuilder<AnalyticsScreenCubit, CubitState<MoodFrequency>>(
         builder: (context, state) {
           return state.when(
