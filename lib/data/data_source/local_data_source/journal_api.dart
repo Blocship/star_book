@@ -185,15 +185,19 @@ class LSJournalApi implements IJournalApi {
     final list = await fetchAll();
     if (list.isEmpty) return 0;
     list.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-    final now = DateTime.now();
-    DateTime prev = now;
-    for (int i = 0; i < list.length; i++) {
-      final current = list[i].createdAt;
-      if (current.difference(prev).inHours > 24) {
-        return prev.difference(now).inDays;
+    int streakCount = 0;
+    int currentStreak = 0;
+    for (int i = 0; i < list.length - 1; i++) {
+      final diff = list[i].createdAt.difference(list[i + 1].createdAt).inDays;
+      if (diff == 1) {
+        currentStreak++;
+      } else if (diff > 1) {
+        currentStreak = 0;
       }
-      prev = current;
+      if (currentStreak > streakCount) {
+        streakCount = currentStreak;
+      }
     }
-    return prev.difference(now).inDays;
+    return streakCount;
   }
 }
