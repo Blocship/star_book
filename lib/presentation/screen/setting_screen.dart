@@ -43,10 +43,6 @@ class SettingsScreen extends StatelessWidget
                 subtitle: 'Know who’s using starbook app',
                 onTap: () => UrlLauncher().starBookCommunity()),
             CustomTile(
-                title: 'About Developer',
-                subtitle: 'Amazing developers behind starbook',
-                onTap: () => UrlLauncher().developer()),
-            CustomTile(
                 title: 'Privacy & Terms',
                 subtitle: 'All your data and personal info terms',
                 onTap: () => UrlLauncher().privacyPolicy()),
