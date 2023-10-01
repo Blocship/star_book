@@ -19,7 +19,7 @@ class UrlLauncher {
   }
 
   Future<void> starBookCommunity() async {
-    final Uri url = Uri.parse('https://discord.com/invite/7EJv8VUGrd');
+    final Uri url = Uri.parse('https://discord.gg/7EJv8VUGrd');
     if (!await launchUrl(url)) {
       throw Exception('Could not launch $url');
     }
