@@ -1,6 +1,8 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/extension.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class CustomTile extends StatelessWidget {
   final String title;
@@ -39,8 +41,38 @@ class CustomTile extends StatelessWidget {
   }
 }
 
-class BlocShipTile extends StatelessWidget {
+class BlocShipTile extends StatefulWidget {
   const BlocShipTile({Key? key}) : super(key: key);
+
+  @override
+  State<BlocShipTile> createState() => _BlocShipTileState();
+}
+
+class _BlocShipTileState extends State<BlocShipTile> {
+  late TapGestureRecognizer _onTapRecognizerBlocship;
+
+  @override
+  void initState() {
+    super.initState();
+    _onTapRecognizerBlocship = TapGestureRecognizer()
+      ..onTap = _openBlocshipLink;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _onTapRecognizerBlocship.dispose();
+  }
+
+  void _openBlocshipLink() async {
+    const link = 'https://blocship.io/';
+
+    try {
+      await launchUrlString(link, mode: LaunchMode.inAppWebView);
+    } on Exception catch (e) {
+      print('Failed to launch link $link: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,6 +99,7 @@ class BlocShipTile extends StatelessWidget {
                   color: themeColorStyle.secondaryColor,
                   decoration: TextDecoration.underline,
                 ),
+                recognizer: _onTapRecognizerBlocship,
               ),
             ],
           ),
@@ -76,13 +109,44 @@ class BlocShipTile extends StatelessWidget {
   }
 }
 
-class UxerShipTile extends StatelessWidget {
+class UxerShipTile extends StatefulWidget {
   const UxerShipTile({Key? key}) : super(key: key);
+
+  @override
+  State<UxerShipTile> createState() => _UxerShipTileState();
+}
+
+class _UxerShipTileState extends State<UxerShipTile> {
+  late TapGestureRecognizer _onTapRecognizerUxership;
+
+  @override
+  void initState() {
+    super.initState();
+    _onTapRecognizerUxership = TapGestureRecognizer()
+      ..onTap = _openUxershipLink;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _onTapRecognizerUxership.dispose();
+  }
+
+  void _openUxershipLink() async {
+    const link = 'https://blocship.io/';
+
+    try {
+      await launchUrlString(link, mode: LaunchMode.inAppWebView);
+    } on Exception catch (e) {
+      print('Failed to launch link $link: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = context.textTheme;
     final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -115,6 +179,7 @@ class UxerShipTile extends StatelessWidget {
                   color: themeColorStyle.secondaryColor,
                   decoration: TextDecoration.underline,
                 ),
+                recognizer: _onTapRecognizerUxership,
               ),
             ],
           ),
