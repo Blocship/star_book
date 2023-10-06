@@ -32,7 +32,7 @@ dependencies:
   path_provider: ^2.0.12
   flutter_form_builder: ^9.0.0
   form_builder_validators: ^9.0.0
-  url_launcher: ^6.1.11
+  url_launcher: ^6.1.14
   package_info_plus: ^4.0.2
 
 dev_dependencies:
