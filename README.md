@@ -12,7 +12,7 @@
     ·
     <a href="https://github.com/hashirshoaeb/star_book/issues">Request Feature</a>
   </p>
-</p>
+</p> 
 
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/hashirshoaeb?color=ffcc66&logo=twitter&logoColor=ffffff&style=for-the-badge)](https://twitter.com/hashirshoaeb)
