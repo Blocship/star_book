@@ -12,7 +12,7 @@ class UrlLauncher {
 
   Future<void> privacyPolicy() async {
     final Uri url = Uri.parse(
-        'https://github.com/hashirshoaeb/star_book/blob/dev/PRIVACY%26POLICY.md');
+        'https://qurantalk.notion.site/Privacy-Policy-for-Starbook-Mobile-App-a8fb153c39dd45dfa5b2cb9a945e3c84?pvs=4');
     if (!await launchUrl(url)) {
       throw Exception('Could not launch $url');
     }
