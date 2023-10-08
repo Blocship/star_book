@@ -15,7 +15,7 @@ The following are guidelines for contributing to this project.
 > pull requests from branches on your fork. To do this, run:
 >
 > ```
-> git remote add upstream https://github.com/hashirshoaeb/star_book.git
+> git remote add upstream https://github.com/Blocship/star_book.git
 > git fetch upstream
 > git branch --set-upstream-to=upstream/master master
 > ```
