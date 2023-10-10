@@ -130,7 +130,7 @@ both your expected and actual results.
 
 ## 🙏 Help needed
 
-Please checkout the [issues](https://github.com/hashirshoaeb/star_book/issues) and [project board](https://github.com/users/hashirshoaeb/projects/1)
+Please check out the [issues](https://github.com/hashirshoaeb/star_book/issues) and [project board](https://github.com/users/hashirshoaeb/projects/1) for any current concerns or topics related to the project. Additionally, we now use Discord for project management and communication. Feel free to join our Discord server here for the latest updates and discussions.
 
 <br />
 <p align="center">
