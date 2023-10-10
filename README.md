@@ -8,15 +8,15 @@
     <br />
     <a href="https://hashirshoaeb.com">About Me</a>
     ·
-    <a href="https://github.com/hashirshoaeb/star_book/issues">Report Bug</a>
+    <a href="https://github.com/Blocship/star_book/issues">Report Bug</a>
     ·
-    <a href="https://github.com/hashirshoaeb/star_book/issues">Request Feature</a>
+    <a href="https://github.com/Blocship/star_book/issues">Request Feature</a>
   </p>
 </p>
 
 
 [![Twitter Follow](https://img.shields.io/twitter/follow/hashirshoaeb?color=ffcc66&logo=twitter&logoColor=ffffff&style=for-the-badge)](https://twitter.com/hashirshoaeb)
-[![GitHub license](https://img.shields.io/github/license/hashirshoaeb/star_book?style=for-the-badge)](https://github.com/hashirshoaeb/star_book/blob/master/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/Blocship/star_book?style=for-the-badge)](https://github.com/Blocship/star_book/blob/master/LICENSE)
 [![Flutter Version](https://img.shields.io/static/v1?label=Flutter&message=3.10.1&color=ffcc66&style=for-the-badge)](https://flutter.dev/docs/development/tools/sdk/releases)
 
 ## Get the App
