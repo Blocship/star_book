@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "269682090917",
+    "project_id": "starbook-e6430",
+    "storage_bucket": "starbook-e6430.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:269682090917:android:509fda51191f5e596dbe4c",
+        "android_client_info": {
+          "package_name": "com.hashirshoaeb.StarBook.star_book"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAnNXANfO7p7-qd2K9Dp6sx2Ki6RJyBgp8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
