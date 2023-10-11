@@ -197,10 +197,14 @@ class AppRouter {
     // ignore: no_leading_underscores_for_local_identifiers
     late final String path;
     if (route is GoRoute) {
-      path = previousPath + route.path;
+      if (route.path.isNotEmpty && !route.path.startsWith('/')) {
+        path = '$previousPath/${route.path}';
+      } else {
+        path = previousPath + route.path;
+      }
       String screenName =
           route.builder?.runtimeType.toString().split("=> ").last ?? "";
-      log("$decorator$previousPath${route.path} ($screenName)");
+      log("$decorator$path ($screenName)");
     } else if (route is StatefulShellRoute) {
       log("$decorator$previousPath(Shell Route)");
       path = previousPath;
