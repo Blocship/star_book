@@ -24,7 +24,7 @@ class _ProdFirebaseService implements FirebaseService {
 
   @override
   Future<void> initialise() async {
-    await Firebase.initializeApp(name: options.projectId, options: options);
+    await Firebase.initializeApp(name: '[DEFAULT]', options: options);
   }
 }
 
