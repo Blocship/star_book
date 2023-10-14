@@ -18,13 +18,13 @@ class FormValidator {
   /// [nameValidator] that requires the name field is non nullable
   /// and should be less than 15 characters (Only Contains Alphabetic character)
   static String? nameValidator(value) {
-    final name = RegExp(r'^[a-zA-Z]+$');
+    final name = RegExp(r'^[a-zA-Z\s]+$');
     if (value == null || value.isEmpty) {
       return 'Please enter your name';
     } else if (value.length > 15) {
-      return 'name should be less than 15 characters';
+      return 'Name should be less than 15 characters';
     } else if (!name.hasMatch(value)) {
-      return 'name should only contain alphabetic characters';
+      return 'Use alphabets only, no symbols allowed';
     }
     return null;
   }
