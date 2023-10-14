@@ -1,46 +1,70 @@
+import 'dart:developer';
+
 const kDefaultFlavor = 'prod';
 
-enum Env {
-  development('dev'),
+enum Environment {
+  staging('qa'),
   production(kDefaultFlavor);
 
   final String value;
-  const Env(this.value);
+  const Environment(this.value);
 
-  factory Env.raw(String value) => Env.values.firstWhere(
+  factory Environment.from(String value) => Environment.values.firstWhere(
         (e) => e.value == value,
         orElse: () => throw UnimplementedError('Env $value is not supported'),
       );
 }
 
-abstract class Config {
-  // https://github.com/flutter/flutter/issues/55870
-  static const String _flavor =
-      String.fromEnvironment('flavor', defaultValue: kDefaultFlavor);
+// https://github.com/flutter/flutter/issues/55870
+final Environment kEnvironment = Environment.from(
+    const String.fromEnvironment('flavor', defaultValue: kDefaultFlavor));
 
-  final Env env;
-  final String cacheDirectory;
-  final String appSettingsDirectory;
+extension XEnvironment on Environment {
+  bool get isProd => this == Environment.production;
+  bool get isStaging => this == Environment.staging;
 
-  static final Config _instance = Config.define();
-  factory Config() => _instance;
-  Config._internal({
-    required this.env,
-    required this.cacheDirectory,
-    required this.appSettingsDirectory,
-  });
-
-  factory Config.define() {
-    switch (Env.raw(_flavor)) {
-      case Env.development:
-        return _DevelopmentConfig();
-      case Env.production:
-        return _ProductionConfig();
+  void maybeWhen({
+    Function()? prod,
+    Function()? staging,
+    Function()? orElse,
+  }) {
+    switch (this) {
+      case Environment.production:
+        prod?.call() ?? orElse?.call();
+        break;
+      case Environment.staging:
+        staging?.call() ?? orElse?.call();
+        break;
     }
   }
 
-  bool get isDevelopment => env == Env.development;
-  bool get isProduction => env == Env.production;
+  /// The [map] method allows mapping different values
+  ///  based on the current environment.
+  T map<T>({
+    required T Function() prod,
+    required T Function() staging,
+  }) {
+    switch (this) {
+      case Environment.production:
+        return prod();
+      case Environment.staging:
+        return staging();
+    }
+  }
+}
+
+abstract class Config {
+  Environment get env;
+  String get cacheDirectory;
+  String get appSettingsDirectory;
+
+  factory Config() {
+    log('App is running in ${kEnvironment.toString()} environment');
+    return kEnvironment.map(
+      prod: () => _ProdAppConfig(),
+      staging: () => _StagingAppConfig(),
+    );
+  }
 
   @override
   String toString() {
@@ -48,20 +72,24 @@ abstract class Config {
   }
 }
 
-class _DevelopmentConfig extends Config {
-  _DevelopmentConfig()
-      : super._internal(
-          env: Env.development,
-          cacheDirectory: '/dev',
-          appSettingsDirectory: '/dev',
-        );
+class _StagingAppConfig implements Config {
+  @override
+  final String appSettingsDirectory = '/qa';
+
+  @override
+  final String cacheDirectory = '/qa';
+
+  @override
+  final Environment env = Environment.staging;
 }
 
-class _ProductionConfig extends Config {
-  _ProductionConfig()
-      : super._internal(
-          env: Env.production,
-          cacheDirectory: '/prod',
-          appSettingsDirectory: '/prod',
-        );
+class _ProdAppConfig implements Config {
+  @override
+  final String appSettingsDirectory = '/prod';
+
+  @override
+  final String cacheDirectory = '/prod';
+
+  @override
+  final Environment env = Environment.production;
 }

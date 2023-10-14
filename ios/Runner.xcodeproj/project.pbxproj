@@ -13,7 +13,6 @@
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
 		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
-		E3FED2828871D54FAACF1D78 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 98B92FA89140C29747702060 /* GoogleService-Info.plist */; };
 		FEDC6CAFD1E6113FDC8324A0 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15AB58BF46C2B61A64C64D5C /* Pods_Runner.framework */; };
 /* End PBXBuildFile section */
 
@@ -47,7 +46,6 @@
 		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		98B92FA89140C29747702060 /* GoogleService-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "Runner/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BCE26F75816D237E3E03F7C2 /* Pods-Runner.profile.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.profile.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.profile.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -100,7 +98,6 @@
 				97C146EF1CF9000F007C117D /* Products */,
 				6790EC1EDD41820C734F56D1 /* Pods */,
 				4446A59F249A3A7F7D20F0BF /* Frameworks */,
-				98B92FA89140C29747702060 /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -194,7 +191,6 @@
 				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
 				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
 				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
-				E3FED2828871D54FAACF1D78 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
