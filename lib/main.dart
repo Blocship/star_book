@@ -7,6 +7,7 @@ import 'package:star_book/app_settings.dart';
 import 'package:star_book/config.dart';
 import 'package:star_book/data/utils/local_database.dart';
 import 'package:star_book/domain/repository/mood_repo.dart';
+import 'package:star_book/firebase.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/theme/ultramarine_light.dart';
@@ -20,11 +21,17 @@ String createDirectory({required String path}) {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  final config = Config();
   assert(
-    config.isDevelopment,
-    'Please run in dev environment for debugging. i.e. --dart-define=flavor=dev',
+    kEnvironment.isStaging,
+    'Please run in dev environment for debugging. i.e. --dart-define=flavor=qa',
   );
+  // todo, use injector for services, to be accessible from anywhere
+  final service = FirebaseService();
+  await service.initialise();
+  final reportingService = ReportingService();
+  await reportingService.initialise();
+
+  final config = Config();
   final directory = await getApplicationDocumentsDirectory();
   await LocalDatabase.initialise(
     directory: createDirectory(
