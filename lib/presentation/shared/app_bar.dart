@@ -114,7 +114,8 @@ class SecondaryAppBar extends StatelessWidget implements PreferredSizeWidget {
         leadingWidth: 24,
         actions: [
           IconButton(
-            padding: EdgeInsets.zero,
+            splashRadius: 21,
+            padding: const EdgeInsets.all(9),
             constraints: const BoxConstraints(),
             onPressed: trailingOnTap,
             icon:
