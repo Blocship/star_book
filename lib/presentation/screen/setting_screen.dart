@@ -82,6 +82,11 @@ class SettingsScreen extends StatelessWidget
                 subtitle: 'Clears all local database',
                 onTap: () async {
                   final isCleared = await LocalDatabase.clear();
+                  if(isCleared) {
+                  // ignore: use_build_context_synchronously
+                    context.goToScreen(arg: const IntroScreenRoute());
+
+                  }
                   // ignore: use_build_context_synchronously
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
