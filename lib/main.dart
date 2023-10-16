@@ -21,6 +21,8 @@ String createDirectory({required String path}) {
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
   assert(
     kEnvironment.isStaging,
     'Please run in dev environment for debugging. i.e. --dart-define=flavor=qa',
