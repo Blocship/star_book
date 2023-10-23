@@ -94,7 +94,7 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
               ),
             ),
             floatingActionButton: SecondaryFloatingActionButton(
-              onTap: () async {
+              onTap: ()  {
                 if (_formKey.currentState!.validate()) {
                   context.read<JournalCreateCubit>().addJournal().then(
                         (value) => context.shouldPop()
