@@ -19,8 +19,7 @@ import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 
-class JournalCreateScreen extends StatefulWidget
-    implements Screen<JournalCreateScreenRoute> {
+class JournalCreateScreen extends StatefulWidget implements Screen<JournalCreateScreenRoute> {
   @override
   final JournalCreateScreenRoute arg;
   const JournalCreateScreen({super.key, required this.arg});
@@ -49,8 +48,7 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
               centerTitle: 'New Thought',
             ),
             body: SafeArea(
-              minimum: const EdgeInsets.symmetric(
-                  horizontal: CustomPadding.mediumPadding),
+              minimum: const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
               child: SingleChildScrollView(
                 child: FormBuilder(
                   key: _formKey,
@@ -69,6 +67,7 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
                       const SizedBox(height: 30),
                       MoodPickerFormField(
                         name: JournalFormModel.moodKey,
+                        validator: FormValidator.required(),
                       ),
                       const SizedBox(height: 30),
                       CustomTextFormField(
@@ -95,12 +94,12 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
               ),
             ),
             floatingActionButton: SecondaryFloatingActionButton(
-              onTap: () async {
-                await context.read<JournalCreateCubit>().addJournal();
-
-                /// Don't use 'BuildContext's across async gaps
-                /// we can use .then() for solving this warning
-                context.shouldPop();
+              onTap: ()  {
+                if (_formKey.currentState!.validate()) {
+                  context.read<JournalCreateCubit>().addJournal().then(
+                        (value) => context.shouldPop()
+                      );
+                }
               },
               child: const Icon(Icons.check),
             ),
@@ -139,8 +138,7 @@ class AddNewDetails extends StatelessWidget {
             SizedBox(height: deviceHeight * 0.004),
             Text(
               'Write your today’s thought details below',
-              style:
-                  textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w400),
+              style: textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w400),
             ),
           ],
         ),
