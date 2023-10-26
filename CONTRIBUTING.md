@@ -122,7 +122,7 @@ routes
 
 ## 🐛 How to Report Bugs
 
-Please open a [new issue](https://github.com/hashirshoaeb/star_book/issues/new) including steps to reproduce the problem
+Please open a [new issue]([https://github.com/hashirshoaeb/star_book/issues/new)](https://github.com/Blocship/star_book/issues) including steps to reproduce the problem
 you're experiencing.
 
 Be sure to include as much information including screenshots, text output, and
@@ -130,7 +130,7 @@ both your expected and actual results.
 
 ## 🙏 Help needed
 
-Please checkout the [issues](https://github.com/hashirshoaeb/star_book/issues) and [project board](https://github.com/users/hashirshoaeb/projects/1)
+Please checkout the [issues](https://github.com/Blocship/star_book/issues) and [project board](https://github.com/users/hashirshoaeb/projects/1)
 
 <br />
 <p align="center">
