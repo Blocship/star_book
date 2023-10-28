@@ -8,6 +8,7 @@ import 'package:star_book/presentation/cubits/journal_state.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
+import 'package:star_book/presentation/shared/journal_tile.dart';
 import 'package:star_book/presentation/shared/loader.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
@@ -78,15 +79,8 @@ class JournalList extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(
                               horizontal: CustomPadding.mediumPadding),
                           itemBuilder: (context, index) {
-                            return ListTile(
-                              title: Text(journals.journals[index].title),
-                              onTap: () {
-                                context.pushScreen(
-                                  arg: JournalDetailScreenRoute(
-                                      id: journals.journals[index].id),
-                                );
-                              },
-                            );
+                            return JournalTile(
+                                journal: journals.journals[index]);
                           },
                         );
                 },
