@@ -130,7 +130,7 @@ both your expected and actual results.
 
 ## 🙏 Help needed
 
-Please checkout the [issues](https://github.com/hashirshoaeb/star_book/issues) and [project board](https://github.com/users/hashirshoaeb/projects/1)
+Please checkout the [issues](https://github.com/Blocship/star_book/issues) and [project board](https://github.com/users/hashirshoaeb/projects/1)
 
 <br />
 <p align="center">
