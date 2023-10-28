@@ -107,6 +107,7 @@ abstract class AnalyticsService {
   Future<void> initialise();
   Future<void> logEvent(String name, Map<String, dynamic> parameters);
 
+  Future<bool> enableAnalytics(bool enable);
   factory AnalyticsService() {
     if (kEnvironment.isProd) {
       return _ProdAnalyticsService();
@@ -117,12 +118,20 @@ abstract class AnalyticsService {
 
 class _ProdAnalyticsService implements AnalyticsService {
   @override
-  Future<void> initialise() async {}
+  Future<void> initialise() async {
+    FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(true);
+  }
 
   @override
   Future<void> logEvent(String name, Map<String, dynamic> parameters) async {
     await FirebaseAnalytics.instance
         .logEvent(name: name, parameters: parameters);
+  }
+
+  @override
+  Future<bool> enableAnalytics(bool enable) async {
+    await FirebaseAnalytics.instance.setAnalyticsCollectionEnabled(true);
+    return enable;
   }
 }
 
@@ -132,4 +141,9 @@ class _StagingAnalyticsService implements AnalyticsService {
 
   @override
   Future<void> logEvent(String name, Map<String, dynamic> parameters) async {}
+
+  @override
+  Future<bool> enableAnalytics(bool enable) async {
+    return false;
+  }
 }
