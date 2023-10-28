@@ -122,7 +122,7 @@ routes
 
 ## 🐛 How to Report Bugs
 
-Please open a [new issue](https://github.com/hashirshoaeb/star_book/issues/new) including steps to reproduce the problem
+Please open a [new issue](https://github.com/Blocship/star_book/issues/new) including steps to reproduce the problem
 you're experiencing.
 
 Be sure to include as much information including screenshots, text output, and
