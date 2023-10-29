@@ -34,6 +34,8 @@ void main() async {
     await service.initialise();
     final reportingService = ReportingService();
     await reportingService.initialise();
+    final analyticsService = AnalyticsService();
+    await analyticsService.initialise();
 
     final config = Config();
     final directory = await getApplicationDocumentsDirectory();
