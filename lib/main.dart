@@ -21,22 +21,54 @@ String createDirectory({required String path}) {
 }
 
 void main() async {
-  runZonedGuarded<Future<void>>(() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  if (kEnvironment.isProd) {
+    runZonedGuarded<Future<void>>(() async {
+      WidgetsFlutterBinding.ensureInitialized();
+      // Todo, use injector for services, to be accessible from anywhere
+      final service = FirebaseService();
+      await service.initialise();
+      final reportingService = ReportingService();
+      await reportingService.initialise();
+      final analyticsService = AnalyticsService();
+      await analyticsService.initialise();
+      await SystemChrome.setPreferredOrientations(
+          [DeviceOrientation.portraitUp]);
 
+      final config = Config();
+      final directory = await getApplicationDocumentsDirectory();
+      await LocalDatabase.initialise(
+        directory: createDirectory(
+          path: directory.path + config.cacheDirectory,
+        ),
+      );
+      await Injector.initialise();
+      final isFreshInstall = Injector.resolve<AppSettings>().isFreshInstall;
+      if (isFreshInstall) {
+        Injector.resolve<MoodRepo>().addDefaultMoods();
+      }
+
+      /// Run this statement when you reinstall your app
+      /// for adding moods in backend (run only once)
+      // Injector.resolve<MoodRepo>().addDefaultMoods();
+      SystemChrome.setSystemUIOverlayStyle(
+        const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+        ),
+      );
+      runApp(const MyApp());
+    }, (error, stackTrace) async {
+      ReportingService().recordError(error, stackTrace);
+      // Injector.resolve<ReportingService>().recordError(error, stackTrace);
+    });
+  } else {
+    WidgetsFlutterBinding.ensureInitialized();
+
+    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
     assert(
       kEnvironment.isStaging,
       'Please run in dev environment for debugging. i.e. --dart-define=flavor=qa',
     );
-    // todo, use injector for services, to be accessible from anywhere
-    final service = FirebaseService();
-    await service.initialise();
-    final reportingService = ReportingService();
-    await reportingService.initialise();
-    final analyticsService = AnalyticsService();
-    await analyticsService.initialise();
-
     final config = Config();
     final directory = await getApplicationDocumentsDirectory();
     await LocalDatabase.initialise(
@@ -60,9 +92,7 @@ void main() async {
       ),
     );
     runApp(const MyApp());
-  }, (error, stackTrace) async {
-    Injector.resolve<ReportingService>().recordError(error, stackTrace);
-  });
+  }
 }
 
 class MyApp extends StatelessWidget {

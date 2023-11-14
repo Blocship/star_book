@@ -1,10 +1,8 @@
 import 'dart:developer';
 
-import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/domain/models/mood/day.dart';
-import 'package:star_book/firebase.dart';
 import 'package:star_book/presentation/screen/analytics_screens/analytics_tab_bar_view.dart';
 import 'package:star_book/presentation/screen/home_screen.dart';
 import 'package:star_book/presentation/screen/intro_screen.dart';
@@ -18,8 +16,10 @@ import 'package:star_book/presentation/screen/profile_screen.dart';
 import 'package:star_book/presentation/screen/setting_screen.dart';
 import 'package:star_book/presentation/screen/splash_screen.dart';
 import 'package:star_book/presentation/screen/year_screen.dart';
+import 'package:star_book/presentation/service/navigator.dart';
 
 part 'extension.dart';
+
 part 'route_argument.dart';
 
 class AppRouter {
@@ -31,9 +31,7 @@ class AppRouter {
     redirect: (context, state) {
       return null;
     },
-    observers: [
-      FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
-    ],
+    observers: [LoggerNavigatorObserver()],
     routes: <RouteBase>[
       ///SplashScreen
       GoRoute(
