@@ -5,4 +5,4 @@
 - [ ]  Description of the changes proposed in the pull request.
 - [ ]  I listed at least one issue that this PR fixes in the description above.
 
-If you need help, consider asking for advice on the #hackers-new channel on [Discord](https://discord.gg/XQCQUdQc).
+If you need help, consider asking for advice on the #dev-chat channel on [Discord](https://discord.gg/XQCQUdQc).
