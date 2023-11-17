@@ -16,6 +16,7 @@ import 'package:star_book/data/repository/user_repo.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
 import 'package:star_book/domain/repository/mood_repo.dart';
 import 'package:star_book/domain/repository/user_repo.dart';
+import 'package:star_book/firebase.dart';
 
 abstract class Injector {
   // maybe pass config
@@ -28,8 +29,11 @@ abstract class Injector {
   static final clear = KiwiContainer().clear;
 
   Future<void> _initialise();
+
   Future<void> _initialisesServices();
+
   Future<void> _initialiseDatasource();
+
   Future<void> _initialiseRepositories();
 }
 
@@ -46,7 +50,25 @@ class _Injector extends Injector {
     final KiwiContainer container = KiwiContainer();
     final SharedPreferences preferences = await SharedPreferences.getInstance();
     container
-        .registerSingleton<AppSettings>((c) => AppSettingsImpl(preferences));
+      ..registerSingleton<AppSettings>((c) => AppSettingsImpl(preferences))
+      ..registerSingleton<FirebaseService>((c) {
+        final service = FirebaseService();
+        print('initialising firebase service');
+        service.initialise();
+        return service;
+      })
+      ..registerSingleton<ReportingService>((c) {
+        final reportingService = ReportingService();
+        print('initialising reporting service');
+        reportingService.initialise();
+        return reportingService;
+      })
+      ..registerSingleton<AnalyticsService>((c) {
+        final analyticsService = AnalyticsService();
+        print('initialising analytics service');
+        analyticsService.initialise();
+        return analyticsService;
+      });
   }
 
   @override

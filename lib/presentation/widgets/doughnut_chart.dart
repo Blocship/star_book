@@ -10,10 +10,12 @@ import 'package:syncfusion_flutter_charts/charts.dart';
 
 class MoodDoughnutChart extends StatefulWidget {
   final Map<Mood, Frequency> moodDataMap;
+  final bool isDataEmpty;
 
   const MoodDoughnutChart({
     Key? key,
     required this.moodDataMap,
+    this.isDataEmpty = false,
   }) : super(key: key);
 
   @override
@@ -47,23 +49,32 @@ class _MoodDoughnutChartState extends State<MoodDoughnutChart> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Text(
-                  'Mood of The Month',
-                  style: textTheme.bodySmall!
-                      .copyWith(fontWeight: FontWeight.w400),
-                ),
-                Text(
-                  '45%', // Percentage based on calculation
-                  style: textTheme.headlineLarge!
-                      .copyWith(fontWeight: FontWeight.w700),
-                ),
-                Text(
-                  'Productive',
-                  style: textTheme.bodyMedium!.copyWith(
-                    fontWeight: FontWeight.w500,
-                    color: themeColorStyle.secondaryColor,
+                if (widget.isDataEmpty) ...[
+                  Text(
+                    'Jot wins, track progress',
+                    style: textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
-                ),
+                ] else ...[
+                  Text(
+                    'Mood of The Month',
+                    style: textTheme.bodySmall!
+                        .copyWith(fontWeight: FontWeight.w400),
+                  ),
+                  Text(
+                    '45%', // Percentage based on calculation
+                    style: textTheme.headlineLarge!
+                        .copyWith(fontWeight: FontWeight.w700),
+                  ),
+                  Text(
+                    'Productive',
+                    style: textTheme.bodyMedium!.copyWith(
+                      fontWeight: FontWeight.w500,
+                      color: themeColorStyle.secondaryColor,
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
@@ -164,5 +175,6 @@ class ChartData {
 class MoodData {
   final Mood mood;
   final Frequency frequency;
+
   const MoodData({required this.mood, required this.frequency});
 }

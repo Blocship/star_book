@@ -1,14 +1,15 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
+import 'package:star_book/domain/repository/user_repo.dart';
 
 class ProfileScreenCubit extends Cubit<Points> {
   JournalRepo journalRepo;
 
-  // final UserRepo userRepo;
+  final UserRepo userRepo;
 
   ProfileScreenCubit({
     required this.journalRepo,
-    // required this.userRepo,
+    required this.userRepo,
   }) : super(Points.initial());
 
   Future<Points> getStreakAndPoint() async {
@@ -18,11 +19,10 @@ class ProfileScreenCubit extends Cubit<Points> {
   }
 
   /// TODO: getUserName Function
-// Future<String> getUserName() async {
-//   emit(const LoadingState());
-//   final user = await userRepo.getUserName();
-//   return user;
-// }
+  Future<String> getUserName(String userId) async {
+    final user = await userRepo.getUser(userId: userId);
+    return user.name;
+  }
 }
 
 class Points {
