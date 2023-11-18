@@ -4,13 +4,13 @@
   "version": "0.4.0",
   "configurations": [
     {
-      "name": "dev debug",
+      "name": "staging debug",
       "request": "launch",
       "type": "dart",
       "flutterMode": "debug", // "debug", "profile" or "release".
 		  "console": "debugConsole", // "debugConsole" or "terminal"
       "args": [
-        "--dart-define", "flavor=dev", // --dart-define=flavor=dev
+        "--dart-define", "flavor=qa", // --dart-define=flavor=dev
       ],
     }, 
     {
@@ -20,17 +20,7 @@
       "flutterMode": "debug",
 		  "console": "debugConsole",
       "args": [
-        "--dart-define", "flavor=prod",
-      ],
-    },
-    {
-      "name": "dev release",
-      "request": "launch",
-      "type": "dart",
-      "flutterMode": "release", // "debug", "profile" or "release".
-		  "console": "debugConsole", // "debugConsole" or "terminal"
-      "args": [
-        "--dart-define", "flavor=dev", // --dart-define=flavor=dev
+        "--dart-define-from-file=.env.prod.json",
       ],
     }, 
   ]

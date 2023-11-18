@@ -1,28 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-import 'package:star_book/cubits/cubit_state/cubit_state.dart';
-import 'package:star_book/cubits/intro_screen_cubit.dart';
+import 'package:star_book/app_settings.dart';
 import 'package:star_book/domain/models/user/user.dart';
 import 'package:star_book/domain/repository/user_repo.dart';
+import 'package:star_book/presentation/cubits/cubit_state/cubit_state.dart';
+import 'package:star_book/presentation/cubits/intro_screen_cubit.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
-import 'package:star_book/presentation/screen/home_screen.dart';
 import 'package:star_book/presentation/shared/elevated_buttons.dart';
 import 'package:star_book/presentation/shared/form_validator.dart';
 import 'package:star_book/presentation/shared/text_field.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
-
-class IntroScreenRoute extends RouteArg {
-  static const String path = '/intro';
-
-  const IntroScreenRoute() : super();
-
-  @override
-  Uri get uri => Uri(path: path);
-}
 
 class IntroScreen extends StatelessWidget implements Screen<IntroScreenRoute> {
   @override
@@ -89,6 +80,7 @@ class IntroScreen extends StatelessWidget implements Screen<IntroScreenRoute> {
                             .read<IntroScreenCubit>()
                             .createUser(nameController.text);
                         final datetime = DateTime.now();
+                        Injector.resolve<AppSettings>().setFreshInstalled();
                         context.goToScreen(
                             arg: HomeScreenRoute(
                           year: datetime.year,

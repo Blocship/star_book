@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
-import 'package:star_book/cubits/cubit_state/cubit_state.dart';
-import 'package:star_book/cubits/profile_screen_cubit.dart';
-import 'package:star_book/data/models/journal/journal.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
+import 'package:star_book/presentation/cubits/profile_screen_cubit.dart';
 import 'package:star_book/presentation/injector/injector.dart';
-import 'package:star_book/presentation/routes/app_router_name.dart';
 import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/doughnut_chart_widget.dart';
@@ -14,15 +10,6 @@ import 'package:star_book/presentation/shared/stats_widget.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
-
-class ProfileScreenRoute extends RouteArg {
-  static const String path = '/main/profile';
-
-  const ProfileScreenRoute() : super();
-
-  @override
-  Uri get uri => Uri(path: path);
-}
 
 class ProfileScreen extends StatelessWidget
     implements Screen<ProfileScreenRoute> {
@@ -41,10 +28,10 @@ class ProfileScreen extends StatelessWidget
       create: (context) => ProfileScreenCubit(
         journalRepo: Injector.resolve<JournalRepo>(),
       ),
-      child: BlocBuilder<ProfileScreenCubit, CubitState<Journal>>(
+      child: BlocBuilder<ProfileScreenCubit, Points>(
         builder: (context, state) {
-          // final getStreaks = context.read<ProfileScreenCubit>().getStreak();
-          // final getPoints = context.read<ProfileScreenCubit>().getPoint();
+          final getPoints =
+              context.read<ProfileScreenCubit>().getStreakAndPoint();
           return Scaffold(
             backgroundColor: Colors.transparent,
             appBar: SecondaryAppBar(
@@ -52,7 +39,8 @@ class ProfileScreen extends StatelessWidget
                 image: AssetImage('assets/icons/shooting_star.png'),
               ),
               trailing: Icons.menu_outlined,
-              trailingOnTap: () => context.goNamed(AppRouterName.settingScreen),
+              trailingOnTap: () =>
+                  context.pushScreen(arg: const SettingsScreenRoute()),
             ),
             body: SingleChildScrollView(
               child: Padding(
@@ -76,13 +64,18 @@ class ProfileScreen extends StatelessWidget
                       ),
                     ),
                     SizedBox(height: deviceHeight * 0.028),
-                    const StatsWidget(
-                      pointsImagePath: 'assets/icons/crown.png',
-                      points: '30',
-                      // points: getPoints.toString(),
-                      streakImagePath: 'assets/icons/fire.png',
-                      streak: '06',
-                      // streak: getStreaks.toString(),
+                    FutureBuilder(
+                      future: getPoints,
+                      builder: (context, snapshot) {
+                        return snapshot.hasData
+                            ? StatsWidget(
+                                pointsImagePath: 'assets/icons/crown.png',
+                                points: snapshot.data!.point,
+                                streakImagePath: 'assets/icons/fire.png',
+                                streak: snapshot.data!.streak,
+                              )
+                            : const SizedBox();
+                      },
                     ),
                     SizedBox(height: deviceHeight * 0.045),
                     Row(
@@ -104,7 +97,7 @@ class ProfileScreen extends StatelessWidget
                         const Spacer(),
                         GestureDetector(
                           onTap: () =>
-                              context.goNamed(AppRouterName.analyticScreen),
+                              context.goToScreen(arg: AnalyticsScreenRoute()),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [

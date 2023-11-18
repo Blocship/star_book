@@ -34,8 +34,7 @@ class BottomNavBar extends StatelessWidget {
       top: false,
       minimum: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
       child: Container(
-        width: deviceWidth * 0.9,
-        height: deviceHeight * 0.08,
+        height: 60,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(

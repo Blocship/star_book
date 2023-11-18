@@ -1,45 +1,39 @@
+import 'dart:developer';
+
+import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:star_book/domain/models/mood/day.dart';
+import 'package:star_book/firebase.dart';
+import 'package:star_book/presentation/screen/analytics_screens/analytics_tab_bar_view.dart';
 import 'package:star_book/presentation/screen/home_screen.dart';
 import 'package:star_book/presentation/screen/intro_screen.dart';
 import 'package:star_book/presentation/screen/journal_screens/journal_create_screen.dart';
 import 'package:star_book/presentation/screen/journal_screens/journal_detail_screen.dart';
+import 'package:star_book/presentation/screen/journal_screens/journal_edit_screen.dart';
+import 'package:star_book/presentation/screen/journal_screens/journal_list_screen.dart';
+import 'package:star_book/presentation/screen/license/license_agreement_screen.dart';
 import 'package:star_book/presentation/screen/main_screen.dart';
 import 'package:star_book/presentation/screen/profile_screen.dart';
+import 'package:star_book/presentation/screen/setting_screen.dart';
 import 'package:star_book/presentation/screen/splash_screen.dart';
 import 'package:star_book/presentation/screen/year_screen.dart';
 
-abstract class RouteArg {
-  const RouteArg();
-  String get parsedPath => uri.toString();
-  Uri get uri;
-}
-
-abstract class Screen<T extends RouteArg> {
-  T get arg;
-}
+part 'extension.dart';
+part 'route_argument.dart';
 
 class AppRouter {
-  ///Routes Paths
-
-  static const String journalCreateScreenPath = 'journalCreateScreen';
-  static const String moodPickerScreenPath = 'moodPickerScreen';
-  static const String datePickerScreenPath = 'datePickerScreen';
-
-  static const String journalEditScreenPath =
-      'mainScreen/monthScreen/journalEditScreen';
-  static const String analyticScreenPath = 'analyticScreen';
-  static const String settingScreenPath = 'settingScreen';
-  static const String licenseAgreementScreenPath = 'licenseAgreementScreen';
-
   static final _rootNavigatorKey = GlobalKey<NavigatorState>();
-  static final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
   static final GoRouter appRoutes = GoRouter(
-    debugLogDiagnostics: true,
     initialLocation: SplashScreenRoute.path,
     navigatorKey: _rootNavigatorKey,
+    redirect: (context, state) {
+      return null;
+    },
+    observers: [
+      FirebaseAnalyticsObserver(analytics: FirebaseAnalytics.instance),
+    ],
     routes: <RouteBase>[
       ///SplashScreen
       GoRoute(
@@ -62,100 +56,203 @@ class AppRouter {
       ),
 
       /// MainScreen
-      ShellRoute(
-        navigatorKey: _shellNavigatorKey,
-        builder: (context, state, child) {
+      StatefulShellRoute.indexedStack(
+        builder: (context, state, navigationShell) {
           const arg = MainScreenRoute();
-          return MainScreen(arg: arg, child: child);
+          return MainScreen(arg: arg, child: navigationShell);
         },
-        routes: <RouteBase>[
-          /// main/year
-          GoRoute(
-            path: YearScreenRoute.path,
-            parentNavigatorKey: _shellNavigatorKey,
-            // pageBuilder: (context, state) {
-            //   const arg = YearScreenRoute();
-            //   return const NoTransitionPage(child: YearScreen(arg: arg));
-            // },
-            builder: (context, state) {
-              const arg = YearScreenRoute();
-              return const YearScreen(arg: arg);
-            },
+        branches: [
+          StatefulShellBranch(
             routes: [
-              /// main/year/month
+              /// YearScreen
               GoRoute(
-                path: HomeScreenRoute.path,
-                parentNavigatorKey: _shellNavigatorKey,
-                // pageBuilder: (context, state) {
-                //   const arg = HomeScreenRoute(month: 3, year: 2023);
-                //   return const NoTransitionPage(child: HomeScreen(arg: arg));
-                // },
+                path: YearScreenRoute.path,
                 builder: (context, state) {
-                  const arg = HomeScreenRoute(month: 3, year: 2023);
-                  return const HomeScreen(arg: arg);
+                  const arg = YearScreenRoute();
+                  return const YearScreen(arg: arg);
                 },
+                routes: [
+                  /// HomeScreen
+                  GoRoute(
+                    path: HomeScreenRoute.path,
+                    builder: (context, state) {
+                      final arg =
+                          HomeScreenRoute.fromMap(state.queryParameters);
+                      return HomeScreen(arg: arg);
+                    },
+                  ),
+                ],
               ),
             ],
           ),
-          GoRoute(
-            path: ProfileScreenRoute.path,
-            parentNavigatorKey: _shellNavigatorKey,
-            // pageBuilder: (context, state) {
-            //   const arg = ProfileScreenRoute();
-            //   return const NoTransitionPage(child: ProfileScreen(arg: arg));
-            // },
-            builder: (context, state) {
-              const arg = ProfileScreenRoute();
-              return const ProfileScreen(arg: arg);
-            },
+          StatefulShellBranch(
+            routes: [
+              /// ProfileScreen
+              GoRoute(
+                path: ProfileScreenRoute.path,
+                builder: (context, state) {
+                  const arg = ProfileScreenRoute();
+                  return const ProfileScreen(arg: arg);
+                },
+                routes: [
+                  /// AnalyticsScreen
+                  GoRoute(
+                    path: AnalyticsScreenRoute.path,
+                    parentNavigatorKey: _rootNavigatorKey,
+                    builder: (context, state) {
+                      const arg = AnalyticsScreenRoute();
+                      return const AnalyticsScreen(arg: arg);
+                    },
+                  ),
+
+                  /// SettingsScreen
+                  GoRoute(
+                    path: SettingsScreenRoute.path,
+                    parentNavigatorKey: _rootNavigatorKey,
+                    builder: (context, state) {
+                      const arg = SettingsScreenRoute();
+                      return const SettingsScreen(arg: arg);
+                    },
+                    routes: [
+                      /// LicenseAgreementScreen
+                      GoRoute(
+                        path: LicenseAgreementScreenRoute.path,
+                        parentNavigatorKey: _rootNavigatorKey,
+                        builder: (context, state) {
+                          const arg = LicenseAgreementScreenRoute();
+                          return const LicenseAgreementScreen(arg: arg);
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
           ),
         ],
       ),
 
-      /// Journal
+      /// Journals
       GoRoute(
-        path: JournalCreateScreenRoute.path,
+        path: JournalsListScreenRoute.path,
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) {
-          final dayKey = state.params['date'];
-          final day = dayKey != null ? Day.fromDayKey(dayKey) : Day.today();
-          final arg = JournalCreateScreenRoute(day: day);
-          return JournalCreateScreen(arg: arg);
+          final arg = JournalsListScreenRoute.fromMap(state.queryParameters);
+          return JournalsListScreen(arg: arg);
         },
+        routes: [
+          /// JournalCreateScreen
+          GoRoute(
+            path: JournalCreateScreenRoute.path,
+            parentNavigatorKey: _rootNavigatorKey,
+            builder: (context, state) {
+              final arg =
+                  JournalCreateScreenRoute.fromMap(state.queryParameters);
+              return JournalCreateScreen(arg: arg);
+            },
+          ),
+
+          /// JournalDetailScreen
+          GoRoute(
+            path: JournalDetailScreenRoute.path,
+            parentNavigatorKey: _rootNavigatorKey,
+            builder: (context, state) {
+              final arg =
+                  JournalDetailScreenRoute(id: state.pathParameters['id']!);
+              return JournalDetailScreen(arg: arg);
+            },
+            routes: [
+              /// JournalEditScreen
+              GoRoute(
+                path: JournalEditScreenRoute.path,
+                parentNavigatorKey: _rootNavigatorKey,
+                builder: (context, state) {
+                  final arg =
+                      JournalEditScreenRoute(id: state.pathParameters['id']!);
+                  return JournalEditScreen(arg: arg);
+                },
+              ),
+            ],
+          ),
+        ],
       ),
-      GoRoute(
-        path: JournalDetailScreenRoute.path,
-        parentNavigatorKey: _rootNavigatorKey,
-        builder: (context, state) {
-          final arg = JournalDetailScreenRoute(id: state.params['id']!);
-          return JournalDetailScreen(arg: arg);
-        },
-      ),
-      // named AppRouterName.datePickerScreen
-      // GoRoute(
-      //     path: AppRouterName.datePickerScreen,
-      //     parentNavigatorKey: _rootNavigatorKey,
-      //     builder: (context, state) {
-      //       return DatePickerScreen();
-      //     }),
     ],
   );
-}
 
-extension XBuildContext on BuildContext {
-  void goToScreen({required RouteArg arg}) {
-    go(arg.parsedPath);
-  }
-
-  void pushScreen({required RouteArg arg}) {
-    push(arg.parsedPath);
-  }
-
-  String get location => GoRouter.of(this).location;
-
-  void shouldPop() {
-    if (canPop()) {
-      pop();
+  @visibleForTesting
+  static void printPaths() {
+    final routes = appRoutes.routerDelegate.builder.configuration.routes;
+    final routesLength = routes.length;
+    for (int e = 0; e < routesLength; e++) {
+      String decorator = _getDecorator(depth: 0, isLast: e == routesLength - 1);
+      _printRoute(
+        depth: 0,
+        decorator: decorator,
+        route: (routes[e]),
+      );
     }
+  }
+
+  static void _printRoute({
+    required int depth,
+    String decorator = "",
+    String previousPath = "",
+    required RouteBase route,
+  }) {
+    // ignore: no_leading_underscores_for_local_identifiers
+    late final String path;
+    if (route is GoRoute) {
+      if (route.path.isNotEmpty && !route.path.startsWith('/')) {
+        path = '$previousPath/${route.path}';
+      } else {
+        path = previousPath + route.path;
+      }
+      String screenName =
+          route.builder?.runtimeType.toString().split("=> ").last ?? "";
+      log("$decorator$path ($screenName)");
+    } else if (route is StatefulShellRoute) {
+      log("$decorator$previousPath(Shell Route)");
+      path = previousPath;
+    } else {
+      log("$decorator$previousPath(Unknown Route)");
+      path = previousPath;
+    }
+
+    if (route.routes.isEmpty) {
+      return;
+    }
+
+    final int newDepth = depth + 1;
+    final routesLength = route.routes.length;
+
+    for (int e = 0; e < routesLength; e++) {
+      String decorator = _getDecorator(
+        depth: newDepth,
+        isLast: e == routesLength - 1,
+      );
+
+      _printRoute(
+        depth: newDepth,
+        decorator: decorator,
+        previousPath: path,
+        route: route.routes[e] as GoRoute,
+      );
+    }
+  }
+
+  static String _getDecorator({
+    required int depth,
+    required bool isLast,
+  }) {
+    String decorator = "";
+    for (int i = 0; i < depth; i++) {
+      decorator += "  ";
+    }
+    if (isLast) {
+      decorator += " └─";
+    } else {
+      decorator += " ├─";
+    }
+    return decorator;
   }
 }

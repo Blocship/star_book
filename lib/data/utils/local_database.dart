@@ -15,4 +15,9 @@ abstract class LocalDatabase {
       directory: directory,
     );
   }
+
+  static Future<bool> clear() async {
+    final isar = Isar.getInstance()!;
+    return isar.close(deleteFromDisk: true);
+  }
 }

@@ -8,3 +8,16 @@ class Loader extends StatelessWidget {
     return const CircularProgressIndicator();
   }
 }
+
+class ScaffoldLoader extends StatelessWidget {
+  const ScaffoldLoader({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
+      ),
+    );
+  }
+}

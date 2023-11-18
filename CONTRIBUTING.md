@@ -104,22 +104,25 @@ lib
 ## Routes
 
 ```
+routes
 ├── / (SplashScreen)
 ├── /intro (IntroScreen)
 ├── /main (MainScreen)
-├── /main/year (YearScreen)
-├── /main/profile (ProfileScreen)
-├── /main/year/month (HomeScreen)
-├── /main/settings (SettingsScreen)
-├── /main/journal/:id (JournalDetailScreen)
-├── /main/journals?date=2020-01-01 (JournalsListScreen)
-├── /main/journal/:id/edit (EditJournalScreen)
-├── /main/journal/new?date=2020-01-01 (NewJournalScreen)
+│   ├── /main/year?year=2023 (YearScreen)
+│   │   └── /main/year/month?year=2023&month=4 (HomeScreen)
+│   └── /main/profile (ProfileScreen)
+│       ├── /main/profile/analytics (AnalyticsScreen)
+│       └── /main/profile/settings (SettingsScreen)
+│           └── /main/profile/settings/license (LicenseAgreementScreen) 
+├── /journal?date=2023-01-01 (JournalsListScreen)
+│   ├── /journal/new?date=2023-01-01 (JournalCreateScreen)
+│   └── /journal/:id (JournalDetailScreen)
+│       └── /journal/:id/edit (EditJournalScreen)
 ```
 
 ## 🐛 How to Report Bugs
 
-Please open a [new issue](https://github.com/hashirshoaeb/star_book/issues/new) including steps to reproduce the problem
+Please open a [new issue](https://github.com/Blocship/star_book/issues/new) including steps to reproduce the problem
 you're experiencing.
 
 Be sure to include as much information including screenshots, text output, and
@@ -127,7 +130,7 @@ both your expected and actual results.
 
 ## 🙏 Help needed
 
-Please checkout the [issues](https://github.com/hashirshoaeb/star_book/issues) and [project board](https://github.com/users/hashirshoaeb/projects/1)
+Please checkout the [issues](https://github.com/Blocship/star_book/issues) and [project board](https://github.com/users/hashirshoaeb/projects/1)
 
 <br />
 <p align="center">

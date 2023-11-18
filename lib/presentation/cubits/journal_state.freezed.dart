@@ -17,7 +17,6 @@ final _privateConstructorUsedError = UnsupportedError(
 /// @nodoc
 mixin _$JournalState {
   List<Journal> get journals => throw _privateConstructorUsedError;
-  String get journalId => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $JournalStateCopyWith<JournalState> get copyWith =>
@@ -30,7 +29,7 @@ abstract class $JournalStateCopyWith<$Res> {
           JournalState value, $Res Function(JournalState) then) =
       _$JournalStateCopyWithImpl<$Res, JournalState>;
   @useResult
-  $Res call({List<Journal> journals, String journalId});
+  $Res call({List<Journal> journals});
 }
 
 /// @nodoc
@@ -47,17 +46,12 @@ class _$JournalStateCopyWithImpl<$Res, $Val extends JournalState>
   @override
   $Res call({
     Object? journals = null,
-    Object? journalId = null,
   }) {
     return _then(_value.copyWith(
       journals: null == journals
           ? _value.journals
           : journals // ignore: cast_nullable_to_non_nullable
               as List<Journal>,
-      journalId: null == journalId
-          ? _value.journalId
-          : journalId // ignore: cast_nullable_to_non_nullable
-              as String,
     ) as $Val);
   }
 }
@@ -70,7 +64,7 @@ abstract class _$$_JournalStateCopyWith<$Res>
       __$$_JournalStateCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<Journal> journals, String journalId});
+  $Res call({List<Journal> journals});
 }
 
 /// @nodoc
@@ -85,17 +79,12 @@ class __$$_JournalStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? journals = null,
-    Object? journalId = null,
   }) {
     return _then(_$_JournalState(
       journals: null == journals
           ? _value._journals
           : journals // ignore: cast_nullable_to_non_nullable
               as List<Journal>,
-      journalId: null == journalId
-          ? _value.journalId
-          : journalId // ignore: cast_nullable_to_non_nullable
-              as String,
     ));
   }
 }
@@ -103,8 +92,7 @@ class __$$_JournalStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_JournalState implements _JournalState {
-  _$_JournalState(
-      {required final List<Journal> journals, required this.journalId})
+  _$_JournalState({required final List<Journal> journals})
       : _journals = journals;
 
   final List<Journal> _journals;
@@ -116,11 +104,8 @@ class _$_JournalState implements _JournalState {
   }
 
   @override
-  final String journalId;
-
-  @override
   String toString() {
-    return 'JournalState(journals: $journals, journalId: $journalId)';
+    return 'JournalState(journals: $journals)';
   }
 
   @override
@@ -128,14 +113,12 @@ class _$_JournalState implements _JournalState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_JournalState &&
-            const DeepCollectionEquality().equals(other._journals, _journals) &&
-            (identical(other.journalId, journalId) ||
-                other.journalId == journalId));
+            const DeepCollectionEquality().equals(other._journals, _journals));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType, const DeepCollectionEquality().hash(_journals), journalId);
+  int get hashCode =>
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_journals));
 
   @JsonKey(ignore: true)
   @override
@@ -145,14 +128,11 @@ class _$_JournalState implements _JournalState {
 }
 
 abstract class _JournalState implements JournalState {
-  factory _JournalState(
-      {required final List<Journal> journals,
-      required final String journalId}) = _$_JournalState;
+  factory _JournalState({required final List<Journal> journals}) =
+      _$_JournalState;
 
   @override
   List<Journal> get journals;
-  @override
-  String get journalId;
   @override
   @JsonKey(ignore: true)
   _$$_JournalStateCopyWith<_$_JournalState> get copyWith =>

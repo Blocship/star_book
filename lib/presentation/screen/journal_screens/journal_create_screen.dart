@@ -2,11 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:go_router/go_router.dart';
-import 'package:star_book/cubits/cubit_state/cubit_state.dart';
-import 'package:star_book/cubits/journal_create_cubit.dart';
 import 'package:star_book/domain/models/journal/journal.dart';
-import 'package:star_book/domain/models/mood/day.dart';
 import 'package:star_book/domain/repository/journal_repo.dart';
+import 'package:star_book/presentation/cubits/cubit_state/cubit_state.dart';
+import 'package:star_book/presentation/cubits/journal_create_cubit.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/screen/date_picker_screen.dart';
@@ -20,21 +19,7 @@ import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 
-class JournalCreateScreenRoute extends RouteArg {
-  // ?date=2020-01-01
-  static const String path = '/journal/new';
-
-  final Day? day;
-  const JournalCreateScreenRoute({this.day});
-
-  @override
-  Uri get uri => Uri(path: path, queryParameters: {
-        if (day != null) 'date': day!.dayKey,
-      });
-}
-
-class JournalCreateScreen extends StatefulWidget
-    implements Screen<JournalCreateScreenRoute> {
+class JournalCreateScreen extends StatefulWidget implements Screen<JournalCreateScreenRoute> {
   @override
   final JournalCreateScreenRoute arg;
   const JournalCreateScreen({super.key, required this.arg});
@@ -63,11 +48,11 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
               centerTitle: 'New Thought',
             ),
             body: SafeArea(
-              minimum: const EdgeInsets.symmetric(
-                  horizontal: CustomPadding.mediumPadding),
+              minimum: const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
               child: SingleChildScrollView(
                 child: FormBuilder(
                   key: _formKey,
+                  initialValue: JournalFormModel.initialValue(widget.arg.day),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     mainAxisSize: MainAxisSize.min,
@@ -76,12 +61,14 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
                       const AddNewDetails(),
                       const SizedBox(height: 30),
                       CustomDatePickerFormField(
-                        name: 'date',
-                        initialValue: DateTime.now(),
+                        name: JournalFormModel.createdAtKey,
                       ),
                       // FormBuilderDateTimePicker(name: name),
                       const SizedBox(height: 30),
-                      MoodPickerFormField(name: 'mood'),
+                      MoodPickerFormField(
+                        name: JournalFormModel.moodKey,
+                        validator: FormValidator.required(),
+                      ),
                       const SizedBox(height: 30),
                       CustomTextFormField(
                         fieldKey: JournalFormModel.titleKey,
@@ -107,11 +94,15 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
               ),
             ),
             floatingActionButton: SecondaryFloatingActionButton(
-                onTap: () async {
-                  _formKey.currentState?.save();
-                  print(_formKey.currentState?.value);
-                },
-                child: const Icon(Icons.check)),
+              onTap: ()  {
+                if (_formKey.currentState!.validate()) {
+                  context.read<JournalCreateCubit>().addJournal().then(
+                        (value) => context.shouldPop()
+                      );
+                }
+              },
+              child: const Icon(Icons.check),
+            ),
           );
         },
       ),
@@ -147,8 +138,7 @@ class AddNewDetails extends StatelessWidget {
             SizedBox(height: deviceHeight * 0.004),
             Text(
               'Write your today’s thought details below',
-              style:
-                  textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w400),
+              style: textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w400),
             ),
           ],
         ),

@@ -1,11 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:star_book/domain/models/journal/journal.dart';
+import 'package:star_book/domain/repository/journal_repo.dart';
+import 'package:star_book/presentation/cubits/cubit_state/cubit_state.dart';
+import 'package:star_book/presentation/cubits/journal_detail_cubit.dart';
+import 'package:star_book/presentation/injector/injector.dart';
+import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/shared/elevated_buttons.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 
 class CustomDialogBox extends StatelessWidget {
-  const CustomDialogBox({Key? key}) : super(key: key);
+  final String journalId;
+
+  const CustomDialogBox({
+    Key? key,
+    required this.journalId,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,13 +60,34 @@ class CustomDialogBox extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InactiveFilledButton(
-                        onTap: () {
-                          context.pop();
-                        },
-                        label: 'Cancel'),
-                    DangerFilledButton(
                       onTap: () => context.pop(),
-                      label: 'Delete Note',
+                      label: 'Cancel',
+                    ),
+                    BlocProvider<JournalDetailCubit>(
+                      create: (context) => JournalDetailCubit(
+                        journalRepo: Injector.resolve<JournalRepo>(),
+                      ),
+                      child:
+                          BlocBuilder<JournalDetailCubit, CubitState<Journal>>(
+                        builder: (context, state) {
+                          return DangerFilledButton(
+                            onTap: () {
+                              context
+                                  .read<JournalDetailCubit>()
+                                  .deleteJournal(journalId: journalId);
+
+                              /// Todo: FInd a way to pop 2 times
+                              /// we can navigate directly to List of journal Screen
+                              /// but, we need to pass date in JournalListScreen
+                              context.shouldPop();
+                              context.shouldPop();
+
+                              // Navigator.push(context, MaterialPageRoute(builder: (context) => ,))
+                            },
+                            label: 'Delete Note',
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),

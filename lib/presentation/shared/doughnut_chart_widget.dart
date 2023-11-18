@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/domain/repository/mood_repo.dart';
+import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/theme/styling/doughnut_chart_style.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/extension.dart';
@@ -13,20 +15,39 @@ class DoughnutChartWidget extends StatefulWidget {
 }
 
 class _DoughnutChartWidgetState extends State<DoughnutChartWidget> {
+  late final MoodRepo moodRepo;
+  List<ChartData> chartData = [];
+  @override
+  initState() {
+    super.initState();
+    moodRepo = Injector.resolve<MoodRepo>();
+    getData();
+  }
+
+  Future<void> getData() async {
+    final currentDate = DateTime.now();
+    final data = await moodRepo.getMoodFrequencyByMonth(
+        month: currentDate.month, year: currentDate.year);
+    final chartData = <ChartData>[];
+    data.info.forEach((mood, frequency) {
+      chartData.add(
+        ChartData(
+          x: mood.label,
+          y: frequency.toDouble(),
+          color: Color(mood.color),
+        ),
+      );
+    });
+    this.chartData = chartData;
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = context.textTheme;
     final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     final double deviceHeight = context.deviceHeight;
     final DoughnutChartStyle doughnutChartStyle = context.doughnutChartStyle;
-    final List<ChartData> chartData = [
-      ChartData(
-          x: 'Productive', y: 3.5, color: doughnutChartStyle.primaryColor),
-      ChartData(x: 'Sad', y: 1.5, color: doughnutChartStyle.secondaryColor),
-      ChartData(x: 'Angry', y: 1.5, color: doughnutChartStyle.tertiaryColor),
-      ChartData(x: 'Happy', y: 1.5, color: doughnutChartStyle.quinaryColor),
-      ChartData(x: 'Sick', y: 2.0, color: doughnutChartStyle.quaternaryColor),
-    ];
     return Container(
       height: deviceHeight * 0.3,
       decoration: BoxDecoration(
@@ -79,7 +100,11 @@ class _DoughnutChartWidgetState extends State<DoughnutChartWidget> {
 }
 
 class ChartData {
-  ChartData({required this.x, required this.y, required this.color});
+  ChartData({
+    required this.x,
+    required this.y,
+    required this.color,
+  });
 
   final String x;
   final double y;
