@@ -13,8 +13,7 @@ import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 
-class ProfileScreen extends StatelessWidget
-    implements Screen<ProfileScreenRoute> {
+class ProfileScreen extends StatelessWidget implements Screen<ProfileScreenRoute> {
   @override
   final ProfileScreenRoute arg;
 
@@ -33,9 +32,9 @@ class ProfileScreen extends StatelessWidget
       ),
       child: BlocBuilder<ProfileScreenCubit, Points>(
         builder: (context, state) {
-          final getPoints =
-              context.read<ProfileScreenCubit>().getStreakAndPoint();
+          final getPoints = context.read<ProfileScreenCubit>().getStreakAndPoint();
           final userId = Injector.resolve<AppSettings>().userId;
+          print('userId: $userId');
           final getUser = context.read<ProfileScreenCubit>().getUserName(userId);
           return Scaffold(
             backgroundColor: Colors.transparent,
@@ -44,21 +43,18 @@ class ProfileScreen extends StatelessWidget
                 image: AssetImage('assets/icons/shooting_star.png'),
               ),
               trailing: Icons.menu_outlined,
-              trailingOnTap: () =>
-                  context.pushScreen(arg: const SettingsScreenRoute()),
+              trailingOnTap: () => context.pushScreen(arg: const SettingsScreenRoute()),
             ),
             body: SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.symmetric(
-                    horizontal: CustomPadding.mediumPadding),
+                padding: const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
                       'Welcome Back',
-                      style: textTheme.headlineSmall!
-                          .copyWith(fontWeight: FontWeight.w400),
+                      style: textTheme.headlineSmall!.copyWith(fontWeight: FontWeight.w400),
                     ),
                     SizedBox(height: deviceHeight * 0.007),
                     FutureBuilder(
@@ -66,11 +62,11 @@ class ProfileScreen extends StatelessWidget
                       builder: (context, snapshot) {
                         return snapshot.hasData
                             ? Text(
-                                snapshot.data
-                                    .toString()
-                                    .capitalizeFirstLetter(),
+                                snapshot.data.toString().capitalizeFirstLetter(),
                                 style: textTheme.headlineMedium!.copyWith(
-                                    fontWeight: FontWeight.w700, height: 1.4),
+                                  fontWeight: FontWeight.w700,
+                                  height: 1.4,
+                                ),
                               )
                             : const SizedBox();
                       },
@@ -100,21 +96,19 @@ class ProfileScreen extends StatelessWidget
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const Image(
-                          image: AssetImage(
-                              'assets/icons/analytics_donut_chart.png'),
+                          image: AssetImage('assets/icons/analytics_donut_chart.png'),
                           height: 25,
                         ),
                         SizedBox(width: deviceWidth * 0.02),
                         Text(
                           'Analytics',
-                          style: textTheme.headlineMedium!.copyWith(
-                              fontWeight: FontWeight.w700, height: 1.4),
+                          style: textTheme.headlineMedium!
+                              .copyWith(fontWeight: FontWeight.w700, height: 1.4),
                         ),
                         // SizedBox(width: deviceWidth * 0.26),
                         const Spacer(),
                         GestureDetector(
-                          onTap: () => context.goToScreen(
-                              arg: const AnalyticsScreenRoute()),
+                          onTap: () => context.goToScreen(arg: const AnalyticsScreenRoute()),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [

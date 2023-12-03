@@ -35,10 +35,6 @@ void main() async {
   await Injector.resolve<ReportingService>().initialise();
   await Injector.resolve<AnalyticsService>().initialise();
 
-  // Injector.resolve<FirebaseService>();
-  // Injector.resolve<ReportingService>();
-  // Injector.resolve<AnalyticsService>();
-
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   final isFreshInstall = Injector.resolve<AppSettings>().isFreshInstall;

@@ -53,20 +53,14 @@ class _Injector extends Injector {
       ..registerSingleton<AppSettings>((c) => AppSettingsImpl(preferences))
       ..registerSingleton<FirebaseService>((c) {
         final service = FirebaseService();
-        print('initialising firebase service');
-        service.initialise();
         return service;
       })
       ..registerSingleton<ReportingService>((c) {
         final reportingService = ReportingService();
-        print('initialising reporting service');
-        reportingService.initialise();
         return reportingService;
       })
       ..registerSingleton<AnalyticsService>((c) {
         final analyticsService = AnalyticsService();
-        print('initialising analytics service');
-        analyticsService.initialise();
         return analyticsService;
       });
   }
