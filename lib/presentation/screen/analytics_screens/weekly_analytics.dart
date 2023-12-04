@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:star_book/domain/models/mood/mood.dart';
 import 'package:star_book/domain/models/mood/mood_frequency.dart';
 import 'package:star_book/domain/repository/mood_repo.dart';
 import 'package:star_book/presentation/cubits/analytiics_screen_cubit.dart';
@@ -18,7 +19,6 @@ class WeeklyAnalyticsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double deviceHeight = context.deviceHeight;
-    // final DoughnutChartStyle doughnutChartStyle = context.doughnutChartStyle;
 
     return BlocProvider<AnalyticsScreenCubit>(
       create: (context) => AnalyticsScreenCubit(
@@ -29,9 +29,40 @@ class WeeklyAnalyticsTab extends StatelessWidget {
       child: BlocBuilder<AnalyticsScreenCubit, CubitState<MoodFrequency>>(
         builder: (context, state) {
           return state.when(
-              initial: () => const Loader(),
+              initial: () => const SizedBox(),
               loading: () => const Loader(),
               loaded: (mood) {
+                if (mood.info.isEmpty) {
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: CustomPadding.mediumPadding),
+                    child: Column(
+                      children: [
+                        MoodDoughnutChart(
+                          isDataEmpty: true,
+                          moodDataMap: {
+                            const Mood(
+                                id: '',
+                                label: 'Productive',
+                                color: 0xFF32C74F): 20,
+                            const Mood(
+                                id: '', label: 'Angry', color: 0xFFFF3932): 20,
+                            const Mood(
+                                id: '', label: 'Sick', color: 0xFFFF9600): 20,
+                            const Mood(id: '', label: 'Sad', color: 0xFF565AC9):
+                                20,
+                            const Mood(
+                                id: '', label: 'Happy', color: 0xFF0179FF): 20,
+                          },
+                        ),
+                        SizedBox(height: deviceHeight * 0.05),
+                        const SelectableTab(),
+                        SizedBox(height: deviceHeight * 0.03),
+                        const LegendsChart(),
+                      ],
+                    ),
+                  );
+                }
                 return Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: CustomPadding.mediumPadding),

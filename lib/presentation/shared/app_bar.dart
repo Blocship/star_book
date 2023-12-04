@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
@@ -34,6 +35,10 @@ class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
           const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
       child: AppBar(
         elevation: 0,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+        ),
         backgroundColor: Colors.transparent,
         leadingWidth: deviceWidth * 0.175,
         leading: showLeading
@@ -109,6 +114,10 @@ class SecondaryAppBar extends StatelessWidget implements PreferredSizeWidget {
           const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
       child: AppBar(
         elevation: 0,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+        ),
         backgroundColor: Colors.transparent,
         leading: leading,
         leadingWidth: 24,

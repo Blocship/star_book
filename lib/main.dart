@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -21,48 +20,38 @@ String createDirectory({required String path}) {
 }
 
 void main() async {
-  runZonedGuarded<Future<void>>(() async {
-    WidgetsFlutterBinding.ensureInitialized();
-    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  WidgetsFlutterBinding.ensureInitialized();
+  final config = Config();
+  final directory = await getApplicationDocumentsDirectory();
+  await LocalDatabase.initialise(
+    directory: createDirectory(
+      path: directory.path + config.cacheDirectory,
+    ),
+  );
+  await Injector.initialise();
 
-    assert(
-      kEnvironment.isStaging,
-      'Please run in dev environment for debugging. i.e. --dart-define=flavor=qa',
-    );
-    // todo, use injector for services, to be accessible from anywhere
-    final service = FirebaseService();
-    await service.initialise();
-    final reportingService = ReportingService();
-    await reportingService.initialise();
-    final analyticsService = AnalyticsService();
-    await analyticsService.initialise();
+  /// Firebase Services initialisation
+  await Injector.resolve<FirebaseService>().initialise();
+  await Injector.resolve<ReportingService>().initialise();
+  await Injector.resolve<AnalyticsService>().initialise();
 
-    final config = Config();
-    final directory = await getApplicationDocumentsDirectory();
-    await LocalDatabase.initialise(
-      directory: createDirectory(
-        path: directory.path + config.cacheDirectory,
-      ),
-    );
-    await Injector.initialise();
-    final isFreshInstall = Injector.resolve<AppSettings>().isFreshInstall;
-    if (isFreshInstall) {
-      Injector.resolve<MoodRepo>().addDefaultMoods();
-    }
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
-    /// Run this statement when you reinstall your app
-    /// for adding moods in backend (run only once)
-    // Injector.resolve<MoodRepo>().addDefaultMoods();
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-        statusBarIconBrightness: Brightness.dark,
-      ),
-    );
-    runApp(const MyApp());
-  }, (error, stackTrace) async {
-    Injector.resolve<ReportingService>().recordError(error, stackTrace);
-  });
+  final isFreshInstall = Injector.resolve<AppSettings>().isFreshInstall;
+  if (isFreshInstall) {
+    Injector.resolve<MoodRepo>().addDefaultMoods();
+  }
+
+  /// Run this statement when you reinstall your app
+  /// for adding moods in backend (run only once)
+  // Injector.resolve<MoodRepo>().addDefaultMoods();
+  SystemChrome.setSystemUIOverlayStyle(
+    const SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+      statusBarIconBrightness: Brightness.dark,
+    ),
+  );
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {

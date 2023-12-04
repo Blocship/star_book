@@ -13,8 +13,16 @@ class AppSettingsImpl implements AppSettings {
   bool get isFreshInstall => _pref.getBool(FreshInstall.key) ?? true;
 
   @override
+  String get userId => _pref.getString(FreshInstall.userIdKey) ?? '';
+
+  @override
   Future<void> setFreshInstalled() async {
     await _pref.setBool(FreshInstall.key, false);
+  }
+
+  @override
+  Future<void> setUserId(String userId) async {
+    await _pref.setString(FreshInstall.userIdKey, userId);
   }
 
   @override
@@ -25,6 +33,13 @@ class AppSettingsImpl implements AppSettings {
 
 abstract class FreshInstall {
   static const String key = 'isFreshInstall';
+  static const String userIdKey = 'userId';
+
   bool get isFreshInstall;
+
+  String get userId;
+
   Future<void> setFreshInstalled();
+
+  Future<void> setUserId(String userId);
 }

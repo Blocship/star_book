@@ -38,7 +38,6 @@ dependencies:
   firebase_crashlytics: ^3.3.7
   firebase_analytics: ^10.6.2
   firebase_remote_config: ^4.3.2
-  package_info: ^2.0.2
 
 
 dev_dependencies:

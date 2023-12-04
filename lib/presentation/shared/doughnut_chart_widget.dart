@@ -17,6 +17,7 @@ class DoughnutChartWidget extends StatefulWidget {
 class _DoughnutChartWidgetState extends State<DoughnutChartWidget> {
   late final MoodRepo moodRepo;
   List<ChartData> chartData = [];
+
   @override
   initState() {
     super.initState();
@@ -44,6 +45,36 @@ class _DoughnutChartWidgetState extends State<DoughnutChartWidget> {
 
   @override
   Widget build(BuildContext context) {
+    if (chartData.isEmpty) {
+      chartData = [
+        ChartData(
+          x: 'Productive',
+          y: 20,
+          color: const Color(0xFF32C74F),
+        ),
+        ChartData(
+          x: 'Angry',
+          y: 20,
+          color: const Color(0xFFFF3932),
+        ),
+        ChartData(
+          x: 'Sick',
+          y: 20,
+          color: const Color(0xFFFF9600),
+        ),
+        ChartData(
+          x: 'Sad',
+          y: 20,
+          color: const Color(0xFF565AC9),
+        ),
+        ChartData(
+          x: 'Happy',
+          y: 20,
+          color: const Color(0xFF0179FF),
+        ),
+      ];
+    }
+
     final TextTheme textTheme = context.textTheme;
     final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     final double deviceHeight = context.deviceHeight;

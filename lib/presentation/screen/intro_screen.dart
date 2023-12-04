@@ -18,6 +18,7 @@ import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
 class IntroScreen extends StatelessWidget implements Screen<IntroScreenRoute> {
   @override
   final IntroScreenRoute arg;
+
   IntroScreen({
     super.key,
     required this.arg,
@@ -39,59 +40,62 @@ class IntroScreen extends StatelessWidget implements Screen<IntroScreenRoute> {
         builder: (context, state) {
           return GradientScaffold(
             resizeToAvoidBottomInset: false,
-            body: Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: CustomPadding.mediumPadding),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: deviceHeight * 0.08),
-                  Image(
-                      image: const AssetImage('assets/images/intro_image.png'),
-                      height: deviceHeight * 0.2),
-                  SizedBox(height: deviceHeight * 0.024),
-                  Text(
-                    'So nice to meet you!',
-                    textAlign: TextAlign.center,
-                    style: textTheme.headlineMedium!
-                        .copyWith(fontWeight: FontWeight.w400),
-                  ),
-                  Text(
-                    'What do your friends call you?',
-                    textAlign: TextAlign.center,
-                    style: textTheme.headlineMedium!
-                        .copyWith(fontWeight: FontWeight.w700),
-                  ),
-                  SizedBox(height: deviceHeight * 0.028),
-                  FormBuilder(
-                    key: _formKey,
-                    child: PrimaryTextField(
-                      hintText: 'Enter your name',
-                      controller: nameController,
-                      validator: FormValidator.nameValidator,
+            body: SingleChildScrollView(
+              child: Container(
+                height: deviceHeight,
+                padding: const EdgeInsets.symmetric(
+                    horizontal: CustomPadding.mediumPadding),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Spacer(),
+                    Image(
+                        image: const AssetImage('assets/images/intro_image.png'),
+                        height: deviceHeight * 0.2),
+                    SizedBox(height: deviceHeight * 0.024),
+                    Text(
+                      'So nice to meet you!',
+                      textAlign: TextAlign.center,
+                      style: textTheme.headlineMedium!
+                          .copyWith(fontWeight: FontWeight.w400),
                     ),
-                  ),
-                  const Spacer(),
-                  PrimaryFilledButton(
-                    onTap: () {
-                      if (_formKey.currentState!.validate()) {
-                        context
-                            .read<IntroScreenCubit>()
-                            .createUser(nameController.text);
-                        final datetime = DateTime.now();
-                        Injector.resolve<AppSettings>().setFreshInstalled();
-                        context.goToScreen(
-                            arg: HomeScreenRoute(
-                          year: datetime.year,
-                          month: datetime.month,
-                        ));
-                      }
-                    },
-                    label: 'Continue',
-                  ),
-                  SizedBox(height: deviceHeight * 0.03),
-                ],
+                    Text(
+                      'What do your friends call you?',
+                      textAlign: TextAlign.center,
+                      style: textTheme.headlineMedium!
+                          .copyWith(fontWeight: FontWeight.w700),
+                    ),
+                    SizedBox(height: deviceHeight * 0.028),
+                    FormBuilder(
+                      key: _formKey,
+                      child: PrimaryTextField(
+                        hintText: 'Enter your name',
+                        controller: nameController,
+                        validator: FormValidator.nameValidator,
+                      ),
+                    ),
+                    const Spacer(flex: 5),
+                    PrimaryFilledButton(
+                      onTap: () {
+                        if (_formKey.currentState!.validate()) {
+                          context
+                              .read<IntroScreenCubit>()
+                              .createUser(nameController.text);
+                          final datetime = DateTime.now();
+                          Injector.resolve<AppSettings>().setFreshInstalled();
+                          context.goToScreen(
+                              arg: HomeScreenRoute(
+                            year: datetime.year,
+                            month: datetime.month,
+                          ));
+                        }
+                      },
+                      label: 'Continue',
+                    ),
+                    SizedBox(height: deviceHeight * 0.03),
+                  ],
+                ),
               ),
             ),
           );
