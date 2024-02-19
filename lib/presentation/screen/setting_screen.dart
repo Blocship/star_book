@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:star_book/app_settings.dart';
+import 'package:star_book/config.dart';
 import 'package:star_book/data/utils/local_database.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
@@ -115,7 +116,7 @@ class SettingsScreen extends StatelessWidget
                     return const SizedBox();
                   }
                   return Text(
-                    'App version ${sanpshot.data!.version} (${sanpshot.data!.buildNumber})',
+                    'v ${sanpshot.data!.version}-${kEnvironment.value}+${sanpshot.data!.buildNumber}',
                     style: textTheme.bodyMedium!
                         .copyWith(fontWeight: FontWeight.w400),
                   );

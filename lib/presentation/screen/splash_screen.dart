@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:star_book/app_settings.dart';
+import 'package:star_book/config.dart';
 import 'package:star_book/presentation/injector/injector.dart';
 import 'package:star_book/presentation/routes/routes.dart';
 import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
@@ -63,9 +65,19 @@ class _SplashScreenState extends State<SplashScreen>
                     fontWeight: FontWeight.w700,
                     color: themeColorStyle.secondaryColor)),
             SizedBox(height: deviceHeight * 0.33),
-            Text('Beta Version V2.0',
-                style: textTheme.bodyMedium!
-                    .copyWith(fontWeight: FontWeight.w400)),
+            FutureBuilder<PackageInfo>(
+              future: PackageInfo.fromPlatform(),
+              builder: (context, sanpshot) {
+                if (!sanpshot.hasData) {
+                  return const SizedBox();
+                }
+                return Text(
+                  'v ${sanpshot.data!.version}-${kEnvironment.value}+${sanpshot.data!.buildNumber}',
+                  style: textTheme.bodyMedium!
+                      .copyWith(fontWeight: FontWeight.w400),
+                );
+              },
+            ),
             SizedBox(height: deviceHeight * 0.05),
           ],
         ),
