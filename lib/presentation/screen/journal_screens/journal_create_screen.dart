@@ -19,7 +19,8 @@ import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 import 'package:star_book/presentation/widgets/floating_action_button.dart';
 
-class JournalCreateScreen extends StatefulWidget implements Screen<JournalCreateScreenRoute> {
+class JournalCreateScreen extends StatefulWidget
+    implements Screen<JournalCreateScreenRoute> {
   @override
   final JournalCreateScreenRoute arg;
   const JournalCreateScreen({super.key, required this.arg});
@@ -48,7 +49,8 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
               centerTitle: 'New Thought',
             ),
             body: SafeArea(
-              minimum: const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
+              minimum: const EdgeInsets.symmetric(
+                  horizontal: CustomPadding.mediumPadding),
               child: SingleChildScrollView(
                 child: FormBuilder(
                   key: _formKey,
@@ -70,22 +72,17 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
                         validator: FormValidator.required(),
                       ),
                       const SizedBox(height: 30),
-                      CustomTextFormField(
+                      const CustomTextFormField(
                         fieldKey: JournalFormModel.titleKey,
                         heading: 'Title',
                         label: 'Enter Mood Title',
-                        validator: FormValidator.compose([
-                          FormValidator.required(),
-                          FormValidator.minLength(3),
-                        ]),
                       ),
                       const SizedBox(height: 30),
-                      CustomTextFormField(
+                      const CustomTextFormField(
                         fieldKey: JournalFormModel.memoKey,
                         heading: 'Note',
                         label: 'Write Note',
                         isMultiline: true,
-                        validator: FormValidator.required(),
                       ),
                       const SizedBox(height: 30),
                     ],
@@ -94,11 +91,12 @@ class _JournalCreateScreenState extends State<JournalCreateScreen> {
               ),
             ),
             floatingActionButton: SecondaryFloatingActionButton(
-              onTap: ()  {
+              onTap: () {
                 if (_formKey.currentState!.validate()) {
-                  context.read<JournalCreateCubit>().addJournal().then(
-                        (value) => context.shouldPop()
-                      );
+                  context
+                      .read<JournalCreateCubit>()
+                      .addJournal()
+                      .then((value) => context.shouldPop());
                 }
               },
               child: const Icon(Icons.check),
@@ -138,7 +136,8 @@ class AddNewDetails extends StatelessWidget {
             SizedBox(height: deviceHeight * 0.004),
             Text(
               'Write your today’s thought details below',
-              style: textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w400),
+              style:
+                  textTheme.labelLarge!.copyWith(fontWeight: FontWeight.w400),
             ),
           ],
         ),
