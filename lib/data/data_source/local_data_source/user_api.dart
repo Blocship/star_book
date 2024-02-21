@@ -1,24 +1,38 @@
 import 'package:isar/isar.dart';
+import 'package:star_book/app_settings.dart';
 import 'package:star_book/data/data_source/local_data_source/base_api.dart';
 import 'package:star_book/data/models/user/user.dart';
 import 'package:star_book/data/utils/utils.dart';
+import 'package:star_book/presentation/injector/injector.dart';
 
 abstract class IUserApi extends BaseApi {
   static const String collectionName = 'userCollection';
-  Future<void> create(User user);
+
+  Future<void> create(UserBody user);
+
   Future<User> fetch(String uuid);
-  Future<void> update(User user);
+
+  Future<void> update(String uuid, UserBody user);
+
   Future<void> delete(String uuid);
 }
 
 class LSUserApi extends IUserApi {
   final IsarCollection<User> collection;
+
   LSUserApi({required this.collection});
 
   @override
-  Future<void> create(User user) async {
+  Future<void> create(UserBody user) async {
+    final newUser = User(
+      id: Util.uid,
+      name: user.name,
+    );
+
+    Injector.resolve<AppSettings>().setUserId(newUser.id);
+
     await collection.isar.writeTxn(() async {
-      await collection.put(user);
+      await collection.put(newUser);
     });
     return;
   }
@@ -35,9 +49,14 @@ class LSUserApi extends IUserApi {
   }
 
   @override
-  Future<void> update(User user) async {
+  Future<void> update(String uuid, UserBody user) async {
+    final user = await fetch(uuid);
+    final updatedUser = User(
+      id: user.id,
+      name: user.name,
+    );
     await collection.isar.writeTxn(() async {
-      await collection.put(user);
+      await collection.put(updatedUser);
     });
   }
 

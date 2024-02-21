@@ -51,3 +51,45 @@ extension XJournal on Journal {
     return journal;
   }
 }
+
+@freezed
+class JournalBody with _$JournalBody {
+  const JournalBody._();
+  const factory JournalBody({
+    required final Mood mood,
+    required final String title,
+    required final String memo,
+    final DateTime? createdAt,
+  }) = _JournalBody;
+
+  factory JournalBody.initial() => JournalBody(
+        mood: Mood.initial(),
+        title: '',
+        memo: '',
+      );
+
+  factory JournalBody.fromJournal(Journal journal) => JournalBody(
+        mood: journal.mood,
+        title: journal.title,
+        memo: journal.memo,
+        createdAt: journal.createdAt,
+      );
+
+  factory JournalBody.fromLSJournal(J.Journal journal) => JournalBody(
+      mood: Mood.fromLSMood(journal.mood),
+      title: journal.title,
+      memo: journal.memo,
+      createdAt: journal.createdAt);
+}
+
+extension XJournalBody on JournalBody {
+  J.JournalBody get toLSJournalBody {
+    var journalBody = J.JournalBody(
+      title: title,
+      memo: memo,
+      createdAt: createdAt,
+      mood: mood.toLSMood,
+    );
+    return journalBody;
+  }
+}

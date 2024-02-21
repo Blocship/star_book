@@ -1,4 +1,10 @@
+import 'dart:developer';
+
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/utils/extension.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class CustomTile extends StatelessWidget {
   final String title;
@@ -14,35 +20,66 @@ class CustomTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     return ListTile(
       title: Text(
         title,
-        style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-              fontWeight: FontWeight.w600,
-              color: const Color(0xFF1F1F1F),
-            ),
+        style: textTheme.bodyLarge!.copyWith(
+          fontWeight: FontWeight.w600,
+          color: themeColorStyle.secondaryColor,
+        ),
       ),
       subtitle: Text(
         subtitle,
-        style: Theme.of(context)
-            .textTheme
-            .bodyMedium!
-            .copyWith(fontWeight: FontWeight.w400),
+        style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w400),
       ),
-      trailing: const Icon(
+      trailing: Icon(
         Icons.keyboard_arrow_right,
-        color: Color(0xFF1F1F1F),
+        color: themeColorStyle.secondaryColor,
       ),
       onTap: onTap,
     );
   }
 }
 
-class BlocShipTile extends StatelessWidget {
+class BlocShipTile extends StatefulWidget {
   const BlocShipTile({Key? key}) : super(key: key);
 
   @override
+  State<BlocShipTile> createState() => _BlocShipTileState();
+}
+
+class _BlocShipTileState extends State<BlocShipTile> {
+  late TapGestureRecognizer _onTapRecognizerBlocship;
+
+  @override
+  void initState() {
+    super.initState();
+    _onTapRecognizerBlocship = TapGestureRecognizer()
+      ..onTap = _openBlocshipLink;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _onTapRecognizerBlocship.dispose();
+  }
+
+  void _openBlocshipLink() async {
+    const link = 'https://blocship.io/';
+
+    try {
+      await launchUrlString(link, mode: LaunchMode.inAppWebView);
+    } on Exception catch (e) {
+      log('Failed to launch link $link: $e');
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -55,18 +92,16 @@ class BlocShipTile extends StatelessWidget {
           textScaleFactor: MediaQuery.of(context).textScaleFactor,
           text: TextSpan(
             text: 'Powered by ',
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium!
-                .copyWith(fontWeight: FontWeight.w400),
+            style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w400),
             children: [
               TextSpan(
                 text: 'Blocship',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      fontWeight: FontWeight.w400,
-                      color: const Color(0xFF1F1F1F),
-                      decoration: TextDecoration.underline,
-                    ),
+                style: textTheme.bodyMedium!.copyWith(
+                  fontWeight: FontWeight.w400,
+                  color: themeColorStyle.secondaryColor,
+                  decoration: TextDecoration.underline,
+                ),
+                recognizer: _onTapRecognizerBlocship,
               ),
             ],
           ),
@@ -76,11 +111,43 @@ class BlocShipTile extends StatelessWidget {
   }
 }
 
-class UxerShipTile extends StatelessWidget {
+class UxerShipTile extends StatefulWidget {
   const UxerShipTile({Key? key}) : super(key: key);
 
   @override
+  State<UxerShipTile> createState() => _UxerShipTileState();
+}
+
+class _UxerShipTileState extends State<UxerShipTile> {
+  late TapGestureRecognizer _onTapRecognizerUxership;
+
+  @override
+  void initState() {
+    super.initState();
+    _onTapRecognizerUxership = TapGestureRecognizer()
+      ..onTap = _openUxershipLink;
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    _onTapRecognizerUxership.dispose();
+  }
+
+  void _openUxershipLink() async {
+    const link = 'https://blocship.io/';
+
+    try {
+      await launchUrlString(link, mode: LaunchMode.inAppWebView);
+    } on Exception catch (e) {
+      print('Failed to launch link $link: $e');
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -93,31 +160,27 @@ class UxerShipTile extends StatelessWidget {
           textScaleFactor: MediaQuery.of(context).textScaleFactor,
           text: TextSpan(
             text: 'Design & Crafted with ',
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium!
-                .copyWith(fontWeight: FontWeight.w400),
+            style: textTheme.bodyMedium!.copyWith(fontWeight: FontWeight.w400),
             children: [
-              const WidgetSpan(
+              WidgetSpan(
                 child: Icon(
                   Icons.favorite,
-                  color: Colors.red,
+                  color: themeColorStyle.nonaryColor,
                   size: 17,
                 ),
               ),
               TextSpan(
                   text: ' by ',
-                  style: Theme.of(context)
-                      .textTheme
-                      .bodyMedium!
+                  style: textTheme.bodyMedium!
                       .copyWith(fontWeight: FontWeight.w400)),
               TextSpan(
                 text: 'Uxership',
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      fontWeight: FontWeight.w400,
-                      color: const Color(0xFF1F1F1F),
-                      decoration: TextDecoration.underline,
-                    ),
+                style: textTheme.bodyMedium!.copyWith(
+                  fontWeight: FontWeight.w400,
+                  color: themeColorStyle.secondaryColor,
+                  decoration: TextDecoration.underline,
+                ),
+                recognizer: _onTapRecognizerUxership,
               ),
             ],
           ),

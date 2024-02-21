@@ -1,4 +1,4 @@
-package com.hashirshoaeb.StarBook.star_book
+package com.hashirshoaeb.StarBook
 
 import io.flutter.embedding.android.FlutterActivity
 

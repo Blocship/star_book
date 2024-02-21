@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
 
 class StatsWidget extends StatelessWidget {
   final String pointsImagePath;
-  final String points;
+  final int points;
   final String streakImagePath;
-  final String streak;
+  final int streak;
 
   const StatsWidget({
     Key? key,
@@ -17,16 +19,22 @@ class StatsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceHeight = context.deviceHeight;
     return Container(
-      height: screenHeight * 0.26,
+      height: deviceHeight * 0.26,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(20),
         color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: themeColorStyle.secondaryColor.withOpacity(0.1),
+            blurRadius: 100,
+          ),
+        ],
       ),
-      padding: const EdgeInsets.symmetric(
-          vertical: CustomPadding.smallPadding,
-          horizontal: CustomPadding.mediumPadding),
+      padding:
+          const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -48,7 +56,7 @@ class StatsWidget extends StatelessWidget {
 
 class CustomCard extends StatelessWidget {
   final String imagePath;
-  final String count;
+  final int count;
   final String title;
 
   const CustomCard({
@@ -60,23 +68,26 @@ class CustomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceHeight = context.deviceHeight;
     return Expanded(
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
+          SizedBox(height: deviceHeight * 0.035),
           Image(image: AssetImage(imagePath), height: 55),
+          SizedBox(height: deviceHeight * 0.025),
           Text(
-            count,
-            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                fontWeight: FontWeight.w700, color: const Color(0xFF1F1F1F)),
+            '$count',
+            style: textTheme.headlineLarge!.copyWith(
+                fontWeight: FontWeight.w700,
+                color: themeColorStyle.secondaryColor),
           ),
+          SizedBox(height: deviceHeight * 0.02),
           Text(
             title,
-            style: Theme.of(context)
-                .textTheme
-                .bodyLarge!
-                .copyWith(fontWeight: FontWeight.w400),
+            style: textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w400),
           ),
         ],
       ),

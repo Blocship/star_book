@@ -15,7 +15,7 @@ The following are guidelines for contributing to this project.
 > pull requests from branches on your fork. To do this, run:
 >
 > ```
-> git remote add upstream https://github.com/hashirshoaeb/star_book.git
+> git remote add upstream https://github.com/Blocship/star_book.git
 > git fetch upstream
 > git branch --set-upstream-to=upstream/master master
 > ```
@@ -52,9 +52,77 @@ The following are guidelines for contributing to this project.
 
 Read more from linting here: https://dart.dev/guides/language/effective-dart/style
 
+## Architecture Diagram
+
+```
+                                       +-----------------+
+                                       |                 |
++------+  Events  +------+  Request    |                 |
+|      +--------->|      +------------>|                 |
+|  UI  |          | Bloc |             |   Repository    |
+|      <----------+      <-------------+                 |
++------+  States  +------+  Response   |                 |
+                                       |                 |
+                                       +-------^-----+---+
+                                               |     |
+                                      Response |     |  Request
+                                               |     |
+                                       +-------+-----v--+
+                                       |                |
+                             Class     | +------------+ |
+                  +-------+  Object    | |API Provider| |
+                  |       +----------->| +------------+ |
+                  | Model |            |                |
+                  |       <------------+   +--------+   |
+                  +-------+   Json     |   |Local DB|   |
+                                       |   +--------+   |
+                                       |                |
+                                       +----------------+
+```
+
+## Directory Structure
+
+```
+lib
+├── data
+│   ├── data_source
+│   ├── models
+│   ├── repository
+|   └── utils
+├── domain
+│   ├── models
+|   └── repository
+├── presentation
+│   ├── service
+│   ├── shared
+│   ├── theme
+│   ├── utils
+|   └── screen
+└── main.dart
+```
+
+## Routes
+
+```
+routes
+├── / (SplashScreen)
+├── /intro (IntroScreen)
+├── /main (MainScreen)
+│   ├── /main/year?year=2023 (YearScreen)
+│   │   └── /main/year/month?year=2023&month=4 (HomeScreen)
+│   └── /main/profile (ProfileScreen)
+│       ├── /main/profile/analytics (AnalyticsScreen)
+│       └── /main/profile/settings (SettingsScreen)
+│           └── /main/profile/settings/license (LicenseAgreementScreen) 
+├── /journal?date=2023-01-01 (JournalsListScreen)
+│   ├── /journal/new?date=2023-01-01 (JournalCreateScreen)
+│   └── /journal/:id (JournalDetailScreen)
+│       └── /journal/:id/edit (EditJournalScreen)
+```
+
 ## 🐛 How to Report Bugs
 
-Please open a [new issue](https://github.com/hashirshoaeb/star_book/issues/new) including steps to reproduce the problem
+Please open a [new issue](https://github.com/Blocship/star_book/issues/new) including steps to reproduce the problem
 you're experiencing.
 
 Be sure to include as much information including screenshots, text output, and
@@ -62,7 +130,7 @@ both your expected and actual results.
 
 ## 🙏 Help needed
 
-Please checkout the [issues](https://github.com/hashirshoaeb/star_book/issues) and [project board](https://github.com/users/hashirshoaeb/projects/1)
+Please checkout the [issues](https://github.com/Blocship/star_book/issues) and [project board](https://github.com/users/hashirshoaeb/projects/1)
 
 <br />
 <p align="center">

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:star_book/theme/styling/filled_button_style.dart';
+import 'package:star_book/presentation/theme/styling/filled_button_style.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 
 class PrimaryFilledButton extends StatelessWidget {
   final VoidCallback onTap;
@@ -13,13 +14,15 @@ class PrimaryFilledButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.fromSize(
-      size: const Size(306, 40),
+    final double deviceHeight = context.deviceHeight;
+    final double deviceWidth = context.deviceWidth;
+    final CustomButtonTheme customButtonTheme = context.customButtonTheme;
+    return SizedBox(
+      width: deviceWidth,
+      height: deviceHeight * 0.052,
       child: ElevatedButton(
         onPressed: onTap,
-        style: Theme.of(context)
-            .extension<CustomButtonTheme>()!
-            .primaryFilledButtonTheme,
+        style: customButtonTheme.primaryFilledButtonTheme,
         child: Text(label),
       ),
     );
@@ -38,13 +41,13 @@ class DangerFilledButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CustomButtonTheme customButtonTheme = context.customButtonTheme;
+
     return SizedBox.fromSize(
       size: const Size(125, 40),
       child: ElevatedButton(
         onPressed: onTap,
-        style: Theme.of(context)
-            .extension<CustomButtonTheme>()!
-            .dangerFilledButtonTheme,
+        style: customButtonTheme.dangerFilledButtonTheme,
         child: Text(label),
       ),
     );
@@ -63,13 +66,13 @@ class InactiveFilledButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final CustomButtonTheme customButtonTheme = context.customButtonTheme;
+
     return SizedBox.fromSize(
       size: const Size(125, 40),
       child: ElevatedButton(
         onPressed: onTap,
-        style: Theme.of(context)
-            .extension<CustomButtonTheme>()!
-            .inactiveFilledButtonTheme,
+        style: customButtonTheme.inactiveFilledButtonTheme,
         child: Text(label),
       ),
     );

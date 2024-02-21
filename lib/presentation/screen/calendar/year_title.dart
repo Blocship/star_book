@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 
 class YearTitle extends StatelessWidget {
   const YearTitle(this.year, {super.key});
@@ -7,11 +8,12 @@ class YearTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = context.textTheme;
     return Padding(
       padding: const EdgeInsets.only(left: 6),
       child: Text(
         year.toString(),
-        style: Theme.of(context).textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.w700),
+        style: textTheme.headlineMedium!.copyWith(fontWeight: FontWeight.w700),
       ),
     );
   }

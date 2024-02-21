@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:star_book/presentation/screen/calendar/custom_calendar.dart';
-import 'package:star_book/widgets/gradient_scaffold.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:star_book/app_settings.dart';
+import 'package:star_book/config.dart';
+import 'package:star_book/presentation/injector/injector.dart';
+import 'package:star_book/presentation/routes/routes.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/utils/extension.dart';
+import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
 
-class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+class SplashScreen extends StatefulWidget implements Screen<SplashScreenRoute> {
+  @override
+  final SplashScreenRoute arg;
+
+  const SplashScreen({Key? key, required this.arg}) : super(key: key);
 
   @override
   State<SplashScreen> createState() => _SplashScreenState();
@@ -20,8 +29,12 @@ class _SplashScreenState extends State<SplashScreen>
       duration: const Duration(milliseconds: 2000),
       vsync: this,
     )..forward().then((_) {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const CustomCalendar()));
+        final isFreshInstall = Injector.resolve<AppSettings>().isFreshInstall;
+        if (isFreshInstall) {
+          context.goToScreen(arg: const IntroScreenRoute());
+        } else {
+          context.goToScreen(arg: const HomeScreenRoute());
+        }
       });
   }
 
@@ -33,7 +46,10 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceHeight = context.deviceHeight;
+
     return GradientScaffold(
       body: Center(
         child: Column(
@@ -43,17 +59,26 @@ class _SplashScreenState extends State<SplashScreen>
               image: AssetImage('assets/icons/splash_screen_logo.png'),
               width: 115,
             ),
-            SizedBox(height: screenHeight * 0.02),
+            SizedBox(height: deviceHeight * 0.02),
             Text('Starbook',
-                style: Theme.of(context).textTheme.headlineLarge!.copyWith(
-                    fontWeight: FontWeight.w700, color: Colors.black)),
-            SizedBox(height: screenHeight * 0.33),
-            Text('Beta Version V2.0',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium!
-                    .copyWith(fontWeight: FontWeight.w400)),
-            SizedBox(height: screenHeight * 0.05),
+                style: textTheme.headlineLarge!.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color: themeColorStyle.secondaryColor)),
+            SizedBox(height: deviceHeight * 0.33),
+            FutureBuilder<PackageInfo>(
+              future: PackageInfo.fromPlatform(),
+              builder: (context, sanpshot) {
+                if (!sanpshot.hasData) {
+                  return const SizedBox();
+                }
+                return Text(
+                  'v ${sanpshot.data!.version}-${kEnvironment.value}+${sanpshot.data!.buildNumber}',
+                  style: textTheme.bodyMedium!
+                      .copyWith(fontWeight: FontWeight.w400),
+                );
+              },
+            ),
+            SizedBox(height: deviceHeight * 0.05),
           ],
         ),
       ),

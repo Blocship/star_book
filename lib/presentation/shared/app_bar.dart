@@ -1,229 +1,142 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
-import 'package:star_book/theme/styling/theme_color_style.dart';
-
-class PrimaryAppBarItem {
-  final String? label;
-  final IconData? icon;
-  final VoidCallback? onTap;
-
-  PrimaryAppBarItem({
-    this.label,
-    this.icon,
-    this.onTap,
-  });
-}
 
 class PrimaryAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final PrimaryAppBarItem? leading;
-  final String? center;
-  final PrimaryAppBarItem? trailing;
+  final String? leadingText;
+  final String? centerTitle;
+  final String? trailingText;
+  final bool showLeading;
+  final VoidCallback? leadingOnTap;
+  final VoidCallback? trailingOnTap;
 
   const PrimaryAppBar({
     super.key,
-    this.leading,
-    this.center,
-    this.trailing,
-  });
+    this.leadingText,
+    this.leadingOnTap,
+    this.showLeading = true,
+    this.centerTitle,
+    this.trailingText,
+    this.trailingOnTap,
+  })
+  // assert that if showLeading is false, then leading and leadingOnTap must be null
+  : assert(showLeading ? true : leadingText == null && leadingOnTap == null);
+
+  @override
+  Widget build(BuildContext context) {
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final double deviceWidth = context.deviceWidth;
+
+    return Padding(
+      padding:
+          const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
+      child: AppBar(
+        elevation: 0,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+        ),
+        backgroundColor: Colors.transparent,
+        leadingWidth: deviceWidth * 0.175,
+        leading: showLeading
+            ? GestureDetector(
+                onTap: leadingOnTap,
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.keyboard_arrow_left_outlined,
+                      size: 24,
+                      color: themeColorStyle.secondaryColor,
+                    ),
+                    Text(
+                      leadingText ?? 'Back',
+                      style: textTheme.bodyMedium!.copyWith(
+                        fontWeight: FontWeight.w400,
+                        color: themeColorStyle.secondaryColor,
+                      ),
+                    ),
+                  ],
+                ),
+              )
+            : null,
+        centerTitle: true,
+        title: Text(
+          centerTitle ?? '',
+          style: textTheme.bodyLarge!.copyWith(
+            fontWeight: FontWeight.w700,
+            color: themeColorStyle.secondaryColor,
+          ),
+        ),
+        actions: [
+          Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: GestureDetector(
+                onTap: trailingOnTap,
+                child: Text(
+                  trailingText ?? '',
+                  style: textTheme.bodyMedium!.copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: themeColorStyle.secondaryColor,
+                  ),
+                ),
+              )),
+        ],
+      ),
+    );
+  }
 
   @override
   Size get preferredSize {
     return const Size.fromHeight(50);
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding:
-          const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
-      child: Stack(
-        alignment: AlignmentDirectional.bottomCenter,
-        children: [
-          Positioned(
-            top: 50,
-            left: 0,
-            child: _PrimaryLeading(leading: leading),
-          ),
-          Positioned(
-            top: 50,
-            child: _PrimaryTitle(title: center),
-          ),
-          Positioned(
-            top: 54,
-            right: 0,
-            child: _PrimaryTrailing(trailing: trailing),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _PrimaryLeading extends StatelessWidget {
-  final PrimaryAppBarItem? leading;
-
-  const _PrimaryLeading({this.leading});
-
-  @override
-  Widget build(BuildContext context) {
-    if (leading == null) return const SizedBox();
-
-    return GestureDetector(
-      onTap: leading?.onTap,
-      child: Row(
-        children: [
-          Icon(
-            Icons.keyboard_arrow_left_outlined,
-            size: 24,
-            color:
-                Theme.of(context).extension<ThemeColorStyle>()!.secondaryColor,
-          ),
-          if (leading!.label != null)
-            Text(
-              leading!.label!,
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    fontWeight: FontWeight.w400,
-                    color: Theme.of(context)
-                        .extension<ThemeColorStyle>()!
-                        .secondaryColor,
-                  ),
-            ),
-        ],
-      ),
-    );
-  }
-}
-
-class _PrimaryTrailing extends StatelessWidget {
-  final PrimaryAppBarItem? trailing;
-
-  const _PrimaryTrailing({this.trailing});
-
-  @override
-  Widget build(BuildContext context) {
-    if (trailing == null) return const SizedBox();
-    return GestureDetector(
-      onTap: trailing?.onTap,
-      child: (trailing!.label != null)
-          ? Text(
-              trailing!.label!,
-              style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                    fontWeight: FontWeight.w400,
-                    color: Theme.of(context)
-                        .extension<ThemeColorStyle>()!
-                        .secondaryColor,
-                  ),
-            )
-          : const SizedBox(),
-    );
-  }
-}
-
-class _PrimaryTitle extends StatelessWidget {
-  final String? title;
-
-  const _PrimaryTitle({required this.title});
-
-  @override
-  Widget build(BuildContext context) {
-    if (title == null) return const SizedBox();
-
-    return Text(
-      title ?? '',
-      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-            fontWeight: FontWeight.w700,
-            color:
-                Theme.of(context).extension<ThemeColorStyle>()!.secondaryColor,
-          ),
-    );
-  }
-}
-
-class SecondaryAppBarItem {
-  final Widget? icon;
-  final VoidCallback? onTap;
-
-  SecondaryAppBarItem({
-    this.icon,
-    this.onTap,
-  });
 }
 
 class SecondaryAppBar extends StatelessWidget implements PreferredSizeWidget {
-  final SecondaryAppBarItem? leadingIcon;
-  final SecondaryAppBarItem? trailingIcon;
+  final Widget leading;
+  final IconData trailing;
+  final VoidCallback trailingOnTap;
 
   const SecondaryAppBar({
     super.key,
-    this.leadingIcon,
-    this.trailingIcon,
+    required this.leading,
+    required this.trailing,
+    required this.trailingOnTap,
   });
 
   @override
-  Size get preferredSize {
-    return const Size.fromHeight(50);
-  }
-
-  @override
   Widget build(BuildContext context) {
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     return Padding(
       padding:
           const EdgeInsets.symmetric(horizontal: CustomPadding.mediumPadding),
-      child: Stack(
-        alignment: AlignmentDirectional.bottomCenter,
-        children: [
-          Positioned(
-            top: 50,
-            left: 0,
-            child: _SecondaryLeading(leadingIcon: leadingIcon),
-          ),
-          Positioned(
-            top: 54,
-            right: 0,
-            child: _SecondaryTrailing(trailingIcon: trailingIcon),
-          ),
+      child: AppBar(
+        elevation: 0,
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.transparent,
+          statusBarIconBrightness: Brightness.dark,
+        ),
+        backgroundColor: Colors.transparent,
+        leading: leading,
+        leadingWidth: 24,
+        actions: [
+          IconButton(
+            splashRadius: 21,
+            padding: const EdgeInsets.all(9),
+            constraints: const BoxConstraints(),
+            onPressed: trailingOnTap,
+            icon:
+                Icon(trailing, size: 24, color: themeColorStyle.secondaryColor),
+          )
         ],
       ),
     );
   }
-}
-
-class _SecondaryLeading extends StatelessWidget {
-  final SecondaryAppBarItem? leadingIcon;
-
-  const _SecondaryLeading({this.leadingIcon});
 
   @override
-  Widget build(BuildContext context) {
-    if (leadingIcon == null) return const SizedBox();
-
-    return (leadingIcon!.icon != null)
-        ? SizedBox(
-            width: 24,
-            height: 24,
-            child: leadingIcon!.icon!,
-          )
-        : const SizedBox();
-  }
-}
-
-class _SecondaryTrailing extends StatelessWidget {
-  final SecondaryAppBarItem? trailingIcon;
-
-  const _SecondaryTrailing({this.trailingIcon});
-
-  @override
-  Widget build(BuildContext context) {
-    if (trailingIcon == null) return const SizedBox();
-    return GestureDetector(
-      onTap: trailingIcon?.onTap,
-      child: (trailingIcon!.icon != null)
-          ? SizedBox(
-              width: 24,
-              height: 24,
-              child: trailingIcon!.icon!,
-            )
-          : const SizedBox(),
-    );
+  Size get preferredSize {
+    return const Size.fromHeight(50);
   }
 }

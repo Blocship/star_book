@@ -36,3 +36,38 @@ extension XMood on Mood {
     );
   }
 }
+
+@freezed
+class MoodBody with _$MoodBody {
+  const MoodBody._();
+  const factory MoodBody({
+    required final String label,
+    required final int color,
+  }) = _MoodBody;
+
+  factory MoodBody.initial() => const MoodBody(
+        label: '',
+        color: 0xFFFFFFFF,
+      );
+
+  factory MoodBody.fromMood(Mood mood) => MoodBody(
+        label: mood.label,
+        color: mood.color,
+      );
+
+  factory MoodBody.fromLSMoodBody(M.MoodBody from) {
+    return MoodBody(
+      label: from.label,
+      color: from.color,
+    );
+  }
+}
+
+extension XMoodBody on MoodBody {
+  M.MoodBody get toLSMoodBody {
+    return M.MoodBody(
+      label: label,
+      color: color,
+    );
+  }
+}

@@ -1,64 +1,133 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info_plus/package_info_plus.dart';
+import 'package:star_book/app_settings.dart';
+import 'package:star_book/config.dart';
+import 'package:star_book/data/utils/local_database.dart';
+import 'package:star_book/presentation/injector/injector.dart';
+import 'package:star_book/presentation/routes/routes.dart';
+import 'package:star_book/presentation/service/links.dart';
+import 'package:star_book/presentation/shared/app_bar.dart';
 import 'package:star_book/presentation/shared/tile.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 import 'package:star_book/presentation/utils/padding_style.dart';
-import 'package:star_book/widgets/gradient_scaffold.dart';
+import 'package:star_book/presentation/widgets/gradient_scaffold.dart';
 
-class SettingScreen extends StatelessWidget {
-  const SettingScreen({Key? key}) : super(key: key);
+class SettingsScreen extends StatelessWidget
+    implements Screen<SettingsScreenRoute> {
+  @override
+  final SettingsScreenRoute arg;
+
+  const SettingsScreen({
+    Key? key,
+    required this.arg,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final double screenHeight = MediaQuery.of(context).size.height;
+    final TextTheme textTheme = context.textTheme;
     return GradientScaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        centerTitle: true,
-        title: Text(
-          'Settings',
-          style: Theme.of(context)
-              .textTheme
-              .headlineSmall!
-              .copyWith(fontWeight: FontWeight.w700),
-        ),
+      appBar: PrimaryAppBar(
+        leadingOnTap: () => context.shouldPop(),
+        centerTitle: 'Settings',
       ),
-      body: Padding(
-        padding:
-            const EdgeInsets.symmetric(horizontal: CustomPadding.smallPadding),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: screenHeight * 0.04),
-            CustomTile(
-                title: 'Starbook Community',
-                subtitle: 'Know who’s using starbook app',
-                onTap: () {}),
-            CustomTile(
-                title: 'About Developer',
-                subtitle: 'Person info who developed this amazing app',
-                onTap: () {}),
-            CustomTile(
-                title: 'Privacy & Terms',
-                subtitle: 'All your data and personal info terms',
-                onTap: () {}),
-            CustomTile(
-                title: 'License Agreement',
-                subtitle: 'Your licensed agreement with starbook',
-                onTap: () {}),
-            SizedBox(height: screenHeight * 0.34),
-            Text(
-              'App version 2.0',
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium!
-                  .copyWith(fontWeight: FontWeight.w400),
-            ),
-            const SizedBox(height: 10),
-            const BlocShipTile(),
-            const SizedBox(height: 10),
-            const UxerShipTile(),
-          ],
+      body: SingleChildScrollView(
+        physics: const BouncingScrollPhysics(),
+        child: Container(
+          /// This is the height of the appbar
+          height: context.deviceHeight - 90,
+          padding: const EdgeInsets.symmetric(
+              horizontal: CustomPadding.smallPadding, vertical: 30),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CustomTile(
+                  title: 'Starbook Community',
+                  subtitle: 'Know who’s using starbook app',
+                  onTap: () => UrlLauncher().starBookCommunity()),
+              CustomTile(
+                  title: 'Privacy & Terms',
+                  subtitle: 'All your data and personal info terms',
+                  onTap: () => UrlLauncher().privacyPolicy()),
+              CustomTile(
+                title: 'Acknowledgements',
+                subtitle: 'Open source libraries used in starbook',
+                onTap: () {
+                  context.goToScreen(arg: const LicenseAgreementScreenRoute());
+                },
+              ),
+              CustomTile(
+                title: 'Support',
+                subtitle: 'Get help with starbook',
+                onTap: () {
+                  UrlLauncher().support();
+                },
+              ),
+              if (kDebugMode) ...[
+                const SizedBox(height: 30),
+                Text('Debug Mode', style: textTheme.bodyMedium),
+                CustomTile(
+                  title: 'Clear App Settings',
+                  subtitle: 'Clears all app settings',
+                  onTap: () async {
+                    await Injector.resolve<AppSettings>().clear();
+                    // ignore: use_build_context_synchronously
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('App settings cleared'),
+                        duration: Duration(seconds: 2),
+                      ),
+                    );
+                  },
+                ),
+                CustomTile(
+                  title: 'Clear Local Database',
+                  subtitle: 'Clears all local database',
+                  onTap: () async {
+                    final isCleared = await LocalDatabase.clear();
+                    // ignore: use_build_context_synchronously
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          isCleared
+                              ? 'Local database cleared successfully'
+                              : 'Local database not cleared',
+                        ),
+                        duration: const Duration(seconds: 2),
+                      ),
+                    );
+                  },
+                ),
+                CustomTile(
+                  title: 'Log Routes',
+                  subtitle: 'Log Route tree',
+                  onTap: () async {
+                    // ignore: invalid_use_of_visible_for_testing_member
+                    AppRouter.printPaths();
+                  },
+                ),
+              ],
+              const Spacer(),
+              FutureBuilder<PackageInfo>(
+                future: PackageInfo.fromPlatform(),
+                builder: (context, sanpshot) {
+                  if (!sanpshot.hasData) {
+                    return const SizedBox();
+                  }
+                  return Text(
+                    'v ${sanpshot.data!.version}-${kEnvironment.value}+${sanpshot.data!.buildNumber}',
+                    style: textTheme.bodyMedium!
+                        .copyWith(fontWeight: FontWeight.w400),
+                  );
+                },
+              ),
+              const SizedBox(height: 10),
+              const BlocShipTile(),
+              // const SizedBox(height: 10),
+              // const UxerShipTile(),
+            ],
+          ),
         ),
       ),
     );

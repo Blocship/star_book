@@ -7,15 +7,20 @@ import 'package:star_book/data/utils/utils.dart';
 
 abstract class IJournalApi extends BaseApi {
   static const String collectionName = 'journalCollection';
-  Future<void> create(Journal journal);
+  Stream<Journal?> streamById(String journalId);
+  Stream<List<Journal>> streamByDay(DateTime day);
+  Future<void> create(JournalBody journal);
   Future<List<Journal>> fetchAll();
   Future<Journal> fetchById(String journalId);
   Future<List<Journal>> fetchByMood(String moodId);
   Future<List<Journal>> fetchByDate(DateTime day);
-  Future<void> update(Journal journal);
+  Future<List<Journal>> getJournalByMonth(int month, int year);
+  Future<List<Journal>> getJournalByYear(int year);
+  Future<List<Journal>> getJournalByRange(DateTime start, DateTime end);
+  Future<void> update(String id, JournalBody journal);
   Future<void> delete(String journalId);
-  Stream<Journal?> streamById(String journalId);
-  Stream<List<Journal>> streamByDay(DateTime day);
+  Future<int> streak();
+  Future<int> point();
 }
 
 class LSJournalApi implements IJournalApi {
@@ -28,11 +33,23 @@ class LSJournalApi implements IJournalApi {
   });
 
   @override
-  Future<void> create(Journal journal) async {
+  Future<void> create(JournalBody journal) async {
+    assert(journal.createdAt != null, 'createdAt must not be null');
+    // check that mood is already created and exists in database
+    final mood = await moodCollection.get(journal.mood.id.fnvHash);
+    assert(mood != null, 'mood must be created before creating journal');
+    final newJournal = Journal(
+      id: Util.uid,
+      createdAt: journal.createdAt ?? DateTime.now(),
+      updatedAt: DateTime.now(),
+      title: journal.title,
+      memo: journal.memo,
+    );
+    newJournal.mood = journal.mood;
     await journalCollection.isar.writeTxn(() async {
-      await journalCollection.put(journal);
-      await moodCollection.put(journal.mood);
-      await journal.moodRelation.save();
+      await journalCollection.put(newJournal);
+      await moodCollection.put(newJournal.mood);
+      await newJournal.moodRelation.save();
     });
     return;
   }
@@ -83,9 +100,18 @@ class LSJournalApi implements IJournalApi {
   }
 
   @override
-  Future<void> update(Journal journal) async {
+  Future<void> update(String id, JournalBody journal) async {
+    assert(journal.createdAt == null, 'createdAt must be null');
+    final oldJournal = await fetchById(id);
+    final newJournal = Journal(
+      id: oldJournal.id,
+      createdAt: oldJournal.createdAt,
+      updatedAt: DateTime.now(),
+      title: journal.title,
+      memo: journal.memo,
+    );
     await journalCollection.isar.writeTxn(() async {
-      await journalCollection.put(journal);
+      await journalCollection.put(newJournal);
     });
   }
 
@@ -114,5 +140,64 @@ class LSJournalApi implements IJournalApi {
         )
         .build();
     return query.watch(fireImmediately: true);
+  }
+
+  @override
+  Future<List<Journal>> getJournalByMonth(int month, int year) async {
+    final start = DateTime(year, month, 1).startTimeofDay;
+    final end = DateTime(year, month + 1, 0).endTimeofDay;
+    return getJournalByRange(start, end);
+  }
+
+  @override
+  Future<List<Journal>> getJournalByRange(DateTime start, DateTime end) async {
+    late final List<Journal> list;
+    await journalCollection.isar.txn(() async {
+      list = await journalCollection
+          .where()
+          .createdAtBetween(
+            start,
+            end,
+            includeLower: true,
+            includeUpper: true,
+          )
+          .findAll();
+    });
+    return list;
+  }
+
+  @override
+  Future<List<Journal>> getJournalByYear(int year) async {
+    final start = DateTime(year, 1, 1).startTimeofDay;
+    final end = DateTime(year, 12, 31).endTimeofDay;
+    return getJournalByRange(start, end);
+  }
+
+  // total number of journals created
+  @override
+  Future<int> point() async {
+    return journalCollection.count();
+  }
+
+  // number of consecutive days journals created
+  @override
+  Future<int> streak() async {
+    final list = await fetchAll();
+    if (list.isEmpty) return 0;
+    list.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    int streakCount = 0;
+    int currentStreak = 0;
+    for (int i = 0; i < list.length - 1; i++) {
+      final diff = list[i].createdAt.difference(list[i + 1].createdAt).inDays;
+      if (diff == 1) {
+        currentStreak++;
+      } else if (diff > 1) {
+        currentStreak = 0;
+      }
+      if (currentStreak > streakCount) {
+        streakCount = currentStreak;
+      }
+    }
+    return streakCount;
   }
 }

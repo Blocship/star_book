@@ -1,53 +1,53 @@
 import 'package:flutter/material.dart';
-import 'package:star_book/theme/styling/theme_color_style.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 
 class PrimaryTextField extends StatelessWidget {
   final String hintText;
+  final TextEditingController controller;
+  final FormFieldValidator<String>? validator;
 
   const PrimaryTextField({
     Key? key,
     required this.hintText,
+    required this.controller,
+    this.validator,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    return SizedBox(
-      width: screenWidth * 0.85,
-      child: TextFormField(
-        decoration: InputDecoration(
-          hintText: hintText,
-          hintStyle: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                fontWeight: FontWeight.w400,
-                color: Theme.of(context)
-                    .extension<ThemeColorStyle>()!
-                    .tertiaryColor,
-              ),
-          isDense: true,
-          contentPadding: const EdgeInsets.all(16.0),
-          filled: true,
-          fillColor:
-              Theme.of(context).extension<ThemeColorStyle>()!.quinaryColor,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide(
-              color:
-                  Theme.of(context).extension<ThemeColorStyle>()!.octonaryColor,
-            ),
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    return TextFormField(
+      controller: controller,
+      validator: validator,
+      decoration: InputDecoration(
+        hintText: hintText,
+        hintStyle: textTheme.bodyMedium!.copyWith(
+          fontWeight: FontWeight.w400,
+          color: themeColorStyle.tertiaryColor,
+        ),
+        isDense: true,
+        contentPadding: const EdgeInsets.all(16.0),
+        filled: true,
+        fillColor: themeColorStyle.quinaryColor,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          borderSide: BorderSide(
+            color: themeColorStyle.octonaryColor,
           ),
-          focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide(
-              color:
-                  Theme.of(context).extension<ThemeColorStyle>()!.octonaryColor,
-            ),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          borderSide: BorderSide(
+            color: themeColorStyle.octonaryColor,
           ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8.0),
-            borderSide: BorderSide(
-              color:
-                  Theme.of(context).extension<ThemeColorStyle>()!.octonaryColor,
-            ),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0),
+          borderSide: BorderSide(
+            color: themeColorStyle.octonaryColor,
           ),
         ),
       ),
@@ -59,11 +59,20 @@ class CustomTextFormField extends StatefulWidget {
   final String heading;
   final String? label;
   final String? initialValue;
+  final bool isMultiline;
+  final String fieldKey;
+  final ValueChanged<String?>? onChanged;
+  final FormFieldValidator<String>? validator;
+
   const CustomTextFormField({
     Key? key,
     required this.heading,
     this.label,
     this.initialValue,
+    this.isMultiline = false,
+    required this.fieldKey,
+    this.validator,
+    this.onChanged,
   })  : assert(label != null || initialValue != null,
             'Label and initialValue both cannot be null'),
         super(key: key);
@@ -75,8 +84,6 @@ class CustomTextFormField extends StatefulWidget {
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   final FocusNode focusNode = FocusNode();
 
-  final TextEditingController controller = TextEditingController();
-
   @override
   void initState() {
     focusNode.addListener(() {
@@ -87,59 +94,47 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 
   @override
   Widget build(BuildContext context) {
-    controller.text = (widget.label ?? widget.initialValue)!;
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     return Container(
-      width: 306,
-      padding: const EdgeInsets.symmetric(horizontal: 12.0),
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 12),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8.0),
-        border: Border.all(color: Colors.grey),
+        border: Border.all(color: themeColorStyle.octonaryColor),
       ),
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 8),
           AnimatedDefaultTextStyle(
             style: focusNode.hasFocus
-                ? Theme.of(context).textTheme.bodySmall!.copyWith(
-                      fontWeight: FontWeight.w400,
-                    )
-                : Theme.of(context).textTheme.bodyLarge!.copyWith(
-                      fontWeight: FontWeight.w400,
-                      color: Theme.of(context)
-                          .extension<ThemeColorStyle>()!
-                          .secondaryColor,
-                    ),
+                ? textTheme.bodySmall!.copyWith(fontWeight: FontWeight.w400)
+                : textTheme.bodyLarge!.copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: themeColorStyle.secondaryColor,
+                  ),
             duration: const Duration(milliseconds: 200),
             child: Text(widget.heading),
           ),
-          const SizedBox(height: 8),
-          LayoutBuilder(
-            builder: (context, constraints) {
-              return SizedBox(
-                width: 306,
-                height: 40,
-                child: TextFormField(
-                  expands: true,
-                  minLines: null,
-                  maxLines: null,
-                  focusNode: focusNode,
-                  controller: controller,
-                  keyboardType: TextInputType.multiline,
-                  decoration: InputDecoration(
-                    contentPadding: EdgeInsets.zero,
-                    isDense: true,
-                    // hintText: widget.label ?? '',
-                    hintStyle: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                          fontWeight: FontWeight.w400,
-                        ),
-                    border: const OutlineInputBorder(
-                      borderSide: BorderSide.none,
-                    ),
-                  ),
-                ),
-              );
-            },
+          const SizedBox(height: 16),
+          FormBuilderTextField(
+            name: widget.fieldKey,
+            maxLines: widget.isMultiline ? null : 1,
+            initialValue: widget.initialValue,
+            focusNode: focusNode,
+            onChanged: widget.onChanged,
+            validator: widget.validator,
+            keyboardType: TextInputType.multiline,
+            decoration: InputDecoration(
+              contentPadding: EdgeInsets.zero,
+              isDense: true,
+              hintText: widget.label ?? '',
+              hintStyle:
+                  textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w400),
+              border: const OutlineInputBorder(
+                borderSide: BorderSide.none,
+              ),
+            ),
           ),
         ],
       ),
@@ -150,6 +145,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
 class SelectableTile extends StatelessWidget {
   final String title;
   final String? select;
+  final int? color;
   final VoidCallback onTap;
 
   const SelectableTile({
@@ -157,53 +153,59 @@ class SelectableTile extends StatelessWidget {
     required this.title,
     this.select,
     required this.onTap,
+    this.color,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final double screenWidth = MediaQuery.of(context).size.width;
-    return SizedBox(
-      width: screenWidth * 0.85,
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color:
-                Theme.of(context).extension<ThemeColorStyle>()!.octonaryColor,
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final selectedData = select ?? 'Select';
+    final bool isEmpty = (selectedData != 'Select');
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8.0),
+        border: Border.all(
+          color: themeColorStyle.octonaryColor,
+        ),
+      ),
+      child: ListTile(
+        onTap: onTap,
+        dense: true,
+        title: Text(
+          title,
+          style: textTheme.bodyLarge!.copyWith(
+            fontWeight: FontWeight.w400,
+            color: isEmpty
+                ? themeColorStyle.secondaryColor
+                : themeColorStyle.tertiaryColor,
           ),
         ),
-        child: ListTile(
-          onTap: onTap,
-          dense: true,
-          title: Text(
-            title,
-            style: Theme.of(context).textTheme.bodyLarge!.copyWith(
+        trailing: SizedBox(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                selectedData,
+                style: textTheme.bodyLarge!.copyWith(
                   fontWeight: FontWeight.w400,
-                  color: Theme.of(context)
-                      .extension<ThemeColorStyle>()!
-                      .secondaryColor,
+                  color: themeColorStyle.tertiaryColor,
                 ),
-          ),
-          trailing: SizedBox(
-            width: screenWidth * 0.19,
-            child: Row(
-              children: [
-                Text(
-                  select ?? 'Select',
-                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(
-                        fontWeight: FontWeight.w400,
-                        color: Theme.of(context)
-                            .extension<ThemeColorStyle>()!
-                            .tertiaryColor,
-                      ),
+              ),
+              if (color != null) ...[
+                const SizedBox(width: 8),
+                CircleAvatar(
+                  radius: 7,
+                  backgroundColor: Color(color!),
                 ),
-                const SizedBox(width: 4),
-                const Icon(
-                  Icons.keyboard_arrow_right,
-                  size: 20,
-                ),
+                const SizedBox(width: 2),
               ],
-            ),
+              const Icon(
+                Icons.keyboard_arrow_right,
+                size: 20,
+              ),
+            ],
           ),
         ),
       ),

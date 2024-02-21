@@ -2,11 +2,11 @@ name: star_book
 description: A new Flutter project.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 3.0.0+1
+version: 2.0.1+4
 
 environment:
-  sdk: '>=2.18.2 <3.0.0'
-  flutter: ^3.3.4
+  sdk: '>=3.0.1 <4.0.0'
+  flutter: ^3.10.1
 
 # Automatically upgrade your dependencies to the
 # latest versions `flutter pub upgrade --major-versions`.
@@ -22,12 +22,23 @@ dependencies:
   isar_flutter_libs: ^3.0.5
   flutter_bloc: ^8.1.1
   kiwi: ^4.0.3
+  shared_preferences: ^2.1.1
   
   # Non Technical Dependencies
   logger: ^1.1.0
-  syncfusion_flutter_charts: ^20.4.50
+  syncfusion_flutter_charts: ^21.2.6
   intl: ^0.18.0
-  go_router: ^6.0.7
+  go_router: ^7.1.1
+  path_provider: ^2.0.12
+  flutter_form_builder: ^9.0.0
+  form_builder_validators: ^9.0.0
+  url_launcher: ^6.1.11
+  package_info_plus: ^4.0.2
+  firebase_core: ^2.17.0
+  firebase_crashlytics: ^3.3.7
+  firebase_analytics: ^10.6.2
+  firebase_remote_config: ^4.3.2
+
 
 dev_dependencies:
   flutter_test:
@@ -36,6 +47,14 @@ dev_dependencies:
   json_serializable: ^6.5.4
   flutter_lints: ^2.0.0
   isar_generator: ^3.0.5
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  ios: true
+  remove_alpha_ios: true
+  android: "launcher_icon"
+  image_path: "assets/icon.png"
+
 
 flutter:
 
@@ -44,6 +63,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
      - assets/icons/
+     - assets/images/
 
   fonts:
      - family: Inter

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:star_book/presentation/screen/calendar/month_days.dart';
+import 'package:star_book/presentation/routes/routes.dart';
+import 'package:star_book/presentation/screen/home_screen.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/calendar.dart';
+import 'package:star_book/presentation/utils/extension.dart';
 
 class CustomCalendarCard extends StatelessWidget {
   final int year;
@@ -14,18 +17,18 @@ class CustomCalendarCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final TextTheme textTheme = context.textTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         GestureDetector(
           onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => DaysOfMonth(
-                  year: year,
-                  month: monthIndex,
-                ),
+            context.goToScreen(
+              arg: HomeScreenRoute(
+                month: monthIndex,
+                year: year,
               ),
             );
           },
@@ -33,13 +36,14 @@ class CustomCalendarCard extends StatelessWidget {
             width: 70,
             height: 70,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: themeColorStyle.quinaryColor,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Center(
               child: Text(
                 CalendarUtils.getMonthName(monthIndex),
-                style: Theme.of(context).textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w400),
+                style:
+                    textTheme.bodyLarge!.copyWith(fontWeight: FontWeight.w400),
               ),
             ),
           ),

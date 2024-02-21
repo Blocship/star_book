@@ -39,12 +39,12 @@
 		// current file when a language service does not provide its own completions.
 		// This results in code completion suggesting words when editing comments and
 		// strings. This setting will prevent that.
-		"editor.wordBasedSuggestions": false,
+		"editor.wordBasedSuggestions": "off",
 
 		"editor.suggestOnTriggerCharacters": true,
 		
 		"editor.codeActionsOnSave": {
-			"source.organizeImports": true,
+			"source.organizeImports": "explicit"
 		}
 	}
 }

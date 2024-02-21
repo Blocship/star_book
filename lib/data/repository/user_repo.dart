@@ -20,4 +20,14 @@ class UserRepoImpl implements UserRepo {
   Future<void> deleteUser(String userId) async {
     await lSUserApi.delete(userId);
   }
+
+  @override
+  Future<void> createUser(UserBody user) async {
+    await lSUserApi.create(user.toLSUserBody);
+  }
+
+  @override
+  Future<void> updateUser(String id, UserBody user) async {
+    await lSUserApi.update(id, user.toLSUserBody);
+  }
 }

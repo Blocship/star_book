@@ -6,10 +6,10 @@ import 'base_api.dart';
 
 abstract class IMoodApi extends BaseApi {
   static const String collectionName = 'moodCollection';
-  Future<void> create(Mood mood);
+  Future<void> create(MoodBody mood);
   Future<List<Mood>> fetchAll();
   Future<Mood> fetchById(String moodId);
-  Future<void> update(Mood mood);
+  Future<void> update(String id, MoodBody mood);
   Future<void> delete(String moodId);
 }
 
@@ -18,9 +18,14 @@ class LSMoodApi implements IMoodApi {
   LSMoodApi({required this.collection});
 
   @override
-  Future<void> create(Mood mood) async {
+  Future<void> create(MoodBody mood) async {
+    final newMood = Mood(
+      id: Util.uid,
+      label: mood.label,
+      color: mood.color,
+    );
     await collection.isar.writeTxn(() async {
-      await collection.put(mood);
+      await collection.put(newMood);
     });
     return;
   }
@@ -46,9 +51,16 @@ class LSMoodApi implements IMoodApi {
   }
 
   @override
-  Future<void> update(Mood mood) async {
+  Future<void> update(String id, MoodBody mood) async {
+    // mood should exist todo, later improve it
+    final oldMood = await fetchById(id);
+    final newMood = Mood(
+      id: oldMood.id,
+      label: mood.label,
+      color: mood.color,
+    );
     await collection.isar.writeTxn(() async {
-      await collection.put(mood);
+      await collection.put(newMood);
     });
   }
 
