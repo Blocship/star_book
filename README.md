@@ -22,11 +22,12 @@
 ## Get the App
 
 
-<div style="display: flex; align-items:center">
+<div>
   <a 
     href="https://apps.apple.com/us/app/starbook-journal-ai-diary/id1552418289?itsct=apps_box&amp;itscg=30200"
     >
-    <img 
+    <img
+      align="center"
       style="height: 50px"
       src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-US" alt="Download on the App Store" 
       style="border-radius: 13px; width: 250px; height: 83px;"/>
@@ -34,6 +35,7 @@
   <a 
     href='https://play.google.com/store/apps/details?id=com.hashirshoaeb.StarBook'>
       <img
+        align="center"
         style="height: 75px"
         alt='Get Starbook on Google Play' 
         src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/>
