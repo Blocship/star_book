@@ -30,15 +30,15 @@
       align="center"
       style="height: 50px"
       src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-US" 
-      alt="Download on the App Store"/>
+      alt="Download Starbook on App Store"/>
   </a>
   <a 
-    href='https://play.google.com/store/apps/details?id=com.hashirshoaeb.StarBook'>
+    href="https://play.google.com/store/apps/details?id=com.hashirshoaeb.StarBook">
       <img
         align="center"
         style="height: 75px"
-        src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'
-        alt='Get Starbook on Google Play' />
+        src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png"
+        alt="Get Starbook on Google Play"/>
   </a>
 </div>
 
