@@ -21,8 +21,24 @@
 
 ## Get the App
 
-<a href="https://apps.apple.com/us/app/starbook-journal-ai-diary/id1552418289?itsct=apps_box&amp;itscg=30200" style="display: inline-block; overflow: hidden; border-radius: 13px; width: 250px; height: 83px;"><img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-US?size=250x83&amp;releaseDate=1612569600&h=9e9ca7fb9eb136d741621d25e5fadce8" alt="Download on the App Store" style="border-radius: 13px; width: 250px; height: 83px;"></a>
 
+<div style="display: flex; align-items:center">
+  <a 
+    href="https://apps.apple.com/us/app/starbook-journal-ai-diary/id1552418289?itsct=apps_box&amp;itscg=30200"
+    >
+    <img 
+      style="height: 50px"
+      src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/white/en-US" alt="Download on the App Store" 
+      style="border-radius: 13px; width: 250px; height: 83px;"/>
+  </a>
+  <a 
+    href='https://play.google.com/store/apps/details?id=com.hashirshoaeb.StarBook'>
+      <img
+        style="height: 75px"
+        alt='Get Starbook on Google Play' 
+        src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/>
+  </a>
+</div>
 
 ## 📝 About the App
 
