@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:star_book/presentation/theme/styling/filled_button_style.dart';
+import 'package:star_book/presentation/theme/styling/theme_color_style.dart';
 import 'package:star_book/presentation/utils/extension.dart';
 
 class PrimaryFilledButton extends StatelessWidget {
   final VoidCallback onTap;
   final String label;
-
+  final Color? color;
   const PrimaryFilledButton({
     super.key,
     required this.onTap,
     required this.label,
+    this.color,
   });
 
   @override
@@ -17,12 +19,16 @@ class PrimaryFilledButton extends StatelessWidget {
     final double deviceHeight = context.deviceHeight;
     final double deviceWidth = context.deviceWidth;
     final CustomButtonTheme customButtonTheme = context.customButtonTheme;
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
     return SizedBox(
       width: deviceWidth,
       height: deviceHeight * 0.052,
       child: ElevatedButton(
         onPressed: onTap,
-        style: customButtonTheme.primaryFilledButtonTheme,
+        style: customButtonTheme.primaryFilledButtonTheme.copyWith(
+          backgroundColor: MaterialStateProperty.all<Color>(
+              (color != null) ? color! : themeColorStyle.primaryColor),
+        ),
         child: Text(label),
       ),
     );

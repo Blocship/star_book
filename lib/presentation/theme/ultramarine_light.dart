@@ -33,7 +33,7 @@ class UltramarineLightTheme extends BaseTheme {
       tertiaryColor: Color(0xFF8B8B8B),
       quaternaryColor: Color(0xFF7B7CFF),
       quinaryColor: Color(0xFFFFFFFF),
-      senaryColor: Color(0xFFFF3932),
+      senaryColor: Color(0xff32C74F),
       septenaryColor: Color(0xFFF1F2F4),
       octonaryColor: Color(0xFFBCBCBC),
       nonaryColor: Color(0xFFE31414),

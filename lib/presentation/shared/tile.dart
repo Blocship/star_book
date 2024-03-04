@@ -189,3 +189,73 @@ class _UxerShipTileState extends State<UxerShipTile> {
     );
   }
 }
+
+class AppLockTile extends StatefulWidget {
+  final String title;
+
+  const AppLockTile({Key? key, required this.title}) : super(key: key);
+
+  @override
+  State<AppLockTile> createState() => _AppLockTileState();
+}
+
+class _AppLockTileState extends State<AppLockTile> {
+  bool isSwitchOn = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final ThemeColorStyle themeColorStyle = context.themeColorStyle;
+    final TextTheme textTheme = context.textTheme;
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: themeColorStyle.octonaryColor),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      child: Row(
+        children: [
+          Text(
+            widget.title,
+            style: textTheme.bodyLarge!.copyWith(
+              fontWeight: FontWeight.w400,
+              color: themeColorStyle.secondaryColor,
+            ),
+          ),
+          const Spacer(),
+          Theme(
+            data: ThemeData(useMaterial3: true).copyWith(
+              colorScheme: Theme.of(context)
+                  .colorScheme
+                  .copyWith(outline: Colors.transparent),
+            ),
+            child: SizedBox(
+              height: 30,
+              width: 38,
+              child: FittedBox(
+                fit: BoxFit.fill,
+
+                /// Change InActiveTrackColor of Switch
+                child: Switch(
+                  value: isSwitchOn,
+                  trackColor: MaterialStateProperty.resolveWith((states) {
+                    if (states.contains(MaterialState.selected)) {
+                      return themeColorStyle.senaryColor;
+                    }
+                    return themeColorStyle.octonaryColor.withOpacity(0.7);
+                  }),
+                  thumbColor: MaterialStateProperty.all(Colors.white),
+                  // inactiveTrackColor: Colors.white,
+                  onChanged: (value) {
+                    setState(() {
+                      isSwitchOn = value;
+                    });
+                  },
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
