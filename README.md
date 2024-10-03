@@ -63,25 +63,25 @@ Prerequisite: https://flutter.dev/docs/get-started/install
     ```sh
      flutter pub get
     ```
-4. Run project
-    - Run project on development.
+## Run project
+  - Run project on development.
       ```sh
        flutter run --dart-define=flavor=dev
       ```
-    - Run project in staging(debug mode).
+  - Run project in staging(debug mode).
       ```sh
       flutter run --dart-define=flavor=qa
       ```
-    - Run project in production.
+  - Run project in production.
       ```sh
         flutter run --dart-define-from-file=.env.prod.json
       ```
-5. Deploy project
-    - Deploy to iOS.
+## Deploy project
+  - Deploy to iOS.
       ```sh
       flutter build ipa --release --dart-define-from-file=.env.prod.json
       ```
-    -   Deploy to Android.
+  -   Deploy to Android.
          ```sh
         flutter build appbundle --release --dart-define-from-file=.env.prod.json
         ```
