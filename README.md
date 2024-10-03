@@ -63,26 +63,28 @@ Prerequisite: https://flutter.dev/docs/get-started/install
     ```sh
      flutter pub get
     ```
-4. Run project on development.
-    ```sh
-     flutter run --dart-define=flavor=dev
-    ```
-5. Run project in staging(debug mode).
-    ```sh
-     flutter run --dart-define=flavor=qa
-    ```
-6. Run project in production.
-    ```sh
-     flutter run --dart-define-from-file=.env.prod.json
-    ```
-7. Deploy to iOS.
-    ```sh
-     flutter build ipa --release --dart-define-from-file=.env.prod.json
-    ```
-8. Deploy to Android.
-    ```sh
-     flutter build appbundle --release --dart-define-from-file=.env.prod.json
-    ```
+4. Run project
+    - Run project on development.
+      ```sh
+       flutter run --dart-define=flavor=dev
+      ```
+    - Run project in staging(debug mode).
+      ```sh
+      flutter run --dart-define=flavor=qa
+      ```
+    - Run project in production.
+      ```sh
+        flutter run --dart-define-from-file=.env.prod.json
+      ```
+5. Deploy project
+    - Deploy to iOS.
+      ```sh
+      flutter build ipa --release --dart-define-from-file=.env.prod.json
+      ```
+    -   Deploy to Android.
+         ```sh
+        flutter build appbundle --release --dart-define-from-file=.env.prod.json
+        ```
 where .env.prod.json is the file containing the production environment variables as like the following.
 ```json
 {
