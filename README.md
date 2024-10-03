@@ -63,10 +63,41 @@ Prerequisite: https://flutter.dev/docs/get-started/install
     ```sh
      flutter pub get
     ```
-4. Run project.
-    ```sh
-     flutter run --dart-define=flavor=dev
-    ```
+## Run project
+  - Run project on development.
+      ```sh
+       flutter run --dart-define=flavor=dev
+      ```
+  - Run project in staging(debug mode).
+      ```sh
+      flutter run --dart-define=flavor=qa
+      ```
+  - Run project in production.
+      ```sh
+        flutter run --dart-define-from-file=.env.prod.json
+      ```
+## Deploy project
+  - Deploy to iOS.
+      ```sh
+      flutter build ipa --release --dart-define-from-file=.env.prod.json
+      ```
+  -   Deploy to Android.
+         ```sh
+        flutter build appbundle --release --dart-define-from-file=.env.prod.json
+        ```
+where .env.prod.json is the file containing the production environment variables as like the following.
+```json
+{
+  "flavor": "prod",
+  "apiKey": "<FIREBASE_API_KEY>",
+  "appIdAndroid": "<FIREBASE_APP_ID>",
+  "appIdIos": "<FIREBASE_APP_ID>",
+  "messagingSenderId": "<FIREBASE_MESSAGING_SENDER_ID>",
+  "projectId": "<FIREBASE_PROJECT_ID>",
+  "storageBucket": "<FIREBASE_STORAGE_BUCKET>",
+  "iosBundleId": "<IOS_BUNDLE_ID>",
+}
+```
 
 ## Support my work
 
