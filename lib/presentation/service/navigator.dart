@@ -6,32 +6,32 @@ class LoggerNavigatorObserver extends NavigatorObserver {
   /// The [Navigator] pushed `route`.
   @override
   void didPush(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    AnalyticsService().logEvent(
-        'Route Pushed', <String, dynamic>{'screen': route.settings.name});
+    AnalyticsService().logEvent('Route Pushed',
+        <String, Object>{'screen': route.settings.name ?? 'unknown'});
     SbLog().v('Route Pushed — ${route.settings.name}');
   }
 
   /// The [Navigator] popped `route`.
   @override
   void didPop(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    AnalyticsService().logEvent(
-        'Route Popped', <String, dynamic>{'screen': route.settings.name});
+    AnalyticsService().logEvent('Route Popped',
+        <String, Object>{'screen': route.settings.name ?? 'unknown'});
     SbLog().v('Route Popped — ${route.settings.name}');
   }
 
   /// The [Navigator] removed `route`.
   @override
   void didRemove(Route<dynamic> route, Route<dynamic>? previousRoute) {
-    AnalyticsService().logEvent(
-        'Route Removed', <String, dynamic>{'screen': route.settings.name});
+    AnalyticsService().logEvent('Route Removed',
+        <String, Object>{'screen': route.settings.name ?? 'unknown'});
     SbLog().v('Route Removed — ${route.settings.name}');
   }
 
   /// The [Navigator] replaced `oldRoute` with `newRoute`.
   @override
   void didReplace({Route<dynamic>? newRoute, Route<dynamic>? oldRoute}) {
-    AnalyticsService().logEvent(
-        'Route Replaced', <String, dynamic>{'screen': newRoute?.settings.name});
+    AnalyticsService().logEvent('Route Replaced',
+        <String, Object>{'screen': newRoute?.settings.name ?? 'unknown'});
     SbLog().v('Route Replaced — ${newRoute?.settings.name ?? ""}');
   }
 
