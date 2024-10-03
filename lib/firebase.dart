@@ -105,7 +105,7 @@ class _StagingReportingService implements ReportingService {
 
 abstract class AnalyticsService {
   Future<void> initialise();
-  Future<void> logEvent(String name, Map<String, dynamic> parameters);
+  Future<void> logEvent(String name, Map<String, Object>? parameters);
 
   Future<bool> enableAnalytics(bool enable);
   factory AnalyticsService() {
@@ -123,7 +123,7 @@ class _ProdAnalyticsService implements AnalyticsService {
   }
 
   @override
-  Future<void> logEvent(String name, Map<String, dynamic> parameters) async {
+  Future<void> logEvent(String name, Map<String, Object>? parameters) async {
     await FirebaseAnalytics.instance
         .logEvent(name: name, parameters: parameters);
   }
@@ -140,7 +140,7 @@ class _StagingAnalyticsService implements AnalyticsService {
   Future<void> initialise() async {}
 
   @override
-  Future<void> logEvent(String name, Map<String, dynamic> parameters) async {}
+  Future<void> logEvent(String name, Map<String, Object>? parameters) async {}
 
   @override
   Future<bool> enableAnalytics(bool enable) async {

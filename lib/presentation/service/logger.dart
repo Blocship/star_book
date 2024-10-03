@@ -17,6 +17,10 @@ class _QtLogPrinter extends LogPrinter {
     Level.warning: '👊🏻  WARNING — ',
     Level.error: '⛔  ERROR   — ',
     Level.wtf: '👾  WTF     — ',
+    Level.all: '🌈  ALL     — ',
+    Level.fatal: '💀  FATAL   — ',
+    Level.off: '🔕  OFF     — ',
+    Level.trace: '🔍  TRACE   — ',
   };
 
   String stringifyMessage(dynamic message) {
