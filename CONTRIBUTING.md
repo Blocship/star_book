@@ -130,7 +130,7 @@ To automate deployment using Github releases, follow these steps:
   git tag -a v1.0.0 -m "Release version 1.0.0"
   ```
 
-- **Push the tag to GtiHub**:
+- **Push the tag to GitHub**:
 
   ```bash
   git push origin v1.0.0
