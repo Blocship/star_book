@@ -19,7 +19,6 @@ import 'package:star_book/presentation/screen/year_screen.dart';
 import 'package:star_book/presentation/service/navigator.dart';
 
 part 'extension.dart';
-
 part 'route_argument.dart';
 
 class AppRouter {
@@ -75,7 +74,7 @@ class AppRouter {
                     path: HomeScreenRoute.path,
                     builder: (context, state) {
                       final arg =
-                          HomeScreenRoute.fromMap(state.queryParameters);
+                          HomeScreenRoute.fromMap(state.uri.queryParameters);
                       return HomeScreen(arg: arg);
                     },
                   ),
@@ -135,7 +134,8 @@ class AppRouter {
         path: JournalsListScreenRoute.path,
         parentNavigatorKey: _rootNavigatorKey,
         builder: (context, state) {
-          final arg = JournalsListScreenRoute.fromMap(state.queryParameters);
+          final arg =
+              JournalsListScreenRoute.fromMap(state.uri.queryParameters);
           return JournalsListScreen(arg: arg);
         },
         routes: [
@@ -145,7 +145,7 @@ class AppRouter {
             parentNavigatorKey: _rootNavigatorKey,
             builder: (context, state) {
               final arg =
-                  JournalCreateScreenRoute.fromMap(state.queryParameters);
+                  JournalCreateScreenRoute.fromMap(state.uri.queryParameters);
               return JournalCreateScreen(arg: arg);
             },
           ),
