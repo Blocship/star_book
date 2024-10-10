@@ -120,6 +120,33 @@ routes
 │       └── /journal/:id/edit (EditJournalScreen)
 ```
 
+## Git Tagging and Releases
+
+To automate deployment using Github releases, follow these steps:
+
+- **Create a git tag**:
+
+  ```bash
+  git tag -a v1.0.0 -m "Release version 1.0.0"
+  ```
+
+- **Push the tag to GtiHub**:
+
+  ```bash
+  git push origin v1.0.0
+  ```
+
+- **Create GitHub release**:
+
+  - Go to ```Releases``` section in your repository
+
+  - Click on ```Create a new release```
+
+  - Select the tag you want to release and add notes 
+  
+  - Finally, click on ```Publish release```
+
+
 ## 🐛 How to Report Bugs
 
 Please open a [new issue](https://github.com/Blocship/star_book/issues/new/choose) including steps to reproduce the problem you're experiencing.
